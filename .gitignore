@@ -19,29 +19,22 @@
 
 
 
-# Uncomment this line if you wish to ignore the asset store tools plugin
-
-# /[Aa]ssets/AssetStoreTools*
-
+# Uncomment this line if you wish to ignore the asset store tools plugin/
+[Aa]ssets/AssetStoreTools*
 
 
-# TextMesh Pro files
 
-[Aa]ssets/
-TextMesh
-*Pro/
+# TextMesh Pro files [Aa]ssets/
+TextMesh*Pro/
 
 
 
 # Visual Studio cache 
-directory
-.vs/
+directory.vs/
 
 
 
-# Gradle 
-cache directory
-.gradle/
+# Gradle cache directory.gradle/
 
 
 
@@ -93,9 +86,7 @@ ExportedObj/
 
 
 
-# Unity3D 
-generated file on crash reports
-sysinfo.txt
+# Unity3D generated file on crash reports sysinfo.txt
 
 
 
@@ -107,7 +98,6 @@ sysinfo.txt
 
 
 
-# Crashlytics 
-generated file
+# Crashlytics generated file 
 crashlytics-build.properties
 
