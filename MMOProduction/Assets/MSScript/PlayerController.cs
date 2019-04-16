@@ -54,8 +54,7 @@ public class PlayerController : MonoBehaviour
 	// Use this for initialization
 	void Start ()
     {
-        string playerDataJson = "{ \"X\": 0, \"Y\": 0, \"Z\": 0, \"HP\": 0, \"MP\": 100, \"Direction\": 0\" }";
-        playerData = JsonUtility.FromJson<PlayerData>(playerDataJson);
+
 	}
 	
 	// Update is called once per frame
@@ -63,8 +62,7 @@ public class PlayerController : MonoBehaviour
     {
         // 移動
         Move();
-
-        Json();
+        
 	}
 
     /// <summary>
