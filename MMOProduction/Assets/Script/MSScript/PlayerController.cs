@@ -48,7 +48,7 @@ public class PlayerController : MonoBehaviour
     [SerializeField, Header("ジャンプキー")]
     private KeyCode JumpKey;
 
-    [SerializeField, Range(0f,1f), Header("振り向き速度")]
+    [SerializeField, Range(0f, 1f), Header("振り向き速度")]
     private float TurnSpeed;
 
 	// Use this for initialization
