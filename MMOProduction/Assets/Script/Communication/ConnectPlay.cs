@@ -37,11 +37,7 @@ public class ConnectPlay : MonoBehaviour
 
         send_data.command = 201;
         send_data.user_id = Retention.ID;
-        send_data.X = 10;
-        send_data.Y = 20;
-        send_data.Z = 30;
-        send_data.HP = 500;
-        send_data.MP = 300;
+
         Debug.Log(send_data.user_id);
     }
 
