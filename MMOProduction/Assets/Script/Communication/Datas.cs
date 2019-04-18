@@ -13,14 +13,12 @@ namespace Packes
     // command 101  ユーザー作成
     public class CreateUser :  IPacketDatas
     {
-        public int command;
         public string user_name;
         public string password;
     }
     // command 102  ログイン
     public class Login : IPacketDatas
     {
-        //public int command;
         public string username;
         public string pass;
 
@@ -28,19 +26,16 @@ namespace Packes
     // command 103  確認OK
     public class OKConfirmation : IPacketDatas
     {
-        public int command;
         public int user_id;
     }
     // command 104  確認取れない
     public class MissingConfirmation : IPacketDatas
     {
-        public int command;
     }
 
     // command 201  位置同期(client->server)
     public class SendPosSync : IPacketDatas
     {
-        public int command;
         public int user_id;
         public float X;
         public float Y;
@@ -53,7 +48,6 @@ namespace Packes
     // command 202  位置同期(server->client)
     public class RecvPosSync : IPacketDatas
     {
-        public int command;
         public float x;
         public float y;
         public float z;
@@ -74,6 +68,12 @@ public enum CommandData
     CmdMissingConfirmation = (int)104,
     CmdSendPosSync = (int)201,
     CmdRecvPosSync = (int)202,
+}
+public enum Scenes
+{
+    Login,
+    Play,
+    Non,
 }
 
 /// <summary>
