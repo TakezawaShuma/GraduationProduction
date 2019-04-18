@@ -425,7 +425,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   score_object: {fileID: 296179874}
-  score_text: {fileID: 0}
 --- !u!114 &296179877
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -546,7 +545,6 @@ GameObject:
   - component: {fileID: 1410961285}
   - component: {fileID: 1410961284}
   - component: {fileID: 1410961283}
-  - component: {fileID: 1410961286}
   m_Layer: 5
   m_Name: Down_Button
   m_TagString: Untagged
@@ -614,7 +612,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1410961286}
+      - m_Target: {fileID: 1475882874}
         m_MethodName: Down_Button
         m_Mode: 1
         m_Arguments:
@@ -664,18 +662,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1410961281}
   m_CullTransparentMesh: 0
---- !u!114 &1410961286
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1410961281}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3fdbc81cfdd7a25419bba5ededbf0ea4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1475882869
 GameObject:
   m_ObjectHideFlags: 0
@@ -818,6 +804,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3fdbc81cfdd7a25419bba5ededbf0ea4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  score_bord: {fileID: 296179874}
 --- !u!1 &1478360625
 GameObject:
   m_ObjectHideFlags: 0

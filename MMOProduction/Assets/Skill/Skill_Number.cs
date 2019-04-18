@@ -8,8 +8,8 @@ public class Skill_Number : MonoBehaviour
     //Textのオブジェクト
     public GameObject score_object = null;
 
-
-    public Text score_text;
+    
+    Text score_text;
 
     // Start is called before the first frame update
     void Start()
@@ -17,7 +17,7 @@ public class Skill_Number : MonoBehaviour
         // オブジェクトからTextコンポーネントを取得
        score_text = score_object.GetComponent<Text>();
         // テキストの表示を入れ替える
-        score_text.text = "00";
+       score_text.text = "0";
     }
 
     // Update is called once per frame
