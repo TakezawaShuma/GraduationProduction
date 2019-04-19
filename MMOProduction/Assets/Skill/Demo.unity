@@ -653,6 +653,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1646924628}
+        m_MethodName: Up_ButtonP
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &474964947
@@ -782,6 +793,17 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1646924628}
+        m_MethodName: Down_ButtonP
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
     m_TypeName: UnityEngine.UI.Button+ButtonClickedEvent, UnityEngine.UI, Version=1.0.0.0,
       Culture=neutral, PublicKeyToken=null
 --- !u!114 &539194006
@@ -830,6 +852,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 669515950}
+  - component: {fileID: 669515951}
   m_Layer: 5
   m_Name: skill_01
   m_TagString: Untagged
@@ -859,6 +882,20 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &669515951
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 669515949}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fdbc81cfdd7a25419bba5ededbf0ea4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  score_bord: {fileID: 296179874}
+  point_bord: {fileID: 1475978981}
 --- !u!1 &913076509
 GameObject:
   m_ObjectHideFlags: 0
@@ -1194,8 +1231,8 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1475882874}
-        m_MethodName: Up_Button
+      - m_Target: {fileID: 669515951}
+        m_MethodName: Down_Button
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1205,8 +1242,8 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1475882874}
-        m_MethodName: Up_ButtonP
+      - m_Target: {fileID: 669515951}
+        m_MethodName: Down_ButtonP
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1341,7 +1378,6 @@ GameObject:
   - component: {fileID: 1475882873}
   - component: {fileID: 1475882872}
   - component: {fileID: 1475882871}
-  - component: {fileID: 1475882874}
   m_Layer: 5
   m_Name: Up_Button
   m_TagString: Untagged
@@ -1366,7 +1402,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 49.999985, y: 73}
+  m_AnchoredPosition: {x: 50, y: 73}
   m_SizeDelta: {x: 160, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1475882871
@@ -1409,7 +1445,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1475882874}
+      - m_Target: {fileID: 669515951}
         m_MethodName: Up_Button
         m_Mode: 1
         m_Arguments:
@@ -1420,7 +1456,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1475882874}
+      - m_Target: {fileID: 669515951}
         m_MethodName: Up_ButtonP
         m_Mode: 1
         m_Arguments:
@@ -1470,20 +1506,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1475882869}
   m_CullTransparentMesh: 0
---- !u!114 &1475882874
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1475882869}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3fdbc81cfdd7a25419bba5ededbf0ea4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  score_bord: {fileID: 296179874}
-  point_bord: {fileID: 1475978981}
 --- !u!1 &1475978981
 GameObject:
   m_ObjectHideFlags: 0
@@ -1698,7 +1720,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   score_bord: {fileID: 1253808708}
-  point_bord: {fileID: 0}
+  point_bord: {fileID: 1475978981}
 --- !u!1 &1895250931
 GameObject:
   m_ObjectHideFlags: 0

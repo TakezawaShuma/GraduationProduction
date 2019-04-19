@@ -5,10 +5,6 @@ using UnityEngine.UI;
 
 public class Skill_Count : MonoBehaviour
 {
-    int score;
-
-    int score_p = 30; 
-
     public GameObject score_bord;
 
     public GameObject point_bord;
@@ -31,41 +27,31 @@ public class Skill_Count : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //スキル結果の表示
-        skill_number.Set_Score(score);
-        //マスターポイント結果の表示
-        get_point.Set_Point(score_p);
+  
     }
 
     //UPボタンに登録
     public void Up_Button()
     {
-        score = score + 1;
-        Debug.Log("あがった : " + score.ToString());
+        //スキル結果の表示
+        skill_number.Set_Score(+1);
     }
 
     public void Up_ButtonP()
     {
-        if (0 < score_p)
-        {
-            score_p = score_p - 1;
-        }
+        //マスターポイント結果の表示
+        get_point.Set_Point(-1);
     }
 
     //DOWNボタンに登録
     public void Down_Button()
     {
-        if (0 < score)
-        {
-            score = score - 1;
-        }
-        Debug.Log("下がった : " + score.ToString());
+        //スキル結果の表示
+        skill_number.Set_Score(-1);
     }
     public void Down_ButtonP()
     {
-        if (score_p < 30)
-        {
-            score_p = score_p + 1;
-        }
+        //マスターポイント結果の表示
+        get_point.Set_Point(+1);
     }
 }

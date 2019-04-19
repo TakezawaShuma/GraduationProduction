@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class Get_Point : MonoBehaviour
 {
+    int m_point = 30;
+
     //Textのオブジェクト
     public GameObject point_object;
 
@@ -26,6 +28,12 @@ public class Get_Point : MonoBehaviour
 
     public void Set_Point(int set_point)
     {
-        point_text.text = set_point.ToString();
+        if ((set_point > 0 && (m_point < 30 && m_point >= 0)) || 
+            (set_point < 0 && (m_point <= 30 && m_point > 0)))
+        {
+            m_point += set_point;
+        }
+
+        point_text.text = m_point.ToString();
     }
 }

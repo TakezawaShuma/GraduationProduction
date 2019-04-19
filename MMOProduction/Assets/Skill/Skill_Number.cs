@@ -5,6 +5,8 @@ using UnityEngine.UI;
 
 public class Skill_Number : MonoBehaviour
 {
+    int m_score = 0;
+
     //Textのオブジェクト
     public GameObject score_object;
     
@@ -28,6 +30,11 @@ public class Skill_Number : MonoBehaviour
     //スキルカウントスクリプトに呼び出す関数
     public void Set_Score(int score)
     {
-        score_text.text = score.ToString();
+        if ((score > 0 &&  m_score >= 0) ||
+            (score < 0 &&  m_score > 0))
+        {
+            m_score += score;
+        }
+        score_text.text = m_score.ToString();
     }
 }
