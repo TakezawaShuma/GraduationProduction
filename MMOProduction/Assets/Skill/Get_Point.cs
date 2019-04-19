@@ -3,31 +3,29 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class Skill_Number : MonoBehaviour
+public class Get_Point : MonoBehaviour
 {
     //Textのオブジェクト
-    public GameObject score_object;
-    
-    Text score_text;
+    public GameObject point_object;
 
+    Text point_text;
     // Start is called before the first frame update
     void Start()
     {
         // オブジェクトからTextコンポーネントを取得
-       score_text = score_object.GetComponent<Text>();
+        point_text = point_object.GetComponent<Text>();
         // テキストの表示を入れ替える
-       score_text.text = "0";
+        point_text.text = "30";
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
-    //スキルカウントスクリプトに呼び出す関数
-    public void Set_Score(int score)
+    public void Set_Point(int set_point)
     {
-        score_text.text = score.ToString();
+        point_text.text = set_point.ToString();
     }
 }
