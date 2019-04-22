@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Get_Point : MonoBehaviour
 {
-    int m_point = 30;
+    public int m_point = 30;
 
     //Textのオブジェクト
     public GameObject point_object;

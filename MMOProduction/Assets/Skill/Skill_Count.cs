@@ -27,14 +27,17 @@ public class Skill_Count : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-  
+        
     }
 
     //UPボタンに登録
     public void Up_Button()
     {
         //スキル結果の表示
-        skill_number.Set_Score(+1);
+        if(get_point.m_point>0)
+        {
+            skill_number.Set_Score(+1);
+        }
     }
 
     public void Up_ButtonP()
@@ -52,6 +55,9 @@ public class Skill_Count : MonoBehaviour
     public void Down_ButtonP()
     {
         //マスターポイント結果の表示
-        get_point.Set_Point(+1);
+        if (skill_number.m_score > 0)
+        {
+            get_point.Set_Point(+1);
+        }
     }
 }
