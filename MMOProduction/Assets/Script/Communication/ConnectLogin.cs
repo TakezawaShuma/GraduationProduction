@@ -40,18 +40,23 @@ public class ConnectLogin : MonoBehaviour
     }
 
     /// <summary>
+    /// ログインの送信
+    /// </summary>
+    /// <param name="_id">ユーザー名</param>
+    /// <param name="_pass">パス</param>
+    public void Login(string _id,string _pass)
+    {
+        login_packet.command = 102;
+        login_packet.username = _id;
+        login_packet.pass = _pass;
+        SendToServer(login_packet);
+    }
+
+    /// <summary>
     /// 更新処理
     /// </summary>
     void Update()
     {
-        if (Input.GetKeyDown("l"))
-        {
-            login_packet.command = 102;
-            login_packet.username = "tsit";
-            login_packet.pass = "trident";
-            SendToServer(login_packet);
-        }
-
         switch(scene_flag)
         {
             case Scenes.Login:

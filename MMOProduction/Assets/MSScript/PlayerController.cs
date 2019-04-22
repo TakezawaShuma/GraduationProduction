@@ -43,7 +43,6 @@ public class PlayerController : MonoBehaviour
     private KeyCode AutoRunKey;
 
     [SerializeField, Range(0f,1f), Header("振り向き速度")]
-    [SerializeField, Range(0f, 1f), Header("振り向き速度")]
     private float TurnSpeed;
 
     private bool autoRunState;
@@ -63,8 +62,6 @@ public class PlayerController : MonoBehaviour
         playerData.Direction = 180;
         Debug.Log(JsonUtility.ToJson(playerData));
     }
-
-	}
 	
 	// Update is called once per frame
 	void Update ()

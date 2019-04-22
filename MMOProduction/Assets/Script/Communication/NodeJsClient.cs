@@ -17,7 +17,7 @@ public class NodeJsClient : MonoBehaviour
     public int Port { get { return port; }set { port = value; } }
 
     // パケット情報
-    PlayerController.PlayerData sendData = new PlayerController.PlayerData();
+    PlayerData sendData = new PlayerData();
 
     // ソケット
     WebSocket ws;
@@ -86,7 +86,7 @@ public class NodeJsClient : MonoBehaviour
     /// </summary>
     /// <param name="Data"></param>
     /// <returns></returns>
-    public bool SendToServer(PlayerController.PlayerData Data)
+    public bool SendToServer(PlayerData Data)
     {
         bool sf = true;
         try
@@ -108,7 +108,7 @@ public class NodeJsClient : MonoBehaviour
     /// </summary>
     /// <param name="data"></param>
     /// <returns></returns>
-    private string ConvertToJson(PlayerController.PlayerData data)
+    private string ConvertToJson(PlayerData data)
     {
         string json = JsonUtility.ToJson(data);
         return json;
