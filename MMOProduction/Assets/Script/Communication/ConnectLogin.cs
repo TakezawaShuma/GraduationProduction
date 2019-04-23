@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using WebSocketSharp;
 using WebSocketSharp.Net;
+using System;
 
 namespace Connect
 {
@@ -24,12 +25,16 @@ namespace Connect
         // 受信データ
         private Packes.IPacketDatas i_data = null;
 
+        // ログインコールバック
+        private Action<int> loginCallback;
 
         /// <summary>
         /// 初期処理を纏めた
         /// </summary>
-        public void ConnectionStart()
+        public void ConnectionStart(Action<int> _callback)
         {
+            // コールバックの設定
+            loginCallback = _callback;
             Connect();
             RelatedToWS();
         }
@@ -50,7 +55,8 @@ namespace Connect
             {
                 ws.Connect();
             }
-            catch {
+            catch 
+            {
                 Debug.Log("サーバーへ接続ができません。");
             }
         }
@@ -65,6 +71,7 @@ namespace Connect
             {
                 //Debug.Log("Data : " + e.Data);
                 i_data = Receive(e);
+                loginCallback(i_data.command);
                 Debug.Log(i_data.command);
                 if (i_data.Command == CommandData.CmdOKConfirmation || i_data.Command == CommandData.CmdCreateReport)
                 {
@@ -212,6 +219,8 @@ namespace Connect
                 case Scenes.Login:
                     break;
                 case Scenes.Play:
+                    // ソケット削除
+                    Destroy();
                     SceneManager.LoadScene("DebugPlay");
                     break;
                 case Scenes.Non:

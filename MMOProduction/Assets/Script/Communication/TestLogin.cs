@@ -11,7 +11,7 @@ public class TestLogin : MonoBehaviour
     void Start()
     {
         // 通信関係の初期処理
-        connect_login.ConnectionStart();
+        connect_login.ConnectionStart(Receive);
     }
 
     // Update is called once per frame
@@ -19,7 +19,7 @@ public class TestLogin : MonoBehaviour
     {
         if(Input.GetKeyDown("s"))
         {
-            connect_login.SendLogin("tsit", "trident");
+            connect_login.SendLogin("haroharo", "trident");
         }
         if (Input.GetKeyDown("n"))
         {
@@ -27,12 +27,31 @@ public class TestLogin : MonoBehaviour
         }
         connect_login.ChangeScene();
 
-        if (Input.GetKeyDown("r")) { OnDestroy(); Start(); }
+        if (Input.GetKeyDown("r")) { Start(); }
     }
 
-    private void OnDestroy()
+    void Receive(int cmd)
     {
-        connect_login.Destroy();
+        switch(cmd)
+        {
+            case 103:
+                Debug.Log("受信コマンド：" + cmd + "　ログイン成功");
+                break;
+            case 104:
+                Debug.Log("受信コマンド：" + cmd + "　ログイン失敗");
+                break;
+            case 105:
+                Debug.Log("受信コマンド：" + cmd + "　新規作成成功");
+                break;
+            case 106:
+                Debug.Log("受信コマンド：" + cmd + "　新規作成失敗");
+                break;
+            case 901:
+                Debug.Log("受信コマンド：" + cmd + "　重複ログイン");
+                break;
+            default:
+                break;
+        }
     }
 }
 

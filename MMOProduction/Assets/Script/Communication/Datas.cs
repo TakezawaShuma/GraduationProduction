@@ -15,16 +15,16 @@ namespace Packes
     public class CreateUser :  IPacketDatas
     {
         public CreateUser() { command = 101; }
-        public CreateUser(string name,string password) { command = 101;username = name;pass = password; }
-        public string username;
+        public CreateUser(string name,string password) { command = 101;user_name = name;pass = password; }
+        public string user_name;
         public string pass;
     }
     // command 102  ログイン
     public class Login : IPacketDatas
     {
         public Login() { command = 102; }
-        public Login(string name, string password) { command = 102; username = name; pass = password; }
-        public string username;
+        public Login(string name, string password) { command = 102; user_name = name; pass = password; }
+        public string user_name;
         public string pass;
 
     }
@@ -59,12 +59,12 @@ namespace Packes
     {
         public SendPosSync() { command = 201; }
         public int user_id;
-        public float X;
-        public float Y;
-        public float Z;
-        public int HP;
-        public int MP;
-        public int Direction;
+        public float x;
+        public float y;
+        public float z;
+        public int hp;
+        public int mp;
+        public int dir;
     }
 
     // command 202  位置同期(server->client)
@@ -79,10 +79,37 @@ namespace Packes
         public int dir;
     }
 
+    // command 203　初期ログイン(client->server)
+    public class SendInitialLogin:IPacketDatas
+    {
+        public SendInitialLogin() { command = 203; }
+        public int user_id;
+        public float x;
+        public float y;
+        public float z;
+    }
+
+    // command 204　初期ログイン(server->client)
+    public class RecvInitialLogin:IPacketDatas
+    {
+        public RecvInitialLogin() { command = 204; }
+        public int user_id;
+        public float x;
+        public float y;
+        public float z;
+    }
+
     // command 701　ログアウト時(client->server)
     public class Finished : IPacketDatas
     {
         public Finished() { command = 701; }
+        public int level;
+        public int hp;
+        public int mp;
+        public float x;
+        public float y;
+        public float z;
+        public float exp;
     }
 
     // command 801　チャット()

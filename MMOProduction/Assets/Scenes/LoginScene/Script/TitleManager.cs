@@ -16,6 +16,9 @@ public class TitleManager : MonoBehaviour
     public const int MIN_ID_WORD = 4;
     public const int MIN_PW_WORD = 4;
 
+    // wsソケット
+    Connect.ConnectLogin ws = new Connect.ConnectLogin();
+
     //ボタンの種類
     public enum CANVAS_STATE
     {
@@ -59,8 +62,6 @@ public class TitleManager : MonoBehaviour
     private InputField ConfirmPW_;
 
 
-    Connect.ConnectLogin connect_login = new Connect.ConnectLogin();
-
 
     // Start is called before the first frame update
     void Start()
@@ -82,22 +83,26 @@ public class TitleManager : MonoBehaviour
         id_.characterLimit = MAX_WORD;
         pw_.characterLimit = MAX_WORD;
 
-        // 通信関係の初期処理
-        connect_login.ConnectionStart();
+        // 接続開始
+        ws.ConnectionStart(Receive);
+    }
 
+    private int m_command = 0;
+
+    /// <summary>
+    /// 受信したデータを扱う関数
+    /// </summary>
+    void Receive(int _comand)
+    {
+        m_command = _comand;
     }
 
     // Update is called once per frame
     void Update()
     {
-        connect_login.ChangeScene();
+        // シーンの変更
+        ws.ChangeScene();
     }
-
-    void OnDestroy()
-    {
-        connect_login.Destroy();
-    }
-
     //public関数--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     //ボタンが押されたとき
     public void Click()
@@ -132,7 +137,6 @@ public class TitleManager : MonoBehaviour
         Error02.gameObject.SetActive(false);
         Error03.gameObject.SetActive(false);
         ConfirmPW_.gameObject.SetActive(false);
-        ConfirmPW_.text = "";
         Debug.Log("Back");
     }
 
@@ -150,12 +154,17 @@ public class TitleManager : MonoBehaviour
             Error01.gameObject.SetActive(false);
             Error02.gameObject.SetActive(false);
             Error03.gameObject.SetActive(false);
-            connect_login.SendLogin(id, pw);
+
+            // ログイン処理
+            ws.SendLogin(id, pw);
         }
         else
         {
             pw_.text = "";
         }
+
+
+
     }
 
     public void RegisterClick02()
@@ -173,7 +182,9 @@ public class TitleManager : MonoBehaviour
                 Error01.gameObject.SetActive(false);
                 Error02.gameObject.SetActive(false);
                 Error03.gameObject.SetActive(false);
-                connect_login.SendRegistration(id, pw);
+
+                // 新規登録
+               ws.SendRegistration(id, pw);
             }
             else
             {
@@ -187,6 +198,7 @@ public class TitleManager : MonoBehaviour
         {
             pw_.text = "";
         }
+
     }
 
     //id入力用input fieldでEnterが押された時の処理

@@ -6,14 +6,14 @@ public class TestPlay : MonoBehaviour
 {
     class TestBox
     {
-        public float X;
-        public float Y;
-        public float Z;
-        public int HP;
-        public int MP;
-        public int Direction;
+        public float x;
+        public float y;
+        public float z;
+        public int hp;
+        public int mp;
+        public int dir;
         public TestBox() { }
-        public TestBox(int hp,int mp) { HP = hp;MP = mp; }
+        public TestBox(int hp,int mp) { this.hp = hp; this.mp = mp; }
     }
     TestBox testbox=new TestBox(500,300);
 
@@ -32,7 +32,7 @@ public class TestPlay : MonoBehaviour
         Move();
         if (Input.GetKeyDown("s"))
         {
-            connect_play.SendPlayData(testbox.HP, testbox.MP, testbox.X, testbox.Y, testbox.Z);
+            connect_play.SendPlayData(testbox.hp, testbox.mp, testbox.x, testbox.y, testbox.z);
         }
     }
 
@@ -45,12 +45,12 @@ public class TestPlay : MonoBehaviour
 
     private void Move()
     {
-        if(Input.GetKey(KeyCode.X)){ testbox.X++; }
-        if (Input.GetKey(KeyCode.Y)) { testbox.Y++; }
-        if (Input.GetKey(KeyCode.Z)) { testbox.Z++; }
-        if (Input.GetKey(KeyCode.M)) { testbox.MP--; }
-        if (Input.GetKey(KeyCode.H)) { testbox.HP--; }
-        if (Input.GetKey(KeyCode.D)) { testbox.Direction--; }
+        if(Input.GetKey(KeyCode.X)){ testbox.x++; }
+        if (Input.GetKey(KeyCode.Y)) { testbox.y++; }
+        if (Input.GetKey(KeyCode.Z)) { testbox.z++; }
+        if (Input.GetKey(KeyCode.M)) { testbox.mp--; }
+        if (Input.GetKey(KeyCode.H)) { testbox.hp--; }
+        if (Input.GetKey(KeyCode.D)) { testbox.dir--; }
 
     }
 }

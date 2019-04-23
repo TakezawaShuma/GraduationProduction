@@ -182,11 +182,11 @@ namespace Connect
         public Packes.SendPosSync SetSendData(int hp,int mp,float x,float y,float z)
         {
             Packes.SendPosSync packet = new Packes.SendPosSync();
-            packet.HP = hp;
-            packet.MP = mp;
-            packet.X = x;
-            packet.Y = y;
-            packet.Z = z;
+            packet.hp = hp;
+            packet.mp = mp;
+            packet.x = x;
+            packet.y = y;
+            packet.z = z;
             return packet;
         }
 
