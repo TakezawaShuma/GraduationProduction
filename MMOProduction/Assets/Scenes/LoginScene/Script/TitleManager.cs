@@ -50,15 +50,20 @@ public class TitleManager : MonoBehaviour
     private Text Error02;
     [SerializeField]
     private Text Error03;
-<<<<<<< HEAD
-=======
+    
+    // すでに使われているID　エラー
     [SerializeField]
     private Text Error04;
+    
+    // IDまたはPWが違う　エラー
     [SerializeField]
     private Text Error05;
+
+    
+    // 重複ログイン　エラー
     [SerializeField]
     private Text Error06;
->>>>>>> login
+
 
     //ログインID入力用
     [SerializeField]
@@ -85,13 +90,9 @@ public class TitleManager : MonoBehaviour
         login02_.gameObject.SetActive(false);
         createAccount_.gameObject.SetActive(false);
 
-<<<<<<< HEAD
-        Error01.gameObject.SetActive(false);
-        Error02.gameObject.SetActive(false);
-        Error03.gameObject.SetActive(false);
-=======
+
         ErrorMessageHide();
->>>>>>> login
+
         //Input Field の入力文字数制限
         id_.characterLimit = MAX_WORD;
         pw_.characterLimit = MAX_WORD;
@@ -108,10 +109,8 @@ public class TitleManager : MonoBehaviour
     void Receive(int _comand)
     {
         m_command = _comand;
-<<<<<<< HEAD
-=======
+
         ErrorCheck(_comand);
->>>>>>> login
     }
 
     // Update is called once per frame
@@ -119,15 +118,14 @@ public class TitleManager : MonoBehaviour
     {
         // シーンの変更
         ws.ChangeScene();
-<<<<<<< HEAD
-=======
+
 
         //エラーコードチェック用
        // if(Input.GetKeyDown(KeyCode.Space))
        // {
        //     ErrorCheck(104);
        // }
->>>>>>> login
+
     }
     //public関数--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     //ボタンが押されたとき
@@ -159,42 +157,26 @@ public class TitleManager : MonoBehaviour
         pw_.text = "";
         login02_.gameObject.SetActive(false);
         createAccount_.gameObject.SetActive(false);
-<<<<<<< HEAD
-        Error01.gameObject.SetActive(false);
-        Error02.gameObject.SetActive(false);
-        Error03.gameObject.SetActive(false);
-        ConfirmPW_.gameObject.SetActive(false);
-=======
+
         ErrorMessageHide();
         ConfirmPW_.gameObject.SetActive(false);
         ConfirmPW_.text = "";
->>>>>>> login
+
         Debug.Log("Back");
     }
 
     public void LogInToGameClick()
     {
-<<<<<<< HEAD
-        Error01.gameObject.SetActive(false);
-        Error02.gameObject.SetActive(false);
-        Error03.gameObject.SetActive(false);
-=======
         ErrorMessageHide();
->>>>>>> login
+
         string id = id_.text;
         string pw = pw_.text;
 
         if (CheckString(id,true) == true && CheckString(pw,false) == true)
         {
             Debug.Log("ログイン ID:" + id + "  PW:" + pw);
-<<<<<<< HEAD
-            Error01.gameObject.SetActive(false);
-            Error02.gameObject.SetActive(false);
-            Error03.gameObject.SetActive(false);
-
-=======
             ErrorMessageHide();
->>>>>>> login
+
             // ログイン処理
             ws.SendLogin(id, pw);
         }
@@ -202,23 +184,12 @@ public class TitleManager : MonoBehaviour
         {
             pw_.text = "";
         }
-<<<<<<< HEAD
-
-
-
-=======
->>>>>>> login
     }
 
     public void RegisterClick02()
     {
-<<<<<<< HEAD
-        Error01.gameObject.SetActive(false);
-        Error02.gameObject.SetActive(false);
-        Error03.gameObject.SetActive(false);
-=======
         ErrorMessageHide();
->>>>>>> login
+
         string id = id_.text;
         string pw = pw_.text;
         if(CheckString(id,true)==true&&CheckString(pw,false)==true)
@@ -226,21 +197,12 @@ public class TitleManager : MonoBehaviour
             if(pw_.text==ConfirmPW_.text)
             {
                 Debug.Log("新規登録 ID:" + id + "  PW:" + pw);
-<<<<<<< HEAD
-                Error01.gameObject.SetActive(false);
-                Error02.gameObject.SetActive(false);
-                Error03.gameObject.SetActive(false);
-
-                // 新規登録
-               ws.SendRegistration(id, pw);
-=======
                 //Error01.gameObject.SetActive(false);
                 //Error02.gameObject.SetActive(false);
                 //Error03.gameObject.SetActive(false);
                 //Error04.gameObject.SetActive(false);
                 // 新規登録
                 ws.SendRegistration(id, pw);
->>>>>>> login
             }
             else
             {
@@ -253,10 +215,8 @@ public class TitleManager : MonoBehaviour
         else
         {
             pw_.text = "";
-<<<<<<< HEAD
-=======
+
             ConfirmPW_.text = "";
->>>>>>> login
         }
 
     }
@@ -345,11 +305,7 @@ public class TitleManager : MonoBehaviour
                 return false;
             }
             return true;
-<<<<<<< HEAD
-            //return Regex.IsMatch(str, @"^[0-9a-zA-Z]+$");
-        }
-    }
-=======
+
         }
     }
 
@@ -412,5 +368,4 @@ public class TitleManager : MonoBehaviour
         Error05.gameObject.SetActive(false);
         Error06.gameObject.SetActive(false);
     }
->>>>>>> login
 }
