@@ -13,12 +13,4 @@ public class PlayersGenerator : MonoBehaviour
         return other.GetComponent<OtherPlayers>();
     }
 
-    public PlayerController GeneratePlayer()
-    {
-        Debug.Log("Playerのジェネレート");
-        GameObject prefab = (GameObject)Resources.Load("Player");
-        GameObject player = Instantiate(prefab);
-        return player.GetComponent<PlayerController>();
-    }
-
 }
