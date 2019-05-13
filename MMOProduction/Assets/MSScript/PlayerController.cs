@@ -1,70 +1,92 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
 public class PlayerController : MonoBehaviour
 {
-    private PlayerData playerData;
-
-    private string jsonData;
+    [SerializeField]
+    private Player PlayerData;
 
     [SerializeField, Header("カメラ")]
     private FollowingCamera FollowingCamera;
 
     [SerializeField, Header("通常スピード(1秒間で進む距離)")]
-    private float NomalSpeed;
+    private float NomalSpeed = 5f;
 
     [SerializeField, Header("ダッシュスピード(1秒間で進む距離)")]
-    private float DashSpeed;
+    private float DashSpeed = 12.5f;
 
     [SerializeField, Header("ジャンプ力")]
-    private float JumpPower;
+    private float JumpPower = 300f;
 
     [SerializeField, Header("移動キー")]
-    private KeyCode FrontKey;
+    private KeyCode FrontKey = KeyCode.W;
 
     [SerializeField]
-    private KeyCode BackKey;
+    private KeyCode BackKey = KeyCode.S;
 
     [SerializeField]
-    private KeyCode LeftKey;
+    private KeyCode LeftKey = KeyCode.A;
 
     [SerializeField]
-    private KeyCode RightKey;
+    private KeyCode RightKey = KeyCode.D;
 
     [SerializeField, Header("ダッシュキー")]
-    private KeyCode DashKey;
+    private KeyCode DashKey = KeyCode.LeftShift;
 
     [SerializeField, Header("ジャンプキー")]
-    private KeyCode JumpKey;
+    private KeyCode JumpKey = KeyCode.Space;
 
-    [SerializeField, Header("オートラン")]
-    private KeyCode AutoRunKey;
+    [SerializeField, Header("オートランキー")]
+    private KeyCode AutoRunKey = KeyCode.T;
 
+    [SerializeField, Range(0f,1f), Header("振り向き速度")]
+    private float TurnSpeed = 0.15f;
 
-    [SerializeField, Range(0f, 1f), Header("振り向き速度")]
-    private float TurnSpeed;
+    [SerializeField, Header("アニメーションをするか")]
+    private bool IsAnimator = false;
 
-    private bool autoRunState;
+    [SerializeField, Header("アニメーター")]
+    private Animator Animator;
+
+    [SerializeField]
+    private bool IsNetwork = true;
+
+    // 速度
+    private Vector3 velocity;
+
+    private Vector3 clickPosition;
+
+    private RaycastHit hit;
+
+    private Ray ray;
+
+    private bool runState;
+
+    private bool jumpState;
+
+    private string jsonData;
+
+    private enum MoveMode
+    {
+        Key,
+        Auto,
+        Click,
+    }
+
+    private MoveMode moveMode;
 
 	// Use this for initialization
 	void Start ()
     {
-        autoRunState = false;
+        runState = false;
+        jumpState = false;
 
-        playerData = new PlayerData();
-
-        playerData.X = 10;
-        playerData.Y = 5;
-        playerData.Z = 2;
-        playerData.HP = 100;
-        playerData.MP = 50;
-        playerData.Direction = 180;
-        Debug.Log(JsonUtility.ToJson(playerData));
+        moveMode = MoveMode.Key;
+        
+        //UpdatePlayerData();
+        //Debug.Log(JsonUtility.ToJson(PlayerData));
     }
-
-	
 	
 	// Update is called once per frame
 	void Update ()
@@ -72,96 +94,251 @@ public class PlayerController : MonoBehaviour
         // キーを押したら切り替える
         if(Input.GetKeyDown(AutoRunKey))
         {
-            autoRunState = !autoRunState;
+            if (moveMode != MoveMode.Auto)
+            {
+                moveMode = MoveMode.Auto;
+            }
+            else
+            {
+                moveMode = MoveMode.Key;
+            }
+        }
+
+        if (Input.GetMouseButton(0))
+        {
+            ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            if (Physics.Raycast(ray, out hit, 100f))
+            {
+                clickPosition = hit.point;
+                moveMode = MoveMode.Click;
+            }
+        }
+        else if(Input.GetMouseButtonUp(0))
+        {
+            moveMode = MoveMode.Key;
         }
 
         // 移動
         Move();
-
-        //UpdatePlayerData();
-
-        //UpdateJsonData();
-	}
+    }
 
     /// <summary>
     /// 移動関数
     /// </summary>
     public void Move()
     {
-        // 移動速度
-        Vector3 velocity = Vector3.zero;
+        velocity = Vector3.zero;
 
-        if (!autoRunState)
+        switch(moveMode)
         {
-            if (Input.GetKey(FrontKey))
-            {
-                velocity.x -= 1;
-            }
-            else if (Input.GetKey(BackKey))
-            {
-                velocity.x += 1;
-            }
+            case MoveMode.Key:
+                MoveModeKey();
+                break;
+            case MoveMode.Auto:
+                MoveModeAuto();
+                break;
+            case MoveMode.Click:
+                MoveModeClick();
+                break;
+        }
 
-            if (Input.GetKey(LeftKey))
+        // 移動量が0より上であれば
+        if (velocity.magnitude > 0)
+        {
+            if (moveMode != MoveMode.Click)
             {
-                velocity.z -= 1;
-            }
-            else if (Input.GetKey(RightKey))
-            {
-                velocity.z += 1;
-            }
+                if (IsNetwork)
+                {
+                    Vector3 afterMoving = transform.position + FollowingCamera.Angle * velocity;
+                    float afterDirection = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(FollowingCamera.Angle * velocity), TurnSpeed).eulerAngles.y;
 
-            // 正規化
-            velocity = velocity.normalized;
+                    SendMoveDeta(afterMoving, afterDirection);
+                }
+                else
+                {
+                    // 移動方向に回転
+                    transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(FollowingCamera.Angle * velocity), TurnSpeed);
 
-            // 押していたらダッシュ
-            if (Input.GetKey(DashKey))
-            {
-                velocity *= DashSpeed * Time.deltaTime;
+                    // 移動
+                    transform.position += FollowingCamera.Angle * velocity;
+                }
             }
             else
             {
-                velocity *= NomalSpeed * Time.deltaTime;
+                if (IsNetwork)
+                {
+                    Vector3 afterMoving = transform.position + velocity;
+                    float afterDirection = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(velocity), TurnSpeed).eulerAngles.y;
+
+                    SendMoveDeta(afterMoving, afterDirection);
+                }
+                else
+                {
+                    //transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(velocity), TurnSpeed);
+                    Quaternion rot = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(velocity), TurnSpeed);
+                    transform.rotation = rot;
+                    transform.position += velocity;
+                }
+            }
+
+            if(runState)
+            {
+                SetRun();
+            }
+            else
+            {
+                SetWalk();
             }
         }
         else
         {
-            velocity = new Vector3(-1, 0, 0) * DashSpeed * Time.deltaTime;
+            SetIdle();
         }
 
-        if (velocity.magnitude > 0)
+        // ジャンプ処理
+        if (Input.GetKeyDown(JumpKey))
         {
-            transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(FollowingCamera.Angle * -velocity), TurnSpeed);
-
-            transform.position += FollowingCamera.Angle * velocity;
+            // ジャンプ状態でなければジャンプをする
+            if (!jumpState)
+            {
+                GetComponent<Rigidbody>().AddForce(0, JumpPower, 0);
+                jumpState = true;
+            }
         }
     }
 
-    private void UpdatePlayerData()
+    private void SendMoveDeta(Vector3 position, float direction)
     {
-        playerData.X = transform.position.x;
-        playerData.Y = transform.position.y;
-        playerData.Z = transform.position.z;
-        playerData.HP = 100;
-        playerData.MP = 100;
-        playerData.Direction = transform.rotation.y;
+        float x, y, z, dir;
+
+        x = position.x;
+        y = position.y;
+        z = position.z;
+        dir = direction;
+
+        PlayerData.X = x;
+        PlayerData.Y = y;
+        PlayerData.Z = z;
+        PlayerData.Dir = dir;
     }
 
-    private void UpdateJsonData()
+    /// <summary>
+    /// 移動モードがキー状態の時に呼ぶ関数
+    /// </summary>
+    private void MoveModeKey()
     {
-        jsonData = JsonUtility.ToJson(playerData);
+        // キー判定
+        if (Input.GetKey(FrontKey))
+        {
+            velocity.x -= 1;
+        }
+        else if (Input.GetKey(BackKey))
+        {
+            velocity.x += 1;
+        }
 
-        // Debug.Log(jsonData);
+        if (Input.GetKey(LeftKey))
+        {
+            velocity.z -= 1;
+        }
+        else if (Input.GetKey(RightKey))
+        {
+            velocity.z += 1;
+        }
+
+        // 正規化
+        velocity = velocity.normalized;
+
+        // 押していたらダッシュ
+        if (Input.GetKey(DashKey))
+        {
+            velocity *= DashSpeed * Time.deltaTime;
+            runState = true;
+        }
+        else
+        {
+            velocity *= NomalSpeed * Time.deltaTime;
+            runState = false;
+        }
     }
 
-    //private void OnCollisionStay(Collision collision)
-    //{
-    //    if (collision.gameObject.tag == "Ground")
-    //    {
-    //        if (Input.GetKeyDown(JumpKey))
-    //        {
-    //            GetComponent<Rigidbody>().AddForce(0, JumpPower, 0);
-    //        }
-    //    }
-    //}
+    /// <summary>
+    /// 移動モードがオート状態の時に呼ぶ関数
+    /// </summary>
+    private void MoveModeAuto()
+    {
+        velocity = new Vector3(-1, 0, 0) * DashSpeed * Time.deltaTime;
+        runState = true;
+        
+        if (Input.GetKeyDown(FrontKey) || Input.GetKeyDown(BackKey) || Input.GetKeyDown(LeftKey) || Input.GetKeyDown(RightKey))
+        {
+            moveMode = MoveMode.Key;
+        }
+    }
+
+    /// <summary>
+    /// 移動モードがクリックの時に呼ぶ関数
+    /// </summary>
+    private void MoveModeClick()
+    {
+        float dis = (new Vector2(transform.position.x, transform.position.z) - new Vector2(clickPosition.x, clickPosition.z)).magnitude;
+        
+        //if (dis <= 0.1f)
+        //{
+        //    moveMode = MoveMode.Key;
+        //    runState = false;
+        //}
+        //else
+        {
+            Vector2 v = new Vector2(clickPosition.x, clickPosition.z) - new Vector2(transform.position.x, transform.position.z);
+
+            float rad = Mathf.Atan2(v.x, v.y);
+
+            velocity.x = Mathf.Sin(rad);
+            velocity.z = Mathf.Cos(rad);
+
+            velocity = velocity.normalized;
+
+            velocity *= DashSpeed * Time.deltaTime;
+            runState = true;
+        }
+    }
+    
+    private void SetIdle()
+    {
+        if (IsAnimator)
+        {
+            Animator.SetBool("Idle", true);
+            Animator.SetBool("Walk", false);
+            Animator.SetBool("Run", false);
+        }
+    }
+
+    private void SetWalk()
+    {
+        if (IsAnimator)
+        {
+            Animator.SetBool("Idle", false);
+            Animator.SetBool("Walk", true);
+            Animator.SetBool("Run", false);
+        }
+    }
+
+    private void SetRun()
+    {
+        if (IsAnimator)
+        {
+            Animator.SetBool("Idle", false);
+            Animator.SetBool("Walk", false);
+            Animator.SetBool("Run", true);
+        }
+    }
+
+    private void OnCollisionEnter(UnityEngine.Collision collision)
+    {
+        if (collision.gameObject.tag == "Ground")
+        {
+            jumpState = false;
+        }
+    }
 }

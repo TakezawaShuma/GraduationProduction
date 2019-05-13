@@ -5,15 +5,23 @@ using UnityEngine;
 [ExecuteInEditMode, DisallowMultipleComponent]
 public class FollowingCamera : MonoBehaviour
 {
-    public GameObject target; // an object to follow
-    public Vector3 offset; // offset form the target object
+    [SerializeField]
+    private GameObject target; // an object to follow
+
+    public GameObject Target
+    {
+        set { target = value; }
+    }
 
     [SerializeField]
-    private float distance = 4.0f; // distance from following object
+    private Vector3 offset; // offset form the target object
+
     [SerializeField]
-    private float polarAngle = 45.0f; // angle with y-axis
+    private float distance = 10.0f; // distance from following object
     [SerializeField]
-    private float azimuthalAngle = 45.0f; // angle with x-axis
+    private float polarAngle = 65.0f; // angle with y-axis
+    [SerializeField]
+    private float azimuthalAngle = 270.0f; // angle with x-axis
 
     public Quaternion Angle
     {
@@ -23,13 +31,13 @@ public class FollowingCamera : MonoBehaviour
     [Space()]
 
     [SerializeField]
-    private float minDistance = 1.0f;
+    private float minDistance = 2.0f;
     [SerializeField]
-    private float maxDistance = 7.0f;
+    private float maxDistance = 40.0f;
     [SerializeField]
     private float minPolarAngle = 5.0f;
     [SerializeField]
-    private float maxPolarAngle = 75.0f;
+    private float maxPolarAngle = 80.0f;
     [SerializeField]
     private float mouseXSensitivity = 5.0f;
     [SerializeField]
@@ -39,7 +47,7 @@ public class FollowingCamera : MonoBehaviour
 
     void LateUpdate()
     {
-        if (Input.GetMouseButton(0))
+        if (Input.GetMouseButton(1))
         {
             updateAngle(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
         }
