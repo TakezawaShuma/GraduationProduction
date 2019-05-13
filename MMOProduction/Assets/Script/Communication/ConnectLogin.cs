@@ -26,15 +26,15 @@ namespace Connect
         private Packes.IPacketDatas i_data = null;
 
         // ログインコールバック
-        private Action<int> loginCallback;
+        private Action<int> login_callback;
 
         /// <summary>
         /// 初期処理を纏めた
         /// </summary>
-        public void ConnectionStart(Action<int> _callback)
+        public void ConnectionStart(Action<int> callback)
         {
             // コールバックの設定
-            loginCallback = _callback;
+            login_callback = callback;
             Connect();
             RelatedToWS();
         }
@@ -71,7 +71,7 @@ namespace Connect
             {
                 //Debug.Log("Data : " + e.Data);
                 i_data = Receive(e);
-                loginCallback(i_data.command);
+                login_callback(i_data.command);
                 Debug.Log(i_data.command);
                 if (i_data.Command == CommandData.CmdOKConfirmation || i_data.Command == CommandData.CmdCreateReport)
                 {

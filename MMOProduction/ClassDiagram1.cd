@@ -1,0 +1,379 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="skill_table" Collapsed="true">
+    <Position X="9.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\game_data\skill_table.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FollowingCamera" Collapsed="true">
+    <Position X="6.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABCAAQBAAAABAAAAIAAAIAAAAkQEACAABUAAAAABAAA=</HashCode>
+      <FileName>Assets\MSScript\FollowingCamera.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerController" Collapsed="true">
+    <Position X="8" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ADQAAAAEAKADAAgBCAAABAAAAIAABAAAIAQACAATAAA=</HashCode>
+      <FileName>Assets\MSScript\PlayerController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerData" Collapsed="true">
+    <Position X="9.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAACAAAAAAQgAAAAAAAAAAAAAAYAE=</HashCode>
+      <FileName>Assets\MSScript\PlayerData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PositionSetter" Collapsed="true">
+    <Position X="6.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQACAAAACAAAAAAAAAAIAACAQAAAAAAACAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scenes\LoginScene\Script\PositionSetter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TitleManager">
+    <Position X="2.75" Y="7" Width="1.5" />
+    <NestedTypes>
+      <Enum Name="TitleManager.CANVAS_STATE" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Scenes\LoginScene\Script\TitleManager.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Enum>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAT+QAQQACAAABAABAEYCIABAASAgAAQAQEAEAAAA2A=</HashCode>
+      <FileName>Assets\Scenes\LoginScene\Script\TitleManager.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="ws" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Retention" Collapsed="true">
+    <Position X="8" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>Assets\Script\Communication\Datas.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayersGenerator">
+    <Position X="7.25" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAEAA=</HashCode>
+      <FileName>Assets\Script\Genereter\PlayersGenerator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="HAYAKAWA" Collapsed="true">
+    <Position X="6.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAIAAAAQAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\OtherPlayer\OtherPlayers.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OtherPlayers">
+    <Position X="9.25" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAECAAAAAgAAAAAAAAQgAAAAAAAABiAQAAYAE=</HashCode>
+      <FileName>Assets\Script\OtherPlayer\OtherPlayers.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TestLogin">
+    <Position X="0.5" Y="11.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAAEAAAAAAAAAAAAAAAAQAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\Test\TestLogin.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="connect_login" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="TestPlay">
+    <Position X="5.25" Y="11.5" Width="1.5" />
+    <NestedTypes>
+      <Class Name="TestPlay.TestBox" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Assets\Script\Test\TestPlay.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>AAQBABAAAKCAAAAAAAAAAAAAAAAAAAARAAAAAAAAAAg=</HashCode>
+      <FileName>Assets\Script\Test\TestPlay.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="connect_play" />
+      <Field Name="generator" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Connect.ConnectChat">
+    <Position X="9.25" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAABAAAAAAAEAAACAAAIAAAAFAAAgQAQAAACAACAA=</HashCode>
+      <FileName>Assets\Script\Communication\ConnectChat.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Connect.ConnectLogin">
+    <Position X="0.5" Y="7" Width="1.5" />
+    <AssociationLine Name="i_data" Type="Packes.IPacketDatas" ManuallyRouted="true">
+      <Path>
+        <Point X="0.5" Y="8.835" />
+        <Point X="0.122" Y="8.835" />
+        <Point X="0.122" Y="0.781" />
+        <Point X="0.5" Y="0.781" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAAAAQEAAAAEAAIAAAAFgAAgQEQAAACAACgA=</HashCode>
+      <FileName>Assets\Script\Communication\ConnectLogin.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="i_data" />
+      <Field Name="scene_flag" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="Connect.ConnectPlay">
+    <Position X="5.25" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAABQAAAAACEAAAAECAIAAAAFCAAgQAQAAACAAAAA=</HashCode>
+      <FileName>Assets\Script\Communication\ConnectPlay.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Packes.IPacketDatas" Collapsed="true">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAABAAAAAQAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\Communication\Datas.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Packes.CreateUser" Collapsed="true">
+    <Position X="2.5" Y="1.75" Width="1.5" />
+    <InheritanceLine Type="Packes.IPacketDatas" FixedToPoint="true">
+      <Path>
+        <Point X="1.25" Y="1.062" />
+        <Point X="1.25" Y="1.375" />
+        <Point X="2.102" Y="1.375" />
+        <Point X="2.102" Y="2.125" />
+        <Point X="2.5" Y="2.125" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAgAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\Communication\Datas.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Packes.Login" Collapsed="true">
+    <Position X="0.5" Y="5.75" Width="1.5" />
+    <InheritanceLine Type="Packes.IPacketDatas" FixedToPoint="true">
+      <Path>
+        <Point X="1.25" Y="1.062" />
+        <Point X="1.25" Y="1.375" />
+        <Point X="0.26" Y="1.375" />
+        <Point X="0.26" Y="6.125" />
+        <Point X="0.5" Y="6.125" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAgAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\Communication\Datas.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Packes.OKConfirmation" Collapsed="true">
+    <Position X="2.5" Y="5.75" Width="1.5" />
+    <InheritanceLine Type="Packes.IPacketDatas" ManuallyRouted="true" FixedToPoint="true">
+      <Path>
+        <Point X="1.25" Y="1.062" />
+        <Point X="1.25" Y="1.375" />
+        <Point X="2.096" Y="1.375" />
+        <Point X="2.096" Y="6.125" />
+        <Point X="2.5" Y="6.125" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\Communication\Datas.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Packes.MissingConfirmation" Collapsed="true">
+    <Position X="4.5" Y="2.75" Width="1.5" />
+    <InheritanceLine Type="Packes.IPacketDatas" ManuallyRouted="true" FixedToPoint="true">
+      <Path>
+        <Point X="1.25" Y="1.062" />
+        <Point X="1.25" Y="1.375" />
+        <Point X="4.237" Y="1.375" />
+        <Point X="4.237" Y="3.125" />
+        <Point X="4.5" Y="3.125" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\Communication\Datas.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Packes.CreateReport" Collapsed="true">
+    <Position X="0.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\Communication\Datas.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Packes.Existing" Collapsed="true">
+    <Position X="0.5" Y="3.75" Width="1.5" />
+    <InheritanceLine Type="Packes.IPacketDatas" FixedToPoint="true">
+      <Path>
+        <Point X="1.25" Y="1.062" />
+        <Point X="1.25" Y="1.375" />
+        <Point X="0.26" Y="1.375" />
+        <Point X="0.26" Y="4.125" />
+        <Point X="0.5" Y="4.125" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\Communication\Datas.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Packes.SendPosSync" Collapsed="true">
+    <Position X="2.5" Y="2.75" Width="1.5" />
+    <InheritanceLine Type="Packes.IPacketDatas" FixedToPoint="true">
+      <Path>
+        <Point X="1.25" Y="1.062" />
+        <Point X="1.25" Y="1.375" />
+        <Point X="2.102" Y="1.375" />
+        <Point X="2.102" Y="3.125" />
+        <Point X="2.5" Y="3.125" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgACAAAAAAAAAAAAAAAAAAAAAAAABiAQAAAAA=</HashCode>
+      <FileName>Assets\Script\Communication\Datas.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Packes.RecvPosSync" Collapsed="true">
+    <Position X="2.5" Y="4.75" Width="1.5" />
+    <InheritanceLine Type="Packes.IPacketDatas" FixedToPoint="true">
+      <Path>
+        <Point X="1.25" Y="1.062" />
+        <Point X="1.25" Y="1.375" />
+        <Point X="2.102" Y="1.375" />
+        <Point X="2.102" Y="5.062" />
+        <Point X="2.5" Y="5.062" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgACAAAAAAAAAAAAAAAAAAAAAAAABiAQAAAAA=</HashCode>
+      <FileName>Assets\Script\Communication\Datas.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Packes.SendInitialLogin" Collapsed="true">
+    <Position X="4.5" Y="1.75" Width="1.5" />
+    <InheritanceLine Type="Packes.IPacketDatas" ManuallyRouted="true" FixedToPoint="true">
+      <Path>
+        <Point X="1.25" Y="1.062" />
+        <Point X="1.25" Y="1.375" />
+        <Point X="4.237" Y="1.375" />
+        <Point X="4.237" Y="2.125" />
+        <Point X="4.5" Y="2.125" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\Communication\Datas.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Packes.RecvInitialLogin" Collapsed="true">
+    <Position X="4.5" Y="3.75" Width="1.5" />
+    <InheritanceLine Type="Packes.IPacketDatas" FixedToPoint="true">
+      <Path>
+        <Point X="1.25" Y="1.062" />
+        <Point X="1.25" Y="1.375" />
+        <Point X="4.237" Y="1.375" />
+        <Point X="4.237" Y="4.125" />
+        <Point X="4.5" Y="4.125" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAABgAQAAAAA=</HashCode>
+      <FileName>Assets\Script\Communication\Datas.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Packes.Finished" Collapsed="true">
+    <Position X="0.5" Y="2.75" Width="1.5" />
+    <InheritanceLine Type="Packes.IPacketDatas" FixedToPoint="true">
+      <Path>
+        <Point X="1.25" Y="1.062" />
+        <Point X="1.25" Y="1.375" />
+        <Point X="0.26" Y="1.375" />
+        <Point X="0.26" Y="3.062" />
+        <Point X="0.5" Y="3.062" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAABiAQAAAgA=</HashCode>
+      <FileName>Assets\Script\Communication\Datas.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Packes.Chat" Collapsed="true">
+    <Position X="0.5" Y="4.75" Width="1.5" />
+    <InheritanceLine Type="Packes.IPacketDatas" FixedToPoint="true">
+      <Path>
+        <Point X="1.25" Y="1.062" />
+        <Point X="1.25" Y="1.375" />
+        <Point X="0.26" Y="1.375" />
+        <Point X="0.26" Y="5.125" />
+        <Point X="0.5" Y="5.125" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAACA=</HashCode>
+      <FileName>Assets\Script\Communication\Datas.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Packes.Duplicate" Collapsed="true">
+    <Position X="2.5" Y="3.75" Width="1.5" />
+    <InheritanceLine Type="Packes.IPacketDatas" FixedToPoint="true">
+      <Path>
+        <Point X="1.25" Y="1.062" />
+        <Point X="1.25" Y="1.375" />
+        <Point X="2.102" Y="1.375" />
+        <Point X="2.102" Y="4.062" />
+        <Point X="2.5" Y="4.062" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\Communication\Datas.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="skill_type" Collapsed="true">
+    <Position X="11.5" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAAAgAAAAAAAAABAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\game_data\skill_table.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="buff_type" Collapsed="true">
+    <Position X="9.75" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAAAQAQgAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\game_data\skill_table.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="CommandData" Collapsed="true">
+    <Position X="8" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgAAAAAkEQAAAAgAAAAAAAAAAAAAAAAAAAACAEHAAAQ=</HashCode>
+      <FileName>Assets\Script\Communication\Datas.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Scenes" Collapsed="true">
+    <Position X="6.25" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAgAAQAAAAAAA=</HashCode>
+      <FileName>Assets\Script\Communication\Datas.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Yu Gothic UI" Size="9" />
+</ClassDiagram>

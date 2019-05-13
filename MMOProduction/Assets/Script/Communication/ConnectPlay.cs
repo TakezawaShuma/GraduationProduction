@@ -17,18 +17,20 @@ namespace Connect
         // ログインサーバーのポート
         private int port = 8001;
 
-        // 受信データ
-        public Packes.RecvPosSync recv_data = new Packes.RecvPosSync();
 
+        public System.Action<int, int, int, float, float, float,float> play_collback;
 
         /// <summary>
         /// 初期処理を纏めた
         /// </summary>
-        public void ConnectionStart()
+        public void ConnectionStart(System.Action<int, int, int, float, float, float,float> callback)
         {
+            play_collback = callback;
             Connect();
             RelatedToWS();
+            SendInData();
         }
+        
 
         /// <summary>
         /// 終了処理
@@ -36,7 +38,7 @@ namespace Connect
         public void Destroy()
         {
             SendCutting();
-            Debug.Log("ログインシーンの終了");
+            Debug.Log("プレイシーンの終了");
             ws.Close();
             ws = null;
         }
@@ -67,25 +69,30 @@ namespace Connect
             // データが送られてくると呼ばれる
             ws.OnMessage += (sender, e) =>
             {
+                // データ形の確認
                 Debug.Log("Data : " + e.Data);
-            // 受信データからコマンドを取り出す
-            CommandData com = (CommandData)int.Parse(e.Data.Substring(11, 3));
+                // 受信データからコマンドを取り出す
+                CommandData com = (CommandData)int.Parse(e.Data.Substring(11, 3));
 
-            // コマンドから受信データサイズを決定
-            // コマンド内容はDatas.csを参照
-            switch (com)
+                // コマンドから受信データサイズを決定
+                // コマンド内容はDatas.csを参照
+                switch (com)
                 {
                     case CommandData.CmdRecvPosSync:
+                        // 受信データ
+                        Packes.RecvPosSync recv_data = new Packes.RecvPosSync();
                         recv_data = Receive(e);
+                        play_collback(recv_data.user_id, recv_data.hp, recv_data.mp, recv_data.x, recv_data.y, recv_data.z, recv_data.dir);
+                        break;
+                    case CommandData.CmdRecvInitialLogin:
+                        Packes.RecvInitialLogin recv_in = new Packes.RecvInitialLogin();
+                        recv_in = ReceiveIn(e);
+                        play_collback(recv_in.user_id, 0, 0, recv_in.x, recv_in.y, recv_in.z, 0);
                         break;
                     default:
                         break;
                 }
-                Debug.Log(recv_data.command);
-                if (recv_data.Command == CommandData.CmdRecvPosSync)
-                {
-                // 此処に送られてきた情報を設定する関数を入れる
-            }
+
             };
 
             // 通信にエラーが発生すると呼ばれる
@@ -104,11 +111,10 @@ namespace Connect
         /// <summary>
         /// サーバーにデータを送信する
         /// </summary>
-        /// <param name="send_data"></param>
         /// <returns></returns>
-        public bool SendPlayData(int hp, int mp, float x, float y, float z)
+        public bool SendPosData(int hp, int mp, float x, float y, float z,int dir)
         {
-            Packes.SendPosSync send = SetSendData(hp, mp, x, y, z);
+            Packes.SendPosSync send = SetSendData(hp, mp, x, y, z, dir);
             // 送信の成否
             bool sf = true;
             try
@@ -126,31 +132,26 @@ namespace Connect
         }
 
         /// <summary>
-        /// パケットをJSON形式に変換する
+        /// プレイシーンに入った事を報告
         /// </summary>
-        /// <param name="data"></param>
         /// <returns></returns>
-        private string ConvertToJson(Packes.IPacketDatas data)
+        public bool SendInData()
         {
-            string json = JsonUtility.ToJson(data);
-            return json;
+            Packes.SendInitialLogin send = new Packes.SendInitialLogin();
+            send.user_id = Retention.ID;
+            try
+            {
+                string str = ConvertToJson(send);
+                ws.Send(str);
+                Debug.Log(str);
+            }
+            catch
+            {
+                Debug.Log("送信に失敗しました。");
+                return false;
+            }
+            return true;
         }
-
-        /// <summary>
-        /// データを受信したときの処理
-        /// </summary>
-        /// <param name="e"></param>
-        /// <returns></returns>
-        public Packes.RecvPosSync Receive(MessageEventArgs e)
-        {
-            // データの形の確認
-            Debug.Log("Data: " + e.Data);
-            // JSONをデシリアライズ
-            Packes.RecvPosSync recv = JsonUtility.FromJson<Packes.RecvPosSync>(e.Data);
-            return recv;
-
-        }
-
         /// <summary>
         /// ログアウトデータを送信する
         /// </summary>
@@ -179,16 +180,54 @@ namespace Connect
         /// 送るデータを設定する
         /// </summary>
         /// <param name="data"></param>
-        public Packes.SendPosSync SetSendData(int hp,int mp,float x,float y,float z)
+        private Packes.SendPosSync SetSendData(int hp, int mp, float x, float y, float z, int dir)
         {
             Packes.SendPosSync packet = new Packes.SendPosSync();
+            packet.user_id = Retention.ID;
             packet.hp = hp;
             packet.mp = mp;
             packet.x = x;
             packet.y = y;
             packet.z = z;
+            packet.dir = dir;
             return packet;
         }
+        /// <summary>
+        /// パケットをJSON形式に変換する
+        /// </summary>
+        /// <param name="data"></param>
+        /// <returns></returns>
+        private string ConvertToJson(Packes.IPacketDatas data)
+        {
+            string json = JsonUtility.ToJson(data);
+            return json;
+        }
+
+        /// <summary>
+        /// データを受信したときの処理
+        /// </summary>
+        /// <param name="e"></param>
+        /// <returns></returns>
+        public Packes.RecvPosSync Receive(MessageEventArgs e)
+        {
+            // JSONをデシリアライズ
+            Packes.RecvPosSync recv = JsonUtility.FromJson<Packes.RecvPosSync>(e.Data);
+            return recv;
+
+        }
+        /// <summary>
+        /// 初期ログイン確認
+        /// </summary>
+        /// <param name="e"></param>
+        /// <returns></returns>
+        private Packes.RecvInitialLogin ReceiveIn(MessageEventArgs e)
+        {
+
+            Packes.RecvInitialLogin init = JsonUtility.FromJson<Packes.RecvInitialLogin>(e.Data);
+            return init;
+
+        }
+
 
     }
 }
