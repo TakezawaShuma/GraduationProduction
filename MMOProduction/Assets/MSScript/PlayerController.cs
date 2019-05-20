@@ -52,6 +52,12 @@ public class PlayerController : MonoBehaviour
     [SerializeField]
     private bool IsNetwork = true;
 
+    private float x = 0;
+    private float y = 0;
+    private float z = 0;
+    private int dir = 0;
+
+
     // 速度
     private Vector3 velocity;
 
@@ -209,18 +215,24 @@ public class PlayerController : MonoBehaviour
 
     private void SendMoveDeta(Vector3 position, float direction)
     {
-        float x, y, z, dir;
+
 
         x = position.x;
         y = position.y;
         z = position.z;
-        dir = direction;
+        dir = (int)direction;
 
-        PlayerData.X = x;
-        PlayerData.Y = y;
-        PlayerData.Z = z;
-        PlayerData.Dir = dir;
+        //PlayerData.X = x;
+        //PlayerData.Y = y;
+        //PlayerData.Z = z;
+        //PlayerData.Dir = dir;
     }
+
+    public float X { get { return x; } }
+    public float Y { get { return y; } }
+    public float Z{ get { return z; } }
+    public int Dir { get { return dir; } }
+
 
     /// <summary>
     /// 移動モードがキー状態の時に呼ぶ関数

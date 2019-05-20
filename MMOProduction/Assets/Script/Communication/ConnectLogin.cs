@@ -34,9 +34,11 @@ namespace Connect
         public void ConnectionStart(Action<int> callback)
         {
             // コールバックの設定
-            login_callback = callback;
+            //login_callback = callback;
             Connect();
             RelatedToWS();
+
+            Send(702);
         }
 
         /// <summary>
@@ -45,12 +47,7 @@ namespace Connect
         private void Connect()
         {
             ws = new WebSocket("ws://" + server_ip + ":" + port.ToString());
-            Debug.Log("IPアドレス : " + server_ip + "ポート : " + port);
-            // 接続が確立したら呼ばれる
-            ws.OnOpen += (sender, e) =>
-            {
-                Debug.Log("WebSocket Open(Login)");
-            };
+            Debug.Log("IPアドレス : " + server_ip + " ポート : " + port);
             try
             {
                 ws.Connect();
@@ -66,13 +63,19 @@ namespace Connect
         /// </summary>
         private void RelatedToWS()
         {
+
+            // 接続が確立したら呼ばれる
+            ws.OnOpen += (sender, e) =>
+            {
+                Debug.Log("WebSocket Open(Login)");
+            };
             // データが送られてくると呼ばれる
             ws.OnMessage += (sender, e) =>
             {
-                //Debug.Log("Data : " + e.Data);
+                Debug.Log("Data : " + e.Data);
                 i_data = Receive(e);
                 login_callback(i_data.command);
-                Debug.Log(i_data.command);
+                Debug.Log(e.Data);
                 if (i_data.Command == CommandData.CmdOKConfirmation || i_data.Command == CommandData.CmdCreateReport)
                 {
                     Debug.Log("プレイシーンに移行します。");
@@ -117,28 +120,28 @@ namespace Connect
             // コマンド内容はDatas.csを参照
             switch (com)
             {
-                case CommandData.CmdOKConfirmation:
+                case CommandData.CmdOKConfirmation: //103
                     Debug.Log(e.Data);
-                    Packes.OKConfirmation ok = JsonUtility.FromJson<Packes.OKConfirmation>(e.Data);
+                    Packes.OKConfirmation ok = Json.ConvertToPackets<Packes.OKConfirmation>(e.Data);
                     // IDの保管
                     Retention.ID = ok.user_id;
                     Debug.Log(Retention.ID);
                     return ok;
 
-                case CommandData.CmdMissingConfirmation:
+                case CommandData.CmdMissingConfirmation: // 104
                     Debug.Log(e.Data);
-                    Packes.MissingConfirmation miss = JsonUtility.FromJson<Packes.MissingConfirmation>(e.Data);
+                    Packes.MissingConfirmation miss = Json.ConvertToPackets<Packes.MissingConfirmation>(e.Data);
                     return miss;
 
-                case CommandData.CmdCreateReport:
-                    Packes.CreateReport create = JsonUtility.FromJson<Packes.CreateReport>(e.Data);
+                case CommandData.CmdCreateReport: //105
+                    Packes.CreateReport create = Json.ConvertToPackets<Packes.CreateReport>(e.Data);
                     // IDの保管
                     Retention.ID = create.user_id;
                     Debug.Log(Retention.ID);
                     return create;
 
-                case CommandData.CmdExisting:
-                    Packes.Existing existing = JsonUtility.FromJson<Packes.Existing>(e.Data);
+                case CommandData.CmdExisting: // 106
+                    Packes.Existing existing = Json.ConvertToPackets<Packes.Existing>(e.Data);
                     return existing;
 
                 default:
@@ -161,7 +164,7 @@ namespace Connect
             bool sf = true;
             try
             {
-                string str = ConvertToJson(login_packet);
+                string str = Json.ConvertToJson(login_packet);
                 ws.Send(str);
                 Debug.Log(str);
             }
@@ -171,6 +174,29 @@ namespace Connect
                 return false;
             }
             return sf;
+        }
+
+        public bool Send(int com)
+        {
+            Packes.IPacketDatas pack = null;
+            switch (com)
+            {
+                case 702:
+                    pack = new Packes.SendItemList();
+                    break;
+                case 703:
+                    pack = new Packes.SendSkillList();
+                    break;
+                default:
+                    break;
+            }
+
+            if (pack != null)
+            {
+                string str = Json.ConvertToJson(pack);
+                ws.Send(str);
+            }
+            return true;
         }
 
         /// <summary>
@@ -186,7 +212,7 @@ namespace Connect
             bool sf = true;
             try
             {
-                string str = ConvertToJson(create_user);
+                string str = Json.ConvertToJson(create_user);
                 Debug.Log(str);
                 ws.Send(str);
             }
@@ -198,16 +224,6 @@ namespace Connect
             return sf;
         }
 
-        /// <summary>
-        /// パケットをJSON形式に変換する
-        /// </summary>
-        /// <param name="data"></param>
-        /// <returns></returns>
-        private string ConvertToJson(Packes.IPacketDatas data)
-        {
-            string json = JsonUtility.ToJson(data);
-            return json;
-        }
 
         /// <summary>
         /// シーンを切り替える

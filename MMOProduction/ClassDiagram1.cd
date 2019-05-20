@@ -10,14 +10,14 @@
   <Class Name="FollowingCamera" Collapsed="true">
     <Position X="6.25" Y="2.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>ABCAAQBAAAABAAAAIAAAIAAAAkQEACAABUAAAAABAAA=</HashCode>
+      <HashCode>ABCAAQBAAAABAAAAIAAAICAAAkQEACAABUAAAAABAAA=</HashCode>
       <FileName>Assets\MSScript\FollowingCamera.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="PlayerController" Collapsed="true">
     <Position X="8" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>ADQAAAAEAKADAAgBCAAABAAAAIAABAAAIAQACAATAAA=</HashCode>
+      <HashCode>ADUKAAAsCKADJggBAEEADACAAIAAACAIIAQACAQDAAA=</HashCode>
       <FileName>Assets\MSScript\PlayerController.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -62,7 +62,7 @@
   <Class Name="PlayersGenerator">
     <Position X="7.25" Y="7" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAEAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAA=</HashCode>
       <FileName>Assets\Script\Genereter\PlayersGenerator.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -104,8 +104,8 @@
       <FileName>Assets\Script\Test\TestPlay.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Field Name="connect_play" />
       <Field Name="generator" />
+      <Field Name="connect_play" />
     </ShowAsAssociation>
   </Class>
   <Class Name="Connect.ConnectChat">
@@ -119,19 +119,19 @@
     <Position X="0.5" Y="7" Width="1.5" />
     <AssociationLine Name="i_data" Type="Packes.IPacketDatas" ManuallyRouted="true">
       <Path>
-        <Point X="0.5" Y="8.835" />
-        <Point X="0.122" Y="8.835" />
+        <Point X="0.5" Y="8.931" />
+        <Point X="0.122" Y="8.931" />
         <Point X="0.122" Y="0.781" />
         <Point X="0.5" Y="0.781" />
       </Path>
     </AssociationLine>
     <TypeIdentifier>
-      <HashCode>AAAAABAAAAAAQEAAAAEAAIAAAAFgAAgQEQAAACAACgA=</HashCode>
+      <HashCode>AAAAABAAAAAAQEAAAEEAAIAAAAFgAAgQEQAAACAACgA=</HashCode>
       <FileName>Assets\Script\Communication\ConnectLogin.cs</FileName>
     </TypeIdentifier>
     <ShowAsAssociation>
-      <Field Name="i_data" />
       <Field Name="scene_flag" />
+      <Field Name="i_data" />
     </ShowAsAssociation>
   </Class>
   <Class Name="Connect.ConnectPlay">

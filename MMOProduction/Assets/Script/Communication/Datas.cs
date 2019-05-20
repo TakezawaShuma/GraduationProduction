@@ -110,6 +110,17 @@ namespace Packes
         public float exp;
     }
 
+    public class SendItemList : IPacketDatas
+    {
+        public SendItemList() { command = 702; }
+
+    }
+    public class SendSkillList : IPacketDatas
+    {
+        public SendSkillList() { command = 703; }
+
+    }
+
     // command 801　チャット()
     public class Chat:IPacketDatas
     {

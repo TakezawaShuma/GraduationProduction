@@ -12,25 +12,6 @@ public class Player : MonoBehaviour
     private int mp;
     private float dir;
 
-    public float X
-    {
-        set { x = value; UpdatePosition(); }
-    }
-
-    public float Y
-    {
-        set { y = value; UpdatePosition(); }
-    }
-
-    public float Z
-    {
-        set { z = value; UpdatePosition(); }
-    }
-
-    public float Dir
-    {
-        set { dir = value; UpdateDirection(); }
-    }
 
     public int HP
     {
@@ -51,13 +32,21 @@ public class Player : MonoBehaviour
         dir = transform.rotation.y;
     }
 
-    private void UpdatePosition()
+    private void Update()
     {
         transform.position = new Vector3(x, y, z);
+        transform.rotation = Quaternion.Euler(0, dir, 0);
     }
 
-    private void UpdateDirection()
+    public void UpdatePosition(float _x, float _y, float _z)
     {
-        transform.rotation = Quaternion.Euler(0, dir, 0);
+        x = _x;
+        y = _y;
+        z = _z;
+    }
+
+    public void UpdateDirection(float _dir)
+    {
+        dir = _dir;
     }
 }

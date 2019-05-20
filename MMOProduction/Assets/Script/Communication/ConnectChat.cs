@@ -118,9 +118,9 @@ namespace Connect
             
             try
             {
-                string str = ConvertToJson(chat_packet);
-                ws.Send(str);
-                Debug.Log(str);
+                //string str = ConvertToJson(chat_packet);
+                //ws.Send(str);
+                //Debug.Log(str);
             }
             catch
             {
@@ -130,15 +130,5 @@ namespace Connect
             return true;
         }
 
-        /// <summary>
-        /// パケットをJSON形式に変換する
-        /// </summary>
-        /// <param name="data"></param>
-        /// <returns></returns>
-        private string ConvertToJson(Packes.IPacketDatas data)
-        {
-            string json = JsonUtility.ToJson(data);
-            return json;
-        }
     }
 }
