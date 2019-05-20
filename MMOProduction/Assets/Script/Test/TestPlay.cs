@@ -32,7 +32,7 @@ public class TestPlay : MonoBehaviour
         // 通信関係の初期処理
         connect_play.ConnectionStart(Receive);
 
-        player = generator.GeneratePlayer();
+
     }
 
     void Update()
