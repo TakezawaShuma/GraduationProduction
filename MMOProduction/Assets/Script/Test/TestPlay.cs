@@ -17,7 +17,7 @@ public class TestPlay : MonoBehaviour
     }
     TestBox testbox=new TestBox(500,500);
 
-    PlayerController player = new PlayerController();
+    Player player = new Player();
 
     Dictionary<int, OtherPlayers> other_players = new Dictionary<int, OtherPlayers>();
     PlayersGenerator generator = new PlayersGenerator();
@@ -31,8 +31,6 @@ public class TestPlay : MonoBehaviour
         // Startに必ず入れる事！！
         // 通信関係の初期処理
         connect_play.ConnectionStart(Receive);
-
-
     }
 
     void Update()
@@ -68,7 +66,7 @@ public class TestPlay : MonoBehaviour
             if (player == null)
             {
                 Debug.Log("プレイヤーのnull確認");
-                //generator.GeneratePlayer();
+                player = generator.GenetatePlayer();
             }
         }
         // 自分以外のIDなら
