@@ -97,6 +97,7 @@ public class PlayerController : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
     {
+        
         // キーを押したら切り替える
         if(Input.GetKeyDown(AutoRunKey))
         {
@@ -128,98 +129,105 @@ public class PlayerController : MonoBehaviour
         Move();
     }
 
-    /// <summary>
-    /// 移動関数
-    /// </summary>
     public void Move()
     {
         velocity = Vector3.zero;
+        velocity = MoveModeKey();
+        SendMoveDeta(velocity, 0);
 
-        switch(moveMode)
-        {
-            case MoveMode.Key:
-                MoveModeKey();
-                break;
-            case MoveMode.Auto:
-                MoveModeAuto();
-                break;
-            case MoveMode.Click:
-                MoveModeClick();
-                break;
-        }
-
-        // 移動量が0より上であれば
-        if (velocity.magnitude > 0)
-        {
-            if (moveMode != MoveMode.Click)
-            {
-                if (IsNetwork)
-                {
-                    Vector3 afterMoving = transform.position + FollowingCamera.Angle * velocity;
-                    float afterDirection = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(FollowingCamera.Angle * velocity), TurnSpeed).eulerAngles.y;
-
-                    SendMoveDeta(afterMoving, afterDirection);
-                }
-                else
-                {
-                    // 移動方向に回転
-                    transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(FollowingCamera.Angle * velocity), TurnSpeed);
-
-                    // 移動
-                    transform.position += FollowingCamera.Angle * velocity;
-                }
-            }
-            else
-            {
-                if (IsNetwork)
-                {
-                    Vector3 afterMoving = transform.position + velocity;
-                    float afterDirection = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(velocity), TurnSpeed).eulerAngles.y;
-
-                    SendMoveDeta(afterMoving, afterDirection);
-                }
-                else
-                {
-                    //transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(velocity), TurnSpeed);
-                    Quaternion rot = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(velocity), TurnSpeed);
-                    transform.rotation = rot;
-                    transform.position += velocity;
-                }
-            }
-
-            if(runState)
-            {
-                SetRun();
-            }
-            else
-            {
-                SetWalk();
-            }
-        }
-        else
-        {
-            SetIdle();
-        }
-
-        // ジャンプ処理
-        if (Input.GetKeyDown(JumpKey))
-        {
-            // ジャンプ状態でなければジャンプをする
-            if (!jumpState)
-            {
-                GetComponent<Rigidbody>().AddForce(0, JumpPower, 0);
-                jumpState = true;
-            }
-        }
     }
+
+
+    ///// <summary>
+    ///// 移動関数
+    ///// </summary>
+    //public void Move()
+    //{
+    //    velocity = Vector3.zero;
+
+    //    switch(moveMode)
+    //    {
+    //        case MoveMode.Key:
+    //            MoveModeKey();
+    //            break;
+    //        case MoveMode.Auto:
+    //            MoveModeAuto();
+    //            break;
+    //        case MoveMode.Click:
+    //            MoveModeClick();
+    //            break;
+    //    }
+
+    //    // 移動量が0より上であれば
+    //    if (velocity.magnitude > 0)
+    //    {
+    //        if (moveMode != MoveMode.Click)
+    //        {
+    //            if (IsNetwork)
+    //            {
+    //                Vector3 afterMoving = transform.position + FollowingCamera.Angle * velocity;
+    //                float afterDirection = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(FollowingCamera.Angle * velocity), TurnSpeed).eulerAngles.y;
+
+    //                SendMoveDeta(afterMoving, afterDirection);
+    //            }
+    //            else
+    //            {
+    //                // 移動方向に回転
+    //                transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(FollowingCamera.Angle * velocity), TurnSpeed);
+
+    //                // 移動
+    //                transform.position += FollowingCamera.Angle * velocity;
+    //            }
+    //        }
+    //        else
+    //        {
+    //            if (IsNetwork)
+    //            {
+    //                Vector3 afterMoving = transform.position + velocity;
+    //                float afterDirection = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(velocity), TurnSpeed).eulerAngles.y;
+
+    //                SendMoveDeta(afterMoving, afterDirection);
+    //            }
+    //            else
+    //            {
+    //                //transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(velocity), TurnSpeed);
+    //                Quaternion rot = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(velocity), TurnSpeed);
+    //                transform.rotation = rot;
+    //                transform.position += velocity;
+    //            }
+    //        }
+
+    //        if(runState)
+    //        {
+    //            SetRun();
+    //        }
+    //        else
+    //        {
+    //            SetWalk();
+    //        }
+    //    }
+    //    else
+    //    {
+    //        SetIdle();
+    //    }
+
+    //    // ジャンプ処理
+    //    if (Input.GetKeyDown(JumpKey))
+    //    {
+    //        // ジャンプ状態でなければジャンプをする
+    //        if (!jumpState)
+    //        {
+    //            GetComponent<Rigidbody>().AddForce(0, JumpPower, 0);
+    //            jumpState = true;
+    //        }
+    //    }
+    //}
 
     private void SendMoveDeta(Vector3 position, float direction)
     {
-
-
-        x = position.x;
-        y = position.y;
-        z = position.z;
+        x += position.x;
+        y += position.y;
+        z += position.z;
         dir = (int)direction;
 
         //PlayerData.X = x;
@@ -237,41 +245,43 @@ public class PlayerController : MonoBehaviour
     /// <summary>
     /// 移動モードがキー状態の時に呼ぶ関数
     /// </summary>
-    private void MoveModeKey()
+    private Vector3 MoveModeKey()
     {
+        Vector3 vec = Vector3.zero;
         // キー判定
         if (Input.GetKey(FrontKey))
         {
-            velocity.x -= 1;
+            vec.x = -1;
         }
         else if (Input.GetKey(BackKey))
         {
-            velocity.x += 1;
+            vec.x = 1;
         }
 
         if (Input.GetKey(LeftKey))
         {
-            velocity.z -= 1;
+            vec.z = -1;
         }
         else if (Input.GetKey(RightKey))
         {
-            velocity.z += 1;
+            vec.z = 1;
         }
 
         // 正規化
-        velocity = velocity.normalized;
+        vec = vec.normalized;
 
         // 押していたらダッシュ
         if (Input.GetKey(DashKey))
         {
-            velocity *= DashSpeed * Time.deltaTime;
+            vec *= DashSpeed * Time.deltaTime;
             runState = true;
         }
         else
         {
-            velocity *= NomalSpeed * Time.deltaTime;
+            vec *= NomalSpeed * Time.deltaTime;
             runState = false;
         }
+        return vec;
     }
 
     /// <summary>
