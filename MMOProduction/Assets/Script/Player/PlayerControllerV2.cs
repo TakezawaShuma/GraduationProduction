@@ -65,10 +65,10 @@ public class PlayerControllerV2 : MonoBehaviour
         z = position.z;
         dir = direction;
 
-        PlayerData.X = x;
-        PlayerData.Y = y;
-        PlayerData.Z = z;
-        PlayerData.Dir = dir;
+       // PlayerData.X = x;
+       // PlayerData.Y = y;
+       // PlayerData.Z = z;
+       // PlayerData.Dir = dir;
     }
 
     public void ChangeState(BaseState state)
