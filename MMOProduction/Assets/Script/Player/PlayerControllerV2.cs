@@ -58,6 +58,17 @@ public class PlayerControllerV2 : MonoBehaviour
         SendMoveDeta(pos, rot.eulerAngles.y);
     }
 
+    public void MouseMove(Vector3 velocity)
+    {
+        // 移動方向に回転
+        Quaternion rot = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(velocity), playerSetting.TS);
+
+        // 移動
+        Vector3 pos = transform.position + velocity;
+
+        SendMoveDeta(pos, rot.eulerAngles.y);
+    }
+
     public void SendMoveDeta(Vector3 position, float direction)
     {
         float x, y, z, dir;
