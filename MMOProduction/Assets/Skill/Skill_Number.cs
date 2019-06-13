@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class Skill_Number : MonoBehaviour
 {
-   public int m_score = 0;
+    public int m_score = 0;
 
     //Textのオブジェクト
     public GameObject score_object;

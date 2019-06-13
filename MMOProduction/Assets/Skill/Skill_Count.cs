@@ -34,7 +34,7 @@ public class Skill_Count : MonoBehaviour
     public void Up_Button()
     {
         //スキル結果の表示
-        if(get_point.m_point>0)
+        if(get_point.m_point > 0)
         {
             skill_number.Set_Score(+1);
         }
