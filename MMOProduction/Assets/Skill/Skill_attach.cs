@@ -73,6 +73,10 @@ public class Skill_attach : MonoBehaviour
     {
         //スキルをスキル枠に付ける
         OnCollisionTag(other.gameObject);
+        if (Input.GetMouseButtonUp(1))
+        {
+            transform.position = startPosition;
+        }
     }
 
     void OnCollisionTag(GameObject slot)
