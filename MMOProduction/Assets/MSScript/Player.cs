@@ -29,7 +29,7 @@ public class Player : MonoBehaviour
         y = transform.position.y;
         z = transform.position.z;
 
-        dir = transform.rotation.y;
+        dir = transform.rotation.eulerAngles.y;
     }
 
     private void Update()
@@ -40,13 +40,13 @@ public class Player : MonoBehaviour
 
     public void UpdatePosition(float _x, float _y, float _z)
     {
-        x += _x;
-        y += _y;
-        z += _z;
+        x = _x;
+        y = _y;
+        z = _z;
     }
 
     public void UpdateDirection(float _dir)
     {
-        dir += _dir;
+        dir = _dir;
     }
 }

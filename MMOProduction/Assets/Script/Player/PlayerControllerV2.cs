@@ -50,10 +50,23 @@ public class PlayerControllerV2 : MonoBehaviour
     public void Move(Vector3 velocity)
     {
         // 移動方向に回転
-        transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(FollowingCamera.Angle * velocity), playerSetting.TS);
+        Quaternion rot = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(FollowingCamera.Angle * velocity), playerSetting.TS);
         
         // 移動
-        transform.position += FollowingCamera.Angle * velocity;
+        Vector3 pos = transform.position + FollowingCamera.Angle * velocity;
+
+        SendMoveDeta(pos, rot.eulerAngles.y);
+    }
+
+    public void MouseMove(Vector3 velocity)
+    {
+        // 移動方向に回転
+        Quaternion rot = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(velocity), playerSetting.TS);
+
+        // 移動
+        Vector3 pos = transform.position + velocity;
+
+        SendMoveDeta(pos, rot.eulerAngles.y);
     }
 
     public void SendMoveDeta(Vector3 position, float direction)
@@ -65,10 +78,8 @@ public class PlayerControllerV2 : MonoBehaviour
         z = position.z;
         dir = direction;
 
-       // PlayerData.X = x;
-       // PlayerData.Y = y;
-       // PlayerData.Z = z;
-       // PlayerData.Dir = dir;
+        PlayerData.UpdatePosition(x, y, z);
+        PlayerData.UpdateDirection(dir);
     }
 
     public void ChangeState(BaseState state)

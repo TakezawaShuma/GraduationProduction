@@ -35,7 +35,7 @@ public class MouseMoveState : BaseState
 
         if (velocity.magnitude > 0)
         {
-            playerController.Move(velocity);
+            playerController.MouseMove(velocity);
         }
 
         if(Input.GetMouseButtonUp(0))
@@ -60,9 +60,9 @@ public class MouseMoveState : BaseState
 
     private void VelocityDecision(Vector3 clickPosition)
     {
-        Vector3 v = clickPosition - playerController.transform.position;
+        Vector2 v = new Vector2(clickPosition.x, clickPosition.z) - new Vector2(playerController.transform.position.x, playerController.transform.position.z);
 
-        float rad = Mathf.Atan2(v.x, v.z) + (270.0f * Mathf.Deg2Rad);
+        float rad = Mathf.Atan2(v.x, v.y);
 
         velocity.x = Mathf.Sin(rad);
         velocity.z = Mathf.Cos(rad);
