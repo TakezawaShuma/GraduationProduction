@@ -13,7 +13,8 @@ namespace Connect
         private WebSocket ws;
 
         //　サーバーのIP
-        string server_ip = "172.24.52.250";
+        //string server_ip = "172.24.52.250";
+        string server_ip = "localhost";
         // ログインサーバーのポート
         private int port = 8001;
 
