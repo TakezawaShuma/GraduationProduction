@@ -5,6 +5,7 @@ using UnityEngine.SceneManagement;
 using WebSocketSharp;
 using WebSocketSharp.Net;
 using System;
+using System.Threading;
 
 namespace Connect
 {
@@ -17,7 +18,8 @@ namespace Connect
         Scenes scene_flag = Scenes.Non;
 
         //　サーバーのIP
-        private const string server_ip = "172.24.52.250";
+        //private const string server_ip = "172.24.52.250";
+        private const string server_ip = "localhost";
 
         // ログインサーバーのポート
         private const int port = 8000;
@@ -34,7 +36,7 @@ namespace Connect
         public void ConnectionStart(Action<int> callback)
         {
             // コールバックの設定
-            //login_callback = callback;
+            login_callback = callback;
             Connect();
             RelatedToWS();
 
@@ -63,25 +65,29 @@ namespace Connect
         /// </summary>
         private void RelatedToWS()
         {
+            var context = SynchronizationContext.Current;
 
+            // データが送られてくると呼ばれる
+            ws.OnMessage += (sender, e) =>
+            {
+                Debug.Log("Data : " + e.Data);
+                context.Post(state => {
+                    i_data = Receive(e);
+                    login_callback(i_data.command);
+                    Debug.Log(i_data.command);
+                    if (i_data.Command == CommandData.CmdOKConfirmation || i_data.Command == CommandData.CmdCreateReport)
+                    {
+                        Debug.Log("プレイシーンに移行します。");
+                        scene_flag = Scenes.Play;
+                    }
+                }, e.Data);
+            };
             // 接続が確立したら呼ばれる
             ws.OnOpen += (sender, e) =>
             {
                 Debug.Log("WebSocket Open(Login)");
             };
-            // データが送られてくると呼ばれる
-            ws.OnMessage += (sender, e) =>
-            {
-                Debug.Log("Data : " + e.Data);
-                i_data = Receive(e);
-                login_callback(i_data.command);
-                Debug.Log(e.Data);
-                if (i_data.Command == CommandData.CmdOKConfirmation || i_data.Command == CommandData.CmdCreateReport)
-                {
-                    Debug.Log("プレイシーンに移行します。");
-                    scene_flag = Scenes.Play;
-                }
-            };
+            
 
             // 通信にエラーが発生すると呼ばれる
             ws.OnError += (sender, e) =>
