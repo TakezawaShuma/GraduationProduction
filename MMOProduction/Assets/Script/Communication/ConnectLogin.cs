@@ -18,8 +18,8 @@ namespace Connect
         Scenes scene_flag = Scenes.Non;
 
         //　サーバーのIP
-        //private const string server_ip = "172.24.52.250";
-        private const string server_ip = "localhost";
+        private const string server_ip = "172.24.52.250";
+        //private const string server_ip = "localhost";
 
         // ログインサーバーのポート
         private const int port = 8000;
@@ -243,7 +243,7 @@ namespace Connect
                 case Scenes.Play:
                     // ソケット削除
                     Destroy();
-                    SceneManager.LoadScene("DebugPlay");
+                    SceneManager.LoadScene("PlayScene");
                     break;
                 case Scenes.Non:
                     break;

@@ -45,6 +45,14 @@ public class FollowingCamera : MonoBehaviour
     [SerializeField]
     private float scrollSensitivity = 5.0f;
 
+    /// <summary>
+    /// ターゲットの設定
+    /// </summary>
+    /// <param name="_target"></param>
+    public void SetTarget(GameObject _target) {
+        target = _target;
+    }
+
     void LateUpdate()
     {
         if (Input.GetMouseButton(1))

@@ -122,7 +122,6 @@ GameObject:
   m_Component:
   - component: {fileID: 645858242}
   - component: {fileID: 645858244}
-  - component: {fileID: 645858243}
   m_Layer: 0
   m_Name: PlaySceneManager
   m_TagString: Untagged
@@ -144,34 +143,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &645858243
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 645858241}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1000ee39775235b4a9525159ecc91fbf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PlayerData: {fileID: 1381904013}
-  FollowingCamera: {fileID: 992294608}
-  NomalSpeed: 5
-  DashSpeed: 12.5
-  JumpPower: 300
-  FrontKey: 119
-  BackKey: 115
-  LeftKey: 97
-  RightKey: 100
-  DashKey: 304
-  JumpKey: 32
-  AutoRunKey: 116
-  TurnSpeed: 0.15
-  IsAnimator: 0
-  Animator: {fileID: 0}
-  IsNetwork: 1
 --- !u!114 &645858244
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -184,6 +155,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cb1b657d808c7b4583315bc0749e915, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerObject: {fileID: 1381904012}
+  playerPre: {fileID: 2966051609647939905, guid: c91ccc80925ca9b48adf04a09399cb3f,
+    type: 3}
+  FollowingCamera: {fileID: 992294608}
 --- !u!1 &992294604
 GameObject:
   m_ObjectHideFlags: 0
@@ -374,13 +349,15 @@ GameObject:
   - component: {fileID: 1381904015}
   - component: {fileID: 1381904014}
   - component: {fileID: 1381904013}
+  - component: {fileID: 1381904019}
+  - component: {fileID: 1381904018}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1381904013
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -465,6 +442,46 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1381904018
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1381904012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e83a106f1bb43df46a76f41219ca3be5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  NomalSpeed: 5
+  DashSpeed: 12.5
+  JumpPower: 300
+  TurnSpeed: 0.15
+  IsAnimator: 0
+  IsNetwork: 0
+  FrontKey: 119
+  BackKey: 115
+  LeftKey: 97
+  RightKey: 100
+  DashKey: 304
+  JumpKey: 32
+  AutoRunKey: 116
+--- !u!114 &1381904019
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1381904012}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07c974c033d562447b7fb18d4050c63d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PlayerData: {fileID: 1381904013}
+  FollowingCamera: {fileID: 992294608}
+  playerSetting: {fileID: 1381904018}
 --- !u!1001 &1925013531
 PrefabInstance:
   m_ObjectHideFlags: 0

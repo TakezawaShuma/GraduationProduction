@@ -16,6 +16,12 @@ public class PlayerControllerV2 : MonoBehaviour
     // 現在のステート
     BaseState currentState;
 
+    public void Init(Player _playerData,FollowingCamera _camera,PlayerSetting _setting) {
+        PlayerData = _playerData;
+        FollowingCamera = _camera;
+        playerSetting = _setting; 
+    }
+
     // 位置
     Vector3 pos;
     public Vector3 Position
@@ -29,6 +35,7 @@ public class PlayerControllerV2 : MonoBehaviour
     {
         get { return dir; }
     }
+
 
     // Use this for initialization
     void Start()
