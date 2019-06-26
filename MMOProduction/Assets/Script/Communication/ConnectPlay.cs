@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.Threading;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using WebSocketSharp;
@@ -67,33 +68,39 @@ namespace Connect
         /// <returns></returns>
         private void RelatedToWS()
         {
+
+            var context = SynchronizationContext.Current;
+
             // データが送られてくると呼ばれる
             ws.OnMessage += (sender, e) =>
             {
                 // データ形の確認
                 Debug.Log("Data : " + e.Data);
-                // 受信データからコマンドを取り出す
-                CommandData com = (CommandData)int.Parse(e.Data.Substring(11, 3));
-
-                // コマンドから受信データサイズを決定
-                // コマンド内容はDatas.csを参照
-                switch (com)
+                context.Post(state =>
                 {
-                    case CommandData.CmdRecvPosSync:
-                        // 受信データ
-                        Packes.RecvPosSync recv_data = new Packes.RecvPosSync();
-                        recv_data = Receive(e);
-                        play_collback(recv_data.user_id, recv_data.hp, recv_data.mp, recv_data.x, recv_data.y, recv_data.z, recv_data.dir);
-                        break;
-                    case CommandData.CmdRecvInitialLogin:
-                        Packes.RecvInitialLogin recv_in = new Packes.RecvInitialLogin();
-                        recv_in = ReceiveIn(e);
-                        play_collback(recv_in.user_id, 0, 0, recv_in.x, recv_in.y, recv_in.z, 0);
-                        break;
-                    default:
-                        break;
-                }
+                    // 受信データからコマンドを取り出す
+                    CommandData com = (CommandData)int.Parse(e.Data.Substring(11, 3));
 
+                    // コマンドから受信データサイズを決定
+                    // コマンド内容はDatas.csを参照
+                    switch (com)
+                    {
+                        case CommandData.CmdRecvPosSync:
+                            // 受信データ
+                            Packes.RecvPosSync recv_data = new Packes.RecvPosSync();
+                            recv_data = Receive(e);
+                            Debug.Log("listen user_id : " + recv_data.user_id.ToString());
+                            play_collback(recv_data.user_id, recv_data.hp, recv_data.mp, recv_data.x, recv_data.y, recv_data.z, recv_data.dir);
+                            break;
+                        case CommandData.CmdRecvInitialLogin:
+                            Packes.RecvInitialLogin recv_in = new Packes.RecvInitialLogin();
+                            recv_in = ReceiveIn(e);
+                            play_collback(recv_in.user_id, 0, 0, recv_in.x, recv_in.y, recv_in.z, 0);
+                            break;
+                        default:
+                            break;
+                    }
+                },e.Data);
             };
 
             // 通信にエラーが発生すると呼ばれる
@@ -116,6 +123,7 @@ namespace Connect
         public bool SendPosData(int hp, int mp, float x, float y, float z,int dir)
         {
             Packes.SendPosSync send = SetSendData(hp, mp, x, y, z, dir);
+            send.user_id = Retention.ID;
             // 送信の成否
             bool sf = true;
             try

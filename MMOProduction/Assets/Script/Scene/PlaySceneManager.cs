@@ -4,9 +4,6 @@ using UnityEngine;
 
 public class PlaySceneManager : MonoBehaviour
 {
-    // デバッグ用プレイヤー
-    public GameObject playerObject;
-
     public GameObject playerPre;
 
     [SerializeField, Header("カメラ")]
@@ -29,11 +26,11 @@ public class PlaySceneManager : MonoBehaviour
     void Update()
     {
         Debug.Log(Retention.ID);
-        var playerData = playerObject.transform.position;
-        ws.SendPosData(0, 0, playerData.x, playerData.y, playerData.z, 0);
-
         MakePlayer();
-
+        if (players.ContainsKey(Retention.ID)){
+            var playerData = players[Retention.ID].transform.position;
+            if (Timer()) ws.SendPosData(99, 0, playerData.x, playerData.y, playerData.z, 0);
+        }
     }
 
     private void OnDestroy()
@@ -41,21 +38,42 @@ public class PlaySceneManager : MonoBehaviour
        
     }
 
+    private int count = 0;
+    private int updateMaxCount = 5;
+
+    private bool Timer() {
+        count++;
+        if (count > updateMaxCount) {
+            count = 0;
+            return true;
+        }
+        return false;
+    }
+
     /// <summary>
     /// 自分以外のユーザーの更新
     /// </summary>
     private void UpdatePlayers(int _id,int _hp,int _mp,float _x,float _y,float _z,float _dir)
     {
-        if(_id != Retention.ID) {
-            // ユーザーの更新
-            if (players.ContainsKey(_id)) players[_id].transform.position = new Vector3(_x, _y, _z);
-            // 他のユーザーの作成
-            else {
-                var otherPlayer = Instantiate<GameObject>(playerPre);
-                players.Add(_id, otherPlayer);
-                players[_id].transform.position = new Vector3(_x, _y, _z);
-            };
-        } 
+        Debug.Log("player id :" + Retention.ID.ToString() + "move player id" + _id.ToString());
+
+        if (_id != 0) {
+            if (_id != Retention.ID) {
+                // ユーザーの更新
+                if (players.ContainsKey(_id)) {
+                    players[_id].transform.position = new Vector3(_x, _y, _z);
+                    Debug.Log("他のユーザーの移動処理");
+                }
+                // 他のユーザーの作成
+                else {
+                    var otherPlayer = Instantiate<GameObject>(playerPre);
+                    players.Add(_id, otherPlayer);
+                    players[_id].transform.position = new Vector3(_x, _y, _z);
+
+                    Debug.Log("他のユーザーの作成");
+                };
+            }
+        }
     }
 
     /// <summary>
