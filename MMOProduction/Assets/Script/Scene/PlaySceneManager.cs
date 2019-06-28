@@ -14,6 +14,8 @@ public class PlaySceneManager : MonoBehaviour
     private Connect.ConnectPlay ws = new Connect.ConnectPlay();
     private Dictionary<int, GameObject> players = new Dictionary<int, GameObject>();
 
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -25,11 +27,11 @@ public class PlaySceneManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Debug.Log(Retention.ID);
         MakePlayer();
         if (players.ContainsKey(Retention.ID)){
             var playerData = players[Retention.ID].transform.position;
-            if (Timer()) ws.SendPosData(99, 0, playerData.x, playerData.y, playerData.z, 0);
+            if (Timer())
+            ws.SendPosData(99, 0, playerData.x, playerData.y, playerData.z, 0);
         }
     }
 
@@ -39,7 +41,7 @@ public class PlaySceneManager : MonoBehaviour
     }
 
     private int count = 0;
-    private int updateMaxCount = 5;
+    private int updateMaxCount = 3;
 
     private bool Timer() {
         count++;
