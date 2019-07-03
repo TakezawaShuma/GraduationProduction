@@ -4,58 +4,97 @@ using UnityEngine;
 
 public class PlaySceneManager : MonoBehaviour
 {
-    Player player;
-    PlayerController con;
+    public GameObject playerPre;
 
-    Dictionary<int, OtherPlayers> other_players = new Dictionary<int, OtherPlayers>();
-    PlayersGenerator generator = new PlayersGenerator();
-    Connect.ConnectPlay connect_play = new Connect.ConnectPlay();
+    [SerializeField, Header("カメラ")]
+    private FollowingCamera FollowingCamera;
+
+
+    // ソケット
+    private Connect.ConnectPlay ws = new Connect.ConnectPlay();
+    private Dictionary<int, GameObject> players = new Dictionary<int, GameObject>();
+
+
 
     // Start is called before the first frame update
     void Start()
     {
-        player = GameObject.Find("Player").GetComponent<Player>();
-        con = GameObject.Find("PlaySceneManager").GetComponent<PlayerController>();
-        connect_play.ConnectionStart(Receive);
+        // ユーザーID
+        var user_id = Retention.ID;
+        ws.ConnectionStart(UpdatePlayers);
     }
 
     // Update is called once per frame
     void Update()
     {
-        connect_play.SendPosData(0, 0, con.X, con.Y, con.Z, con.Dir);
-        player.UpdatePosition(con.X, con.Y, con.Z);
-        player.UpdateDirection(con.Dir);
+        MakePlayer();
+        if (players.ContainsKey(Retention.ID)){
+            var playerData = players[Retention.ID].transform.position;
+            if (Timer())
+            ws.SendPosData(99, 0, playerData.x, playerData.y, playerData.z, 0);
+        }
     }
 
     private void OnDestroy()
     {
-        connect_play.Destroy();
+       
     }
 
-    void Receive(int id, int hp, int mp, float x, float y, float z, float dir)
-    {
-        // 自分のIDだったら
-        if (id == Retention.ID)
-        {
-            player.UpdatePosition(x, y, z);
-            player.UpdateDirection(dir);
+    private int count = 0;
+    private int updateMaxCount = 3;
 
+    private bool Timer() {
+        count++;
+        if (count > updateMaxCount) {
+            count = 0;
+            return true;
         }
-        // 自分以外のIDなら
-        else
-        {
-            // すでに存在している
-            if (other_players.ContainsKey(id))
-            {
-                other_players[id].UpdataData(hp, mp, x, y, z, dir);
+        return false;
+    }
 
+    /// <summary>
+    /// 自分以外のユーザーの更新
+    /// </summary>
+    private void UpdatePlayers(int _id,int _hp,int _mp,float _x,float _y,float _z,float _dir)
+    {
+        Debug.Log("player id :" + Retention.ID.ToString() + "move player id" + _id.ToString());
+
+        if (_id != 0) {
+            if (_id != Retention.ID) {
+                // ユーザーの更新
+                if (players.ContainsKey(_id)) {
+                    players[_id].transform.position = new Vector3(_x, _y, _z);
+                    Debug.Log("他のユーザーの移動処理");
+                }
+                // 他のユーザーの作成
+                else {
+                    var otherPlayer = Instantiate<GameObject>(playerPre);
+                    players.Add(_id, otherPlayer);
+                    players[_id].transform.position = new Vector3(_x, _y, _z);
+
+                    Debug.Log("他のユーザーの作成");
+                };
             }
-            // 存在していないプレイヤー
-            else
-            {
-                other_players.Add(id, generator.GenerateOtherPlayer());
-                Debug.Log("ID : " + id + " Data : " + other_players[id]);
-            }
+        }
+    }
+
+    /// <summary>
+    /// プレイヤーの作成
+    /// </summary>
+    private void MakePlayer() {
+        if (!players.ContainsKey(Retention.ID)) {
+            // 自分の作成コンポーネントの追加
+            var tmpPlayer = Instantiate<GameObject>(playerPre);
+            players.Add(Retention.ID, tmpPlayer);
+            players[Retention.ID].AddComponent<Player>();
+            players[Retention.ID].AddComponent<PlayerControllerV2>();
+            players[Retention.ID].AddComponent<PlayerSetting>();
+            players[Retention.ID].GetComponent<PlayerControllerV2>().Init(
+                players[Retention.ID].GetComponent<Player>(),
+                FollowingCamera,
+                players[Retention.ID].GetComponent<PlayerSetting>()
+                );
+            FollowingCamera.SetTarget(players[Retention.ID]);
         }
     }
 }
