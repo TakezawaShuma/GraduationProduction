@@ -58,6 +58,12 @@ namespace Packes
     public class SendPosSync : IPacketDatas
     {
         public SendPosSync() { command = 201; }
+        public SendPosSync(PlayerData _data) {
+            command = 201; user_id = _data.id; x = _data.X; y = _data.Y; z = _data.Z; hp = _data.HP; mp = _data.MP; dir = _data.Direction;
+        }
+        public SendPosSync(int _id,float _x,float _y,float _z,int _hp,int _mp,int _dir){
+            user_id = _id; command = 201; x = _x; y = _y; z = _z; hp = _hp; mp = _mp; dir = _dir;
+        }
         public int user_id;
         public float x;
         public float y;
@@ -70,7 +76,12 @@ namespace Packes
     // command 202  位置同期(server->client)
     public class RecvPosSync : IPacketDatas
     {
+        
+
         public RecvPosSync() { command = 202; }
+        public RecvPosSync(int _id,float _x,float _y,float _z,int _hp,int _mp,int _dir) {
+            command = 202; user_id = _id; x = _x; y = _y;z = _z; hp = _hp; mp = _mp; dir = _dir;
+        }
         public int user_id;
         public float x;
         public float y;
@@ -83,7 +94,9 @@ namespace Packes
     // command 203　初期ログイン(client->server)
     public class SendInitialLogin:IPacketDatas
     {
-        public SendInitialLogin() { command = 203; }
+        public SendInitialLogin() {
+            command = 203; user_id = Retention.ID;
+        }
         public int user_id;
     }
 

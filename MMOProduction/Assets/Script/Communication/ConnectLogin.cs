@@ -1,9 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.SceneManagement;
 using WebSocketSharp;
-using WebSocketSharp.Net;
 using System;
 using System.Threading;
 
@@ -142,7 +139,7 @@ namespace Connect
         /// <summary>
         /// シーンを切り替える
         /// </summary>
-        public void ChangeScene() {
+        private void ChangeScene() {
             Destroy();
             SceneManager.LoadScene("PlayScene");
         }

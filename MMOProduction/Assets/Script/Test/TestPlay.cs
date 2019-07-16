@@ -57,10 +57,10 @@ public class TestPlay : MonoBehaviour
         if (Input.GetKey(KeyCode.D)) { testbox.dir--; }
     }
 
-    void Receive(int id, int hp, int mp, float x, float y, float z,float dir)
+    void Receive(PlayerData _data)
     {
         // 自分のIDだったら
-        if (id == Retention.ID)
+        if (_data.id == Retention.ID)
         {
             Debug.Log("自分のデータの受信");
             if (player == null)
@@ -73,16 +73,16 @@ public class TestPlay : MonoBehaviour
         else
         {
             // すでに存在している
-            if (other_players.ContainsKey(id))
+            if (other_players.ContainsKey(_data.id))
             {
-                other_players[id].UpdataData(hp, mp, x, y, z, dir);
+                other_players[_data.id].UpdataData(_data.HP, _data.MP, _data.X, _data.Y, _data.Z, _data.Direction);
 
             }
             // 存在していないプレイヤー
             else
             {
-                other_players.Add(id, generator.GenerateOtherPlayer());
-                Debug.Log("ID : " + id + " Data : " + other_players[id]);
+                other_players.Add(_data.id, generator.GenerateOtherPlayer());
+                Debug.Log("ID : " + _data.id + " Data : " + other_players[_data.id]);
             }
         }
     }

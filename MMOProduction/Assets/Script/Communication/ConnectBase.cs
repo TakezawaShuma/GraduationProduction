@@ -9,8 +9,8 @@ public abstract class ConnectBase
     // ソケット
     protected WebSocket ws;
     // サーバーのIP
-    //protected string server_ip = "172.24.52.250";
-    private string server_ip = "localhost";
+    private string server_ip = "172.24.52.250";
+    //private string server_ip = "localhost";
 
     /// <summary>
     /// 接続
@@ -21,7 +21,7 @@ public abstract class ConnectBase
         Debug.Log("IPアドレス : " + server_ip + "ポート : " + _port);
         try{
             ws.Connect();
-        } catch{
+        } catch {
             Debug.Log("サーバーへ接続ができません。");
         }
     }
