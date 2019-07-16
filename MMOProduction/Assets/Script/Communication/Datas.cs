@@ -125,6 +125,11 @@ namespace Packes
     public class Chat:IPacketDatas
     {
         public Chat() { command = 801; }
+        public Chat(string _name,string _msg) {
+            command = 801;
+            user_name = _name;
+            message = _msg;
+        }
         public string user_name;
         public string message;
     }

@@ -1,10 +1,6 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using System.Threading;
+﻿using System.Threading;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 using WebSocketSharp;
-using WebSocketSharp.Net;
 
 namespace Connect
 {
@@ -14,8 +10,8 @@ namespace Connect
         private WebSocket ws;
 
         //　サーバーのIP
-        string server_ip = "172.24.52.250";
-        //string server_ip = "localhost";
+        //string server_ip = "172.24.52.250";
+        string server_ip = "localhost";
         // ログインサーバーのポート
         private int port = 8001;
 
