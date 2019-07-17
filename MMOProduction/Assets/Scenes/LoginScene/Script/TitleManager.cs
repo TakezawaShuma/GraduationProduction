@@ -331,15 +331,15 @@ public class TitleManager : MonoBehaviour
     {
         switch(_comand)
         {
-            case (int)CommandData.CmdMissingConfirmation:
+            case (int)CommandData.MissingConfirmation:
                 //IDかPWが間違っている
                 TypingError();
                 break;
-            case (int)CommandData.CmdExisting:
+            case (int)CommandData.Existing:
                 //すでに使われているID
                 AlreadyInUse();
                 break;
-            case (int)CommandData.CmdDuplicate:
+            case (int)CommandData.Duplicate:
                 //すでにログインしているID
                 MultipleLoginError();
                 break;

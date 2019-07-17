@@ -37,7 +37,7 @@ public class TestPlay : MonoBehaviour
     {
         if (Input.GetKeyDown("]"))
         {
-            connect_play.SendPosData(500, 200, player.transform.position.x, player.transform.position.y, player.transform.position.z, (int)player.transform.rotation.y);
+            connect_play.SendPosData( player.transform.position.x, player.transform.position.y, player.transform.position.z, (int)player.transform.rotation.y);
             Debug.Log(other_players.Count);
         }
     }
@@ -75,7 +75,7 @@ public class TestPlay : MonoBehaviour
             // すでに存在している
             if (other_players.ContainsKey(_data.id))
             {
-                other_players[_data.id].UpdataData(_data.HP, _data.MP, _data.X, _data.Y, _data.Z, _data.Direction);
+                //other_players[_data.id].UpdataData(_data.HP, _data.MP, _data.X, _data.Y, _data.Z, _data.Direction);
 
             }
             // 存在していないプレイヤー

@@ -40,7 +40,7 @@ namespace Connect
                     i_data = Receive(e);
                     login_callback(i_data.command);
                     Debug.Log(i_data.command);
-                    if (i_data.Command == CommandData.CmdOKConfirmation || i_data.Command == CommandData.CmdCreateReport) {
+                    if (i_data.Command == CommandData.OKConfirmation || i_data.Command == CommandData.CreateReport) {
                         Debug.Log("プレイシーンに移行します。");
                         ChangeScene();
                     }
@@ -66,23 +66,23 @@ namespace Connect
             // コマンドで受信データサイズを変える
             // コマンド内容はDatas.csを参照
             switch (com) {
-                case CommandData.CmdOKConfirmation: //103
+                case CommandData.OKConfirmation: //103
                     Debug.Log(e.Data);
                     Packes.OKConfirmation ok = Json.ConvertToPackets<Packes.OKConfirmation>(e.Data);
                     Retention.ID = ok.user_id;
                     return ok;
 
-                case CommandData.CmdMissingConfirmation: // 104
+                case CommandData.MissingConfirmation: // 104
                     Debug.Log(e.Data);
                     return Json.ConvertToPackets<Packes.MissingConfirmation>(e.Data);
 
-                case CommandData.CmdCreateReport: //105
+                case CommandData.CreateReport: //105
                     Packes.CreateReport create = Json.ConvertToPackets<Packes.CreateReport>(e.Data);
                     // IDの保管
                     Retention.ID = create.user_id;
                     return create;
 
-                case CommandData.CmdExisting: // 106
+                case CommandData.Existing: // 106
                     return Json.ConvertToPackets<Packes.Existing>(e.Data);
 
                 default: break;

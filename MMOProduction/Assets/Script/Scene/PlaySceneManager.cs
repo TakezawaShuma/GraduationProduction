@@ -31,7 +31,7 @@ public class PlaySceneManager : MonoBehaviour
         if (players.ContainsKey(Retention.ID)){
             var playerData = players[Retention.ID].transform.position;
             if (Timer())
-            ws.SendPosData(99, 0, playerData.x, playerData.y, playerData.z, 0);
+            ws.SendPosData(playerData.x, playerData.y, playerData.z, 0);
         }
     }
 
@@ -63,14 +63,14 @@ public class PlaySceneManager : MonoBehaviour
             if (_data.id != Retention.ID) {
                 // ユーザーの更新
                 if (players.ContainsKey(_data.id)) {
-                    players[_data.id].transform.position = new Vector3(_data.X, _data.Y, _data.Z);
+                    players[_data.id].transform.position = new Vector3(_data.x, _data.y, _data.z);
                     Debug.Log("他のユーザーの移動処理");
                 }
                 // 他のユーザーの作成
                 else {
                     var otherPlayer = Instantiate<GameObject>(playerPre);
                     players.Add(_data.id, otherPlayer);
-                    players[_data.id].transform.position = new Vector3(_data.X, _data.Y, _data.Z);
+                    players[_data.id].transform.position = new Vector3(_data.x, _data.y, _data.z);
 
                     Debug.Log("他のユーザーの作成");
                 };

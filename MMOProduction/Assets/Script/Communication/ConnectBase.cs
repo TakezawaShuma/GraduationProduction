@@ -1,8 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using WebSocketSharp;
-using WebSocketSharp.Net;
 
 public abstract class ConnectBase 
 {

@@ -9,8 +9,6 @@ namespace Connect
     {
         // ログインサーバーのポート
         private int port = 8001;
-        
-        // public Action<int, int, int, float, float, float,float> play_collback;
         public Action<PlayerData> play_collback;
 
         /// <summary>
@@ -53,15 +51,15 @@ namespace Connect
                     // コマンド内容はDatas.csを参照
                     switch (com)
                     {
-                        case CommandData.CmdRecvPosSync:
+                        case CommandData.RecvPosSync:
                             // 受信データ
                             Packes.RecvPosSync recv_data = JsonUtility.FromJson<Packes.RecvPosSync>(e.Data);
                             Debug.Log("listen user_id : " + recv_data.user_id.ToString());
                             play_collback(new PlayerData(recv_data));
                         break;
-                        case CommandData.CmdRecvInitialLogin:
+                        case CommandData.RecvInitialLogin:
                             Packes.RecvInitialLogin recv_in = JsonUtility.FromJson<Packes.RecvInitialLogin>(e.Data);
-                            play_collback(new PlayerData(recv_in.user_id, recv_in.x, recv_in.y, recv_in.z, 0, 0, 0));
+                            play_collback(new PlayerData(recv_in.user_id, recv_in.x, recv_in.y, recv_in.z, 0));
                             break;
                         default:
                             break;
@@ -71,16 +69,30 @@ namespace Connect
             base.WsInit();
         }
 
-
         /// <summary>
-        /// サーバーにデータを送信する
+        /// ステータスの送信
         /// </summary>
         /// <returns></returns>
-        public bool SendPosData(int hp, int mp, float x, float y, float z,int dir)
-        {
-            Packes.SendPosSync send = new Packes.SendPosSync(Retention.ID, x, y, z, hp, mp, dir);
+        public bool SendStatus(int _hp,int _mp,int _status) {
             try {
-                string str = send.ToJson();
+                string json = new Packes.SendStatus(_hp, _mp, _status).ToJson();
+                ws.Send(json);
+                Debug.Log(json);
+            } catch {
+                Debug.Log("Send Err");
+                return false;
+            }
+            return true;
+        }
+
+        /// <summary>
+        /// 位置の送信
+        /// </summary>
+        /// <returns></returns>
+        public bool SendPosData(float x, float y, float z,int dir)
+        {
+            try {
+                string str = new Packes.SendPosSync(Retention.ID, x, y, z, dir).ToJson();
                 ws.Send(str);
                 Debug.Log(str);
             } catch {

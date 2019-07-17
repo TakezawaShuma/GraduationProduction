@@ -1,8 +1,5 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using WebSocketSharp;
-using WebSocketSharp.Net;
 using System;
 using System.Threading;
 
@@ -85,7 +82,7 @@ namespace Connect
             // コマンドで受信データサイズを変える
             // コマンド内容はDatas.csを参照
             switch (com){
-                case CommandData.CmdChat:
+                case CommandData.Chat:
                     // JSONをデシリアライズ
                     Packes.Chat chat = JsonUtility.FromJson<Packes.Chat>(e.Data);
                     chatReceive_callback(chat.user_name, chat.message);

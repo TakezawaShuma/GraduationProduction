@@ -1,23 +1,26 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-[System.Serializable]
+﻿[System.Serializable]
 public class PlayerData
 {
     public int id;
-    public float X;
-    public float Y;
-    public float Z;
-    public int HP;
-    public int MP;
-    public int Direction;
+    public float x;
+    public float y;
+    public float z;
+    public int dir;
 
-    public PlayerData(int _id,float _x,float _y,float _z,int _hp,int _mp,int _dir) {
-        id = _id; X = _x; Y = _y; Z = _z; HP = _hp; MP = _mp; Direction = _dir;
+    public PlayerData(int _id,float _x,float _y,float _z,int _dir) {
+        id = _id; x = _x; y = _y; z = _z; dir = _dir;
     }
 
     public PlayerData(Packes.RecvPosSync _data) {
-        id = _data.user_id; X = _data.x; Y = _data.y; Z = _data.z; HP = _data.hp; MP = _data.mp; Direction = _data.dir;
+        id = _data.user_id; x = _data.x; y = _data.y; z = _data.z; dir = _data.dir;
     }
+}
+
+/// <summary>
+/// プレイヤーの状態
+/// </summary>
+public class PlayerStatus{
+    public int id;
+    public int hp;
+    public int mp;
 }
