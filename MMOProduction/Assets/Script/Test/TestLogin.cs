@@ -25,7 +25,7 @@ public class TestLogin : MonoBehaviour
         {
             connect_login.SendRegistration("haroharo", "trident");
         }
-        connect_login.ChangeScene();
+        //connect_login.ChangeScene();
 
         if (Input.GetKeyDown("r")) { Start(); }
     }

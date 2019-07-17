@@ -4,7 +4,7 @@ using UnityEngine;
 using WebSocketSharp;
 using System;
 
-public class Json 
+public static class Json 
 {
     /// <summary>
     /// パケットをJSON形式に変換する
@@ -27,4 +27,10 @@ public class Json
         return JsonUtility.FromJson<Type>(json);
     }
 
+    /// <summary>
+    /// パケットをJSON形式に変換する
+    /// </summary>
+    public static string ToJson(this Packes.IPacketDatas _data) {
+        return JsonUtility.ToJson(_data);
+    }
 }
