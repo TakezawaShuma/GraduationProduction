@@ -29,9 +29,9 @@ public class PlaySceneManager : MonoBehaviour
     {
         MakePlayer();
         if (players.ContainsKey(Retention.ID)){
-            var playerData = players[Retention.ID].transform.position;
+            var playerData = players[Retention.ID].GetComponent<Player>().GetPosition();
             if (Timer())
-            ws.SendPosData(playerData.x, playerData.y, playerData.z, 0);
+            ws.SendPosData(playerData.x, playerData.y, playerData.z, (int)playerData.w);
         }
     }
 

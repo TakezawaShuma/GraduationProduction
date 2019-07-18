@@ -49,4 +49,8 @@ public class Player : MonoBehaviour
     {
         dir = _dir;
     }
+
+    public Vector4 GetPosition() {
+        return new Vector4(x, y, z, dir);
+    }
 }
