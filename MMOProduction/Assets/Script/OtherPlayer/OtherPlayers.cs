@@ -1,4 +1,9 @@
-﻿using System.Collections;
+﻿//////////////////////////////////
+// 自分以外のプレイヤーのクラス //
+//////////////////////////////////
+
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 

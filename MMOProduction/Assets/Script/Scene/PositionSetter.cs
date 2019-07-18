@@ -1,4 +1,9 @@
-﻿using System.Collections;
+﻿////////////////////////////////////////////////////////
+// タイトルシーンのUI等のポジションを設定するクラス？ //
+////////////////////////////////////////////////////////
+
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -28,33 +33,32 @@ public class PositionSetter : MonoBehaviour
 
     public Vector2 margin;
 
-    private RectTransform _rt;
+    private RectTransform rectTrans;
 
     // Start is called before the first frame update
     void Start()
     {
-        _rt = GetComponent<RectTransform>();
+        rectTrans = GetComponent<RectTransform>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (isUpdate)
-            setPosition();
+        if (isUpdate) { SetPosition(); }
     }
-    private void setPosition()
+    private void SetPosition()
     {
-        Vector2 pos = _rt.anchoredPosition;
+        Vector2 pos = rectTrans.anchoredPosition;
         switch (positionX)
         {
             case PositionX.CENTER:
                 pos.x = 0f;
                 break;
             case PositionX.LEFT:
-                pos.x = -Screen.width * 0.5f + _rt.rect.width * 0.5f + margin.x;
+                pos.x = -Screen.width * 0.5f + rectTrans.rect.width * 0.5f + margin.x;
                 break;
             case PositionX.RIGHT:
-                pos.x = Screen.width * 0.5f - _rt.rect.width * 0.5f - margin.x;
+                pos.x = Screen.width * 0.5f - rectTrans.rect.width * 0.5f - margin.x;
                 break;
         }
 
@@ -64,12 +68,12 @@ public class PositionSetter : MonoBehaviour
                 pos.y = 0f;
                 break;
             case PositionY.BOTTOM:
-                pos.y = -Screen.height * 0.5f + _rt.rect.height * 0.5f + margin.y;
+                pos.y = -Screen.height * 0.5f + rectTrans.rect.height * 0.5f + margin.y;
                 break;
             case PositionY.TOP:
-                pos.y = Screen.height * 0.5f - _rt.rect.height * 0.5f - margin.y;
+                pos.y = Screen.height * 0.5f - rectTrans.rect.height * 0.5f - margin.y;
                 break;
         }
-        _rt.anchoredPosition = pos;
+        rectTrans.anchoredPosition = pos;
     }
 }

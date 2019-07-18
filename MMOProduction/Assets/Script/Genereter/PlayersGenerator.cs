@@ -1,4 +1,8 @@
-﻿using System.Collections;
+﻿////////////////////////////
+// プレイヤーの生成クラス //
+////////////////////////////
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 

@@ -1,4 +1,9 @@
-﻿using System.Collections;
+﻿//////////////////////////////////////
+// プレイシーンのマネージャークラス //
+//////////////////////////////////////
+
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,7 +16,7 @@ public class PlaySceneManager : MonoBehaviour
 
 
     // ソケット
-    private Connect.ConnectPlay ws = new Connect.ConnectPlay();
+    private WS.WsPlay ws = new WS.WsPlay();
     private Dictionary<int, GameObject> players = new Dictionary<int, GameObject>();
 
 
@@ -21,17 +26,21 @@ public class PlaySceneManager : MonoBehaviour
     {
         // ユーザーID
         var user_id = Retention.ID;
-        ws.ConnectionStart(UpdatePlayers);
+        // プレイサーバに接続
+        //ws.ConnectionStart(UpdatePlayers);
     }
 
     // Update is called once per frame
     void Update()
     {
         MakePlayer();
-        if (players.ContainsKey(Retention.ID)){
+        if (players.ContainsKey(Retention.ID))
+        {
             var playerData = players[Retention.ID].GetComponent<Player>().GetPosition();
             if (Timer())
-            ws.SendPosData(playerData.x, playerData.y, playerData.z, (int)playerData.w);
+            {
+                //ws.SendPosData(playerData.x, playerData.y, playerData.z, (int)playerData.w);
+            }
         }
     }
 
@@ -87,9 +96,9 @@ public class PlaySceneManager : MonoBehaviour
             var tmpPlayer = Instantiate<GameObject>(playerPre);
             players.Add(Retention.ID, tmpPlayer);
             players[Retention.ID].AddComponent<Player>();
-            players[Retention.ID].AddComponent<PlayerControllerV2>();
+            players[Retention.ID].AddComponent<PlayerController>();
             players[Retention.ID].AddComponent<PlayerSetting>();
-            players[Retention.ID].GetComponent<PlayerControllerV2>().Init(
+            players[Retention.ID].GetComponent<PlayerController>().Init(
                 players[Retention.ID].GetComponent<Player>(),
                 FollowingCamera,
                 players[Retention.ID].GetComponent<PlayerSetting>()

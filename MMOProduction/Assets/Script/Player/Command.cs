@@ -1,3 +1,7 @@
+/////////////////////////////////
+// FCOコマンド(FULLCHINONLINE) //
+/////////////////////////////////
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,10 +10,10 @@ using UnityEngine.Events;
 public class Command : MonoBehaviour
 {
     [SerializeField, Header("コマンド")]
-    private string command;
+    private string command = "";
     
     public UnityAction Function;
-
+    // コマンドの文字数
     private int commandLenght;
 
     private int currentNum;

@@ -1,4 +1,8 @@
-﻿using System.Collections;
+﻿//////////////////////////////////////
+// 待機状態のステートパターンクラス //
+//////////////////////////////////////
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 

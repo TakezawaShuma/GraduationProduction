@@ -1,4 +1,9 @@
-﻿using UnityEngine;
+﻿//////////////////////////////////
+// D＆Dで操作できるようにした？ //
+//////////////////////////////////
+
+
+using UnityEngine;
 using UnityEngine.EventSystems;
 
 public class SwipeMove : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler

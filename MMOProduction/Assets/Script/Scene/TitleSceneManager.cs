@@ -1,4 +1,9 @@
-﻿using System.Collections;
+﻿////////////////////////////////////////
+// タイトルシーンのマネージャークラス //
+////////////////////////////////////////
+
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -7,7 +12,7 @@ using System.Text;
 using System.Text.RegularExpressions;
 
 
-public class TitleManager : MonoBehaviour
+public class TitleSceneManager : MonoBehaviour
 {
 #pragma warning disable 0649
     //ID,PWの最大文字数
@@ -17,7 +22,7 @@ public class TitleManager : MonoBehaviour
     public const int MIN_PW_WORD = 4;
 
     // wsソケット
-    Connect.ConnectLogin ws = new Connect.ConnectLogin();
+    WS.WsLogin ws = new WS.WsLogin();
 
     //ボタンの種類
     public enum CANVAS_STATE
@@ -98,7 +103,7 @@ public class TitleManager : MonoBehaviour
         pw_.characterLimit = MAX_WORD;
 
         // 接続開始
-        ws.ConnectionStart(Receive);
+        //ws.ConnectionStart(Receive);
     }
 
     private int m_command = 0;
@@ -168,7 +173,7 @@ public class TitleManager : MonoBehaviour
             ErrorMessageHide();
 
             // ログイン処理
-            ws.SendLogin(id, pw);
+            //ws.SendLogin(id, pw);
         }
         else
         {
@@ -192,7 +197,7 @@ public class TitleManager : MonoBehaviour
                 //Error03.gameObject.SetActive(false);
                 //Error04.gameObject.SetActive(false);
                 // 新規登録
-                ws.SendRegistration(id, pw);
+                //ws.SendRegistration(id, pw);
             }
             else
             {

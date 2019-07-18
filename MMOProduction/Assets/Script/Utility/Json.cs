@@ -1,9 +1,16 @@
-﻿using System.Collections;
+﻿///////////////////////////////////////////
+// 何処でも使うクラスや関数をまとめる.cs //
+///////////////////////////////////////////
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using WebSocketSharp;
 using System;
 
+/// <summary>
+/// パケットデータのJSON化かけるクラス
+/// </summary>
 public static class Json 
 {
     /// <summary>

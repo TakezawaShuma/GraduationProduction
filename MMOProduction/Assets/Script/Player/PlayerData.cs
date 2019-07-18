@@ -1,4 +1,8 @@
-﻿[System.Serializable]
+﻿////////////////////////////
+// プレイヤーの簡易データ //
+////////////////////////////
+
+[System.Serializable]
 public class PlayerData
 {
     public int id;

@@ -1,4 +1,8 @@
-﻿using System.Collections;
+﻿//////////////////////////////////////////////
+// プレイヤーに追従するカメラを制御用クラス //
+//////////////////////////////////////////////
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -14,7 +18,7 @@ public class FollowingCamera : MonoBehaviour
     }
 
     [SerializeField]
-    private Vector3 offset; // offset form the target object
+    private Vector3 offset=new Vector3(); // offset form the target object
 
     [SerializeField]
     private float distance = 10.0f; // distance from following object

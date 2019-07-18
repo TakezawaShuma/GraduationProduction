@@ -1,5 +1,13 @@
-﻿namespace Packes
+﻿////////////////////////////////////////////////
+// パケットデータ等通信で使うデータをまとめた //
+////////////////////////////////////////////////
+
+/// <summary>
+/// パケットデータ
+/// </summary>
+namespace Packes
 {
+
     public abstract class IPacketDatas
     {
         public int command;

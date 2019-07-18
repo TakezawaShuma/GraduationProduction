@@ -1,4 +1,8 @@
-﻿using UnityEngine;
+﻿/////////////////////////////////
+// ログイン用のWebSocketクラス //
+/////////////////////////////////
+
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using WebSocketSharp;
 using System;
@@ -9,7 +13,7 @@ namespace WS
     public class WsLogin : WsBase
     {
         // シーン切り替え用フラグ
-        Scenes scene_flag = Scenes.Non;
+        //Scenes scene_flag = Scenes.Non;
         // ログインサーバーのポート
         private const int port = 8000;
         // 受信データ

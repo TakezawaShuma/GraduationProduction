@@ -1,4 +1,9 @@
-﻿using System;
+﻿//////////////////////////////////////////
+// マウス操作時のステートパターンクラス //
+//////////////////////////////////////////
+
+
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;

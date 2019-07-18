@@ -1,8 +1,13 @@
-﻿using System.Collections;
+﻿//////////////////////////////////
+// プレイヤーコントロールクラス //
+//////////////////////////////////
+
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerControllerV2 : MonoBehaviour
+public class PlayerController: MonoBehaviour
 {
     [SerializeField, Header("プレイヤー")]
     private Player PlayerData;
@@ -23,14 +28,14 @@ public class PlayerControllerV2 : MonoBehaviour
     }
 
     // 位置
-    Vector3 pos;
+    Vector3 pos = new Vector3();
     public Vector3 Position
     {
         get { return pos; }
     }
 
     // 向き
-    float dir;
+    float dir = 0;
     public float Direction
     {
         get { return dir; }

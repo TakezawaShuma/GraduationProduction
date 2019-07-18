@@ -1,4 +1,9 @@
-﻿using System;
+﻿/////////////////////////////
+// プレイ用WebSocketクラス //
+/////////////////////////////
+
+
+using System;
 using System.Threading;
 using UnityEngine;
 using WebSocketSharp;

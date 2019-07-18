@@ -1,4 +1,8 @@
-﻿using System.Collections;
+﻿////////////////////////////////
+// アイテムを制御するクラス？ //
+////////////////////////////////
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;

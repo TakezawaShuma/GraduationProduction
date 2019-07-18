@@ -1,4 +1,9 @@
-﻿using System.Collections;
+﻿//////////////////////////////////
+// Playerの初期設定用のクラス？ //
+//////////////////////////////////
+
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 

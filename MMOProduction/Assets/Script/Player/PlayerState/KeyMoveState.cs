@@ -1,4 +1,8 @@
-﻿using System.Collections;
+﻿////////////////////////////////////////
+// キー操作時のステートパターンクラス //
+////////////////////////////////////////
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 

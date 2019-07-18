@@ -1,4 +1,8 @@
-﻿using UnityEngine;
+﻿///////////////////////////////////
+// WebSocketで通信する基底クラス //
+///////////////////////////////////
+
+using UnityEngine;
 using WebSocketSharp;
 
 namespace WS

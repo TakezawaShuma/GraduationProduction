@@ -23,28 +23,28 @@ public class TestPlay : MonoBehaviour
     PlayersGenerator generator = new PlayersGenerator();
 
     // 対応したシーンのConnect○○を作ってね！
-    Connect.ConnectPlay connect_play = new Connect.ConnectPlay();
+    WS.WsPlay ws_play = new WS.WsPlay();
 
     void Start()
     {
         player = null;
         // Startに必ず入れる事！！
         // 通信関係の初期処理
-        connect_play.ConnectionStart(Receive);
+        ws_play.ConnectionStart(Receive);
     }
 
     void Update()
     {
         if (Input.GetKeyDown("]"))
         {
-            connect_play.SendPosData( player.transform.position.x, player.transform.position.y, player.transform.position.z, (int)player.transform.rotation.y);
+            ws_play.SendPosData( player.transform.position.x, player.transform.position.y, player.transform.position.z, (int)player.transform.rotation.y);
             Debug.Log(other_players.Count);
         }
     }
 
     private void OnDestroy()
     {
-        connect_play.Destroy();
+        ws_play.Destroy();
     }
 
     private void Move()

@@ -1,4 +1,8 @@
-﻿using UnityEngine;
+﻿/////////////////////////////////
+// チャット用のWebSocketクラス //
+/////////////////////////////////
+
+using UnityEngine;
 using WebSocketSharp;
 using System;
 using System.Threading;
@@ -16,7 +20,7 @@ namespace WS
         // ログインサーバーのポート
         private const int port = 8009;
         // 受信データ
-        private Packes.IPacketDatas i_data = null;
+        //private Packes.IPacketDatas i_data = null;
         // チャットコールバック
         private Action<string, string> chatReceive_callback;        
 
