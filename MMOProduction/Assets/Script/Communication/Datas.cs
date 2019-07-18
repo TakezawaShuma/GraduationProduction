@@ -49,6 +49,18 @@
         public Existing() { command = 106; }
     }
 
+    // command 107 再接続(client->server)
+    public class ReconnectC2S:IPacketDatas
+    {
+        public ReconnectC2S() { command = 107; }
+    }
+
+    // command 108 再接続(server->client)
+    public class ReconnectS2C : IPacketDatas
+    {
+        public ReconnectS2C() { command = 108; }
+    }
+
 
     // command 201  位置同期(client->server)
     public class SendPosSync : IPacketDatas
@@ -102,6 +114,7 @@
         public float z;
     }
 
+    // command 205 ステータス共有(client->server)
     public class SendStatus : IPacketDatas{
         public SendStatus() { command = 205; user_id = Retention.ID; }
         public SendStatus(int _hp,int _mp,int _status) {
@@ -111,6 +124,12 @@
         int hp;
         int mp;
         int status;
+    }
+
+    // command 206 ステータス共有(server->client)
+    public class RecvStatus : IPacketDatas
+    {
+        public RecvStatus() { command = 206; }
     }
 
     // command 701　ログアウト時(client->server)
@@ -126,14 +145,30 @@
         public float exp;
     }
 
+    // command 702 アイテム一覧(client->server)
     public class SendItemList : IPacketDatas
     {
         public SendItemList() { command = 702; }
 
     }
+
+    // command 703 スキル一覧(client->server)
     public class SendSkillList : IPacketDatas
     {
         public SendSkillList() { command = 703; }
+
+    }
+    // command 704 アイテム一覧(server->client)
+    public class RecvItemList : IPacketDatas
+    {
+        public RecvItemList() { command = 704; }
+
+    }
+
+    // command 705 スキル一覧(server->client)
+    public class RecvSkillList : IPacketDatas
+    {
+        public RecvSkillList() { command = 705; }
 
     }
 
@@ -148,6 +183,18 @@
         }
         public string user_name;
         public string message;
+    }
+
+    // command 802 全体チャット送信(client->server)
+    public class SemdAllChat:IPacketDatas
+    {
+        SemdAllChat() { command = 802; }
+    }
+
+    // command 803 全体チャット受信(client->server)
+    public class RecvAllChat:IPacketDatas
+    {
+        RecvAllChat() { command = 803; }
     }
 
     // command 901　重複ログイン(server->client)   エラーコマンド

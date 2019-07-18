@@ -11,8 +11,8 @@ namespace Connect
         private WebSocket ws;
 
         // サーバーのIP
-        //private const string server_ip = "172.24.52.250";
-        private const string server_ip = "localhost";
+        private const string server_ip = "172.24.52.250";
+        //private const string server_ip = "localhost";
         // ログインサーバーのポート
         private const int port = 8009;
         // 受信データ

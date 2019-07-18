@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using WebSocketSharp;
 
+/// <summary>
+/// 通信基礎
+/// </summary>
 public abstract class ConnectBase 
 {
     // ソケット
