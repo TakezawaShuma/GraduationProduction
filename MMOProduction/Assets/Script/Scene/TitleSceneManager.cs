@@ -103,7 +103,7 @@ public class TitleSceneManager : MonoBehaviour
         pw_.characterLimit = MAX_WORD;
 
         // 接続開始
-        //ws.ConnectionStart(Receive);
+        ws.ConnectionStart(Receive);
     }
 
     private int m_command = 0;
@@ -173,7 +173,7 @@ public class TitleSceneManager : MonoBehaviour
             ErrorMessageHide();
 
             // ログイン処理
-            //ws.SendLogin(id, pw);
+            ws.SendLogin(id, pw);
         }
         else
         {
@@ -197,7 +197,7 @@ public class TitleSceneManager : MonoBehaviour
                 //Error03.gameObject.SetActive(false);
                 //Error04.gameObject.SetActive(false);
                 // 新規登録
-                //ws.SendRegistration(id, pw);
+                ws.SendRegistration(id, pw);
             }
             else
             {

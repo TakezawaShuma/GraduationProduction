@@ -27,7 +27,7 @@ public class PlaySceneManager : MonoBehaviour
         // ユーザーID
         var user_id = Retention.ID;
         // プレイサーバに接続
-        //ws.ConnectionStart(UpdatePlayers);
+        ws.ConnectionStart(UpdatePlayers);
     }
 
     // Update is called once per frame
@@ -39,7 +39,7 @@ public class PlaySceneManager : MonoBehaviour
             var playerData = players[Retention.ID].GetComponent<Player>().GetPosition();
             if (Timer())
             {
-                //ws.SendPosData(playerData.x, playerData.y, playerData.z, (int)playerData.w);
+                ws.SendPosData(playerData.x, playerData.y, playerData.z, (int)playerData.w);
             }
         }
     }
