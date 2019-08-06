@@ -354,6 +354,9 @@ public class TitleSceneManager : MonoBehaviour
         return false;
     }
 
+    ///
+    /// エラーメッセージを全て非表示にする。
+    ///
     public void ErrorMessageHide()
     {
         Error01.gameObject.SetActive(false);
