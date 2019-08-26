@@ -113,9 +113,8 @@ namespace WS
         /// <returns></returns>
         public bool SendInData()
         {
-            Packes.SendInitialLogin send = new Packes.SendInitialLogin();
             try {
-                string str = send.ToJson();
+                string str = new Packes.SendInitialLogin(Retention.ID).ToJson();
                 ws.Send(str);
                 Debug.Log(str);
             } catch {

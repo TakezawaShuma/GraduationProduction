@@ -22,18 +22,22 @@ namespace WS
         /// 接続
         /// </summary>
         /// <param name="_port">ポート</param>
-        public void Connect(int _port)
+        public bool Connect(int _port)
         {
+            bool ret = false;
             ws = new WebSocket("ws://" + server_ip + ":" + _port.ToString());
             Debug.Log("IPアドレス : " + server_ip + "ポート : " + _port);
             try
             {
                 ws.Connect();
+                ret = true;
             }
             catch
             {
                 Debug.Log("サーバーへ接続ができません。");
+                ret = false;
             }
+            return ret;
         }
 
         /// <summary>

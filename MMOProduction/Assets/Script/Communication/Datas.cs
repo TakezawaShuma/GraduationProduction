@@ -106,8 +106,8 @@ namespace Packes
     // command 203　初期ログイン(client->server)
     public class SendInitialLogin : IPacketDatas
     {
-        public SendInitialLogin() {
-            command = 203; user_id = Retention.ID;
+        public SendInitialLogin(int _id) {
+            command = 203; user_id =_id;
         }
         public int user_id;
     }
@@ -229,6 +229,9 @@ public enum CommandData
     CreateReport = (int)105,
     // すでに存在している   エラーコマンド
     Existing = (int)106,
+
+
+
     // プレイヤーデータの送信
     SendPosSync = (int)201,
     // プレイヤーデータの受信
@@ -237,6 +240,9 @@ public enum CommandData
     SendInitialLogin = (int)203,
     // 初期ログインの受信
     RecvInitialLogin = (int)204,
+
+
+
     // ログアウトコマンド
     Finished = (int)701,
     // チャット
@@ -264,5 +270,7 @@ public enum Scenes
 public static class Retention
 {
     private static int id;
-    public static int ID { get { return id; }set { id = value; } }
+    private static string name;
+    public static int ID { get { return id; }set { if(id==0)id = value; } }
+    public static string Name { get { return name; } set { if (name=="") name = value; } }
 }

@@ -8,11 +8,17 @@ using System;
 using System.Threading;
 
 namespace WS
-{
+{   public struct ChatMassege
+    {
+        public ChatMassege(string _name, string _mass) { name = _name; massege = _mass; }
+        public string name;
+        public string massege;
+    }
     public class WsChat
     {
         // ソケット
         private WebSocket ws;
+
 
         // サーバーのIP
         private const string server_ip = "172.24.52.250";
@@ -22,9 +28,9 @@ namespace WS
         // 受信データ
         //private Packes.IPacketDatas i_data = null;
         // チャットコールバック
-        private Action<string, string> chatReceive_callback;        
+        private Action<ChatMassege> chatReceive_callback;        
 
-        public void ConnectionStart(Action<string,string> _callback){
+        public void ConnectionStart(Action<ChatMassege> _callback){
             chatReceive_callback = _callback;
             Connect();
         }
@@ -89,7 +95,8 @@ namespace WS
                 case CommandData.Chat:
                     // JSONをデシリアライズ
                     Packes.Chat chat = JsonUtility.FromJson<Packes.Chat>(e.Data);
-                    chatReceive_callback(chat.user_name, chat.message);
+                    ChatMassege cm = new ChatMassege(chat.user_name, chat.message);
+                    chatReceive_callback(cm);
                     break;
             }
             return null;

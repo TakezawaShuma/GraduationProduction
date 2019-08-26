@@ -520,7 +520,7 @@ GameObject:
   - component: {fileID: 372416688}
   - component: {fileID: 372416687}
   m_Layer: 5
-  m_Name: Register
+  m_Name: SignUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1128,7 +1128,7 @@ GameObject:
   - component: {fileID: 927173940}
   - component: {fileID: 927173943}
   m_Layer: 5
-  m_Name: Login
+  m_Name: SelectLogin
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1945,7 +1945,7 @@ GameObject:
   - component: {fileID: 1207362945}
   - component: {fileID: 1207362948}
   m_Layer: 5
-  m_Name: CreateAccount
+  m_Name: SelectSignUp
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2420,11 +2420,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8207370bc14231049971798453a2e169, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  login01_: {fileID: 927173940}
-  login02_: {fileID: 1183998531}
-  register_: {fileID: 1207362945}
+  SelectLogin_: {fileID: 927173940}
+  loginToGame_: {fileID: 1183998531}
+  selectSignUp_: {fileID: 1207362945}
   back_: {fileID: 1902749755}
-  createAccount_: {fileID: 372416688}
+  signUp_: {fileID: 372416688}
   Error01: {fileID: 1462817434}
   Error02: {fileID: 133005164}
   Error03: {fileID: 1229138759}
@@ -3172,7 +3172,7 @@ PrefabInstance:
     - target: {fileID: 1945711396570947902, guid: 3e1031057e2f7a1478d36ff2f0bccaa5,
         type: 3}
       propertyPath: m_Name
-      value: Login
+      value: SelectLogin
       objectReference: {fileID: 0}
     - target: {fileID: 1945711396570947905, guid: 3e1031057e2f7a1478d36ff2f0bccaa5,
         type: 3}
@@ -3402,7 +3402,7 @@ PrefabInstance:
     - target: {fileID: 1945711395797394329, guid: 3e1031057e2f7a1478d36ff2f0bccaa5,
         type: 3}
       propertyPath: m_Name
-      value: CreateAccount
+      value: SelectSignUp
       objectReference: {fileID: 0}
     - target: {fileID: 1945711395797394328, guid: 3e1031057e2f7a1478d36ff2f0bccaa5,
         type: 3}

@@ -33,39 +33,42 @@ public class TitleSceneManager : MonoBehaviour
     }
     //ログインを選択
     [SerializeField]
-    private Button login01_;
+    private Button SelectLogin_;
     //ログインする
     [SerializeField]
-    private Button login02_;
-    //登録
+    private Button loginToGame_;
+    //新規登録
     [SerializeField]
-    private Button register_;
+    private Button selectSignUp_;
     //戻る
     [SerializeField]
     private Button back_;
     //アカウントを作る
     [SerializeField]
-    private Button createAccount_;
+    private Button signUp_;
 
 
     //Error用Text
+    // 文字数が足りない時
     [SerializeField]
     private Text Error01;
+    // 使用できない文字があります
     [SerializeField]
     private Text Error02;
+    // パスワードが一致しません
     [SerializeField]
     private Text Error03;
     
-    // すでに使われているID　エラー
+    // すでに使われているID　command 106
     [SerializeField]
     private Text Error04;
     
-    // IDまたはPWが違う　エラー
+    // IDまたはPWが違う　command 104
     [SerializeField]
     private Text Error05;
 
     
-    // 重複ログイン　エラー
+    // 重複ログイン　command 901
     [SerializeField]
     private Text Error06;
 
@@ -86,14 +89,14 @@ public class TitleSceneManager : MonoBehaviour
     void Start()
     {
         //初期のGameObjectの表示設定
-        login01_.gameObject.SetActive(true);
-        register_.gameObject.SetActive(true);
+        SelectLogin_.gameObject.SetActive(true);
+        selectSignUp_.gameObject.SetActive(true);
         back_.gameObject.SetActive(false);
         id_.gameObject.SetActive(false);
         pw_.gameObject.SetActive(false);
         ConfirmPW_.gameObject.SetActive(false);
-        login02_.gameObject.SetActive(false);
-        createAccount_.gameObject.SetActive(false);
+        loginToGame_.gameObject.SetActive(false);
+        signUp_.gameObject.SetActive(false);
 
 
         ErrorMessageHide();
@@ -103,7 +106,7 @@ public class TitleSceneManager : MonoBehaviour
         pw_.characterLimit = MAX_WORD;
 
         // 接続開始
-        ws.ConnectionStart(Receive);
+        //ws.ConnectionStart(Receive);
     }
 
     private int m_command = 0;
@@ -129,6 +132,7 @@ public class TitleSceneManager : MonoBehaviour
         Debug.Log("クリックされた");
     }
 
+    // 
     public void LogInClick()
     {
         LogInActive();
@@ -143,15 +147,15 @@ public class TitleSceneManager : MonoBehaviour
 
     public void BackClick()
     {
-        login01_.gameObject.SetActive(true);
-        register_.gameObject.SetActive(true);
+        SelectLogin_.gameObject.SetActive(true);
+        selectSignUp_.gameObject.SetActive(true);
         back_.gameObject.SetActive(false);
         id_.gameObject.SetActive(false);
         id_.text = "";
         pw_.gameObject.SetActive(false);
         pw_.text = "";
-        login02_.gameObject.SetActive(false);
-        createAccount_.gameObject.SetActive(false);
+        loginToGame_.gameObject.SetActive(false);
+        signUp_.gameObject.SetActive(false);
 
         ErrorMessageHide();
         ConfirmPW_.gameObject.SetActive(false);
@@ -160,7 +164,7 @@ public class TitleSceneManager : MonoBehaviour
         Debug.Log("Back");
     }
 
-    public void LogInToGameClick()
+    public void loginToGame_Click()
     {
         ErrorMessageHide();
 
@@ -225,19 +229,19 @@ public class TitleSceneManager : MonoBehaviour
     //PW入力用input fieldでEnterが押された時の処理
     public void pwEndEdit()
     {
-        LogInToGameClick();
+        loginToGame_Click();
     }
 
     //private関数--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     private void LogInActive()
     {
 
-        login01_.gameObject.SetActive(false);
-        register_.gameObject.SetActive(false);
+        SelectLogin_.gameObject.SetActive(false);
+        selectSignUp_.gameObject.SetActive(false);
         back_.gameObject.SetActive(true);
         id_.gameObject.SetActive(true);
         pw_.gameObject.SetActive(true);
-        login02_.gameObject.SetActive(true);
+        loginToGame_.gameObject.SetActive(true);
         
         RectTransform er01= Error01.GetComponent<RectTransform>();
         er01.localPosition = new Vector3(75, -280, 0);
@@ -245,14 +249,15 @@ public class TitleSceneManager : MonoBehaviour
         er02.localPosition = new Vector3(75, -280, 0);
     }
 
+    // 新規登録選択時表示させる
     private void RegisterActive()
     {
-        login01_.gameObject.SetActive(false);
-        register_.gameObject.SetActive(false);
+        SelectLogin_.gameObject.SetActive(false);
+        selectSignUp_.gameObject.SetActive(false);
         back_.gameObject.SetActive(true);
         id_.gameObject.SetActive(true);
         pw_.gameObject.SetActive(true);
-        createAccount_.gameObject.SetActive(true);
+        signUp_.gameObject.SetActive(true);
         ConfirmPW_.gameObject.SetActive(true);
         RectTransform er01 = Error01.GetComponent<RectTransform>();
         er01.localPosition = new Vector3(75, -370, 0);
@@ -336,15 +341,15 @@ public class TitleSceneManager : MonoBehaviour
     {
         switch(_comand)
         {
-            case (int)CommandData.MissingConfirmation:
+            case (int)CommandData.MissingConfirmation:  // command 104
                 //IDかPWが間違っている
                 TypingError();
                 break;
-            case (int)CommandData.Existing:
+            case (int)CommandData.Existing: // command 106
                 //すでに使われているID
                 AlreadyInUse();
                 break;
-            case (int)CommandData.Duplicate:
+            case (int)CommandData.Duplicate:    // command 901
                 //すでにログインしているID
                 MultipleLoginError();
                 break;
