@@ -82,18 +82,16 @@ public class ChatController : MonoBehaviour
         chatLog.Add(_addLog);
     }
 
-    public void Receive(WS.ChatMassege _cm)
+    public void Receive(string _name,string _massege)
     {
         string massege = "";
-
-        massege = massege + _cm.name + "：" + _cm.massege;
+        massege = massege + _name + "：" + _massege;
         
         AddChatLog(massege);
     }
 
     private void SendInputMassege(string _massege)
     {
-        Debug.Log("えんたー");
         string name = Retention.ID.ToString();
         wc.SendMessage(name, _massege);
         //string mas = name + "：" + _massege;

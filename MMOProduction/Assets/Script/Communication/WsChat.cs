@@ -14,62 +14,44 @@ namespace WS
         public string name;
         public string massege;
     }
-    public class WsChat
+    public class WsChat:WsBase
     {
         // ソケット
-        private WebSocket ws;
+        //private WebSocket ws;
 
 
         // サーバーのIP
-        private const string server_ip = "172.24.52.250";
+        private const string server_ip = "172.24.52.56";
         //private const string server_ip = "localhost";
         // ログインサーバーのポート
         private const int port = 8009;
         // 受信データ
         //private Packes.IPacketDatas i_data = null;
         // チャットコールバック
-        private Action<ChatMassege> chatReceive_callback;        
+        private Action<string, string> chatReceive_callback;
 
-        public void ConnectionStart(Action<ChatMassege> _callback){
+        public void ConnectionStart(Action<string, string> _callback)
+        {
             chatReceive_callback = _callback;
-            Connect();
+            base.Connect(port);
+            RelatedToWS();
         }
 
-        /// <summary>
-        /// 接続処理
-        /// </summary>
-        private void Connect(){
-            ws = new WebSocket("ws://" + server_ip + ":" + port.ToString());
-            Debug.Log("IPアドレス : " + server_ip + "ポート : " + port);
-            // 接続開始
-            try{
-                ws.Connect();
-            } catch {
-                Debug.Log("サーバーへ接続ができません。");
-            }
-        }
 
         /// <summary>
         /// WebSocket関係のイベント
         /// </summary>
         private void RelatedToWS() {
-            ws.OnOpen += (sender, e) => {
-                Debug.Log("WebSocket Open(Login)");
-            };
+             var context = SynchronizationContext.Current;
+            base.WsInit();
             ws.OnMessage += (sender, e) => {
-                var context = SynchronizationContext.Current;
                 // データ形の確認
                 Debug.Log("Data : " + e.Data);
                 context.Post(state =>{
                     Receive(e);
                 }, e.Data);
             };
-            ws.OnError += (sender, e) => {
-                Debug.LogError("WebSocket Error Message: " + e.Message);
-            };
-            ws.OnClose += (sender, e) =>{
-                Debug.Log("WebSocket Close(Login)");
-            };
+
         }
 
         /// <summary>
@@ -77,8 +59,7 @@ namespace WS
         /// </summary>
         public void Destroy(){
             Debug.Log("ログインシーンの終了");
-            ws.Close();
-            ws = null;
+            base.Destroy("チャット終了");
         }
 
         /// <summary>
@@ -92,11 +73,10 @@ namespace WS
             // コマンドで受信データサイズを変える
             // コマンド内容はDatas.csを参照
             switch (com){
-                case CommandData.Chat:
+                case CommandData.RecvAChat:
                     // JSONをデシリアライズ
-                    Packes.Chat chat = JsonUtility.FromJson<Packes.Chat>(e.Data);
-                    ChatMassege cm = new ChatMassege(chat.user_name, chat.message);
-                    chatReceive_callback(cm);
+                    Packes.RecvAllChat chat = JsonUtility.FromJson<Packes.RecvAllChat>(e.Data);
+                    chatReceive_callback(chat.user_name, chat.message);
                     break;
             }
             return null;
@@ -104,7 +84,7 @@ namespace WS
 
         public bool SendMessage(string _name,string _msg){
             try {
-                string str = Json.ConvertToJson(new Packes.Chat(_name, _msg));
+                string str = Json.ConvertToJson(new Packes.SendAllChat(_name, _msg));
                 ws.Send(str);
                 Debug.Log(str);
             } catch {

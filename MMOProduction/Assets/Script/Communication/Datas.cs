@@ -180,11 +180,11 @@ namespace Packes
 
     }
 
-    // command 801　チャット()
-    public class Chat:IPacketDatas
+    // command 801　全体チャット(client->server)
+    public class SendAllChat:IPacketDatas
     {
-        public Chat() { command = 801; }
-        public Chat(string _name,string _msg) {
+        public SendAllChat() { command = 801; }
+        public SendAllChat(string _name,string _msg) {
             command = 801;
             user_name = _name;
             message = _msg;
@@ -193,17 +193,21 @@ namespace Packes
         public string message;
     }
 
-    // command 802 全体チャット送信(client->server)
-    public class SemdAllChat:IPacketDatas
-    {
-        SemdAllChat() { command = 802; }
-    }
-
-    // command 803 全体チャット受信(client->server)
+    // command 802 全体チャット(server->client)
     public class RecvAllChat:IPacketDatas
     {
-        RecvAllChat() { command = 803; }
+        public RecvAllChat() { command = 802; }
+
+        
+        public string user_name;
+        public string message;
     }
+
+    //// command 803 全体チャット受信(client->server)
+    //public class RecvAllChat:IPacketDatas
+    //{
+    //    RecvAllChat() { command = 803; }
+    //}
 
     // command 901　重複ログイン(server->client)   エラーコマンド
     public class Duplicate:IPacketDatas
@@ -246,7 +250,10 @@ public enum CommandData
     // ログアウトコマンド
     Finished = (int)701,
     // チャット
-    Chat = (int)801,
+    // 全体チャット送信
+    SendAChat = (int)801,
+    // 全体チャット受信
+    RecvAChat=(int)802,
     // 重複ログイン報告   エラーコマンド
     Duplicate = 901,
 }
