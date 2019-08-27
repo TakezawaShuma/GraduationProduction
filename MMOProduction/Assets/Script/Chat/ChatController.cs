@@ -22,7 +22,7 @@ public class ChatController : MonoBehaviour
     private List<string> chatLog = new List<string>();
 
     // チャットサーバー
-    //WS.WsChat wc = new WS.WsChat();
+    WS.WsChat wc = new WS.WsChat();
 
 
     // チャット画面表示フラグ
@@ -33,7 +33,7 @@ public class ChatController : MonoBehaviour
     void Start()
     {
         chatFlame.SetActive(false);
-        //wc.ConnectionStart(Receive);
+        wc.ConnectionStart(Receive);
     }
 
     // Update is called once per frame
@@ -87,22 +87,17 @@ public class ChatController : MonoBehaviour
         string massege = "";
 
         massege = massege + _cm.name + "：" + _cm.massege;
-
-
-
+        
         AddChatLog(massege);
     }
 
     private void SendInputMassege(string _massege)
     {
-
-            Debug.Log("えんたー");
-            string name = Retention.ID.ToString();
-            //wc.SendMessage(name, _massege);
-            string mas = name + "：" + _massege;
-            AddChatLog(mas);
-
-        
+        Debug.Log("えんたー");
+        string name = Retention.ID.ToString();
+        wc.SendMessage(name, _massege);
+        //string mas = name + "：" + _massege;
+        //AddChatLog(mas);
     }
 
 }
