@@ -33,7 +33,7 @@ public class TitleSceneManager : MonoBehaviour
     }
     //ログインを選択
     [SerializeField]
-    private Button SelectLogin_;
+    private Button selectLogin_;
     //ログインする
     [SerializeField]
     private Button loginToGame_;
@@ -89,7 +89,7 @@ public class TitleSceneManager : MonoBehaviour
     void Start()
     {
         //初期のGameObjectの表示設定
-        SelectLogin_.gameObject.SetActive(true);
+        selectLogin_.gameObject.SetActive(true);
         selectSignUp_.gameObject.SetActive(true);
         back_.gameObject.SetActive(false);
         id_.gameObject.SetActive(false);
@@ -106,7 +106,7 @@ public class TitleSceneManager : MonoBehaviour
         pw_.characterLimit = MAX_WORD;
 
         // 接続開始
-        //ws.ConnectionStart(Receive);
+        ws.ConnectionStart(Receive);
     }
 
     private int m_command = 0;
@@ -147,7 +147,7 @@ public class TitleSceneManager : MonoBehaviour
 
     public void BackClick()
     {
-        SelectLogin_.gameObject.SetActive(true);
+        selectLogin_.gameObject.SetActive(true);
         selectSignUp_.gameObject.SetActive(true);
         back_.gameObject.SetActive(false);
         id_.gameObject.SetActive(false);
@@ -236,7 +236,7 @@ public class TitleSceneManager : MonoBehaviour
     private void LogInActive()
     {
 
-        SelectLogin_.gameObject.SetActive(false);
+        selectLogin_.gameObject.SetActive(false);
         selectSignUp_.gameObject.SetActive(false);
         back_.gameObject.SetActive(true);
         id_.gameObject.SetActive(true);
@@ -252,7 +252,7 @@ public class TitleSceneManager : MonoBehaviour
     // 新規登録選択時表示させる
     private void RegisterActive()
     {
-        SelectLogin_.gameObject.SetActive(false);
+        selectLogin_.gameObject.SetActive(false);
         selectSignUp_.gameObject.SetActive(false);
         back_.gameObject.SetActive(true);
         id_.gameObject.SetActive(true);

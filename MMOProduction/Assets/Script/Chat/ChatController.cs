@@ -1,4 +1,8 @@
-﻿using System.Collections;
+﻿//////////////////////////////////////
+// チャット全体のコントロールクラス //
+//////////////////////////////////////
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
@@ -17,12 +21,11 @@ public class ChatController : MonoBehaviour
     [SerializeField]
     private InputField inputMassege;
 
-
     // チャットログ
     private List<string> chatLog = new List<string>();
 
     // チャットサーバー
-    WS.WsChat wc = new WS.WsChat();
+    WS.WsChat wsc = new WS.WsChat();
 
 
     // チャット画面表示フラグ
@@ -32,13 +35,14 @@ public class ChatController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        chatFlame.SetActive(false);
-        wc.ConnectionStart(Receive);
+        chatFlame.SetActive(chatActiveFlag);
+        wsc.ConnectionStart(Receive);
     }
 
     // Update is called once per frame
     void Update()
     {
+        // チャットのアクティブ化
         if (Input.GetKeyUp(KeyCode.LeftControl) && chatActiveFlag == false)
         {
             chatFlame.SetActive(true);
@@ -93,9 +97,14 @@ public class ChatController : MonoBehaviour
     private void SendInputMassege(string _massege)
     {
         string name = Retention.ID.ToString();
-        wc.SendMessage(name, _massege);
+        wsc.SendMessage(name, _massege);
         //string mas = name + "：" + _massege;
         //AddChatLog(mas);
+    }
+
+    public bool GetChatActiveFlag()
+    {
+        return chatActiveFlag;
     }
 
 }

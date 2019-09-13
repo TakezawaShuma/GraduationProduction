@@ -16,10 +16,6 @@ namespace WS
     }
     public class WsChat:WsBase
     {
-        // ソケット
-        //private WebSocket ws;
-
-
         // サーバーのIP
         private const string server_ip = "172.24.52.56";
         //private const string server_ip = "localhost";
