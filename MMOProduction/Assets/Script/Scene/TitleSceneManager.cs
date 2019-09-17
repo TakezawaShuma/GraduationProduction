@@ -125,6 +125,8 @@ public class TitleSceneManager : MonoBehaviour
     void Update()
     {
     }
+
+
     //public関数--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     //ボタンが押されたとき
     public void Click()
@@ -164,13 +166,16 @@ public class TitleSceneManager : MonoBehaviour
         Debug.Log("Back");
     }
 
+    /// <summary>
+    /// ログイン送信
+    /// </summary>
     public void loginToGame_Click()
     {
         ErrorMessageHide();
 
         string id = id_.text;
         string pw = pw_.text;
-
+        
         if (CheckString(id,true) == true && CheckString(pw,false) == true)
         {
             Debug.Log("ログイン ID:" + id + "  PW:" + pw);
@@ -185,6 +190,9 @@ public class TitleSceneManager : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 新規登録送信
+    /// </summary>
     public void RegisterClick02()
     {
         ErrorMessageHide();
@@ -278,6 +286,7 @@ public class TitleSceneManager : MonoBehaviour
         //チェックするのがIDかどうか
         if(id)
         {
+            // 4文字以下なら弾く
             if (str.Length < MIN_ID_WORD)
             {
                 Error01.gameObject.SetActive(true);
@@ -291,6 +300,7 @@ public class TitleSceneManager : MonoBehaviour
             }
             return true;
         }
+        // パスワードなら
         else
         {
             if (str.Length < MIN_PW_WORD)
