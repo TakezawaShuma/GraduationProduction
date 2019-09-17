@@ -1865,7 +1865,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1416931804}
-        m_MethodName: LogInToGameClick
+        m_MethodName: loginToGame_Click
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2420,7 +2420,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8207370bc14231049971798453a2e169, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  SelectLogin_: {fileID: 927173940}
+  selectLogin_: {fileID: 927173940}
   loginToGame_: {fileID: 1183998531}
   selectSignUp_: {fileID: 1207362945}
   back_: {fileID: 1902749755}
