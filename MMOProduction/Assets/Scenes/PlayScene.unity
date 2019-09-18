@@ -516,7 +516,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 645858241}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 4cb1b657d808c7b4583315bc0749e915, type: 3}
   m_Name: 
@@ -558,6 +558,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   chatFlame: {fileID: 435296719}
   chatLogText: {fileID: 1826006565}
+  inputMassege: {fileID: 0}
 --- !u!114 &809979502
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -855,8 +856,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 992294604}
-  m_LocalRotation: {x: 0.21644013, y: -0.0000000058211262, z: 0.000000001290516, w: 0.9762959}
-  m_LocalPosition: {x: 0.0000059441886, y: 242.53998, z: -523.1693}
+  m_LocalRotation: {x: 0.2164408, y: -0.0000000058211254, z: 0.0000000012905199, w: 0.97629577}
+  m_LocalPosition: {x: 0.0000071330264, y: 289.02808, z: -622.86285}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

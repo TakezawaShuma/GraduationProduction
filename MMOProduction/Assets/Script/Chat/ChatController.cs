@@ -11,15 +11,15 @@ public class ChatController : MonoBehaviour
 {
     // チャット全体のフレーム
     [SerializeField]
-    private GameObject chatFlame;
+    private GameObject chatFlame = default(GameObject);
 
     // チャットログのテキスト
     [SerializeField]
-    private Text chatLogText;
+    private Text chatLogText = default(Text);
 
     // 入力メッセージ
     [SerializeField]
-    private InputField inputMassege;
+    private InputField inputMassege = default(InputField);
 
     // チャットログ
     private List<string> chatLog = new List<string>();
