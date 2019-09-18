@@ -5,8 +5,8 @@ using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class ChatLogSizeController : MonoBehaviour, IDragHandler
-{ 
-    private RectTransform rect;
+{
+    private RectTransform rect = default(RectTransform);
 
     public void OnDrag(PointerEventData e)
     {

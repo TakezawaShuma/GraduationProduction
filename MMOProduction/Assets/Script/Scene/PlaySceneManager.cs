@@ -12,7 +12,7 @@ public class PlaySceneManager : MonoBehaviour
     public GameObject playerPre;
 
     [SerializeField, Header("カメラ")]
-    private FollowingCamera FollowingCamera;
+    private FollowingCamera FollowingCamera = default(FollowingCamera);
 
 
     // ソケット
