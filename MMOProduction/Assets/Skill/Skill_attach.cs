@@ -19,10 +19,10 @@ public class Skill_attach : MonoBehaviour
     bool isBack = false;
 
     //スキル発動を発動する変数
-    bool isSkill = false;
+    //bool isSkill = false;
 
     //スキル枠の中心座標
-    Vector3 slot_c;
+    //Vector3 slot_c;
 
     //スキル移動カウント
     float count = 0.2f;
@@ -35,7 +35,7 @@ public class Skill_attach : MonoBehaviour
 
         rectT = this.gameObject.GetComponent<RectTransform>();
         //スキル枠の中心を所得
-        slot_c = (GameObject.Find("slot")).GetComponent<Renderer>().bounds.center;
+        //slot_c = (GameObject.Find("slot")).GetComponent<Renderer>().bounds.center;
     }
 
     // Update is called once per frame
