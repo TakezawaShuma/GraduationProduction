@@ -30,7 +30,7 @@ public class TestPlay : MonoBehaviour
         player = null;
         // Startに必ず入れる事！！
         // 通信関係の初期処理
-        ws_play.ConnectionStart(Receive);
+        //ws_play.ConnectionStart(Receive);
     }
 
     void Update()

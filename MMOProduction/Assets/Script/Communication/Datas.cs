@@ -1,6 +1,8 @@
 ﻿////////////////////////////////////////////////
 // パケットデータ等通信で使うデータをまとめた //
 ////////////////////////////////////////////////
+using UnityEngine;
+
 
 /// <summary>
 /// パケットデータ
@@ -14,6 +16,8 @@ namespace Packes
 
         public CommandData Command { get { return (CommandData)command; } }
     }
+
+    // ログインシーン--------------------------------------------------------------------------------------------------
 
     // command 101  ユーザー作成 (client->server)
     public class CreateUser : IPacketDatas
@@ -68,6 +72,9 @@ namespace Packes
     {
         public ReconnectS2C() { command = 108; }
     }
+
+
+    // プレイシーン----------------------------------------------------------------------------------------------------
 
 
     // command 201  位置同期(client->server)
@@ -128,10 +135,10 @@ namespace Packes
         public SendStatus(int _hp,int _mp,int _status) {
             command = 205; user_id = Retention.ID; hp = _hp; mp = _mp; status = _status;
         }
-        int user_id;
-        int hp;
-        int mp;
-        int status;
+        public int user_id;
+        public int hp;
+        public int mp;
+        public int status;
     }
 
     // command 206 ステータス共有(server->client)
@@ -139,6 +146,34 @@ namespace Packes
     {
         public RecvStatus() { command = 206; }
     }
+
+    // command 209 セーブデータの読み込み要請(client->server)
+    public class SaveDataRequ:IPacketDatas
+    {
+        public SaveDataRequ() { command = 209; }
+        public int user_id;
+    }
+    
+    // command 210 セーブデータ(server->client)
+    public class RecvSaveData : IPacketDatas
+    {
+        public RecvSaveData() { command = 210; }
+        public Weapon weapon;
+        public Vector3 position;
+        public int lv;
+        public int exp;
+    }
+
+    // command 211 データの読み込み完了(client->server)
+    public class DataLoadComplete:IPacketDatas
+    {
+        public DataLoadComplete() { command = 211; }
+
+    }
+
+
+    // その他データ----------------------------------------------------------------------------------------------------
+
 
     // command 701　ログアウト時(client->server)
     public class Finished : IPacketDatas
@@ -180,6 +215,15 @@ namespace Packes
 
     }
 
+    // command 706 ログアウト完了(server->client)
+    public class FinishComplete : IPacketDatas
+    {
+        public FinishComplete() { command = 706; }
+    }
+
+
+    // チャット--------------------------------------------------------------------------------------------------------
+
     // command 801　全体チャット(client->server)
     public class SendAllChat:IPacketDatas
     {
@@ -209,6 +253,9 @@ namespace Packes
     //    RecvAllChat() { command = 803; }
     //}
 
+
+    // エラーコマンド--------------------------------------------------------------------------------------------------
+
     // command 901　重複ログイン(server->client)   エラーコマンド
     public class Duplicate:IPacketDatas
     {
@@ -233,7 +280,10 @@ public enum CommandData
     CreateReport = (int)105,
     // すでに存在している   エラーコマンド
     Existing = (int)106,
-
+    // 再接続
+    ReconnectC2S = (int)107,
+　　// 再接続確認
+    ReconnectS2C = (int)108,
 
 
     // プレイヤーデータの送信
@@ -244,16 +294,37 @@ public enum CommandData
     SendInitialLogin = (int)203,
     // 初期ログインの受信
     RecvInitialLogin = (int)204,
+    // ステータスの送信
+    SendStatus = (int)205,
+    // ステータスの受信
+    RecvStatus = (int)206,
+    // セーブデータ要請
+    SaveDataRequ = (int)209,
+    // セーブデータ
+    RecvSaveData = (int)210,
+    // データ読み込み完了
+    DataLoadComplete = (int)211,
 
 
-
-    // ログアウトコマンド
+    // ログアウト要請
     Finished = (int)701,
+    // アイテム一覧送信
+    SendItemList = (int)702,
+    // スキル一覧送信
+    SendSkillList = (int)703,
+    // アイテム一覧受信
+    RecvItemList = (int)704,
+    // スキル一覧受信
+    RecvSkillList = (int)705,
+    // ログアウト完了
+    FinishComplete = (int)706,
+
+
     // チャット
     // 全体チャット送信
     SendAChat = (int)801,
     // 全体チャット受信
-    RecvAChat=(int)802,
+    RecvAChat = (int)802,
     // 重複ログイン報告   エラーコマンド
     Duplicate = 901,
 }

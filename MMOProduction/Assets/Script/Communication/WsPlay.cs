@@ -14,17 +14,23 @@ namespace WS
     {
         // ログインサーバーのポート
         private int port = 8001;
-        public Action<PlayerData> play_collback;
+        public Action<PlayerData> player_collback;
+        public Action<SaveData> save_collback;
 
         /// <summary>
         /// 初期処理を纏めた
         /// </summary>
-        public void ConnectionStart(Action<PlayerData> callback){
-            play_collback = callback;
-            base.Connect(port);
-            RelatedToWS();
-            SendInData();
-        }       
+        public void ConnectionStart(Action<PlayerData> _player,Action<SaveData> _save)
+        {
+            player_collback = _player;
+            save_collback = _save;
+
+            if (base.Connect(port))
+            {
+                RelatedToWS();
+                SendRequestSaveData();
+            }
+        }    
 
         /// <summary>
         /// 終了処理
@@ -60,14 +66,19 @@ namespace WS
                             // 受信データ
                             Packes.RecvPosSync recv_data = JsonUtility.FromJson<Packes.RecvPosSync>(e.Data);
                             Debug.Log("listen user_id : " + recv_data.user_id.ToString());
-                            play_collback(new PlayerData(recv_data));
+                            player_collback(new PlayerData(recv_data));
                         break;
                         case CommandData.RecvInitialLogin:
                             Packes.RecvInitialLogin recv_in = JsonUtility.FromJson<Packes.RecvInitialLogin>(e.Data);
-                            play_collback(new PlayerData(recv_in.user_id, recv_in.x, recv_in.y, recv_in.z, 0));
+                            player_collback(new PlayerData(recv_in.user_id, recv_in.x, recv_in.y, recv_in.z, 0));
+                            break;
+                        case CommandData.RecvSaveData:
+                            Packes.RecvSaveData recv_save = JsonUtility.FromJson<Packes.RecvSaveData>(e.Data);
+                            save_collback(new SaveData(recv_save.weapon, recv_save.position, recv_save.lv, recv_save.exp));
                             break;
                         default:
                             break;
+
                     }
                 },e.Data);
             };
@@ -122,6 +133,20 @@ namespace WS
                 return false;
             }
             return true;
+        }
+
+        /// <summary>
+        /// セーブデータを要請する
+        /// </summary>
+        public void SendRequestSaveData()
+        {
+            try
+            {
+                string str = new Packes.SaveDataRequ().ToJson();
+                ws.Send(str);
+            }catch{
+                Debug.Log("セーブデータ要請失敗しました。");
+            }
         }
 
         /// <summary>

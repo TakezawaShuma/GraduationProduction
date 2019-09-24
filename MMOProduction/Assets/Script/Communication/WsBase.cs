@@ -15,8 +15,8 @@ namespace WS
         // ソケット
         protected WebSocket ws;
         // サーバーのIP
-        private string server_ip = "172.24.52.250";
-        //private string server_ip = "localhost";
+        //private string server_ip = "172.24.52.250";
+        private string server_ip = "localhost";
 
         /// <summary>
         /// 接続
