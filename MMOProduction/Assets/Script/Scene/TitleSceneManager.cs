@@ -24,6 +24,9 @@ public class TitleSceneManager : MonoBehaviour
     // wsソケット
     WS.WsLogin ws = new WS.WsLogin();
 
+    [SerializeField]
+    bool connectFlag = false;
+
     //ボタンの種類
     public enum CANVAS_STATE
     {
@@ -104,9 +107,11 @@ public class TitleSceneManager : MonoBehaviour
         //Input Field の入力文字数制限
         id_.characterLimit = MAX_WORD;
         pw_.characterLimit = MAX_WORD;
-
-        // 接続開始
-        ws.ConnectionStart(Receive);
+        if (connectFlag)
+        {
+            // 接続開始
+            ws.ConnectionStart(Receive);
+        }
     }
 
     private int m_command = 0;
@@ -175,14 +180,16 @@ public class TitleSceneManager : MonoBehaviour
 
         string id = id_.text;
         string pw = pw_.text;
-        
-        if (CheckString(id,true) == true && CheckString(pw,false) == true)
+
+        if (CheckString(id, true) == true && CheckString(pw, false) == true)
         {
             Debug.Log("ログイン ID:" + id + "  PW:" + pw);
             ErrorMessageHide();
-
-            // ログイン処理
-            ws.SendLogin(id, pw);
+            if (connectFlag)
+            {
+                // ログイン処理
+                ws.SendLogin(id, pw);
+            }
         }
         else
         {
@@ -201,15 +208,18 @@ public class TitleSceneManager : MonoBehaviour
         string pw = pw_.text;
         if(CheckString(id,true)==true&&CheckString(pw,false)==true)
         {
-            if(pw_.text==ConfirmPW_.text)
+            // 新規登録
+            if (pw_.text == ConfirmPW_.text)
             {
                 Debug.Log("新規登録 ID:" + id + "  PW:" + pw);
                 //Error01.gameObject.SetActive(false);
                 //Error02.gameObject.SetActive(false);
                 //Error03.gameObject.SetActive(false);
                 //Error04.gameObject.SetActive(false);
-                // 新規登録
-                ws.SendRegistration(id, pw);
+                if (connectFlag)
+                {
+                    ws.SendRegistration(id, pw);
+                }
             }
             else
             {
