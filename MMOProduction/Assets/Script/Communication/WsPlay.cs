@@ -149,6 +149,17 @@ namespace WS
             }
         }
 
+        public void SendSaveDataOK()
+        {
+            try
+            {
+                string str = new Packes.DataLoadComplete().ToJson();
+                ws.Send(str);
+            }catch{
+                Debug.Log("読み込み完了報告失敗");
+            }
+        }
+
         /// <summary>
         /// ログアウトデータを送信する
         /// </summary>

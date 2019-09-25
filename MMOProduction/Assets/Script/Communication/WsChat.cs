@@ -69,7 +69,7 @@ namespace WS
             // コマンドで受信データサイズを変える
             // コマンド内容はDatas.csを参照
             switch (com){
-                case CommandData.RecvAChat:
+                case CommandData.RecvAllChat:
                     // JSONをデシリアライズ
                     Packes.RecvAllChat chat = JsonUtility.FromJson<Packes.RecvAllChat>(e.Data);
                     chatReceive_callback(chat.user_name, chat.message);

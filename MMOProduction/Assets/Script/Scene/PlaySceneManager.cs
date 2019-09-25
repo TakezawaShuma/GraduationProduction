@@ -115,6 +115,6 @@ public class PlaySceneManager : MonoBehaviour
     private void RecvSaveData(SaveData _data)
     {
         save = _data;
-        ws.SendInData();
+        ws.SendSaveDataOK();
     }
 }
