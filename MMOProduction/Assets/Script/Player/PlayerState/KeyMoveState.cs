@@ -30,6 +30,11 @@ public class KeyMoveState : BaseState
     // 実行関数
     public override void Execute()
     {
+        if (Input.GetMouseButtonDown(0))
+        {
+            playerController.LockOn();
+        }
+
         velocity = Vector3.zero;
 
         VelocityDecision();
@@ -44,7 +49,7 @@ public class KeyMoveState : BaseState
             playerController.ChangeState(IdleState.Instance);
         }
 
-        Debug.Log("key");
+        //Debug.Log("key");
     }
 
     private void VelocityDecision()
@@ -74,10 +79,12 @@ public class KeyMoveState : BaseState
         // 押していたらダッシュ
         if (Input.GetKey(playerSetting.DKey))
         {
+            animatorManager.Run();
             velocity *= playerSetting.DS * Time.deltaTime;
         }
         else
         {
+            animatorManager.Walk();
             velocity *= playerSetting.NS * Time.deltaTime;
         }
     }
