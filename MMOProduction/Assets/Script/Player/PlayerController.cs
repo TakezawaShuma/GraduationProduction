@@ -153,7 +153,7 @@ public class PlayerController: MonoBehaviour
 
             Debug.Log(hit.collider.gameObject);
 
-            if (hit.collider.gameObject.tag == "Enemy")
+            if (hit.collider.gameObject.tag == "Marker")
             {
                 target = hit.collider.gameObject;
 
