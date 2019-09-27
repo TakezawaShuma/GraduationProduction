@@ -37,10 +37,11 @@ public class MouseMoveState : BaseState
     public override void Execute()
     {
         VelocityDecision(GetMousePos());
+        playerController.GetAnim().Move(true);
 
         if (velocity.magnitude > 0)
         {
-            playerController.MouseMove(velocity);
+            playerController.MouseMove(velocity);          
         }
 
         if(Input.GetMouseButtonUp(0))
