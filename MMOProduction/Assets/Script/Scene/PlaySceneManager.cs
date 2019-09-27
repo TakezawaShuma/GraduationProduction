@@ -21,6 +21,7 @@ public class PlaySceneManager : MonoBehaviour
     // ソケット
     private WS.WsPlay ws = new WS.WsPlay();
     private Dictionary<int, GameObject> players = new Dictionary<int, GameObject>();
+    private SaveData save;
 
 
 
@@ -32,8 +33,9 @@ public class PlaySceneManager : MonoBehaviour
         if (connectFlag)
         {
             // プレイサーバに接続
-            ws.ConnectionStart(UpdatePlayers);
+            ws.ConnectionStart(UpdatePlayers, RecvSaveData);
         }
+
     }
 
     // Update is called once per frame
@@ -114,5 +116,15 @@ public class PlaySceneManager : MonoBehaviour
                 );
             FollowingCamera.SetTarget(players[Retention.ID]);
         }
+    }
+
+    /// <summary>
+    /// セーブデータを受け取り入場要請を送る
+    /// </summary>
+    /// <param name="_data"></param>
+    private void RecvSaveData(SaveData _data)
+    {
+        save = _data;
+        ws.SendSaveDataOK();
     }
 }

@@ -28,3 +28,28 @@ public class PlayerStatus{
     public int hp;
     public int mp;
 }
+
+
+/// <summary>
+/// セーブデータ
+/// </summary>
+public class SaveData{
+    public SaveData(Weapon _weapon, UnityEngine.Vector3 _pos, int _lv, int _exp) { weapon = _weapon; position = _pos; lv = _lv; exp = _exp; }
+    public Weapon weapon;
+    public UnityEngine.Vector3 position;
+    public int lv;
+    public int exp;
+}
+
+/// <summary>
+/// 装備クラス
+/// </summary>
+public class Weapon
+{
+    int weapon;
+    int head;
+    int body;
+    int leg;
+    int accessoryL;
+    int accessoryR;
+}
