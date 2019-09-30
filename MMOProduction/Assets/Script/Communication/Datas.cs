@@ -150,7 +150,7 @@ namespace Packes
     // command 209 セーブデータの読み込み要請(client->server)
     public class SaveDataRequ:IPacketDatas
     {
-        public SaveDataRequ() { command = (int)CommandData.SaveDataRequ; }
+        public SaveDataRequ(int _id) { command = (int)CommandData.SaveDataRequ; user_id = _id; }
         public int user_id;
     }
     

@@ -6,6 +6,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class PlaySceneManager : MonoBehaviour
 {
@@ -24,6 +25,8 @@ public class PlaySceneManager : MonoBehaviour
     private SaveData save;
 
 
+    // ロードシーン削除用フラグ
+    bool unloadFlag = false;
 
     // Start is called before the first frame update
     void Start()
@@ -33,7 +36,7 @@ public class PlaySceneManager : MonoBehaviour
         if (connectFlag)
         {
             // プレイサーバに接続
-            ws.ConnectionStart(UpdatePlayers, RecvSaveData);
+            unloadFlag = ws.ConnectionStart(UpdatePlayers, RecvSaveData);
         }
 
     }
@@ -41,6 +44,9 @@ public class PlaySceneManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // 鯖と接続出来たらLoadSceneをUnloadする
+        if (unloadFlag) { StartCoroutine("UnLoadScene"); unloadFlag = false; }
+
         MakePlayer();
         if (players.ContainsKey(Retention.ID))
         {
@@ -126,5 +132,28 @@ public class PlaySceneManager : MonoBehaviour
     {
         save = _data;
         ws.SendSaveDataOK();
+    }
+
+    // シーン切り替え用関数------------------------------------
+
+    public void LoadData(string _str)
+    {
+        Debug.Log(_str);
+        StartCoroutine(this.invokeActionOnloadScene("LoadingScene", () => {
+            var load = FindObjectOfType<LoadSceneManager>() as LoadSceneManager;
+            load.nextScene = _str;
+            load.unloadScene = "PlayScene";
+        }));
+    }
+
+    private IEnumerator invokeActionOnloadScene(string sceneName, System.Action onLoad)
+    {
+        var asyncOp = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
+        yield return asyncOp;
+    }
+    IEnumerator UnLoadScene()
+    {
+        yield return SceneManager.UnloadSceneAsync("LoadScene");
+        Debug.Log("UnLoad");
     }
 }

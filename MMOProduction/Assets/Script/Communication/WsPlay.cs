@@ -20,17 +20,18 @@ namespace WS
         /// <summary>
         /// 初期処理を纏めた
         /// </summary>
-        public void ConnectionStart(Action<PlayerData> _player,Action<SaveData> _save)
+        public bool ConnectionStart(Action<PlayerData> _player, Action<SaveData> _save)
         {
             player_collback = _player;
             save_collback = _save;
 
-            if (base.Connect(port))
-            {
-                RelatedToWS();
-                SendRequestSaveData();
-            }
-        }    
+            bool ret = base.Connect(port);
+
+            RelatedToWS();
+            SendRequestSaveData();
+            return ret;
+
+        }
 
         /// <summary>
         /// 終了処理
@@ -142,7 +143,7 @@ namespace WS
         {
             try
             {
-                string str = new Packes.SaveDataRequ().ToJson();
+                string str = new Packes.SaveDataRequ(Retention.ID).ToJson();
                 ws.Send(str);
             }catch{
                 Debug.Log("セーブデータ要請失敗しました。");

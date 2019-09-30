@@ -10,6 +10,7 @@ using UnityEngine.UI;
 using System;
 using System.Text;
 using System.Text.RegularExpressions;
+using UnityEngine.SceneManagement;
 
 
 public class TitleSceneManager : MonoBehaviour
@@ -86,7 +87,8 @@ public class TitleSceneManager : MonoBehaviour
     [SerializeField]
     private InputField ConfirmPW_;
 
-
+    // ロードシーン削除用フラグ
+    bool unloadFlag = false;
 
     // Start is called before the first frame update
     void Start()
@@ -110,7 +112,7 @@ public class TitleSceneManager : MonoBehaviour
         if (connectFlag)
         {
             // 接続開始
-            ws.ConnectionStart(Receive);
+            unloadFlag = ws.ConnectionStart(Receive);
         }
     }
 
@@ -124,11 +126,16 @@ public class TitleSceneManager : MonoBehaviour
         m_command = _comand;
 
         ErrorCheck(_comand);
+
+        // シーン切り替え
+        //LoadScene("PlayScene");
     }
 
     // Update is called once per frame
     void Update()
     {
+        // 鯖と接続出来たらUnloadする
+        if (unloadFlag) { StartCoroutine("UnLoadScene"); unloadFlag = false; }
     }
 
 
@@ -251,6 +258,29 @@ public class TitleSceneManager : MonoBehaviour
     }
 
     //private関数--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
+
+    // シーン管理用関数----------------------------------------------------------------------------
+    public void LoadScene(string _str)
+    {
+        Debug.Log(_str);
+        StartCoroutine(this.invokeActionOnloadScene("LoadingScene", () => {
+            var load = FindObjectOfType<LoadSceneManager>() as LoadSceneManager;
+            load.nextScene = _str;
+            load.unloadScene = "LoginScene";
+        }));
+    }
+    private IEnumerator invokeActionOnloadScene(string sceneName, System.Action onLoad)
+    {
+        var asyncOp = SceneManager.LoadSceneAsync(sceneName, LoadSceneMode.Additive);
+        yield return asyncOp;
+    }
+    private IEnumerator UnLoadScene()
+    {
+        yield return SceneManager.UnloadSceneAsync("LoadScene");
+        Debug.Log("UnLoad");
+    }
+
+    // UI制御用関数--------------------------------------------------------------------------------
     private void LogInActive()
     {
 

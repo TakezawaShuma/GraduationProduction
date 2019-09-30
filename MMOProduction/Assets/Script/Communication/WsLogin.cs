@@ -24,12 +24,13 @@ namespace WS
         /// <summary>
         /// 初期処理を纏めた
         /// </summary>
-        public void ConnectionStart(Action<int> callback){
+        public bool ConnectionStart(Action<int> callback){
             // コールバックの設定
             login_callback = callback;
-            base.Connect(port);
+            bool ret = base.Connect(port);
             RelatedToWS();
             Send(new Packes.SendItemList().ToJson());
+            return ret;
         }
 
         /// <summary>
