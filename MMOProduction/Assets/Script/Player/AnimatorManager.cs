@@ -25,9 +25,9 @@ public class AnimatorManager
     }
 
     public void Walk()
-    {
-        AllFalse();
-        animator.SetBool("Walk", true);
+    {    
+       AllFalse();
+       animator.SetBool("Walk", true);
     }
 
     public void Run()

@@ -28,7 +28,10 @@ public class IdleState : BaseState
     {
         //Debug.Log("idle");
 
-        animatorManager.Idle();
+        if (playerSetting.IA)
+        {
+            animatorManager.Idle();
+        }
 
         if(Input.GetMouseButtonDown(0))
         {

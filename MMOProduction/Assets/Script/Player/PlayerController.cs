@@ -21,6 +21,9 @@ public class PlayerController: MonoBehaviour
     [SerializeField, Header("アニメーターコントローラー")]
     private Animator animator;
 
+    [SerializeField, Header("チャットコントローラー")]
+    private ChatController chatController;
+
     // 現在のステート
     private BaseState currentState;
 
@@ -142,6 +145,8 @@ public class PlayerController: MonoBehaviour
         target = null;
         lockState = false;
 
+        FollowingCamera.LOCK = null;
+
         Debug.Log(Camera.main);
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -160,6 +165,8 @@ public class PlayerController: MonoBehaviour
                 lockState = true;
 
                 target.GetComponent<Marker>().FLAG = true;
+
+                FollowingCamera.LOCK = target;
             }
         }
     }

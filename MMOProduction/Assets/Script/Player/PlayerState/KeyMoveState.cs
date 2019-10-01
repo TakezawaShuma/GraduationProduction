@@ -79,12 +79,18 @@ public class KeyMoveState : BaseState
         // 押していたらダッシュ
         if (Input.GetKey(playerSetting.DKey))
         {
-            animatorManager.Run();
+            if (playerSetting.IA)
+            {
+                animatorManager.Run();
+            }
             velocity *= playerSetting.DS * Time.deltaTime;
         }
         else
         {
-            animatorManager.Walk();
+            if (playerSetting.IA)
+            {
+                animatorManager.Walk();
+            }
             velocity *= playerSetting.NS * Time.deltaTime;
         }
     }

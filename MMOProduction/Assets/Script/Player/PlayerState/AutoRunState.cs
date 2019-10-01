@@ -28,7 +28,10 @@ public class AutoRunState : BaseState
 
     public override void Execute()
     {
-        animatorManager.Run();
+        if(playerSetting.IA)
+        {
+            animatorManager.Run();
+        }
 
         if (Input.GetMouseButtonDown(0))
         {

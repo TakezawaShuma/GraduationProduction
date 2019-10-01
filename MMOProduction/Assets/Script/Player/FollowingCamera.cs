@@ -49,6 +49,12 @@ public class FollowingCamera : MonoBehaviour
     [SerializeField]
     private float scrollSensitivity = 5.0f;
 
+    private GameObject lockOnTarget;
+    public GameObject LOCK
+    {
+        set { lockOnTarget = value; }
+    }
+
     /// <summary>
     /// ターゲットの設定
     /// </summary>
@@ -65,8 +71,19 @@ public class FollowingCamera : MonoBehaviour
         }
         updateDistance(Input.GetAxis("Mouse ScrollWheel"));
 
-        var lookAtPos = target.transform.position + offset;
-        updatePosition(lookAtPos);
+        Vector3 lookAtPos;
+
+        //if (lockOnTarget)
+        //{
+        //    lookAtPos = lockOnTarget.transform.position;
+        //    updatePosition(target.transform.position + offset);
+        //}
+        //else
+        {
+            lookAtPos = target.transform.position + offset;
+            updatePosition(lookAtPos);
+        }
+
         transform.LookAt(lookAtPos);
     }
 
@@ -89,6 +106,19 @@ public class FollowingCamera : MonoBehaviour
     {
         var da = azimuthalAngle * Mathf.Deg2Rad;
         var dp = polarAngle * Mathf.Deg2Rad;
+        transform.position = new Vector3(
+            lookAtPos.x + distance * Mathf.Sin(dp) * Mathf.Cos(da),
+            lookAtPos.y + distance * Mathf.Cos(dp),
+            lookAtPos.z + distance * Mathf.Sin(dp) * Mathf.Sin(da));
+    }
+
+    void updateLockPosition(Vector3 lookAtPos)
+    {
+        // ここ変更
+        var da = azimuthalAngle * Mathf.Deg2Rad;
+        var dp = polarAngle * Mathf.Deg2Rad;
+
+
         transform.position = new Vector3(
             lookAtPos.x + distance * Mathf.Sin(dp) * Mathf.Cos(da),
             lookAtPos.y + distance * Mathf.Cos(dp),
