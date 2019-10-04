@@ -70,6 +70,18 @@ public class PlayerController: MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (target != null)
+        {
+            Vector3 v = target.transform.position - transform.position;
+
+            if (v.magnitude > playerSetting.LOD)
+            {
+                target.GetComponent<Marker>().FLAG = false;
+                target = null;
+                lockState = false;
+            }
+        }
+
         currentState.Execute();
     }
 
@@ -158,15 +170,20 @@ public class PlayerController: MonoBehaviour
 
             Debug.Log(hit.collider.gameObject);
 
-            if (hit.collider.gameObject.tag == "Marker")
+            Vector3 v = hit.transform.position - transform.position;
+
+            if (v.magnitude <= playerSetting.LOD)
             {
-                target = hit.collider.gameObject;
+                if (hit.collider.gameObject.tag == "Marker")
+                {
+                    target = hit.collider.gameObject;
 
-                lockState = true;
+                    lockState = true;
 
-                target.GetComponent<Marker>().FLAG = true;
+                    target.GetComponent<Marker>().FLAG = true;
 
-                FollowingCamera.LOCK = target;
+                    FollowingCamera.LOCK = target;
+                }
             }
         }
     }
