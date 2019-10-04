@@ -73,12 +73,21 @@ public class FollowingCamera : MonoBehaviour
 
         Vector3 lookAtPos;
 
-        //if (lockOnTarget)
-        //{
-        //    lookAtPos = lockOnTarget.transform.position;
-        //    updatePosition(target.transform.position + offset);
-        //}
-        //else
+        if (lockOnTarget)
+        {
+            // ここでazimuthalAngleをいい感じにする
+            Vector3 v = lockOnTarget.transform.position - target.transform.position;
+
+            float a = Mathf.Atan2(v.x, v.z) * Mathf.Rad2Deg % 360 + 90;
+
+            Debug.Log(azimuthalAngle + ":" + a);
+
+            azimuthalAngle = -a;
+
+            lookAtPos = target.transform.position + offset;
+            updatePosition(lookAtPos);
+        }
+        else
         {
             lookAtPos = target.transform.position + offset;
             updatePosition(lookAtPos);
@@ -89,8 +98,12 @@ public class FollowingCamera : MonoBehaviour
 
     void updateAngle(float x, float y)
     {
-        x = azimuthalAngle - x * mouseXSensitivity;
-        azimuthalAngle = Mathf.Repeat(x, 360);
+
+        if (!lockOnTarget)
+        {
+            x = azimuthalAngle - x * mouseXSensitivity;
+            azimuthalAngle = Mathf.Repeat(x, 360);
+        }
 
         y = polarAngle + y * mouseYSensitivity;
         polarAngle = Mathf.Clamp(y, minPolarAngle, maxPolarAngle);
@@ -106,19 +119,6 @@ public class FollowingCamera : MonoBehaviour
     {
         var da = azimuthalAngle * Mathf.Deg2Rad;
         var dp = polarAngle * Mathf.Deg2Rad;
-        transform.position = new Vector3(
-            lookAtPos.x + distance * Mathf.Sin(dp) * Mathf.Cos(da),
-            lookAtPos.y + distance * Mathf.Cos(dp),
-            lookAtPos.z + distance * Mathf.Sin(dp) * Mathf.Sin(da));
-    }
-
-    void updateLockPosition(Vector3 lookAtPos)
-    {
-        // ここ変更
-        var da = azimuthalAngle * Mathf.Deg2Rad;
-        var dp = polarAngle * Mathf.Deg2Rad;
-
-
         transform.position = new Vector3(
             lookAtPos.x + distance * Mathf.Sin(dp) * Mathf.Cos(da),
             lookAtPos.y + distance * Mathf.Cos(dp),
