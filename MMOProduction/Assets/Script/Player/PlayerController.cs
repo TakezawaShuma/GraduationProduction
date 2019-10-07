@@ -110,11 +110,11 @@ public class PlayerController: MonoBehaviour
         else
         {
             // 移動方向に回転
-            rot = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(Camera.main.GetComponent<FollowingCamera>().Angle * velocity), playerSetting.TS);
+            rot = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(FollowingCamera.Angle * velocity), playerSetting.TS);
         }
         
         // 移動
-        pos = transform.position + Camera.main.GetComponent<FollowingCamera>().Angle * velocity;
+        pos = transform.position + FollowingCamera.Angle * velocity;
 
         SendMoveDeta(pos, rot.eulerAngles.y);
     }
@@ -159,17 +159,11 @@ public class PlayerController: MonoBehaviour
 
         FollowingCamera.LOCK = null;
 
-        Debug.Log(Camera.main);
-
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        Ray ray = FollowingCamera.GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
         RaycastHit hit = new RaycastHit();
 
         if (Physics.Raycast(ray, out hit))
         {
-            Debug.DrawRay(ray.origin, ray.direction * 100, Color.red, 5);
-
-            Debug.Log(hit.collider.gameObject);
-
             Vector3 v = hit.transform.position - transform.position;
 
             if (v.magnitude <= playerSetting.LOD)
