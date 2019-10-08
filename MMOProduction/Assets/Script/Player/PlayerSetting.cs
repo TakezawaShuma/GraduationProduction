@@ -29,9 +29,10 @@ public class PlayerSetting : MonoBehaviour
     private bool IsAnimator = false;
     public bool IA { get { return IsAnimator; } }
 
-    [SerializeField, Header("ネットワークを使用して移動するか")]
-    private bool IsNetwork = true;
-    public bool IN { get { return IsNetwork; } }
+    [SerializeField, Range(0f,100f), Header("ロックオンの距離")]
+    private float LockOnDirection;
+
+    public float LOD { get { return LockOnDirection; } }
 
     [SerializeField, Header("移動キー")]
     private KeyCode FrontKey = KeyCode.W;

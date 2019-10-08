@@ -12,10 +12,13 @@ public abstract class BaseState
 
     protected PlayerSetting playerSetting;
 
-    public void Initialized(PlayerController playerController, PlayerSetting playerSetting)
+    protected AnimatorManager animatorManager;
+
+    public void Initialized(PlayerController playerController, PlayerSetting playerSetting, AnimatorManager animatorManager)
     {
         this.playerController = playerController;
         this.playerSetting = playerSetting;
+        this.animatorManager = animatorManager;
     }
 
     // 実行関数

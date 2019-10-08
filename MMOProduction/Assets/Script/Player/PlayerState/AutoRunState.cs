@@ -28,6 +28,16 @@ public class AutoRunState : BaseState
 
     public override void Execute()
     {
+        if(playerSetting.IA)
+        {
+            animatorManager.Run();
+        }
+
+        if (Input.GetMouseButtonDown(0))
+        {
+            playerController.LockOn();
+        }
+
         // 前に進む
         velocity = new Vector3(-1, 0, 0) * playerSetting.DS * Time.deltaTime;
 
@@ -38,6 +48,6 @@ public class AutoRunState : BaseState
             playerController.ChangeState(KeyMoveState.Instance);
         }
 
-        Debug.Log("Auto");
+        //Debug.Log("Auto");
     }
 }
