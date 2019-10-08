@@ -33,10 +33,16 @@ public class PlayerController: MonoBehaviour
 
     private GameObject target;
 
+    // Tama: プレイヤーアニメーションデータ
+    private PlayerAnimData _playerAnim;
+    
+
     public void Init(Player _playerData,FollowingCamera _camera,PlayerSetting _setting) {
         PlayerData = _playerData;
         FollowingCamera = _camera;
-        playerSetting = _setting; 
+        playerSetting = _setting;
+
+        _playerAnim = new PlayerAnimData(this.gameObject);
     }
 
     // 位置
@@ -180,5 +186,4 @@ public class PlayerController: MonoBehaviour
                 }
             }
         }
-    }
 }

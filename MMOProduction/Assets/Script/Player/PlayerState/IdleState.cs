@@ -26,8 +26,6 @@ public class IdleState : BaseState
     // 実行関数
     public override void Execute()
     {
-        //Debug.Log("idle");
-
         if (playerSetting.IA)
         {
             animatorManager.Idle();
