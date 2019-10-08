@@ -33,10 +33,6 @@ public class IdleState : BaseState
         {
             playerController.ChangeState(KeyMoveState.Instance);
         }
-        else if (Input.GetMouseButtonDown(0))
-        {
-            playerController.ChangeState(MouseMoveState.Instance);
-        }
         else if (Input.GetKeyDown(playerSetting.AKey))
         {
             playerController.ChangeState(AutoRunState.Instance);

@@ -53,7 +53,6 @@ public class PlayerController: MonoBehaviour
     {
         IdleState.Instance.Initialized(this, playerSetting);
         KeyMoveState.Instance.Initialized(this, playerSetting);
-        MouseMoveState.Instance.Initialized(this, playerSetting);
         AutoRunState.Instance.Initialized(this, playerSetting);
 
         currentState = IdleState.Instance;
