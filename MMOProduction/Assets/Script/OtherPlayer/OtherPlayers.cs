@@ -34,7 +34,8 @@ public class OtherPlayers: MonoBehaviour
 
 
     // Start is called before the first frame update
-    void Start() {
+    void Start()
+    {
         HAYAKAWA oi = new HAYAKAWA();
         oi.command = 101;
         oi.pos = new Vector3(99, 999, 99);
@@ -51,5 +52,7 @@ public class OtherPlayers: MonoBehaviour
     }
 
     public void UpdataData(int hp, int mp, float x, float y, float z, float dir)
-    { HP = hp; MP = mp; X = x; Y = y; Z = z; Dir = dir; }
+    {
+        HP = hp; MP = mp; X = x; Y = y; Z = z; Dir = dir;
+    }
 }

@@ -1,0 +1,553 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="skill_table" Collapsed="true">
+    <Position X="70.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\game_data\skill_table.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChatController" Collapsed="true">
+    <Position X="61.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AKQAAAAQACAAQAAAAAQAAAAAACBAAAAQAQAAAACAAAA=</HashCode>
+      <FileName>Assets\Script\Chat\ChatController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChatLogMove" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="63.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\Chat\ChatLogMove.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ChatLogSizeController" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="65.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAABAIAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\Chat\ChatLogSizeController.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="Retention" Collapsed="true">
+    <Position X="61.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAAQAAAAEAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>Assets\Script\Communication\Datas.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayersGenerator" Collapsed="true">
+    <Position X="63.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAEAA=</HashCode>
+      <FileName>Assets\Script\Genereter\PlayersGenerator.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DoubleClickButtonInspector" Collapsed="true">
+    <Position X="70.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\inventory\DoubleClickButton.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DoubleClickButton" Collapsed="true">
+    <Position X="68.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAAAAAAAAAAAAAAAAAAAAAJAAAAAEAQCAA=</HashCode>
+      <FileName>Assets\Script\inventory\DoubleClickButton.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ItemController" Collapsed="true">
+    <Position X="70.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAQAEBAIACYAAlCAACBACAAgAQAQIQEAYAQBUSAIAIA=</HashCode>
+      <FileName>Assets\Script\inventory\ItemController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Item" Collapsed="true">
+    <Position X="67" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAAAAAAAAAAAAAAAEAAAAAAAAAAAAIgA=</HashCode>
+      <FileName>Assets\Script\inventory\ItemController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ItemButton" Collapsed="true">
+    <Position X="68.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAQAAACAAAAAABAAAAAAAAAIgA=</HashCode>
+      <FileName>Assets\Script\inventory\ItemController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SwipeMove" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="61.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAABAEAAAAAAAACAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\inventory\SwipeMove.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="HAYAKAWA" Collapsed="true">
+    <Position X="65.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAIAAAAQAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\OtherPlayer\OtherPlayers.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OtherPlayers" Collapsed="true">
+    <Position X="63.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAECAAAAAgAAAAAAAAQgAAAAAAAABiAQAAYAE=</HashCode>
+      <FileName>Assets\Script\OtherPlayer\OtherPlayers.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Command" Collapsed="true">
+    <Position X="67" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQQAAAAACAAAAAEAAABAAIAAAQAAAAAAAAAIAAAIAA=</HashCode>
+      <FileName>Assets\Script\Player\Command.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FollowingCamera" Collapsed="true">
+    <Position X="61.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABCAAQBAAAABAAAAIAAAICAAAkQEACAABUAAAAABAAI=</HashCode>
+      <FileName>Assets\Script\Player\FollowingCamera.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Player" Collapsed="true">
+    <Position X="65.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAACAAAAAIAAAAQgAAAAAAAABiAQAAAAA=</HashCode>
+      <FileName>Assets\Script\Player\Player.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerAnimData" Collapsed="true">
+    <Position X="67" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAIAAAAAAAAAAAAAAAAAAAAAAIAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\Player\PlayerAnimData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerController" Collapsed="true">
+    <Position X="68.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAgAKAABBAhICAAAIEAAAAAEAAAAAACAACAAAA=</HashCode>
+      <FileName>Assets\Script\Player\PlayerController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerData" Collapsed="true">
+    <Position X="70.5" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAABgAQAAAgA=</HashCode>
+      <FileName>Assets\Script\Player\PlayerData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerStatus" Collapsed="true">
+    <Position X="65.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABCAAAAAgA=</HashCode>
+      <FileName>Assets\Script\Player\PlayerData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SaveData" Collapsed="true">
+    <Position X="63.5" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAACAAAAAAAAAAAAAAAAgE=</HashCode>
+      <FileName>Assets\Script\Player\PlayerData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Weapon" Collapsed="true">
+    <Position X="70.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgAAAAAAAAACAAAAACQAAAAAAIAAAgAAAAAA=</HashCode>
+      <FileName>Assets\Script\Player\PlayerData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerSetting" Collapsed="true">
+    <Position X="61.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CCAAAAEEAAADAEhAAAEABAAAEJEYAAAAIAAACACDAII=</HashCode>
+      <FileName>Assets\Script\Player\PlayerSetting.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AutoRunState" Collapsed="true">
+    <Position X="0.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAABAAAAAQAQAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\Player\PlayerState\AutoRunState.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BaseState" Collapsed="true">
+    <Position X="3.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAEAAAAAAAABQAAAAAAAAAAAAAAAAAAABAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\Player\PlayerState\BaseState.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IdleState" Collapsed="true">
+    <Position X="2.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAAAAAAAAAABAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\Player\PlayerState\IdleState.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KeyMoveState" Collapsed="true">
+    <Position X="5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAQAAQAAAAAAAABAAAAAQAQAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\Player\PlayerState\KeyMoveState.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MouseMoveState" Collapsed="true">
+    <Position X="7.25" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABAAAIAAAAAgQAAQAAAAAAAABAAAAAQAQAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\Player\PlayerState\MouseMoveState.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerUIManager" Collapsed="true">
+    <Position X="67" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQQAIAEACQAAAAAAAAAAACBAIAAAAABAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\Player\PlayerUIManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlaySceneManager" Collapsed="true">
+    <Position X="68.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQBAAAAAKCAAAABBUAAAAAAAAAAAAggIQAAAQAEAAA=</HashCode>
+      <FileName>Assets\Script\Scene\PlaySceneManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PositionSetter" Collapsed="true">
+    <Position X="70.5" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQACAAAACAAAAAAEAAAIAAAAQAAAgAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\Scene\PositionSetter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TitleSceneManager" Collapsed="true">
+    <Position X="68.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAT+QAUQACAAABAABAEYCBAAAAaAgAAwAQEAEAEAEmA=</HashCode>
+      <FileName>Assets\Script\Scene\TitleSceneManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Get_Point" Collapsed="true">
+    <Position X="63.5" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAEAAAAAAAAAQAQAAAAAQAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\Skill\Get_Point.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Skill_attach" Collapsed="true">
+    <Position X="65.25" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAUAAIAEACAABBAABCAAAEAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\Skill\Skill_attach.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Skill_Count" Collapsed="true">
+    <Position X="67" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAgAAAACAAAAIAAAAAAAAAAAAAQAAAAQBAAAAAAUA=</HashCode>
+      <FileName>Assets\Script\Skill\Skill_Count.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Skill_Number" Collapsed="true">
+    <Position X="68.75" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAYAAAAAACAAAAAABAAAAQAAAAAAACAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\Skill\Skill_Number.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TestLogin" Collapsed="true">
+    <Position X="63.5" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAABAAAAAAAAAAAAAAAAAAQAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\Test\TestLogin.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TestPlay" Collapsed="true">
+    <Position X="65.25" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQBABAAAKCAAAAAAAAAIAAAAAAAAAARAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\Test\TestPlay.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TestTextArea" Collapsed="true">
+    <Position X="67" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAACAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\Test\TestTextArea.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Json" Collapsed="true">
+    <Position X="61.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAIAAAAIAAAAA=</HashCode>
+      <FileName>Assets\Script\Utility\Json.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Packes.IPacketDatas" Collapsed="true">
+    <Position X="31" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAABAAAAAQAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\Communication\Datas.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Packes.CreateUser" Collapsed="true">
+    <Position X="14.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAgAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\Communication\Datas.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Packes.Login" Collapsed="true">
+    <Position X="21" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAgAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\Communication\Datas.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Packes.OKConfirmation" Collapsed="true">
+    <Position X="27.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\Communication\Datas.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Packes.MissingConfirmation" Collapsed="true">
+    <Position X="34.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\Communication\Datas.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Packes.CreateReport" Collapsed="true">
+    <Position X="41.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\Communication\Datas.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Packes.Existing" Collapsed="true">
+    <Position X="48" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\Communication\Datas.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Packes.ReconnectC2S" Collapsed="true">
+    <Position X="54.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\Communication\Datas.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Packes.ReconnectS2C" Collapsed="true">
+    <Position X="3" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\Communication\Datas.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Packes.SendPosSync" Collapsed="true">
+    <Position X="9.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgACAAAAAAAAAAAAAAAAAAAAAAAABgAQAAAAA=</HashCode>
+      <FileName>Assets\Script\Communication\Datas.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Packes.RecvPosSync" Collapsed="true">
+    <Position X="16.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgACAAAAAAAAAAAAAAAAAAAAAAAABgAQAAAAA=</HashCode>
+      <FileName>Assets\Script\Communication\Datas.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Packes.SendInitialLogin" Collapsed="true">
+    <Position X="23.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\Communication\Datas.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Packes.RecvInitialLogin" Collapsed="true">
+    <Position X="30" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAABgAQAAAAA=</HashCode>
+      <FileName>Assets\Script\Communication\Datas.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Packes.SendStatus" Collapsed="true">
+    <Position X="36.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAABCAAAAAAA=</HashCode>
+      <FileName>Assets\Script\Communication\Datas.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Packes.RecvStatus" Collapsed="true">
+    <Position X="43.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\Communication\Datas.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Packes.SaveDataRequ" Collapsed="true">
+    <Position X="50.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\Communication\Datas.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Packes.RecvSaveData" Collapsed="true">
+    <Position X="57" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAACAAAAAAAAAAAAAAAAgE=</HashCode>
+      <FileName>Assets\Script\Communication\Datas.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Packes.DataLoadComplete" Collapsed="true">
+    <Position X="5.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\Communication\Datas.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Packes.Finished" Collapsed="true">
+    <Position X="12" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAAABiAQAAAgA=</HashCode>
+      <FileName>Assets\Script\Communication\Datas.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Packes.SendItemList" Collapsed="true">
+    <Position X="18.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\Communication\Datas.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Packes.SendSkillList" Collapsed="true">
+    <Position X="25.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\Communication\Datas.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Packes.RecvItemList" Collapsed="true">
+    <Position X="32.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\Communication\Datas.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Packes.RecvSkillList" Collapsed="true">
+    <Position X="39" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\Communication\Datas.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Packes.FinishComplete" Collapsed="true">
+    <Position X="45.75" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\Communication\Datas.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Packes.SendAllChat" Collapsed="true">
+    <Position X="52.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAACA=</HashCode>
+      <FileName>Assets\Script\Communication\Datas.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Packes.RecvAllChat" Collapsed="true">
+    <Position X="59.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAACA=</HashCode>
+      <FileName>Assets\Script\Communication\Datas.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Packes.Duplicate" Collapsed="true">
+    <Position X="7.5" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\Communication\Datas.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WS.WsBase" Collapsed="true">
+    <Position X="2.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAIAAAABAAAAAAQAAACAAgAA=</HashCode>
+      <FileName>Assets\Script\Communication\WsBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WS.WsChat" Collapsed="true">
+    <Position X="0.5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAQBAAAAAAAEAAACAAAAAAAABAAAgQAAAAACAAAAA=</HashCode>
+      <FileName>Assets\Script\Communication\WsChat.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WS.WsLogin" Collapsed="true">
+    <Position X="2.75" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAABAAAAAAQEAAAEEAAAAAAABgAAgQAAAAAAAACgA=</HashCode>
+      <FileName>Assets\Script\Communication\WsLogin.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WS.WsPlay" Collapsed="true">
+    <Position X="5" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAARQAAAAAAEAAAAMAAAAAAABCAAhAAAAAIAgAAAA=</HashCode>
+      <FileName>Assets\Script\Communication\WsPlay.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="WS.ChatMassege" Collapsed="true">
+    <Position X="61.75" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\Communication\WsChat.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Interface Name="IAnimData" Collapsed="true">
+    <Position X="61.75" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\Player\IAnimData.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="skill_type" Collapsed="true">
+    <Position X="67" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAgAAAAAAAAAAgAAAAAAAAABAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\game_data\skill_table.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="buff_type" Collapsed="true">
+    <Position X="61.75" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAIAAAAAAAAAAQAQgAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\game_data\skill_table.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="CommandData" Collapsed="true">
+    <Position X="63.5" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AYBACACAAQAEggAAAUQAAAAAACAAIAgAAABQEEgCBAI=</HashCode>
+      <FileName>Assets\Script\Communication\Datas.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Scenes" Collapsed="true">
+    <Position X="65.25" Y="9" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAgAAQAAAAAAA=</HashCode>
+      <FileName>Assets\Script\Communication\Datas.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Yu Gothic UI" Size="9" />
+</ClassDiagram>
