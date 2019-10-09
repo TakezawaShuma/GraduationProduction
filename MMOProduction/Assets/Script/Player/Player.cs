@@ -16,6 +16,7 @@ public class Player : MonoBehaviour
     private int mp;
     private float dir;
 
+    private Rigidbody rb;
 
     public int HP
     {
@@ -34,11 +35,13 @@ public class Player : MonoBehaviour
         z = transform.position.z;
 
         dir = transform.rotation.eulerAngles.y;
+
+        rb = GetComponent<Rigidbody>();
     }
 
     private void Update()
     {
-        transform.position = new Vector3(x, y, z);
+        rb.position = new Vector3(x, y, z);
         transform.rotation = Quaternion.Euler(0, dir, 0);
     }
 
