@@ -10,6 +10,7 @@ public class Skill_attach : MonoBehaviour
     private RectTransform rectT;
 
     private Vector3 mouse;
+
     private Vector3 mouse3d;
 
     //スキルを追従する変数
@@ -104,7 +105,6 @@ public class Skill_attach : MonoBehaviour
                 isTrack = false;
                 //Slotタグの中心座標
                 transform.position = slot.transform.position;
-                Debug.Log("スキル発動");
             }
         }
     }

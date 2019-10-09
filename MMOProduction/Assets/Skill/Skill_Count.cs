@@ -5,8 +5,10 @@ using UnityEngine.UI;
 
 public class Skill_Count : MonoBehaviour
 {
+    //スキルナンバーのゲームオブジェクト
     public GameObject score_bord;
 
+    //ゲットポイントのゲームオブジェクト
     public GameObject point_bord;
 
     //スキルナンバーのスクリプトが入る変数
@@ -33,13 +35,14 @@ public class Skill_Count : MonoBehaviour
     //UPボタンに登録
     public void Up_Button()
     {
-        //スキル結果の表示
+        //スキルレベル結果の表示
         if(get_point.m_point > 0)
         {
             skill_number.Set_Score(+1);
         }
     }
 
+    //UPボタンに登録
     public void Up_ButtonP()
     {
         //マスターポイント結果の表示
@@ -49,9 +52,10 @@ public class Skill_Count : MonoBehaviour
     //DOWNボタンに登録
     public void Down_Button()
     {
-        //スキル結果の表示
+        //スキレベルル結果の表示
         skill_number.Set_Score(-1);
     }
+    //DOWNボタンに登録
     public void Down_ButtonP()
     {
         //マスターポイント結果の表示
