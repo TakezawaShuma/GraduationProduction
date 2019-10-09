@@ -66,6 +66,7 @@ public class PlayerUI : MonoBehaviour
         int maxHp = playerCmp.maxHp;
         int mp = playerCmp.mp;
         int maxMp = playerCmp.maxMp;
+
         if (Observar(hp, currentHp) || Observar(maxHp,currentMaxHp))
         {
             // HPの表示を更新する
