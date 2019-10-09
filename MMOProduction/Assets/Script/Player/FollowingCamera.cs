@@ -18,12 +18,12 @@ public class FollowingCamera : MonoBehaviour
     }
 
     [SerializeField]
-    private Vector3 offset=new Vector3(); // offset form the target object
+    private Vector3 offset = new Vector3(0f, 1.5f, 0f); // offset form the target object
 
     [SerializeField]
-    private float distance = 10.0f; // distance from following object
+    private float distance = 2.0f; // distance from following object
     [SerializeField]
-    private float polarAngle = 65.0f; // angle with y-axis
+    private float polarAngle = 75.0f; // angle with y-axis
     [SerializeField]
     private float azimuthalAngle = 270.0f; // angle with x-axis
 
@@ -35,13 +35,13 @@ public class FollowingCamera : MonoBehaviour
     [Space()]
 
     [SerializeField]
-    private float minDistance = 2.0f;
+    private float minDistance = 0.7f;
     [SerializeField]
-    private float maxDistance = 40.0f;
+    private float maxDistance = 10.0f;
     [SerializeField]
-    private float minPolarAngle = 5.0f;
+    private float minPolarAngle = 45.0f;
     [SerializeField]
-    private float maxPolarAngle = 80.0f;
+    private float maxPolarAngle = 120.0f;
     [SerializeField]
     private float mouseXSensitivity = 5.0f;
     [SerializeField]

@@ -118,20 +118,11 @@ public class PlayerController: MonoBehaviour
             // 移動方向に回転
             rot = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(FollowingCamera.Angle * velocity), playerSetting.TS);
         }
-        
+
+        velocity.y -= playerSetting.FS * Time.deltaTime;
+
         // 移動
         pos = transform.position + FollowingCamera.Angle * velocity;
-
-        SendMoveDeta(pos, rot.eulerAngles.y);
-    }
-
-    public void MouseMove(Vector3 velocity)
-    {
-        // 移動方向に回転
-        Quaternion rot = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(velocity), playerSetting.TS);
-
-        // 移動
-        pos = transform.position + velocity;
 
         SendMoveDeta(pos, rot.eulerAngles.y);
     }

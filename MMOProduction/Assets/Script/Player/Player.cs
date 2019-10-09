@@ -18,6 +18,8 @@ public class Player : MonoBehaviour
     public int maxMp { get; set; }
 
     private float dir;
+
+    private Rigidbody rb;
     
 
     private void Start()
@@ -27,11 +29,13 @@ public class Player : MonoBehaviour
         z = transform.position.z;
 
         dir = transform.rotation.eulerAngles.y;
+
+        rb = GetComponent<Rigidbody>();
     }
 
     private void Update()
     {
-        transform.position = new Vector3(x, y, z);
+        rb.position = new Vector3(x, y, z);
         transform.rotation = Quaternion.Euler(0, dir, 0);
     }
 

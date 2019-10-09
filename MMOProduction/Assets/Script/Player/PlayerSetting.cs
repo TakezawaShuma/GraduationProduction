@@ -21,6 +21,10 @@ public class PlayerSetting : MonoBehaviour
     private float JumpPower = 300f;
     public float JP { get { return JumpPower; } }
 
+    [SerializeField, Header("落下速度(1秒間で落下する距離)")]
+    private float FallSpeed = 0.98f;
+    public float FS { get { return FallSpeed; } }
+
     [SerializeField, Range(0f, 1f), Header("振り向き速度")]
     private float TurnSpeed = 0.15f;
     public float TS { get { return TurnSpeed; } }
@@ -30,7 +34,7 @@ public class PlayerSetting : MonoBehaviour
     public bool IA { get { return IsAnimator; } }
 
     [SerializeField, Range(0f,100f), Header("ロックオンの距離")]
-    private float LockOnDirection;
+    private float LockOnDirection = 30f;
 
     public float LOD { get { return LockOnDirection; } }
 
