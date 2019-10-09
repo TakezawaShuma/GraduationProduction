@@ -18,8 +18,20 @@ public class PlayerController: MonoBehaviour
     [SerializeField, Header("プレイヤーの設定ファイル")]
     private PlayerSetting playerSetting;
 
+    [SerializeField, Header("アニメーターコントローラー")]
+    private Animator animator;
+
+    [SerializeField, Header("チャットコントローラー")]
+    private ChatController chatController;
+
     // 現在のステート
-    BaseState currentState;
+    private BaseState currentState;
+
+    private AnimatorManager animatorManager;
+
+    private bool lockState = false;
+
+    private GameObject target;
 
     // Tama: プレイヤーアニメーションデータ
     private PlayerAnimData _playerAnim;
@@ -34,7 +46,7 @@ public class PlayerController: MonoBehaviour
     }
 
     // 位置
-    Vector3 pos = new Vector3();
+    Vector3 pos;
     public Vector3 Position
     {
         get { return pos; }
@@ -51,10 +63,12 @@ public class PlayerController: MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        IdleState.Instance.Initialized(this, playerSetting);
-        KeyMoveState.Instance.Initialized(this, playerSetting);
-        MouseMoveState.Instance.Initialized(this, playerSetting);
-        AutoRunState.Instance.Initialized(this, playerSetting);
+        pos = transform.position;
+        animatorManager = new AnimatorManager(animator);
+        IdleState.Instance.Initialized(this, playerSetting, animatorManager);
+        KeyMoveState.Instance.Initialized(this, playerSetting, animatorManager);
+        //MouseMoveState.Instance.Initialized(this, playerSetting, animatorManager);
+        AutoRunState.Instance.Initialized(this, playerSetting, animatorManager);
 
         currentState = IdleState.Instance;
     }
@@ -62,16 +76,51 @@ public class PlayerController: MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (target != null)
+        {
+            Vector3 v = target.transform.position - transform.position;
+
+            if (v.magnitude > playerSetting.LOD)
+            {
+                target.GetComponent<Marker>().FLAG = false;
+                target = null;
+                lockState = false;
+            }
+        }
+
         currentState.Execute();
+    }
+
+    public void NoMove()
+    {
+        Quaternion rot = transform.rotation;
+
+        if (lockState)
+        {
+            Vector3 dir = target.transform.position - transform.position;
+            rot = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(dir), playerSetting.TS);
+        }
+
+        SendMoveDeta(pos, rot.eulerAngles.y);
     }
 
     public void Move(Vector3 velocity)
     {
-        // 移動方向に回転
-        Quaternion rot = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(FollowingCamera.Angle * velocity), playerSetting.TS);
+        Quaternion rot = new Quaternion();
+
+        if (lockState)
+        {
+            Vector3 dir = target.transform.position - transform.position;
+            rot = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(dir), playerSetting.TS);
+        }
+        else
+        {
+            // 移動方向に回転
+            rot = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(FollowingCamera.Angle * velocity), playerSetting.TS);
+        }
         
         // 移動
-        Vector3 pos = transform.position + FollowingCamera.Angle * velocity;
+        pos = transform.position + FollowingCamera.Angle * velocity;
 
         SendMoveDeta(pos, rot.eulerAngles.y);
     }
@@ -82,7 +131,7 @@ public class PlayerController: MonoBehaviour
         Quaternion rot = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(velocity), playerSetting.TS);
 
         // 移動
-        Vector3 pos = transform.position + velocity;
+        pos = transform.position + velocity;
 
         SendMoveDeta(pos, rot.eulerAngles.y);
     }
@@ -105,8 +154,37 @@ public class PlayerController: MonoBehaviour
         currentState = state;
     }
 
-    public PlayerAnimData GetAnim()
+    public void LockOn()
     {
-        return _playerAnim;
+        if (target != null)
+        {
+            target.GetComponent<Marker>().FLAG = false;
+        }
+        target = null;
+        lockState = false;
+
+        FollowingCamera.LOCK = null;
+
+        Ray ray = FollowingCamera.GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit = new RaycastHit();
+
+        if (Physics.Raycast(ray, out hit))
+        {
+            Vector3 v = hit.transform.position - transform.position;
+
+            if (v.magnitude <= playerSetting.LOD)
+            {
+                if (hit.collider.gameObject.tag == "Marker")
+                {
+                    target = hit.collider.gameObject;
+
+                    lockState = true;
+
+                    target.GetComponent<Marker>().FLAG = true;
+
+                    FollowingCamera.LOCK = target;
+                }
+            }
+        }
     }
 }
