@@ -38,6 +38,7 @@ public class Skill_Number : MonoBehaviour
         {
             m_score += score;
         }
+        //文字列に変更
         score_text.text = m_score.ToString();
     }
 }

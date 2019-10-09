@@ -88,6 +88,7 @@ public class Skill_attach : MonoBehaviour
         //スキルをスキル枠に付ける
         OnCollisionTag(other.gameObject);
 
+        //右クリックを押したらスキルが元の位置に戻る
         if (Input.GetMouseButtonUp(1))
         {
             transform.position = startPosition;

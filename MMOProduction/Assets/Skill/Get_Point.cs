@@ -36,6 +36,7 @@ public class Get_Point : MonoBehaviour
             m_point += set_point;
         }
 
+        //文字列に変更
         point_text.text = m_point.ToString();
     }
 }
