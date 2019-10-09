@@ -42,6 +42,8 @@ public class PlayerUI : MonoBehaviour
         //playerCmp = player.GetComponent<Player>();
 
         // アイコンやプレイヤ情報の初期設定
+
+
     }
 
     // Update is called once per frame
@@ -70,12 +72,14 @@ public class PlayerUI : MonoBehaviour
         if (Observar(hp, currentHp) || Observar(maxHp,currentMaxHp))
         {
             // HPの表示を更新する
+            hpGreen.maxValue = maxHp;
             hpGreen.value = hp;
         }
 
         if (Observar(mp, currentMp) || Observar(maxMp,currentMaxMp))
         {
             // MPの表示を更新する
+            mpBlue.maxValue = maxMp;
             mpBlue.value = mp;
         }
 
