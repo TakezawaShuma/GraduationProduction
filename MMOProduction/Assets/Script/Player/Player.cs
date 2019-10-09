@@ -12,21 +12,13 @@ public class Player : MonoBehaviour
     private float x;
     private float y;
     private float z;
-    private int hp;
-    private int mp;
+    public int hp { get; set; }
+    public int mp { get; set; }
+    public int maxHp { get; set; }
+    public int maxMp { get; set; }
+
     private float dir;
-
-    private Rigidbody rb;
-
-    public int HP
-    {
-        set { hp = value; }
-    }
-
-    public int MP
-    {
-        set { mp = value; }
-    }
+    
 
     private void Start()
     {
@@ -35,13 +27,11 @@ public class Player : MonoBehaviour
         z = transform.position.z;
 
         dir = transform.rotation.eulerAngles.y;
-
-        rb = GetComponent<Rigidbody>();
     }
 
     private void Update()
     {
-        rb.position = new Vector3(x, y, z);
+        transform.position = new Vector3(x, y, z);
         transform.rotation = Quaternion.Euler(0, dir, 0);
     }
 
@@ -57,7 +47,8 @@ public class Player : MonoBehaviour
         dir = _dir;
     }
 
-    public Vector4 GetPosition() {
+    public Vector4 GetPosition()
+    {
         return new Vector4(x, y, z, dir);
     }
 }
