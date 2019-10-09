@@ -156,7 +156,7 @@ public class PlayerController: MonoBehaviour
 
     public void LockOn()
     {
-        if(target != null)
+        if (target != null)
         {
             target.GetComponent<Marker>().FLAG = false;
         }
@@ -186,4 +186,5 @@ public class PlayerController: MonoBehaviour
                 }
             }
         }
+    }
 }
