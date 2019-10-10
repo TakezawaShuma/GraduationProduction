@@ -15,6 +15,7 @@ namespace WS
         // ソケット
         protected WebSocket ws;
         // サーバーのIP
+        // debug
         //private string server_ip = "172.24.52.250";
         private string server_ip = "localhost";
 
@@ -24,17 +25,25 @@ namespace WS
         /// <param name="_port">ポート</param>
         public bool Connect(int _port)
         {
-            bool ret = false;
+            if (Retention.IP != "")
+            {
+                server_ip = Retention.IP;
+                Debug.Log(server_ip);
+            }
+
             ws = new WebSocket("ws://" + server_ip + ":" + _port.ToString());
             Debug.Log("IPアドレス : " + server_ip + "ポート : " + _port);
+            Debug.Log(ws.ReadyState);
+            bool ret = false;
             try
             {
                 ws.Connect();
                 ret = true;
+                Debug.Log("接続");
             }
             catch
             {
-                Debug.Log("サーバーへ接続ができません。");
+                Debug.LogError("サーバーへ接続ができません。");
                 ret = false;
             }
             return ret;
@@ -56,8 +65,13 @@ namespace WS
         /// </summary>
         public void WsInit(string _openMsg = "", string _closeMsg = "")
         {
-            ws.OnOpen += (sender, e) => { Debug.Log("WebSocket Open : " + _openMsg); };
-            ws.OnError += (sender, e) => { Debug.LogError("WebSocket Error Message: " + e.Message); };
+            //ws.OnOpen += (sender, e) => { Debug.Log("WebSocket Open : " + _openMsg); };
+            //ws.OnError += (sender, e) => { Debug.LogError("WebSocket Error Message: " + e.Message); };
+        }
+
+        public void ForDebug()
+        {
+            Debug.Log(this.ws.ReadyState);
         }
     }
 }

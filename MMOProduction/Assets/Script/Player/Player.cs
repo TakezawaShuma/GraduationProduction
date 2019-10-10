@@ -15,6 +15,12 @@ public class Player : MonoBehaviour
     private int hp;
     private int mp;
     private float dir;
+    public void Init(SaveData _save)
+    {
+        x = _save.position.x;
+        y = _save.position.y;
+        x = _save.position.z;
+    }
 
 
     public int HP
@@ -29,9 +35,10 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        x = transform.position.x;
-        y = transform.position.y;
-        z = transform.position.z;
+        // debag
+        //x = transform.position.x;
+        //y = transform.position.y;
+        //z = transform.position.z;
 
         dir = transform.rotation.eulerAngles.y;
     }

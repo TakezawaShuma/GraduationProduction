@@ -5,13 +5,13 @@
 
 using System.Collections;
 using System.Collections.Generic;
+using System;
 using UnityEngine;
 
 public class PlaySceneManager : MonoBehaviour
 {
     [SerializeField]
     bool connectFlag = false;
-
     public GameObject playerPre;
 
     [SerializeField, Header("カメラ")]
@@ -19,11 +19,18 @@ public class PlaySceneManager : MonoBehaviour
 
 
     // ソケット
-    private WS.WsPlay ws = new WS.WsPlay();
+    private WS.WsPlay wsp = new WS.WsPlay();
     private Dictionary<int, GameObject> players = new Dictionary<int, GameObject>();
     private SaveData save;
 
+    // コールバック関数をリスト化
+    private List<Action<PlayerData, SaveData>> callbackList = new List<Action<PlayerData, SaveData>>();
 
+    private void Awake()
+    {
+        callbackList.Add(UpdatePlayers);    // 0　プレイヤーの更新
+        callbackList.Add(RecvSaveData);     // 1　セーブデータの受け取り
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -33,9 +40,10 @@ public class PlaySceneManager : MonoBehaviour
         if (connectFlag)
         {
             // プレイサーバに接続
-            ws.ConnectionStart(UpdatePlayers, RecvSaveData);
+            //wsp.ConnectionStart(UpdatePlayers, RecvSaveData); // debug
+            wsp.ConnectionStart(callbackList);
         }
-
+        Debug.Log("プレイスタート");
     }
 
     // Update is called once per frame
@@ -49,7 +57,7 @@ public class PlaySceneManager : MonoBehaviour
             {
                 if (connectFlag)
                 {
-                    ws.SendPosData(playerData.x, playerData.y, playerData.z, (int)playerData.w);
+                    SendPosition(playerData);
                 }
             }
         }
@@ -57,7 +65,7 @@ public class PlaySceneManager : MonoBehaviour
 
     private void OnDestroy()
     {
-       
+        wsp.Destroy();
     }
 
     private int count = 0;
@@ -75,7 +83,7 @@ public class PlaySceneManager : MonoBehaviour
     /// <summary>
     /// 自分以外のユーザーの更新
     /// </summary>
-    private void UpdatePlayers(PlayerData _data)
+    private void UpdatePlayers(PlayerData _data,SaveData _save)
     {
         Debug.Log("player id :" + Retention.ID.ToString() + "move player id" + _data.id.ToString());
 
@@ -83,14 +91,16 @@ public class PlaySceneManager : MonoBehaviour
             if (_data.id != Retention.ID) {
                 // ユーザーの更新
                 if (players.ContainsKey(_data.id)) {
+                    //players[_data.id].GetComponent<OtherPlayers>().UpdataData()
                     players[_data.id].transform.position = new Vector3(_data.x, _data.y, _data.z);
                     Debug.Log("他のユーザーの移動処理");
                 }
                 // 他のユーザーの作成
                 else {
                     var otherPlayer = Instantiate<GameObject>(playerPre);
+                    otherPlayer.AddComponent<OtherPlayers>();
+                    otherPlayer.GetComponent<OtherPlayers>().Init(_data.x, _data.y, _data.z,_data.dir);
                     players.Add(_data.id, otherPlayer);
-                    players[_data.id].transform.position = new Vector3(_data.x, _data.y, _data.z);
 
                     Debug.Log("他のユーザーの作成");
                 };
@@ -99,7 +109,7 @@ public class PlaySceneManager : MonoBehaviour
     }
 
     /// <summary>
-    /// プレイヤーの作成
+    /// 自分の作成
     /// </summary>
     private void MakePlayer() {
         if (!players.ContainsKey(Retention.ID)) {
@@ -119,12 +129,84 @@ public class PlaySceneManager : MonoBehaviour
     }
 
     /// <summary>
-    /// セーブデータを受け取り入場要請を送る
+    /// 自分の作成
     /// </summary>
-    /// <param name="_data"></param>
-    private void RecvSaveData(SaveData _data)
+    private void MakePlayer(SaveData _save)
     {
-        save = _data;
-        ws.SendSaveDataOK();
+        if (!players.ContainsKey(Retention.ID))
+        {
+            // 自分の作成コンポーネントの追加
+            var tmpPlayer = Instantiate<GameObject>(playerPre);
+            players.Add(Retention.ID, tmpPlayer);
+            players[Retention.ID].AddComponent<Player>();
+            players[Retention.ID].AddComponent<PlayerController>();
+            players[Retention.ID].AddComponent<PlayerSetting>();
+            players[Retention.ID].GetComponent<Player>().Init(_save);
+            players[Retention.ID].GetComponent<PlayerController>().Init(
+                players[Retention.ID].GetComponent<Player>(),
+                FollowingCamera,
+                players[Retention.ID].GetComponent<PlayerSetting>()
+                );
+            FollowingCamera.SetTarget(players[Retention.ID]);
+        }
     }
+
+    /// <summary>
+    /// セーブデータを受け取り入場要請を送信
+    /// </summary>
+    /// <param name="_save"></param>
+    private void RecvSaveData(PlayerData _player, SaveData _save)
+    {
+        save = _save;
+        wsp.SendSaveDataOK();
+
+        // プレイヤーに受け取ったセーブデータを渡す。
+        MakePlayer(_save);
+
+    }
+
+    /// <summary>
+    /// 位置情報の送信
+    /// </summary>
+    private void SendPosition(Vector4 _pos)
+    {
+        wsp.SendPosData(_pos.x, _pos.y, _pos.z, (int)_pos.w);
+    }
+
+
+
+
+
+
+    /// <summary>
+    /// 自分自身の情報を渡す
+    /// </summary>
+    /// <returns></returns>
+    public Player GetPlayerData()
+    {
+        return players[Retention.ID].GetComponent<Player>();
+    } 
+
+    /// <summary>
+    /// パーティの情報を渡す
+    /// </summary>
+    /// <returns></returns>
+    public List<OtherPlayers> GetPartyData()
+    {
+        List<OtherPlayers> party = new List<OtherPlayers>();
+        // todo
+        // パーティを組んでいる人の情報を渡す
+        return party;
+    }
+
+    /// <summary>
+    /// 自分以外のプレイヤーの情報を渡す
+    /// </summary>
+    /// <param name="_playerId"></param>
+    /// <returns></returns>
+    public　OtherPlayers GetOtherPlayer(int _playerId)
+    {
+        return players[_playerId].GetComponent<OtherPlayers>();
+    }
+
 }

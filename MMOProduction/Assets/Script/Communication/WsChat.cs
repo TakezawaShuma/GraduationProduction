@@ -40,13 +40,13 @@ namespace WS
         private void RelatedToWS() {
              var context = SynchronizationContext.Current;
             base.WsInit();
-            ws.OnMessage += (sender, e) => {
-                // データ形の確認
-                Debug.Log("Data : " + e.Data);
-                context.Post(state =>{
-                    Receive(e);
-                }, e.Data);
-            };
+            //ws.OnMessage += (sender, e) => {
+            //    // データ形の確認
+            //    Debug.Log("Data : " + e.Data);
+            //    context.Post(state =>{
+            //        Receive(e);
+            //    }, e.Data);
+            //};
 
         }
 

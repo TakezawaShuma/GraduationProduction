@@ -9,6 +9,9 @@ using UnityEngine.UI;
 
 public class ChatController : MonoBehaviour
 {
+    [SerializeField]
+    bool connectFlag = false;
+
     // チャット全体のフレーム
     [SerializeField]
     private GameObject chatFlame = default(GameObject);
@@ -36,7 +39,10 @@ public class ChatController : MonoBehaviour
     void Start()
     {
         chatFlame.SetActive(chatActiveFlag);
-        wsc.ConnectionStart(Receive);
+        if (connectFlag)
+        {
+            wsc.ConnectionStart(Receive);
+        }
     }
 
     // Update is called once per frame
@@ -97,7 +103,7 @@ public class ChatController : MonoBehaviour
     private void SendInputMassege(string _massege)
     {
         string name = Retention.ID.ToString();
-        wsc.SendMessage(name, _massege);
+        if (connectFlag) { wsc.SendMessage(name, _massege); }
         //string mas = name + "：" + _massege;
         //AddChatLog(mas);
     }

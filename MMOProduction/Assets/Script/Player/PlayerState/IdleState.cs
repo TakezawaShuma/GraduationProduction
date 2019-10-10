@@ -26,7 +26,7 @@ public class IdleState : BaseState
     // 実行関数
     public override void Execute()
     {
-        Debug.Log("idle");
+        //Debug.Log("idle");
         playerController.GetAnim().Move(false);
 
         if (Input.GetKeyDown(playerSetting.FKey) || Input.GetKeyDown(playerSetting.BKey) || Input.GetKeyDown(playerSetting.LKey) || Input.GetKeyDown(playerSetting.RKey))
