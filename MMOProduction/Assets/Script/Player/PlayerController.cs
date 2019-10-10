@@ -35,6 +35,8 @@ public class PlayerController: MonoBehaviour
 
     // Tama: プレイヤーアニメーションデータ
     private PlayerAnimData _playerAnim;
+
+    private Rigidbody rigidbody;
     
 
     public void Init(Player _playerData,FollowingCamera _camera,PlayerSetting _setting) {
@@ -63,7 +65,7 @@ public class PlayerController: MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        pos = transform.position;
+        pos = Vector3.zero;
         animatorManager = new AnimatorManager(animator);
         IdleState.Instance.Initialized(this, playerSetting, animatorManager);
         KeyMoveState.Instance.Initialized(this, playerSetting, animatorManager);
@@ -71,6 +73,8 @@ public class PlayerController: MonoBehaviour
         AutoRunState.Instance.Initialized(this, playerSetting, animatorManager);
 
         currentState = IdleState.Instance;
+
+        rigidbody = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -85,6 +89,7 @@ public class PlayerController: MonoBehaviour
                 target.GetComponent<Marker>().FLAG = false;
                 target = null;
                 lockState = false;
+                FollowingCamera.LOCK = null;
             }
         }
 
@@ -93,6 +98,7 @@ public class PlayerController: MonoBehaviour
 
     public void NoMove()
     {
+        rigidbody.velocity = new Vector3(0, rigidbody.velocity.y, 0);
         Quaternion rot = transform.rotation;
 
         if (lockState)
@@ -100,6 +106,10 @@ public class PlayerController: MonoBehaviour
             Vector3 dir = target.transform.position - transform.position;
             rot = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(dir), playerSetting.TS);
         }
+
+        pos = rigidbody.position;
+
+        transform.rotation = Quaternion.Euler(0, rot.eulerAngles.y, 0);
 
         SendMoveDeta(pos, rot.eulerAngles.y);
     }
@@ -119,10 +129,14 @@ public class PlayerController: MonoBehaviour
             rot = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(FollowingCamera.Angle * velocity), playerSetting.TS);
         }
 
-        velocity.y -= playerSetting.FS * Time.deltaTime;
+        Vector3 v = FollowingCamera.Angle * velocity;
 
         // 移動
-        pos = transform.position + FollowingCamera.Angle * velocity;
+        rigidbody.velocity = new Vector3(v.x, rigidbody.velocity.y, v.z);
+
+        pos = rigidbody.position;
+
+        transform.rotation = Quaternion.Euler(0, rot.eulerAngles.y, 0);
 
         SendMoveDeta(pos, rot.eulerAngles.y);
     }

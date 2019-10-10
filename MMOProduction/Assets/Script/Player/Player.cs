@@ -9,6 +9,9 @@ using UnityEngine;
 [System.Serializable]
 public class Player : MonoBehaviour
 {
+    [SerializeField, Header("プレイヤーの設定")]
+    private PlayerSetting playerSetting;
+
     private float x;
     private float y;
     private float z;
@@ -24,9 +27,9 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
-        x = transform.position.x;
-        y = transform.position.y;
-        z = transform.position.z;
+        x = 0;
+        y = 0;
+        z = 0;
 
         dir = transform.rotation.eulerAngles.y;
 
@@ -35,8 +38,8 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        rb.position = new Vector3(x, y, z);
-        transform.rotation = Quaternion.Euler(0, dir, 0);
+        //rb.AddForce(new Vector3(x, y, z) * 100);
+        //transform.rotation = Quaternion.Euler(0, dir, 0);
     }
 
     public void UpdatePosition(float _x, float _y, float _z)
