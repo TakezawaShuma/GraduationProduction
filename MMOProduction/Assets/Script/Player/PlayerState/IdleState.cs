@@ -27,15 +27,23 @@ public class IdleState : BaseState
     public override void Execute()
     {
         //Debug.Log("idle");
-        playerController.GetAnim().Move(false);
+        //playerController.GetAnim().Move(false);
+
+        if (playerSetting.IA)
+        {
+            animatorManager.Idle();
+        }
+
+        if(Input.GetMouseButtonDown(0))
+        {
+            playerController.LockOn();
+        }
+
+        playerController.NoMove();
 
         if (Input.GetKeyDown(playerSetting.FKey) || Input.GetKeyDown(playerSetting.BKey) || Input.GetKeyDown(playerSetting.LKey) || Input.GetKeyDown(playerSetting.RKey))
         {
             playerController.ChangeState(KeyMoveState.Instance);
-        }
-        else if (Input.GetMouseButtonDown(0))
-        {
-            playerController.ChangeState(MouseMoveState.Instance);
         }
         else if (Input.GetKeyDown(playerSetting.AKey))
         {

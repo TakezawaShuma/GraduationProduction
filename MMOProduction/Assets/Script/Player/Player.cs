@@ -23,15 +23,11 @@ public class Player : MonoBehaviour
     }
 
 
-    public int HP
-    {
-        set { hp = value; }
-    }
+    public int HP { get; set; }
+    public int MP { get; set; }
+    public int MaxHP { get; set; }
+    public int MaxMP { get; set; }
 
-    public int MP
-    {
-        set { mp = value; }
-    }
 
     private void Start()
     {
@@ -61,7 +57,8 @@ public class Player : MonoBehaviour
         dir = _dir;
     }
 
-    public Vector4 GetPosition() {
+    public Vector4 GetPosition()
+    {
         return new Vector4(x, y, z, dir);
     }
 }

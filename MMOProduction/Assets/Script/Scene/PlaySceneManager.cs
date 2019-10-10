@@ -115,6 +115,7 @@ public class PlaySceneManager : MonoBehaviour
         if (!players.ContainsKey(Retention.ID)) {
             // 自分の作成コンポーネントの追加
             var tmpPlayer = Instantiate<GameObject>(playerPre);
+            tmpPlayer.name = "player" + Retention.ID;
             players.Add(Retention.ID, tmpPlayer);
             players[Retention.ID].AddComponent<Player>();
             players[Retention.ID].AddComponent<PlayerController>();

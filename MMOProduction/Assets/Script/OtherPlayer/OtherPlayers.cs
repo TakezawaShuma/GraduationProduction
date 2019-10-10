@@ -47,7 +47,8 @@ public class OtherPlayers: MonoBehaviour
     }
 
     // Start is called before the first frame update
-    void Start() {
+    void Start()
+    {
 
     }
 
@@ -60,5 +61,7 @@ public class OtherPlayers: MonoBehaviour
     }
 
     public void UpdataData(int hp, int mp, float x, float y, float z, float dir)
-    { HP = hp; MP = mp; X = x; Y = y; Z = z; Dir = dir; }
+    {
+        HP = hp; MP = mp; X = x; Y = y; Z = z; Dir = dir;
+    }
 }
