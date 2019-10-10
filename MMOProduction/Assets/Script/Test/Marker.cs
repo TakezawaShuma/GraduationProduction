@@ -5,7 +5,7 @@ using UnityEngine;
 public class Marker : MonoBehaviour
 {
     [SerializeField]
-    private SpriteRenderer sprite;
+    private SpriteRenderer sprite = null;
 
     private bool flag = false;
     public bool FLAG

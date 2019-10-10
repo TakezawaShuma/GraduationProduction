@@ -5,10 +5,10 @@ using UnityEngine;
 public class CameraChange : MonoBehaviour
 {
     [SerializeField]
-    private GameObject mainCamera;
+    private GameObject mainCamera = default(GameObject);
 
     [SerializeField]
-    private GameObject otherCamera;
+    private GameObject otherCamera = default(GameObject);
 
     // Start is called before the first frame update
     void Start()

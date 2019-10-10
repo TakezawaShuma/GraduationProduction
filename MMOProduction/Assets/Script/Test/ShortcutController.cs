@@ -5,7 +5,7 @@ using UnityEngine;
 public class ShortcutController : MonoBehaviour
 {
     [SerializeField, Header("ショートカットの数")]
-    private int MaxShortCut;
+    private int MaxShortCut = 0;
 
     private KeyCode[,] ShortcutKeys;
 

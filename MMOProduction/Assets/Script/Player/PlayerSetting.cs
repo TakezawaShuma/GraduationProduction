@@ -29,8 +29,8 @@ public class PlayerSetting : MonoBehaviour
     private bool IsAnimator = false;
     public bool IA { get { return IsAnimator; } }
 
-    [SerializeField, Range(0f,100f), Header("ロックオンの距離")]
-    private float LockOnDirection;
+    [SerializeField, Range(0f, 100f), Header("ロックオンの距離")]
+    private float LockOnDirection = 0.0f;
 
     public float LOD { get { return LockOnDirection; } }
 
