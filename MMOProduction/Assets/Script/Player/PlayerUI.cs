@@ -8,7 +8,7 @@ public class PlayerUI : MonoBehaviour
     //プレイヤ情報
     private Player playerCmp;
     [SerializeField]
-    private GameObject player;
+    private GameObject player = null;
 
     // 監視用変数
     private int currentHp;

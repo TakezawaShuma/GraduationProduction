@@ -13,7 +13,7 @@ namespace WS
     public abstract class WsBase
     {
         // ソケット
-        protected WebSocket ws;
+        protected WebSocket ws = null;
         // サーバーのIP
         // debug
         //private string server_ip = "172.24.52.250";
@@ -56,7 +56,7 @@ namespace WS
         protected virtual void Destroy(string _msg = "")
         {
             if (_msg != "") Debug.Log(_msg);
-            ws.Close();
+            if (ws != null) ws.Close();
             ws = null;
         }
 
