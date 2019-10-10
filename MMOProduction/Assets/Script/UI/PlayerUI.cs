@@ -20,13 +20,9 @@ public class PlayerUI : MonoBehaviour
     [SerializeField]
     private Image job;
     [SerializeField]
-    private Slider hpRed;
+    private Slider m_hp;
     [SerializeField]
-    private Slider hpGreen;
-    [SerializeField]
-    private Slider mpYellow;
-    [SerializeField]
-    private Slider mpBlue;
+    private Slider m_mp;
     [SerializeField]
     private Image number;
     [SerializeField]
@@ -72,15 +68,15 @@ public class PlayerUI : MonoBehaviour
         if (Observar(hp, currentHp) || Observar(maxHp,currentMaxHp))
         {
             // HPの表示を更新する
-            hpGreen.maxValue = maxHp;
-            hpGreen.value = hp;
+            m_hp.maxValue = maxHp;
+            m_hp.value = hp;
         }
 
         if (Observar(mp, currentMp) || Observar(maxMp,currentMaxMp))
         {
             // MPの表示を更新する
-            mpBlue.maxValue = maxMp;
-            mpBlue.value = mp;
+            m_mp.maxValue = maxMp;
+            m_mp.value = mp;
         }
 
         currentHp = hp;
