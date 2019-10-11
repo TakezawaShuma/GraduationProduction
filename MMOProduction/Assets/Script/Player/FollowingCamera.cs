@@ -9,7 +9,7 @@ using UnityEngine;
 [ExecuteInEditMode, DisallowMultipleComponent]
 public class FollowingCamera : MonoBehaviour
 {
-    [SerializeField]
+    [SerializeField, Header("写したいターゲット")]
     private GameObject target; // an object to follow
 
     public GameObject Target
@@ -17,14 +17,14 @@ public class FollowingCamera : MonoBehaviour
         set { target = value; }
     }
 
-    [SerializeField]
+    [SerializeField, Header("オフセット")]
     private Vector3 offset = new Vector3(0f, 1.5f, 0f); // offset form the target object
 
-    [SerializeField]
+    [SerializeField, Header("ターゲットとの距離")]
     private float distance = 2.0f; // distance from following object
-    [SerializeField]
+    [SerializeField, Header("X軸の回転")]
     private float polarAngle = 75.0f; // angle with y-axis
-    [SerializeField]
+    [SerializeField, Header("Y軸の回転")]
     private float azimuthalAngle = 270.0f; // angle with x-axis
 
     public Quaternion Angle
@@ -49,11 +49,34 @@ public class FollowingCamera : MonoBehaviour
     [SerializeField]
     private float scrollSensitivity = 5.0f;
 
+    [SerializeField, Header("障害物がターゲットとカメラの間にあったら近づくか")]
+    private bool isApproachObstacle;
+
+    [SerializeField,Header("障害物とするレイヤー")]
+    private LayerMask obstacleLayer;
+
+    [SerializeField, Header("地面に当たった時に近づくか")]
+    private bool isApproachGround;
+
+    [SerializeField, Header("近づく速度")]
+    private float approachSpeed;
+
+    [SerializeField]
+    private BoxCollider boxCollider;
+
     private GameObject lockOnTarget;
     public GameObject LOCK
     {
         set { lockOnTarget = value; }
     }
+
+    private float collisionDistance;
+
+    private bool collisionObstacle;
+
+    private bool stop;
+
+    private Vector3 hitPos;
 
     /// <summary>
     /// ターゲットの設定
@@ -94,6 +117,12 @@ public class FollowingCamera : MonoBehaviour
         }
 
         transform.LookAt(lookAtPos);
+
+        //　レイを視覚的に確認
+        Debug.DrawLine(target.transform.position + offset, transform.position, Color.red, 0f, false);
+        Vector3 b = target.transform.position + offset - transform.position;
+        Debug.DrawLine(transform.position, transform.position - b, Color.red, 0f, false);
+        CantPenetrateObstacle();
     }
 
     void updateAngle(float x, float y)
@@ -123,5 +152,52 @@ public class FollowingCamera : MonoBehaviour
             lookAtPos.x + distance * Mathf.Sin(dp) * Mathf.Cos(da),
             lookAtPos.y + distance * Mathf.Cos(dp),
             lookAtPos.z + distance * Mathf.Sin(dp) * Mathf.Sin(da));
+    }
+
+    void CantPenetrateObstacle()
+    {
+        if (isApproachObstacle)
+        {
+            RaycastHit hit;
+            //　キャラクターとカメラの間に障害物があったら障害物の位置にカメラを移動させる
+            if (Physics.Linecast(target.transform.position + offset, transform.position, out hit, obstacleLayer))
+            {
+                if(!collisionObstacle)
+                {
+                    collisionObstacle = true;
+                    collisionDistance = distance;
+                }
+                //transform.position = hit.point;
+                hitPos = hit.point;
+                distance -= approachSpeed * Time.deltaTime;
+            }
+            else if(collisionObstacle)
+            {
+                Vector3 v = target.transform.position + offset - transform.position;
+
+                if (!Physics.Linecast(transform.position, transform.position - v, out hit, obstacleLayer))
+                {
+                    distance += approachSpeed * Time.deltaTime;
+
+                    if (distance >= collisionDistance)
+                    {
+                        distance = collisionDistance;
+                        collisionObstacle = false;
+                    }
+                }
+            }
+            
+        }
+    }
+
+    private void OnCollisionStay(Collision collision)
+    {
+        if (isApproachGround)
+        {
+            if (collision.gameObject.tag == "Ground")
+            {
+                distance -= approachSpeed * Time.deltaTime;
+            }
+        }
     }
 }
