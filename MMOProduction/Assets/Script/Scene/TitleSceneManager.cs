@@ -25,7 +25,7 @@ public class TitleSceneManager : MonoBehaviour
     WS.WsLogin ws = new WS.WsLogin();
 
     [SerializeField]
-    bool connectFlag = false;
+    bool connectFlag = true;
 
     //ボタンの種類
     public enum CANVAS_STATE

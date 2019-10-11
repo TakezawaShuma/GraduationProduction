@@ -1,4 +1,4 @@
-﻿/////////////////////////////
+/////////////////////////////
 // プレイ用WebSocketクラス //
 /////////////////////////////
 
@@ -142,7 +142,7 @@ namespace WS
         {
             try
             {
-                string str = new Packes.SaveDataRequ().ToJson();
+                string str = new Packes.SaveDataRequ(Retention.ID).ToJson();
                 ws.Send(str);
             }catch{
                 Debug.Log("セーブデータ要請失敗しました。");

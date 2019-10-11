@@ -10,7 +10,7 @@ using UnityEngine;
 public class PlaySceneManager : MonoBehaviour
 {
     [SerializeField]
-    bool connectFlag = false;
+    bool connectFlag = true;
 
     public GameObject playerPre;
 
