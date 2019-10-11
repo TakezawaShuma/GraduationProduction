@@ -1019,6 +1019,7 @@ GameObject:
   - component: {fileID: 992294606}
   - component: {fileID: 992294605}
   - component: {fileID: 992294608}
+  - component: {fileID: 992294609}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1084,7 +1085,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 992294604}
   m_LocalRotation: {x: 0.1306508, y: -0.0000000059213363, z: 7.8031587e-10, w: 0.99142843}
-  m_LocalPosition: {x: 0.0008246362, y: 32554.031, z: -69171.86}
+  m_LocalPosition: {x: 0.00082585786, y: 32660.963, z: -69274.13}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1114,13 +1115,26 @@ MonoBehaviour:
   mouseXSensitivity: 5
   mouseYSensitivity: 5
   scrollSensitivity: 5
-  isApproachObstacle: 0
+  isApproachObstacle: 1
   obstacleLayer:
     serializedVersion: 2
     m_Bits: 32768
-  isApproachGround: 0
-  approachSpeed: 0
-  boxCollider: {fileID: 0}
+  isApproachGround: 1
+  approachSpeed: 10
+  boxCollider: {fileID: 992294609}
+--- !u!65 &992294609
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 992294604}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.1, y: 0.1, z: 0.1}
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1001 &994700655
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2050,6 +2064,21 @@ PrefabInstance:
       propertyPath: m_Name
       value: Village
       objectReference: {fileID: 0}
+    - target: {fileID: 3201748439549769694, guid: 0fa414a67aa7f1c4eb4160453128f9ae,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2096290842771280467, guid: 0fa414a67aa7f1c4eb4160453128f9ae,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 3448306579371780189, guid: 0fa414a67aa7f1c4eb4160453128f9ae,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 3448306578202603262, guid: 0fa414a67aa7f1c4eb4160453128f9ae,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2115,12 +2144,12 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 15
       objectReference: {fileID: 0}
-    - target: {fileID: 2662524501040077035, guid: 0fa414a67aa7f1c4eb4160453128f9ae,
+    - target: {fileID: 3448306578180483708, guid: 0fa414a67aa7f1c4eb4160453128f9ae,
         type: 3}
-      propertyPath: m_Layer
-      value: 15
+      propertyPath: m_TagString
+      value: Ground
       objectReference: {fileID: 0}
-    - target: {fileID: 3448306579371780189, guid: 0fa414a67aa7f1c4eb4160453128f9ae,
+    - target: {fileID: 2662524501040077035, guid: 0fa414a67aa7f1c4eb4160453128f9ae,
         type: 3}
       propertyPath: m_Layer
       value: 15
@@ -2129,16 +2158,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 2096290842771280467, guid: 0fa414a67aa7f1c4eb4160453128f9ae,
-        type: 3}
-      propertyPath: m_Layer
-      value: 15
-      objectReference: {fileID: 0}
-    - target: {fileID: 3201748439549769694, guid: 0fa414a67aa7f1c4eb4160453128f9ae,
-        type: 3}
-      propertyPath: m_Layer
-      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0fa414a67aa7f1c4eb4160453128f9ae, type: 3}

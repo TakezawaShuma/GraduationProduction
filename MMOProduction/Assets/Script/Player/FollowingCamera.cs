@@ -74,6 +74,10 @@ public class FollowingCamera : MonoBehaviour
 
     private bool collisionObstacle;
 
+    private bool stop;
+
+    private Vector3 hitPos;
+
     /// <summary>
     /// ターゲットの設定
     /// </summary>
@@ -115,8 +119,9 @@ public class FollowingCamera : MonoBehaviour
         transform.LookAt(lookAtPos);
 
         //　レイを視覚的に確認
-        Debug.DrawLine(target.transform.position, transform.position, Color.red, 0f, false);
-
+        Debug.DrawLine(target.transform.position + offset, transform.position, Color.red, 0f, false);
+        Vector3 b = target.transform.position + offset - transform.position;
+        Debug.DrawLine(transform.position, transform.position - b, Color.red, 0f, false);
         CantPenetrateObstacle();
     }
 
@@ -155,7 +160,7 @@ public class FollowingCamera : MonoBehaviour
         {
             RaycastHit hit;
             //　キャラクターとカメラの間に障害物があったら障害物の位置にカメラを移動させる
-            if (Physics.Linecast(target.transform.position, transform.position, out hit, obstacleLayer))
+            if (Physics.Linecast(target.transform.position + offset, transform.position, out hit, obstacleLayer))
             {
                 if(!collisionObstacle)
                 {
@@ -163,20 +168,25 @@ public class FollowingCamera : MonoBehaviour
                     collisionDistance = distance;
                 }
                 //transform.position = hit.point;
+                hitPos = hit.point;
                 distance -= approachSpeed * Time.deltaTime;
             }
-            else
+            else if(collisionObstacle)
             {
-                if(collisionObstacle)
+                Vector3 v = target.transform.position + offset - transform.position;
+
+                if (!Physics.Linecast(transform.position, transform.position - v, out hit, obstacleLayer))
                 {
                     distance += approachSpeed * Time.deltaTime;
 
-                    if(distance >= collisionDistance)
+                    if (distance >= collisionDistance)
                     {
+                        distance = collisionDistance;
                         collisionObstacle = false;
                     }
                 }
             }
+            
         }
     }
 
