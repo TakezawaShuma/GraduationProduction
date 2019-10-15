@@ -24,9 +24,11 @@ namespace WS
         /// <summary>
         /// 初期処理を纏めた
         /// </summary>
-        public void ConnectionStart(Action<int> callback){
+        public void ConnectionStart(Action<int> callback) {
             // コールバックの設定
             login_callback = callback;
+            base.InitializeWebSocket(OnClosed);
+
             base.Connect(port);
             RelatedToWS();
             Send(new Packes.SendItemList().ToJson());
@@ -46,7 +48,7 @@ namespace WS
                     Debug.Log(i_data.command);
                     if (i_data.Command == CommandData.OKConfirmation || i_data.Command == CommandData.CreateReport) {
                         Debug.Log("プレイシーンに移行します。");
-                        ChangeScene();
+                        ChangeScene2Play();
                     }
                 }, e.Data);
             };
@@ -92,7 +94,7 @@ namespace WS
                 default: break;
             }
             return null;
-        }        
+        }
 
         /// <summary>
         /// ログインデータを送信する
@@ -102,7 +104,7 @@ namespace WS
         public bool SendLogin(string user_name, string pass) {
             Packes.Login login_packet = new Packes.Login(user_name, pass);
             // 送信の成否
-            try{
+            try {
                 string str = login_packet.ToJson();
                 ws.Send(str);
                 Debug.Log(str);
@@ -141,11 +143,30 @@ namespace WS
         }
 
         /// <summary>
-        /// シーンを切り替える
+        /// シーンを切り替える プレイ
         /// </summary>
-        private void ChangeScene() {
+        private void ChangeScene2Play() {
             Destroy();
             SceneManager.LoadScene("PlayScene");
         }
+
+
+        /// <summary>
+        /// 通信切断された時呼ばれるコールバック
+        /// </summary>
+        private void OnClosed()
+        {
+            // todo
+            ChangeScene2Title();
+        }
+        /// <summary>
+        /// シーンを切り替える　タイトル
+        /// </summary>
+        private void ChangeScene2Title()
+        {
+            Destroy();
+            //SceneManager.LoadScene("TitleScene");
+        }
+
     }
 }

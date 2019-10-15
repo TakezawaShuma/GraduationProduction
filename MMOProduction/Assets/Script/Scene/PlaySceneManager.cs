@@ -21,15 +21,17 @@ public class PlaySceneManager : MonoBehaviour
     // ソケット
     private WS.WsPlay wsp = new WS.WsPlay();
     private Dictionary<int, GameObject> players = new Dictionary<int, GameObject>();
+    private Dictionary<int, GameObject> enemies = new Dictionary<int, GameObject>();
     private SaveData save;
 
     // コールバック関数をリスト化
-    private List<Action<PlayerData, SaveData>> callbackList = new List<Action<PlayerData, SaveData>>();
+    private List<Action<string>> callbackList = new List<Action<string>>();
 
     private void Awake()
     {
         callbackList.Add(UpdatePlayers);    // 0　プレイヤーの更新
         callbackList.Add(RecvSaveData);     // 1　セーブデータの受け取り
+        callbackList.Add(RegisterEnemies);  // 2　エネミーの更新
     }
 
     // Start is called before the first frame update
@@ -71,48 +73,27 @@ public class PlaySceneManager : MonoBehaviour
     private int count = 0;
     private int updateMaxCount = 3;
 
-    private bool Timer() {
+    private bool Timer()
+    {
         count++;
-        if (count > updateMaxCount) {
+        if (count > updateMaxCount)
+        {
             count = 0;
             return true;
         }
         return false;
     }
 
-    /// <summary>
-    /// 自分以外のユーザーの更新
-    /// </summary>
-    private void UpdatePlayers(PlayerData _data,SaveData _save)
-    {
-        Debug.Log("player id :" + Retention.ID.ToString() + "move player id" + _data.id.ToString());
 
-        if (_data.id != 0) {
-            if (_data.id != Retention.ID) {
-                // ユーザーの更新
-                if (players.ContainsKey(_data.id)) {
-                    //players[_data.id].GetComponent<OtherPlayers>().UpdataData()
-                    players[_data.id].transform.position = new Vector3(_data.x, _data.y, _data.z);
-                    Debug.Log("他のユーザーの移動処理");
-                }
-                // 他のユーザーの作成
-                else {
-                    var otherPlayer = Instantiate<GameObject>(playerPre);
-                    otherPlayer.AddComponent<OtherPlayers>();
-                    otherPlayer.GetComponent<OtherPlayers>().Init(_data.x, _data.y, _data.z,_data.dir);
-                    players.Add(_data.id, otherPlayer);
 
-                    Debug.Log("他のユーザーの作成");
-                };
-            }
-        }
-    }
 
     /// <summary>
     /// 自分の作成
     /// </summary>
-    private void MakePlayer() {
-        if (!players.ContainsKey(Retention.ID)) {
+    private void MakePlayer()
+    {
+        if (!players.ContainsKey(Retention.ID))
+        {
             // 自分の作成コンポーネントの追加
             var tmpPlayer = Instantiate<GameObject>(playerPre);
             tmpPlayer.name = "player" + Retention.ID;
@@ -152,19 +133,80 @@ public class PlaySceneManager : MonoBehaviour
         }
     }
 
+
+
+    // コールバック系統↓
+
+    /// <summary>
+    /// 自分以外のユーザーの更新
+    /// </summary>
+    private void UpdatePlayers(string _str)
+    {
+        PlayerData data = JsonUtility.FromJson<PlayerData>(_str);
+        Debug.Log("player id :" + Retention.ID.ToString() + "move player id" + data.id.ToString());
+
+
+        if (data.id != 0)
+        {
+            if (data.id != Retention.ID)
+            {
+                // ユーザーの更新
+                if (players.ContainsKey(data.id))
+                {
+                    //players[_data.id].GetComponent<OtherPlayers>().UpdataData()
+                    players[data.id].transform.position = new Vector3(data.x, data.y, data.z);
+                    Debug.Log("他のユーザーの移動処理");
+                }
+                // todo 他プレイヤーの更新と作成を関数分けする
+                // 他のユーザーの作成
+                else
+                {
+                    var otherPlayer = Instantiate<GameObject>(playerPre);
+                    otherPlayer.AddComponent<OtherPlayers>();
+                    otherPlayer.GetComponent<OtherPlayers>().Init(data.x, data.y, data.z, data.dir);
+                    players.Add(data.id, otherPlayer);
+
+                    Debug.Log("他のユーザーの作成");
+                };
+            }
+        }
+    }
+
+
+    /// <summary>
+    /// エネミーの情報の更新と作成
+    /// </summary>
+    /// <param name="_str"></param>
+    
+    private void RegisterEnemies(string _str)
+    {
+        // todo
+        // エネミーの作成と更新
+    }
+
+
+
+
     /// <summary>
     /// セーブデータを受け取り入場要請を送信
     /// </summary>
     /// <param name="_save"></param>
-    private void RecvSaveData(PlayerData _player, SaveData _save)
+    private void RecvSaveData(string _str)
     {
-        save = _save;
+        SaveData data = JsonUtility.FromJson<SaveData>(_str);
+
+        save = data;
         wsp.SendSaveDataOK();
 
         // プレイヤーに受け取ったセーブデータを渡す。
-        MakePlayer(_save);
+        MakePlayer(data);
 
     }
+
+
+
+
+
 
     /// <summary>
     /// 位置情報の送信
@@ -173,11 +215,7 @@ public class PlaySceneManager : MonoBehaviour
     {
         wsp.SendPosData(_pos.x, _pos.y, _pos.z, (int)_pos.w);
     }
-
-
-
-
-
+    
 
     /// <summary>
     /// 自分自身の情報を渡す
@@ -187,6 +225,12 @@ public class PlaySceneManager : MonoBehaviour
     {
         return players[Retention.ID].GetComponent<Player>();
     } 
+
+
+
+
+
+
 
     /// <summary>
     /// パーティの情報を渡す

@@ -21,7 +21,7 @@ namespace WS
 
         private Action<PlayerData, SaveData> player_call;
         private Action<PlayerData, SaveData> save_call;
-        private List<Action<PlayerData, SaveData>> callback_list;
+        private List<Action<string>> callback_list;
 
 
         /// <summary>
@@ -41,7 +41,7 @@ namespace WS
         /// <summary>
         /// 初期処理を纏めた
         /// </summary>
-        public void ConnectionStart(List<Action<PlayerData, SaveData>> _callback)
+        public void ConnectionStart(List<Action<string>> _callback)
         {
             callback_list = _callback;
            
@@ -83,7 +83,7 @@ namespace WS
                 {
                     // 受信データからコマンドを取り出す
                     CommandData com = (CommandData)int.Parse(e.Data.Substring(11, 3));
-
+                    
                     // コマンドから受信データサイズを決定
                     // コマンド内容はDatas.csを参照
                     switch (com)
@@ -92,21 +92,24 @@ namespace WS
                             // 受信データ
                             Packes.RecvPosSync recv_pos = JsonUtility.FromJson<Packes.RecvPosSync>(e.Data);
                             Debug.Log("command : "+recv_pos.command.ToString()+" listen user_id : " + recv_pos.user_id.ToString());
-                            //player_collback(new PlayerData(recv_pos)); //debug
-                            callback_list[0](new PlayerData(recv_pos), new SaveData());
+                            PlayerData p1 = new PlayerData(recv_pos);
+                            callback_list[0](JsonUtility.ToJson(p1));
                         break;
                         case CommandData.RecvInitialLogin:
                             Packes.RecvInitialLogin recv_in = JsonUtility.FromJson<Packes.RecvInitialLogin>(e.Data);
                             Debug.Log("command : " + recv_in.command.ToString());
-                            //player_collback(new PlayerData(recv_in.user_id, recv_in.x, recv_in.y, recv_in.z, 0)); // debug
-                            callback_list[0](new PlayerData(recv_in.user_id, recv_in.x, recv_in.y, recv_in.z, 0), new SaveData());
+                            PlayerData p2 = new PlayerData(recv_in.user_id, recv_in.x, recv_in.y, recv_in.z, 0);
+                            callback_list[0](JsonUtility.ToJson(p2));
                             break;
                         case CommandData.RecvSaveData:
                             Packes.RecvSaveData recv_save = JsonUtility.FromJson<Packes.RecvSaveData>(e.Data);
                             Debug.Log("command : " + recv_save.command.ToString());
-                            //save_collback(new SaveData(recv_save.weapon, recv_save.position, recv_save.lv, recv_save.exp)); // debug
-                            callback_list[1](new PlayerData(), new SaveData(recv_save.weapon, recv_save.position, recv_save.lv, recv_save.exp));
+                            SaveData save = new SaveData(recv_save.weapon, recv_save.position, recv_save.lv, recv_save.exp);
+                            callback_list[1](JsonUtility.ToJson(save));
                             break;
+                        // todo case CommandData.:
+                        // 敵の情報を受け取る場所を作る
+                        // break;
                         default:
                             break;
 
