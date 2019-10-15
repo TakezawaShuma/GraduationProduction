@@ -69,8 +69,8 @@ public class PlayerController: MonoBehaviour
         animatorManager = new AnimatorManager(animator);
         IdleState.Instance.Initialized(this, playerSetting, animatorManager);
         KeyMoveState.Instance.Initialized(this, playerSetting, animatorManager);
-        //MouseMoveState.Instance.Initialized(this, playerSetting, animatorManager);
         AutoRunState.Instance.Initialized(this, playerSetting, animatorManager);
+        TestAttackState.Instance.Initialized(this, playerSetting, animatorManager);
 
         currentState = IdleState.Instance;
 

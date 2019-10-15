@@ -46,5 +46,9 @@ public class IdleState : BaseState
         {
             playerController.ChangeState(AutoRunState.Instance);
         }
+        else if (Input.GetKeyDown(KeyCode.Z))
+        {
+            playerController.ChangeState(TestAttackState.Instance);
+        }
     }
 }
