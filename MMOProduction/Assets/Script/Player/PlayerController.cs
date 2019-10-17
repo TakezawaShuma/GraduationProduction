@@ -107,6 +107,7 @@ public class PlayerController: MonoBehaviour
             rot = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(dir), playerSetting.TS);
         }
 
+
         pos = rigidbody.position;
 
         transform.rotation = Quaternion.Euler(0, rot.eulerAngles.y, 0);

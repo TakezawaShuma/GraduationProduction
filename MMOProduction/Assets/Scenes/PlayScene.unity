@@ -1204,7 +1204,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 992294604}
   m_LocalRotation: {x: 0.13111871, y: -0.000000005920967, z: 7.8311047e-10, w: 0.9913667}
-  m_LocalPosition: {x: 0.0008324502, y: 33238.445, z: -69826.02}
+  m_LocalPosition: {x: 0.0008792883, y: 37342.133, z: -73747.15}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1496,7 +1496,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1514585324}
   m_Direction: 3
   m_Value: 0
-  m_Size: 0.85874647
+  m_Size: 0.85325867
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -2208,6 +2208,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 4692928919116174290, guid: 0fa414a67aa7f1c4eb4160453128f9ae,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 2096290842771280467, guid: 0fa414a67aa7f1c4eb4160453128f9ae,
         type: 3}
       propertyPath: m_Layer
@@ -2297,11 +2302,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Layer
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 4692928919116174290, guid: 0fa414a67aa7f1c4eb4160453128f9ae,
-        type: 3}
-      propertyPath: m_Layer
-      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 3448306578062976290, guid: 0fa414a67aa7f1c4eb4160453128f9ae,
         type: 3}

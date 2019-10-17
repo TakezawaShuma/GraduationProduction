@@ -7,6 +7,11 @@ using UnityEngine.Events;
 public class ShortcutButton : MonoBehaviour
 {
     private Button button;
+
+    [SerializeField, Header("テキスト")]
+    private Text text;
+
+    [SerializeField, Header("画像")]
     private Image image;
 
     // Start is called before the first frame update
@@ -22,10 +27,12 @@ public class ShortcutButton : MonoBehaviour
         
     }
 
-    public void SetShortcut(UnityAction unityAction, Sprite sprite)
+    public void SetShortcut(UnityAction unityAction, string text, Sprite sprite)
     {
         button.onClick.RemoveAllListeners();
         button.onClick.AddListener(unityAction);
+
+        this.text.text = text;
 
         if (sprite)
         {

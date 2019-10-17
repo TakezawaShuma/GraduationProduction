@@ -16,7 +16,7 @@ public class ShortcutManager : MonoBehaviour
         for(int i = 0; i < 10; i++)
         {
             int a = i;
-            buttons[i].GetComponent<ShortcutButton>().SetShortcut(() => Debug.Log(a), null);
+            buttons[i].GetComponent<ShortcutButton>().SetShortcut(() => Debug.Log(a), i.ToString(), null);
         }
     }
 
