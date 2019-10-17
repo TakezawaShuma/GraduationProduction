@@ -2,10 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public struct Status
 {
-    public int hp;
-    public int mp;
+    public int hitPoint;
+    public int magicPoint;
     public int strength;
     public int vitality;
     public int intelligence;
@@ -13,15 +14,15 @@ public struct Status
     public int dexterity;
     public int agility;
 
-    public Status(int hp = 0, int mp = 0, int strength = 0, int vitality = 0, int intelligence = 0, int mind = 0, int dexterity = 0, int agility = 0)
+    public Status(int hp = 0, int mp = 0, int str = 0, int vit = 0, int inte = 0, int min = 0, int dex = 0, int agi = 0)
     {
-        this.hp = hp;
-        this.mp = mp;
-        this.strength = strength;
-        this.vitality = vitality;
-        this.intelligence = intelligence;
-        this.mind = mind;
-        this.dexterity = dexterity;
-        this.agility = agility;
+        hitPoint = hp;
+        magicPoint = mp;
+        strength = str;
+        vitality = vit;
+        intelligence = inte;
+        mind = min;
+        dexterity = dex;
+        agility = agi;
     }
 }
