@@ -24,6 +24,14 @@ public class PlayerController: MonoBehaviour
     [SerializeField, Header("チャットコントローラー")]
     private ChatController chatController;
 
+    [SerializeField, Header("攻撃判定用当たり判定")]
+    private CapsuleCollider attackCollider;
+
+    public CapsuleCollider AttackCollider
+    {
+        get { return attackCollider; }
+    }
+
     // 現在のステート
     private BaseState currentState;
 
@@ -191,6 +199,15 @@ public class PlayerController: MonoBehaviour
                     FollowingCamera.LOCK = target;
                 }
             }
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "Enemy")
+        {
+            // ここでデータを送る
+            Debug.Log("当たってるYO");
         }
     }
 }
