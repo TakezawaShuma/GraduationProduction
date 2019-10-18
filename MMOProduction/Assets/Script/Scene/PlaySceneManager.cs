@@ -57,17 +57,15 @@ public class PlaySceneManager : MonoBehaviour
 
     private void OnDestroy()
     {
-
+       
     }
 
     private int count = 0;
     private int updateMaxCount = 3;
 
-    private bool Timer()
-    {
+    private bool Timer() {
         count++;
-        if (count > updateMaxCount)
-        {
+        if (count > updateMaxCount) {
             count = 0;
             return true;
         }
@@ -81,22 +79,19 @@ public class PlaySceneManager : MonoBehaviour
     {
         Debug.Log("player id :" + Retention.ID.ToString() + "move player id" + _data.id.ToString());
 
-        if (_data.id != 0)
-        {
-            if (_data.id != Retention.ID)
-            {
+        if (_data.id != 0) {
+            if (_data.id != Retention.ID) {
                 // ユーザーの更新
-                if (players.ContainsKey(_data.id))
-                {
+                if (players.ContainsKey(_data.id)) {
                     players[_data.id].transform.position = new Vector3(_data.x, _data.y, _data.z);
                     Debug.Log("他のユーザーの移動処理");
                 }
                 // 他のユーザーの作成
-                else
-                {
+                else {
                     var otherPlayer = Instantiate<GameObject>(playerPre);
                     players.Add(_data.id, otherPlayer);
                     players[_data.id].transform.position = new Vector3(_data.x, _data.y, _data.z);
+
                     Debug.Log("他のユーザーの作成");
                 };
             }
@@ -106,10 +101,8 @@ public class PlaySceneManager : MonoBehaviour
     /// <summary>
     /// プレイヤーの作成
     /// </summary>
-    private void MakePlayer()
-    {
-        if (!players.ContainsKey(Retention.ID))
-        {
+    private void MakePlayer() {
+        if (!players.ContainsKey(Retention.ID)) {
             // 自分の作成コンポーネントの追加
             var tmpPlayer = Instantiate<GameObject>(playerPre);
             tmpPlayer.name = "player" + Retention.ID;

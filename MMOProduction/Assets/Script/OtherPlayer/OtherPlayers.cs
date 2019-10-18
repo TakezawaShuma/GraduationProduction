@@ -14,7 +14,7 @@ public class HAYAKAWA
     public Vector3 pos;
 }
 
-public class OtherPlayers : MonoBehaviour
+public class OtherPlayers: MonoBehaviour
 {
     private int hp = 0;
     private int mp = 0;

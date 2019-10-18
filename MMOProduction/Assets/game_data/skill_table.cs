@@ -5,8 +5,7 @@ using UnityEngine;
 /// <summary>
 /// スキルの種類
 /// </summary>
-public enum skill_type
-{
+public enum skill_type {
     ATTACK,
     BUFF,
     NUME
@@ -15,25 +14,12 @@ public enum skill_type
 /// <summary>
 /// バフの種類
 /// </summary>
-public enum buff_type
-{
+public enum buff_type {
     DEFFENSE,
     ATTACK,
     HEEL,
     NOME
 }
-
-/// <summary>
-/// ターゲットの種類
-/// </summary>
-public enum target_type
-{
-    PLAYER,
-    PARTY,
-    TARGET,
-    RANGE,
-}
-
 
 [CreateAssetMenu(menuName = "game_table/skill", fileName = "skill_data")]
 public class skill_table : ScriptableObject
@@ -45,36 +31,22 @@ public class skill_table : ScriptableObject
     [System.SerializableAttribute]
     public class skill_data
     {
+        [SerializeField]
         // ID
-        [SerializeField]
         public int id;
-
-        // 名前
         [SerializeField]
-        public string name;
-
         // 最大Lv
-        [SerializeField]
         public int max_point;
-
+        [SerializeField]
         // 効果
-        [SerializeField]
         public int effect;
-
-        // 説明文
         [SerializeField]
+        // 説明文
         public string description;
-
         // スキルの種類
         [SerializeField]
         public skill_type skillType;
-
-        // バフの種類
         [SerializeField]
         public buff_type buffType;
-
-        // ターゲットの種類
-        [SerializeField]
-        public target_type targetType;
     }
 }

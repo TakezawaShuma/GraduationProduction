@@ -20,9 +20,13 @@ public class PlayerUI : MonoBehaviour
     [SerializeField]
     private Image job;
     [SerializeField]
-    private Slider m_hp;
+    private Slider hpRed;
     [SerializeField]
-    private Slider m_mp;
+    private Slider hpGreen;
+    [SerializeField]
+    private Slider mpYellow;
+    [SerializeField]
+    private Slider mpBlue;
     [SerializeField]
     private Image number;
     [SerializeField]
@@ -38,8 +42,6 @@ public class PlayerUI : MonoBehaviour
         //playerCmp = player.GetComponent<Player>();
 
         // アイコンやプレイヤ情報の初期設定
-
-
     }
 
     // Update is called once per frame
@@ -68,15 +70,13 @@ public class PlayerUI : MonoBehaviour
         if (Observar(hp, currentHp) || Observar(maxHp,currentMaxHp))
         {
             // HPの表示を更新する
-            m_hp.maxValue = maxHp;
-            m_hp.value = hp;
+            hpGreen.value = hp;
         }
 
         if (Observar(mp, currentMp) || Observar(maxMp,currentMaxMp))
         {
             // MPの表示を更新する
-            m_mp.maxValue = maxMp;
-            m_mp.value = mp;
+            mpBlue.value = mp;
         }
 
         currentHp = hp;
