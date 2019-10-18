@@ -6,6 +6,10 @@ public class TestAttackState : BaseState
 {
     private static BaseState instance;
 
+    int count = 0;
+
+    int maxCount = 30;
+
     public static BaseState Instance
     {
         get
@@ -19,12 +23,22 @@ public class TestAttackState : BaseState
         }
     }
 
-
     // 実行関数
     public override void Execute()
     {
-        Debug.Log("攻撃しました");
+        if (count < maxCount)
+        {
+            Debug.Log("攻撃してるYO");
+            playerController.AttackCollider.enabled = true;
+        }
+        else
+        {
+            Debug.Log("攻撃やめたYO");
+            playerController.AttackCollider.enabled = false;
+            playerController.ChangeState(IdleState.Instance);
+            count = 0;
+        }
 
-        playerController.ChangeState(IdleState.Instance);
+        count++;
     }
 }
