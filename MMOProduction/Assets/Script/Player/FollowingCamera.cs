@@ -103,8 +103,6 @@ public class FollowingCamera : MonoBehaviour
 
             float a = Mathf.Atan2(v.x, v.z) * Mathf.Rad2Deg % 360 + 90;
 
-            Debug.Log(azimuthalAngle + ":" + a);
-
             azimuthalAngle = -a;
 
             lookAtPos = target.transform.position + offset;
@@ -119,9 +117,9 @@ public class FollowingCamera : MonoBehaviour
         transform.LookAt(lookAtPos);
 
         //　レイを視覚的に確認
-        Debug.DrawLine(target.transform.position + offset, transform.position, Color.red, 0f, false);
-        Vector3 b = target.transform.position + offset - transform.position;
-        Debug.DrawLine(transform.position, transform.position - b, Color.red, 0f, false);
+        //Debug.DrawLine(target.transform.position + offset, transform.position, Color.red, 0f, false);
+        //Vector3 b = target.transform.position + offset - transform.position;
+        //Debug.DrawLine(transform.position, transform.position - b, Color.red, 0f, false);
         CantPenetrateObstacle();
     }
 
@@ -140,8 +138,11 @@ public class FollowingCamera : MonoBehaviour
 
     void updateDistance(float scroll)
     {
-        scroll = distance - scroll * scrollSensitivity;
-        distance = Mathf.Clamp(scroll, minDistance, maxDistance);
+        if (!collisionObstacle && !stop)
+        {
+            scroll = distance - scroll * scrollSensitivity;
+            distance = Mathf.Clamp(scroll, minDistance, maxDistance);
+        }
     }
 
     void updatePosition(Vector3 lookAtPos)

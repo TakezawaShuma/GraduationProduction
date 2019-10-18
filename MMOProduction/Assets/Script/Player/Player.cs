@@ -19,6 +19,12 @@ public class Player : MonoBehaviour
     public int mp { get; set; }
     public int maxHp { get; set; }
     public int maxMp { get; set; }
+    private int strength;
+    private int vitality;
+    private int Intelligence;
+    private int mind;
+    private int dexterity;
+    private int agility;
 
     private float dir;
 

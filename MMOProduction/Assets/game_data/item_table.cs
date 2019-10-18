@@ -2,17 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ShortcutController : MonoBehaviour
+public class item_table : MonoBehaviour
 {
-    [SerializeField, Header("ショートカットの数")]
-    private int MaxShortCut;
-
-    private KeyCode[,] ShortcutKeys;
-
     // Start is called before the first frame update
     void Start()
     {
-        ShortcutKeys = new KeyCode[MaxShortCut, 2];
+        
     }
 
     // Update is called once per frame

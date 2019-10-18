@@ -14,7 +14,7 @@ public class PlayerSetting : MonoBehaviour
     public float NS { get { return NomalSpeed; } }
 
     [SerializeField, Header("ダッシュスピード(1秒間で進む距離)")]
-    private float DashSpeed = 5f;
+    private float DashSpeed = 6.25f;
     public float DS { get { return DashSpeed; } }
 
     [SerializeField, Header("ジャンプ力")]
