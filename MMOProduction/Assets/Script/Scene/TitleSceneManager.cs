@@ -22,7 +22,7 @@ public class TitleSceneManager : MonoBehaviour
     public const int MIN_PW_WORD = 4;
 
     // wsソケット
-    WS.WsLogin ws = new WS.WsLogin();
+    WS.WsLogin wsl = null; 
 
     [SerializeField]
     bool connectFlag = false;
@@ -110,7 +110,7 @@ public class TitleSceneManager : MonoBehaviour
         if (connectFlag)
         {
             // 接続開始
-            ws.ConnectionStart(Receive);
+            wsl = new WS.WsLogin(8000);
         }
     }
 
@@ -188,7 +188,8 @@ public class TitleSceneManager : MonoBehaviour
             if (connectFlag)
             {
                 // ログイン処理
-                ws.SendLogin(id, pw);
+                Packes.LoginUser loginUser = new Packes.LoginUser(id, pw);
+                wsl.Send(Json.ConvertToJson(loginUser));
             }
         }
         else
@@ -218,7 +219,7 @@ public class TitleSceneManager : MonoBehaviour
                 //Error04.gameObject.SetActive(false);
                 if (connectFlag)
                 {
-                    ws.SendRegistration(id, pw);
+                    //wsl.SendRegistration(id, pw);
                 }
             }
             else
@@ -362,14 +363,14 @@ public class TitleSceneManager : MonoBehaviour
     {
         switch(_comand)
         {
-            case (int)CommandData.MissingConfirmation:  // command 104
+            case (int)CommandData.LoginError:  // command 104
                 //IDかPWが間違っている
                 TypingError();
                 break;
-            case (int)CommandData.Existing: // command 106
-                //すでに使われているID
-                AlreadyInUse();
-                break;
+            //case (int)CommandData.Existing: // command 106
+            //    //すでに使われているID
+            //    AlreadyInUse();
+            //    break;
             case (int)CommandData.Duplicate:    // command 901
                 //すでにログインしているID
                 MultipleLoginError();

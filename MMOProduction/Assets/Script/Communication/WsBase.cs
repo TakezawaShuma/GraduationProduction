@@ -14,66 +14,48 @@ namespace WS
     public abstract class WsBase
     {
         // ソケット
-        protected WebSocket ws = null;
+        protected WebSocket ws;
         // サーバーのIP
-        // debug
         //private string server_ip = "172.24.52.250";
         private string server_ip = "localhost";
-
-        private Action reconect_callback;
-
-
-        public void InitializeWebSocket(Action _func)
-        {
-            reconect_callback = _func;
-        }
 
         /// <summary>
         /// 接続
         /// </summary>
         /// <param name="_port">ポート</param>
-        public void Connect(int _port)
+        protected void Connect(uint _port)
         {
-            if (Retention.IP != "")
-            {
-                server_ip = Retention.IP;
-                Debug.Log(server_ip);
-            }
-
             ws = new WebSocket("ws://" + server_ip + ":" + _port.ToString());
             Debug.Log("IPアドレス : " + server_ip + "ポート : " + _port);
             WsInit();
-
-                ws.Connect();
-             
+            ws.Connect();
         }
+
+
 
         /// <summary>
         /// 削除
         /// </summary>
         /// <param name="_msg">削除した際のメッセージ</param>
-        protected virtual void Destroy(string _msg = "")
+        protected virtual void Destroy(string _msg = "", bool type = true)
         {
-            if (_msg != "") Debug.Log(_msg);
-            if (ws != null) ws.Close();
+            if (_msg != "")
+            {
+                if (type) { Debug.Log(_msg); }
+                else { Debug.LogWarning(_msg); }
+            }
+            ws.Close();
             ws = null;
         }
 
         /// <summary>
         /// 初期化処理
         /// </summary>
-        public void WsInit(string _openMsg = "", string _closeMsg = "")
+        private void WsInit(string _openMsg = "", string _closeMsg = "")
         {
             ws.OnOpen += (sender, e) => { Debug.Log("WebSocket Open : " + _openMsg); };
             ws.OnError += (sender, e) => { Debug.LogError("WebSocket Error Message: " + e.Message); };
-            ws.OnClose += (sender, e) => { Debug.Log("WebSocket Close"); };
+            ws.OnClose += (sender, e) => { Destroy("通信が切断されました: " + _closeMsg); };
         }
-
-        public void ForDebug()
-        {
-            Debug.Log(this.ws.ReadyState);
-        }
-
-
     }
 }

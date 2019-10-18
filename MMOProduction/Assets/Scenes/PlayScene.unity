@@ -507,7 +507,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cb1b657d808c7b4583315bc0749e915, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  connectFlag: 1
+  connectFlag: 0
   playerPre: {fileID: 2279237861936315273, guid: 45e8155fd7d09ab4ba826865045bd327,
     type: 3}
   FollowingCamera: {fileID: 992294608}
@@ -852,7 +852,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 992294604}
   m_LocalRotation: {x: 0.21646833, y: -0.000000005822274, z: 0.000000001290947, w: 0.97628963}
-  m_LocalPosition: {x: 0.000718386, y: 28103.174, z: -60264.484}
+  m_LocalPosition: {x: 0.00072335824, y: 28297.596, z: -60681.36}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1103,7 +1103,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1514585325}
   m_HandleRect: {fileID: 1514585324}
   m_Direction: 3
-  m_Value: 0.00000021430884
+  m_Value: 0
   m_Size: 0.7661741
   m_NumberOfSteps: 0
   m_OnValueChanged:
@@ -1508,7 +1508,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.000061035156}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!1001 &1925013531

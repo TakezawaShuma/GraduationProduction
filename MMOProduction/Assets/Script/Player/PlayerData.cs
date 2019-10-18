@@ -16,9 +16,9 @@ public class PlayerData
         id = _id; x = _x; y = _y; z = _z; dir = _dir;
     }
 
-    public PlayerData(Packes.RecvPosSync _data) {
-        id = _data.user_id; x = _data.x; y = _data.y; z = _data.z; dir = _data.dir;
-    }
+    //public PlayerData(Packes.RecvPosSync _data) {
+    //    id = _data.user_id; x = _data.x; y = _data.y; z = _data.z; dir = _data.dir;
+    //}
 }
 
 /// <summary>

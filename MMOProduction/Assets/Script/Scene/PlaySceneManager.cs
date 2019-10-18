@@ -19,7 +19,7 @@ public class PlaySceneManager : MonoBehaviour
 
 
     // ソケット
-    private WS.WsPlay wsp = new WS.WsPlay();
+    private WS.WsPlay wsp = null;
     private Dictionary<int, GameObject> players = new Dictionary<int, GameObject>();
     private Dictionary<int, GameObject> enemies = new Dictionary<int, GameObject>();
     private SaveData save;
@@ -43,15 +43,15 @@ public class PlaySceneManager : MonoBehaviour
         {
             // プレイサーバに接続
             //wsp.ConnectionStart(UpdatePlayers, RecvSaveData); // debug
-            wsp.ConnectionStart(callbackList);
+            wsp = new WS.WsPlay(8001);
         }
         Debug.Log("プレイスタート");
+        MakePlayer();
     }
 
     // Update is called once per frame
     void Update()
     {
-        MakePlayer();
         if (players.ContainsKey(Retention.ID))
         {
             var playerData = players[Retention.ID].GetComponent<Player>().GetPosition();
@@ -67,7 +67,7 @@ public class PlaySceneManager : MonoBehaviour
 
     private void OnDestroy()
     {
-        wsp.Destroy();
+        if (connectFlag) { wsp.Destroy(); }
     }
 
     private int count = 0;
@@ -196,7 +196,7 @@ public class PlaySceneManager : MonoBehaviour
         SaveData data = JsonUtility.FromJson<SaveData>(_str);
 
         save = data;
-        wsp.SendSaveDataOK();
+        //wsp.SendSaveDataOK();
 
         // プレイヤーに受け取ったセーブデータを渡す。
         MakePlayer(data);
@@ -213,7 +213,7 @@ public class PlaySceneManager : MonoBehaviour
     /// </summary>
     private void SendPosition(Vector4 _pos)
     {
-        wsp.SendPosData(_pos.x, _pos.y, _pos.z, (int)_pos.w);
+        //wsp.SendPosData(_pos.x, _pos.y, _pos.z, (int)_pos.w);
     }
     
 

@@ -23,7 +23,7 @@ public class TestPlay : MonoBehaviour
     PlayersGenerator generator = new PlayersGenerator();
 
     // 対応したシーンのConnect○○を作ってね！
-    WS.WsPlay ws_play = new WS.WsPlay();
+    //WS.WsPlay ws_play = new WS.WsPlay();
 
     void Start()
     {
@@ -37,14 +37,14 @@ public class TestPlay : MonoBehaviour
     {
         if (Input.GetKeyDown("]"))
         {
-            ws_play.SendPosData( player.transform.position.x, player.transform.position.y, player.transform.position.z, (int)player.transform.rotation.y);
+            //ws_play.SendPosData( player.transform.position.x, player.transform.position.y, player.transform.position.z, (int)player.transform.rotation.y);
             Debug.Log(other_players.Count);
         }
     }
 
     private void OnDestroy()
     {
-        ws_play.Destroy();
+        //ws_play.Destroy();
     }
 
     private void Move()
