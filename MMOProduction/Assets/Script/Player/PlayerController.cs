@@ -94,7 +94,7 @@ public class PlayerController: MonoBehaviour
 
             if (v.magnitude > playerSetting.LOD)
             {
-                target.GetComponent<Marker>().FLAG = false;
+                target.GetComponent<Marker>().STATE = Marker.State.None;
                 target = null;
                 lockState = false;
                 FollowingCamera.LOCK = null;
@@ -170,14 +170,7 @@ public class PlayerController: MonoBehaviour
 
     public void LockOn()
     {
-        if (target != null)
-        {
-            target.GetComponent<Marker>().FLAG = false;
-        }
-        target = null;
-        lockState = false;
-
-        FollowingCamera.LOCK = null;
+        bool noLock = false;
 
         Ray ray = FollowingCamera.GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
         RaycastHit hit = new RaycastHit();
@@ -194,11 +187,42 @@ public class PlayerController: MonoBehaviour
 
                     lockState = true;
 
-                    target.GetComponent<Marker>().FLAG = true;
+                    if (target.GetComponent<Marker>().STATE != Marker.State.Choice)
+                    {
+                        target.GetComponent<Marker>().STATE = Marker.State.Choice;
+                    }
+                    else
+                    {
+                        target.GetComponent<Marker>().Execute();
+                    }
 
                     FollowingCamera.LOCK = target;
                 }
+                else
+                {
+                    noLock = true;
+                }
             }
+            else
+            {
+                noLock = true;
+            }
+        }
+        else
+        {
+            noLock = true;
+        }
+        
+        if(noLock)
+        {
+            if (target != null)
+            {
+                target.GetComponent<Marker>().STATE = Marker.State.None;
+            }
+            target = null;
+            lockState = false;
+
+            FollowingCamera.LOCK = null;
         }
     }
 
