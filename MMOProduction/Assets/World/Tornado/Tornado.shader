@@ -26,7 +26,8 @@ Shader "Performance/Tornado"
 		#pragma fragment frag
 
 		#include "UnityCG.cginc"
-		#include "Assets/CGIncludes/MyCG.cginc"
+		#include "Assets/CGInclude/SimpleMath.cginc"
+		#include "Assets/CGInclude/Transform.cginc"
 
 		struct appdata
 		{
