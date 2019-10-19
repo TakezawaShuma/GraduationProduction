@@ -94,7 +94,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sprite: {fileID: 5089083184803762796}
-  color: {r: 1, g: 1, b: 1, a: 1}
+  color:
+  - {r: 0, g: 0, b: 0, a: 0}
+  - {r: 1, g: 1, b: 1, a: 1}
 --- !u!136 &8466094277308354578
 CapsuleCollider:
   m_ObjectHideFlags: 0

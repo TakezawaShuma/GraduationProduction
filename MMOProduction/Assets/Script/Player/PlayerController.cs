@@ -193,7 +193,7 @@ public class PlayerController: MonoBehaviour
                     }
                     else
                     {
-                        target.GetComponent<Marker>().Execute();
+                        target.GetComponent<Marker>().Execute(transform.position);
                     }
 
                     FollowingCamera.LOCK = target;

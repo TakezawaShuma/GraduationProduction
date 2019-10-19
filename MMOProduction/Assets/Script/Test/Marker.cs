@@ -19,6 +19,9 @@ public class Marker : MonoBehaviour
     [SerializeField]
     private Color[] color = new Color[(int)State.Num];
 
+    [SerializeField, Header("距離")]
+    private float executeRange = 5;
+
     private UnityEvent unityEvent;
 
     private State state = State.None;
@@ -49,8 +52,13 @@ public class Marker : MonoBehaviour
         unityEvent.AddListener(unityAction);
     }
 
-    public void Execute()
+    public void Execute(Vector3 pos)
     {
-        unityEvent.Invoke();
+        Vector3 v = pos - transform.position;
+        float distance = v.magnitude;
+        if (distance <= executeRange)
+        {
+            unityEvent.Invoke();
+        }
     }
 }
