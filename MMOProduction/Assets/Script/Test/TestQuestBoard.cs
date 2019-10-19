@@ -5,7 +5,7 @@ using UnityEngine;
 public class TestQuestBoard : MonoBehaviour
 {
     [SerializeField]
-    private GameObject gameObject;
+    private GameObject[] gameObject;
 
     [SerializeField]
     private Marker marker;
@@ -14,7 +14,11 @@ public class TestQuestBoard : MonoBehaviour
     void Start()
     {
         marker.SetFunction(On);
-        gameObject.SetActive(false);
+
+        foreach (GameObject game in gameObject)
+        {
+            game.SetActive(false);
+        }
     }
 
     // Update is called once per frame
@@ -25,11 +29,17 @@ public class TestQuestBoard : MonoBehaviour
 
     public void On()
     {
-        gameObject.SetActive(true);
+        foreach (GameObject game in gameObject)
+        {
+            game.SetActive(true);
+        }
     }
 
     public void Off()
     {
-        gameObject.SetActive(false);
+        foreach (GameObject game in gameObject)
+        {
+            game.SetActive(false);
+        }
     }
 }

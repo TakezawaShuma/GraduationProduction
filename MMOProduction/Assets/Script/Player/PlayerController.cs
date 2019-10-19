@@ -174,34 +174,30 @@ public class PlayerController: MonoBehaviour
 
         Ray ray = FollowingCamera.GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
         RaycastHit hit = new RaycastHit();
+        int layerNo = LayerMask.NameToLayer("Marker");
+        int layerMask = 1 << layerNo;
 
-        if (Physics.Raycast(ray, out hit))
+        if (Physics.Raycast(ray, out hit, playerSetting.LOD,layerMask))
         {
             Vector3 v = hit.transform.position - transform.position;
 
             if (v.magnitude <= playerSetting.LOD)
             {
-                if (hit.collider.gameObject.tag == "Marker")
+                
+                target = hit.collider.gameObject;
+                
+                lockState = true;
+                
+                if (target.GetComponent<Marker>().STATE != Marker.State.Choice)
                 {
-                    target = hit.collider.gameObject;
-
-                    lockState = true;
-
-                    if (target.GetComponent<Marker>().STATE != Marker.State.Choice)
-                    {
-                        target.GetComponent<Marker>().STATE = Marker.State.Choice;
-                    }
-                    else
-                    {
-                        target.GetComponent<Marker>().Execute(transform.position);
-                    }
-
-                    FollowingCamera.LOCK = target;
+                    target.GetComponent<Marker>().STATE = Marker.State.Choice;
                 }
                 else
                 {
-                    noLock = true;
+                    target.GetComponent<Marker>().Execute(transform.position);
                 }
+                
+                FollowingCamera.LOCK = target;
             }
             else
             {

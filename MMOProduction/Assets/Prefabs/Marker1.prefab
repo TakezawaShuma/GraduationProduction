@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 694367849638356948}
   - component: {fileID: 495394191780137743}
   - component: {fileID: 1728888321597043996}
-  m_Layer: 0
+  m_Layer: 17
   m_Name: Marker1
   m_TagString: Marker
   m_Icon: {fileID: 0}
@@ -97,6 +97,7 @@ MonoBehaviour:
   color:
   - {r: 1e-45, g: 0, b: 3.4e-43, a: 0}
   - {r: 0, g: 0, b: 0, a: 1}
+  executeRange: 5
 --- !u!136 &1728888321597043996
 CapsuleCollider:
   m_ObjectHideFlags: 0
