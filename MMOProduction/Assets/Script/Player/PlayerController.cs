@@ -94,7 +94,7 @@ public class PlayerController: MonoBehaviour
 
             if (v.magnitude > playerSetting.LOD)
             {
-                target.GetComponent<Marker>().FLAG = false;
+                target.GetComponent<Marker>().STATE = Marker.State.None;
                 target = null;
                 lockState = false;
                 FollowingCamera.LOCK = null;
@@ -170,35 +170,55 @@ public class PlayerController: MonoBehaviour
 
     public void LockOn()
     {
-        if (target != null)
-        {
-            target.GetComponent<Marker>().FLAG = false;
-        }
-        target = null;
-        lockState = false;
-
-        FollowingCamera.LOCK = null;
+        bool noLock = false;
 
         Ray ray = FollowingCamera.GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
         RaycastHit hit = new RaycastHit();
+        int layerNo = LayerMask.NameToLayer("Marker");
+        int layerMask = 1 << layerNo;
 
-        if (Physics.Raycast(ray, out hit))
+        if (Physics.Raycast(ray, out hit, playerSetting.LOD,layerMask))
         {
             Vector3 v = hit.transform.position - transform.position;
 
             if (v.magnitude <= playerSetting.LOD)
             {
-                if (hit.collider.gameObject.tag == "Marker")
+                
+                target = hit.collider.gameObject;
+                
+                lockState = true;
+                
+                if (target.GetComponent<Marker>().STATE != Marker.State.Choice)
                 {
-                    target = hit.collider.gameObject;
-
-                    lockState = true;
-
-                    target.GetComponent<Marker>().FLAG = true;
-
-                    FollowingCamera.LOCK = target;
+                    target.GetComponent<Marker>().STATE = Marker.State.Choice;
                 }
+                else
+                {
+                    target.GetComponent<Marker>().Execute(transform.position);
+                }
+                
+                FollowingCamera.LOCK = target;
             }
+            else
+            {
+                noLock = true;
+            }
+        }
+        else
+        {
+            noLock = true;
+        }
+        
+        if(noLock)
+        {
+            if (target != null)
+            {
+                target.GetComponent<Marker>().STATE = Marker.State.None;
+            }
+            target = null;
+            lockState = false;
+
+            FollowingCamera.LOCK = null;
         }
     }
 
