@@ -34,6 +34,7 @@ namespace WS
         private void Init(uint _port)
         {
             base.Connect(_port);
+            Receive();
         }
 
         /// <summary>

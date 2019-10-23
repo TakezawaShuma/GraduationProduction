@@ -55,7 +55,7 @@ namespace WS
         {
             ws.OnOpen += (sender, e) => { Debug.Log("WebSocket Open : " + _openMsg); };
             ws.OnError += (sender, e) => { Debug.LogError("WebSocket Error Message: " + e.Message); };
-            ws.OnClose += (sender, e) => { Destroy("通信が切断されました: " + _closeMsg); };
+            ws.OnClose += (sender, e) => { Destroy("通信が切断されました: " + _closeMsg, false); };
         }
     }
 }

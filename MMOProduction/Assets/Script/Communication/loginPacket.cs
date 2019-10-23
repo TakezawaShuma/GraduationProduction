@@ -40,7 +40,7 @@ namespace Packes
         /// <summary>ユーザー名</summary>
         public string user_name;
         /// <summary>パスワード</summary>
-        public string name;
+        public string pass;
 
         /// <summary>デフォルトコンストラクタ</summary>
         public LoginUser(){
@@ -51,11 +51,11 @@ namespace Packes
         /// <param name="_name">パスワード</summary>
         public LoginUser(
             string _user_name,
-            string _name
+            string _pass
         ){
             this.command = (int)CommandData.LoginUser;
             this.user_name = _user_name;
-            this.name = _name;
+            this.pass = _pass;
         }
     }
 

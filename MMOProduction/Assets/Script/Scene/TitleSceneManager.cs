@@ -219,7 +219,9 @@ public class TitleSceneManager : MonoBehaviour
                 //Error04.gameObject.SetActive(false);
                 if (connectFlag)
                 {
-                    //wsl.SendRegistration(id, pw);
+                    // 送信処理
+                    Packes.CreateUser new_user = new Packes.CreateUser(id, pw);
+                    wsl.Send(Json.ConvertToJson(new_user));
                 }
             }
             else

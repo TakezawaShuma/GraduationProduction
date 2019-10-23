@@ -38,6 +38,8 @@ namespace WS
         private void Init(uint _port)
         {
             base.Connect(_port);
+            Receive();
+
         }
 
         /// <summary>
@@ -54,8 +56,11 @@ namespace WS
         /// <param name="_json"></param>
         public void Send(string _json)
         {
-            Debug.Log("Send data : " + _json);
-            base.ws.Send(_json);
+            Debug.Log("Send data : " + int.Parse(_json.Substring(11,3)));
+            if (base.ws.ReadyState == WebSocketState.Open)
+            {
+                base.ws.Send(_json);
+            }
         }
 
 

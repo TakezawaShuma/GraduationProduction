@@ -126,7 +126,7 @@ namespace Packes
     }
 
     /// <summary>
-    /// セーブデータの読み込み command:209
+    /// セーブデータの読み込み要請 command:209
     /// </summary>
     public class DataLoading : IPacketDatas
     {
@@ -212,6 +212,28 @@ namespace Packes
             this.dir = _dir;
         }
     }
+
+    /// <summary>
+    /// 初回ログイン command:204
+    /// </summary>
+    public class InitLoginStoC : IPacketDatas
+    {
+        /// <summary>ユーザーのID</summary>
+        public int user_id;
+        /// <summary>デフォルトコンストラクタ</summary>
+        public InitLoginStoC()
+        {
+            this.command = (int)CommandData.InitLoginStoC;
+        }
+        public InitLoginStoC(
+            int _user_id
+        )
+        {
+            this.command = (int)CommandData.InitLoginStoC;
+            this.user_id = _user_id;
+        }
+    }
+
 
     /// <summary>
     /// 状態送信 command:206
