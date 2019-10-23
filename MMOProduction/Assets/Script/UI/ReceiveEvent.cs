@@ -30,6 +30,11 @@ public class ReceiveEvent : MonoBehaviour
         this.transform.position = startPosition;
     }
 
+    public void MyPointerUpUIBack()
+    {
+        ChangeAlpha(1.0f);
+    }
+
     // ドラッグ時の関数
     public void MyDragUI()
     {
@@ -50,8 +55,6 @@ public class ReceiveEvent : MonoBehaviour
     {
         if (collision.transform.tag == "Slot")
         {
-            Debug.Log("UI衝突");
-            Debug.Log(length);
             hitObject = collision.gameObject;
         }
     }
@@ -60,7 +63,6 @@ public class ReceiveEvent : MonoBehaviour
     {
         if (collision.transform.tag == "Slot")
         {
-            Debug.Log("UI衝突");
             hitObject = null;
         }
     }
