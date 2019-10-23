@@ -51,10 +51,10 @@ public class PlayerUI : MonoBehaviour
         {
             player = GameObject.Find("player" + Retention.ID);
             playerCmp = player.GetComponent<Player>();
-            playerCmp.MaxHP = 100;
-            playerCmp.HP = 30;
-            playerCmp.MaxMP = 100;
-            playerCmp.MP = 60;
+            playerCmp.maxHp = 100;
+            playerCmp.hp = 30;
+            playerCmp.maxMp = 100;
+            playerCmp.mp = 60;
         }
 
         StatusUpdate();
@@ -62,10 +62,10 @@ public class PlayerUI : MonoBehaviour
 
     private void StatusUpdate()
     {
-        int hp = playerCmp.HP;
-        int maxHp = playerCmp.MaxHP;
-        int mp = playerCmp.MP;
-        int maxMp = playerCmp.MaxMP;
+        int hp = playerCmp.hp;
+        int maxHp = playerCmp.maxHp;
+        int mp = playerCmp.mp;
+        int maxMp = playerCmp.maxMp;
 
         if (Observar(hp, currentHp) || Observar(maxHp,currentMaxHp))
         {

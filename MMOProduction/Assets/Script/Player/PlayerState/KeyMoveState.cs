@@ -83,7 +83,7 @@ public class KeyMoveState : BaseState
             {
                 animatorManager.Run();
             }
-            velocity *= playerSetting.DS * Time.deltaTime;
+            velocity *= playerSetting.DS;
         }
         else
         {
@@ -91,7 +91,7 @@ public class KeyMoveState : BaseState
             {
                 animatorManager.Walk();
             }
-            velocity *= playerSetting.NS * Time.deltaTime;
+            velocity *= playerSetting.NS;
         }
     }
 }

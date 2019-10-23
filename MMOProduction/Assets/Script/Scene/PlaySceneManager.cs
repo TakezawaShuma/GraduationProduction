@@ -31,9 +31,7 @@ public class PlaySceneManager : MonoBehaviour
 
     private void Awake()
     {
-        //callbackList.Add(UpdatePlayers);    // 0　プレイヤーの更新
-        //callbackList.Add(RecvSaveData);     // 1　セーブデータの受け取り
-        //callbackList.Add(RegisterEnemies);  // 2　エネミーの更新
+
     }
 
     // Start is called before the first frame update
@@ -49,7 +47,6 @@ public class PlaySceneManager : MonoBehaviour
             wsp.loadSaveAction = RecvSaveData;
             wsp.moveingAction = UpdatePlayers;
             wsp.statusAction = null;
-            Packes.DataLoading packet = ;
             wsp.Send(new Packes.DataLoading(Retention.ID).ToJson());
 
         }
@@ -140,7 +137,7 @@ public class PlaySceneManager : MonoBehaviour
             players[Retention.ID].AddComponent<Player>();
             players[Retention.ID].AddComponent<PlayerController>();
             players[Retention.ID].AddComponent<PlayerSetting>();
-            players[Retention.ID].GetComponent<Player>().Init(_save);
+            //players[Retention.ID].GetComponent<Player>().Init(_save);
             players[Retention.ID].GetComponent<PlayerController>().Init(
                 players[Retention.ID].GetComponent<Player>(),
                 FollowingCamera,

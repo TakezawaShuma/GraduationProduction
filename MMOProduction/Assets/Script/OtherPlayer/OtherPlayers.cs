@@ -37,14 +37,17 @@ public class OtherPlayers: MonoBehaviour
     public float Z { get { return position.z; } set { position.z = value; } }
     public float Dir { get { return dir; } set { dir = value; } }
 
+    private float lastX = 0;
+    private float lastY = 0;
+    private float lastZ = 0;
+    private float lastDir = 0;
 
-    public void Init(float _x,float _y ,float _z,float _dir)
-    {
-        X = _x;
-        Y = _y;
-        Z = _z;
-        Dir = _dir;
-    }
+
+    private int nowFlame = 0;
+
+    private const int MAX_FLAME = 3;
+
+
 
     // Start is called before the first frame update
     void Start()
@@ -56,12 +59,39 @@ public class OtherPlayers: MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        transform.position = new Vector3(X, Y, Z);
-        transform.Rotate(0, dir, 0);
+
+        LerpMove();
+        //transform.position = new Vector3(x, y, z);
+        //transform.Rotate(0, dir, 0);
+
     }
 
-    public void UpdataData(int hp, int mp, float x, float y, float z, float dir)
+    public void UpdataData(int _hp, int _mp, float _x, float _y, float _z, float _dir)
     {
-        HP = hp; MP = mp; X = x; Y = y; Z = z; Dir = dir;
+        lastX = _x;
+        lastY = _y;
+        lastZ = _z;
+        lastDir = _dir;
+
+        HP = _hp; MP = _mp; X = _x; Y = _y; Z = _z; Dir = _dir;
+
+        nowFlame = 0;
+        transform.position = new Vector3(lastX, lastY, lastZ);
+        transform.rotation = Quaternion.Euler(0, lastDir, 0);
+    }
+
+    private void LerpMove()
+    {
+        Vector3 last = new Vector3(lastX, lastY, lastZ);
+        Vector3 next = new Vector3(X, Y, Z);
+
+        float t = 1 / 3 * (nowFlame + 1);
+
+        Vector3 v = Vector3.Lerp(last, next, t);
+        Quaternion.Slerp(Quaternion.Euler(0,lastDir,0), Quaternion.Euler(0,dir,0), t);
+
+        transform.position = v;
+
+        nowFlame++;
     }
 }
