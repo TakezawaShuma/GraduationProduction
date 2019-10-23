@@ -4,6 +4,7 @@
 
 using UnityEngine;
 using WebSocketSharp;
+using System;
 
 namespace WS
 {
@@ -22,31 +23,27 @@ namespace WS
         /// 接続
         /// </summary>
         /// <param name="_port">ポート</param>
-        public bool Connect(int _port)
+        protected void Connect(uint _port)
         {
-            bool ret = false;
             ws = new WebSocket("ws://" + server_ip + ":" + _port.ToString());
             Debug.Log("IPアドレス : " + server_ip + "ポート : " + _port);
-            try
-            {
-                ws.Connect();
-                ret = true;
-            }
-            catch
-            {
-                Debug.Log("サーバーへ接続ができません。");
-                ret = false;
-            }
-            return ret;
+            WsInit();
+            ws.Connect();
         }
+
+
 
         /// <summary>
         /// 削除
         /// </summary>
         /// <param name="_msg">削除した際のメッセージ</param>
-        protected virtual void Destroy(string _msg = "")
+        protected virtual void Destroy(string _msg = "", bool type = true)
         {
-            if (_msg != "") Debug.Log(_msg);
+            if (_msg != "")
+            {
+                if (type) { Debug.Log(_msg); }
+                else { Debug.LogWarning(_msg); }
+            }
             ws.Close();
             ws = null;
         }
@@ -54,10 +51,11 @@ namespace WS
         /// <summary>
         /// 初期化処理
         /// </summary>
-        public void WsInit(string _openMsg = "", string _closeMsg = "")
+        private void WsInit(string _openMsg = "", string _closeMsg = "")
         {
             ws.OnOpen += (sender, e) => { Debug.Log("WebSocket Open : " + _openMsg); };
             ws.OnError += (sender, e) => { Debug.LogError("WebSocket Error Message: " + e.Message); };
+            ws.OnClose += (sender, e) => { Destroy("通信が切断されました: " + _closeMsg, false); };
         }
     }
 }

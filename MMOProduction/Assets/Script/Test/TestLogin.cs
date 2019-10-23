@@ -6,12 +6,12 @@ public class TestLogin : MonoBehaviour
 {
 
 
-    WS.WsLogin ws_login = new WS.WsLogin();
+    //WS.WsLogin // ws_login = new WS.WsLogin();
     // Start is called before the first frame update
     void Start()
     {
         // 通信関係の初期処理
-        ws_login.ConnectionStart(Receive);
+        // ws_login.ConnectionStart(Receive);
     }
 
     // Update is called once per frame
@@ -19,13 +19,13 @@ public class TestLogin : MonoBehaviour
     {
         if(Input.GetKeyDown("s"))
         {
-            ws_login.SendLogin("haroharo", "trident");
+            // ws_login.SendLogin("haroharo", "trident");
         }
         if (Input.GetKeyDown("n"))
         {
-            ws_login.SendRegistration("haroharo", "trident");
+            // ws_login.SendRegistration("haroharo", "trident");
         }
-        //ws_login.ChangeScene();
+        //// ws_login.ChangeScene();
 
         if (Input.GetKeyDown("r")) { Start(); }
     }

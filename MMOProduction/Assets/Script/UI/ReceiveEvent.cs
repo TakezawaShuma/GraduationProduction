@@ -14,7 +14,7 @@ public class ReceiveEvent : MonoBehaviour
     public void MyPointerDownUI()
     {
         //パネルを動かすスクリプトをfalseにする
-        panel.gameObject.GetComponent<ScrollRect>().enabled = false;
+        //panel.gameObject.GetComponent<ScrollRect>().enabled = false;
 
         length = this.transform.position - Input.mousePosition;
         startPosition = this.transform.position;
@@ -33,13 +33,13 @@ public class ReceiveEvent : MonoBehaviour
         this.transform.position = startPosition;
 
         //パネルを動かすスクリプトをtrueにする
-        panel.gameObject.GetComponent<ScrollRect>().enabled = true;
+        //panel.gameObject.GetComponent<ScrollRect>().enabled = true;
     }
 
     public void MyPointerUpUIBack()
     {
         //パネルを動かすスクリプトをtrueにする
-        panel.gameObject.GetComponent<ScrollRect>().enabled = true;
+        //panel.gameObject.GetComponent<ScrollRect>().enabled = true;
         ChangeAlpha(1.0f);
     }
 

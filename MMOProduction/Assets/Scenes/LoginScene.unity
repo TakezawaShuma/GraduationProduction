@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 1276576947}
-  m_IndirectSpecularColor: {r: 0.41113475, g: 0.719092, b: 0.98056406, a: 1}
+  m_IndirectSpecularColor: {r: 0.42438847, g: 0.74323064, b: 1.0137652, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6616,10 +6616,10 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 1639434470}
   - {fileID: 2017102101}
-  - {fileID: 228278065}
+  - {fileID: 1639434470}
   - {fileID: 2087269196}
+  - {fileID: 228278065}
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -8188,7 +8188,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8207370bc14231049971798453a2e169, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  connectFlag: 0
+  connectFlag: 1
   selectLogin_: {fileID: 927173940}
   loginToGame_: {fileID: 1183998531}
   selectSignUp_: {fileID: 1207362945}
@@ -11928,7 +11928,7 @@ Transform:
   - {fileID: 1635095564}
   - {fileID: 951022450}
   m_Father: {fileID: 1152770537}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2055951675
 GameObject:
@@ -12051,7 +12051,7 @@ Transform:
   - {fileID: 1718660984}
   - {fileID: 585745075}
   m_Father: {fileID: 1152770537}
-  m_RootOrder: 3
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2094038153
 GameObject:
