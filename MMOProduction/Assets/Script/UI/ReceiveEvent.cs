@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class ReceiveEvent : MonoBehaviour
 {
+    public Image panel;
     private Vector3 startPosition;
     GameObject hitObject;
 
@@ -12,6 +13,8 @@ public class ReceiveEvent : MonoBehaviour
     // 押した時
     public void MyPointerDownUI()
     {
+        //パネルを動かすスクリプトをfalseにする
+        panel.gameObject.GetComponent<ScrollRect>().enabled = false;
 
         length = this.transform.position - Input.mousePosition;
         startPosition = this.transform.position;
@@ -28,10 +31,15 @@ public class ReceiveEvent : MonoBehaviour
             hitObject.GetComponent<Image>().color = this.GetComponent<Image>().color;
         }
         this.transform.position = startPosition;
+
+        //パネルを動かすスクリプトをtrueにする
+        panel.gameObject.GetComponent<ScrollRect>().enabled = true;
     }
 
     public void MyPointerUpUIBack()
     {
+        //パネルを動かすスクリプトをtrueにする
+        panel.gameObject.GetComponent<ScrollRect>().enabled = true;
         ChangeAlpha(1.0f);
     }
 
