@@ -61,12 +61,12 @@ public class SkilltreeCreater : MonoBehaviour
 
         Create(skilltreeDatas[0].skilltree[0], new Vector2(1, 1), 0);
 
-        skilltreeDatas[1].skilltree[0].children = new int[2] { 1, 2 };
-        skilltreeDatas[1].skilltree[1].children = new int[1] { 3 };
-        skilltreeDatas[1].skilltree[2].children = new int[2] { 4, 5 };
-        skilltreeDatas[1].skilltree[3].children = new int[1] { 6 };
-        skilltreeDatas[1].skilltree[4].children = new int[1] { 7 };
-        skilltreeDatas[1].skilltree[5].children = new int[2] { 8, 9 };
+        skilltreeDatas[1].skilltree[0].children = new int[3] { 1, 2 ,3 };
+        skilltreeDatas[1].skilltree[1].children = new int[1] { 4 };
+        skilltreeDatas[1].skilltree[2].children = new int[2] { 5, 6 };
+        skilltreeDatas[1].skilltree[3].children = new int[1] { 7 };
+        skilltreeDatas[1].skilltree[4].children = new int[1] { 8 };
+        skilltreeDatas[1].skilltree[5].children = new int[1] { 9 };
 
         Create(skilltreeDatas[1].skilltree[0], new Vector2(mostRight + 2, 1), 0);
 
