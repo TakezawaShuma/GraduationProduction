@@ -14,6 +14,9 @@ public class PlaySceneManager : MonoBehaviour
     bool connectFlag = false;
     public GameObject playerPre;
 
+    [SerializeField, Header("テストの敵")]
+    private GameObject testEnemyPre;
+
     [SerializeField, Header("カメラ")]
     private FollowingCamera FollowingCamera = default(FollowingCamera);
 
@@ -64,6 +67,7 @@ public class PlaySceneManager : MonoBehaviour
             packes.x = 0;
             packes.y = 0.5f;
             packes.z = 15;
+            packes.dir = 0;
             Debug.Log("テスト");
             UpdatePlayers(packes);
         }
@@ -74,8 +78,31 @@ public class PlaySceneManager : MonoBehaviour
             packes.x = 10;
             packes.y = 0.5f;
             packes.z = 20;
+            packes.dir = 180;
             Debug.Log("テスト");
             UpdatePlayers(packes);
+        }
+        else if(Input.GetKeyDown(KeyCode.B))
+        {
+            Packes.TranslationStoC packes = new Packes.TranslationStoC();
+            packes.user_id = 100;
+            packes.x = 0;
+            packes.y = 1.2f;
+            packes.z = 30;
+            packes.dir = 0;
+            Debug.Log("敵テスト");
+            RegisterEnemies(packes);
+        }
+        else if(Input.GetKeyDown(KeyCode.V))
+        {
+            Packes.TranslationStoC packes = new Packes.TranslationStoC();
+            packes.user_id = 100;
+            packes.x = 10;
+            packes.y = 1.2f;
+            packes.z = 10;
+            packes.dir = 180;
+            Debug.Log("敵テスト");
+            RegisterEnemies(packes);
         }
 
         if(startFlag)
@@ -195,7 +222,7 @@ public class PlaySceneManager : MonoBehaviour
                 // 他のユーザーの作成
                 else
                 {
-                    var otherPlayer = Instantiate<GameObject>(playerPre);
+                    var otherPlayer = Instantiate<GameObject>(playerPre, new Vector3(data.x, data.y, data.z), Quaternion.Euler(0, data.dir, 0));
                     otherPlayer.name = "otherPlayer" + data.user_id;
                     otherPlayer.AddComponent<OtherPlayers>();
                     players.Add(data.user_id, otherPlayer);
@@ -212,10 +239,38 @@ public class PlaySceneManager : MonoBehaviour
     /// エネミーの情報の更新と作成
     /// </summary>
     /// <param name="_str"></param>
-    private void RegisterEnemies()
+    private void RegisterEnemies(Packes.TranslationStoC _packet)
     {
         // todo
         // エネミーの作成と更新
+
+        Packes.TranslationStoC data = _packet;
+        Debug.Log("ID:" + data.user_id);
+
+        if (data.user_id != 0)
+        {
+            if (data.user_id != Retention.ID)
+            {
+                // 敵の更新
+                if (players.ContainsKey(data.user_id))
+                {
+                    players[data.user_id].GetComponent<Enemy>().UpdataData(0, 0, data.x, data.y, data.z, data.dir);
+                    Debug.Log("敵の移動処理");
+                }
+                // todo 他プレイヤーの更新と作成を関数分けする
+                // 敵の作成
+                else
+                {
+                    var otherPlayer = Instantiate<GameObject>(testEnemyPre, new Vector3(data.x, data.y, data.z), Quaternion.Euler(0, data.dir, 0));
+                    otherPlayer.name = "enemy" + data.user_id;
+                    otherPlayer.AddComponent<Enemy>();
+                    players.Add(data.user_id, otherPlayer);
+                    Debug.Log(otherPlayer.transform.position);
+
+                    Debug.Log("敵の作成");
+                };
+            }
+        }
     }
 
 

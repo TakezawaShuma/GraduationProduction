@@ -1,27 +1,8 @@
-﻿//////////////////////////////////
-// 自分以外のプレイヤーのクラス //
-//////////////////////////////////
-
-
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-/*
-MAXHP　　　　　　変
-   MP　　　　　　変
-nowHP　常(変)
-   MP　常(変)
-Sutas　常(変)
-ロール(ジョブ)　変
-パーティ番号　　変
-レベル　　　　　変
-名前　　　　　　変
-ヘイト順　常(変)
-
- */
-
-public class OtherPlayers: MonoBehaviour
+public class Enemy : MonoBehaviour
 {
     private int maxHp;
     private int maxMp;
@@ -47,25 +28,19 @@ public class OtherPlayers: MonoBehaviour
 
     private const int MAX_FLAME = 3;
 
-
-
     // Start is called before the first frame update
     void Start()
     {
         X = lastX = transform.position.x;
-        Y =lastY = transform.position.y;
+        Y = lastY = transform.position.y;
         Z = lastZ = transform.position.z;
         Dir = lastDir = transform.eulerAngles.y;
     }
-
 
     // Update is called once per frame
     void Update()
     {
         LerpMove();
-        //transform.position = new Vector3(x, y, z);
-        //transform.Rotate(0, dir, 0);
-
     }
 
     public void UpdataData(int _hp, int _mp, float _x, float _y, float _z, float _dir)
@@ -90,7 +65,7 @@ public class OtherPlayers: MonoBehaviour
         float t = (1.0f / 60.0f) * (nowFlame + 1);
 
         Vector3 v = Vector3.Lerp(last, next, t);
-        transform.rotation = Quaternion.Slerp(Quaternion.Euler(transform.rotation.x,lastDir, transform.rotation.z), Quaternion.Euler(transform.rotation.x,dir, transform.rotation.z), t);
+        Quaternion.Slerp(Quaternion.Euler(0, lastDir, 0), Quaternion.Euler(0, dir, 0), t);
 
         transform.position = v;
 
