@@ -150,7 +150,6 @@ namespace WS
         /// シーンを切り替える プレイ
         /// </summary>
         private void ChangeScenetoPlay() {
-            Destroy();
             SceneManager.LoadScene("PlayScene");
         }
 

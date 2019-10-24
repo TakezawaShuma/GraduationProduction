@@ -20,6 +20,8 @@ namespace WS
         public Action<Packes.StatusStoC> statusAction;
         // セーブ読み込み 210
         public Action<Packes.LoadSaveData> loadSaveAction;
+        // ロード終了 212
+        public Action<Packes.LoadingFinishStoC> loadFinAction;
 
 
         /// <summary>
@@ -47,6 +49,7 @@ namespace WS
         /// </summary>
         public void Destroy()
         {
+            Send(new Packes.LogoutCtoS(Retention.ID).ToJson());
             base.Destroy("プレイの終了");
         }
 
@@ -79,8 +82,13 @@ namespace WS
                     {
                         case CommandData.TranslationStoC:
                             Packes.TranslationStoC posSync = Json.ConvertToPackets<Packes.TranslationStoC>(e.Data);
-                            Debug.Log("command : " + posSync.command + " , user_id : " + posSync.user_id + " , position : (" + posSync.x + "," + posSync.y + "," + posSync.z + ") , direction : " + posSync.dir);
+                            Debug.Log("command : " + posSync.command + " , user_id : " + posSync.user_id + 
+                                " , position : (" + posSync.x + "," + posSync.y + "," + posSync.z + ") , direction : " + posSync.dir);
                             moveingAction(posSync);
+                            break;
+                        case CommandData.InitLoginStoC:
+                            Packes.InitLoginStoC init = Json.ConvertToPackets<Packes.InitLoginStoC>(e.Data);
+                            Debug.Log("command : " + init.command + " , user_id : " + init.user_id);
                             break;
                         case CommandData.StatusStoC:
                             Packes.StatusStoC status = Json.ConvertToPackets<Packes.StatusStoC>(e.Data);
@@ -91,6 +99,15 @@ namespace WS
                             Packes.LoadSaveData save = Json.ConvertToPackets<Packes.LoadSaveData>(e.Data);
                             Debug.Log("command : " + save.command);
                             loadSaveAction(save);
+                            break;
+
+                        case CommandData.LoadingFinishStoC:
+                            Packes.LoadingFinishStoC loadFin = Json.ConvertToPackets<Packes.LoadingFinishStoC>(e.Data);
+                            Debug.Log("command : " + loadFin.command);
+                            loadFinAction(loadFin);
+                            break;
+                            
+                        case CommandData.LogoutStoC:
                             break;
                         // 随時追加
                         default:

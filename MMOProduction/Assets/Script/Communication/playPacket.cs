@@ -152,20 +152,46 @@ namespace Packes
     /// <summary>
     /// データの読み込み終了 command:211
     /// </summary>
-    public class LoadingFinish : IPacketDatas
+    public class LoadingFinishCtoS : IPacketDatas
     {
-
+        public int user_id;
         /// <summary>デフォルトコンストラクタ</summary>
-        public LoadingFinish()
+        public LoadingFinishCtoS()
         {
-            this.command = (int)CommandData.LoadingFinish;
+            this.command = (int)CommandData.LoadingFinishCtoS;
         }
         /// <summary>フルコンストラクタ</summary>
-        public LoadingFinish(int _i)
+        public LoadingFinishCtoS(int _id)
         {
-            this.command = (int)CommandData.LoadingFinish;
+            this.command = (int)CommandData.LoadingFinishCtoS;
+            this.user_id = _id;
         }
     }
+
+    /// <summary>
+    /// ログアウト command:701
+    /// </summary>
+    public class LogoutCtoS : IPacketDatas
+    {
+        /// <summary>ユーザーのID</summary>
+        public int user_id;
+
+        /// <summary>デフォルトコンストラクタ</summary>
+        public LogoutCtoS()
+        {
+            this.command = (int)CommandData.LogoutCtoS;
+        }
+        /// <summary>コンストラクタ</summary>
+        /// <param name="_user_id">ユーザーのID</summary>
+        public LogoutCtoS(
+            int _user_id
+        )
+        {
+            this.command = (int)CommandData.LogoutCtoS;
+            this.user_id = _user_id;
+        }
+    }
+
 
     // -------------------受信パケット------------------- //
 
@@ -301,4 +327,44 @@ namespace Packes
             this.command = (int)CommandData.LoadSaveData;
         }
     }
+
+
+    /// <summary>
+    /// セーブデータの読み込み完了
+    /// </summary>
+    public class LoadingFinishStoC:IPacketDatas
+    {
+        /// <summary>デフォルトコンストラクタ</summary>
+        public LoadingFinishStoC()
+        {
+            this.command = (int)CommandData.LoadingFinishStoC;
+        }
+        /// <summary>フルコンストラクタ</summary>
+        public LoadingFinishStoC(int _i)
+        {
+            this.command = (int)CommandData.LoadingFinishStoC;
+        }
+    }
+
+    /// <summary>
+    /// ログアウト command:707
+    /// </summary>
+    public class LogoutStoC : IPacketDatas
+    {
+
+        public int user_id;
+
+        /// <summary>デフォルトコンストラクタ</summary>
+        public LogoutStoC()
+        {
+            this.command = (int)CommandData.LogoutStoC;
+        }
+        public LogoutStoC(
+            int _user_id
+        )
+        {
+            this.user_id = _user_id;
+        }
+    }
+
 }

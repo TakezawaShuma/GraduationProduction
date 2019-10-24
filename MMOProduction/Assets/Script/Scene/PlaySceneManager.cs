@@ -44,9 +44,10 @@ public class PlaySceneManager : MonoBehaviour
             // プレイサーバに接続
             //wsp.ConnectionStart(UpdatePlayers, RecvSaveData); // debug
             wsp = new WS.WsPlay(8001);
-            wsp.loadSaveAction = RecvSaveData;
-            wsp.moveingAction = UpdatePlayers;
-            wsp.statusAction = null;
+            wsp.loadSaveAction = RecvSaveData;  // 210
+            wsp.moveingAction = UpdatePlayers;  // 202
+            wsp.statusAction = null;            // 206
+            wsp.loadFinAction = LoadFinish;
             wsp.Send(new Packes.DataLoading(Retention.ID).ToJson());
 
         }
@@ -78,12 +79,6 @@ public class PlaySceneManager : MonoBehaviour
             UpdatePlayers(packes);
         }
 
-        if(startFlag)
-        {
-            wsp.Send(new Packes.InitLogin(Retention.ID).ToJson());
-            startFlag = false;
-            updateFlag = true;
-        }
         if (updateFlag)
         {
             if (players.ContainsKey(Retention.ID))
@@ -94,6 +89,7 @@ public class PlaySceneManager : MonoBehaviour
                     if (connectFlag)
                     {
                         SendPosition(playerData);
+                        SendStatus(100, 40, 100, 60, 10001001);
                     }
                 }
             }
@@ -179,7 +175,7 @@ public class PlaySceneManager : MonoBehaviour
     {
         Debug.Log("ユーザーの移動系のコールバック");
         Packes.TranslationStoC data = _packet;
-        Debug.Log("ID:" + data.user_id);
+        //Debug.Log("ID:" + data.user_id);
 
         if (data.user_id != 0)
         {
@@ -232,8 +228,7 @@ public class PlaySceneManager : MonoBehaviour
 
         //save = data;
 
-        wsp.Send(new Packes.LoadingFinish().ToJson());
-        startFlag = true;
+        wsp.Send(new Packes.LoadingFinishCtoS().ToJson());
         //wsp.SendSaveDataOK();
 
         // プレイヤーに受け取ったセーブデータを渡す。
@@ -242,16 +237,26 @@ public class PlaySceneManager : MonoBehaviour
     }
     
 
+    private void LoadFinish(Packes.LoadingFinishStoC _packet)
+    {
+
+        updateFlag = true;
+
+    }
+
 
     /// <summary>
     /// 位置情報の送信
     /// </summary>
     private void SendPosition(Vector4 _pos)
     {
-        wsp.Send(new Packes.TranslationCtoS(Retention.ID, _pos.x, _pos.y, _pos.z, 0).ToJson());
-        //wsp.SendPosData(_pos.x, _pos.y, _pos.z, (int)_pos.w);
+        wsp.Send(new Packes.TranslationCtoS(Retention.ID, _pos.x, _pos.y, _pos.z, _pos.w).ToJson());
     }
     
+    private void SendStatus(int _maxHp,int _hp,int _maxMp,int _mp ,int _status)
+    {
+        wsp.Send(new Packes.StatusCtoS(Retention.ID, _maxHp, _hp, _maxMp, _mp, _status).ToJson());
+    }
 
     /// <summary>
     /// 自分自身の情報を渡す

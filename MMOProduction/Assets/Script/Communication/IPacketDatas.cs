@@ -57,13 +57,16 @@ public enum CommandData
     DataLoading = (int)209,
     /// <summary>セーブデータ</summary>
     LoadSaveData = (int)210,
-    /// <summary>データの読み込み終了</summary>
-    LoadingFinish = (int)211,
+    /// <summary>データの読み込み終了報告</summary>
+    LoadingFinishCtoS = (int)211,
+    /// <summary>データの読み込み終了報告</summary>
+    LoadingFinishStoC = (int)212,
 
 
     /// その他
-    /// <summary> ログアウト要請 </summary>
-    Finished = (int)701,
+
+    /// <summary>ログアウト要請</summary>
+    LogoutCtoS = (int)701,
     /// <summary> アイテム一覧送信 </summary>
     SendItemList = (int)702,
     /// <summary> スキル一覧送信 </summary>
@@ -75,6 +78,8 @@ public enum CommandData
     /// <summary> ログアウト完了 </summary>
     FinishComplete = (int)706,
 
+    /// <summary>他ユーザーのログアウト</summary>
+    LogoutStoC = (int)707,
 
     // チャット
     /// <summary> 全体チャット送信 </summary>

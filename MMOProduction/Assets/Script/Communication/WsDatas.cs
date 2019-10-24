@@ -214,20 +214,20 @@ namespace Packes
     // その他データ----------------------------------------------------------------------------------------------------
 
         
-    /// <summary>
-    /// command 701　ログアウト時(client->server)
-    /// </summary>
-    public class Finished : IPacketDatas
-    {
-        public Finished() { command = (int)CommandData.Finished; }
-        public int level;
-        public int hp;
-        public int mp;
-        public float x;
-        public float y;
-        public float z;
-        public float exp;
-    }
+    ///// <summary>
+    ///// command 701　ログアウト時(client->server)
+    ///// </summary>
+    //public class Finished : IPacketDatas
+    //{
+    //    public Finished() { command = (int)CommandData.Finished; }
+    //    public int level;
+    //    public int hp;
+    //    public int mp;
+    //    public float x;
+    //    public float y;
+    //    public float z;
+    //    public float exp;
+    //}
     
     /// <summary>
     /// command 702 アイテム一覧(client->server)
