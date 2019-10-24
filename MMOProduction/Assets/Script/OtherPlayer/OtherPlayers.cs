@@ -52,14 +52,16 @@ public class OtherPlayers: MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        X = lastX = transform.position.x;
+        Y =lastY = transform.position.y;
+        Z = lastZ = transform.position.z;
+        Dir = lastDir = transform.eulerAngles.y;
     }
 
 
     // Update is called once per frame
     void Update()
     {
-
         LerpMove();
         //transform.position = new Vector3(x, y, z);
         //transform.Rotate(0, dir, 0);
@@ -68,10 +70,10 @@ public class OtherPlayers: MonoBehaviour
 
     public void UpdataData(int _hp, int _mp, float _x, float _y, float _z, float _dir)
     {
-        lastX = _x;
-        lastY = _y;
-        lastZ = _z;
-        lastDir = _dir;
+        lastX = X;
+        lastY = Y;
+        lastZ = Z;
+        lastDir = Dir;
 
         HP = _hp; MP = _mp; X = _x; Y = _y; Z = _z; Dir = _dir;
 
@@ -85,7 +87,7 @@ public class OtherPlayers: MonoBehaviour
         Vector3 last = new Vector3(lastX, lastY, lastZ);
         Vector3 next = new Vector3(X, Y, Z);
 
-        float t = 1 / 3 * (nowFlame + 1);
+        float t = (1.0f / 60.0f) * (nowFlame + 1);
 
         Vector3 v = Vector3.Lerp(last, next, t);
         Quaternion.Slerp(Quaternion.Euler(0,lastDir,0), Quaternion.Euler(0,dir,0), t);

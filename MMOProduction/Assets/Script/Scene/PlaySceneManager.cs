@@ -57,6 +57,27 @@ public class PlaySceneManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if(Input.GetKeyDown(KeyCode.M))
+        {
+            Packes.TranslationStoC packes = new Packes.TranslationStoC();
+            packes.user_id = 1;
+            packes.x = 0;
+            packes.y = 0.5f;
+            packes.z = 15;
+            Debug.Log("テスト");
+            UpdatePlayers(packes);
+        }
+        else if(Input.GetKeyDown(KeyCode.N))
+        {
+            Packes.TranslationStoC packes = new Packes.TranslationStoC();
+            packes.user_id = 1;
+            packes.x = 10;
+            packes.y = 0.5f;
+            packes.z = 20;
+            Debug.Log("テスト");
+            UpdatePlayers(packes);
+        }
+
         if(startFlag)
         {
             wsp.Send(new Packes.InitLogin(Retention.ID).ToJson());
@@ -157,34 +178,33 @@ public class PlaySceneManager : MonoBehaviour
     private void UpdatePlayers(Packes.TranslationStoC _packet)
     {
         Debug.Log("ユーザーの移動系のコールバック");
-        //PlayerData data = JsonUtility.FromJson<PlayerData>(_str);
-        //Debug.Log("player id :" + Retention.ID.ToString() + "move player id" + data.id.ToString());
+        Packes.TranslationStoC data = _packet;
+        Debug.Log("ID:" + data.user_id);
 
+        if (data.user_id != 0)
+        {
+            if (data.user_id != Retention.ID)
+            {
+                // 他ユーザーの更新
+                if (players.ContainsKey(data.user_id))
+                {
+                    players[data.user_id].GetComponent<OtherPlayers>().UpdataData(0, 0, data.x, data.y, data.z, data.dir);
+                    Debug.Log("他のユーザーの移動処理");
+                }
+                // todo 他プレイヤーの更新と作成を関数分けする
+                // 他のユーザーの作成
+                else
+                {
+                    var otherPlayer = Instantiate<GameObject>(playerPre);
+                    otherPlayer.name = "otherPlayer" + data.user_id;
+                    otherPlayer.AddComponent<OtherPlayers>();
+                    players.Add(data.user_id, otherPlayer);
+                    Debug.Log(otherPlayer.transform.position);
 
-        //if (data.id != 0)
-        //{
-        //    if (data.id != Retention.ID)
-        //    {
-        //        // ユーザーの更新
-        //        if (players.ContainsKey(data.id))
-        //        {
-        //            //players[_data.id].GetComponent<OtherPlayers>().UpdataData()
-        //            players[data.id].transform.position = new Vector3(data.x, data.y, data.z);
-        //            Debug.Log("他のユーザーの移動処理");
-        //        }
-        //        // todo 他プレイヤーの更新と作成を関数分けする
-        //        // 他のユーザーの作成
-        //        else
-        //        {
-        //            var otherPlayer = Instantiate<GameObject>(playerPre);
-        //            otherPlayer.AddComponent<OtherPlayers>();
-        //            otherPlayer.GetComponent<OtherPlayers>().Init(data.x, data.y, data.z, data.dir);
-        //            players.Add(data.id, otherPlayer);
-
-        //            Debug.Log("他のユーザーの作成");
-        //        };
-        //    }
-        //}
+                    Debug.Log("他のユーザーの作成");
+                };
+            }
+        }
     }
 
 
@@ -192,8 +212,7 @@ public class PlaySceneManager : MonoBehaviour
     /// エネミーの情報の更新と作成
     /// </summary>
     /// <param name="_str"></param>
-    
-    private void RegisterEnemies(string _str)
+    private void RegisterEnemies()
     {
         // todo
         // エネミーの作成と更新
