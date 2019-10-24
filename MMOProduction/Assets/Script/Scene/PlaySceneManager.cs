@@ -62,47 +62,47 @@ public class PlaySceneManager : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.M))
         {
-            Packes.TranslationStoC packes = new Packes.TranslationStoC();
-            packes.user_id = 1;
-            packes.x = 0;
-            packes.y = 0.5f;
-            packes.z = 15;
-            packes.dir = 0;
+            Packes.TranslationStoC packet = new Packes.TranslationStoC();
+            packet.user_id = 1;
+            packet.x = 0;
+            packet.y = 0.5f;
+            packet.z = 15;
+            packet.dir = 0;
             Debug.Log("テスト");
-            UpdatePlayers(packes);
+            UpdatePlayers(packet);
         }
         else if(Input.GetKeyDown(KeyCode.N))
         {
-            Packes.TranslationStoC packes = new Packes.TranslationStoC();
-            packes.user_id = 1;
-            packes.x = 10;
-            packes.y = 0.5f;
-            packes.z = 20;
-            packes.dir = 180;
+            Packes.TranslationStoC packet = new Packes.TranslationStoC();
+            packet.user_id = 1;
+            packet.x = 10;
+            packet.y = 0.5f;
+            packet.z = 20;
+            packet.dir = 180;
             Debug.Log("テスト");
-            UpdatePlayers(packes);
+            UpdatePlayers(packet);
         }
         else if(Input.GetKeyDown(KeyCode.B))
         {
-            Packes.TranslationStoC packes = new Packes.TranslationStoC();
-            packes.user_id = 100;
-            packes.x = 0;
-            packes.y = 1.2f;
-            packes.z = 30;
-            packes.dir = 0;
+            Packes.TranslationStoC packet = new Packes.TranslationStoC();
+            packet.user_id = 100;
+            packet.x = 0;
+            packet.y = 0.2f;
+            packet.z = 30;
+            packet.dir = 0;
             Debug.Log("敵テスト");
-            RegisterEnemies(packes);
+            RegisterEnemies(packet);
         }
         else if(Input.GetKeyDown(KeyCode.V))
         {
-            Packes.TranslationStoC packes = new Packes.TranslationStoC();
-            packes.user_id = 100;
-            packes.x = 10;
-            packes.y = 1.2f;
-            packes.z = 10;
-            packes.dir = 180;
+            Packes.TranslationStoC packet = new Packes.TranslationStoC();
+            packet.user_id = 100;
+            packet.x = 10;
+            packet.y = 0.2f;
+            packet.z = 10;
+            packet.dir = 180;
             Debug.Log("敵テスト");
-            RegisterEnemies(packes);
+            RegisterEnemies(packet);
         }
 
         if(startFlag)
@@ -229,7 +229,7 @@ public class PlaySceneManager : MonoBehaviour
                     Debug.Log(otherPlayer.transform.position);
 
                     Debug.Log("他のユーザーの作成");
-                };
+                }
             }
         }
     }
@@ -268,7 +268,7 @@ public class PlaySceneManager : MonoBehaviour
                     Debug.Log(otherPlayer.transform.position);
 
                     Debug.Log("敵の作成");
-                };
+                }
             }
         }
     }
