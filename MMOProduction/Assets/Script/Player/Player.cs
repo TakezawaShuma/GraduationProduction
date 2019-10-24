@@ -9,37 +9,45 @@ using UnityEngine;
 [System.Serializable]
 public class Player : MonoBehaviour
 {
+    [SerializeField, Header("プレイヤーの設定")]
+    private PlayerSetting playerSetting;
+
     private float x;
     private float y;
     private float z;
-    private int hp;
-    private int mp;
+
+    private Status status;
+    public int hp { get; set; }
+    public int mp { get; set; }
+    public int maxHp { get; set; }
+    public int maxMp { get; set; }
+    private int strength;
+    private int vitality;
+    private int Intelligence;
+    private int mind;
+    private int dexterity;
+    private int agility;
+
     private float dir;
 
-
-    public int HP
-    {
-        set { hp = value; }
-    }
-
-    public int MP
-    {
-        set { mp = value; }
-    }
+    private Rigidbody rb;
+    
 
     private void Start()
     {
-        x = transform.position.x;
-        y = transform.position.y;
-        z = transform.position.z;
+        x = 0;
+        y = 0;
+        z = 0;
 
         dir = transform.rotation.eulerAngles.y;
+
+        rb = GetComponent<Rigidbody>();
     }
 
     private void Update()
     {
-        transform.position = new Vector3(x, y, z);
-        transform.rotation = Quaternion.Euler(0, dir, 0);
+        //rb.AddForce(new Vector3(x, y, z) * 100);
+        //transform.rotation = Quaternion.Euler(0, dir, 0);
     }
 
     public void UpdatePosition(float _x, float _y, float _z)
@@ -54,7 +62,8 @@ public class Player : MonoBehaviour
         dir = _dir;
     }
 
-    public Vector4 GetPosition() {
+    public Vector4 GetPosition()
+    {
         return new Vector4(x, y, z, dir);
     }
 }

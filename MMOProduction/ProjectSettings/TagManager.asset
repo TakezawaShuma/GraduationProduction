@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Slot
   - Marker
+  - Ground
+  - Enemy
   layers:
   - Default
   - TransparentFX
@@ -20,13 +22,13 @@ TagManager:
   - PlayerModel
   - 
   - 
+  - Ground
   - 
+  - Obstacle
   - 
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Marker
+  - Player
+  - NPC
   - 
   - 
   - 

@@ -10,16 +10,20 @@ using UnityEngine;
 public class PlayerSetting : MonoBehaviour
 {
     [SerializeField, Header("通常スピード(1秒間で進む距離)")]
-    private float NomalSpeed = 5f;
+    private float NomalSpeed = 2.5f;
     public float NS { get { return NomalSpeed; } }
 
     [SerializeField, Header("ダッシュスピード(1秒間で進む距離)")]
-    private float DashSpeed = 12.5f;
+    private float DashSpeed = 6.25f;
     public float DS { get { return DashSpeed; } }
 
     [SerializeField, Header("ジャンプ力")]
     private float JumpPower = 300f;
     public float JP { get { return JumpPower; } }
+
+    [SerializeField, Header("重力")]
+    private float FallSpeed = 0.98f;
+    public float FS { get { return FallSpeed; } }
 
     [SerializeField, Range(0f, 1f), Header("振り向き速度")]
     private float TurnSpeed = 0.15f;
@@ -29,8 +33,8 @@ public class PlayerSetting : MonoBehaviour
     private bool IsAnimator = false;
     public bool IA { get { return IsAnimator; } }
 
-    [SerializeField, Range(0f, 100f), Header("ロックオンの距離")]
-    private float LockOnDirection = 0.0f;
+    [SerializeField, Range(0f,100f), Header("ロックオンの距離")]
+    private float LockOnDirection = 30f;
 
     public float LOD { get { return LockOnDirection; } }
 

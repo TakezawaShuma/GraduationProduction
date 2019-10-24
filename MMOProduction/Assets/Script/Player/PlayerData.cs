@@ -11,13 +11,14 @@ public class PlayerData
     public float z;
     public int dir;
 
+    public PlayerData() { }
     public PlayerData(int _id,float _x,float _y,float _z,int _dir) {
         id = _id; x = _x; y = _y; z = _z; dir = _dir;
     }
 
-    public PlayerData(Packes.RecvPosSync _data) {
-        id = _data.user_id; x = _data.x; y = _data.y; z = _data.z; dir = _data.dir;
-    }
+    //public PlayerData(Packes.RecvPosSync _data) {
+    //    id = _data.user_id; x = _data.x; y = _data.y; z = _data.z; dir = _data.dir;
+    //}
 }
 
 /// <summary>
@@ -34,6 +35,7 @@ public class PlayerStatus{
 /// セーブデータ
 /// </summary>
 public class SaveData{
+    public SaveData() { }
     public SaveData(Weapon _weapon, UnityEngine.Vector3 _pos, int _lv, int _exp) { weapon = _weapon; position = _pos; lv = _lv; exp = _exp; }
     public Weapon weapon;
     public UnityEngine.Vector3 position;

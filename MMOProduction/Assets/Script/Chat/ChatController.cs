@@ -9,9 +9,8 @@ using UnityEngine.UI;
 
 public class ChatController : MonoBehaviour
 {
-    // 接続フラグ
     [SerializeField]
-    bool connectFlag = true;
+    bool connectFlag = false;
 
     // チャット全体のフレーム
     [SerializeField]
@@ -29,7 +28,7 @@ public class ChatController : MonoBehaviour
     private List<string> chatLog = new List<string>();
 
     // チャットサーバー
-    WS.WsChat wsc = new WS.WsChat();
+    WS.WsChat wsc = null; 
 
 
     // チャット画面表示フラグ
@@ -40,7 +39,10 @@ public class ChatController : MonoBehaviour
     void Start()
     {
         chatFlame.SetActive(chatActiveFlag);
-        if (connectFlag) wsc.ConnectionStart(Receive);
+        if (connectFlag)
+        {
+            wsc = new WS.WsChat(8009);
+        }
     }
 
     // Update is called once per frame
@@ -68,6 +70,11 @@ public class ChatController : MonoBehaviour
                 inputMassege.text = "";
             }
         }
+    }
+
+    private void OnDestroy()
+    {
+        if (connectFlag) { wsc.Destroy(); }
     }
 
     // チャットログの更新
@@ -101,9 +108,10 @@ public class ChatController : MonoBehaviour
     private void SendInputMassege(string _massege)
     {
         string name = Retention.ID.ToString();
-        if (connectFlag) wsc.SendMessage(name, _massege);
-        //string mas = name + "：" + _massege;
-        //AddChatLog(mas);
+        Packes.SendAllChat mag = new Packes.SendAllChat(name, _massege);
+        if (connectFlag) { wsc.Send(Json.ConvertToJson(mag)); }
+        string mas = name + "：" + _massege;
+        AddChatLog(mas);
     }
 
     public bool GetChatActiveFlag()

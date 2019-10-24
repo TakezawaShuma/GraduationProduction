@@ -26,6 +26,9 @@ public class IdleState : BaseState
     // 実行関数
     public override void Execute()
     {
+        //Debug.Log("idle");
+        //playerController.GetAnim().Move(false);
+
         if (playerSetting.IA)
         {
             animatorManager.Idle();
@@ -45,6 +48,10 @@ public class IdleState : BaseState
         else if (Input.GetKeyDown(playerSetting.AKey))
         {
             playerController.ChangeState(AutoRunState.Instance);
+        }
+        else if (Input.GetKeyDown(KeyCode.Z))
+        {
+            playerController.ChangeState(TestAttackState.Instance);
         }
     }
 }

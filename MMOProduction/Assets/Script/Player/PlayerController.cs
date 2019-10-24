@@ -24,9 +24,17 @@ public class PlayerController: MonoBehaviour
     [SerializeField, Header("チャットコントローラー")]
     private ChatController chatController;
 
+    [SerializeField, Header("攻撃判定用当たり判定")]
+    private CapsuleCollider attackCollider;
+
+    public CapsuleCollider AttackCollider
+    {
+        get { return attackCollider; }
+    }
+
     // 現在のステート
     private BaseState currentState;
-
+    
     private AnimatorManager animatorManager;
 
     private bool lockState = false;
@@ -35,6 +43,8 @@ public class PlayerController: MonoBehaviour
 
     // Tama: プレイヤーアニメーションデータ
     private PlayerAnimData _playerAnim;
+
+    private Rigidbody rigidbody;
     
 
     public void Init(Player _playerData,FollowingCamera _camera,PlayerSetting _setting) {
@@ -63,14 +73,16 @@ public class PlayerController: MonoBehaviour
     // Use this for initialization
     void Start()
     {
-        pos = transform.position;
+        pos = Vector3.zero;
         animatorManager = new AnimatorManager(animator);
         IdleState.Instance.Initialized(this, playerSetting, animatorManager);
         KeyMoveState.Instance.Initialized(this, playerSetting, animatorManager);
-        //MouseMoveState.Instance.Initialized(this, playerSetting, animatorManager);
         AutoRunState.Instance.Initialized(this, playerSetting, animatorManager);
+        TestAttackState.Instance.Initialized(this, playerSetting, animatorManager);
 
         currentState = IdleState.Instance;
+
+        rigidbody = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
@@ -82,9 +94,10 @@ public class PlayerController: MonoBehaviour
 
             if (v.magnitude > playerSetting.LOD)
             {
-                target.GetComponent<Marker>().FLAG = false;
+                target.GetComponent<Marker>().STATE = Marker.State.None;
                 target = null;
                 lockState = false;
+                FollowingCamera.LOCK = null;
             }
         }
 
@@ -93,6 +106,7 @@ public class PlayerController: MonoBehaviour
 
     public void NoMove()
     {
+        rigidbody.velocity = new Vector3(0, rigidbody.velocity.y, 0);
         Quaternion rot = transform.rotation;
 
         if (lockState)
@@ -100,6 +114,11 @@ public class PlayerController: MonoBehaviour
             Vector3 dir = target.transform.position - transform.position;
             rot = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(dir), playerSetting.TS);
         }
+
+
+        pos = rigidbody.position;
+
+        transform.rotation = Quaternion.Euler(0, rot.eulerAngles.y, 0);
 
         SendMoveDeta(pos, rot.eulerAngles.y);
     }
@@ -118,20 +137,15 @@ public class PlayerController: MonoBehaviour
             // 移動方向に回転
             rot = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(FollowingCamera.Angle * velocity), playerSetting.TS);
         }
-        
-        // 移動
-        pos = transform.position + FollowingCamera.Angle * velocity;
 
-        SendMoveDeta(pos, rot.eulerAngles.y);
-    }
-
-    public void MouseMove(Vector3 velocity)
-    {
-        // 移動方向に回転
-        Quaternion rot = Quaternion.Slerp(transform.rotation, Quaternion.LookRotation(velocity), playerSetting.TS);
+        Vector3 v = FollowingCamera.Angle * velocity;
 
         // 移動
-        pos = transform.position + velocity;
+        rigidbody.velocity = new Vector3(v.x, rigidbody.velocity.y, v.z);
+
+        pos = rigidbody.position;
+
+        transform.rotation = Quaternion.Euler(0, rot.eulerAngles.y, 0);
 
         SendMoveDeta(pos, rot.eulerAngles.y);
     }
@@ -156,35 +170,64 @@ public class PlayerController: MonoBehaviour
 
     public void LockOn()
     {
-        if (target != null)
-        {
-            target.GetComponent<Marker>().FLAG = false;
-        }
-        target = null;
-        lockState = false;
-
-        FollowingCamera.LOCK = null;
+        bool noLock = false;
 
         Ray ray = FollowingCamera.GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
         RaycastHit hit = new RaycastHit();
+        int layerNo = LayerMask.NameToLayer("Marker");
+        int layerMask = 1 << layerNo;
 
-        if (Physics.Raycast(ray, out hit))
+        if (Physics.Raycast(ray, out hit, playerSetting.LOD,layerMask))
         {
             Vector3 v = hit.transform.position - transform.position;
 
             if (v.magnitude <= playerSetting.LOD)
             {
-                if (hit.collider.gameObject.tag == "Marker")
+                
+                target = hit.collider.gameObject;
+                
+                lockState = true;
+                
+                if (target.GetComponent<Marker>().STATE != Marker.State.Choice)
                 {
-                    target = hit.collider.gameObject;
-
-                    lockState = true;
-
-                    target.GetComponent<Marker>().FLAG = true;
-
-                    FollowingCamera.LOCK = target;
+                    target.GetComponent<Marker>().STATE = Marker.State.Choice;
                 }
+                else
+                {
+                    target.GetComponent<Marker>().Execute(transform.position);
+                }
+                
+                FollowingCamera.LOCK = target;
             }
+            else
+            {
+                noLock = true;
+            }
+        }
+        else
+        {
+            noLock = true;
+        }
+        
+        if(noLock)
+        {
+            if (target != null)
+            {
+                target.GetComponent<Marker>().STATE = Marker.State.None;
+            }
+            target = null;
+            lockState = false;
+
+            FollowingCamera.LOCK = null;
+        }
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "Enemy")
+        {
+            // ここでデータを送る
+            Debug.Log("当たってるYO");
         }
     }
 }
