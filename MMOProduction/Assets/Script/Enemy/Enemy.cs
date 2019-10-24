@@ -65,7 +65,7 @@ public class Enemy : MonoBehaviour
         float t = (1.0f / 60.0f) * (nowFlame + 1);
 
         Vector3 v = Vector3.Lerp(last, next, t);
-        Quaternion.Slerp(Quaternion.Euler(0, lastDir, 0), Quaternion.Euler(0, dir, 0), t);
+        transform.rotation = Quaternion.Slerp(Quaternion.Euler(0, lastDir, 0), Quaternion.Euler(0, dir, 0), t);
 
         transform.position = v;
 
