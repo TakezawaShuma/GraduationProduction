@@ -183,7 +183,11 @@ public class PlayerController: MonoBehaviour
 
             if (v.magnitude <= playerSetting.LOD)
             {
-                
+                if (target != null)
+                {
+                    target.GetComponent<Marker>().STATE = Marker.State.None;
+                }
+
                 target = hit.collider.gameObject;
                 
                 lockState = true;
