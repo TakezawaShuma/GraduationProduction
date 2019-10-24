@@ -2,24 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-/// <summary>
-/// スキルの種類
-/// </summary>
-public enum skill_type {
-    ATTACK,
-    BUFF,
-    NUME
+public enum range_type
+{
+    PLAYER,
+    TARGET,
+    PARTY,
+    RANGE,
 }
 
-/// <summary>
-/// バフの種類
-/// </summary>
-public enum buff_type {
-    DEFFENSE,
-    ATTACK,
-    HEEL,
-    NOME
+public enum target_type
+{
+    PLAYER,
+    ENEMY,
+    NONE,
 }
+
+
 
 [CreateAssetMenu(menuName = "game_table/skill", fileName = "skill_data")]
 public class skill_table : ScriptableObject
@@ -31,22 +29,66 @@ public class skill_table : ScriptableObject
     [System.SerializableAttribute]
     public class skill_data
     {
-        [SerializeField]
-        // ID
+        //スキルID
         public int id;
-        [SerializeField]
-        // 最大Lv
-        public int max_point;
-        [SerializeField]
-        // 効果
+
+        //アイコンID
+        public int Icon;
+
+        //エフェクトID
+        public int effectId;
+
+        //名前
+        public string name;
+
+        //最大レベル
+        public int maxLv;
+
+        //現在レベル
+        public int currentLv;
+
+        //説明文
+        public string detail;
+
+        //リキャスト時間
+        public int cast;
+
+        //現在のリキャスト時間
+        public int currentCast;
+
+        //消費コスト
+        public int cost;
+
+        //時間
+        public int time;
+
+        //ヘイト値
+        public int hate;
+
+        //親のID
+        public int pearentID;
+
+        //必要ポイント
+        public int pearentPoint;
+
+        //武器
+        public int weapon;
+
+        // ステータスに及ぼす効果
+        public int hp;
+        public int mp;
+        public int str;
+        public int vit;
+        public int inte;
+        public int mnd;
+        public int dex;
+        public int agi;
         public int effect;
-        [SerializeField]
-        // 説明文
-        public string description;
-        // スキルの種類
-        [SerializeField]
-        public skill_type skillType;
-        [SerializeField]
-        public buff_type buffType;
+        public int condition;
+
+        // 識別用
+        public range_type rangeType;
+
+        public target_type targetType;
     }
 }

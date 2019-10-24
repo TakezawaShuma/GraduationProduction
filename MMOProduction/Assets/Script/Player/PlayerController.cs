@@ -34,7 +34,7 @@ public class PlayerController: MonoBehaviour
 
     // 現在のステート
     private BaseState currentState;
-
+    
     private AnimatorManager animatorManager;
 
     private bool lockState = false;

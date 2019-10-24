@@ -1,10 +1,17 @@
-// グレースケールに変換
-float toGray(float4 c)
-{
-	return (c.r*0.3 + c.g*0.6 + c.b*0.1);
-}		
+//
+// Transform.cginc
+// 
+// Author : Tama
+//
+// UnityShader用
+// 変換情報用の関数をまとめたファイル
+//	
 
+#include "UnityCG.cginc"
+
+// -------------------------------------------------
 // 回転
+// -------------------------------------------------
 float3 rotate(float3 p, float angle, float3 axis) 
 {
 	float3 a = normalize(axis);
@@ -25,7 +32,9 @@ float3 rotate(float3 p, float angle, float3 axis)
 	return mul(p, m);
 }
 
+// -------------------------------------------------
 // 拡大・縮小
+// -------------------------------------------------
 float3 scale(float3 p, float3 s)
 {
 	float3x3 m = float3x3(
@@ -36,7 +45,9 @@ float3 scale(float3 p, float3 s)
 		return mul(p, m);
 }			
 
+// -------------------------------------------------
 // 平行移動
+// -------------------------------------------------
 float4 trans(float3 p, float3 t)
 {
 	float4x4 m = float4x4(

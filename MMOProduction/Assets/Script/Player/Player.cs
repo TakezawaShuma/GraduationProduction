@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
     private float x;
     private float y;
     private float z;
+
     private Status status;
     public int hp { get; set; }
     public int mp { get; set; }
