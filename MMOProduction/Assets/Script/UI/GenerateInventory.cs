@@ -5,7 +5,6 @@ using UnityEngine.UI;
 public class GenerateInventory : MonoBehaviour
 {
     public GameObject Slot;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -27,6 +26,6 @@ public class GenerateInventory : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        //アイテムのデータ数によってスロットを変更する予定
     }
 }
