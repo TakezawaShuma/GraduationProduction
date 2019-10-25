@@ -29,7 +29,7 @@ public class PlaySceneManager : MonoBehaviour
     // ソケット
     private WS.WsPlay wsp = null;
     private Dictionary<int, GameObject> players = new Dictionary<int, GameObject>();
-    private Dictionary<int, GameObject> enemies = new Dictionary<int, GameObject>();
+    private Dictionary<int, Enemy> enemies = new Dictionary<int, Enemy>();
     private SaveData save;
 
     // コールバック関数をリスト化
@@ -92,25 +92,11 @@ public class PlaySceneManager : MonoBehaviour
         else if(Input.GetKeyDown(KeyCode.B))
         {
             Packes.GetEnemyDataStoC packet = new Packes.GetEnemyDataStoC();
-            //packet.u = 100;
-            //packet.x = 0;
-            //packet.y = 0.2f;
-            //packet.z = 30;
-            //packet.dir = 0;
+            packet.enemys.Add(new Packes.EnemyReceiveData(0, 0, 10, 1, 10, 0, 0, 100));
             Debug.Log("敵テスト");
             RegisterEnemies(packet);
         }
-        else if(Input.GetKeyDown(KeyCode.V))
-        {
-            Packes.GetEnemyDataStoC packet = new Packes.GetEnemyDataStoC();
-            //packet.user_id = 100;
-            //packet.x = 10;
-            //packet.y = 0.2f;
-            //packet.z = 10;
-            //packet.dir = 180;
-            Debug.Log("敵テスト");
-            RegisterEnemies(packet);
-        }
+
 
         if (updateFlag)
         {
@@ -266,10 +252,29 @@ public class PlaySceneManager : MonoBehaviour
         // todo
         // エネミーの作成と更新
 
-        //Packes.TranslationStoC data = _packet;
+        List<Packes.EnemyReceiveData> list = _packet.enemys;
+        foreach(var ene in list)
+        {
+            if(ene.unique_id!=Retention.ID)
+            {
+                // 敵の更新
+                if(enemies.ContainsKey(ene.unique_id))
+                {
+                    enemies[ene.unique_id].UpdataData(ene.hp, 0, ene.x, ene.y, ene.z, ene.dir);
+                }
+                // 敵の作成
+                else
+                {
+                    var newEnemy = Instantiate<GameObject>(testEnemyPre, new Vector3(ene.x, ene.y, ene.z), Quaternion.Euler(0, ene.dir, 0));
+                    newEnemy.name = "Enemy:" + ene.master_id;
+                    Enemy enemy = newEnemy.AddComponent<Enemy>();
+                    enemies.Add(ene.unique_id, enemy);
+                    Debug.Log("敵の新規作成");
+                }
+            }
+        }
         //Packes.TranslationStoC data = new Packes.TranslationStoC();
         //Debug.Log("ID:" + data.user_id);
-
         //if (data.user_id != 0)
         //{
         //    if (data.user_id != Retention.ID)
