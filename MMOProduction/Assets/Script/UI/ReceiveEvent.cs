@@ -13,6 +13,8 @@ public class ReceiveEvent : MonoBehaviour
     public void MyPointerDownUI()
     {
         length = this.transform.position - Input.mousePosition;
+
+
         startPosition = this.transform.position;
         ChangeAlpha(0.5f);
     }
@@ -40,6 +42,11 @@ public class ReceiveEvent : MonoBehaviour
     public void MyDragUI()
     {
         transform.position = Input.mousePosition + length;
+    }
+
+    public void MyDragMoveChild()
+    {
+        transform.GetChild(0).position = Input.mousePosition + length;
     }
 
 
