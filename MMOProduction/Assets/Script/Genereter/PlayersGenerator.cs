@@ -13,7 +13,7 @@ public class PlayersGenerator : MonoBehaviour
     {
         GameObject prefab = (GameObject)Resources.Load("OtherPlayer");
         GameObject other = Instantiate(prefab);
-        Debug.Log("ジェネレート");
+        //Debug.Log("ジェネレート");
         return other.GetComponent<OtherPlayers>();
     }
 
@@ -21,7 +21,7 @@ public class PlayersGenerator : MonoBehaviour
     {
         GameObject prefab = (GameObject)Resources.Load("Player");
         GameObject player = Instantiate(prefab);
-        Debug.Log("ジェネレート");
+        //Debug.Log("ジェネレート");
         return player.GetComponent<Player>();
     }
 }

@@ -67,50 +67,50 @@ public class PlaySceneManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.M))
-        {
-            Packes.TranslationStoC packet = new Packes.TranslationStoC();
-            packet.user_id = 1;
-            packet.x = 0;
-            packet.y = 0.5f;
-            packet.z = 15;
-            packet.dir = 0;
-            Debug.Log("テスト");
-            UpdatePlayers(packet);
-        }
-        else if(Input.GetKeyDown(KeyCode.N))
-        {
-            Packes.TranslationStoC packet = new Packes.TranslationStoC();
-            packet.user_id = 1;
-            packet.x = 10;
-            packet.y = 0.5f;
-            packet.z = 20;
-            packet.dir = 180;
-            Debug.Log("テスト");
-            UpdatePlayers(packet);
-        }
-        else if(Input.GetKeyDown(KeyCode.B))
-        {
-            Packes.GetEnemyDataStoC packet = new Packes.GetEnemyDataStoC();
-            //packet.u = 100;
-            //packet.x = 0;
-            //packet.y = 0.2f;
-            //packet.z = 30;
-            //packet.dir = 0;
-            Debug.Log("敵テスト");
-            RegisterEnemies(packet);
-        }
-        else if(Input.GetKeyDown(KeyCode.V))
-        {
-            Packes.GetEnemyDataStoC packet = new Packes.GetEnemyDataStoC();
-            //packet.user_id = 100;
-            //packet.x = 10;
-            //packet.y = 0.2f;
-            //packet.z = 10;
-            //packet.dir = 180;
-            Debug.Log("敵テスト");
-            RegisterEnemies(packet);
-        }
+        //if(Input.GetKeyDown(KeyCode.M))
+        //{
+        //    Packes.TranslationStoC packet = new Packes.TranslationStoC();
+        //    packet.user_id = 1;
+        //    packet.x = 0;
+        //    packet.y = 0.5f;
+        //    packet.z = 15;
+        //    packet.dir = 0;
+        //    Debug.Log("テスト");
+        //    UpdatePlayers(packet);
+        //}
+        //else if(Input.GetKeyDown(KeyCode.N))
+        //{
+        //    Packes.TranslationStoC packet = new Packes.TranslationStoC();
+        //    packet.user_id = 1;
+        //    packet.x = 10;
+        //    packet.y = 0.5f;
+        //    packet.z = 20;
+        //    packet.dir = 180;
+        //    Debug.Log("テスト");
+        //    UpdatePlayers(packet);
+        //}
+        //else if(Input.GetKeyDown(KeyCode.B))
+        //{
+        //    Packes.GetEnemyDataStoC packet = new Packes.GetEnemyDataStoC();
+        //    //packet.u = 100;
+        //    //packet.x = 0;
+        //    //packet.y = 0.2f;
+        //    //packet.z = 30;
+        //    //packet.dir = 0;
+        //    //Debug.Log("敵テスト");
+        //    RegisterEnemies(packet);
+        //}
+        //else if(Input.GetKeyDown(KeyCode.V))
+        //{
+        //    Packes.GetEnemyDataStoC packet = new Packes.GetEnemyDataStoC();
+        //    //packet.user_id = 100;
+        //    //packet.x = 10;
+        //    //packet.y = 0.2f;
+        //    //packet.z = 10;
+        //    //packet.dir = 180;
+        //    //Debug.Log("敵テスト");
+        //    RegisterEnemies(packet);
+        //}
 
         if (updateFlag)
         {
@@ -224,7 +224,7 @@ public class PlaySceneManager : MonoBehaviour
     /// </summary>
     private void UpdatePlayers(Packes.TranslationStoC _packet)
     {
-        Debug.Log("ユーザーの移動系のコールバック");
+        //Debug.Log("ユーザーの移動系のコールバック");
         Packes.TranslationStoC data = _packet;
         //Debug.Log("ID:" + data.user_id);
 
@@ -236,7 +236,7 @@ public class PlaySceneManager : MonoBehaviour
                 if (players.ContainsKey(data.user_id))
                 {
                     players[data.user_id].GetComponent<OtherPlayers>().UpdataData(0, 0, data.x, data.y, data.z, data.dir);
-                    Debug.Log("他のユーザーの移動処理");
+                    //Debug.Log("他のユーザーの移動処理");
                 }
                 // todo 他プレイヤーの更新と作成を関数分けする
                 // 他のユーザーの作成
@@ -246,9 +246,9 @@ public class PlaySceneManager : MonoBehaviour
                     otherPlayer.name = "otherPlayer" + data.user_id;
                     otherPlayer.AddComponent<OtherPlayers>();
                     players.Add(data.user_id, otherPlayer);
-                    Debug.Log(otherPlayer.transform.position);
+                    //Debug.Log(otherPlayer.transform.position);
 
-                    Debug.Log("他のユーザーの作成");
+                    //Debug.Log("他のユーザーの作成");
                 }
             }
         }
@@ -261,7 +261,7 @@ public class PlaySceneManager : MonoBehaviour
     /// <param name="_str"></param>
     private void RegisterEnemies(Packes.GetEnemyDataStoC _packet)
     {
-        Debug.Log("エネミーの作成");
+        //Debug.Log("エネミーの作成");
 
         // todo
         // エネミーの作成と更新
@@ -303,7 +303,7 @@ public class PlaySceneManager : MonoBehaviour
     /// <param name="_save"></param>
     private void RecvSaveData(Packes.LoadSaveData _packet)
     {
-        Debug.Log("セーブデータの取得");
+        //Debug.Log("セーブデータの取得");
         //SaveData data = JsonUtility.FromJson<SaveData>(_str);
 
         //save = data;

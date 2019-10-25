@@ -67,7 +67,7 @@ namespace WS
         {
             if (int.Parse(_json.Substring(11, 3)) != 201)
             {
-                Debug.Log("Send data : " + _json);
+                //Debug.Log("Send data : " + _json);
             }
             if (base.ws.ReadyState == WebSocketState.Open)
             {
@@ -99,37 +99,37 @@ namespace WS
                         case CommandData.GetEnemyDataStoC:
                             Packes.GetEnemyDataStoC init = Json.ConvertToPackets<Packes.GetEnemyDataStoC>(e.Data);
                             //Debug.Log("command : " + init.command + " , enemys"+init.enemys.Count);
-                            Debug.Log(e.Data);
+                            //Debug.Log(e.Data);
                             enemysAction(init);
                             break;
 
                         case CommandData.StatusStoC:
                             Packes.StatusStoC status = Json.ConvertToPackets<Packes.StatusStoC>(e.Data);
-                            Debug.Log("command : " + status.command + " , user_id : " + status.user_id);
+                            //Debug.Log("command : " + status.command + " , user_id : " + status.user_id);
                             statusAction(status);
                             break;
 
                         case CommandData.LoadSaveData:
                             Packes.LoadSaveData save = Json.ConvertToPackets<Packes.LoadSaveData>(e.Data);
-                            Debug.Log("command : " + save.command);
+                            //Debug.Log("command : " + save.command);
                             loadSaveAction(save);
                             break;
 
                         case CommandData.LoadingFinishStoC:
                             Packes.LoadingFinishStoC loadFin = Json.ConvertToPackets<Packes.LoadingFinishStoC>(e.Data);
-                            Debug.Log("command : " + loadFin.command);
+                            //Debug.Log("command : " + loadFin.command);
                             loadFinAction(loadFin);
                             break;
 
                         case CommandData.EnemyAliveStoC:
                             Packes.EnemyAliveStoC alive = Json.ConvertToPackets<Packes.EnemyAliveStoC>(e.Data);
-                            Debug.Log("command : " + alive.command + " , unique_id : " + alive.unique_id + " , hp : " + alive.hp);
+                            //Debug.Log("command : " + alive.command + " , unique_id : " + alive.unique_id + " , hp : " + alive.hp);
                             enemyAliveAction(alive);
                             break;
 
                         case CommandData.EnemyDieStoC:
                             Packes.EnemyDieStoC dead = Json.ConvertToPackets<Packes.EnemyDieStoC>(e.Data);
-                            Debug.Log("command : " + dead.command + " , Drop : " + dead.drop + " , unique_id" + dead.unique_id);
+                            //Debug.Log("command : " + dead.command + " , Drop : " + dead.drop + " , unique_id" + dead.unique_id);
                             enemyDeadAction(dead);
                             break;
                         case CommandData.LogoutStoC:

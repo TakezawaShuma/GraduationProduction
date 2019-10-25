@@ -43,7 +43,7 @@ namespace WS
 
         public void Send(string _json)
         {
-            Debug.Log(_json);
+            //Debug.Log(_json);
             base.ws.Send(_json);
         }
 

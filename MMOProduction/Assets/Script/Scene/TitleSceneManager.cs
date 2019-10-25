@@ -137,11 +137,6 @@ public class TitleSceneManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Debug
-        if(Input.GetKeyDown(KeyCode.T))
-        {
-            wsl.Send(new Packes.LoginUser("tsit", "trident").ToJson());
-        }
     }
 
     private void OnDestroy()
@@ -152,20 +147,20 @@ public class TitleSceneManager : MonoBehaviour
     //ボタンが押されたとき
     public void Click()
     {
-        Debug.Log("クリックされた");
+        //Debug.Log("クリックされた");
     }
 
     // 
     public void LogInClick()
     {
         LogInActive();
-        Debug.Log("SignIn");
+        //Debug.Log("SignIn");
     }
 
     public void RegisterClick()
     {
         RegisterActive();
-        Debug.Log("SignUp");
+        //Debug.Log("SignUp");
     }
 
     public void BackClick()
@@ -184,7 +179,7 @@ public class TitleSceneManager : MonoBehaviour
         ConfirmPW_.gameObject.SetActive(false);
         ConfirmPW_.text = "";
 
-        Debug.Log("Back");
+        //Debug.Log("Back");
     }
 
     /// <summary>
@@ -199,7 +194,7 @@ public class TitleSceneManager : MonoBehaviour
 
         if (CheckString(id, true) == true && CheckString(pw, false) == true)
         {
-            Debug.Log("ログイン ID:" + id + "  PW:" + pw);
+            //Debug.Log("ログイン ID:" + id + "  PW:" + pw);
             ErrorMessageHide();
             if (connectFlag)
             {
@@ -228,7 +223,7 @@ public class TitleSceneManager : MonoBehaviour
             // 新規登録
             if (pw_.text == ConfirmPW_.text)
             {
-                Debug.Log("新規登録 ID:" + id + "  PW:" + pw);
+                //Debug.Log("新規登録 ID:" + id + "  PW:" + pw);
                 //Error01.gameObject.SetActive(false);
                 //Error02.gameObject.SetActive(false);
                 //Error03.gameObject.SetActive(false);

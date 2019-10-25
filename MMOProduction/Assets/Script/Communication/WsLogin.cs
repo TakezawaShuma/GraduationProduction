@@ -47,7 +47,6 @@ namespace WS
 
         public void Send(string _json)
         {
-            Debug.Log("SendData : " + _json);
             base.ws.Send(_json);
         }
 
@@ -66,19 +65,19 @@ namespace WS
                     switch (com)
                     {
                         case CommandData.LoginOK: //103
-                            Debug.Log(e.Data);
+                            //Debug.Log(e.Data);
                             Packes.LoginOK login = Json.ConvertToPackets<Packes.LoginOK>(e.Data);
                             // IDの保管
                             Retention.ID = login.user_id;
-                            Debug.Log("command : " + login.command + " , id : " + login.user_id);
-                            Debug.Log("プレイシーンに移行します。");
+                            //Debug.Log("command : " + login.command + " , id : " + login.user_id);
+                            //Debug.Log("プレイシーンに移行します。");
                             ChangeScenetoPlay();
                             break;
 
                         case CommandData.LoginError: // 104
                             Packes.LoginError logError = Json.ConvertToPackets<Packes.LoginError>(e.Data);
 
-                            Debug.Log("command : " + logError.command);
+                            //Debug.Log("command : " + logError.command);
                             errerAction((int)com);
                             break;
 
@@ -86,8 +85,8 @@ namespace WS
                             Packes.CreateOK create = Json.ConvertToPackets<Packes.CreateOK>(e.Data);
                             // IDの保管
                             Retention.ID = create.user_id;
-                            Debug.Log("command : " + create.command + " , id : " + create.user_id);
-                            Debug.Log("プレイシーンに移行します。");
+                            //Debug.Log("command : " + create.command + " , id : " + create.user_id);
+                            //Debug.Log("プレイシーンに移行します。");
                             ChangeScenetoPlay();
                             break;
 

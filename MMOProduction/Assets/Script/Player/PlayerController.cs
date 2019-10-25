@@ -235,7 +235,7 @@ public class PlayerController: MonoBehaviour
         if(other.tag == "Enemy")
         {
             // ここでデータを送る
-            Debug.Log("当たってるYO");
+            Debug.Log("エネミーと当たってるYO");
         }
     }
 }
