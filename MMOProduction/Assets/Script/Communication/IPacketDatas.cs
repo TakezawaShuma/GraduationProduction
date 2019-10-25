@@ -62,6 +62,14 @@ public enum CommandData
     /// <summary>データの読み込み終了報告</summary>
     LoadingFinishStoC = (int)212,
 
+    /// <summary>戦闘処理送信</summary>
+    Attack = (int)220,
+    /// <summary>エネミーが生きている時</summary>
+    EnemyAliveStoC = (int)221,
+    /// <summary>エネミーが死んでいる時</summary>
+    EnemyDieStoC = (int)222,
+
+
 
     /// その他
 

@@ -174,6 +174,46 @@ namespace Packes
     }
 
     /// <summary>
+    /// 攻撃 command:220
+    /// </summary>
+    public class Attack : IPacketDatas
+    {
+        /// <summary>敵のID</summary>
+        public int enemy_id;
+        /// <summary>プレイヤーID</summary>
+        public int user_id;
+        /// <summary>スキルID</summary>
+        public int skill_id;
+        /// <summary>マップのID</summary>
+        public int map_id;
+
+        /// <summary>デフォルトコンストラクタ</summary>
+        public Attack()
+        {
+            this.command = (int)CommandData.Attack;
+        }
+        /// <summary>コンストラクタ</summary>
+        /// <param name="_enemy_id">敵のID</summary>
+        /// <param name="_user_id">プレイヤーID</summary>
+        /// <param name="_skill_id">スキルID</summary>
+        /// <param name="_map_id">マップのID</summary>
+        public Attack(
+            int _enemy_id,
+            int _user_id,
+            int _skill_id,
+            int _map_id
+        )
+        {
+            this.command = (int)CommandData.Attack;
+            this.enemy_id = _enemy_id;
+            this.user_id = _user_id;
+            this.skill_id = _skill_id;
+            this.map_id = _map_id;
+        }
+    }
+
+
+    /// <summary>
     /// ログアウト command:701
     /// </summary>
     public class LogoutCtoS : IPacketDatas
@@ -186,7 +226,7 @@ namespace Packes
         {
             this.command = (int)CommandData.LogoutCtoS;
         }
-        /// <summary>コンストラクタ</summary>
+        /// <summary>フルコンストラクタ</summary>
         /// <param name="_user_id">ユーザーのID</summary>
         public LogoutCtoS(
             int _user_id
@@ -329,7 +369,7 @@ namespace Packes
 
 
     /// <summary>
-    /// セーブデータの読み込み完了
+    /// セーブデータの読み込み完了 command:212
     /// </summary>
     public class LoadingFinishStoC:IPacketDatas
     {
@@ -344,6 +384,70 @@ namespace Packes
             this.command = (int)CommandData.LoadingFinishStoC;
         }
     }
+
+    /// <summary>
+    /// 判定後生きている
+    /// </summary>
+    public class EnemyAliveStoC : IPacketDatas
+    {
+        /// <summary>敵のID</summary>
+        public int unique_id;
+        /// <summary>ヒットポイント</summary>
+        public int hp;
+        /// <summary>状態</summary>
+        public int status;
+
+        /// <summary>デフォルトコンストラクタ</summary>
+        public EnemyAliveStoC()
+        {
+            this.command = (int)CommandData.EnemyAliveStoC;
+        }
+        /// <summary>コンストラクタ</summary>
+        /// <param name="_unique_id">敵のID</summary>
+        /// <param name="_hp">ヒットポイント</summary>
+        /// <param name="_status">状態</summary>
+        public EnemyAliveStoC(
+            int _unique_id,
+            int _hp,
+            int _status
+        )
+        {
+            this.command = (int)CommandData.EnemyAliveStoC;
+            this.unique_id = _unique_id;
+            this.hp = _hp;
+            this.status = _status;
+        }
+    }
+
+    /// <summary>
+    /// 判定後死亡
+    /// </summary>
+    public class EnemyDieStoC : IPacketDatas
+    {
+        /// <summary>ドロップ品のID</summary>
+        public int drop;
+        /// <summary>敵のID</summary>
+        public int unique_id;
+
+        /// <summary>デフォルトコンストラクタ</summary>
+        public EnemyDieStoC()
+        {
+            this.command = (int)CommandData.EnemyDieStoC;
+        }
+        /// <summary>コンストラクタ</summary>
+        /// <param name="_drop">ドロップ品のID</summary>
+        public EnemyDieStoC(
+            int _drop,
+            int _unique_id
+        )
+        {
+            this.command = (int)CommandData.EnemyDieStoC;
+            this.drop = _drop;
+            this.unique_id = _unique_id;
+        }
+    }
+
+
 
     /// <summary>
     /// ログアウト command:707

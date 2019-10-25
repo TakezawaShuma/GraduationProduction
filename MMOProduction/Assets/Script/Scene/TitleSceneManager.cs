@@ -120,23 +120,6 @@ public class TitleSceneManager : MonoBehaviour
            300,
            400,
         };
-
-
-        Packes.GetEnemyDataStoC tmp = new Packes.GetEnemyDataStoC();
-        tmp.enemys.Add(new Packes.EnemyReceiveData(100, 1, 10, 10, 10, 10, 1, 100));
-        tmp.enemys.Add(new Packes.EnemyReceiveData(100, 2, 20, 20, 20, 20, 2, 200));
-        tmp.enemys.Add(new Packes.EnemyReceiveData(100, 3, 30, 30, 30, 30, 3, 300));
-        tmp.enemys.Add(new Packes.EnemyReceiveData(100, 4, 40, 40, 40, 30, 4, 400));
-        tmp.enemys.Add(new Packes.EnemyReceiveData(100, 5, 40, 40, 40, 30, 4, 400));
-        tmp.enemys.Add(new Packes.EnemyReceiveData(100, 6, 40, 40, 40, 30, 4, 400));
-        tmp.enemys.Add(new Packes.EnemyReceiveData(100, 7, 40, 40, 40, 30, 4, 400));
-        tmp.enemys.Add(new Packes.EnemyReceiveData(100, 8, 40, 40, 40, 30, 4, 400));
-        tmp.enemys.Add(new Packes.EnemyReceiveData(100, 9, 40, 40, 40, 30, 4, 400));
-        //Debug.Log(tmp.enemys);
-        string json = tmp.ToJson();
-        Debug.Log(json);
-        Packes.GetEnemyDataStoC tmp2 = Json.ConvertToPackets<Packes.GetEnemyDataStoC>(json);
-        Debug.Log(tmp2.enemys.Count);
     }
 
     private int m_command = 0;

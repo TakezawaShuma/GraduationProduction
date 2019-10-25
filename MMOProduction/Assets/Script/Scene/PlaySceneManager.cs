@@ -14,8 +14,14 @@ public class PlaySceneManager : MonoBehaviour
     bool connectFlag = false;
     public GameObject playerPre;
 
+    [SerializeField, Header("テストの敵")]
+    private GameObject testEnemyPre;
+
     [SerializeField, Header("カメラ")]
     private FollowingCamera FollowingCamera = default(FollowingCamera);
+
+    [SerializeField]
+    private ChatController chat;
 
     bool startFlag = false;
     bool updateFlag = true;
@@ -45,10 +51,12 @@ public class PlaySceneManager : MonoBehaviour
             //wsp.ConnectionStart(UpdatePlayers, RecvSaveData); // debug
             wsp = new WS.WsPlay(8001);
             wsp.moveingAction = UpdatePlayers;  // 202
-            wsp.enemysAction = null;            // 204
+            wsp.enemysAction = RegisterEnemies; // 204
             wsp.statusAction = null;            // 206
             wsp.loadSaveAction = RecvSaveData;  // 210
             wsp.loadFinAction = LoadFinish;     // 212
+            wsp.enemyAliveAction = AliveEnemy;  // 221
+            wsp.enemyDeadAction = DeadEnemy;    // 222
             wsp.Send(new Packes.DataLoading(Retention.ID).ToJson());
 
         }
@@ -61,23 +69,47 @@ public class PlaySceneManager : MonoBehaviour
     {
         if(Input.GetKeyDown(KeyCode.M))
         {
-            Packes.TranslationStoC packes = new Packes.TranslationStoC();
-            packes.user_id = 1;
-            packes.x = 0;
-            packes.y = 0.5f;
-            packes.z = 15;
+            Packes.TranslationStoC packet = new Packes.TranslationStoC();
+            packet.user_id = 1;
+            packet.x = 0;
+            packet.y = 0.5f;
+            packet.z = 15;
+            packet.dir = 0;
             Debug.Log("テスト");
-            UpdatePlayers(packes);
+            UpdatePlayers(packet);
         }
         else if(Input.GetKeyDown(KeyCode.N))
         {
-            Packes.TranslationStoC packes = new Packes.TranslationStoC();
-            packes.user_id = 1;
-            packes.x = 10;
-            packes.y = 0.5f;
-            packes.z = 20;
+            Packes.TranslationStoC packet = new Packes.TranslationStoC();
+            packet.user_id = 1;
+            packet.x = 10;
+            packet.y = 0.5f;
+            packet.z = 20;
+            packet.dir = 180;
             Debug.Log("テスト");
-            UpdatePlayers(packes);
+            UpdatePlayers(packet);
+        }
+        else if(Input.GetKeyDown(KeyCode.B))
+        {
+            Packes.GetEnemyDataStoC packet = new Packes.GetEnemyDataStoC();
+            //packet.u = 100;
+            //packet.x = 0;
+            //packet.y = 0.2f;
+            //packet.z = 30;
+            //packet.dir = 0;
+            Debug.Log("敵テスト");
+            RegisterEnemies(packet);
+        }
+        else if(Input.GetKeyDown(KeyCode.V))
+        {
+            Packes.GetEnemyDataStoC packet = new Packes.GetEnemyDataStoC();
+            //packet.user_id = 100;
+            //packet.x = 10;
+            //packet.y = 0.2f;
+            //packet.z = 10;
+            //packet.dir = 180;
+            Debug.Log("敵テスト");
+            RegisterEnemies(packet);
         }
 
         if (updateFlag)
@@ -95,7 +127,22 @@ public class PlaySceneManager : MonoBehaviour
                     }
                 }
             }
+
+            // Debug
+            if (Input.GetKeyDown(KeyCode.T))
+            {
+                wsp.Send(new Packes.Attack(0, Retention.ID, 0, 0).ToJson());
+            }
+            if (Input.GetKeyDown(KeyCode.Y))
+            {
+                wsp.Send(new Packes.Attack(1, Retention.ID, 0, 0).ToJson());
+            }
+
         }
+
+
+
+
     }
 
     private void OnDestroy()
@@ -137,7 +184,8 @@ public class PlaySceneManager : MonoBehaviour
             players[Retention.ID].GetComponent<PlayerController>().Init(
                 players[Retention.ID].GetComponent<Player>(),
                 FollowingCamera,
-                players[Retention.ID].GetComponent<PlayerSetting>()
+                players[Retention.ID].GetComponent<PlayerSetting>(),
+                chat
                 );
             FollowingCamera.SetTarget(players[Retention.ID]);
         }
@@ -160,7 +208,8 @@ public class PlaySceneManager : MonoBehaviour
             players[Retention.ID].GetComponent<PlayerController>().Init(
                 players[Retention.ID].GetComponent<Player>(),
                 FollowingCamera,
-                players[Retention.ID].GetComponent<PlayerSetting>()
+                players[Retention.ID].GetComponent<PlayerSetting>(),
+                chat
                 );
             FollowingCamera.SetTarget(players[Retention.ID]);
         }
@@ -193,30 +242,59 @@ public class PlaySceneManager : MonoBehaviour
                 // 他のユーザーの作成
                 else
                 {
-                    var otherPlayer = Instantiate<GameObject>(playerPre);
+                    var otherPlayer = Instantiate<GameObject>(playerPre, new Vector3(data.x, data.y, data.z), Quaternion.Euler(0, data.dir, 0));
                     otherPlayer.name = "otherPlayer" + data.user_id;
                     otherPlayer.AddComponent<OtherPlayers>();
                     players.Add(data.user_id, otherPlayer);
                     Debug.Log(otherPlayer.transform.position);
 
                     Debug.Log("他のユーザーの作成");
-                };
+                }
             }
         }
     }
 
 
     /// <summary>
-    /// エネミーの情報の更新と作成　
+    /// エネミーの情報の更新と作成　→ enemysAction
     /// </summary>
     /// <param name="_str"></param>
-    private void RegisterEnemies()
+    private void RegisterEnemies(Packes.GetEnemyDataStoC _packet)
     {
+        Debug.Log("エネミーの作成");
+
         // todo
         // エネミーの作成と更新
+
+        //Packes.TranslationStoC data = _packet;
+        //Packes.TranslationStoC data = new Packes.TranslationStoC();
+        //Debug.Log("ID:" + data.user_id);
+
+        //if (data.user_id != 0)
+        //{
+        //    if (data.user_id != Retention.ID)
+        //    {
+        //        // 敵の更新
+        //        if (players.ContainsKey(data.user_id))
+        //        {
+        //            players[data.user_id].GetComponent<Enemy>().UpdataData(0, 0, data.x, data.y, data.z, data.dir);
+        //            Debug.Log("敵の移動処理");
+        //        }
+        //        // todo 他プレイヤーの更新と作成を関数分けする
+        //        // 敵の作成
+        //        else
+        //        {
+        //            var otherPlayer = Instantiate<GameObject>(testEnemyPre, new Vector3(data.x, data.y, data.z), Quaternion.Euler(0, data.dir, 0));
+        //            otherPlayer.name = "enemy" + data.user_id;
+        //            otherPlayer.AddComponent<Enemy>();
+        //            players.Add(data.user_id, otherPlayer);
+        //            Debug.Log(otherPlayer.transform.position);
+
+        //            Debug.Log("敵の作成");
+        //        }
+        //    }
+        //}
     }
-
-
 
 
     /// <summary>
@@ -237,9 +315,9 @@ public class PlaySceneManager : MonoBehaviour
         //MakePlayer(data);
 
     }
-    
+
     /// <summary>
-    /// セーブデータの読み込みが完了したら呼ばれる　
+    /// セーブデータの読み込みが完了したら呼ばれる　→ loadFinAction
     /// </summary>
     /// <param name="_packet"></param>
     private void LoadFinish(Packes.LoadingFinishStoC _packet)
@@ -248,6 +326,27 @@ public class PlaySceneManager : MonoBehaviour
         wsp.Send(new Packes.GetEnemysDataCtoS(0, Retention.ID).ToJson());
     }
 
+
+    private void AliveEnemy(Packes.EnemyAliveStoC _packet)
+    {
+        // todo
+        // 戦闘で計算後エネミーが生きていたら
+        // HPを減らすや状態の更新
+
+        Debug.Log("敵は生存している");
+    }
+
+    private void DeadEnemy(Packes.EnemyDieStoC _packet)
+    {
+        // todo
+        // 戦闘で計算後エネミーが死亡していたら
+        // HPを0にして死亡エフェクトやドロップアイテムの取得
+
+        Debug.Log("敵は死んだ！！！");
+    }
+
+
+    // --------------------送信関係--------------------
 
     /// <summary>
     /// 位置情報の送信
