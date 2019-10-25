@@ -33,8 +33,6 @@ public class SkilltreeCreater : MonoBehaviour
 
     private int mostRight = 0;
 
-    const int SIZE = 50;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -90,7 +88,10 @@ public class SkilltreeCreater : MonoBehaviour
     {
         GameObject gameObject = Instantiate(skill, transform);
         gameObject.name = num.ToString();
-        gameObject.GetComponent<RectTransform>().localPosition = new Vector2(point.x * SIZE, point.y * -SIZE);
+        var size = gameObject.GetComponent<RectTransform>().sizeDelta;
+        gameObject.GetComponent<RectTransform>().localPosition = new Vector2(point.x * size.x, point.y * -size.y);
+
+        Debug.Log(size);
 
         if (SkillData.children.Length != 0)
         {
@@ -103,18 +104,21 @@ public class SkilltreeCreater : MonoBehaviour
                     nextPoint.x += 1;
 
                     GameObject horizontalLine = Instantiate(horizontal, transform);
-                    horizontalLine.GetComponent<RectTransform>().localPosition = new Vector2(nextPoint.x * SIZE, nextPoint.y * -SIZE);
+                    horizontalLine.GetComponent<RectTransform>().localPosition = new Vector2(nextPoint.x * size.x, nextPoint.y * -size.y);
 
                     nextPoint.x += 1;
 
-                    mostRight = (int)nextPoint.x;
+                    if (mostRight < nextPoint.x)
+                    {
+                        mostRight = (int)nextPoint.x;
+                    }
                 }
                 else
                 {
                     nextPoint.y += 1;
 
                     GameObject verticalLine = Instantiate(vertical, transform);
-                    verticalLine.GetComponent<RectTransform>().localPosition = new Vector2(nextPoint.x * SIZE, nextPoint.y * -SIZE);
+                    verticalLine.GetComponent<RectTransform>().localPosition = new Vector2(nextPoint.x * size.x, nextPoint.y * -size.y);
 
                     nextPoint.y += 1;
                 }
