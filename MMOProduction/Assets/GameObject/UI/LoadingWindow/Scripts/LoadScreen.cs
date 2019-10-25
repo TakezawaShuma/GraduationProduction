@@ -4,8 +4,10 @@
 // Author: Tama
 //
 
+using System.Collections;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 
 // ---------------------------------------------
@@ -33,15 +35,19 @@ public class LoadScreen : MonoBehaviour
        
     private ColumnWindow _columnWindow;    // ロード中に表示するコラム画面
 
+    private AsyncOperation async;
+
 
     private void Start()
     {
-        _loadingUI.SetActive(false);
+        //_loadingUI.SetActive(false);
 
         _progress = 0f;
 
         _columnWindow = new ColumnWindow("Images/ColumnWindow");
         // 標準ウィンドウ幅 width:500 height:300
+
+        StartCoroutine("LoadScene");
     }
 
     private void Update()
@@ -54,7 +60,7 @@ public class LoadScreen : MonoBehaviour
 
         _progress = Mathf.Clamp(_progress, 0.0f, 1.0f);
         _loadingSlider.value = _progress;
-        _progressUI.text = Mathf.Floor(_progress).ToString() + "%";
+        _progressUI.text = Mathf.Floor(_progress * 100.0f).ToString() + "%";
 
 #if DEBUG 
         if (Input.GetKey(KeyCode.Space))
@@ -97,5 +103,19 @@ public class LoadScreen : MonoBehaviour
     private void ChangeColumn()
     {
         _loadingInfoWindow.sprite = _columnWindow.GetRandomImage();
+    }
+
+    private IEnumerator LoadScene()
+    {
+        async = SceneManager.LoadSceneAsync("PlayScene", LoadSceneMode.Additive);
+        while (!async.isDone)
+        {
+            SetProgress(Mathf.Clamp01(async.progress / 0.9f));
+
+            yield return null;
+        }
+
+        Debug.Log("このシーンを消す");
+        SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene().name);
     }
 }
