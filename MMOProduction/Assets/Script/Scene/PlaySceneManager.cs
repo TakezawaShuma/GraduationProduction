@@ -90,7 +90,8 @@ public class PlaySceneManager : MonoBehaviour
                     if (connectFlag)
                     {
                         SendPosition(playerData);
-                        SendStatus(100, 40, 100, 60, 10001001);
+                        //SendStatus(100, 40, 100, 60, 10001001);
+                        LoadFinish(null);
                     }
                 }
             }
@@ -170,7 +171,7 @@ public class PlaySceneManager : MonoBehaviour
     // コールバック系統↓
 
     /// <summary>
-    /// 自分以外のユーザーの更新
+    /// 自分以外のユーザーの更新　→　moveingAction
     /// </summary>
     private void UpdatePlayers(Packes.TranslationStoC _packet)
     {
@@ -206,7 +207,7 @@ public class PlaySceneManager : MonoBehaviour
 
 
     /// <summary>
-    /// エネミーの情報の更新と作成
+    /// エネミーの情報の更新と作成　
     /// </summary>
     /// <param name="_str"></param>
     private void RegisterEnemies()
@@ -219,7 +220,7 @@ public class PlaySceneManager : MonoBehaviour
 
 
     /// <summary>
-    /// セーブデータを受け取り入場要請を送信
+    /// セーブデータを受け取り入場要請を送信　→　loadSaveAction
     /// </summary>
     /// <param name="_save"></param>
     private void RecvSaveData(Packes.LoadSaveData _packet)
@@ -237,12 +238,14 @@ public class PlaySceneManager : MonoBehaviour
 
     }
     
-
+    /// <summary>
+    /// セーブデータの読み込みが完了したら呼ばれる　
+    /// </summary>
+    /// <param name="_packet"></param>
     private void LoadFinish(Packes.LoadingFinishStoC _packet)
     {
-
         updateFlag = true;
-
+        wsp.Send(new Packes.GetEnemysDataCtoS(0, Retention.ID).ToJson());
     }
 
 

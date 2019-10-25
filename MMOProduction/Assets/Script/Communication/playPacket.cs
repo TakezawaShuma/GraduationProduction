@@ -58,10 +58,10 @@ namespace Packes
     /// </summary>
     public class GetEnemysDataCtoS : IPacketDatas
     {
-        /// <summary>コマンド識別子</summary>
-        public int command;
         /// <summary>マップのID</summary>
         public int map_id;
+        /// <summary> ユーザーID</summary>
+        public int user_id;
 
         /// <summary>デフォルトコンストラクタ</summary>
         public GetEnemysDataCtoS()
@@ -71,11 +71,13 @@ namespace Packes
         /// <summary>コンストラクタ</summary>
         /// <param name="_map_id">マップのID</summary>
         public GetEnemysDataCtoS(
-            int _map_id
+            int _map_id,
+            int _user_id
         )
         {
             this.command = (int)CommandData.GetEnemysDataCtoS;
             this.map_id = _map_id;
+            this.user_id = _user_id;
         }
     }
 
