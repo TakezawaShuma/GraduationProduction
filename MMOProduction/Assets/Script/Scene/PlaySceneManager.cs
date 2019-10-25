@@ -23,6 +23,9 @@ public class PlaySceneManager : MonoBehaviour
     [SerializeField]
     private ChatController chat;
 
+    [SerializeField]
+    private GameObject playersParent;
+
     bool startFlag = false;
     bool updateFlag = true;
 
@@ -56,7 +59,6 @@ public class PlaySceneManager : MonoBehaviour
             wsp.Send(new Packes.DataLoading(Retention.ID).ToJson());
 
         }
-        Debug.Log("プレイスタート");
         MakePlayer();
     }
 
@@ -160,7 +162,7 @@ public class PlaySceneManager : MonoBehaviour
         if (!players.ContainsKey(Retention.ID))
         {
             // 自分の作成コンポーネントの追加
-            var tmpPlayer = Instantiate<GameObject>(playerPre);
+            var tmpPlayer = Instantiate<GameObject>(playerPre, playersParent.transform);
             tmpPlayer.name = "player" + Retention.ID;
             players.Add(Retention.ID, tmpPlayer);
             players[Retention.ID].AddComponent<Player>();
