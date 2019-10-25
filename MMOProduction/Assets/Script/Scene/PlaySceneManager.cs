@@ -44,10 +44,11 @@ public class PlaySceneManager : MonoBehaviour
             // プレイサーバに接続
             //wsp.ConnectionStart(UpdatePlayers, RecvSaveData); // debug
             wsp = new WS.WsPlay(8001);
-            wsp.loadSaveAction = RecvSaveData;  // 210
             wsp.moveingAction = UpdatePlayers;  // 202
+            wsp.enemysAction = null;            // 204
             wsp.statusAction = null;            // 206
-            wsp.loadFinAction = LoadFinish;
+            wsp.loadSaveAction = RecvSaveData;  // 210
+            wsp.loadFinAction = LoadFinish;     // 212
             wsp.Send(new Packes.DataLoading(Retention.ID).ToJson());
 
         }

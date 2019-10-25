@@ -16,6 +16,8 @@ namespace WS
         //private int port = 8001;
         // 位置同期 202
         public Action<Packes.TranslationStoC> moveingAction;
+        // エネミーの位置同期と状態 204
+        public Action<Packes.GetEnemyDataStoC> enemysAction;
         // 状態 206
         public Action<Packes.StatusStoC> statusAction;
         // セーブ読み込み 210
@@ -86,15 +88,19 @@ namespace WS
                                 " , position : (" + posSync.x + "," + posSync.y + "," + posSync.z + ") , direction : " + posSync.dir);
                             moveingAction(posSync);
                             break;
-                        case CommandData.InitLoginStoC:
-                            Packes.InitLoginStoC init = Json.ConvertToPackets<Packes.InitLoginStoC>(e.Data);
-                            Debug.Log("command : " + init.command + " , user_id : " + init.user_id);
+
+                        case CommandData.GetEnemyDataStoC:
+                            Packes.GetEnemyDataStoC init = Json.ConvertToPackets<Packes.GetEnemyDataStoC>(e.Data);
+                            Debug.Log("command : " + init.command + " , enemys"+init.enemys.Count);
+                            enemysAction(init);
                             break;
+
                         case CommandData.StatusStoC:
                             Packes.StatusStoC status = Json.ConvertToPackets<Packes.StatusStoC>(e.Data);
                             Debug.Log("command : " + status.command + " , user_id : " + status.user_id);
                             statusAction(status);
                             break;
+
                         case CommandData.LoadSaveData:
                             Packes.LoadSaveData save = Json.ConvertToPackets<Packes.LoadSaveData>(e.Data);
                             Debug.Log("command : " + save.command);

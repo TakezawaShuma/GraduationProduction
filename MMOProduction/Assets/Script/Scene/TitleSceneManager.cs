@@ -112,6 +112,23 @@ public class TitleSceneManager : MonoBehaviour
             // 接続開始
             wsl = new WS.WsLogin(8000);
         }
+
+        int[] enemyyyy =
+        {
+           100,
+           200,
+           300,
+           400,
+        };
+
+
+        Packes.GetEnemyDataStoC tmp = new Packes.GetEnemyDataStoC();
+        tmp.enemys.Add(new Packes.EnemyReceiveData(100, 1, 10, 10, 10, 10, 1, 100));
+        tmp.enemys.Add(new Packes.EnemyReceiveData(100, 2, 20, 20, 20, 20, 2, 200));
+        tmp.enemys.Add(new Packes.EnemyReceiveData(100, 3, 30, 30, 30, 30, 3, 300));
+        tmp.enemys.Add(new Packes.EnemyReceiveData(100, 4, 40, 40, 40, 30, 4, 400));
+        //Debug.Log(tmp.enemys);
+        Debug.Log(Json.ConvertToJson(tmp));
     }
 
     private int m_command = 0;
@@ -133,7 +150,7 @@ public class TitleSceneManager : MonoBehaviour
 
     private void OnDestroy()
     {
-        wsl.Destroy();
+        if(connectFlag) wsl.Destroy();
     }
     //public関数--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     //ボタンが押されたとき

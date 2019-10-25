@@ -1,6 +1,7 @@
 ////////////////////////////////////////////////
 // パケットデータ等通信で使うデータをまとめた //
 ////////////////////////////////////////////////
+using System.Collections.Generic;
 /// <summary>
 /// パケットデータ
 /// </summary>
@@ -53,26 +54,28 @@ namespace Packes
     }
 
     /// <summary>
-    /// 初回ログイン command:203
+    /// 敵の一覧取得 command:203
     /// </summary>
-    public class InitLogin : IPacketDatas
+    public class GetEnemysDataCtoS : IPacketDatas
     {
-        /// <summary>ユーザーID</summary>
-        public int user_id;
+        /// <summary>コマンド識別子</summary>
+        public int command;
+        /// <summary>マップのID</summary>
+        public int map_id;
 
         /// <summary>デフォルトコンストラクタ</summary>
-        public InitLogin()
+        public GetEnemysDataCtoS()
         {
-            this.command = (int)CommandData.InitLogin;
+            this.command = (int)CommandData.GetEnemysDataCtoS;
         }
-        /// <summary>フルコンストラクタ</summary>
-        /// <param name="_user_id">ユーザーID</summary>
-        public InitLogin(
-            int _user_id
+        /// <summary>コンストラクタ</summary>
+        /// <param name="_map_id">マップのID</summary>
+        public GetEnemysDataCtoS(
+            int _map_id
         )
         {
-            this.command = (int)CommandData.InitLogin;
-            this.user_id = _user_id;
+            this.command = (int)CommandData.GetEnemysDataCtoS;
+            this.map_id = _map_id;
         }
     }
 
@@ -240,26 +243,20 @@ namespace Packes
     }
 
     /// <summary>
-    /// 初回ログイン command:204
+    /// 敵の一覧取得 command:204
     /// </summary>
-    public class InitLoginStoC : IPacketDatas
+    public class GetEnemyDataStoC : IPacketDatas
     {
-        /// <summary>ユーザーのID</summary>
-        public int user_id;
-        /// <summary>デフォルトコンストラクタ</summary>
-        public InitLoginStoC()
+        public List<EnemyReceiveData> enemys;
+
+        public GetEnemyDataStoC()
         {
-            this.command = (int)CommandData.InitLoginStoC;
-        }
-        public InitLoginStoC(
-            int _user_id
-        )
-        {
-            this.command = (int)CommandData.InitLoginStoC;
-            this.user_id = _user_id;
+            enemys = new List<EnemyReceiveData>();
+            this.command = (int)CommandData.GetEnemyDataStoC;
         }
     }
 
+    
 
     /// <summary>
     /// 状態送信 command:206
@@ -364,6 +361,55 @@ namespace Packes
         )
         {
             this.user_id = _user_id;
+        }
+    }
+
+
+
+
+    /// <summary> 敵の受信用データ </summary>
+    [System.Serializable]
+    public struct EnemyReceiveData
+    {
+        public int unique_id;
+        public int master_id;
+        public float x;
+        public float y;
+        public float z;
+        public float dir;
+        public int anime_id;
+        public int hp;
+
+        /// <summary>
+        /// 敵のデータ
+        /// </summary>
+        /// <param name="_unique_id">敵の個人ID</param>
+        /// <param name="_master_id">マスターID</param>
+        /// <param name="_x">位置X</param>
+        /// <param name="_y">位置Y</param>
+        /// <param name="_z">位置Z</param>
+        /// <param name="_dir">方向</param>
+        /// <param name="_anime_id">現在のアニメーションID</param>
+        /// <param name="_hp">ヒットポイント</param>
+        public EnemyReceiveData(
+            int _unique_id,
+            int _master_id,
+            float _x,
+            float _y,
+            float _z,
+            float _dir,
+            int _anime_id,
+            int _hp
+        )
+        {
+            this.unique_id = _unique_id;
+            this.master_id = _master_id;
+            this.x = _x;
+            this.y = _y;
+            this.z = _z;
+            this.dir = _dir;
+            this.anime_id = _anime_id;
+            this.hp = _hp;
         }
     }
 

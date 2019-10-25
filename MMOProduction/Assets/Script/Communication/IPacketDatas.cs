@@ -46,9 +46,9 @@ public enum CommandData
     /// <summary>移動</summary>
     TranslationStoC = (int)202,
     /// <summary>初回ログイン送信</summary>
-    InitLogin = (int)203,
+    GetEnemysDataCtoS = (int)203,
     /// <summary>初回ログイン受信</summary>
-    InitLoginStoC = (int)204,
+    GetEnemyDataStoC = (int)204,
     /// <summary>状態送信</summary>
     StatusCtoS = (int)205,
     /// <summary>状態受信</summary>
