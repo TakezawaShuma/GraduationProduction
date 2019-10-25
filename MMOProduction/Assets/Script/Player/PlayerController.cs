@@ -189,7 +189,10 @@ public class PlayerController: MonoBehaviour
             {
                 if (target != null)
                 {
-                    target.GetComponent<Marker>().STATE = Marker.State.None;
+                    if (target != hit.collider.gameObject)
+                    {
+                        target.GetComponent<Marker>().STATE = Marker.State.None;
+                    }
                 }
 
                 target = hit.collider.gameObject;
