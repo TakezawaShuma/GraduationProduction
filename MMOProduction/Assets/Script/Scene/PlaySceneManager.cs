@@ -20,6 +20,9 @@ public class PlaySceneManager : MonoBehaviour
     [SerializeField, Header("カメラ")]
     private FollowingCamera FollowingCamera = default(FollowingCamera);
 
+    [SerializeField]
+    private ChatController chat;
+
     bool startFlag = false;
     bool updateFlag = true;
 
@@ -166,7 +169,8 @@ public class PlaySceneManager : MonoBehaviour
             players[Retention.ID].GetComponent<PlayerController>().Init(
                 players[Retention.ID].GetComponent<Player>(),
                 FollowingCamera,
-                players[Retention.ID].GetComponent<PlayerSetting>()
+                players[Retention.ID].GetComponent<PlayerSetting>(),
+                chat
                 );
             FollowingCamera.SetTarget(players[Retention.ID]);
         }
@@ -189,7 +193,8 @@ public class PlaySceneManager : MonoBehaviour
             players[Retention.ID].GetComponent<PlayerController>().Init(
                 players[Retention.ID].GetComponent<Player>(),
                 FollowingCamera,
-                players[Retention.ID].GetComponent<PlayerSetting>()
+                players[Retention.ID].GetComponent<PlayerSetting>(),
+                chat
                 );
             FollowingCamera.SetTarget(players[Retention.ID]);
         }

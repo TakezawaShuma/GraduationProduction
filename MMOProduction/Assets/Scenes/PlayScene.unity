@@ -344,7 +344,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ui:
   - {fileID: 1970179842}
-  key: 69000000
+  - {fileID: 152935383}
+  key: 690000006b000000
 --- !u!4 &82423898
 Transform:
   m_ObjectHideFlags: 0
@@ -372,11 +373,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 842962567749291421, guid: 796be72676539b34dbc1ac6907da5760,
-        type: 3}
-      propertyPath: m_Name
-      value: Forest Bunny Black
-      objectReference: {fileID: 0}
     - target: {fileID: 839769458397738583, guid: 796be72676539b34dbc1ac6907da5760,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -432,8 +428,19 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 842962567749291421, guid: 796be72676539b34dbc1ac6907da5760,
+        type: 3}
+      propertyPath: m_Name
+      value: Forest Bunny Black
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 796be72676539b34dbc1ac6907da5760, type: 3}
+--- !u!1 &152935383 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 907873173451288549, guid: 91162270213967748b0912fd932a6e49,
+    type: 3}
+  m_PrefabInstance: {fileID: 932495213}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &296919182
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1228,6 +1235,7 @@ MonoBehaviour:
   testEnemyPre: {fileID: 842962567749291421, guid: 796be72676539b34dbc1ac6907da5760,
     type: 3}
   FollowingCamera: {fileID: 992294608}
+  chat: {fileID: 809979501}
 --- !u!224 &646274429 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6631658281002984456, guid: 7f4271a449d825f42ac315b724d2b520,
@@ -1793,6 +1801,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SkiltreeCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 907873173451288549, guid: 91162270213967748b0912fd932a6e49,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 907873173451288545, guid: 91162270213967748b0912fd932a6e49,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1911,17 +1924,17 @@ PrefabInstance:
     - target: {fileID: 907873172687169229, guid: 91162270213967748b0912fd932a6e49,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 0.6664153
       objectReference: {fileID: 0}
     - target: {fileID: 907873172687169229, guid: 91162270213967748b0912fd932a6e49,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 907873172687169229, guid: 91162270213967748b0912fd932a6e49,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 0.99999994
       objectReference: {fileID: 0}
     - target: {fileID: 907873173268231246, guid: 91162270213967748b0912fd932a6e49,
         type: 3}
@@ -1931,12 +1944,12 @@ PrefabInstance:
     - target: {fileID: 907873173268231246, guid: 91162270213967748b0912fd932a6e49,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 0.36305732
       objectReference: {fileID: 0}
     - target: {fileID: 907873173268231246, guid: 91162270213967748b0912fd932a6e49,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 91162270213967748b0912fd932a6e49, type: 3}
@@ -2019,7 +2032,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 992294604}
   m_LocalRotation: {x: 0.1301826, y: -0.0000000059217036, z: 7.7751944e-10, w: 0.99149007}
-  m_LocalPosition: {x: 0.0012450955, y: 69384.63, z: -104371.29}
+  m_LocalPosition: {x: 0.0012466399, y: 69519.68, z: -104500.58}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
