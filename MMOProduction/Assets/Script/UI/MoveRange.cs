@@ -4,29 +4,40 @@ using UnityEngine;
 using UnityEngine.UI;
 public class MoveRange : MonoBehaviour
 {
-    Canvas canvas;
-    Image image;
+    public GameObject canvas;
+    private Rect canvasRect;
+    private Rect thisRect;
     // Start is called before the first frame update
     void Start()
     {
-        canvas = GetComponent<Canvas>();
-        image = GetComponent<Image>();
+        canvasRect = canvas.GetComponent<RectTransform>().rect;
+        thisRect = this.GetComponent<RectTransform>().rect;
     }
 
     // Update is called once per frame
     void Update()
     {
-        float x = this.transform.position.x;
-        float y = this.transform.position.y;
-
-        float h = image.preferredHeight / 2;
-        float w = image.preferredWidth / 2;
-
-        Rect rect = canvas.pixelRect;
-
-        if (rect.height < y + h / 2)
+        if (!IsIn(canvasRect, thisRect))
         {
-            this.transform.position = new Vector3(rect.height-h, y, 0);
+            Vector3 vel = Vector3.Normalize(this.transform.position);
+            this.transform.position = (this.transform.position + vel);
+            Debug.Log(vel);
         }
+    }
+
+    //範囲内にあるかを判定する
+    bool IsIn(Rect canvas, Rect image)
+    {
+
+        if (canvas.xMax < image.xMax) return false;
+        if (canvas.xMin > image.xMin) return false;
+        if (canvas.yMax < image.yMax) return false;
+        if (canvas.yMin > image.yMin) return false;
+
+        Debug.Log(canvas.xMax + image.xMax);
+
+
+        Debug.Log(true);
+        return true;
     }
 }

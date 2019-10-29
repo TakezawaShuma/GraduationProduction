@@ -13,6 +13,13 @@ public class UIManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        if (ui != null)
+        {
+            for (int i = 0; i < ui.Length; i++)
+            {
+                ui[i].SetActive(false);
+            }
+        }
 
     }
 
