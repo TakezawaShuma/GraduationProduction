@@ -29,11 +29,16 @@ public class PlaySceneManager : MonoBehaviour
     // ソケット
     private WS.WsPlay wsp = null;
     private Dictionary<int, GameObject> players = new Dictionary<int, GameObject>();
-    private Dictionary<int, GameObject> enemies = new Dictionary<int, GameObject>();
+    private Dictionary<int, Enemy> enemies = new Dictionary<int, Enemy>();
     private SaveData save;
 
     // コールバック関数をリスト化
     private List<Action<string>> callbackList = new List<Action<string>>();
+
+    // 攻撃判定用マネージャー
+    [SerializeField]
+    private AttackManager _attackManager;
+
 
     private void Awake()
     {
@@ -60,8 +65,18 @@ public class PlaySceneManager : MonoBehaviour
             wsp.Send(new Packes.DataLoading(Retention.ID).ToJson());
 
         }
+
         Debug.Log("プレイスタート");
         MakePlayer();
+
+        // 攻撃判定用マネージャの設定
+        _attackManager.SetWsp(this.wsp);
+
+        // 敵にIDを設定
+        for (int i = 0; i < enemies.Count; i++)
+        {
+            enemies[i].ID = i;
+        }
     }
 
     // Update is called once per frame
@@ -142,7 +157,8 @@ public class PlaySceneManager : MonoBehaviour
 
 
 
-
+        // 攻撃判定用マネージャーの設定
+        
     }
 
     private void OnDestroy()
@@ -345,6 +361,14 @@ public class PlaySceneManager : MonoBehaviour
         Debug.Log("敵は死んだ！！！");
     }
 
+    private void AttackToEnemy()
+    {
+        // 自分の攻撃が敵にヒットしたらデータを送信する
+
+
+        Debug.Log("攻撃が当たった");
+    }
+
 
     // --------------------送信関係--------------------
 
@@ -370,7 +394,10 @@ public class PlaySceneManager : MonoBehaviour
         return players[Retention.ID].GetComponent<Player>();
     } 
 
+    private void SendAttackData()
+    {
 
+    }
 
 
 
@@ -397,5 +424,4 @@ public class PlaySceneManager : MonoBehaviour
     {
         return players[_playerId].GetComponent<OtherPlayers>();
     }
-
 }

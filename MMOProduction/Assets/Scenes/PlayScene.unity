@@ -378,6 +378,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Forest Bunny Black
       objectReference: {fileID: 0}
+    - target: {fileID: 842962567749291421, guid: 796be72676539b34dbc1ac6907da5760,
+        type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 839769458397738583, guid: 796be72676539b34dbc1ac6907da5760,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -521,6 +526,25 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 296919182}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &332935060 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 842962567749291421, guid: 796be72676539b34dbc1ac6907da5760,
+    type: 3}
+  m_PrefabInstance: {fileID: 136671996}
+  m_PrefabAsset: {fileID: 0}
+--- !u!135 &332935063
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 332935060}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Center: {x: 0, y: 0.5, z: 0}
 --- !u!1001 &411982550
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1041,6 +1065,51 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 1131793346}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &568523019
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 568523021}
+  - component: {fileID: 568523020}
+  m_Layer: 0
+  m_Name: AttackManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &568523020
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 568523019}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 290bae93f91baf24e8f63f1c5f878fc6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _attackObjs:
+  - {fileID: 7401277061923458914, guid: 2ebef17e186912f4182adbad094320d2, type: 3}
+--- !u!4 &568523021
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 568523019}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 14
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &590408852 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4000013366157744, guid: 2d5e7104d4c9e6745a2ddcbf404baaef,
@@ -1236,6 +1305,7 @@ MonoBehaviour:
     type: 3}
   FollowingCamera: {fileID: 992294608}
   chat: {fileID: 809979501}
+  _attackManager: {fileID: 568523020}
 --- !u!224 &646274429 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6631658281002984456, guid: 7f4271a449d825f42ac315b724d2b520,
@@ -2032,7 +2102,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 992294604}
   m_LocalRotation: {x: 0.1301826, y: -0.0000000059217036, z: 7.7751944e-10, w: 0.99149007}
-  m_LocalPosition: {x: 0.0012487605, y: 69705.12, z: -104678.11}
+  m_LocalPosition: {x: 0.0012610463, y: 70779.445, z: -105706.63}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
