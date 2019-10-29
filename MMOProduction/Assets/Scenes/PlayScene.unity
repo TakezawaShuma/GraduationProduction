@@ -373,6 +373,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 842962567749291421, guid: 796be72676539b34dbc1ac6907da5760,
+        type: 3}
+      propertyPath: m_Name
+      value: Forest Bunny Black
+      objectReference: {fileID: 0}
     - target: {fileID: 839769458397738583, guid: 796be72676539b34dbc1ac6907da5760,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -427,11 +432,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 842962567749291421, guid: 796be72676539b34dbc1ac6907da5760,
-        type: 3}
-      propertyPath: m_Name
-      value: Forest Bunny Black
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 796be72676539b34dbc1ac6907da5760, type: 3}
@@ -1503,6 +1503,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ShortcutCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 8391190149283786304, guid: a85543a5201d94f49952336917871e96,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8391190149283786316, guid: a85543a5201d94f49952336917871e96,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2032,7 +2037,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 992294604}
   m_LocalRotation: {x: 0.1301826, y: -0.0000000059217036, z: 7.7751944e-10, w: 0.99149007}
-  m_LocalPosition: {x: 0.0012454643, y: 69416.88, z: -104402.164}
+  m_LocalPosition: {x: 0.0012479076, y: 69630.54, z: -104606.71}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

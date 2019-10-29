@@ -67,7 +67,7 @@ namespace WS
         {
             if (int.Parse(_json.Substring(11, 3)) != 201)
             {
-                Debug.Log("Send data : " + _json);
+                //Debug.Log("Send data : " + _json);
             }
             if (base.ws.ReadyState == WebSocketState.Open)
             {
@@ -91,21 +91,21 @@ namespace WS
                     {
                         case CommandData.TranslationStoC:
                             Packes.TranslationStoC posSync = Json.ConvertToPackets<Packes.TranslationStoC>(e.Data);
-                            /* Debug.Log("command : " + posSync.command + " , user_id : " + posSync.user_id + 
-                                " , position : (" + posSync.x + "," + posSync.y + "," + posSync.z + ") , direction : " + posSync.dir);*/
+                            //Debug.Log("command : " + posSync.command + " , user_id : " + posSync.user_id +
+                            //   " , position : (" + posSync.x + "," + posSync.y + "," + posSync.z + ") , direction : " + posSync.dir);
                             moveingAction(posSync);
                             break;
 
                         case CommandData.GetEnemyDataStoC:
                             Packes.GetEnemyDataStoC init = Json.ConvertToPackets<Packes.GetEnemyDataStoC>(e.Data);
                             //Debug.Log("command : " + init.command + " , enemys"+init.enemys.Count);
-                            Debug.Log(e.Data);
+                            //Debug.Log(e.Data);
                             enemysAction(init);
                             break;
 
                         case CommandData.StatusStoC:
                             Packes.StatusStoC status = Json.ConvertToPackets<Packes.StatusStoC>(e.Data);
-                            Debug.Log("command : " + status.command + " , user_id : " + status.user_id);
+                            //Debug.Log("command : " + status.command + " , user_id : " + status.user_id);
                             statusAction(status);
                             break;
 

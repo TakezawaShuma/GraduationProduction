@@ -138,7 +138,7 @@ public class TitleSceneManager : MonoBehaviour
     void Update()
     {
         // Debug
-        if(Input.GetKeyDown(KeyCode.T))
+        if(Input.GetKeyDown(KeyCode.Backslash))
         {
             wsl.Send(new Packes.LoginUser("tsit", "trident").ToJson());
         }
