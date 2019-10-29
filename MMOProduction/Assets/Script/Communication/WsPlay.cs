@@ -65,10 +65,10 @@ namespace WS
         /// <param name="_json"></param>
         public void Send(string _json)
         {
-            if (int.Parse(_json.Substring(11, 3)) != 201)
-            {
-                //Debug.Log("Send data : " + _json);
-            }
+            //if (int.Parse(_json.Substring(11, 3)) != 201)
+            //{
+            //    //Debug.Log("Send data : " + _json);
+            //}
             if (base.ws.ReadyState == WebSocketState.Open)
             {
                 base.ws.Send(_json);

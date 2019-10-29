@@ -70,37 +70,6 @@ public class PlaySceneManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.M))
-        {
-            Packes.TranslationStoC packet = new Packes.TranslationStoC();
-            packet.user_id = 1;
-            packet.x = 0;
-            packet.y = 0.5f;
-            packet.z = 15;
-            packet.dir = 0;
-            Debug.Log("テスト");
-            UpdatePlayers(packet);
-        }
-        else if(Input.GetKeyDown(KeyCode.N))
-        {
-            Packes.TranslationStoC packet = new Packes.TranslationStoC();
-            packet.user_id = 1;
-            packet.x = 10;
-            packet.y = 0.5f;
-            packet.z = 20;
-            packet.dir = 180;
-            Debug.Log("テスト");
-            UpdatePlayers(packet);
-        }
-        else if(Input.GetKeyDown(KeyCode.B))
-        {
-            Packes.GetEnemyDataStoC packet = new Packes.GetEnemyDataStoC();
-            packet.enemys.Add(new Packes.EnemyReceiveData(0, 0, 10, 1, 10, 0, 0, 100));
-            Debug.Log("敵テスト");
-            RegisterEnemies(packet);
-        }
-
-
         if (updateFlag)
         {
             if (players.ContainsKey(Retention.ID))
@@ -116,17 +85,6 @@ public class PlaySceneManager : MonoBehaviour
                     }
                 }
             }
-
-            // Debug
-            if (Input.GetKeyDown(KeyCode.T))
-            {
-                wsp.Send(new Packes.Attack(0, Retention.ID, 0, 0).ToJson());
-            }
-            if (Input.GetKeyDown(KeyCode.Y))
-            {
-                wsp.Send(new Packes.Attack(1, Retention.ID, 0, 0).ToJson());
-            }
-
         }
 
 
