@@ -137,7 +137,11 @@ public class TitleSceneManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+        if(Input.GetKeyDown(KeyCode.Backslash))
+        {
+            wsl.Send(new Packes.LoginUser("tsit", "trident").ToJson());
+        }
+                
     }
 
     private void OnDestroy()
@@ -200,8 +204,7 @@ public class TitleSceneManager : MonoBehaviour
             if (connectFlag)
             {
                 // ログイン処理
-                Packes.LoginUser loginUser = new Packes.LoginUser(id, pw);
-                wsl.Send(Json.ConvertToJson(loginUser));
+                wsl.Send(new Packes.LoginUser(id, pw).ToJson());
             }
         }
         else
@@ -232,8 +235,7 @@ public class TitleSceneManager : MonoBehaviour
                 if (connectFlag)
                 {
                     // 送信処理
-                    Packes.CreateUser new_user = new Packes.CreateUser(id, pw);
-                    wsl.Send(Json.ConvertToJson(new_user));
+                    wsl.Send(new Packes.CreateUser(id, pw).ToJson());
                 }
             }
             else

@@ -553,7 +553,7 @@ GameObject:
   - component: {fileID: 6631658281002984456}
   - component: {fileID: 6631658281002984458}
   - component: {fileID: 6631658281002984459}
-  - component: {fileID: 6631658281002984693}
+  - component: {fileID: 8800217897477896294}
   m_Layer: 5
   m_Name: PartyStatus
   m_TagString: Untagged
@@ -625,7 +625,7 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
---- !u!114 &6631658281002984693
+--- !u!114 &8800217897477896294
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -634,7 +634,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 6631658281002984457}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 83ee9508846bafa4b950715422c83273, type: 3}
+  m_Script: {fileID: 11500000, guid: 5d29a8d7a83d7cf4290b4be6c83c2692, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 0}

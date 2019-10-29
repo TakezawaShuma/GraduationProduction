@@ -130,7 +130,7 @@ public class PlaySceneManager : MonoBehaviour
             
             // 自分の作成コンポーネントの追加
             var tmpPlayer = Instantiate<GameObject>(playerPre);
-            tmpPlayer.transform.position = new Vector3(5, 0, 15);
+            tmpPlayer.transform.position = new Vector3(5, 1, 15);
             tmpPlayer.name = "player" + Retention.ID;
             players.Add(Retention.ID, tmpPlayer);
             players[Retention.ID].AddComponent<Player>();
@@ -166,8 +166,11 @@ public class PlaySceneManager : MonoBehaviour
                 // 他ユーザーの更新
                 if (others.ContainsKey(data.user_id))
                 {
-                    others[data.user_id].UpdataData(0, 0, data.x, data.y, data.z, data.dir);
-                    Debug.Log("他のユーザーの移動処理");
+                    if (others[data.user_id] != null)
+                    {
+                        others[data.user_id].UpdataData(0, 0, data.x, data.y, data.z, data.dir);
+                        Debug.Log("他のユーザーの移動処理");
+                    }
                 }
                 // todo 他プレイヤーの更新と作成を関数分けする
                 // 他のユーザーの作成
@@ -176,6 +179,7 @@ public class PlaySceneManager : MonoBehaviour
                     var otherPlayer = Instantiate<GameObject>(playerPre, new Vector3(data.x, data.y, data.z), Quaternion.Euler(0, data.dir, 0));
                     otherPlayer.name = "otherPlayer" + data.user_id;
                     otherPlayer.AddComponent<OtherPlayers>();
+                    otherPlayer.GetComponent<OtherPlayers>().Init(data.user_id);
                     others.Add(data.user_id, otherPlayer.GetComponent<OtherPlayers>());
                     Debug.Log(otherPlayer.transform.position);
 
@@ -203,9 +207,12 @@ public class PlaySceneManager : MonoBehaviour
             if(ene.unique_id!=Retention.ID)
             {
                 // 敵の更新
-                if(enemies.ContainsKey(ene.unique_id))
+                if (enemies.ContainsKey(ene.unique_id))
                 {
-                    enemies[ene.unique_id].UpdataData(ene.hp, 0, ene.x, ene.y, ene.z, ene.dir);
+                    if (enemies[ene.unique_id] != null)
+                    {
+                        enemies[ene.unique_id].UpdataData(ene.hp, 0, ene.x, ene.y, ene.z, ene.dir);
+                    }
                 }
                 // 敵の作成
                 else

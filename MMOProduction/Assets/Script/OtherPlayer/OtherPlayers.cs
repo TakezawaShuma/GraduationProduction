@@ -32,18 +32,20 @@ public class OtherPlayers: MonoBehaviour
     public int MP { get { return mp; } set { mp = value; } }
 
 
-    private Quaternion lastDir;
-    private Quaternion nextDir;
+    private Quaternion lastDir = new Quaternion();
+    private Quaternion nextDir = new Quaternion();
 
     private float nowFlame = 0;
 
-    Vector3 last;
-    Vector3 next;
+    Vector3 last = new Vector3();
+    Vector3 next = new Vector3();
 
     private const float UPDATE_SPEED = 1.0f / 3.0f;
     private const int MAX_FLAME = 3;
 
-
+    public int id = 0;
+    public OtherPlayers() { }
+    public void Init(int _i) { id = _i; }
 
     // Start is called before the first frame update
     void Start()
@@ -61,7 +63,6 @@ public class OtherPlayers: MonoBehaviour
 
     public void UpdataData(int _hp, int _mp, float _x, float _y, float _z, float _dir)
     {
-
         HP = _hp; MP = _mp;
 
         // 向きを決める
@@ -71,7 +72,7 @@ public class OtherPlayers: MonoBehaviour
         // 位置を決める
         last = transform.position;
         next = new Vector3(_x, _y, _z);
-
+        
         // カウントを初期化
         nowFlame = 0;
     }
@@ -82,7 +83,7 @@ public class OtherPlayers: MonoBehaviour
     private void LerpMove()
     {
         nowFlame += UPDATE_SPEED;
-        transform.rotation = Quaternion.Lerp(lastDir, nextDir, nowFlame);
+        transform.localRotation = Quaternion.Lerp(lastDir, nextDir, nowFlame);
         transform.position = Vector3.Lerp(last, next, nowFlame);
     }
 }
