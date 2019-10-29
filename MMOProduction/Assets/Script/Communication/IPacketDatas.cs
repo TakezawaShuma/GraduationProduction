@@ -45,9 +45,9 @@ public enum CommandData
     TranslationCtoS = (int)201,
     /// <summary>移動</summary>
     TranslationStoC = (int)202,
-    /// <summary>初回ログイン送信</summary>
+    /// <summary>エネミー情報要請</summary>
     GetEnemysDataCtoS = (int)203,
-    /// <summary>初回ログイン受信</summary>
+    /// <summary>エネミー情報受信</summary>
     GetEnemyDataStoC = (int)204,
     /// <summary>状態送信</summary>
     StatusCtoS = (int)205,

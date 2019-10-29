@@ -137,6 +137,7 @@ public class TitleSceneManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+    
     }
 
     private void OnDestroy()
@@ -179,7 +180,6 @@ public class TitleSceneManager : MonoBehaviour
         ConfirmPW_.gameObject.SetActive(false);
         ConfirmPW_.text = "";
 
-        //Debug.Log("Back");
     }
 
     /// <summary>
