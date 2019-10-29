@@ -29,9 +29,20 @@ public class skill_table : ScriptableObject
     public void AddChild()
     {
         foreach (var v in tables)
+        {
             foreach (var vv in tables)
+            {
                 if (v.pearentID == vv.id)
-                    vv.childsID.Add(v);
+                {
+                    if(v.pearentID!=0)
+                    {
+                        vv.childsList.Add(v);
+                    }
+                }
+            }
+
+        }
+
     }
 
     [System.SerializableAttribute]
@@ -77,7 +88,7 @@ public class skill_table : ScriptableObject
         public int pearentID;
 
         //子のIDリスト
-        public List<skill_data> childsID;
+        public List<skill_data> childsList;
 
         //必要ポイント
         public int pearentPoint;
