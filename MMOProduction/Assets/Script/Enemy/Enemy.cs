@@ -19,6 +19,7 @@ public class Enemy : MonoBehaviour
     public float Y { get { return position.y; } set { position.y = value; } }
     public float Z { get { return position.z; } set { position.z = value; } }
     public float Dir { get { return dir; } set { dir = value; } }
+    public int ID { get; set; }
 
     private float lastX = 0;
     private float lastY = 0;
