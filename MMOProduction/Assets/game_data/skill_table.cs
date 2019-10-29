@@ -26,6 +26,14 @@ public class skill_table : ScriptableObject
     [SerializeField]
     public List<skill_data> tables;
 
+    public void AddChild()
+    {
+        foreach (var v in tables)
+            foreach (var vv in tables)
+                if (v.pearentID == vv.id)
+                    vv.childsID.Add(v);
+    }
+
     [System.SerializableAttribute]
     public class skill_data
     {
@@ -67,6 +75,9 @@ public class skill_table : ScriptableObject
 
         //親のID
         public int pearentID;
+
+        //子のIDリスト
+        public List<skill_data> childsID;
 
         //必要ポイント
         public int pearentPoint;
