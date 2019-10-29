@@ -155,9 +155,7 @@ public class PlaySceneManager : MonoBehaviour
     /// </summary>
     private void UpdatePlayers(Packes.TranslationStoC _packet)
     {
-        //Debug.Log("ユーザーの移動系のコールバック");
         Packes.TranslationStoC data = _packet;
-        //Debug.Log("ID:" + data.user_id);
 
         if (data.user_id != 0)
         {
@@ -176,7 +174,6 @@ public class PlaySceneManager : MonoBehaviour
                     otherPlayer.name = "otherPlayer" + data.user_id;
                     otherPlayer.AddComponent<OtherPlayers>();
                     others.Add(data.user_id, otherPlayer.GetComponent<OtherPlayers>());
-                    Debug.Log(otherPlayer.transform.position);
                 }
             }
         }
@@ -225,10 +222,6 @@ public class PlaySceneManager : MonoBehaviour
     /// <param name="_save"></param>
     private void RecvSaveData(Packes.LoadSaveData _packet)
     {
-        //Debug.Log("セーブデータの取得");
-        //SaveData data = JsonUtility.FromJson<SaveData>(_str);
-
-        //save = data;
 
         wsp.Send(new Packes.LoadingFinishCtoS().ToJson());
         //wsp.SendSaveDataOK();

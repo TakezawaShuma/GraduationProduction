@@ -51,8 +51,6 @@ public class Enemy : MonoBehaviour
 
     public void UpdataData(int _hp, int _mp, float _x, float _y, float _z, float _dir)
     {
-
-        Debug.Log("update data");
         lastX = X;
         lastY = Y;
         lastZ = Z;
