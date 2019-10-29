@@ -112,6 +112,14 @@ public class TitleSceneManager : MonoBehaviour
             // 接続開始
             wsl = new WS.WsLogin(8000);
         }
+
+        int[] enemyyyy =
+        {
+           100,
+           200,
+           300,
+           400,
+        };
     }
 
     private int m_command = 0;
@@ -129,11 +137,12 @@ public class TitleSceneManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
     }
 
     private void OnDestroy()
     {
-        wsl.Destroy();
+        if(connectFlag) wsl.Destroy();
     }
     //public関数--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     //ボタンが押されたとき

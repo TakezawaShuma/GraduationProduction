@@ -47,10 +47,11 @@ public class PlayerController: MonoBehaviour
     private Rigidbody rigidbody;
     
 
-    public void Init(Player _playerData,FollowingCamera _camera,PlayerSetting _setting) {
+    public void Init(Player _playerData,FollowingCamera _camera,PlayerSetting _setting, ChatController chat) {
         PlayerData = _playerData;
         FollowingCamera = _camera;
         playerSetting = _setting;
+        chatController = chat;
 
         _playerAnim = new PlayerAnimData(this.gameObject);
     }
@@ -88,20 +89,23 @@ public class PlayerController: MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (target != null)
+        if (!chatController.GetChatActiveFlag())
         {
-            Vector3 v = target.transform.position - transform.position;
-
-            if (v.magnitude > playerSetting.LOD)
+            if (target != null)
             {
-                target.GetComponent<Marker>().STATE = Marker.State.None;
-                target = null;
-                lockState = false;
-                FollowingCamera.LOCK = null;
-            }
-        }
+                Vector3 v = target.transform.position - transform.position;
 
-        currentState.Execute();
+                if (v.magnitude > playerSetting.LOD)
+                {
+                    target.GetComponent<Marker>().STATE = Marker.State.None;
+                    target = null;
+                    lockState = false;
+                    FollowingCamera.LOCK = null;
+                }
+            }
+
+            currentState.Execute();
+        }
     }
 
     public void NoMove()
@@ -183,7 +187,11 @@ public class PlayerController: MonoBehaviour
 
             if (v.magnitude <= playerSetting.LOD)
             {
-                
+                if (target != null)
+                {
+                    target.GetComponent<Marker>().STATE = Marker.State.None;
+                }
+
                 target = hit.collider.gameObject;
                 
                 lockState = true;
