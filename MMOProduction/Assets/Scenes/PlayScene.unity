@@ -1504,6 +1504,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ShortcutCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 8391190149283786304, guid: a85543a5201d94f49952336917871e96,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8391190149283786316, guid: a85543a5201d94f49952336917871e96,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2033,7 +2038,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 992294604}
   m_LocalRotation: {x: 0.1301826, y: -0.0000000059217036, z: 7.7751944e-10, w: 0.99149007}
-  m_LocalPosition: {x: 0.0012461789, y: 69479.37, z: -104461.984}
+  m_LocalPosition: {x: 0.0012487605, y: 69705.12, z: -104678.11}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}

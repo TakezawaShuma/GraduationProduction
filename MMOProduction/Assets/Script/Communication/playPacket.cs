@@ -1,6 +1,8 @@
-////////////////////////////////////////////////
-// パケットデータ等通信で使うデータをまとめた //
-////////////////////////////////////////////////
+//////////////////////////////////////////////////////////////
+// パケットデータ等プレイシーンの通信で使うデータをまとめた //
+//////////////////////////////////////////////////////////////
+
+using System.Collections.Generic;
 /// <summary>
 /// パケットデータ
 /// </summary>
@@ -53,25 +55,29 @@ namespace Packes
     }
 
     /// <summary>
-    /// 初回ログイン command:203
+    /// 敵の一覧取得 command:203
     /// </summary>
-    public class InitLogin : IPacketDatas
+    public class GetEnemysDataCtoS : IPacketDatas
     {
-        /// <summary>ユーザーID</summary>
+        /// <summary>マップのID</summary>
+        public int map_id;
+        /// <summary> ユーザーID</summary>
         public int user_id;
 
         /// <summary>デフォルトコンストラクタ</summary>
-        public InitLogin()
+        public GetEnemysDataCtoS()
         {
-            this.command = (int)CommandData.InitLogin;
+            this.command = (int)CommandData.GetEnemysDataCtoS;
         }
-        /// <summary>フルコンストラクタ</summary>
-        /// <param name="_user_id">ユーザーID</summary>
-        public InitLogin(
+        /// <summary>コンストラクタ</summary>
+        /// <param name="_map_id">マップのID</summary>
+        public GetEnemysDataCtoS(
+            int _map_id,
             int _user_id
         )
         {
-            this.command = (int)CommandData.InitLogin;
+            this.command = (int)CommandData.GetEnemysDataCtoS;
+            this.map_id = _map_id;
             this.user_id = _user_id;
         }
     }
@@ -152,20 +158,86 @@ namespace Packes
     /// <summary>
     /// データの読み込み終了 command:211
     /// </summary>
-    public class LoadingFinish : IPacketDatas
+    public class LoadingFinishCtoS : IPacketDatas
     {
-
+        public int user_id;
         /// <summary>デフォルトコンストラクタ</summary>
-        public LoadingFinish()
+        public LoadingFinishCtoS()
         {
-            this.command = (int)CommandData.LoadingFinish;
+            this.command = (int)CommandData.LoadingFinishCtoS;
         }
         /// <summary>フルコンストラクタ</summary>
-        public LoadingFinish(int _i)
+        public LoadingFinishCtoS(int _id)
         {
-            this.command = (int)CommandData.LoadingFinish;
+            this.command = (int)CommandData.LoadingFinishCtoS;
+            this.user_id = _id;
         }
     }
+
+    /// <summary>
+    /// 攻撃 command:220
+    /// </summary>
+    public class Attack : IPacketDatas
+    {
+        /// <summary>敵のID</summary>
+        public int enemy_id;
+        /// <summary>プレイヤーID</summary>
+        public int user_id;
+        /// <summary>スキルID</summary>
+        public int skill_id;
+        /// <summary>マップのID</summary>
+        public int map_id;
+
+        /// <summary>デフォルトコンストラクタ</summary>
+        public Attack()
+        {
+            this.command = (int)CommandData.Attack;
+        }
+        /// <summary>コンストラクタ</summary>
+        /// <param name="_enemy_id">敵のID</summary>
+        /// <param name="_user_id">プレイヤーID</summary>
+        /// <param name="_skill_id">スキルID</summary>
+        /// <param name="_map_id">マップのID</summary>
+        public Attack(
+            int _enemy_id,
+            int _user_id,
+            int _skill_id,
+            int _map_id
+        )
+        {
+            this.command = (int)CommandData.Attack;
+            this.enemy_id = _enemy_id;
+            this.user_id = _user_id;
+            this.skill_id = _skill_id;
+            this.map_id = _map_id;
+        }
+    }
+
+
+    /// <summary>
+    /// ログアウト command:701
+    /// </summary>
+    public class LogoutCtoS : IPacketDatas
+    {
+        /// <summary>ユーザーのID</summary>
+        public int user_id;
+
+        /// <summary>デフォルトコンストラクタ</summary>
+        public LogoutCtoS()
+        {
+            this.command = (int)CommandData.LogoutCtoS;
+        }
+        /// <summary>フルコンストラクタ</summary>
+        /// <param name="_user_id">ユーザーのID</summary>
+        public LogoutCtoS(
+            int _user_id
+        )
+        {
+            this.command = (int)CommandData.LogoutCtoS;
+            this.user_id = _user_id;
+        }
+    }
+
 
     // -------------------受信パケット------------------- //
 
@@ -214,26 +286,20 @@ namespace Packes
     }
 
     /// <summary>
-    /// 初回ログイン command:204
+    /// 敵の一覧取得 command:204
     /// </summary>
-    public class InitLoginStoC : IPacketDatas
+    public class GetEnemyDataStoC : IPacketDatas
     {
-        /// <summary>ユーザーのID</summary>
-        public int user_id;
-        /// <summary>デフォルトコンストラクタ</summary>
-        public InitLoginStoC()
+        public List<EnemyReceiveData> enemys;
+
+        public GetEnemyDataStoC()
         {
-            this.command = (int)CommandData.InitLoginStoC;
-        }
-        public InitLoginStoC(
-            int _user_id
-        )
-        {
-            this.command = (int)CommandData.InitLoginStoC;
-            this.user_id = _user_id;
+            enemys = new List<EnemyReceiveData>();
+            this.command = (int)CommandData.GetEnemyDataStoC;
         }
     }
 
+    
 
     /// <summary>
     /// 状態送信 command:206
@@ -301,4 +367,157 @@ namespace Packes
             this.command = (int)CommandData.LoadSaveData;
         }
     }
+
+
+    /// <summary>
+    /// セーブデータの読み込み完了 command:212
+    /// </summary>
+    public class LoadingFinishStoC:IPacketDatas
+    {
+        /// <summary>デフォルトコンストラクタ</summary>
+        public LoadingFinishStoC()
+        {
+            this.command = (int)CommandData.LoadingFinishStoC;
+        }
+        /// <summary>フルコンストラクタ</summary>
+        public LoadingFinishStoC(int _i)
+        {
+            this.command = (int)CommandData.LoadingFinishStoC;
+        }
+    }
+
+    /// <summary>
+    /// 判定後生きている
+    /// </summary>
+    public class EnemyAliveStoC : IPacketDatas
+    {
+        /// <summary>敵のID</summary>
+        public int unique_id;
+        /// <summary>ヒットポイント</summary>
+        public int hp;
+        /// <summary>状態</summary>
+        public int status;
+
+        /// <summary>デフォルトコンストラクタ</summary>
+        public EnemyAliveStoC()
+        {
+            this.command = (int)CommandData.EnemyAliveStoC;
+        }
+        /// <summary>コンストラクタ</summary>
+        /// <param name="_unique_id">敵のID</summary>
+        /// <param name="_hp">ヒットポイント</summary>
+        /// <param name="_status">状態</summary>
+        public EnemyAliveStoC(
+            int _unique_id,
+            int _hp,
+            int _status
+        )
+        {
+            this.command = (int)CommandData.EnemyAliveStoC;
+            this.unique_id = _unique_id;
+            this.hp = _hp;
+            this.status = _status;
+        }
+    }
+
+    /// <summary>
+    /// 判定後死亡
+    /// </summary>
+    public class EnemyDieStoC : IPacketDatas
+    {
+        /// <summary>ドロップ品のID</summary>
+        public int drop;
+        /// <summary>敵のID</summary>
+        public int unique_id;
+
+        /// <summary>デフォルトコンストラクタ</summary>
+        public EnemyDieStoC()
+        {
+            this.command = (int)CommandData.EnemyDieStoC;
+        }
+        /// <summary>コンストラクタ</summary>
+        /// <param name="_drop">ドロップ品のID</summary>
+        public EnemyDieStoC(
+            int _drop,
+            int _unique_id
+        )
+        {
+            this.command = (int)CommandData.EnemyDieStoC;
+            this.drop = _drop;
+            this.unique_id = _unique_id;
+        }
+    }
+
+
+
+    /// <summary>
+    /// ログアウト command:707
+    /// </summary>
+    public class LogoutStoC : IPacketDatas
+    {
+
+        public int user_id;
+
+        /// <summary>デフォルトコンストラクタ</summary>
+        public LogoutStoC()
+        {
+            this.command = (int)CommandData.LogoutStoC;
+        }
+        public LogoutStoC(
+            int _user_id
+        )
+        {
+            this.user_id = _user_id;
+        }
+    }
+
+
+
+
+    /// <summary> 敵の受信用データ </summary>
+    [System.Serializable]
+    public struct EnemyReceiveData
+    {
+        public int unique_id;
+        public int master_id;
+        public float x;
+        public float y;
+        public float z;
+        public float dir;
+        public int anime_id;
+        public int hp;
+
+        /// <summary>
+        /// 敵のデータ
+        /// </summary>
+        /// <param name="_unique_id">敵の個人ID</param>
+        /// <param name="_master_id">マスターID</param>
+        /// <param name="_x">位置X</param>
+        /// <param name="_y">位置Y</param>
+        /// <param name="_z">位置Z</param>
+        /// <param name="_dir">方向</param>
+        /// <param name="_anime_id">現在のアニメーションID</param>
+        /// <param name="_hp">ヒットポイント</param>
+        public EnemyReceiveData(
+            int _unique_id,
+            int _master_id,
+            float _x,
+            float _y,
+            float _z,
+            float _dir,
+            int _anime_id,
+            int _hp
+        )
+        {
+            this.unique_id = _unique_id;
+            this.master_id = _master_id;
+            this.x = _x;
+            this.y = _y;
+            this.z = _z;
+            this.dir = _dir;
+            this.anime_id = _anime_id;
+            this.hp = _hp;
+        }
+    }
+
 }

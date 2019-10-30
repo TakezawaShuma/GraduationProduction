@@ -16,8 +16,8 @@ namespace WS
         // ソケット
         protected WebSocket ws;
         // サーバーのIP
-        //private string server_ip = "172.24.52.250";
-        private string server_ip = "localhost";
+        private string server_ip = "172.24.52.250";
+        //private string server_ip = "localhost";
 
         /// <summary>
         /// 接続
@@ -39,13 +39,17 @@ namespace WS
         /// <param name="_msg">削除した際のメッセージ</param>
         protected virtual void Destroy(string _msg = "", bool type = true)
         {
-            if (_msg != "")
+            if (ws.ReadyState != WebSocketState.Closed)
             {
-                if (type) { Debug.Log(_msg); }
-                else { Debug.LogWarning(_msg); }
+                if (_msg != "")
+                {
+                    if (type) { Debug.Log(_msg); }
+                    else { Debug.LogWarning(_msg); }
+                }
+
+                ws.Close();
+                ws = null;
             }
-            ws.Close();
-            ws = null;
         }
 
         /// <summary>

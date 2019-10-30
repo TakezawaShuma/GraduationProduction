@@ -26,7 +26,6 @@ public class IdleState : BaseState
     // 実行関数
     public override void Execute()
     {
-        //Debug.Log("idle");
         //playerController.GetAnim().Move(false);
 
         if (playerSetting.IA)

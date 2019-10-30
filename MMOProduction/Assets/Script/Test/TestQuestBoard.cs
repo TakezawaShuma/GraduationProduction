@@ -5,7 +5,7 @@ using UnityEngine;
 public class TestQuestBoard : MonoBehaviour
 {
     [SerializeField]
-    private GameObject[] gameObject;
+    private GameObject[] gameObject = null;
 
     [SerializeField]
     private Marker marker;

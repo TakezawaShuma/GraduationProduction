@@ -118,5 +118,4 @@ public class ChatController : MonoBehaviour
     {
         return chatActiveFlag;
     }
-
 }
