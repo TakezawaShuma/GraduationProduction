@@ -50,19 +50,19 @@ public class FollowingCamera : MonoBehaviour
     private float scrollSensitivity = 5.0f;
 
     [SerializeField, Header("障害物がターゲットとカメラの間にあったら近づくか")]
-    private bool isApproachObstacle;
+    private bool isApproachObstacle = false;
 
-    [SerializeField,Header("障害物とするレイヤー")]
-    private LayerMask obstacleLayer;
+    [SerializeField, Header("障害物とするレイヤー")]
+    private LayerMask obstacleLayer = default(LayerMask);
 
     [SerializeField, Header("地面に当たった時に近づくか")]
-    private bool isApproachGround;
+    private bool isApproachGround = false;
 
     [SerializeField, Header("近づく速度")]
-    private float approachSpeed;
+    private float approachSpeed = 0.0f;
 
-    [SerializeField]
-    private BoxCollider boxCollider;
+    //[SerializeField]
+    //private BoxCollider boxCollider = null;
 
     private GameObject lockOnTarget;
     public GameObject LOCK
@@ -74,7 +74,7 @@ public class FollowingCamera : MonoBehaviour
 
     private bool collisionObstacle;
 
-    private bool stop;
+    private bool stop = false;
 
     private Vector3 hitPos;
 

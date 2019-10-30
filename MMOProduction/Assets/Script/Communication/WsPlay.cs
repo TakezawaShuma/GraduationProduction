@@ -98,6 +98,7 @@ namespace WS
 
                         case CommandData.GetEnemyDataStoC:
                             Packes.GetEnemyDataStoC init = Json.ConvertToPackets<Packes.GetEnemyDataStoC>(e.Data);
+
                             //Debug.Log("command : " + init.command + " , enemys"+init.enemys.Count);
                             //Debug.Log(e.Data);
                             enemysAction(init);

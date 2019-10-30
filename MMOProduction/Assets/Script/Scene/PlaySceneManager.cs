@@ -12,18 +12,17 @@ public class PlaySceneManager : MonoBehaviour
 {
     [SerializeField]
     bool connectFlag = false;
-    public GameObject playerPre;
+    public GameObject playerPre = null;
 
     [SerializeField, Header("テストの敵")]
-    private GameObject testEnemyPre;
+    private GameObject testEnemyPre = null;
 
     [SerializeField, Header("カメラ")]
     private FollowingCamera FollowingCamera = default(FollowingCamera);
 
     [SerializeField]
-    private ChatController chat;
-
-    bool startFlag = false;
+    private ChatController chat = default(ChatController);
+    
     bool updateFlag = true;
 
     // ソケット
@@ -218,7 +217,7 @@ public class PlaySceneManager : MonoBehaviour
                 else
                 {
                     var newEnemy = Instantiate<GameObject>(testEnemyPre, new Vector3(ene.x, ene.y, ene.z), Quaternion.Euler(0, ene.dir, 0));
-                    newEnemy.name = "Enemy:" + ene.master_id;
+                    newEnemy.name = "Enemy:" + ene.master_id + "->" + ene.unique_id;
                     Enemy enemy = newEnemy.AddComponent<Enemy>();
                     enemies.Add(ene.unique_id, enemy);
                     Debug.Log("敵の新規作成");
