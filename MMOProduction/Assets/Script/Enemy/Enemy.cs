@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
+    private const float UPDATE_SPEED = 1.0f / 3.0f;
+
     private int maxHp;
     private int maxMp;
     private int hp = 0;
@@ -24,16 +26,19 @@ public class Enemy : MonoBehaviour
     private float lastDir = 0;
 
 
-    private int nowFlame = 0;
+    private float nowFlame = 0;
+
+    Vector3 last;
+    Vector3 next;
 
     private const int MAX_FLAME = 3;
 
     // Start is called before the first frame update
     void Start()
     {
-        X = lastX = transform.position.x;
-        Y = lastY = transform.position.y;
-        Z = lastZ = transform.position.z;
+        X = lastX = last.x = transform.position.x;
+        Y = lastY = last.y = transform.position.y;
+        Z = lastZ = last.z = transform.position.z;
         Dir = lastDir = transform.eulerAngles.y;
     }
 
@@ -42,6 +47,7 @@ public class Enemy : MonoBehaviour
     {
         LerpMove();
     }
+
 
     public void UpdataData(int _hp, int _mp, float _x, float _y, float _z, float _dir)
     {
@@ -52,23 +58,23 @@ public class Enemy : MonoBehaviour
 
         HP = _hp; MP = _mp; X = _x; Y = _y; Z = _z; Dir = _dir;
 
+        last = transform.position;
+        next = new Vector3(X, Y, Z);
+
         nowFlame = 0;
+
         transform.position = new Vector3(lastX, lastY, lastZ);
         transform.rotation = Quaternion.Euler(0, lastDir, 0);
     }
 
+
     private void LerpMove()
     {
-        Vector3 last = new Vector3(lastX, lastY, lastZ);
-        Vector3 next = new Vector3(X, Y, Z);
+        nowFlame += UPDATE_SPEED;
 
-        float t = (1.0f / 60.0f) * (nowFlame + 1);
-
-        Vector3 v = Vector3.Lerp(last, next, t);
-        transform.rotation = Quaternion.Slerp(Quaternion.Euler(0, lastDir, 0), Quaternion.Euler(0, dir, 0), t);
-
+        Vector3 v = Vector3.Lerp(last, next, nowFlame);
+        transform.rotation = Quaternion.Slerp(Quaternion.Euler(0, lastDir, 0), Quaternion.Euler(0, dir, 0), nowFlame);
+   
         transform.position = v;
-
-        nowFlame++;
     }
 }

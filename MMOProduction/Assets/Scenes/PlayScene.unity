@@ -1503,6 +1503,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ShortcutCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 8391190149283786304, guid: a85543a5201d94f49952336917871e96,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8391190149283786316, guid: a85543a5201d94f49952336917871e96,
         type: 3}
       propertyPath: m_LocalPosition.x
