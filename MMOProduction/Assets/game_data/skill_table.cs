@@ -28,6 +28,7 @@ public class skill_table : ScriptableObject
 
     public void AddChild()
     {
+        Debug.Log("スキルの子スキルリスト作成");
         foreach (var v in tables)
         {
             foreach (var vv in tables)
