@@ -26,15 +26,16 @@ public class skill_table : ScriptableObject
     [SerializeField]
     public List<skill_data> tables;
 
+    //親IDを見て親の子リストに自身を追加する
     public void AddChild()
     {
-        Debug.Log("スキルの子スキルリスト作成");
         foreach (var v in tables)
         {
             foreach (var vv in tables)
             {
                 if (v.pearentID == vv.id)
                 {
+                    //親がないスキルのparentIDは0で
                     if(v.pearentID!=0)
                     {
                         vv.childsList.Add(v);
