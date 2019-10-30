@@ -1,0 +1,101 @@
+﻿//
+// LoadScreen.cs
+// 
+// Author: Tama
+//
+
+using UnityEngine;
+using UnityEngine.UI;
+
+
+// ---------------------------------------------
+// ロード画面で使用
+// ---------------------------------------------
+public class LoadScreen : MonoBehaviour
+{
+
+    [SerializeField]
+    private GameObject _loadingUI = null;       // ロード中に表示するUI画面
+
+    [SerializeField]
+    private Slider _loadingSlider = null;       // 読み込み率を表示するスライダ
+
+    [SerializeField]
+    private Text _progressUI = null;            // 読み込み具合を表示するUI
+
+    [SerializeField]
+    private Image _loadingInfoWindow = null;    // ロード中に表示するインフォ画面
+
+    //[SerializeField]
+    //private Image _loadingCharacter = null;     // ロード中のキャラクター画像  
+
+    private float _progress;    // 読み込みの進み具合     
+       
+    private ColumnWindow _columnWindow;    // ロード中に表示するコラム画面
+
+
+    private void Start()
+    {
+        _loadingUI.SetActive(false);
+
+        _progress = 0f;
+
+        _columnWindow = new ColumnWindow("Images/ColumnWindow");
+        // 標準ウィンドウ幅 width:500 height:300
+    }
+
+    private void Update()
+    {
+        // 画面クリックでコラムを変更
+        if (Input.GetMouseButtonDown(0))
+        {
+            ChangeColumn();
+        }
+
+        _progress = Mathf.Clamp(_progress, 0.0f, 1.0f);
+        _loadingSlider.value = _progress;
+        _progressUI.text = Mathf.Floor(_progress).ToString() + "%";
+
+#if DEBUG 
+        if (Input.GetKey(KeyCode.Space))
+        {
+            _progress += 0.01f;
+        }
+#endif
+    }
+
+    // --------------------------------------
+    // ロード画面を表示させる
+    // --------------------------------------
+    public void OnLoad()
+    {
+        _loadingInfoWindow.sprite = _columnWindow.GetRandomImage();
+        
+        _loadingUI.SetActive(true);
+    }
+
+    // --------------------------------------
+    // ロード画面を閉じる
+    // --------------------------------------
+    public void ExitLoad()
+    {
+        _loadingUI.SetActive(false);
+    }
+
+    // --------------------------------------
+    // 読み込みの進歩状況を設定する
+    // progress: 数値
+    // --------------------------------------
+    public void SetProgress(float progress)
+    {
+        _progress = progress;
+    }
+
+    // --------------------------------------
+    // コラム画像を変更する
+    // --------------------------------------
+    private void ChangeColumn()
+    {
+        _loadingInfoWindow.sprite = _columnWindow.GetRandomImage();
+    }
+}
