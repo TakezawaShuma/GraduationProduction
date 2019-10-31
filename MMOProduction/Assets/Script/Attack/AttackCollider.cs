@@ -36,7 +36,7 @@ public class AttackCollider : MonoBehaviour
             _wsp.Send(new Packes.Attack(enemyID, _userID, _skillID, 0).ToJson());
 
             // デバッグ表示
-            Debug.Log("Attack successfull : (" + enemyID + ", " +  _userID  + ", " + _skillID + ")");
+            //Debug.Log("Attack successfull : (" + enemyID + ", " +  _userID  + ", " + _skillID + ")");
         }
     }
 
@@ -45,5 +45,6 @@ public class AttackCollider : MonoBehaviour
         _wsp = wsp;
         _userID = user_id;
         _skillID = skill_id;
+        //Debug.Log(_wsp.ToString());
     }
 }

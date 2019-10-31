@@ -46,10 +46,6 @@ public class PlayerController: MonoBehaviour
 
     private Rigidbody rigidbody;
 
-
-    // 攻撃用オブジェクト
-    [SerializeField]
-    private AttackCollider _attackColldier;
     
 
     public void Init(Player _playerData,FollowingCamera _camera,PlayerSetting _setting, ChatController chat) {
@@ -115,7 +111,7 @@ public class PlayerController: MonoBehaviour
         // デバッグ
         // 画面クリックでファイアボールを放つ
         // 敵の頭上
-        if(Input.GetMouseButtonDown(0))
+        if(Input.GetKeyDown(KeyCode.Alpha1))
         {
             AttackNotify.Instance.SendAttack(0, 0);
         }

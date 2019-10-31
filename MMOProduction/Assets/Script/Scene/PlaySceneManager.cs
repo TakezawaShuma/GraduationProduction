@@ -76,9 +76,9 @@ public class PlaySceneManager : MonoBehaviour
         _attackManager.SetWsp(this.wsp);
 
         // 敵にIDを設定
-        for (int i = 0; i < enemies.Count; i++)
+        foreach (var tmp in enemies)
         {
-            enemies[i].ID = i;
+            tmp.Value.ID = tmp.Key;
         }
     }
 
