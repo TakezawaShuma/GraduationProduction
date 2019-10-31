@@ -23,9 +23,6 @@ public class PlaySceneManager : MonoBehaviour
     [SerializeField]
     private ChatController chat = default(ChatController);
 
-    [SerializeField]
-    private GameObject playersParent = null;
-
     bool updateFlag = true;
 
     // ソケット
@@ -151,6 +148,7 @@ public class PlaySceneManager : MonoBehaviour
 
     private void MakePlayer(Vector3 _save,string _name= "player0")
     {
+        _name = "player" + UserRecord.ID;
         if (player == null)
         {
             var tmp = Instantiate<GameObject>(playerPre);
