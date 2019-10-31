@@ -10,7 +10,7 @@ public class DebugIP : MonoBehaviour
     private void Awake()
     {
         ipText = transform.GetComponent<Text>();
-        Retention.IP = ipText.text;
+        UserRecord.IP = ipText.text;
     }
     // Start is called before the first frame update
     void Start()
@@ -20,7 +20,7 @@ public class DebugIP : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        Retention.IP = ipText.text;
+        UserRecord.IP = ipText.text;
     }
 
 }

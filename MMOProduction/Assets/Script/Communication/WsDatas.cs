@@ -162,9 +162,9 @@ namespace Packes
     ///// command 205 ステータス共有(client->server)
     ///// </summary>
     //public class SendStatus : IPacketDatas{
-    //    public SendStatus() { command = (int)CommandData.SendStatus; user_id = Retention.ID; }
+    //    public SendStatus() { command = (int)CommandData.SendStatus; user_id = UserRecord.ID; }
     //    public SendStatus(int _hp,int _mp,int _status) {
-    //        command = (int)CommandData.SendStatus; user_id = Retention.ID; hp = _hp; mp = _mp; status = _status;
+    //        command = (int)CommandData.SendStatus; user_id = UserRecord.ID; hp = _hp; mp = _mp; status = _status;
     //    }
     //    public int user_id;
     //    public int hp;

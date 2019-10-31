@@ -107,7 +107,7 @@ public class ChatController : MonoBehaviour
 
     private void SendInputMassege(string _massege)
     {
-        string name = Retention.ID.ToString();
+        string name = UserRecord.ID.ToString();
         Packes.SendAllChat mag = new Packes.SendAllChat(name, _massege);
         if (connectFlag) { wsc.Send(Json.ConvertToJson(mag)); }
         string mas = name + "：" + _massege;

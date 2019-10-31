@@ -69,7 +69,7 @@ namespace WS
                             Debug.Log(e.Data);
                             Packes.LoginOK login = Json.ConvertToPackets<Packes.LoginOK>(e.Data);
                             // IDの保管
-                            Retention.ID = login.user_id;
+                            UserRecord.ID = login.user_id;
                             Debug.Log("command : " + login.command + " , id : " + login.user_id);
                             Debug.Log("プレイシーンに移行します。");
                             ChangeScenetoPlay();
@@ -85,7 +85,7 @@ namespace WS
                         case CommandData.CreateOK: //105
                             Packes.CreateOK create = Json.ConvertToPackets<Packes.CreateOK>(e.Data);
                             // IDの保管
-                            Retention.ID = create.user_id;
+                            UserRecord.ID = create.user_id;
                             Debug.Log("command : " + create.command + " , id : " + create.user_id);
                             Debug.Log("プレイシーンに移行します。");
                             ChangeScenetoPlay();

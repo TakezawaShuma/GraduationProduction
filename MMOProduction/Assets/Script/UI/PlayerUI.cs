@@ -55,7 +55,7 @@ public class PlayerUI : MonoBehaviour
     {
         if(player == null)
         {
-            player = GameObject.Find("player" + Retention.ID);
+            player = GameObject.Find("player" + UserRecord.ID);
             playerCmp = player.GetComponent<Player>();
             playerCmp.maxHp = 100;
             playerCmp.hp = 30;

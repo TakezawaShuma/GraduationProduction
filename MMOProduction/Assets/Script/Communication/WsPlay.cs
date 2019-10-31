@@ -29,6 +29,8 @@ namespace WS
         // エネミーが死んだ 222
         public Action<Packes.EnemyDieStoC> enemyDeadAction;
 
+        public Action<Packes.LogoutStoC> logoutAction;
+
 
         /// <summary>
         /// コンストラクタ
@@ -55,7 +57,7 @@ namespace WS
         /// </summary>
         public void Destroy()
         {
-            Send(new Packes.LogoutCtoS(Retention.ID).ToJson());
+            Send(new Packes.LogoutCtoS(UserRecord.ID).ToJson());
             base.Destroy("プレイの終了");
         }
 
@@ -134,6 +136,8 @@ namespace WS
                             enemyDeadAction(dead);
                             break;
                         case CommandData.LogoutStoC:
+
+                            logoutAction(null);
                             break;
                         // 随時追加
                         default:

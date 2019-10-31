@@ -30,7 +30,7 @@ public class TestTalk : MonoBehaviour
             game.SetActive(false);
         }
 
-        text.text = texts[currentPage];
+        if (text != null) text.text = texts[currentPage];
     }
 
     // Update is called once per frame
