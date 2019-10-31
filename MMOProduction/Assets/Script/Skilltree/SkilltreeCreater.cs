@@ -5,7 +5,21 @@ using UnityEngine.UI;
 
 public class SkillData
 {
+    public SkillData(int Id,int pId)
+    {
+        id = Id;
+        pearentID = pId;
+    }
+
     public int[] children = new int[0];
+
+    public int id;
+
+    public int pearentID;
+
+    public List<SkillData> childList = new List<SkillData>();
+
+
 }
 
 public class SkilltreeData
@@ -15,6 +29,54 @@ public class SkilltreeData
     public SkilltreeData()
     {
         skilltree = new List<SkillData>();
+    }
+
+    //親IDを見て親の子リストに自身を追加するs
+    public void AddChild()
+    {
+        foreach (var v in skilltree)
+        {
+            foreach (var vv in skilltree)
+            {
+                if (v.pearentID == vv.id)
+                {
+                    //親がないスキルのparentIDは0で
+                    if (v.pearentID != 0)
+                    {
+                        vv.childList.Add(v);
+                    }
+                }
+            }
+        }
+    }
+
+    //childIdがIdを継承したスキルであるか。
+    public bool Search(int id,int childId)
+    {
+        foreach (var v in skilltree)
+        {
+            if(v.id==id)
+            {
+                foreach (var vv in skilltree)
+                {
+                    if (vv.id == childId)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        if (Search(vv.id, childId))
+                        {
+                            return true;
+                        }
+                    }
+                    
+                }
+            }
+            
+        }
+
+        return false;
     }
 }
 
@@ -47,7 +109,7 @@ public class SkilltreeCreater : MonoBehaviour
 
             for (int j = 0; j < 10; j++)
             {
-                SkillData skill = new SkillData();
+                SkillData skill = new SkillData(0,0);
                 skilltreeDatas[i].skilltree.Add(skill);
             }
         }

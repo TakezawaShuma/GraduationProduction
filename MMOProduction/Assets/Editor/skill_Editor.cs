@@ -18,7 +18,6 @@ public class skill_Editor : EditorWindow
     private static void Open()
     {
         tablelist = Resources.Load<skill_table>("GameData\\skill_data");
-        tablelist.AddChild();
         // 生成
         window = GetWindow<skill_Editor>("skill_setting");
         window.maxSize = window.minSize = new Vector2(450, 500);
