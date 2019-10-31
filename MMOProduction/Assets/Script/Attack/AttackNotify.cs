@@ -25,7 +25,7 @@ public class AttackNotify
         _notifyData = new List<NotifyData>();
     }
 
-    public void SendAttack(int user_id, int skill_id, Vector3 spawnPos = default)
+    public void SendAttack(int user_id, int skill_id, Vector3 spawnPos = default(Vector3))
     {
         NotifyData data = new NotifyData(user_id, skill_id, spawnPos);
         _notifyData.Add(data);

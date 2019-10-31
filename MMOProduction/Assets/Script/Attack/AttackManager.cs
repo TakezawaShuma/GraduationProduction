@@ -9,7 +9,7 @@ public class AttackManager : MonoBehaviour
     private AttackCollider[] _attackObjs = new AttackCollider[1];
     //private List<AttackCollider> _attackColliders = new List<AttackCollider>();
 
-    private WS.WsPlay _wsp;
+    private WS.WsPlay _wsp = null;
 
 
     private void Update()
