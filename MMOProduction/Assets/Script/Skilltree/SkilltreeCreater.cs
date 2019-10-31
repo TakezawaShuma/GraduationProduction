@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class SkillData
 {
@@ -12,14 +13,14 @@ public class SkillData
     }
 
     public int[] children = new int[0];
-
+    //自身のID
     public int id;
-
+    //親スキルのID
     public int pearentID;
-
+    //子スキルのリスト
     public List<SkillData> childList = new List<SkillData>();
-
-
+    //自身がアクティブであるか
+    public bool active = false;
 }
 
 public class SkilltreeData
@@ -50,33 +51,49 @@ public class SkilltreeData
         }
     }
 
-    //childIdがIdを継承したスキルであるか。
-    public bool Search(int id,int childId)
+    public List<SkillData> CheckActiveReturnList(int id_)
     {
+        List<SkillData> sd = new List<SkillData>();
         foreach (var v in skilltree)
         {
-            if(v.id==id)
+            if (v.id == id_)
             {
-                foreach (var vv in skilltree)
+                sd.Add(v);
+                if (v.childList.Capacity == 0) break;
+                foreach (var vv in v.childList)
                 {
-                    if (vv.id == childId)
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        if (Search(vv.id, childId))
-                        {
-                            return true;
-                        }
-                    }
-                    
+                    //sd.Add(vv);
+                    sd.AddRange(CheckActiveReturnList(vv.id));
                 }
             }
-            
+            else
+            {
+                Debug.Log("存在しないID");
+            }
+        }
+        return sd;
+    }
+
+    public (int[] id,bool[] active) CheckActiveReturnArray(int id_,int[] id,bool[] active)
+    {
+        foreach(var v in skilltree)
+        {
+            if(v.id==id_)
+            {
+                Array.Resize(ref id, id.Length + 1);
+                id[id.Length - 1] = v.id;
+                Array.Resize(ref active, active.Length + 1);
+                active[active.Length - 1] = v.active;
+                
+            }
+            if (v.childList.Capacity == 0) break;
+            foreach(var vv in v.childList)
+            {
+                CheckActiveReturnArray(vv.id, id, active);
+            }
         }
 
-        return false;
+        return (id, active);
     }
 }
 

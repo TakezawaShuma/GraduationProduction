@@ -26,8 +26,6 @@ public class skill_table : ScriptableObject
     [SerializeField]
     public List<skill_data> tables;
 
-
-
     [System.SerializableAttribute]
     public class skill_data
     {
