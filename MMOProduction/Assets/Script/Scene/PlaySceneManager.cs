@@ -23,6 +23,9 @@ public class PlaySceneManager : MonoBehaviour
     [SerializeField]
     private ChatController chat;
 
+    [SerializeField]
+    private GameObject playersParent;
+
     bool startFlag = false;
     bool updateFlag = true;
 
@@ -58,7 +61,7 @@ public class PlaySceneManager : MonoBehaviour
             wsp = new WS.WsPlay(8001);
             wsp.moveingAction = UpdatePlayers;  // 202
             wsp.enemysAction = RegisterEnemies; // 204
-            wsp.statusAction = UpdateStatus;            // 206
+            wsp.statusAction = UpdateStatus;    // 206
             wsp.loadSaveAction = RecvSaveData;  // 210
             wsp.loadFinAction = LoadFinish;     // 212
             wsp.enemyAliveAction = AliveEnemy;  // 221
@@ -67,7 +70,6 @@ public class PlaySceneManager : MonoBehaviour
 
         }
 
-        Debug.Log("プレイスタート");
         MakePlayer();
 
         // 攻撃判定用マネージャの設定
