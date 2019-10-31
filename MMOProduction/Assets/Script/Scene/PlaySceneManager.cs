@@ -49,7 +49,6 @@ public class PlaySceneManager : MonoBehaviour
         if (connectFlag)
         {
             // プレイサーバに接続
-            //wsp.ConnectionStart(UpdatePlayers, RecvSaveData); // debug
             wsp = new WS.WsPlay(8001);
             wsp.moveingAction = UpdatePlayers;  // 202
             wsp.enemysAction = RegisterEnemies; // 204
@@ -111,41 +110,9 @@ public class PlaySceneManager : MonoBehaviour
 
 
 
-    ///// <summary>
-    ///// 自分の作成
-    ///// </summary>
-    //private void MakePlayer()
-    //{
-    //    //if(UserRecord.ID == receive.user_id) {
-    //    //    player_ = Instantiate<GameObject>(playerPre);
-    //    //    player_.transform.position = new Vector3(5, 0, 15);
-    //    //    player_.name = "player" + UserRecord.ID;
-    //    //}
-
-
-
-    //    //if (!players.ContainsKey(UserRecord.ID))
-    //    //{
-            
-    //    //    // 自分の作成コンポーネントの追加
-    //    //    var tmpPlayer = Instantiate<GameObject>(playerPre);
-    //    //    tmpPlayer.transform.position = new Vector3(5, 1, 15);
-    //    //    tmpPlayer.name = "player" + UserRecord.ID;
-    //    //    tmpPlayer.AddComponent<Player>();
-    //    //    tmpPlayer.AddComponent<PlayerController>();
-    //    //    tmpPlayer.AddComponent<PlayerSetting>();
-    //    //    tmpPlayer.GetComponent<PlayerController>().Init(
-    //    //        players[UserRecord.ID].GetComponent<Player>(),
-    //    //        FollowingCamera,
-    //    //        players[UserRecord.ID].GetComponent<PlayerSetting>(),
-    //    //        chat
-    //    //        );
-    //    //    players.Add(UserRecord.ID, tmpPlayer);
-    //    //    FollowingCamera.SetTarget(players[UserRecord.ID]);
-            
-    //    }
-    //}
-
+    /// <summary>
+    /// 自分の作成
+    /// </summary>
     private void MakePlayer(Vector3 _save,string _name= "player0")
     {
         _name = "player" + UserRecord.ID;
@@ -183,7 +150,6 @@ public class PlaySceneManager : MonoBehaviour
                     if (others[data.user_id] != null)
                     {
                         others[data.user_id].UpdataData(0, 0, data.x, data.y, data.z, data.dir);
-                        Debug.Log("他のユーザーの移動処理");
                     }
                 }
                 // todo 他プレイヤーの更新と作成を関数分けする
@@ -262,7 +228,6 @@ public class PlaySceneManager : MonoBehaviour
     private void LoadFinish(Packes.LoadingFinishStoC _packet)
     {
         updateFlag = true;
-        Debug.Log("LoadFinish");
         wsp.Send(new Packes.GetEnemysDataCtoS(0, UserRecord.ID).ToJson());
         // プレイヤーのインスタンスを取る
 

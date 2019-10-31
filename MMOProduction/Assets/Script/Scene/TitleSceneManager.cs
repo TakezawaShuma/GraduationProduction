@@ -137,10 +137,7 @@ public class TitleSceneManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Backslash))
-        {
-            wsl.Send(new Packes.LoginUser("tsit", "trident").ToJson());
-        }
+
     }
 
     private void OnDestroy()
@@ -151,20 +148,17 @@ public class TitleSceneManager : MonoBehaviour
     //ボタンが押されたとき
     public void Click()
     {
-        //Debug.Log("クリックされた");
     }
 
     // 
     public void LogInClick()
     {
         LogInActive();
-        //Debug.Log("SignIn");
     }
 
     public void RegisterClick()
     {
         RegisterActive();
-        //Debug.Log("SignUp");
     }
 
     public void BackClick()

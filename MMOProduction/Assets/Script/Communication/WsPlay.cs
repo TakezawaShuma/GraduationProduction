@@ -122,8 +122,7 @@ namespace WS
                             enemyDeadAction(dead);
                             break;
                         case CommandData.LogoutStoC:
-
-                            logoutAction(null);
+                            logoutAction(Json.ConvertToPackets<Packes.LogoutStoC>(e.Data));
                             break;
                         // 随時追加
                         default:
