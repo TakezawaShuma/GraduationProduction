@@ -47,7 +47,5 @@ public class AutoRunState : BaseState
         {
             playerController.ChangeState(KeyMoveState.Instance);
         }
-
-        //Debug.Log("Auto");
     }
 }

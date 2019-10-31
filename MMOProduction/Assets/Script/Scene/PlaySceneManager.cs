@@ -22,7 +22,10 @@ public class PlaySceneManager : MonoBehaviour
 
     [SerializeField]
     private ChatController chat = default(ChatController);
-    
+
+    [SerializeField]
+    private GameObject playersParent = null;
+
     bool updateFlag = true;
 
     // ソケット
@@ -65,6 +68,7 @@ public class PlaySceneManager : MonoBehaviour
         Debug.Log("プレイスタート");
         MakePlayer(new Vector3(5, 1, 15));
         UpdatePlayers(new Packes.TranslationStoC(100, 0, 0, 10,0));
+
     }
 
     // Update is called once per frame
@@ -169,9 +173,7 @@ public class PlaySceneManager : MonoBehaviour
     /// </summary>
     private void UpdatePlayers(Packes.TranslationStoC _packet)
     {
-        Debug.Log("ユーザーの移動系のコールバック");
         Packes.TranslationStoC data = _packet;
-        //Debug.Log("ID:" + data.user_id);
 
         if (data.user_id != 0)
         {
@@ -195,9 +197,6 @@ public class PlaySceneManager : MonoBehaviour
                     otherPlayer.AddComponent<OtherPlayers>();
                     otherPlayer.GetComponent<OtherPlayers>().Init(data.user_id);
                     others.Add(data.user_id, otherPlayer.GetComponent<OtherPlayers>());
-                    Debug.Log(otherPlayer.transform.position);
-
-                    Debug.Log("他のユーザーの作成");
                 }
             }
         }
@@ -210,11 +209,6 @@ public class PlaySceneManager : MonoBehaviour
     /// <param name="_str"></param>
     private void RegisterEnemies(Packes.GetEnemyDataStoC _packet)
     {
-        Debug.Log("エネミーの作成");
-
-        // todo
-        // エネミーの作成と更新
-
         List<Packes.EnemyReceiveData> list = _packet.enemys;
         foreach(var ene in list)
         {
@@ -235,36 +229,9 @@ public class PlaySceneManager : MonoBehaviour
                     newEnemy.name = "Enemy:" + ene.master_id + "->" + ene.unique_id;
                     Enemy enemy = newEnemy.AddComponent<Enemy>();
                     enemies.Add(ene.unique_id, enemy);
-                    Debug.Log("敵の新規作成");
                 }
             }
         }
-        //Packes.TranslationStoC data = new Packes.TranslationStoC();
-        //Debug.Log("ID:" + data.user_id);
-        //if (data.user_id != 0)
-        //{
-        //    if (data.user_id != UserRecord.ID)
-        //    {
-        //        // 敵の更新
-        //        if (players.ContainsKey(data.user_id))
-        //        {
-        //            players[data.user_id].GetComponent<Enemy>().UpdataData(0, 0, data.x, data.y, data.z, data.dir);
-        //            Debug.Log("敵の移動処理");
-        //        }
-        //        // todo 他プレイヤーの更新と作成を関数分けする
-        //        // 敵の作成
-        //        else
-        //        {
-        //            var otherPlayer = Instantiate<GameObject>(testEnemyPre, new Vector3(data.x, data.y, data.z), Quaternion.Euler(0, data.dir, 0));
-        //            otherPlayer.name = "enemy" + data.user_id;
-        //            otherPlayer.AddComponent<Enemy>();
-        //            players.Add(data.user_id, otherPlayer);
-        //            Debug.Log(otherPlayer.transform.position);
-
-        //            Debug.Log("敵の作成");
-        //        }
-        //    }
-        //}
     }
 
     /// <summary>
@@ -281,10 +248,6 @@ public class PlaySceneManager : MonoBehaviour
     /// <param name="_save"></param>
     private void RecvSaveData(Packes.LoadSaveData _packet)
     {
-        Debug.Log("セーブデータの取得");
-        //SaveData data = JsonUtility.FromJson<SaveData>(_str);
-
-        //save = data;
 
         wsp.Send(new Packes.LoadingFinishCtoS().ToJson());
         //wsp.SendSaveDataOK();

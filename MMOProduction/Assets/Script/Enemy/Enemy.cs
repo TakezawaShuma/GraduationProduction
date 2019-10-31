@@ -44,9 +44,6 @@ public class Enemy : MonoBehaviour
     public void UpdataData(int _hp, int _mp, float _x, float _y, float _z, float _dir)
     {
 
-        Debug.Log("update data");
-        Debug.Log("Dir : " + _dir);
-
         HP = _hp; MP = _mp;
         // 向きを決める
         lastDir = transform.rotation;

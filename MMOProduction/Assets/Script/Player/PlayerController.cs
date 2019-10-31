@@ -189,7 +189,10 @@ public class PlayerController: MonoBehaviour
             {
                 if (target != null)
                 {
-                    target.GetComponent<Marker>().STATE = Marker.State.None;
+                    if (target != hit.collider.gameObject)
+                    {
+                        target.GetComponent<Marker>().STATE = Marker.State.None;
+                    }
                 }
 
                 target = hit.collider.gameObject;
@@ -235,7 +238,7 @@ public class PlayerController: MonoBehaviour
         if(other.tag == "Enemy")
         {
             // ここでデータを送る
-            Debug.Log("当たってるYO");
+            Debug.Log("エネミーと当たってるYO");
         }
     }
 }
