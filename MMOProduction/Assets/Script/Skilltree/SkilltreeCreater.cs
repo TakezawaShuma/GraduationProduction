@@ -6,10 +6,11 @@ using System;
 
 public class SkillData
 {
-    public SkillData(int Id,int pId)
+    public SkillData(int Id,int pId,bool act)
     {
         id = Id;
         pearentID = pId;
+        active = act;
     }
 
     public int[] children = new int[0];
@@ -45,25 +46,31 @@ public class SkilltreeData
                     if (v.pearentID != 0)
                     {
                         vv.childList.Add(v);
+                        Debug.Log(vv.id + "の子リストに" + v.id + "を追加");
+                    }
+                    else
+                    {
+                        Debug.Log(v.id + "は一番上のスキル");
                     }
                 }
             }
         }
     }
 
-    public List<SkillData> CheckActiveReturnList(int id_)
+    public List<SkillData> CheckActiveReturnList(int id_,List<SkillData> sd)
     {
-        List<SkillData> sd = new List<SkillData>();
         foreach (var v in skilltree)
         {
             if (v.id == id_)
             {
+                if (v.active != true)
+                    return sd;
                 sd.Add(v);
                 if (v.childList.Capacity == 0) break;
                 foreach (var vv in v.childList)
                 {
                     //sd.Add(vv);
-                    sd.AddRange(CheckActiveReturnList(vv.id));
+                    sd.AddRange(CheckActiveReturnList(vv.id,sd));
                 }
             }
             else
@@ -119,6 +126,23 @@ public class SkilltreeCreater : MonoBehaviour
     {
         skilltreeDatas = new List<SkilltreeData>();
 
+
+        //デバッグ用消してどうぞ
+        //SkilltreeData test = new SkilltreeData();
+        //test.skilltree.Add(new SkillData(100, 0,true));
+        //test.skilltree.Add(new SkillData(101, 100,true));
+        //test.skilltree.Add(new SkillData(102, 101,false));
+        //test.skilltree.Add(new SkillData(103, 101,true));
+        //test.AddChild();
+        //List<SkillData> t = new List<SkillData>();
+        //test.CheckActiveReturnList(100,t);
+        //foreach(var v in t)
+        //{
+        //    Debug.Log(v.id + "はアクティブ");
+        //}
+        //ここまでデバッグ
+
+
         for (int i = 0; i < 10; i++)
         {
             SkilltreeData skilltreeData = new SkilltreeData();
@@ -126,7 +150,7 @@ public class SkilltreeCreater : MonoBehaviour
 
             for (int j = 0; j < 10; j++)
             {
-                SkillData skill = new SkillData(0,0);
+                SkillData skill = new SkillData(0,0,false);
                 skilltreeDatas[i].skilltree.Add(skill);
             }
         }
