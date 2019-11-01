@@ -20,6 +20,7 @@ public class PlayerController: MonoBehaviour
 
     [SerializeField, Header("アニメーターコントローラー")]
     private Animator animator;
+    public Animator Animator { get { return this.animator; } }
 
     [SerializeField, Header("チャットコントローラー")]
     private ChatController chatController;
@@ -41,9 +42,6 @@ public class PlayerController: MonoBehaviour
 
     private GameObject target;
 
-    // Tama: プレイヤーアニメーションデータ
-    private PlayerAnimData _playerAnim;
-
     private Rigidbody rigidbody;
 
     
@@ -53,8 +51,6 @@ public class PlayerController: MonoBehaviour
         FollowingCamera = _camera;
         playerSetting = _setting;
         chatController = chat;
-
-        _playerAnim = new PlayerAnimData(this.gameObject);
     }
 
     // 位置
@@ -75,6 +71,9 @@ public class PlayerController: MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        // アニメーターコンポーネントの取得
+        this.animator = GetComponent<Animator>();
+
         pos = Vector3.zero;
         animatorManager = new AnimatorManager(animator);
         IdleState.Instance.Initialized(this, playerSetting, animatorManager);

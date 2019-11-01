@@ -48,7 +48,9 @@ public class KeyMoveState : BaseState
         {
             playerController.ChangeState(IdleState.Instance);
         }
-        
+
+        // アニメーションを再生する
+        playerController.Animator.SetFloat("speed", velocity.magnitude);
     }
 
     private void VelocityDecision()
