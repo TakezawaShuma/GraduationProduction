@@ -63,9 +63,14 @@ public class PlaySceneManager : MonoBehaviour
 
         }
         Debug.Log("プレイスタート");
-        MakePlayer(new Vector3(5, 1, 15));
-        UpdatePlayers(new Packes.TranslationStoC(100, 0, 0, 10,0));
-
+          
+        // debug
+        MakePlayer(new Vector3(5, 1, 15)); 
+        var newEnemy = Instantiate<GameObject>(testEnemyPre, new Vector3(5, 1, 20), Quaternion.Euler(0, 0, 0));
+        newEnemy.name = "Enemy:Debug";
+        newEnemy.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionY;
+        Enemy enemy = newEnemy.AddComponent<Enemy>();
+        enemies.Add(100, enemy);
     }
 
     // Update is called once per frame
@@ -86,6 +91,19 @@ public class PlaySceneManager : MonoBehaviour
                     }
                 }
             }
+        }
+
+        // debug
+        if (Input.GetKeyDown(KeyCode.Backspace))
+        {
+            DeadEnemy(new Packes.EnemyDieStoC(0, 100));
+        }
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            Packes.GetEnemyDataStoC v = new Packes.GetEnemyDataStoC();
+            v.enemys.Add(new Packes.EnemyReceiveData(100, 0, 5, 1, 20, 0, 0, 10));
+
+            RegisterEnemies(v);
         }
     }
 
@@ -109,42 +127,6 @@ public class PlaySceneManager : MonoBehaviour
     }
 
 
-
-
-    ///// <summary>
-    ///// 自分の作成
-    ///// </summary>
-    //private void MakePlayer()
-    //{
-    //    //if(UserRecord.ID == receive.user_id) {
-    //    //    player_ = Instantiate<GameObject>(playerPre);
-    //    //    player_.transform.position = new Vector3(5, 0, 15);
-    //    //    player_.name = "player" + UserRecord.ID;
-    //    //}
-
-
-
-    //    //if (!players.ContainsKey(UserRecord.ID))
-    //    //{
-            
-    //    //    // 自分の作成コンポーネントの追加
-    //    //    var tmpPlayer = Instantiate<GameObject>(playerPre);
-    //    //    tmpPlayer.transform.position = new Vector3(5, 1, 15);
-    //    //    tmpPlayer.name = "player" + UserRecord.ID;
-    //    //    tmpPlayer.AddComponent<Player>();
-    //    //    tmpPlayer.AddComponent<PlayerController>();
-    //    //    tmpPlayer.AddComponent<PlayerSetting>();
-    //    //    tmpPlayer.GetComponent<PlayerController>().Init(
-    //    //        players[UserRecord.ID].GetComponent<Player>(),
-    //    //        FollowingCamera,
-    //    //        players[UserRecord.ID].GetComponent<PlayerSetting>(),
-    //    //        chat
-    //    //        );
-    //    //    players.Add(UserRecord.ID, tmpPlayer);
-    //    //    FollowingCamera.SetTarget(players[UserRecord.ID]);
-            
-    //    }
-    //}
 
     private void MakePlayer(Vector3 _save,string _name= "player0")
     {
@@ -290,7 +272,8 @@ public class PlaySceneManager : MonoBehaviour
         // todo
         // 戦闘で計算後エネミーが死亡していたら
         // HPを0にして死亡エフェクトやドロップアイテムの取得
-
+        enemies[_packet.unique_id].DeiAnimetion();
+        enemies.Remove(_packet.unique_id);
         Debug.Log("敵は死んだ！！！");
     }
 

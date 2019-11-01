@@ -37,7 +37,8 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        LerpMove();
+        // debug
+        //LerpMove();
     }
 
 
@@ -62,5 +63,34 @@ public class Enemy : MonoBehaviour
         nowFlame += UPDATE_SPEED;
         transform.rotation = Quaternion.Lerp(lastDir, nextDir, nowFlame);
         transform.position = Vector3.Lerp(lastPos, nextPos, nowFlame);
+    }
+
+
+    // アニメーション関係
+
+    public void DeiAnimetion()
+    {
+        gameObject.GetComponent<Animator>().SetTrigger("Die");
+    }
+
+    /// <summary>
+    /// アニメーションの終了を判定するコルーチン
+    /// </summary>
+    /// <param name="_animationName"></param>
+    /// <returns></returns>
+    public IEnumerator WaitAnimationEnd(string _animationName,float _animationTime)
+    {
+        bool fin = false;
+        while(!fin)
+        {
+            AnimatorStateInfo nowState = gameObject.GetComponent<Animator>().GetCurrentAnimatorStateInfo(0);
+            if (nowState.IsName(_animationName)) { fin = true; }
+            else { yield return new WaitForSeconds(_animationTime); }
+        }
+    }
+
+    void DestroyMe()
+    {
+        Destroy(this.gameObject);
     }
 }
