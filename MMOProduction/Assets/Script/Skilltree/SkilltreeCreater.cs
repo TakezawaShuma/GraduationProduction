@@ -2,10 +2,25 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class SkillData
 {
+    public SkillData(int Id,int pId)
+    {
+        id = Id;
+        pearentID = pId;
+    }
+
     public int[] children = new int[0];
+    //自身のID
+    public int id;
+    //親スキルのID
+    public int pearentID;
+    //子スキルのリスト
+    public List<SkillData> childList = new List<SkillData>();
+    //自身がアクティブであるか
+    public bool active = false;
 }
 
 public class SkilltreeData
@@ -15,6 +30,70 @@ public class SkilltreeData
     public SkilltreeData()
     {
         skilltree = new List<SkillData>();
+    }
+
+    //親IDを見て親の子リストに自身を追加するs
+    public void AddChild()
+    {
+        foreach (var v in skilltree)
+        {
+            foreach (var vv in skilltree)
+            {
+                if (v.pearentID == vv.id)
+                {
+                    //親がないスキルのparentIDは0で
+                    if (v.pearentID != 0)
+                    {
+                        vv.childList.Add(v);
+                    }
+                }
+            }
+        }
+    }
+
+    public List<SkillData> CheckActiveReturnList(int id_)
+    {
+        List<SkillData> sd = new List<SkillData>();
+        foreach (var v in skilltree)
+        {
+            if (v.id == id_)
+            {
+                sd.Add(v);
+                if (v.childList.Capacity == 0) break;
+                foreach (var vv in v.childList)
+                {
+                    //sd.Add(vv);
+                    sd.AddRange(CheckActiveReturnList(vv.id));
+                }
+            }
+            else
+            {
+                Debug.Log("存在しないID");
+            }
+        }
+        return sd;
+    }
+
+    public (int[] id,bool[] active) CheckActiveReturnArray(int id_,int[] id,bool[] active)
+    {
+        foreach(var v in skilltree)
+        {
+            if(v.id==id_)
+            {
+                Array.Resize(ref id, id.Length + 1);
+                id[id.Length - 1] = v.id;
+                Array.Resize(ref active, active.Length + 1);
+                active[active.Length - 1] = v.active;
+                
+            }
+            if (v.childList.Capacity == 0) break;
+            foreach(var vv in v.childList)
+            {
+                CheckActiveReturnArray(vv.id, id, active);
+            }
+        }
+
+        return (id, active);
     }
 }
 
@@ -47,7 +126,7 @@ public class SkilltreeCreater : MonoBehaviour
 
             for (int j = 0; j < 10; j++)
             {
-                SkillData skill = new SkillData();
+                SkillData skill = new SkillData(0,0);
                 skilltreeDatas[i].skilltree.Add(skill);
             }
         }

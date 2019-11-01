@@ -68,6 +68,7 @@ public class skill_table : ScriptableObject
         //親のID
         public int pearentID;
 
+
         //必要ポイント
         public int pearentPoint;
 
