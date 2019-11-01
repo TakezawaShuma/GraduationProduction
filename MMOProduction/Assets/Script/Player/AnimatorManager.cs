@@ -35,4 +35,15 @@ public class AnimatorManager
         AllFalse();
         animator.SetBool("Run", true);
     }
+
+    public void Speed(float speed)
+    {
+        animator.SetFloat("speed", speed);
+    }
+
+    public void Kill()
+    {
+        //AllFalse();
+        animator.SetTrigger("kill");
+    }
 }

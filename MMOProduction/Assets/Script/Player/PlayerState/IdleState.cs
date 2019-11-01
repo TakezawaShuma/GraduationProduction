@@ -52,5 +52,13 @@ public class IdleState : BaseState
         {
             playerController.ChangeState(TestAttackState.Instance);
         }
+
+        // 攻撃（デバッグ）
+        // 斬る！
+        if (playerController.Player.AttackCommand.Kill())
+        {
+            animatorManager.Kill();
+            playerController.ChangeState(KillState.Instance);
+        }
     }
 }

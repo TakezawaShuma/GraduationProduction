@@ -159,7 +159,6 @@ public class PlaySceneManager : MonoBehaviour
                 chat
                 );
             FollowingCamera.SetTarget(players[Retention.ID]);
-            
         }
     }
 

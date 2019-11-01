@@ -50,7 +50,7 @@ public class KeyMoveState : BaseState
         }
 
         // アニメーションを再生する
-        playerController.Animator.SetFloat("speed", velocity.magnitude);
+        playerController.AnimatorManager.Speed(velocity.magnitude);
     }
 
     private void VelocityDecision()

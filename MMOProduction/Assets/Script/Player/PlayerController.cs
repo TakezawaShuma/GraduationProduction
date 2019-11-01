@@ -11,6 +11,7 @@ public class PlayerController: MonoBehaviour
 {
     [SerializeField, Header("プレイヤー")]
     private Player PlayerData;
+    public Player Player { get { return PlayerData; } }
 
     [SerializeField, Header("カメラ")]
     private FollowingCamera FollowingCamera;
@@ -37,6 +38,7 @@ public class PlayerController: MonoBehaviour
     private BaseState currentState;
     
     private AnimatorManager animatorManager;
+    public AnimatorManager AnimatorManager { get { return this.animatorManager; } }
 
     private bool lockState = false;
 
@@ -44,7 +46,17 @@ public class PlayerController: MonoBehaviour
 
     private Rigidbody rigidbody;
 
-    
+    // プレイヤーが現在所持している武器の当たり判定データ
+    // プレイヤーが現在所持している武器
+    [SerializeField, Header("所持武器の当たり判定データ")]
+    private AttackCollider currentWepon = null;
+    public AttackCollider CurrentWepon { set { this.currentWepon = value; } }
+
+    // プレイヤーが現在所持している武器の当たり判定データ
+    [SerializeField]
+    private PlayerWepon weponData = null;
+    public PlayerWepon WeponData { get { return this.weponData; } }
+
 
     public void Init(Player _playerData,FollowingCamera _camera,PlayerSetting _setting, ChatController chat) {
         PlayerData = _playerData;
@@ -80,10 +92,13 @@ public class PlayerController: MonoBehaviour
         KeyMoveState.Instance.Initialized(this, playerSetting, animatorManager);
         AutoRunState.Instance.Initialized(this, playerSetting, animatorManager);
         TestAttackState.Instance.Initialized(this, playerSetting, animatorManager);
+        KillState.Instance.Initialized(this, playerSetting, animatorManager);
 
         currentState = IdleState.Instance;
 
         rigidbody = GetComponent<Rigidbody>();
+
+        this.weponData = GetComponent<PlayerWepon>();
     }
 
     // Update is called once per frame
@@ -105,14 +120,6 @@ public class PlayerController: MonoBehaviour
             }
 
             currentState.Execute();
-        }
-
-        // デバッグ
-        // 画面クリックでファイアボールを放つ
-        // 敵の頭上
-        if(Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            AttackNotify.Instance.SendAttack(0, 0);
         }
     }
 

@@ -31,7 +31,11 @@ public class Player : MonoBehaviour
     private float dir;
 
     private Rigidbody rb;
-    
+
+    // プレイヤー用コマンド
+    private CommandAttack _attackCommand;
+    public CommandAttack AttackCommand { get { return _attackCommand; } }
+
 
     private void Start()
     {
@@ -42,6 +46,15 @@ public class Player : MonoBehaviour
         dir = transform.rotation.eulerAngles.y;
 
         rb = GetComponent<Rigidbody>();
+
+        // プレイヤーが使用するコマンドを登録
+        _attackCommand = new CommandAttack(this);
+        _attackCommand.Kill = (() => {
+            return Input.GetKeyDown(KeyCode.Alpha1);
+        });
+        _attackCommand.Punch = (() => {
+            return Input.GetKeyDown(KeyCode.Alpha2);
+        });
     }
 
     private void Update()

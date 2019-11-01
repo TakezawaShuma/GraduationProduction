@@ -2108,7 +2108,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 992294604}
   m_LocalRotation: {x: 0.1301826, y: -0.0000000059217036, z: 7.7751944e-10, w: 0.99149007}
-  m_LocalPosition: {x: 0.0012566437, y: 70394.46, z: -105338.06}
+  m_LocalPosition: {x: 0.001274231, y: 71919.76, z: -106813.914}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2127,7 +2127,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 992294604}
-  offset: {x: 0, y: 1.5, z: 0}
+  offset: {x: 0, y: 0.8, z: 0}
   distance: 2
   polarAngle: 75
   azimuthalAngle: 270

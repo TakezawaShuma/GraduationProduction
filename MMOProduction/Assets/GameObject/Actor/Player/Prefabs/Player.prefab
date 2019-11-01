@@ -1145,6 +1145,7 @@ GameObject:
   - component: {fileID: 6075584543837426679}
   - component: {fileID: 3837917106697477593}
   - component: {fileID: 2905891704786409794}
+  - component: {fileID: 3073607535090235238}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1217,6 +1218,21 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!114 &3073607535090235238
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6075584543846948955}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 88544a5f90f4c3b4b89079c51a2c642c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _weponList:
+  - _wepon: {fileID: 8375519708940002963}
+    _name: sword
 --- !u!1 &6075584543846948957
 GameObject:
   m_ObjectHideFlags: 0
@@ -1279,6 +1295,18 @@ Transform:
   m_Father: {fileID: 6075584543847250951}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &8375519708940002963
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7061503273397279698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5375b4bf6e74f4f4b8936d86b9bee22e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &7061503273397378418
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1348,6 +1376,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 46bee165790d2c24f9abecc09e243920, type: 3}
+--- !u!1 &7061503273397279698 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 100000, guid: 46bee165790d2c24f9abecc09e243920,
+    type: 3}
+  m_PrefabInstance: {fileID: 7061503273397378418}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7061503273397503986 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 400000, guid: 46bee165790d2c24f9abecc09e243920,
