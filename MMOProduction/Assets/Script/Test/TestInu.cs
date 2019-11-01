@@ -6,10 +6,10 @@ using UnityEngine.AI;
 public class TestInu : MonoBehaviour
 {
     [SerializeField]
-    private GameObject[] point;
+    private GameObject[] point = null;
 
     [SerializeField]
-    private NavMeshAgent nma;
+    private NavMeshAgent nma = null;
 
     private int nowPoint = 0;
 

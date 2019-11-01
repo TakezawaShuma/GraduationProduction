@@ -27,13 +27,13 @@ public class SkilltreeManager : MonoBehaviour
     private Button[] buttons = new Button[11];
 
     [SerializeField]
-    private Color onColor;
+    private Color onColor = default(Color);
 
     [SerializeField]
-    private Color offColor;
+    private Color offColor = default(Color);
 
     [SerializeField]
-    private ScrollRect scrollRect;
+    private ScrollRect scrollRect = null;
 
     // Start is called before the first frame update
     void Start()

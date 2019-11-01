@@ -5,10 +5,10 @@ using UnityEngine;
 public class UIManager : MonoBehaviour
 {
     [SerializeField]
-    private GameObject[] ui;
+    private GameObject[] ui = null;
 
     [SerializeField]
-    private KeyCode[] key;
+    private KeyCode[] key = null;
 
     // Start is called before the first frame update
     void Start()
@@ -23,9 +23,9 @@ public class UIManager : MonoBehaviour
         {
             for (int i = 0; i < ui.Length; i++)
             {
-                if(Input.GetKeyDown(key[i]))
+                if (Input.GetKeyDown(key[i]))
                 {
-                    if(ui[i].activeInHierarchy)
+                    if (ui[i].activeInHierarchy)
                     {
                         ui[i].SetActive(false);
                     }

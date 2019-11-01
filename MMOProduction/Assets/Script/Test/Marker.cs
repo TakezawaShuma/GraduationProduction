@@ -14,7 +14,7 @@ public class Marker : MonoBehaviour
     }
 
     [SerializeField]
-    private SpriteRenderer sprite;
+    private SpriteRenderer sprite = null;
 
     [SerializeField]
     private Color[] color = new Color[(int)State.Num];

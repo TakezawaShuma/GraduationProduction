@@ -67,7 +67,7 @@ namespace WS
                         case CommandData.LoginOK: //103
                             Packes.LoginOK login = Json.ConvertToPackets<Packes.LoginOK>(e.Data);
                             // IDの保管
-                            Retention.ID = login.user_id;
+                            UserRecord.ID = login.user_id;
                             ChangeScenetoPlay();
                             break;
 
@@ -79,7 +79,7 @@ namespace WS
                         case CommandData.CreateOK: //105
                             Packes.CreateOK create = Json.ConvertToPackets<Packes.CreateOK>(e.Data);
                             // IDの保管
-                            Retention.ID = create.user_id;
+                            UserRecord.ID = create.user_id;
                             ChangeScenetoPlay();
                             break;
 

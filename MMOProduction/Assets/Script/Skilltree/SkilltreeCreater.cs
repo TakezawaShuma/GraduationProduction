@@ -107,15 +107,15 @@ public class SkilltreeData
 public class SkilltreeCreater : MonoBehaviour
 {
     [SerializeField]
-    private GameObject skill;
+    private GameObject skill = null;
 
     [SerializeField]
-    private GameObject horizontal;
+    private GameObject horizontal = null;
 
     [SerializeField]
-    private GameObject vertical;
+    private GameObject vertical = null;
 
-    private List<SkilltreeData> skilltreeDatas;
+    private List<SkilltreeData> skilltreeDatas = null;
 
     private int mostRight = 0;
 

@@ -4,18 +4,19 @@ using UnityEngine;
 
 public class TestQuestBoard : MonoBehaviour
 {
+    // なんの変数なのかわからない
     [SerializeField]
-    private GameObject[] gameObject = null;
+    private GameObject[] gameObject_ = null;
 
     [SerializeField]
-    private Marker marker;
+    private Marker marker = null;
 
     // Start is called before the first frame update
     void Start()
     {
         marker.SetFunction(On);
 
-        foreach (GameObject game in gameObject)
+        foreach (GameObject game in gameObject_)
         {
             game.SetActive(false);
         }
@@ -29,7 +30,7 @@ public class TestQuestBoard : MonoBehaviour
 
     public void On()
     {
-        foreach (GameObject game in gameObject)
+        foreach (GameObject game in gameObject_)
         {
             game.SetActive(true);
         }
@@ -37,7 +38,7 @@ public class TestQuestBoard : MonoBehaviour
 
     public void Off()
     {
-        foreach (GameObject game in gameObject)
+        foreach (GameObject game in gameObject_)
         {
             game.SetActive(false);
         }

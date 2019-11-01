@@ -5,10 +5,10 @@
 /// <summary>
 /// ゲーム中保持する自分のデータ
 /// </summary>
-public static class Retention
+public static class UserRecord
 {
-    private static int id;
-    private static string name;
+    private static int id = 0;
+    private static string name = "";
     private static string ip = "";
     public static int ID { get { return id; } set { if (id == 0) id = value; } }
     public static string Name { get { return name; } set { if (name == "") name = value; } }

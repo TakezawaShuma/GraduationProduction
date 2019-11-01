@@ -18,21 +18,21 @@ public class PlayerUI : MonoBehaviour
 
     // UI情報
     [SerializeField]
-    private Image job;
+    private Image job = null;
     [SerializeField]
-    private Slider hpRed;
+    private Slider hpRed = null;
     [SerializeField]
-    private Slider hpGreen;
+    private Slider hpGreen = null;
     [SerializeField]
-    private Slider mpYellow;
+    private Slider mpYellow = null;
     [SerializeField]
-    private Slider mpBlue;
+    private Slider mpBlue = null;
     [SerializeField]
-    private Image number;
+    private Image number = null;
     [SerializeField]
-    private Image target;
+    private Image target = null;
     [SerializeField]
-    private Text lvName;
+    private Text lvName = null;
 
     // Start is called before the first frame update
     void Start()
@@ -42,6 +42,12 @@ public class PlayerUI : MonoBehaviour
         //playerCmp = player.GetComponent<Player>();
 
         // アイコンやプレイヤ情報の初期設定
+        mpYellow.name = "BGMP";
+        hpRed.name = "BGHP";
+        job.name = "Job";
+        number.name = "Num";
+        lvName.name = "Player";
+        target.name = "Target";
     }
 
     // Update is called once per frame
@@ -49,15 +55,20 @@ public class PlayerUI : MonoBehaviour
     {
         if(player == null)
         {
-            player = GameObject.Find("player" + Retention.ID);
-            playerCmp = player.GetComponent<Player>();
-            playerCmp.maxHp = 100;
-            playerCmp.hp = 30;
-            playerCmp.maxMp = 100;
-            playerCmp.mp = 60;
+            player = GameObject.Find("player" + UserRecord.ID);
+            if (player != null)
+            {
+                playerCmp = player.GetComponent<Player>();
+                playerCmp.maxHp = 100;
+                playerCmp.hp = 30;
+                playerCmp.maxMp = 100;
+                playerCmp.mp = 60;
+            }
         }
-
-        StatusUpdate();
+        if (playerCmp)
+        {
+            StatusUpdate();
+        }
     }
 
     private void StatusUpdate()
