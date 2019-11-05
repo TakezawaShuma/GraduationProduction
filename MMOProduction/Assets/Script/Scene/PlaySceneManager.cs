@@ -36,6 +36,9 @@ public class PlaySceneManager : MonoBehaviour
 
     private GameObject player_;
 
+    //EnemyManager
+    EnemyManager enm = new EnemyManager();
+
     private void Awake()
     {
 
@@ -64,7 +67,9 @@ public class PlaySceneManager : MonoBehaviour
         Debug.Log("プレイスタート");
         MakePlayer(new Vector3(5, 1, 15));
         UpdatePlayers(new Packes.TranslationStoC(100, 0, 0, 10,0));
-
+        //テスト用のEnemy情報を追加
+        enm.AddEnemy(0, "Forest Bunny Black");
+        var newEnemy = Instantiate<GameObject>(enm.GetEnemyPrefab(0), new Vector3(1,0,5.8f), Quaternion.identity);
     }
 
     // Update is called once per frame
