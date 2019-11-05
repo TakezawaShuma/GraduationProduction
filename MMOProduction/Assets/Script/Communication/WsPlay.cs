@@ -135,12 +135,10 @@ namespace WS
                             break;
 
                         case CommandData.EnemyDieStoC:
-                            Packes.EnemyDieStoC dead = Json.ConvertToPackets<Packes.EnemyDieStoC>(e.Data);
-                            enemyDeadAction(dead);
+                            enemyDeadAction(Json.ConvertToPackets<Packes.EnemyDieStoC>(e.Data));
                             break;
                         case CommandData.LogoutStoC:
-                            Packes.LogoutStoC logout = Json.ConvertToPackets<Packes.LogoutStoC>(e.Data);
-                            logoutAction(logout);
+                            logoutAction(Json.ConvertToPackets<Packes.LogoutStoC>(e.Data));
                             break;
                         // 随時追加
                         default:

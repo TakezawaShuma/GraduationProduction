@@ -164,20 +164,17 @@ public class TitleSceneManager : MonoBehaviour
     //ボタンが押されたとき
     public void Click()
     {
-        //Debug.Log("クリックされた");
     }
 
     // 
     public void LogInClick()
     {
         LogInActive();
-        //Debug.Log("SignIn");
     }
 
     public void RegisterClick()
     {
         RegisterActive();
-        //Debug.Log("SignUp");
     }
 
     public void BackClick()
