@@ -45,10 +45,10 @@ public enum CommandData
     TranslationCtoS = (int)201,
     /// <summary>移動</summary>
     TranslationStoC = (int)202,
-    /// <summary>初回ログイン送信</summary>
-    InitLogin = (int)203,
-    /// <summary>初回ログイン受信</summary>
-    InitLoginStoC = (int)204,
+    /// <summary>エネミー情報要請</summary>
+    GetEnemysDataCtoS = (int)203,
+    /// <summary>エネミー情報受信</summary>
+    GetEnemyDataStoC = (int)204,
     /// <summary>状態送信</summary>
     StatusCtoS = (int)205,
     /// <summary>状態受信</summary>
@@ -57,13 +57,24 @@ public enum CommandData
     DataLoading = (int)209,
     /// <summary>セーブデータ</summary>
     LoadSaveData = (int)210,
-    /// <summary>データの読み込み終了</summary>
-    LoadingFinish = (int)211,
+    /// <summary>データの読み込み終了報告</summary>
+    LoadingFinishCtoS = (int)211,
+    /// <summary>データの読み込み終了報告</summary>
+    LoadingFinishStoC = (int)212,
+
+    /// <summary>戦闘処理送信</summary>
+    Attack = (int)220,
+    /// <summary>エネミーが生きている時</summary>
+    EnemyAliveStoC = (int)221,
+    /// <summary>エネミーが死んでいる時</summary>
+    EnemyDieStoC = (int)222,
+
 
 
     /// その他
-    /// <summary> ログアウト要請 </summary>
-    Finished = (int)701,
+
+    /// <summary>ログアウト要請</summary>
+    LogoutCtoS = (int)701,
     /// <summary> アイテム一覧送信 </summary>
     SendItemList = (int)702,
     /// <summary> スキル一覧送信 </summary>
@@ -75,6 +86,8 @@ public enum CommandData
     /// <summary> ログアウト完了 </summary>
     FinishComplete = (int)706,
 
+    /// <summary>他ユーザーのログアウト</summary>
+    LogoutStoC = (int)707,
 
     // チャット
     /// <summary> 全体チャット送信 </summary>

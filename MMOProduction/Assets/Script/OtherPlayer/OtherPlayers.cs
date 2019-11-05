@@ -27,35 +27,31 @@ public class OtherPlayers: MonoBehaviour
     private int maxMp;
     private int hp = 0;
     private int mp = 0;
-    private Vector3 position;
-    private float dir = 0;
+    Vector3 lastPos = new Vector3();
+    Vector3 nextPos = new Vector3();
+    private Quaternion lastDir = new Quaternion();
+    private Quaternion nextDir = new Quaternion();
+
+    
+    private float nowFlame = 0;
 
     public int HP { get { return hp; } set { hp = value; } }
     public int MP { get { return mp; } set { mp = value; } }
-    public float X { get { return position.x; } set { position.x = value; } }
-    public float Y { get { return position.y; } set { position.y = value; } }
-    public float Z { get { return position.z; } set { position.z = value; } }
-    public float Dir { get { return dir; } set { dir = value; } }
-
-    private float lastX = 0;
-    private float lastY = 0;
-    private float lastZ = 0;
-    private float lastDir = 0;
 
 
-    private int nowFlame = 0;
 
+    private const float UPDATE_SPEED = 1.0f / 3.0f;
     private const int MAX_FLAME = 3;
 
-
+    public int id = 0;
+    public OtherPlayers() { }
+    public void Init(int _i) { id = _i; }
 
     // Start is called before the first frame update
     void Start()
     {
-        X = lastX = transform.position.x;
-        Y =lastY = transform.position.y;
-        Z = lastZ = transform.position.z;
-        Dir = lastDir = transform.eulerAngles.y;
+        lastPos = transform.position;
+        lastDir = nextDir = transform.rotation;
     }
 
 
@@ -63,37 +59,31 @@ public class OtherPlayers: MonoBehaviour
     void Update()
     {
         LerpMove();
-        //transform.position = new Vector3(x, y, z);
-        //transform.Rotate(0, dir, 0);
-
     }
 
     public void UpdataData(int _hp, int _mp, float _x, float _y, float _z, float _dir)
     {
-        lastX = X;
-        lastY = Y;
-        lastZ = Z;
-        lastDir = Dir;
+        HP = _hp; MP = _mp;
 
-        HP = _hp; MP = _mp; X = _x; Y = _y; Z = _z; Dir = _dir;
+        // 向きを決める
+        lastDir = transform.rotation;
+        nextDir = Quaternion.Euler(0, _dir, 0);
 
+        // 位置を決める
+        lastPos = transform.position;
+        nextPos = new Vector3(_x, _y, _z);
+        
+        // カウントを初期化
         nowFlame = 0;
-        transform.position = new Vector3(lastX, lastY, lastZ);
-        transform.rotation = Quaternion.Euler(0, lastDir, 0);
     }
 
+    /// <summary>
+    /// 他プレイヤーの移動を補間する
+    /// </summary>
     private void LerpMove()
     {
-        Vector3 last = new Vector3(lastX, lastY, lastZ);
-        Vector3 next = new Vector3(X, Y, Z);
-
-        float t = (1.0f / 60.0f) * (nowFlame + 1);
-
-        Vector3 v = Vector3.Lerp(last, next, t);
-        transform.rotation = Quaternion.Slerp(Quaternion.Euler(transform.rotation.x,lastDir, transform.rotation.z), Quaternion.Euler(transform.rotation.x,dir, transform.rotation.z), t);
-
-        transform.position = v;
-
-        nowFlame++;
+        nowFlame += UPDATE_SPEED;
+        transform.rotation = Quaternion.Lerp(lastDir, nextDir, nowFlame);
+        transform.position = Vector3.Lerp(lastPos, nextPos, nowFlame);
     }
 }

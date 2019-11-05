@@ -2,10 +2,26 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System;
 
 public class SkillData
 {
+    public SkillData(int Id,int pId,bool act)
+    {
+        id = Id;
+        pearentID = pId;
+        active = act;
+    }
+
     public int[] children = new int[0];
+    //自身のID
+    public int id;
+    //親スキルのID
+    public int pearentID;
+    //子スキルのリスト
+    public List<SkillData> childList = new List<SkillData>();
+    //自身がアクティブであるか
+    public bool active = false;
 }
 
 public class SkilltreeData
@@ -16,20 +32,90 @@ public class SkilltreeData
     {
         skilltree = new List<SkillData>();
     }
+
+    //親IDを見て親の子リストに自身を追加するs
+    public void AddChild()
+    {
+        foreach (var v in skilltree)
+        {
+            foreach (var vv in skilltree)
+            {
+                if (v.pearentID == vv.id)
+                {
+                    //親がないスキルのparentIDは0で
+                    if (v.pearentID != 0)
+                    {
+                        vv.childList.Add(v);
+                        Debug.Log(vv.id + "の子リストに" + v.id + "を追加");
+                    }
+                    else
+                    {
+                        Debug.Log(v.id + "は一番上のスキル");
+                    }
+                }
+            }
+        }
+    }
+
+    public List<SkillData> CheckActiveReturnList(int id_,List<SkillData> sd)
+    {
+        foreach (var v in skilltree)
+        {
+            if (v.id == id_)
+            {
+                if (v.active != true)
+                    return sd;
+                sd.Add(v);
+                if (v.childList.Capacity == 0) break;
+                foreach (var vv in v.childList)
+                {
+                    //sd.Add(vv);
+                    sd.AddRange(CheckActiveReturnList(vv.id,sd));
+                }
+            }
+            else
+            {
+                Debug.Log("存在しないID");
+            }
+        }
+        return sd;
+    }
+
+    public (int[] id,bool[] active) CheckActiveReturnArray(int id_,int[] id,bool[] active)
+    {
+        foreach(var v in skilltree)
+        {
+            if(v.id==id_)
+            {
+                Array.Resize(ref id, id.Length + 1);
+                id[id.Length - 1] = v.id;
+                Array.Resize(ref active, active.Length + 1);
+                active[active.Length - 1] = v.active;
+                
+            }
+            if (v.childList.Capacity == 0) break;
+            foreach(var vv in v.childList)
+            {
+                CheckActiveReturnArray(vv.id, id, active);
+            }
+        }
+
+        return (id, active);
+    }
 }
 
 public class SkilltreeCreater : MonoBehaviour
 {
     [SerializeField]
-    private GameObject skill;
+    private GameObject skill = null;
 
     [SerializeField]
-    private GameObject horizontal;
+    private GameObject horizontal = null;
 
     [SerializeField]
-    private GameObject vertical;
+    private GameObject vertical = null;
 
-    private List<SkilltreeData> skilltreeDatas;
+    private List<SkilltreeData> skilltreeDatas = null;
 
     private int mostRight = 0;
 
@@ -38,6 +124,23 @@ public class SkilltreeCreater : MonoBehaviour
     {
         skilltreeDatas = new List<SkilltreeData>();
 
+
+        //デバッグ用消してどうぞ
+        //SkilltreeData test = new SkilltreeData();
+        //test.skilltree.Add(new SkillData(100, 0,true));
+        //test.skilltree.Add(new SkillData(101, 100,true));
+        //test.skilltree.Add(new SkillData(102, 101,false));
+        //test.skilltree.Add(new SkillData(103, 101,true));
+        //test.AddChild();
+        //List<SkillData> t = new List<SkillData>();
+        //test.CheckActiveReturnList(100,t);
+        //foreach(var v in t)
+        //{
+        //    Debug.Log(v.id + "はアクティブ");
+        //}
+        //ここまでデバッグ
+
+
         for (int i = 0; i < 10; i++)
         {
             SkilltreeData skilltreeData = new SkilltreeData();
@@ -45,7 +148,7 @@ public class SkilltreeCreater : MonoBehaviour
 
             for (int j = 0; j < 10; j++)
             {
-                SkillData skill = new SkillData();
+                SkillData skill = new SkillData(0,0,false);
                 skilltreeDatas[i].skilltree.Add(skill);
             }
         }

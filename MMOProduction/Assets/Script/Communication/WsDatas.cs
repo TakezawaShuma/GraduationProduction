@@ -162,9 +162,9 @@ namespace Packes
     ///// command 205 ステータス共有(client->server)
     ///// </summary>
     //public class SendStatus : IPacketDatas{
-    //    public SendStatus() { command = (int)CommandData.SendStatus; user_id = Retention.ID; }
+    //    public SendStatus() { command = (int)CommandData.SendStatus; user_id = UserRecord.ID; }
     //    public SendStatus(int _hp,int _mp,int _status) {
-    //        command = (int)CommandData.SendStatus; user_id = Retention.ID; hp = _hp; mp = _mp; status = _status;
+    //        command = (int)CommandData.SendStatus; user_id = UserRecord.ID; hp = _hp; mp = _mp; status = _status;
     //    }
     //    public int user_id;
     //    public int hp;
@@ -214,20 +214,20 @@ namespace Packes
     // その他データ----------------------------------------------------------------------------------------------------
 
         
-    /// <summary>
-    /// command 701　ログアウト時(client->server)
-    /// </summary>
-    public class Finished : IPacketDatas
-    {
-        public Finished() { command = (int)CommandData.Finished; }
-        public int level;
-        public int hp;
-        public int mp;
-        public float x;
-        public float y;
-        public float z;
-        public float exp;
-    }
+    ///// <summary>
+    ///// command 701　ログアウト時(client->server)
+    ///// </summary>
+    //public class Finished : IPacketDatas
+    //{
+    //    public Finished() { command = (int)CommandData.Finished; }
+    //    public int level;
+    //    public int hp;
+    //    public int mp;
+    //    public float x;
+    //    public float y;
+    //    public float z;
+    //    public float exp;
+    //}
     
     /// <summary>
     /// command 702 アイテム一覧(client->server)

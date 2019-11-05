@@ -112,6 +112,14 @@ public class TitleSceneManager : MonoBehaviour
             // 接続開始
             wsl = new WS.WsLogin(8000);
         }
+
+        int[] enemyyyy =
+        {
+           100,
+           200,
+           300,
+           400,
+        };
     }
 
     private int m_command = 0;
@@ -129,27 +137,28 @@ public class TitleSceneManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+
     }
 
-
+    private void OnDestroy()
+    {
+        if(connectFlag) wsl.Destroy();
+    }
     //public関数--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
     //ボタンが押されたとき
     public void Click()
     {
-        Debug.Log("クリックされた");
     }
 
     // 
     public void LogInClick()
     {
         LogInActive();
-        Debug.Log("SignIn");
     }
 
     public void RegisterClick()
     {
         RegisterActive();
-        Debug.Log("SignUp");
     }
 
     public void BackClick()
@@ -168,7 +177,6 @@ public class TitleSceneManager : MonoBehaviour
         ConfirmPW_.gameObject.SetActive(false);
         ConfirmPW_.text = "";
 
-        Debug.Log("Back");
     }
 
     /// <summary>
@@ -183,13 +191,12 @@ public class TitleSceneManager : MonoBehaviour
 
         if (CheckString(id, true) == true && CheckString(pw, false) == true)
         {
-            Debug.Log("ログイン ID:" + id + "  PW:" + pw);
+            //Debug.Log("ログイン ID:" + id + "  PW:" + pw);
             ErrorMessageHide();
             if (connectFlag)
             {
                 // ログイン処理
-                Packes.LoginUser loginUser = new Packes.LoginUser(id, pw);
-                wsl.Send(Json.ConvertToJson(loginUser));
+                wsl.Send(new Packes.LoginUser(id, pw).ToJson());
             }
         }
         else
@@ -212,7 +219,7 @@ public class TitleSceneManager : MonoBehaviour
             // 新規登録
             if (pw_.text == ConfirmPW_.text)
             {
-                Debug.Log("新規登録 ID:" + id + "  PW:" + pw);
+                //Debug.Log("新規登録 ID:" + id + "  PW:" + pw);
                 //Error01.gameObject.SetActive(false);
                 //Error02.gameObject.SetActive(false);
                 //Error03.gameObject.SetActive(false);
@@ -220,8 +227,7 @@ public class TitleSceneManager : MonoBehaviour
                 if (connectFlag)
                 {
                     // 送信処理
-                    Packes.CreateUser new_user = new Packes.CreateUser(id, pw);
-                    wsl.Send(Json.ConvertToJson(new_user));
+                    wsl.Send(new Packes.CreateUser(id, pw).ToJson());
                 }
             }
             else

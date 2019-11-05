@@ -48,8 +48,7 @@ public class KeyMoveState : BaseState
         {
             playerController.ChangeState(IdleState.Instance);
         }
-
-        //Debug.Log("key");
+        
     }
 
     private void VelocityDecision()

@@ -3,7 +3,7 @@
 public class UIController_Overlay : MonoBehaviour
 {
     [SerializeField]
-    private Transform targetTfm;
+    private Transform targetTfm = null;
 
     private RectTransform myRectTfm;
     private Vector3 offset = new Vector3(0, 1.5f, 0);

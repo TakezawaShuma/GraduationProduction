@@ -12,7 +12,6 @@ public class SwipeMove : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDra
     // ドラックが開始したとき呼ばれる.
     public void OnBeginDrag(PointerEventData eventData)
     {
-        //Debug.Log(1);
         if (eventData.button != PointerEventData.InputButton.Left) return;
     }
 

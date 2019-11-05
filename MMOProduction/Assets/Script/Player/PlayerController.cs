@@ -10,22 +10,22 @@ using UnityEngine;
 public class PlayerController: MonoBehaviour
 {
     [SerializeField, Header("プレイヤー")]
-    private Player PlayerData;
+    private Player PlayerData = null;
 
     [SerializeField, Header("カメラ")]
-    private FollowingCamera FollowingCamera;
+    private FollowingCamera FollowingCamera = null;
 
     [SerializeField, Header("プレイヤーの設定ファイル")]
-    private PlayerSetting playerSetting;
+    private PlayerSetting playerSetting = null;
 
     [SerializeField, Header("アニメーターコントローラー")]
-    private Animator animator;
+    private Animator animator = null;
 
     [SerializeField, Header("チャットコントローラー")]
-    private ChatController chatController;
+    private ChatController chatController = null;
 
     [SerializeField, Header("攻撃判定用当たり判定")]
-    private CapsuleCollider attackCollider;
+    private CapsuleCollider attackCollider = null;
 
     public CapsuleCollider AttackCollider
     {
@@ -44,13 +44,14 @@ public class PlayerController: MonoBehaviour
     // Tama: プレイヤーアニメーションデータ
     private PlayerAnimData _playerAnim;
 
-    private Rigidbody rigidbody;
+    private Rigidbody rigidbody1;
     
 
-    public void Init(Player _playerData,FollowingCamera _camera,PlayerSetting _setting) {
+    public void Init(Player _playerData,FollowingCamera _camera,PlayerSetting _setting, ChatController chat) {
         PlayerData = _playerData;
         FollowingCamera = _camera;
         playerSetting = _setting;
+        chatController = chat;
 
         _playerAnim = new PlayerAnimData(this.gameObject);
     }
@@ -82,31 +83,34 @@ public class PlayerController: MonoBehaviour
 
         currentState = IdleState.Instance;
 
-        rigidbody = GetComponent<Rigidbody>();
+        rigidbody1 = GetComponent<Rigidbody>();
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (target != null)
+        if (!chatController.GetChatActiveFlag())
         {
-            Vector3 v = target.transform.position - transform.position;
-
-            if (v.magnitude > playerSetting.LOD)
+            if (target != null)
             {
-                target.GetComponent<Marker>().STATE = Marker.State.None;
-                target = null;
-                lockState = false;
-                FollowingCamera.LOCK = null;
-            }
-        }
+                Vector3 v = target.transform.position - transform.position;
 
-        currentState.Execute();
+                if (v.magnitude > playerSetting.LOD)
+                {
+                    target.GetComponent<Marker>().STATE = Marker.State.None;
+                    target = null;
+                    lockState = false;
+                    FollowingCamera.LOCK = null;
+                }
+            }
+
+            currentState.Execute();
+        }
     }
 
     public void NoMove()
     {
-        rigidbody.velocity = new Vector3(0, rigidbody.velocity.y, 0);
+        rigidbody1.velocity = new Vector3(0, rigidbody1.velocity.y, 0);
         Quaternion rot = transform.rotation;
 
         if (lockState)
@@ -116,7 +120,7 @@ public class PlayerController: MonoBehaviour
         }
 
 
-        pos = rigidbody.position;
+        pos = rigidbody1.position;
 
         transform.rotation = Quaternion.Euler(0, rot.eulerAngles.y, 0);
 
@@ -141,9 +145,9 @@ public class PlayerController: MonoBehaviour
         Vector3 v = FollowingCamera.Angle * velocity;
 
         // 移動
-        rigidbody.velocity = new Vector3(v.x, rigidbody.velocity.y, v.z);
+        rigidbody1.velocity = new Vector3(v.x, rigidbody1.velocity.y, v.z);
 
-        pos = rigidbody.position;
+        pos = rigidbody1.position;
 
         transform.rotation = Quaternion.Euler(0, rot.eulerAngles.y, 0);
 
@@ -185,7 +189,10 @@ public class PlayerController: MonoBehaviour
             {
                 if (target != null)
                 {
-                    target.GetComponent<Marker>().STATE = Marker.State.None;
+                    if (target != hit.collider.gameObject)
+                    {
+                        target.GetComponent<Marker>().STATE = Marker.State.None;
+                    }
                 }
 
                 target = hit.collider.gameObject;
@@ -231,7 +238,7 @@ public class PlayerController: MonoBehaviour
         if(other.tag == "Enemy")
         {
             // ここでデータを送る
-            Debug.Log("当たってるYO");
+            Debug.Log("エネミーと当たってるYO");
         }
     }
 }

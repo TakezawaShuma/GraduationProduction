@@ -9,10 +9,10 @@ public class ShortcutButton : MonoBehaviour
     private Button button;
 
     [SerializeField, Header("テキスト")]
-    private Text text;
+    private Text text = null;
 
     [SerializeField, Header("画像")]
-    private Image image;
+    private Image image = null;
 
     // Start is called before the first frame update
     void Start()
