@@ -50,7 +50,7 @@ public class PlaySceneManager : MonoBehaviour
         {
             // プレイサーバに接続
             //wsp.ConnectionStart(UpdatePlayers, RecvSaveData); // debug
-            wsp = new WS.WsPlay(8001);
+            wsp = WS.WsPlay.Instance;
             wsp.moveingAction = UpdatePlayers;  // 202
             wsp.enemysAction = RegisterEnemies; // 204
             wsp.statusAction = UpdateStatus;    // 206
@@ -76,6 +76,7 @@ public class PlaySceneManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKey(KeyCode.Escape)) Quit();
         if (updateFlag)
         {
             if (player!=null)
@@ -87,7 +88,6 @@ public class PlaySceneManager : MonoBehaviour
                     {
                         SendPosition(playerData);
                         //SendStatus(100, 40, 100, 60, 10001001);
-                        LoadFinish(null);
                     }
                 }
             }
@@ -106,6 +106,19 @@ public class PlaySceneManager : MonoBehaviour
             RegisterEnemies(v);
         }
     }
+
+    /// <summary>
+    /// .exeの終了関数
+    /// </summary>
+    void Quit()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#elif UNITY_STANDALONE
+    UnityEngine.Application.Quit();
+#endif
+    }
+
 
     private void OnDestroy()
     {
@@ -285,6 +298,7 @@ public class PlaySceneManager : MonoBehaviour
     {
         Destroy(others[_packet.user_id].gameObject);
         others.Remove(_packet.user_id);
+        Debug.Log(_packet.user_id + "さんがログアウトしたよ！");
     }
 
 
