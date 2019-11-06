@@ -28,6 +28,7 @@ public class ReceiveEvent : MonoBehaviour
         {
             hitObject.GetComponent<Image>().sprite = this.GetComponent<Image>().sprite;
             hitObject.GetComponent<SlotData>().ID = this.GetComponent<SlotData>().ID;
+            hitObject.GetComponent<SlotData>().HOGE = this.GetComponent<SlotData>().HOGE;
         }
 
         this.transform.position = startPosition;

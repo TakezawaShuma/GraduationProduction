@@ -4,8 +4,18 @@ using UnityEngine;
 
 public class SlotData : MonoBehaviour
 {
+    public enum HOGEID
+    {
+        SKILL,
+        ITEM,
+        NONE,
+    }
+
     [SerializeField]
     private int id;
+
+    [SerializeField]
+    private HOGEID hoge = HOGEID.NONE;
 
     public int ID
     {
@@ -17,6 +27,19 @@ public class SlotData : MonoBehaviour
         set
         {
             id = value;
+        }
+    }
+
+    public HOGEID HOGE
+    {
+        get
+        {
+            return hoge;
+        }
+
+        set
+        {
+            hoge = value;
         }
     }
     // Start is called before the first frame update

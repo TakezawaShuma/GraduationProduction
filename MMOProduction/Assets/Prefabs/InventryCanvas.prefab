@@ -264,7 +264,7 @@ PrefabInstance:
     - target: {fileID: 5726655133401845477, guid: f775286550711774bbaaf89532340bb0,
         type: 3}
       propertyPath: m_Delegates.Array.data[2].eventID
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5726655133401845477, guid: f775286550711774bbaaf89532340bb0,
         type: 3}
@@ -274,7 +274,7 @@ PrefabInstance:
     - target: {fileID: 5726655133401845477, guid: f775286550711774bbaaf89532340bb0,
         type: 3}
       propertyPath: m_Delegates.Array.data[2].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
-      value: MyPointerUpUIBack
+      value: MyPointerDownUI
       objectReference: {fileID: 0}
     - target: {fileID: 5726655133401845477, guid: f775286550711774bbaaf89532340bb0,
         type: 3}
@@ -296,6 +296,16 @@ PrefabInstance:
       propertyPath: m_Delegates.Array.data[2].callback.m_TypeName
       value: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI, Version=1.0.0.0,
         Culture=neutral, PublicKeyToken=null
+      objectReference: {fileID: 0}
+    - target: {fileID: 5726655133401845477, guid: f775286550711774bbaaf89532340bb0,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[1].eventID
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5726655133401845477, guid: f775286550711774bbaaf89532340bb0,
+        type: 3}
+      propertyPath: m_Delegates.Array.data[1].callback.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
+      value: MyPointerUpUIBack
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f775286550711774bbaaf89532340bb0, type: 3}
