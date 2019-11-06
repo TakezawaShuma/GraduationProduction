@@ -19,14 +19,17 @@ namespace WS
         private string server_ip = "172.24.52.250";
         //private string server_ip = "localhost";
 
+
+
         /// <summary>
         /// 接続
         /// </summary>
         /// <param name="_port">ポート</param>
         protected void Connect(uint _port)
         {
-            ws = new WebSocket("ws://" + server_ip + ":" + _port.ToString());
-            Debug.Log("IPアドレス : " + server_ip + "ポート : " + _port);
+                    ws = new WebSocket("ws://" + server_ip + ":" + _port.ToString());
+                    Debug.Log("IPアドレス : " + server_ip + "ポート : " + _port);
+            //ws = new WebSocket("ws://" + server_ip + ":" + _port.ToString());
             WsInit();
             ws.Connect();
         }
