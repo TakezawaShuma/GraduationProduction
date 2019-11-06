@@ -49,7 +49,7 @@ public class PlaySceneManager : MonoBehaviour
         if (connectFlag)
         {
             // プレイサーバに接続
-            wsp = new WS.WsPlay(8001);
+            wsp = WS.WsPlay.Instance;
             wsp.moveingAction = UpdatePlayers;  // 202
             wsp.enemysAction = RegisterEnemies; // 204
             wsp.statusAction = UpdateStatus;    // 206
@@ -57,19 +57,25 @@ public class PlaySceneManager : MonoBehaviour
             wsp.loadFinAction = LoadFinish;     // 212
             wsp.enemyAliveAction = AliveEnemy;  // 221
             wsp.enemyDeadAction = DeadEnemy;    // 222
-            wsp.logoutAction = Logout;          // 
+            wsp.logoutAction = Logout;          // 701
             wsp.Send(new Packes.DataLoading(UserRecord.ID).ToJson());
 
         }
         Debug.Log("プレイスタート");
-        MakePlayer(new Vector3(5, 1, 15));
-        UpdatePlayers(new Packes.TranslationStoC(100, 0, 0, 10,0));
-
+          
+        // debug
+        MakePlayer(new Vector3(5, 1, 15)); 
+        var newEnemy = Instantiate<GameObject>(testEnemyPre, new Vector3(5, 1, 20), Quaternion.Euler(0, 0, 0));
+        newEnemy.name = "Enemy:Debug";
+        newEnemy.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionY;
+        Enemy enemy = newEnemy.AddComponent<Enemy>();
+        enemies.Add(100, enemy);
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKey(KeyCode.Escape)) Quit();
         if (updateFlag)
         {
             if (player!=null)
@@ -81,12 +87,37 @@ public class PlaySceneManager : MonoBehaviour
                     {
                         SendPosition(playerData);
                         //SendStatus(100, 40, 100, 60, 10001001);
-                        LoadFinish(null);
                     }
                 }
             }
         }
+
+        // debug
+        if (Input.GetKeyDown(KeyCode.Backspace))
+        {
+            DeadEnemy(new Packes.EnemyDieStoC(0, 100));
+        }
+        if (Input.GetKeyDown(KeyCode.L))
+        {
+            Packes.GetEnemyDataStoC v = new Packes.GetEnemyDataStoC();
+            v.enemys.Add(new Packes.EnemyReceiveData(100, 0, 5, 1, 20, 0, 0, 10));
+
+            RegisterEnemies(v);
+        }
     }
+
+    /// <summary>
+    /// .exeの終了関数
+    /// </summary>
+    void Quit()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#elif UNITY_STANDALONE
+    UnityEngine.Application.Quit();
+#endif
+    }
+
 
     private void OnDestroy()
     {
@@ -106,8 +137,6 @@ public class PlaySceneManager : MonoBehaviour
         }
         return false;
     }
-
-
 
 
     /// <summary>
@@ -255,7 +284,8 @@ public class PlaySceneManager : MonoBehaviour
         // todo
         // 戦闘で計算後エネミーが死亡していたら
         // HPを0にして死亡エフェクトやドロップアイテムの取得
-
+        enemies[_packet.unique_id].DeiAnimetion();
+        enemies.Remove(_packet.unique_id);
         Debug.Log("敵は死んだ！！！");
     }
 
@@ -267,6 +297,7 @@ public class PlaySceneManager : MonoBehaviour
     {
         Destroy(others[_packet.user_id].gameObject);
         others.Remove(_packet.user_id);
+        Debug.Log(_packet.user_id + "さんがログアウトしたよ！");
     }
 
 

@@ -110,7 +110,7 @@ public class TitleSceneManager : MonoBehaviour
         if (connectFlag)
         {
             // 接続開始
-            wsl = new WS.WsLogin(8000);
+            wsl = WS.WsLogin.Instance;
         }
 
         int[] enemyyyy =
@@ -137,7 +137,23 @@ public class TitleSceneManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (Input.GetKey(KeyCode.Escape)) Quit();
+        if (Input.GetKeyDown(KeyCode.Backslash))
+        {
+            wsl.Send(new Packes.LoginUser("tsit", "trident").ToJson());
+        }
+    }
 
+    /// <summary>
+    /// .exeの終了関数
+    /// </summary>
+    void Quit()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#elif UNITY_STANDALONE
+    UnityEngine.Application.Quit();
+#endif
     }
 
     private void OnDestroy()

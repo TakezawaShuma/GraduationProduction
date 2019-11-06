@@ -26,6 +26,7 @@ namespace WS
         private Action<string, string> chatReceive_callback;
 
 
+
         public WsChat(uint _port)
         {
             Init(_port);

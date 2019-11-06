@@ -11,20 +11,33 @@ using System.Threading;
 namespace WS
 {
     public class WsLogin : WsBase
-    { 
+    {
         //ログインサーバーのポート
-        //private const int port = 8000;
+        private uint port = 8000;
+        private static WsLogin instance = null;
 
         public Action<int> errerAction;
 
+        public static WsLogin Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new WsLogin();
+
+                }
+                return instance;
+            }
+        }
 
         /// <summary>
         /// コンストラクタ
         /// </summary>
         /// <param name="_port"></param>
-        public WsLogin(uint _port)
+        private WsLogin()
         {
-            Init(_port);
+            Init(port);
         }
 
         /// <summary>

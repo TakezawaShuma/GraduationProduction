@@ -12,8 +12,11 @@ namespace WS
 {
     public class WsPlay : WsBase
     {
-        //// ログインサーバーのポート
-        //private int port = 8001;
+        // ログインサーバーのポート
+        private uint port = 8001;
+        private static WsPlay instance = null;
+
+
         // 位置同期 202
         public Action<Packes.TranslationStoC> moveingAction;
         // エネミーの位置同期と状態 204
@@ -31,14 +34,28 @@ namespace WS
 
         public Action<Packes.LogoutStoC> logoutAction;
 
+        public static WsPlay Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new WsPlay();
+
+                }
+                return instance;
+            }
+        }
+
+
 
         /// <summary>
         /// コンストラクタ
         /// </summary>
         /// <param name="_port"></param>
-        public WsPlay(uint _port)
+        private WsPlay()
         {
-            Init(_port);
+            Init(port);
         }
 
         /// <summary>
@@ -118,8 +135,7 @@ namespace WS
                             break;
 
                         case CommandData.EnemyDieStoC:
-                            Packes.EnemyDieStoC dead = Json.ConvertToPackets<Packes.EnemyDieStoC>(e.Data);
-                            enemyDeadAction(dead);
+                            enemyDeadAction(Json.ConvertToPackets<Packes.EnemyDieStoC>(e.Data));
                             break;
                         case CommandData.LogoutStoC:
                             logoutAction(Json.ConvertToPackets<Packes.LogoutStoC>(e.Data));
