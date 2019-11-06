@@ -525,6 +525,7 @@ GameObject:
   - component: {fileID: 839769458397738583}
   - component: {fileID: 785115049242876177}
   - component: {fileID: 3234076335854187228}
+  - component: {fileID: 932509920433545088}
   m_Layer: 0
   m_Name: Forest Bunny Black
   m_TagString: Untagged
@@ -590,6 +591,18 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
+--- !u!114 &932509920433545088
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 842962567749291421}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e39b6e35fb590144b6d64457717a816, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &843021109807524617
 GameObject:
   m_ObjectHideFlags: 0
@@ -659,6 +672,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 844854387722761983}
+  - component: {fileID: 5426796294650982690}
   m_Layer: 0
   m_Name: RigPelvisGizmo
   m_TagString: Untagged
@@ -680,6 +694,19 @@ Transform:
   m_Father: {fileID: 839769458397738583}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!135 &5426796294650982690
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 843127065402798555}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.38
+  m_Center: {x: -0.16, y: 0, z: 0}
 --- !u!1 &843190361628744111
 GameObject:
   m_ObjectHideFlags: 0
@@ -926,12 +953,22 @@ PrefabInstance:
     - target: {fileID: 5563319087618939830, guid: de596fb218a51844ca2c68f312682837,
         type: 3}
       propertyPath: m_Enabled
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6869322542788682487, guid: de596fb218a51844ca2c68f312682837,
         type: 3}
       propertyPath: m_Constraints
       value: 126
+      objectReference: {fileID: 0}
+    - target: {fileID: 6869322542788682487, guid: de596fb218a51844ca2c68f312682837,
+        type: 3}
+      propertyPath: m_UseGravity
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1728888321597043996, guid: de596fb218a51844ca2c68f312682837,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de596fb218a51844ca2c68f312682837, type: 3}

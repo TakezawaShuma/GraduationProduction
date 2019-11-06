@@ -175,7 +175,7 @@ namespace Packes
     }
 
     /// <summary>
-    /// 攻撃 command:220
+    /// 攻撃 P->E CtoS command:220
     /// </summary>
     public class Attack : IPacketDatas
     {
@@ -212,6 +212,11 @@ namespace Packes
             this.map_id = _map_id;
         }
     }
+
+
+
+
+
 
 
     /// <summary>

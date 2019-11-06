@@ -33,8 +33,9 @@ public class PlaySceneManager : MonoBehaviour
 
     // コールバック関数をリスト化
     private List<Action<string>> callbackList = new List<Action<string>>();
+    
 
-    private GameObject player_;
+    private GameObject newEnemy = null;
 
     private void Awake()
     {
@@ -65,9 +66,10 @@ public class PlaySceneManager : MonoBehaviour
           
         // debug
         MakePlayer(new Vector3(5, 1, 15)); 
-        var newEnemy = Instantiate<GameObject>(testEnemyPre, new Vector3(5, 1, 20), Quaternion.Euler(0, 0, 0));
+        newEnemy = Instantiate<GameObject>(testEnemyPre, new Vector3(5, 1, 20), Quaternion.Euler(0, 0, 0));
         newEnemy.name = "Enemy:Debug";
-        newEnemy.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionY;
+        newEnemy.tag = "Enemy";
+        newEnemy.GetComponent<Rigidbody>().useGravity = true;
         Enemy enemy = newEnemy.AddComponent<Enemy>();
         enemies.Add(100, enemy);
     }
@@ -103,6 +105,11 @@ public class PlaySceneManager : MonoBehaviour
             v.enemys.Add(new Packes.EnemyReceiveData(100, 0, 5, 1, 20, 0, 0, 10));
 
             RegisterEnemies(v);
+        }
+
+        if(Input.GetKeyDown(KeyCode.Comma))
+        {
+            enemies[100].AttackAnimetion();
         }
     }
 
@@ -150,6 +157,7 @@ public class PlaySceneManager : MonoBehaviour
             var tmp = Instantiate<GameObject>(playerPre);
             tmp.transform.position = new Vector3(_save.x, _save.y, _save.z);
             tmp.name = (UserRecord.Name != "") ? UserRecord.Name : _name;
+            tmp.tag = "Player";
             tmp.AddComponent<Player>();
             tmp.AddComponent<PlayerController>();
             tmp.AddComponent<PlayerSetting>();
@@ -187,6 +195,7 @@ public class PlaySceneManager : MonoBehaviour
                 {
                     var otherPlayer = Instantiate<GameObject>(playerPre, new Vector3(data.x, data.y, data.z), Quaternion.Euler(0, data.dir, 0));
                     otherPlayer.name = "otherPlayer" + data.user_id;
+                    otherPlayer.tag = "Player";
                     otherPlayer.AddComponent<OtherPlayers>();
                     otherPlayer.GetComponent<OtherPlayers>().Init(data.user_id);
                     others.Add(data.user_id, otherPlayer.GetComponent<OtherPlayers>());
@@ -218,8 +227,9 @@ public class PlaySceneManager : MonoBehaviour
                 // 敵の作成
                 else
                 {
-                    var newEnemy = Instantiate<GameObject>(testEnemyPre, new Vector3(ene.x, ene.y, ene.z), Quaternion.Euler(0, ene.dir, 0));
+                    newEnemy = Instantiate<GameObject>(testEnemyPre, new Vector3(ene.x, ene.y, ene.z), Quaternion.Euler(0, ene.dir, 0));
                     newEnemy.name = "Enemy:" + ene.master_id + "->" + ene.unique_id;
+                    newEnemy.GetComponent<Rigidbody>().useGravity = true;
                     Enemy enemy = newEnemy.AddComponent<Enemy>();
                     enemies.Add(ene.unique_id, enemy);
                 }
