@@ -32,6 +32,14 @@ public class Marker : MonoBehaviour
         set { state = value; }
     }
 
+    [SerializeField, Header("ロックした時に注目するか")]
+    private bool lockObserve;
+
+    public bool LOCK_OBSERVE
+    {
+        get { return lockObserve; }
+    }
+
     // Start is called before the first frame update
     private void Awake()
     {

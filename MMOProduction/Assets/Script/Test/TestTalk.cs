@@ -7,7 +7,10 @@ public class TestTalk : MonoBehaviour
 {
     // なんのオブジェクトなのかわからない？
     [SerializeField]
-    private GameObject[] gameObject_ = null;
+    private GameObject talkCanvas = null;
+
+    [SerializeField]
+    private GameObject talkCamera = null;
 
     [SerializeField]
     private Marker marker = null;
@@ -25,10 +28,8 @@ public class TestTalk : MonoBehaviour
     {
         marker.SetFunction(On);
 
-        foreach (GameObject game in gameObject_)
-        {
-            game.SetActive(false);
-        }
+        talkCanvas.SetActive(false);
+        talkCamera.SetActive(false);
 
         if (text != null) text.text = texts[currentPage];
     }
@@ -41,10 +42,8 @@ public class TestTalk : MonoBehaviour
 
     public void On()
     {
-        foreach (GameObject game in gameObject_)
-        {
-            game.SetActive(true);
-        }
+        talkCanvas.SetActive(true);
+        talkCamera.SetActive(true);
     }
 
     public void NextPage()
@@ -55,10 +54,8 @@ public class TestTalk : MonoBehaviour
         {
             currentPage = 0;
 
-            foreach (GameObject game in gameObject_)
-            {
-                game.SetActive(false);
-            }
+            talkCanvas.SetActive(false);
+            talkCamera.SetActive(false);
         }
 
         text.text = texts[currentPage];
