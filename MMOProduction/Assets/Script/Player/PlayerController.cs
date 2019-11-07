@@ -165,8 +165,10 @@ public class PlayerController: MonoBehaviour
         z = position.z;
         dir = direction;
 
-        PlayerData.UpdatePosition(x, y, z);
-        PlayerData.UpdateDirection(dir);
+        PlayerData.Position = new Vector4(x, y, z, dir);
+
+        //PlayerData.UpdatePosition(x, y, z);
+        //PlayerData.UpdateDirection(dir);
     }
 
     public void ChangeState(BaseState state)

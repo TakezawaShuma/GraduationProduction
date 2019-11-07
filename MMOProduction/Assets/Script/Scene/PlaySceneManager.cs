@@ -7,6 +7,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System;
 using UnityEngine;
+using System.Linq;
 
 public class PlaySceneManager : MonoBehaviour
 {
@@ -30,6 +31,7 @@ public class PlaySceneManager : MonoBehaviour
     private Player player = null;
     private Dictionary<int, OtherPlayers> others = new Dictionary<int, OtherPlayers>();
     private Dictionary<int, Enemy> enemies = new Dictionary<int, Enemy>();
+    private Dictionary<int, CharacterBase> charcters = new Dictionary<int, CharacterBase>();
 
     // コールバック関数をリスト化
     private List<Action<string>> callbackList = new List<Action<string>>();
@@ -51,14 +53,18 @@ public class PlaySceneManager : MonoBehaviour
         {
             // プレイサーバに接続
             wsp = WS.WsPlay.Instance;
-            wsp.moveingAction = UpdatePlayers;  // 202
-            wsp.enemysAction = RegisterEnemies; // 204
-            wsp.statusAction = UpdateStatus;    // 206
-            wsp.loadSaveAction = RecvSaveData;  // 210
-            wsp.loadFinAction = LoadFinish;     // 212
-            wsp.enemyAliveAction = AliveEnemy;  // 221
-            wsp.enemyDeadAction = DeadEnemy;    // 222
-            wsp.logoutAction = Logout;          // 701
+            wsp.moveingAction = UpdatePlayersPostion;           // 202
+            wsp.enemysAction = RegisterEnemies;                 // 204
+            wsp.statusAction = UpdateStatus;                    // 206
+            wsp.loadSaveAction = RecvSaveData;                  // 210
+            wsp.loadFinAction = LoadFinish;                     // 212
+            wsp.enemyAliveAction = AliveEnemy;                  // 221
+            wsp.enemyDeadAction = DeadEnemy;                    // 222
+            wsp.enemySkillReqAction = EnemyUseSkillRequest;     // 225
+            wsp.enemyUseSkillAction = EnemyUseSkill;            // 226
+            wsp.enemyAttackAction = EnemyAttackResult;          // 227
+            wsp.logoutAction = Logout;                          // 707
+            // セーブデータを要請する。
             wsp.Send(new Packes.DataLoading(UserRecord.ID).ToJson());
 
         }
@@ -71,6 +77,7 @@ public class PlaySceneManager : MonoBehaviour
         newEnemy.tag = "Enemy";
         newEnemy.GetComponent<Rigidbody>().useGravity = true;
         Enemy enemy = newEnemy.AddComponent<Enemy>();
+        enemy.Init(newEnemy.transform.position.x, newEnemy.transform.position.y, newEnemy.transform.position.z, 0);
         enemies.Add(100, enemy);
     }
 
@@ -80,7 +87,7 @@ public class PlaySceneManager : MonoBehaviour
         if (Input.GetKey(KeyCode.Escape)) Quit();
         if (updateFlag)
         {
-            if (player!=null)
+            if (player != null)
             {
                 var playerData = player.GetPosition();
                 if (Timer())
@@ -88,7 +95,8 @@ public class PlaySceneManager : MonoBehaviour
                     if (connectFlag)
                     {
                         SendPosition(playerData);
-                        //SendStatus(100, 40, 100, 60, 10001001);
+                        SendStatus( UserRecord.ID, Packes.ObjectType.Player);
+                        wsp.Send(new Packes.GetEnemysDataCtoS().ToJson());
                     }
                 }
             }
@@ -97,19 +105,23 @@ public class PlaySceneManager : MonoBehaviour
         // debug
         if (Input.GetKeyDown(KeyCode.Backspace))
         {
-            DeadEnemy(new Packes.EnemyDieStoC(0, 100));
+            DeadEnemy(new Packes.EnemyDieStoC(0, 100)); // 100番を殺す
         }
         if (Input.GetKeyDown(KeyCode.L))
         {
             Packes.GetEnemyDataStoC v = new Packes.GetEnemyDataStoC();
             v.enemys.Add(new Packes.EnemyReceiveData(100, 0, 5, 1, 20, 0, 0, 10));
 
-            RegisterEnemies(v);
+            RegisterEnemies(v); // 100番を生み出す
         }
-
-        if(Input.GetKeyDown(KeyCode.Comma))
+        if (Input.GetKeyDown(KeyCode.Comma))
         {
-            enemies[100].AttackAnimetion();
+            enemies[100].AttackAnimetion(); // 敵の攻撃モーションの再生
+        }
+        if (Input.GetKeyDown(KeyCode.Alpha0))
+        {
+            wsp.Send(Json.ConvertToJson(new Packes.Attack(0, UserRecord.ID, 0, 0)));
+            Debug.Log("プレイヤーの攻撃");
         }
     }
 
@@ -173,7 +185,7 @@ public class PlaySceneManager : MonoBehaviour
     /// <summary>
     /// 自分以外のユーザーの更新　→　moveingAction
     /// </summary>
-    private void UpdatePlayers(Packes.TranslationStoC _packet)
+    private void UpdatePlayersPostion(Packes.TranslationStoC _packet)
     {
         Packes.TranslationStoC data = _packet;
 
@@ -186,7 +198,7 @@ public class PlaySceneManager : MonoBehaviour
                 {
                     if (others[data.user_id] != null)
                     {
-                        others[data.user_id].UpdataData(0, 0, data.x, data.y, data.z, data.dir);
+                        others[data.user_id].UpdatePostionData(data.x, data.y, data.z, data.dir);
                     }
                 }
                 // todo 他プレイヤーの更新と作成を関数分けする
@@ -195,10 +207,11 @@ public class PlaySceneManager : MonoBehaviour
                 {
                     var otherPlayer = Instantiate<GameObject>(playerPre, new Vector3(data.x, data.y, data.z), Quaternion.Euler(0, data.dir, 0));
                     otherPlayer.name = "otherPlayer" + data.user_id;
-                    otherPlayer.tag = "Player";
-                    otherPlayer.AddComponent<OtherPlayers>();
-                    otherPlayer.GetComponent<OtherPlayers>().Init(data.user_id);
-                    others.Add(data.user_id, otherPlayer.GetComponent<OtherPlayers>());
+                    otherPlayer.tag = "OtherPlayer";
+                    var other = otherPlayer.AddComponent<OtherPlayers>();
+                    other.Init(data.x, data.y, data.z, data.dir);
+                    others.Add(data.user_id, other);
+                    charcters.Add(data.user_id, other);
                 }
             }
         }
@@ -212,7 +225,8 @@ public class PlaySceneManager : MonoBehaviour
     private void RegisterEnemies(Packes.GetEnemyDataStoC _packet)
     {
         List<Packes.EnemyReceiveData> list = _packet.enemys;
-        foreach(var ene in list)
+        
+        foreach (var ene in list)
         {
             if(ene.unique_id!=UserRecord.ID)
             {
@@ -221,7 +235,8 @@ public class PlaySceneManager : MonoBehaviour
                 {
                     if (enemies[ene.unique_id] != null)
                     {
-                        enemies[ene.unique_id].UpdataData(ene.hp, 0, ene.x, ene.y, ene.z, ene.dir);
+                        enemies[ene.unique_id].UpdatePostionData(ene.x, ene.y, ene.z, ene.dir);
+                        Debug.Log("エネミーの位置情報の更新");
                     }
                 }
                 // 敵の作成
@@ -229,9 +244,11 @@ public class PlaySceneManager : MonoBehaviour
                 {
                     newEnemy = Instantiate<GameObject>(testEnemyPre, new Vector3(ene.x, ene.y, ene.z), Quaternion.Euler(0, ene.dir, 0));
                     newEnemy.name = "Enemy:" + ene.master_id + "->" + ene.unique_id;
-                    newEnemy.GetComponent<Rigidbody>().useGravity = true;
+                    //newEnemy.GetComponent<Rigidbody>().useGravity = true;
                     Enemy enemy = newEnemy.AddComponent<Enemy>();
+                    enemy.Init(ene.x, ene.y, ene.z, ene.dir);
                     enemies.Add(ene.unique_id, enemy);
+                    charcters.Add(ene.unique_id, enemy);
                 }
             }
         }
@@ -242,7 +259,19 @@ public class PlaySceneManager : MonoBehaviour
     /// </summary>
     private void UpdateStatus(Packes.StatusStoC _packet)
     {
-        // todo
+        foreach(var tmp in _packet.status)
+        {
+            if (tmp.charctor_id == UserRecord.ID)
+            {
+                player.UpdateStatus( tmp.hp, tmp.mp, tmp.status);
+            }
+            else
+            {
+                charcters[tmp.charctor_id].UpdateStatusData(tmp.hp, tmp.mp, tmp.status);
+            }
+        }
+
+
     }
 
     /// <summary>
@@ -296,7 +325,35 @@ public class PlaySceneManager : MonoBehaviour
         // HPを0にして死亡エフェクトやドロップアイテムの取得
         enemies[_packet.unique_id].DeiAnimetion();
         enemies.Remove(_packet.unique_id);
+        charcters.Remove(_packet.unique_id);
         Debug.Log("敵は死んだ！！！");
+    }
+
+    /// <summary>
+    /// エネミーのスキル使用リクエストを検知 → enemySkillReqAction
+    /// </summary>
+    /// <param name="_packet"></param>
+    private void EnemyUseSkillRequest(Packes.EnemyUseSkillRequest _packet)
+    {
+        Debug.Log("敵のスキル発動を検知したよ");
+    }
+
+    /// <summary>
+    /// エネミーのスキルの発動 → enemyUseSkillAction
+    /// </summary>
+    /// <param name="_packet"></param>
+    private void EnemyUseSkill(Packes.EnemyUseSkill _packet)
+    {
+        Debug.Log("敵のスキルが発動したよ");
+    }
+
+    /// <summary>
+    /// エネミーの攻撃結果 → enemyAttackAction
+    /// </summary>
+    /// <param name="_packet"></param>
+    private void EnemyAttackResult(Packes.EnemyAttackResult _packet)
+    {
+        Debug.Log("敵の攻撃が" + _packet.user_id + "にヒット");
     }
 
     /// <summary>
@@ -307,6 +364,7 @@ public class PlaySceneManager : MonoBehaviour
     {
         Destroy(others[_packet.user_id].gameObject);
         others.Remove(_packet.user_id);
+        charcters.Remove(_packet.user_id);
         Debug.Log(_packet.user_id + "さんがログアウトしたよ！");
     }
 
@@ -320,10 +378,15 @@ public class PlaySceneManager : MonoBehaviour
     {
         wsp.Send(new Packes.TranslationCtoS(UserRecord.ID, _pos.x, _pos.y, _pos.z, _pos.w).ToJson());
     }
-    
-    private void SendStatus(int _maxHp,int _hp,int _maxMp,int _mp ,int _status)
+
+    /// <summary>
+    /// ステータスの要求
+    /// </summary>
+    /// <param name="_target_id">欲しい相手のID</param>
+    /// <param name="_type">相手のタイプ</param>
+    private void SendStatus(int _target_id, Packes.ObjectType _type)
     {
-        wsp.Send(new Packes.StatusCtoS(UserRecord.ID, _maxHp, _hp, _maxMp, _mp, _status).ToJson());
+        wsp.Send(new Packes.StatusCtoS(UserRecord.ID, _target_id, (int)_type).ToJson());
     }
 
     /// <summary>
@@ -360,7 +423,7 @@ public class PlaySceneManager : MonoBehaviour
     /// <returns></returns>
     public　OtherPlayers GetOtherPlayer(int _playerId)
     {
-        return others[_playerId].GetComponent<OtherPlayers>();
+        return others[_playerId];
     }
 
 }
