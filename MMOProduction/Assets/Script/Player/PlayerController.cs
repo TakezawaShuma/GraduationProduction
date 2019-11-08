@@ -48,11 +48,12 @@ public class PlayerController: MonoBehaviour
     private Rigidbody rigidbody1;
     
 
-    public void Init(Player _playerData,FollowingCamera _camera,PlayerSetting _setting, ChatController chat) {
+    public void Init(Player _playerData,FollowingCamera _camera,PlayerSetting _setting, ChatController chat, Animator animator) {
         PlayerData = _playerData;
         FollowingCamera = _camera;
         playerSetting = _setting;
         chatController = chat;
+        this.animator = animator;
 
         _playerAnim = new PlayerAnimData(this.gameObject);
     }

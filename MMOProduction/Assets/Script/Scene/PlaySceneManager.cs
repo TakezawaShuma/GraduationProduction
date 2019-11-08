@@ -176,7 +176,7 @@ public class PlaySceneManager : MonoBehaviour
             tmp.AddComponent<Player>();
             tmp.AddComponent<PlayerController>();
             tmp.AddComponent<PlayerSetting>();
-            tmp.GetComponent<PlayerController>().Init(tmp.GetComponent<Player>(), FollowingCamera, tmp.GetComponent<PlayerSetting>(), chat);
+            tmp.GetComponent<PlayerController>().Init(tmp.GetComponent<Player>(), FollowingCamera, tmp.GetComponent<PlayerSetting>(), chat, tmp.GetComponent<Animator>());
             player = tmp.GetComponent<Player>();
             FollowingCamera.SetTarget(tmp);
         }
