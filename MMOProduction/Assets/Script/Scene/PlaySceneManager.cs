@@ -36,6 +36,9 @@ public class PlaySceneManager : MonoBehaviour
 
     private GameObject player_;
 
+    [SerializeField]
+    private Vector3 playerSpawnPos = new Vector3(0, 0, 0);
+
     private void Awake()
     {
 
@@ -62,9 +65,10 @@ public class PlaySceneManager : MonoBehaviour
 
         }
         Debug.Log("プレイスタート");
-          
+
         // debug
-        MakePlayer(new Vector3(5, 1, 15)); 
+        //MakePlayer(new Vector3(5, 1, 15)); 
+        MakePlayer(this.playerSpawnPos);
         var newEnemy = Instantiate<GameObject>(testEnemyPre, new Vector3(5, 1, 20), Quaternion.Euler(0, 0, 0));
         newEnemy.name = "Enemy:Debug";
         newEnemy.GetComponent<Rigidbody>().constraints = RigidbodyConstraints.FreezePositionY;
