@@ -37,9 +37,13 @@ public class LoadScreen : MonoBehaviour
 
     private AsyncOperation async;
 
+    private Ready ready;
+
 
     private void Start()
     {
+        ready = Ready.Instance;
+
         //_loadingUI.SetActive(false);
 
         _progress = 0f;
@@ -115,7 +119,13 @@ public class LoadScreen : MonoBehaviour
             yield return null;
         }
 
+        while(!ready.CheckReady())
+        {
+            yield return null;
+        }
+
         Debug.Log("このシーンを消す");
+
         SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene().name);
     }
 }

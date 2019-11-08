@@ -39,9 +39,11 @@ public class PlaySceneManager : MonoBehaviour
 
     private GameObject newEnemy = null;
 
+    private Ready ready;
+
     private void Awake()
     {
-
+        ready = Ready.Instance;
     }
 
     // Start is called before the first frame update
@@ -84,6 +86,7 @@ public class PlaySceneManager : MonoBehaviour
     void Update()
     {
         if (Input.GetKey(KeyCode.Escape)) Quit();
+        ready.ReadyGO();
         if (updateFlag)
         {
             if (player != null)
@@ -169,7 +172,7 @@ public class PlaySceneManager : MonoBehaviour
         _name = "player" + UserRecord.ID;
         if (player == null)
         {
-            var tmp = Instantiate<GameObject>(playerPre);
+            var tmp = Instantiate<GameObject>(playerPre, this.transform);
             tmp.transform.position = new Vector3(_save.x, _save.y, _save.z);
             tmp.name = (UserRecord.Name != "") ? UserRecord.Name : _name;
             tmp.tag = "Player";

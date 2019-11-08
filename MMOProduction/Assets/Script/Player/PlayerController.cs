@@ -46,7 +46,6 @@ public class PlayerController: MonoBehaviour
     private PlayerAnimData _playerAnim;
 
     private Rigidbody rigidbody1;
-    
 
     public void Init(Player _playerData,FollowingCamera _camera,PlayerSetting _setting, ChatController chat) {
         PlayerData = _playerData;
