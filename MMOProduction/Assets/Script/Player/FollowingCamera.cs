@@ -98,15 +98,23 @@ public class FollowingCamera : MonoBehaviour
 
         if (lockOnTarget)
         {
-            // ここでazimuthalAngleをいい感じにする
-            Vector3 v = lockOnTarget.transform.position - target.transform.position;
+            if (lockOnTarget.GetComponent<Marker>().LOCK_OBSERVE)
+            {
+                // ここでazimuthalAngleをいい感じにする
+                Vector3 v = lockOnTarget.transform.position - target.transform.position;
 
-            float a = Mathf.Atan2(v.x, v.z) * Mathf.Rad2Deg % 360 + 90;
+                float a = Mathf.Atan2(v.x, v.z) * Mathf.Rad2Deg % 360 + 90;
 
-            azimuthalAngle = -a;
+                azimuthalAngle = -a;
 
-            lookAtPos = target.transform.position + offset;
-            updatePosition(lookAtPos);
+                lookAtPos = target.transform.position + offset;
+                updatePosition(lookAtPos);
+            }
+            else
+            {
+                lookAtPos = target.transform.position + offset;
+                updatePosition(lookAtPos);
+            }
         }
         else
         {
@@ -125,8 +133,7 @@ public class FollowingCamera : MonoBehaviour
 
     void updateAngle(float x, float y)
     {
-
-        if (!lockOnTarget)
+        if (!lockOnTarget || !lockOnTarget.GetComponent<Marker>().LOCK_OBSERVE)
         {
             x = azimuthalAngle - x * mouseXSensitivity;
             azimuthalAngle = Mathf.Repeat(x, 360);

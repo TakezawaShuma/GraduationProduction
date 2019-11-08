@@ -201,8 +201,11 @@ public class PlayerController: MonoBehaviour
                 }
 
                 target = hit.collider.gameObject;
-                
-                lockState = true;
+
+                if (target.GetComponent<Marker>().LOCK_OBSERVE)
+                {
+                    lockState = true;
+                }
                 
                 if (target.GetComponent<Marker>().STATE != Marker.State.Choice)
                 {

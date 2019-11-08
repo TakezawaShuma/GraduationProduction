@@ -141,7 +141,7 @@ public class PlaySceneManager : MonoBehaviour
     }
 
 
-    private void OnDestroy()
+    private void OnApplicationQuit()
     {
         if (connectFlag) { wsp.Destroy(); }
     }

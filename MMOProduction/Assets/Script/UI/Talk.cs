@@ -3,11 +3,14 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class TestTalk : MonoBehaviour
+public class Talk : MonoBehaviour
 {
     // なんのオブジェクトなのかわからない？
     [SerializeField]
-    private GameObject[] gameObject_ = null;
+    private GameObject talkPanel = null;
+
+    [SerializeField]
+    private GameObject talkCamera = null;
 
     [SerializeField]
     private Marker marker = null;
@@ -25,10 +28,8 @@ public class TestTalk : MonoBehaviour
     {
         marker.SetFunction(On);
 
-        foreach (GameObject game in gameObject_)
-        {
-            game.SetActive(false);
-        }
+        talkPanel.SetActive(false);
+        talkCamera.SetActive(false);
 
         if (text != null) text.text = texts[currentPage];
     }
@@ -41,10 +42,8 @@ public class TestTalk : MonoBehaviour
 
     public void On()
     {
-        foreach (GameObject game in gameObject_)
-        {
-            game.SetActive(true);
-        }
+        talkPanel.SetActive(true);
+        talkCamera.SetActive(true);
     }
 
     public void NextPage()
@@ -55,10 +54,8 @@ public class TestTalk : MonoBehaviour
         {
             currentPage = 0;
 
-            foreach (GameObject game in gameObject_)
-            {
-                game.SetActive(false);
-            }
+            talkPanel.SetActive(false);
+            talkCamera.SetActive(false);
         }
 
         text.text = texts[currentPage];

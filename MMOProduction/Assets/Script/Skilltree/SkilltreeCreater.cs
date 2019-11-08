@@ -210,7 +210,10 @@ public class SkilltreeCreater : MonoBehaviour
 
                     nextPoint.x += 1;
 
-                    mostRight = (int)nextPoint.x;
+                    if (nextPoint.x > mostRight)
+                    {
+                        mostRight = (int)nextPoint.x;
+                    }
                 }
                 else
                 {

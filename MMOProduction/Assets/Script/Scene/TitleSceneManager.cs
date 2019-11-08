@@ -3,24 +3,15 @@
 ////////////////////////////////////////
 
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using System;
-using System.Text;
-using System.Text.RegularExpressions;
-
+using System.Collections.Generic;
 
 public class TitleSceneManager : MonoBehaviour
 {
 #pragma warning disable 0649
     //ID,PWの最大文字数
     private const int MAX_WORD = 16;
-
-    public const int MIN_ID_WORD = 4;
-    public const int MIN_PW_WORD = 4;
-
     // wsソケット
     WS.WsLogin wsl = null; 
 
@@ -34,22 +25,20 @@ public class TitleSceneManager : MonoBehaviour
         SIGN_IN,    //ログイン
         SIGN_UP,    //新規登録
     }
-    //ログインを選択
-    [SerializeField]
-    private Button selectLogin_;
-    //ログインする
-    [SerializeField]
-    private Button loginToGame_;
-    //新規登録
-    [SerializeField]
-    private Button selectSignUp_;
-    //戻る
-    [SerializeField]
-    private Button back_;
-    //アカウントを作る
-    [SerializeField]
-    private Button signUp_;
+    CANVAS_STATE inputState = CANVAS_STATE.SELECT;
 
+    // UIのリスト化
+    public List<GameObject> selectUIList_;
+    public List<GameObject> loginUIList_;
+    public List<GameObject> sinupUIList_;
+
+    [SerializeField]
+    //ログインID入力用
+    private InputField id_;[SerializeField]
+    //ログインPW入力用
+    private InputField pw_;[SerializeField]
+    //PW確認用
+    private InputField ConfirmPW_;
 
     //Error用Text
     // 文字数が足りない時
@@ -61,30 +50,15 @@ public class TitleSceneManager : MonoBehaviour
     // パスワードが一致しません
     [SerializeField]
     private Text Error03;
-    
     // すでに使われているID　command 106
     [SerializeField]
     private Text Error04;
-    
     // IDまたはPWが違う　command 104
     [SerializeField]
     private Text Error05;
-
-    
     // 重複ログイン　command 901
     [SerializeField]
     private Text Error06;
-
-
-    //ログインID入力用
-    [SerializeField]
-    private InputField id_;
-    //ログインPW入力用
-    [SerializeField]
-    private InputField pw_;
-    //PW確認用
-    [SerializeField]
-    private InputField ConfirmPW_;
 
 
 
@@ -92,17 +66,15 @@ public class TitleSceneManager : MonoBehaviour
     void Start()
     {
         //初期のGameObjectの表示設定
-        selectLogin_.gameObject.SetActive(true);
-        selectSignUp_.gameObject.SetActive(true);
-        back_.gameObject.SetActive(false);
-        id_.gameObject.SetActive(false);
-        pw_.gameObject.SetActive(false);
-        ConfirmPW_.gameObject.SetActive(false);
-        loginToGame_.gameObject.SetActive(false);
-        signUp_.gameObject.SetActive(false);
-
+        ChangeActiveUI(selectUIList_);
+        ChangeActiveUI(loginUIList_, false);
+        ChangeActiveUI(sinupUIList_, false);
 
         ErrorMessageHide();
+
+        Error01.GetComponent<RectTransform>().localPosition =
+        Error02.GetComponent<RectTransform>().localPosition = 
+        new Vector3(75, -370, 0);
 
         //Input Field の入力文字数制限
         id_.characterLimit = MAX_WORD;
@@ -112,26 +84,6 @@ public class TitleSceneManager : MonoBehaviour
             // 接続開始
             wsl = WS.WsLogin.Instance;
         }
-
-        int[] enemyyyy =
-        {
-           100,
-           200,
-           300,
-           400,
-        };
-    }
-
-    private int m_command = 0;
-
-    /// <summary>
-    /// 受信したデータを扱う関数
-    /// </summary>
-    void Receive(int _comand)
-    {
-        m_command = _comand;
-
-        ErrorCheck(_comand);
     }
 
     // Update is called once per frame
@@ -142,6 +94,8 @@ public class TitleSceneManager : MonoBehaviour
         {
             wsl.Send(new Packes.LoginUser("hide", "takezawa").ToJson());
         }
+        if(Input.GetKeyDown(KeyCode.Tab)) InputChange();
+        if (Input.GetKeyDown(KeyCode.Return)) EnterCheck();
     }
 
     /// <summary>
@@ -149,22 +103,17 @@ public class TitleSceneManager : MonoBehaviour
     /// </summary>
     void Quit()
     {
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#elif UNITY_STANDALONE
-    UnityEngine.Application.Quit();
-#endif
+        #if UNITY_EDITOR
+                UnityEditor.EditorApplication.isPlaying = false;
+        #elif UNITY_STANDALONE
+            UnityEngine.Application.Quit();
+        #endif
     }
 
-    private void OnDestroy()
-    {
+    private void OnDestroy() {
         if(connectFlag) wsl.Destroy();
     }
     //public関数--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
-    //ボタンが押されたとき
-    public void Click()
-    {
-    }
 
     // 
     public void LogInClick()
@@ -179,20 +128,17 @@ public class TitleSceneManager : MonoBehaviour
 
     public void BackClick()
     {
-        selectLogin_.gameObject.SetActive(true);
-        selectSignUp_.gameObject.SetActive(true);
-        back_.gameObject.SetActive(false);
-        id_.gameObject.SetActive(false);
-        id_.text = "";
-        pw_.gameObject.SetActive(false);
-        pw_.text = "";
-        loginToGame_.gameObject.SetActive(false);
-        signUp_.gameObject.SetActive(false);
+        ChangeActiveUI(selectUIList_);
+        ChangeActiveUI(loginUIList_, false);
+        ChangeActiveUI(sinupUIList_, false);
 
-        ErrorMessageHide();
-        ConfirmPW_.gameObject.SetActive(false);
+        id_.text = "";
+        pw_.text = "";
         ConfirmPW_.text = "";
 
+        ErrorMessageHide();
+
+        inputState = CANVAS_STATE.SELECT;
     }
 
     /// <summary>
@@ -205,7 +151,9 @@ public class TitleSceneManager : MonoBehaviour
         string id = id_.text;
         string pw = pw_.text;
 
-        if (CheckString(id, true) == true && CheckString(pw, false) == true)
+        LoginCheck cheack = new LoginCheck();
+        var result = cheack.CheckIdAndPassword(id, pw);
+        if (result == LoginCheck.CHECKRESULT.OK)
         {
             //Debug.Log("ログイン ID:" + id + "  PW:" + pw);
             ErrorMessageHide();
@@ -215,10 +163,15 @@ public class TitleSceneManager : MonoBehaviour
                 wsl.Send(new Packes.LoginUser(id, pw).ToJson());
             }
         }
-        else
-        {
-            pw_.text = "";
+        else ErrorOn(result);
+    }
+
+    private void ErrorOn(LoginCheck.CHECKRESULT _type) {
+        switch (_type) {
+            case LoginCheck.CHECKRESULT.MINSTRING: Error01.gameObject.SetActive(true); break;
+            case LoginCheck.CHECKRESULT.INVALID: Error02.gameObject.SetActive(true); break;
         }
+        pw_.text = "";
     }
 
     /// <summary>
@@ -230,7 +183,10 @@ public class TitleSceneManager : MonoBehaviour
 
         string id = id_.text;
         string pw = pw_.text;
-        if(CheckString(id,true)==true&&CheckString(pw,false)==true)
+
+        LoginCheck cheack = new LoginCheck();
+        var result = cheack.CheckIdAndPassword(id, pw);
+        if (result == LoginCheck.CHECKRESULT.OK)
         {
             // 新規登録
             if (pw_.text == ConfirmPW_.text)
@@ -256,154 +212,96 @@ public class TitleSceneManager : MonoBehaviour
         }
         else
         {
-            pw_.text = "";
-
+            ErrorOn(result);
             ConfirmPW_.text = "";
         }
 
     }
 
-    //id入力用input fieldでEnterが押された時の処理
-    public void idEndEdit()
-    {
-        pw_.ActivateInputField();
-    }
-
-    //PW入力用input fieldでEnterが押された時の処理
-    public void pwEndEdit()
-    {
-        loginToGame_Click();
-    }
-
     //private関数--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    private void LogInActive()
-    {
 
-        selectLogin_.gameObject.SetActive(false);
-        selectSignUp_.gameObject.SetActive(false);
-        back_.gameObject.SetActive(true);
-        id_.gameObject.SetActive(true);
-        pw_.gameObject.SetActive(true);
-        loginToGame_.gameObject.SetActive(true);
-        
-        RectTransform er01= Error01.GetComponent<RectTransform>();
-        er01.localPosition = new Vector3(75, -280, 0);
-        RectTransform er02 = Error02.GetComponent<RectTransform>();
-        er02.localPosition = new Vector3(75, -280, 0);
+    /// <summary>
+    /// 最初の選択ボタンの状態変化
+    /// </summary>
+    private void ChangeActiveUI(List<GameObject> _uis, bool _active = true) {
+        foreach (var _ui in _uis) {
+            _ui.SetActive(_active);
+        }
     }
+
+    /// <summary>
+    /// 入力の反転
+    /// </summary>
+    /// <returns>成功/失敗</returns>
+    private bool InputChange() {
+        if (!id_.isFocused && !pw_.isFocused && !ConfirmPW_.isFocused) return false;
+        switch (inputState)
+        {
+            case CANVAS_STATE.SELECT: break;
+            case CANVAS_STATE.SIGN_IN:
+                if (id_.isFocused)
+                {
+                    id_.DeactivateInputField();
+                    pw_.ActivateInputField();
+                }
+                else
+                {
+                    id_.ActivateInputField();
+                    pw_.DeactivateInputField();
+                }
+                break;
+                
+            case CANVAS_STATE.SIGN_UP:
+                if (id_.isFocused) {
+                    id_.DeactivateInputField();
+                    pw_.ActivateInputField();
+                } else if (pw_.isFocused) {
+                    ConfirmPW_.ActivateInputField();
+                    pw_.DeactivateInputField();
+                } else {
+                    id_.ActivateInputField();
+                    ConfirmPW_.DeactivateInputField();
+                }
+                break;
+
+            default: break;
+        }
+
+
+        return true;
+    }
+
+    /// <summary>
+    /// 入力完了
+    /// </summary>
+    /// <returns></returns>
+    private void EnterCheck() {
+        loginToGame_Click();
+    }
+       
 
     // 新規登録選択時表示させる
     private void RegisterActive()
     {
-        selectLogin_.gameObject.SetActive(false);
-        selectSignUp_.gameObject.SetActive(false);
-        back_.gameObject.SetActive(true);
-        id_.gameObject.SetActive(true);
-        pw_.gameObject.SetActive(true);
-        signUp_.gameObject.SetActive(true);
-        ConfirmPW_.gameObject.SetActive(true);
-        RectTransform er01 = Error01.GetComponent<RectTransform>();
-        er01.localPosition = new Vector3(75, -370, 0);
-        RectTransform er02 = Error02.GetComponent<RectTransform>();
-        er02.localPosition = new Vector3(75, -370, 0);
+        // 状態の変化
+        ChangeActiveUI(selectUIList_, false);
+        ChangeActiveUI(sinupUIList_);
+        inputState = CANVAS_STATE.SIGN_UP;
+
+        id_.ActivateInputField();
     }
 
-    //string内にスペースや全角文字がないかをしらべる
-    private bool CheckString(string str,bool id)
+    private void LogInActive()
     {
-        //文字が入っていない場合
-        if (str == "")
-        {
-            Error01.gameObject.SetActive(true);
-            return false;
-        }
+        // 状態の変化
+        ChangeActiveUI(selectUIList_, false);
+        ChangeActiveUI(loginUIList_);
+        inputState = CANVAS_STATE.SIGN_IN;
 
-        //チェックするのがIDかどうか
-        if(id)
-        {
-            // 4文字以下なら弾く
-            if (str.Length < MIN_ID_WORD)
-            {
-                Error01.gameObject.SetActive(true);
-                return false;
-            }
-            //英数字と_のみか判定
-            if(!Regex.IsMatch(str, @"^[0-9a-zA-Z-_]+$"))
-            {
-                Error02.gameObject.SetActive(true);
-                return false;
-            }
-            return true;
-        }
-        // パスワードなら
-        else
-        {
-            if (str.Length < MIN_PW_WORD)
-            {
-                Error01.gameObject.SetActive(true);
-                return false;
-            }
-            //英数字のみか判定
-            if (!Regex.IsMatch(str, @"^[0-9a-zA-Z]+$"))
-            {
-                Error02.gameObject.SetActive(true);
-                return false;
-            }
-            return true;
-
-        }
+        id_.ActivateInputField();
     }
 
-
-    //IDがすでに使われていたらエラーメッセージを出す
-    void AlreadyInUse()
-    {
-        ErrorMessageHide();
-        pw_.text = "";
-        ConfirmPW_.text = "";
-
-        ErrorMessageHide();
-        Error04.gameObject.SetActive(true);
-    }
-
-    //IDかPWを間違えていたらエラーメッセージを出す
-    void TypingError()
-    {
-        ErrorMessageHide();
-        Error05.gameObject.SetActive(true);
-    }
-
-    //すでにログインされているIDの場合エラーメッセージを出す
-    void  MultipleLoginError()
-    {
-        ErrorMessageHide();
-        Error06.gameObject.SetActive(true);
-    }
-
-
-    //エラー確認
-    public bool ErrorCheck(int _comand)
-    {
-        switch(_comand)
-        {
-            case (int)CommandData.LoginError:  // command 104
-                //IDかPWが間違っている
-                TypingError();
-                break;
-            //case (int)CommandData.Existing: // command 106
-            //    //すでに使われているID
-            //    AlreadyInUse();
-            //    break;
-            case (int)CommandData.Duplicate:    // command 901
-                //すでにログインしているID
-                MultipleLoginError();
-                break;
-            default:
-                return true;
-        }
-        return false;
-    }
 
     ///
     /// エラーメッセージを全て非表示にする。
