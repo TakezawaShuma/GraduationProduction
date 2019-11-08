@@ -1277,7 +1277,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &669469797
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1350,7 +1350,6 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 1547290424}
-  - {fileID: 1851133675}
   m_Father: {fileID: 0}
   m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1760,7 +1759,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21604249b935e894795018306d23ed43, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  talkCanvas: {fileID: 1560659163}
+  talkPanel: {fileID: 2093985999}
   talkCamera: {fileID: 1978196622}
   marker: {fileID: 931964281}
   texts:
@@ -2022,7 +2021,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 992294604}
   m_LocalRotation: {x: 0.1301826, y: -0.0000000059217036, z: 7.7751944e-10, w: 0.99149007}
-  m_LocalPosition: {x: 0.0012659329, y: 70906.01, z: -106115.73}
+  m_LocalPosition: {x: 0.0012706582, y: 71144.64, z: -106511.31}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2175,8 +2174,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c3eed60af908a440b2b2cf2024d74f8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  gameObject_:
-  - {fileID: 669469796}
+  questPanel: {fileID: 1547290423}
   marker: {fileID: 1074823826}
 --- !u!114 &1074823826 stripped
 MonoBehaviour:
@@ -2736,7 +2734,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1547290424
 RectTransform:
   m_ObjectHideFlags: 0
@@ -2747,7 +2745,8 @@ RectTransform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_Children: []
+  m_Children:
+  - {fileID: 1851133675}
   m_Father: {fileID: 669469800}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2793,12 +2792,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1547290423}
   m_CullTransparentMesh: 0
---- !u!1 &1560659163 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1036729519347832798, guid: c84e4192ce4b7254386e25573f47a03d,
-    type: 3}
-  m_PrefabInstance: {fileID: 1036729519439384009}
-  m_PrefabAsset: {fileID: 0}
 --- !u!114 &1580399995 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6631658280813180845, guid: 7f4271a449d825f42ac315b724d2b520,
@@ -3480,8 +3473,8 @@ RectTransform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 669469800}
-  m_RootOrder: 1
+  m_Father: {fileID: 1547290424}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 45}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
@@ -4457,6 +4450,12 @@ MeshCollider:
   m_Convex: 1
   m_CookingOptions: 14
   m_Mesh: {fileID: 4300000, guid: 5b29f225adf27044da13bbc5b109c397, type: 3}
+--- !u!1 &2093985999 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1036729518244052388, guid: c84e4192ce4b7254386e25573f47a03d,
+    type: 3}
+  m_PrefabInstance: {fileID: 1036729519439384009}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1036729519439384009
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4472,7 +4471,7 @@ PrefabInstance:
     - target: {fileID: 1036729519347832798, guid: c84e4192ce4b7254386e25573f47a03d,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1036729519211918828, guid: c84e4192ce4b7254386e25573f47a03d,
         type: 3}
@@ -4653,6 +4652,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_SizeDelta.y
       value: 220
+      objectReference: {fileID: 0}
+    - target: {fileID: 1036729518244052388, guid: c84e4192ce4b7254386e25573f47a03d,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c84e4192ce4b7254386e25573f47a03d, type: 3}

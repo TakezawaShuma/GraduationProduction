@@ -133,8 +133,7 @@ public class FollowingCamera : MonoBehaviour
 
     void updateAngle(float x, float y)
     {
-
-        if (!lockOnTarget)
+        if (!lockOnTarget || !lockOnTarget.GetComponent<Marker>().LOCK_OBSERVE)
         {
             x = azimuthalAngle - x * mouseXSensitivity;
             azimuthalAngle = Mathf.Repeat(x, 360);
