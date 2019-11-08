@@ -38,6 +38,7 @@ public class PlayerController: MonoBehaviour
     private AnimatorManager animatorManager;
 
     private bool lockState = false;
+    public bool Lock { set { lockState = value; } }
 
     private GameObject target;
 
@@ -85,6 +86,8 @@ public class PlayerController: MonoBehaviour
 
         rigidbody1 = GetComponent<Rigidbody>();
     }
+
+
 
     // Update is called once per frame
     void Update()
@@ -163,8 +166,10 @@ public class PlayerController: MonoBehaviour
         z = position.z;
         dir = direction;
 
-        PlayerData.UpdatePosition(x, y, z);
-        PlayerData.UpdateDirection(dir);
+        PlayerData.Position = new Vector4(x, y, z, dir);
+
+        //PlayerData.UpdatePosition(x, y, z);
+        //PlayerData.UpdateDirection(dir);
     }
 
     public void ChangeState(BaseState state)

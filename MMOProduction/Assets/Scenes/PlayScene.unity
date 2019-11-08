@@ -384,6 +384,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Forest Bunny Black
       objectReference: {fileID: 0}
+    - target: {fileID: 842962567749291421, guid: 796be72676539b34dbc1ac6907da5760,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 839769458397738583, guid: 796be72676539b34dbc1ac6907da5760,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -438,6 +443,21 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8471737281524988454, guid: 796be72676539b34dbc1ac6907da5760,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3412452897815483532, guid: 796be72676539b34dbc1ac6907da5760,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4412167116894416333, guid: 796be72676539b34dbc1ac6907da5760,
+        type: 3}
+      propertyPath: m_UseGravity
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 796be72676539b34dbc1ac6907da5760, type: 3}
@@ -2720,6 +2740,25 @@ MonoBehaviour:
   m_Script: {fileID: -113659843, guid: f70555f144d8491a825f0804e09c671c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1505384493 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 842472474941248521, guid: 796be72676539b34dbc1ac6907da5760,
+    type: 3}
+  m_PrefabInstance: {fileID: 136671996}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1505384496
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1505384493}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 2.64, y: 0.7267612, z: 0.65832245}
+  m_Center: {x: 0.000000009065748, y: 0.050699126, z: 0.3278432}
 --- !u!1 &1514585323
 GameObject:
   m_ObjectHideFlags: 0

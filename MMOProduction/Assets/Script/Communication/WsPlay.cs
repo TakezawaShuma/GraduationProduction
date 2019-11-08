@@ -31,7 +31,13 @@ namespace WS
         public Action<Packes.EnemyAliveStoC> enemyAliveAction;
         // エネミーが死んだ 222
         public Action<Packes.EnemyDieStoC> enemyDeadAction;
-
+        // エネミーの攻撃準備 225
+        public Action<Packes.EnemyUseSkillRequest> enemySkillReqAction;
+        // エネミーが攻撃する 226
+        public Action<Packes.EnemyUseSkill> enemyUseSkillAction;
+        // エネミーの攻撃結果
+        public Action<Packes.EnemyAttackResult> enemyAttackAction;
+        // 他プレイヤーがログアウトした 707
         public Action<Packes.LogoutStoC> logoutAction;
 
         public static WsPlay Instance
@@ -104,40 +110,75 @@ namespace WS
 
                     switch (command)
                     {
-                        case CommandData.TranslationStoC:
-                            Packes.TranslationStoC posSync = Json.ConvertToPackets<Packes.TranslationStoC>(e.Data);
-                            moveingAction(posSync);
+                        case CommandData.TranslationStoC:   // プレイヤーの移動を受信
+                            //Packes.TranslationStoC posSync = Json.ConvertToPackets<Packes.TranslationStoC>(e.Data);
+                            //moveingAction(posSync);
+                            moveingAction(Json.ConvertToPackets<Packes.TranslationStoC>(e.Data));
                             break;
 
-                        case CommandData.GetEnemyDataStoC:
-                            Packes.GetEnemyDataStoC init = Json.ConvertToPackets<Packes.GetEnemyDataStoC>(e.Data);
-                            enemysAction(init);
+                        case CommandData.GetEnemyDataStoC:  // エネミーの位置情報を受信
+                            //Packes.GetEnemyDataStoC init = Json.ConvertToPackets<Packes.GetEnemyDataStoC>(e.Data);
+                            //enemysAction(init);
+                            Debug.Log("敵の位置情報");
+                            enemysAction(Json.ConvertToPackets<Packes.GetEnemyDataStoC>(e.Data));
                             break;
 
-                        case CommandData.StatusStoC:
-                            Packes.StatusStoC status = Json.ConvertToPackets<Packes.StatusStoC>(e.Data);
-                            statusAction(status);
+                        case CommandData.StatusStoC:        // プレイヤーのステータス共有
+                            //Packes.StatusStoC status = Json.ConvertToPackets<Packes.StatusStoC>(e.Data);
+                            //statusAction(status);
+                            Debug.Log("ステータス共有");
+                            statusAction(Json.ConvertToPackets<Packes.StatusStoC>(e.Data));
+
                             break;
 
-                        case CommandData.LoadSaveData:
-                            Packes.LoadSaveData save = Json.ConvertToPackets<Packes.LoadSaveData>(e.Data);
-                            loadSaveAction(save);
+                        case CommandData.LoadSaveData:      // セーブデータの受信
+                            //Packes.LoadSaveData save = Json.ConvertToPackets<Packes.LoadSaveData>(e.Data);
+                            //loadSaveAction(save);
+                            loadSaveAction(Json.ConvertToPackets<Packes.LoadSaveData>(e.Data));
                             break;
 
-                        case CommandData.LoadingFinishStoC:
-                            Packes.LoadingFinishStoC loadFin = Json.ConvertToPackets<Packes.LoadingFinishStoC>(e.Data);
-                            loadFinAction(loadFin);
+                        case CommandData.LoadingFinishStoC: // セーブデータの受信関係の終了
+                            //Packes.LoadingFinishStoC loadFin = Json.ConvertToPackets<Packes.LoadingFinishStoC>(e.Data);
+                            //loadFinAction(loadFin);
+                            loadFinAction(Json.ConvertToPackets<Packes.LoadingFinishStoC>(e.Data));
                             break;
 
-                        case CommandData.EnemyAliveStoC:
-                            Packes.EnemyAliveStoC alive = Json.ConvertToPackets<Packes.EnemyAliveStoC>(e.Data);
-                            enemyAliveAction(alive);
+                        case CommandData.EnemyAliveStoC:    // 戦闘結果(エネミーは生きている)
+                            //Packes.EnemyAliveStoC alive = Json.ConvertToPackets<Packes.EnemyAliveStoC>(e.Data);
+                            //enemyAliveAction(alive);
+                            enemyAliveAction(Json.ConvertToPackets<Packes.EnemyAliveStoC>(e.Data));
                             break;
 
-                        case CommandData.EnemyDieStoC:
+                        case CommandData.EnemyDieStoC:      // 戦闘結果(エネミーが死んだ)
+                            //Packes.EnemyDieStoC enemyDie = Json.ConvertToPackets<Packes.EnemyDieStoC>(e.Data);
+                            //enemyDeadAction(enemyDie);
                             enemyDeadAction(Json.ConvertToPackets<Packes.EnemyDieStoC>(e.Data));
                             break;
-                        case CommandData.LogoutStoC:
+
+                        case CommandData.EnemyUseSkillRequest:  // 敵スキルの使用申請
+                            Debug.Log("スキルを使用します。準備してください");
+                            //Packes.EnemyUseSkillRequest skillReq = Json.ConvertToPackets<Packes.EnemyUseSkillRequest>(e.Data);
+                            //enemySkillReqAction(skillReq);
+                            enemySkillReqAction(Json.ConvertToPackets<Packes.EnemyUseSkillRequest>(e.Data));
+                            break;
+
+                        case CommandData.EnemyUseSkill:     // 敵スキルの使用
+                            Debug.Log("スキルを使用します。");
+                            Packes.EnemyUseSkill skillUse = Json.ConvertToPackets<Packes.EnemyUseSkill>(e.Data);
+                            enemyUseSkillAction(skillUse);
+                            enemyUseSkillAction(Json.ConvertToPackets<Packes.EnemyUseSkill>(e.Data));
+                            break;
+
+                        case CommandData.EnemyAttackResult: // 敵の攻撃結果の受信
+                            Debug.Log("攻撃結果の受信");
+                            Packes.EnemyAttackResult attackRes = Json.ConvertToPackets<Packes.EnemyAttackResult>(e.Data);
+                            enemyAttackAction(attackRes);
+                            enemyAttackAction(Json.ConvertToPackets<Packes.EnemyAttackResult>(e.Data));
+                            break;
+
+                        case CommandData.LogoutStoC:        // 他プレイヤーがログアウトした
+                            //Packes.LogoutStoC logout = Json.ConvertToPackets<Packes.LogoutStoC>(e.Data);
+                            //logoutAction(logout);
                             logoutAction(Json.ConvertToPackets<Packes.LogoutStoC>(e.Data));
                             break;
                         // 随時追加

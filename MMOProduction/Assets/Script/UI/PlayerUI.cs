@@ -59,10 +59,10 @@ public class PlayerUI : MonoBehaviour
             if (player != null)
             {
                 playerCmp = player.GetComponent<Player>();
-                playerCmp.maxHp = 100;
-                playerCmp.hp = 30;
-                playerCmp.maxMp = 100;
-                playerCmp.mp = 60;
+                playerCmp.MaxHp = 100;
+                playerCmp.HP = 30;
+                playerCmp.MaxMp = 100;
+                playerCmp.MP = 60;
             }
         }
         if (playerCmp)
@@ -73,10 +73,10 @@ public class PlayerUI : MonoBehaviour
 
     private void StatusUpdate()
     {
-        int hp = playerCmp.hp;
-        int maxHp = playerCmp.maxHp;
-        int mp = playerCmp.mp;
-        int maxMp = playerCmp.maxMp;
+        int hp = playerCmp.HP;
+        int maxHp = playerCmp.MaxHp;
+        int mp = playerCmp.MP;
+        int maxMp = playerCmp.MaxMp;
 
         if (Observar(hp, currentHp) || Observar(maxHp,currentMaxHp))
         {
