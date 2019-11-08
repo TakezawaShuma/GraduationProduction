@@ -42,6 +42,7 @@ public class OtherPlayers: CharacterBase
     // Update is called once per frame
     void Update()
     {
+        LerpMove();
     }
 
 

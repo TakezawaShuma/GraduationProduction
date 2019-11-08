@@ -35,18 +35,6 @@ public abstract class CharacterBase : MonoBehaviour
         nextDir = Quaternion.Euler(new Vector3(0, _dir, 0));
     }
 
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        LerpMove();
-    }
-
 
     public void UpdatePostionData(float _x, float _y, float _z, float _dir)
     {

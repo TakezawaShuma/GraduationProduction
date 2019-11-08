@@ -20,20 +20,21 @@ public class Enemy : CharacterBase
     // Update is called once per frame
     void Update()
     {
-        
+
+        LerpMove();
     }
 
 
     // アニメーション関係
 
-    public void DeiAnimetion()
+    /// <summary>
+    /// ワンプレイ系のアニメーションを再生する
+    /// </summary>
+    /// <param name="_animetionName">アニメーション遷移名</param>
+    public void PlayTriggerAnimetion(string _animetionName)
     {
-        gameObject.GetComponent<Animator>().SetTrigger("Die");
-    }
+        gameObject.GetComponent<Animator>().SetTrigger(_animetionName);
 
-    public void AttackAnimetion()
-    {
-        gameObject.GetComponent<Animator>().SetTrigger("Attack");
     }
 
 
@@ -52,4 +53,5 @@ public class Enemy : CharacterBase
     {
         Destroy(this.gameObject);
     }
+    
 }

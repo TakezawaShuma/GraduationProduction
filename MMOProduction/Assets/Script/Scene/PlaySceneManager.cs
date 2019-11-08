@@ -68,7 +68,6 @@ public class PlaySceneManager : MonoBehaviour
             wsp.Send(new Packes.DataLoading(UserRecord.ID).ToJson());
 
         }
-        Debug.Log("プレイスタート");
           
         // debug
         MakePlayer(new Vector3(5, 1, 15)); 
@@ -96,7 +95,7 @@ public class PlaySceneManager : MonoBehaviour
                     {
                         SendPosition(playerData);
                         SendStatus( UserRecord.ID, Packes.ObjectType.Player);
-                        wsp.Send(new Packes.GetEnemysDataCtoS().ToJson());
+                        SendEnemyPosReq();
                     }
                 }
             }
@@ -116,12 +115,16 @@ public class PlaySceneManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.Comma))
         {
-            enemies[100].AttackAnimetion(); // 敵の攻撃モーションの再生
+            enemies[100].PlayTriggerAnimetion("Attack"); // 敵の攻撃モーションの再生
         }
         if (Input.GetKeyDown(KeyCode.Alpha0))
         {
             wsp.Send(Json.ConvertToJson(new Packes.Attack(0, UserRecord.ID, 0, 0)));
             Debug.Log("プレイヤーの攻撃");
+        }
+        if(Input.GetKeyDown(KeyCode.F12))
+        {
+            AliveEnemy(new Packes.EnemyAliveStoC(100, 10, 0));
         }
     }
 
@@ -312,6 +315,7 @@ public class PlaySceneManager : MonoBehaviour
         // HPを減らすや状態の更新
 
         Debug.Log("敵は生存している");
+        enemies[_packet.unique_id].PlayTriggerAnimetion("Take Damage");
     }
 
     /// <summary>
@@ -323,9 +327,10 @@ public class PlaySceneManager : MonoBehaviour
         // todo
         // 戦闘で計算後エネミーが死亡していたら
         // HPを0にして死亡エフェクトやドロップアイテムの取得
-        enemies[_packet.unique_id].DeiAnimetion();
-        enemies.Remove(_packet.unique_id);
+        enemies[_packet.unique_id].PlayTriggerAnimetion("Die");
+        player.GetComponent<PlayerController>().Lock = false;
         charcters.Remove(_packet.unique_id);
+        Debug.Log(charcters.Count);
         Debug.Log("敵は死んだ！！！");
     }
 
@@ -363,7 +368,6 @@ public class PlaySceneManager : MonoBehaviour
     private void Logout(Packes.LogoutStoC _packet)
     {
         Destroy(others[_packet.user_id].gameObject);
-        others.Remove(_packet.user_id);
         charcters.Remove(_packet.user_id);
         Debug.Log(_packet.user_id + "さんがログアウトしたよ！");
     }
@@ -387,6 +391,14 @@ public class PlaySceneManager : MonoBehaviour
     private void SendStatus(int _target_id, Packes.ObjectType _type)
     {
         wsp.Send(new Packes.StatusCtoS(UserRecord.ID, _target_id, (int)_type).ToJson());
+    }
+
+    /// <summary>
+    /// エネミーの情報の要求
+    /// </summary>
+    private void SendEnemyPosReq()
+    {
+        wsp.Send(new Packes.GetEnemysDataCtoS(0, UserRecord.ID).ToJson());
     }
 
     /// <summary>

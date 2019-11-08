@@ -119,21 +119,21 @@ namespace WS
                         case CommandData.GetEnemyDataStoC:  // エネミーの位置情報を受信
                             //Packes.GetEnemyDataStoC init = Json.ConvertToPackets<Packes.GetEnemyDataStoC>(e.Data);
                             //enemysAction(init);
-                            Debug.Log(e.Data);
+                            Debug.Log("敵の位置情報");
                             enemysAction(Json.ConvertToPackets<Packes.GetEnemyDataStoC>(e.Data));
                             break;
 
                         case CommandData.StatusStoC:        // プレイヤーのステータス共有
                             //Packes.StatusStoC status = Json.ConvertToPackets<Packes.StatusStoC>(e.Data);
                             //statusAction(status);
-                            Debug.Log("ステータス共有 : " + e.Data);
+                            Debug.Log("ステータス共有");
                             statusAction(Json.ConvertToPackets<Packes.StatusStoC>(e.Data));
 
                             break;
 
                         case CommandData.LoadSaveData:      // セーブデータの受信
-                            Packes.LoadSaveData save = Json.ConvertToPackets<Packes.LoadSaveData>(e.Data);
-                            loadSaveAction(save);
+                            //Packes.LoadSaveData save = Json.ConvertToPackets<Packes.LoadSaveData>(e.Data);
+                            //loadSaveAction(save);
                             loadSaveAction(Json.ConvertToPackets<Packes.LoadSaveData>(e.Data));
                             break;
 
@@ -155,19 +155,22 @@ namespace WS
                             enemyDeadAction(Json.ConvertToPackets<Packes.EnemyDieStoC>(e.Data));
                             break;
 
-                        case CommandData.EnemyUseSkillRequest:
+                        case CommandData.EnemyUseSkillRequest:  // 敵スキルの使用申請
+                            Debug.Log("スキルを使用します。準備してください");
                             //Packes.EnemyUseSkillRequest skillReq = Json.ConvertToPackets<Packes.EnemyUseSkillRequest>(e.Data);
                             //enemySkillReqAction(skillReq);
                             enemySkillReqAction(Json.ConvertToPackets<Packes.EnemyUseSkillRequest>(e.Data));
                             break;
 
-                        case CommandData.EnemyUseSkill:
+                        case CommandData.EnemyUseSkill:     // 敵スキルの使用
+                            Debug.Log("スキルを使用します。");
                             Packes.EnemyUseSkill skillUse = Json.ConvertToPackets<Packes.EnemyUseSkill>(e.Data);
                             enemyUseSkillAction(skillUse);
                             enemyUseSkillAction(Json.ConvertToPackets<Packes.EnemyUseSkill>(e.Data));
                             break;
 
-                        case CommandData.EnemyAttackResult:
+                        case CommandData.EnemyAttackResult: // 敵の攻撃結果の受信
+                            Debug.Log("攻撃結果の受信");
                             Packes.EnemyAttackResult attackRes = Json.ConvertToPackets<Packes.EnemyAttackResult>(e.Data);
                             enemyAttackAction(attackRes);
                             enemyAttackAction(Json.ConvertToPackets<Packes.EnemyAttackResult>(e.Data));

@@ -38,6 +38,7 @@ public class PlayerController: MonoBehaviour
     private AnimatorManager animatorManager;
 
     private bool lockState = false;
+    public bool Lock { set { lockState = value; } }
 
     private GameObject target;
 
