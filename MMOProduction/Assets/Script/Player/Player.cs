@@ -36,6 +36,9 @@ public class Player : MonoBehaviour
     private CommandAttack _attackCommand;
     public CommandAttack AttackCommand { get { return _attackCommand; } }
 
+    // プレイヤーID
+    public int ID { get; set; }
+
 
     private void Start()
     {

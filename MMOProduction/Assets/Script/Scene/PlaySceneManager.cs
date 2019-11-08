@@ -149,9 +149,14 @@ public class PlaySceneManager : MonoBehaviour
             tmpPlayer.transform.position = new Vector3(5, 0, 15);
             tmpPlayer.name = "player" + Retention.ID;
             players.Add(Retention.ID, tmpPlayer);
-            players[Retention.ID].AddComponent<Player>();
-            players[Retention.ID].AddComponent<PlayerController>();
-            players[Retention.ID].AddComponent<PlayerSetting>();
+            Player player = players[Retention.ID].AddComponent<Player>();
+            PlayerController controller = players[Retention.ID].AddComponent<PlayerController>();
+            PlayerSetting setting = players[Retention.ID].AddComponent<PlayerSetting>();
+
+            // プレイヤーにIDを割り振る
+            player.ID = Retention.ID;
+
+            // プレイヤーを初期化する
             players[Retention.ID].GetComponent<PlayerController>().Init(
                 players[Retention.ID].GetComponent<Player>(),
                 FollowingCamera,

@@ -28,7 +28,11 @@ public class PlayerWepon : MonoBehaviour
 
     private void Start()
     {
-        
+        Player player = this.gameObject.GetComponent<Player>();
+        foreach (var wepon in _weponList)
+        {
+            wepon._wepon.UserID = player.ID;
+        }
     }
 
     public WeponData FindWeponFromName(string name)
