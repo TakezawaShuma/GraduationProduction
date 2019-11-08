@@ -3,12 +3,8 @@
 ////////////////////////////////////////
 
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using System;
-using System.Text;
 using System.Text.RegularExpressions;
 
 
@@ -101,6 +97,7 @@ public class TitleSceneManager : MonoBehaviour
         loginToGame_.gameObject.SetActive(false);
         signUp_.gameObject.SetActive(false);
 
+        
 
         ErrorMessageHide();
 
@@ -112,25 +109,13 @@ public class TitleSceneManager : MonoBehaviour
             // 接続開始
             wsl = WS.WsLogin.Instance;
         }
-
-        int[] enemyyyy =
-        {
-           100,
-           200,
-           300,
-           400,
-        };
     }
-
-    private int m_command = 0;
 
     /// <summary>
     /// 受信したデータを扱う関数
     /// </summary>
     void Receive(int _comand)
     {
-        m_command = _comand;
-
         ErrorCheck(_comand);
     }
 
@@ -142,6 +127,8 @@ public class TitleSceneManager : MonoBehaviour
         {
             wsl.Send(new Packes.LoginUser("tsit", "trident").ToJson());
         }
+        if(Input.GetKeyDown(KeyCode.Tab)) InputChange();
+        if (Input.GetKeyDown(KeyCode.Return)) EnterCheck();
     }
 
     /// <summary>
@@ -149,11 +136,11 @@ public class TitleSceneManager : MonoBehaviour
     /// </summary>
     void Quit()
     {
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#elif UNITY_STANDALONE
-    UnityEngine.Application.Quit();
-#endif
+        #if UNITY_EDITOR
+                UnityEditor.EditorApplication.isPlaying = false;
+        #elif UNITY_STANDALONE
+            UnityEngine.Application.Quit();
+        #endif
     }
 
     private void OnDestroy()
@@ -286,12 +273,38 @@ public class TitleSceneManager : MonoBehaviour
         id_.gameObject.SetActive(true);
         pw_.gameObject.SetActive(true);
         loginToGame_.gameObject.SetActive(true);
-        
+        id_.ActivateInputField();
+
         RectTransform er01= Error01.GetComponent<RectTransform>();
         er01.localPosition = new Vector3(75, -280, 0);
         RectTransform er02 = Error02.GetComponent<RectTransform>();
         er02.localPosition = new Vector3(75, -280, 0);
     }
+
+    /// <summary>
+    /// 入力の反転
+    /// </summary>
+    /// <returns>成功/失敗</returns>
+    private bool InputChange() {
+        if (!id_.isFocused && !pw_.isFocused) return false;
+        if(id_.isFocused) {
+            id_.DeactivateInputField();
+            pw_.ActivateInputField();
+        } else {
+            id_.ActivateInputField();
+            pw_.DeactivateInputField();
+        }
+        return true;
+    }
+
+    /// <summary>
+    /// 入力完了
+    /// </summary>
+    /// <returns></returns>
+    private void EnterCheck() {
+        loginToGame_Click();
+    }
+       
 
     // 新規登録選択時表示させる
     private void RegisterActive()
