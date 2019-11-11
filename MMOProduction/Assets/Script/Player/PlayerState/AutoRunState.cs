@@ -39,7 +39,7 @@ public class AutoRunState : BaseState
         }
 
         // 前に進む
-        velocity = new Vector3(-1, 0, 0) * playerSetting.DS * Time.deltaTime;
+        velocity = new Vector3(-1, 0, 0) * playerSetting.DS;
 
         playerController.Move(velocity);
 
