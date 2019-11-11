@@ -90,10 +90,6 @@ public class TitleSceneManager : MonoBehaviour
     void Update()
     {
         if (Input.GetKey(KeyCode.Escape)) Quit();
-        if (Input.GetKeyDown(KeyCode.Backslash))
-        {
-            wsl.Send(new Packes.LoginUser("hide", "takezawa").ToJson());
-        }
         if(Input.GetKeyDown(KeyCode.Tab)) InputChange();
         if (Input.GetKeyDown(KeyCode.Return)) EnterCheck();
     }
