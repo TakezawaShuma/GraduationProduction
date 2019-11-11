@@ -69,15 +69,7 @@ public class PlaySceneManager : MonoBehaviour
 
         }
           
-        // debug
-        MakePlayer(new Vector3(5, 1, 15)); 
-        newEnemy = Instantiate<GameObject>(testEnemyPre, new Vector3(5, 1, 20), Quaternion.Euler(0, 0, 0));
-        newEnemy.name = "Enemy:Debug";
-        newEnemy.tag = "Enemy";
-        newEnemy.GetComponent<Rigidbody>().useGravity = true;
-        Enemy enemy = newEnemy.AddComponent<Enemy>();
-        enemy.Init(newEnemy.transform.position.x, newEnemy.transform.position.y, newEnemy.transform.position.z, 0);
-        enemies.Add(100, enemy);
+
     }
 
     // Update is called once per frame
@@ -250,8 +242,9 @@ public class PlaySceneManager : MonoBehaviour
                     //newEnemy.GetComponent<Rigidbody>().useGravity = true;
                     Enemy enemy = newEnemy.AddComponent<Enemy>();
                     enemy.Init(ene.x, ene.y, ene.z, ene.dir);
-                    enemies.Add(ene.unique_id, enemy);
-                    charcters.Add(ene.unique_id, enemy);
+                    enemies[ene.unique_id] = enemy;
+                    charcters[ene.unique_id] = enemy;
+                    Debug.Log("エネミーの新規せいせ");
                 }
             }
         }
@@ -329,7 +322,8 @@ public class PlaySceneManager : MonoBehaviour
         // HPを0にして死亡エフェクトやドロップアイテムの取得
         enemies[_packet.unique_id].PlayTriggerAnimetion("Die");
         player.GetComponent<PlayerController>().Lock = false;
-        charcters.Remove(_packet.unique_id);
+        enemies.Remove(_packet.unique_id);
+        //charcters.Remove(_packet.unique_id);
         Debug.Log(charcters.Count);
         Debug.Log("敵は死んだ！！！");
     }
@@ -369,6 +363,7 @@ public class PlaySceneManager : MonoBehaviour
     {
         Destroy(others[_packet.user_id].gameObject);
         charcters.Remove(_packet.user_id);
+        others.Remove(_packet.user_id);
         Debug.Log(_packet.user_id + "さんがログアウトしたよ！");
     }
 
