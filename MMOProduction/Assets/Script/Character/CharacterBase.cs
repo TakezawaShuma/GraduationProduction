@@ -12,6 +12,7 @@ public abstract class CharacterBase : MonoBehaviour
 
     protected float nowFlame = 0;
 
+    protected int id;   // キャラクターごとのID
 
     protected Vector3 lastPos = new Vector3();
     protected Vector3 nextPos = new Vector3();
@@ -65,5 +66,14 @@ public abstract class CharacterBase : MonoBehaviour
         nowFlame += UPDATE_SPEED;
         transform.rotation = Quaternion.Lerp(lastDir, nextDir, nowFlame);
         transform.position = Vector3.Lerp(lastPos, nextPos, nowFlame);
+    }
+
+    /// <summary>
+    /// キャラクターごとのID
+    /// </summary>
+    public virtual int ID
+    {
+        get { return this.id; }
+        set { this.id = value; }
     }
 }

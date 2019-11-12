@@ -1,0 +1,38 @@
+﻿// Each #kernel tells which function to compile; you can have many kernels
+#pragma kernel CSMain
+
+// 玉の構造体
+struct Fireball
+{
+	float3 pos;
+	float3 startPos;
+	float3 accel;
+	float4 col;
+};
+
+float _DeltaTime;
+float4 _Center;
+RWStructuredBuffer<Fireball> _Balls;
+
+// メイン処理
+[numthreads(8, 1, 1)]
+void CSMain(uint3 id : SV_DispatchThreadID)
+{
+	_Balls[id.x].col.a = 1;
+	float eps = 0.1;
+	float3 center = _Center.xyz;
+	//_Balls[id.x].pos += _Balls[id.x].accel * _DeltaTime;
+	float3 startPos = _Balls[id.x].startPos;
+	float3 pos = _Balls[id.x].pos;
+
+	// エフェクトを移動させる
+	pos = lerp(pos, center, _Balls[id.x].accel.x * _DeltaTime * 10);
+
+	float dist = distance(pos, center);
+	if (dist < eps)
+	{
+		pos = startPos;
+	}
+
+	_Balls[id.x].pos = pos;
+}
