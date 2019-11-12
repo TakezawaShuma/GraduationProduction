@@ -255,6 +255,6 @@ public class PlayerController: MonoBehaviour
     }
 
     private void OnCollisionStay(Collision _coll){
-        sound_.WalkPlay(_coll.gameObject.tag);
+        if(currentState is KeyMoveState) sound_.WalkPlay(_coll.gameObject.tag);
     }
 }

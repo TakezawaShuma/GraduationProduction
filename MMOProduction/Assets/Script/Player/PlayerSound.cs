@@ -42,7 +42,8 @@ public class PlayerSound : MonoBehaviour
     /// 初期化
     /// </summary>
     void Start() {
-        audioSource_ = new AudioSource();
+        audioSource_ = GetComponent<AudioSource>();
+        //audioSource_ = new AudioSource();
         // 歩く初期化
         InitWalk();
         // スキルの初期化
@@ -76,7 +77,7 @@ public class PlayerSound : MonoBehaviour
     /// </summary>
     public void WalkPlay(string _tag) {
         if (!walkSounds_.ContainsKey(_tag)) return;
-        if (!audioSource_.isPlaying && walkSounds_[_tag] != null) audioSource_.PlayOneShot(walkSounds_[_tag]);
+        if (!audioSource_.isPlaying) audioSource_.PlayOneShot(walkSounds_[_tag]);
     }
 
     /// <summary>
