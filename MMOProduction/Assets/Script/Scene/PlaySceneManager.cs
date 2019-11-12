@@ -167,6 +167,7 @@ public class PlaySceneManager : MonoBehaviour
             tmp.transform.position = new Vector3(_save.x, _save.y, _save.z);
             tmp.name = (UserRecord.Name != "") ? UserRecord.Name : _name;
             tmp.tag = "Player";
+            tmp.transform.localScale = new Vector3(2, 2, 2);
             tmp.AddComponent<Player>();
             tmp.AddComponent<PlayerController>();
             tmp.AddComponent<PlayerSetting>();
@@ -205,6 +206,7 @@ public class PlaySceneManager : MonoBehaviour
                     var otherPlayer = Instantiate<GameObject>(playerPre, new Vector3(data.x, data.y, data.z), Quaternion.Euler(0, data.dir, 0));
                     otherPlayer.name = "otherPlayer" + data.user_id;
                     otherPlayer.tag = "OtherPlayer";
+                    otherPlayer.transform.localScale = new Vector3(2, 2, 2);
                     var other = otherPlayer.AddComponent<OtherPlayers>();
                     other.Init(data.x, data.y, data.z, data.dir);
                     others.Add(data.user_id, other);
