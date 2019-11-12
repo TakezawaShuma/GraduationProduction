@@ -21,6 +21,10 @@ public abstract class BaseState
         this.animatorManager = animatorManager;
     }
 
+    public abstract void Start();
+
     // 実行関数
     public abstract void Execute();
+
+    public abstract void End();
 }

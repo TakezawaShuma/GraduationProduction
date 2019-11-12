@@ -13,6 +13,12 @@ public class Marker : MonoBehaviour
         Num,
     }
 
+    public enum Type
+    {
+        NPC,
+        Enemy,
+    }
+
     [SerializeField]
     private SpriteRenderer sprite = null;
 
@@ -21,6 +27,14 @@ public class Marker : MonoBehaviour
 
     [SerializeField, Header("距離")]
     private float executeRange = 5;
+
+    [SerializeField]
+    private Type type = Type.NPC;
+
+    public Type TYPE
+    {
+        get { return type; }
+    }
 
     private UnityEvent unityEvent;
 

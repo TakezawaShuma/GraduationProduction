@@ -27,6 +27,10 @@ public class KeyMoveState : BaseState
         }
     }
 
+    public override void Start()
+    {
+    }
+
     // 実行関数
     public override void Execute()
     {
@@ -49,6 +53,10 @@ public class KeyMoveState : BaseState
             playerController.ChangeState(IdleState.Instance);
         }
         
+    }
+
+    public override void End()
+    {
     }
 
     private void VelocityDecision()

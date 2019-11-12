@@ -23,11 +23,13 @@ public class IdleState : BaseState
         }
     }
 
+    public override void Start()
+    {
+    }
+
     // 実行関数
     public override void Execute()
     {
-        //playerController.GetAnim().Move(false);
-
         if (playerSetting.IA)
         {
             animatorManager.Idle();
@@ -50,7 +52,14 @@ public class IdleState : BaseState
         }
         else if (Input.GetKeyDown(KeyCode.Z))
         {
-            playerController.ChangeState(TestAttackState.Instance);
+            if (playerController.MODE == PlayerController.Mode.Battle)
+            {
+                playerController.ChangeState(NormalAttackState.Instance);
+            }
         }
+    }
+
+    public override void End()
+    {
     }
 }
