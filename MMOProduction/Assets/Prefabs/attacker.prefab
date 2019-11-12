@@ -984,6 +984,7 @@ GameObject:
   - component: {fileID: 5516378010463226371}
   - component: {fileID: 667564124551022295}
   - component: {fileID: 6613963366847100238}
+  - component: {fileID: 4114223418111783062}
   m_Layer: 0
   m_Name: attacker
   m_TagString: Untagged
@@ -1309,6 +1310,29 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.39, y: 1.16, z: 0.28}
   m_Center: {x: 0, y: 0.58, z: 0}
+--- !u!114 &4114223418111783062
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2136695631195096698}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8052dc5ff31da484089429acfe883fed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grassland_: {fileID: 0}
+  sandRoad_: {fileID: 0}
+  rockyPlace_: {fileID: 0}
+  sandyBeach_: {fileID: 0}
+  slashing_: {fileID: 0}
+  blow_: {fileID: 0}
+  fireBall_: {fileID: 0}
+  thunder_: {fileID: 0}
+  water_: {fileID: 0}
+  damage_: {fileID: 0}
+  die_: {fileID: 0}
 --- !u!1 &2149958233113188971
 GameObject:
   m_ObjectHideFlags: 0

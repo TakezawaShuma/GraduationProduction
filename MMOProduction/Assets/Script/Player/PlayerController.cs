@@ -46,6 +46,8 @@ public class PlayerController: MonoBehaviour
     private PlayerAnimData _playerAnim;
 
     private Rigidbody rigidbody1;
+
+    private PlayerSound sound_ = null;
     
 
     public void Init(Player _playerData,FollowingCamera _camera,PlayerSetting _setting, ChatController chat, Animator _animator) {
@@ -55,6 +57,7 @@ public class PlayerController: MonoBehaviour
         chatController = chat;
         animator = _animator;
         _playerAnim = new PlayerAnimData(this.gameObject);
+      
     }
 
     // 位置
@@ -85,6 +88,7 @@ public class PlayerController: MonoBehaviour
         currentState = IdleState.Instance;
 
         rigidbody1 = GetComponent<Rigidbody>();
+        sound_ = GetComponent<PlayerSound>();
     }
 
 
@@ -248,5 +252,9 @@ public class PlayerController: MonoBehaviour
             // ここでデータを送る
             Debug.Log("エネミーと当たってるYO");
         }
+    }
+
+    private void OnCollisionStay(Collision _coll){
+        sound_.WalkPlay(_coll.gameObject.tag);
     }
 }
