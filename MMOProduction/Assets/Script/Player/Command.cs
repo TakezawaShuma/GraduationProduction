@@ -12,7 +12,6 @@ public class Command : MonoBehaviour
     [SerializeField, Header("コマンド")]
     private string command = "";
     
-    public UnityAction Function;
     // コマンドの文字数
     private int commandLenght;
 
@@ -21,7 +20,7 @@ public class Command : MonoBehaviour
     private UnityEvent ue;
 
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
         ue = new UnityEvent();
         ue.AddListener(Message);

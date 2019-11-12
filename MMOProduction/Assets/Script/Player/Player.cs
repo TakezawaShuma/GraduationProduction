@@ -12,15 +12,19 @@ public class Player : MonoBehaviour
     [SerializeField, Header("プレイヤーの設定")]
     private PlayerSetting playerSetting;
 
+    private Vector4 position = new Vector4();
+
     private float x;
     private float y;
     private float z;
 
-    private Status status;
-    public int hp { get; set; }
-    public int mp { get; set; }
-    public int maxHp { get; set; }
-    public int maxMp { get; set; }
+    //private Status status;
+    public int HP { get; set; }
+    public int MP { get; set; }
+    public int MaxHp { get; set; }
+    public int MaxMp { get; set; }
+    public int Status { get; set; }
+    public Vector4 Position { get { return position; } set { position = value; } }
     private int strength;
     private int vitality;
     private int Intelligence;
@@ -31,7 +35,7 @@ public class Player : MonoBehaviour
     private float dir;
 
     private Rigidbody rb;
-    
+
 
     private void Start()
     {
@@ -64,6 +68,13 @@ public class Player : MonoBehaviour
 
     public Vector4 GetPosition()
     {
-        return new Vector4(x, y, z, dir);
+        return position;
     }
+    public void UpdateStatus( int _hp,  int _mp, int _status)
+    {
+        HP = _hp;
+        MP = _mp;
+        Status = _status;
+    }
+
 }

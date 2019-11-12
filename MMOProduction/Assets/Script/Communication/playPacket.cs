@@ -89,16 +89,11 @@ namespace Packes
     {
         /// <summary>ユーザーID</summary>
         public int user_id;
-        /// <summary>最大ヒットポイント</summary>
-        public int max_hp;
-        /// <summary>ヒットポイント</summary>
-        public int hp;
-        /// <summary>最大マジックポイント</summary>
-        public int max_mp;
-        /// <summary>マジックポイント</summary>
-        public int mp;
-        /// <summary>異常状態</summary>
-        public int status;
+        /// <summary>情報が欲しい相手のID</summary>
+        public int target_id;
+        /// <summary>どの情報が欲しいか</summary>
+        public int type;
+
 
         /// <summary>デフォルトコンストラクタ</summary>
         public StatusCtoS()
@@ -107,27 +102,18 @@ namespace Packes
         }
         /// <summary>フルコンストラクタ</summary>
         /// <param name="_user_id">ユーザーID</summary>
-        /// <param name="_max_hp">最大ヒットポイント</summary>
-        /// <param name="_hp">ヒットポイント</summary>
-        /// <param name="_max_mp">最大マジックポイント</summary>
-        /// <param name="_mp">マジックポイント</summary>
-        /// <param name="_status">異常状態</summary>
+        /// <param name="_target_id">情報が欲しい相手のID</summary>
+        /// <param name="_type">どの情報が欲しいか</summary>
         public StatusCtoS(
             int _user_id,
-            int _max_hp,
-            int _hp,
-            int _max_mp,
-            int _mp,
-            int _status
+            int _target_id,
+            int _type
         )
         {
             this.command = (int)CommandData.StatusCtoS;
             this.user_id = _user_id;
-            this.max_hp = _max_hp;
-            this.hp = _hp;
-            this.max_mp = _max_mp;
-            this.mp = _mp;
-            this.status = _status;
+            this.target_id = _target_id;
+            this.type = _type;
         }
     }
 
@@ -175,7 +161,7 @@ namespace Packes
     }
 
     /// <summary>
-    /// 攻撃 command:220
+    /// 攻撃 P->E CtoS command:220
     /// </summary>
     public class Attack : IPacketDatas
     {
@@ -213,6 +199,34 @@ namespace Packes
         }
     }
 
+    /// <summary>
+    /// 敵の攻撃がプレイヤーにヒットした command:228
+    /// </summary>
+    public class UserHit : IPacketDatas
+    {
+        /// <summary>ユーザーのID</summary>
+        public int user_id;
+        /// <summary>敵のID</summary>
+        public int enemy_id;
+
+        /// <summary>デフォルトコンストラクタ</summary>
+        public UserHit()
+        {
+            this.command = (int)CommandData.UserHit;
+        }
+        /// <summary>コンストラクタ</summary>
+        /// <param name="_user_id">ユーザーのID</summary>
+        /// <param name="_enemy_id">敵のID</summary>
+        public UserHit(
+            int _user_id,
+            int _enemy_id
+        )
+        {
+            this.command = (int)CommandData.UserHit;
+            this.user_id = _user_id;
+            this.enemy_id = _enemy_id;
+        }
+    }
 
     /// <summary>
     /// ログアウト command:701
@@ -299,25 +313,13 @@ namespace Packes
         }
     }
 
-    
-
     /// <summary>
     /// 状態送信 command:206
     /// </summary>
     public class StatusStoC : IPacketDatas
     {
         /// <summary>ユーザーID</summary>
-        public int user_id;
-        /// <summary>最大ヒットポイント</summary>
-        public int max_hp;
-        /// <summary>今のヒットポイント</summary>
-        public int hp;
-        /// <summary>最大マジックポイント</summary>
-        public int max_mp;
-        /// <summary>マジックポイント</summary>
-        public int mp;
-        /// <summary>状態</summary>
-        public int status;
+        public List<CharctorSatusData> status;
 
         /// <summary>デフォルトコンストラクタ</summary>
         public StatusStoC()
@@ -331,22 +333,10 @@ namespace Packes
         /// <param name="_max_mp">最大マジックポイント</summary>
         /// <param name="_mp">マジックポイント</summary>
         /// <param name="_status">状態</summary>
-        public StatusStoC(
-            int _user_id,
-            int _max_hp,
-            int _hp,
-            int _max_mp,
-            int _mp,
-            int _status
+        public StatusStoC(int _i
         )
         {
             this.command = (int)CommandData.StatusStoC;
-            this.user_id = _user_id;
-            this.max_hp = _max_hp;
-            this.hp = _hp;
-            this.max_mp = _max_mp;
-            this.mp = _mp;
-            this.status = _status;
         }
     }
 
@@ -368,7 +358,6 @@ namespace Packes
         }
     }
 
-
     /// <summary>
     /// セーブデータの読み込み完了 command:212
     /// </summary>
@@ -387,7 +376,7 @@ namespace Packes
     }
 
     /// <summary>
-    /// 判定後生きている
+    /// 判定後生きている command:221
     /// </summary>
     public class EnemyAliveStoC : IPacketDatas
     {
@@ -421,7 +410,7 @@ namespace Packes
     }
 
     /// <summary>
-    /// 判定後死亡
+    /// 判定後死亡 command:222
     /// </summary>
     public class EnemyDieStoC : IPacketDatas
     {
@@ -448,6 +437,94 @@ namespace Packes
         }
     }
 
+    /// <summary>
+    /// 敵のスキル使用申請 command:225
+    /// </summary>
+    public class EnemyUseSkillRequest : IPacketDatas
+    {
+        /// <summary>スキルのID</summary>
+        public int skill_id;
+        /// <summary>敵のID</summary>
+        public int enemy_id;
+
+        /// <summary>デフォルトコンストラクタ</summary>
+        public EnemyUseSkillRequest()
+        {
+            this.command = (int)CommandData.EnemyUseSkillRequest;
+        }
+        /// <summary>コンストラクタ</summary>
+        /// <param name="_skill_id">スキルのID</summary>
+        /// <param name="_enemy_id">敵のID</summary>
+        public EnemyUseSkillRequest(
+            int _skill_id,
+            int _enemy_id
+        )
+        {
+            this.command = (int)CommandData.EnemyUseSkillRequest;
+            this.skill_id = _skill_id;
+            this.enemy_id = _enemy_id;
+        }
+    }
+
+    /// <summary>
+    /// 敵のスキル使用 command:226
+    /// </summary>
+    public class EnemyUseSkill : IPacketDatas
+    {
+        /// <summary>スキルのID</summary>
+        public int skill_id;
+        /// <summary>敵のID</summary>
+        public int enemy_id;
+
+        /// <summary>デフォルトコンストラクタ</summary>
+        public EnemyUseSkill()
+        {
+            this.command = (int)CommandData.EnemyUseSkill;
+        }
+        /// <summary>コンストラクタ</summary>
+        /// <param name="_skill_id">スキルのID</summary>
+        /// <param name="_enemy_id">敵のID</summary>
+        public EnemyUseSkill(
+            int _skill_id,
+            int _enemy_id
+        )
+        {
+            this.command = (int)CommandData.EnemyUseSkill;
+            this.skill_id = _skill_id;
+            this.enemy_id = _enemy_id;
+        }
+    }
+
+    /// <summary>
+    /// 敵の攻撃 command:227
+    /// </summary>
+    public class EnemyAttackResult : IPacketDatas
+    {
+        /// <summary>ユーザーのID</summary>
+        public int user_id;
+        /// <summary>ヒットポイント</summary>
+        public int hp;
+
+        /// <summary>デフォルトコンストラクタ</summary>
+        public EnemyAttackResult()
+        {
+            this.command = (int)CommandData.EnemyAttackResult;
+        }
+        /// <summary>コンストラクタ</summary>
+        /// <param name="_user_id">ユーザーのID</summary>
+        /// <param name="_hp">ヒットポイント</summary>
+        public EnemyAttackResult(
+            int _user_id,
+            int _hp
+        )
+        {
+            this.command = (int)CommandData.EnemyAttackResult;
+            this.user_id = _user_id;
+            this.hp = _hp;
+        }
+    }
+
+
 
 
     /// <summary>
@@ -473,6 +550,13 @@ namespace Packes
 
 
 
+
+    enum ObjectType
+    {
+        Player,
+        OtherPlayer,
+        Enemy,
+    }
 
     /// <summary> 敵の受信用データ </summary>
     [System.Serializable]
@@ -517,6 +601,26 @@ namespace Packes
             this.dir = _dir;
             this.anime_id = _anime_id;
             this.hp = _hp;
+        }
+    }
+
+
+    /// <summary>
+    /// キャラクターのステータス共有データ
+    /// </summary>
+    [System.Serializable]
+    public struct CharctorSatusData
+    {
+        public int charctor_id;
+        public int hp;
+        public int mp;
+        public int status;
+        public CharctorSatusData(int _charctor_id, int _hp, int _mp, int _status)
+        {
+            this.charctor_id = _charctor_id;
+            this.hp = _hp;
+            this.mp = _mp;
+            this.status = _status;
         }
     }
 
