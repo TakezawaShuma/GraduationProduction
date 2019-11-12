@@ -28,4 +28,14 @@ public class PlayerAnimData
     {
         _animator.SetBool("walk", state);
     }
+
+    public void Walk() {
+        _animator.SetBool("walk", true);
+        _animator.SetBool("run", false);
+    }
+
+    public void Run() {
+        _animator.SetBool("run", true);
+        _animator.SetBool("walk", false);
+    }
 }
