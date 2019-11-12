@@ -37,7 +37,7 @@ public class FireballEffect : MonoBehaviour
     private GameObject _fireball = null;   // 火球オブジェクト
 
 
-    private void OnDisable()
+    private void OnDestroy()
     {
         SafeRelease(_computeBuffer);
     }
@@ -92,6 +92,7 @@ public class FireballEffect : MonoBehaviour
     public void Play()
     {
         gameObject.SetActive(true);
+        SafeRelease(_computeBuffer);
         InitializeComputeBuffer();
     }
 

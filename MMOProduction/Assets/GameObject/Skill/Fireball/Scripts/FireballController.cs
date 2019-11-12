@@ -22,6 +22,8 @@ public class FireballController : SkillObject
     private Vector3 _velocity;
     private Vector3 _scale;
 
+    private Vector3 _originPos;
+
 
     private void Start()
     {
@@ -29,6 +31,8 @@ public class FireballController : SkillObject
 
         _velocity = Vector3.zero;
         _scale = new Vector3(0, 0, 0);
+
+        _originPos = transform.localPosition;
 
         // 関数登録
         HitAction += Explosion;
@@ -84,6 +88,9 @@ public class FireballController : SkillObject
         //_explosionEffect.Stop();
         //gameObject.SetActive(false);
         _fireballEffect.Stop();
+        transform.localPosition = _originPos;
+        _scale = Vector3.zero;
+        _velocity = Vector3.zero;
         gameObject.SetActive(false);
     }
 
