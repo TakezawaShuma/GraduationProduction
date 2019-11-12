@@ -108,7 +108,7 @@ namespace WS
         /// シーンを切り替える プレイ
         /// </summary>
         private void ChangeScenetoPlay() {
-            SceneManager.LoadScene("PlayScene");
+            SceneManager.LoadScene("LoadingScene");
         }
 
 
