@@ -119,14 +119,14 @@ namespace WS
                         case CommandData.GetEnemyDataStoC:  // エネミーの位置情報を受信
                             //Packes.GetEnemyDataStoC init = Json.ConvertToPackets<Packes.GetEnemyDataStoC>(e.Data);
                             //enemysAction(init);
-                            Debug.Log("敵の位置情報");
+                            //Debug.Log("敵の位置情報");
                             enemysAction(Json.ConvertToPackets<Packes.GetEnemyDataStoC>(e.Data));
                             break;
 
                         case CommandData.StatusStoC:        // プレイヤーのステータス共有
                             //Packes.StatusStoC status = Json.ConvertToPackets<Packes.StatusStoC>(e.Data);
                             //statusAction(status);
-                            Debug.Log("ステータス共有");
+                            //Debug.Log("ステータス共有");
                             statusAction(Json.ConvertToPackets<Packes.StatusStoC>(e.Data));
 
                             break;

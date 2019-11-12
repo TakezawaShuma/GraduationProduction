@@ -26,6 +26,10 @@ public class AutoRunState : BaseState
         }
     }
 
+    public override void Start()
+    {
+    }
+
     public override void Execute()
     {
         if(playerSetting.IA)
@@ -47,5 +51,9 @@ public class AutoRunState : BaseState
         {
             playerController.ChangeState(KeyMoveState.Instance);
         }
+    }
+
+    public override void End()
+    {
     }
 }

@@ -6,16 +6,22 @@ public class AnimatorManager
 {
     private Animator animator;
 
+    public Animator ANIMATOR
+    {
+        get { return animator; }
+    }
+
     public AnimatorManager(Animator animator)
     {
         this.animator = animator;
     }
 
-    private void AllFalse()
+    public void AllFalse()
     {
         animator.SetBool("Idle", false);
         animator.SetBool("Walk", false);
         animator.SetBool("Run", false);
+        animator.SetBool("NormalAttack", false);
     }
 
     public void Idle()
@@ -34,5 +40,11 @@ public class AnimatorManager
     {
         AllFalse();
         animator.SetBool("Run", true);
+    }
+
+    public void NormalAttack()
+    {
+        AllFalse();
+        animator.SetBool("NormalAttack", true);
     }
 }

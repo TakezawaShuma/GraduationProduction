@@ -25,9 +25,9 @@ public class PlayerController: MonoBehaviour
     private ChatController chatController = null;
 
     [SerializeField, Header("攻撃判定用当たり判定")]
-    private CapsuleCollider attackCollider = null;
+    private CapsuleCollider[] attackCollider = null;
 
-    public CapsuleCollider AttackCollider
+    public CapsuleCollider[] AttackCollider
     {
         get { return attackCollider; }
     }
@@ -42,22 +42,42 @@ public class PlayerController: MonoBehaviour
 
     private GameObject target;
 
-    // Tama: プレイヤーアニメーションデータ
-    private PlayerAnimData _playerAnim;
-
     private Rigidbody rigidbody1;
 
     private PlayerSound sound_ = null;
-    
 
-    public void Init(Player _playerData,FollowingCamera _camera,PlayerSetting _setting, ChatController chat, Animator _animator) {
+
+    public enum Mode
+    {
+        Normal,
+        Battle,
+    }
+
+    private Mode mode = Mode.Normal;
+
+    public Mode MODE
+    {
+        get { return mode; }
+    }
+
+    private int skilId = 0;
+
+    public int SKIL
+    {
+        set { skilId = value; }
+    }
+
+    // スキル再生（使用？）クラス
+    [SerializeField]
+    private SkillPlayer _skillPlayer = null;
+    
+    public void Init(Player _playerData,FollowingCamera _camera,PlayerSetting _setting, ChatController _chat, Animator _animator) {
         PlayerData = _playerData;
         FollowingCamera = _camera;
         playerSetting = _setting;
-        chatController = chat;
+        chatController = _chat;
         animator = _animator;
         _playerAnim = new PlayerAnimData(this.gameObject);
-      
     }
 
     // 位置
@@ -83,12 +103,17 @@ public class PlayerController: MonoBehaviour
         IdleState.Instance.Initialized(this, playerSetting, animatorManager);
         KeyMoveState.Instance.Initialized(this, playerSetting, animatorManager);
         AutoRunState.Instance.Initialized(this, playerSetting, animatorManager);
-        TestAttackState.Instance.Initialized(this, playerSetting, animatorManager);
+        NormalAttackState.Instance.Initialized(this, playerSetting, animatorManager);
+
+        attackCollider = GetComponent<WeaponList>().WEAPONS;
 
         currentState = IdleState.Instance;
+        currentState.Start();
 
         rigidbody1 = GetComponent<Rigidbody>();
         sound_ = GetComponent<PlayerSound>();
+
+        _skillPlayer = GetComponent<SkillPlayer>();
     }
 
 
@@ -111,7 +136,22 @@ public class PlayerController: MonoBehaviour
                 }
             }
 
+            if(Input.GetMouseButtonDown(1))
+            {
+                mode = Mode.Normal;
+                target.GetComponent<Marker>().STATE = Marker.State.None;
+                target = null;
+                lockState = false;
+                FollowingCamera.LOCK = null;
+            }
+
             currentState.Execute();
+        }
+
+        // デバッグ スキル使用
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            _skillPlayer.GetSkill(0).Play();
         }
     }
 
@@ -178,7 +218,9 @@ public class PlayerController: MonoBehaviour
 
     public void ChangeState(BaseState state)
     {
+        currentState.End();
         currentState = state;
+        currentState.Start();
     }
 
     public void LockOn()
@@ -219,6 +261,11 @@ public class PlayerController: MonoBehaviour
                 {
                     target.GetComponent<Marker>().Execute(transform.position);
                 }
+
+                if(target.GetComponent<Marker>().TYPE == Marker.Type.Enemy)
+                {
+                    mode = Mode.Battle;
+                }
                 
                 FollowingCamera.LOCK = target;
             }
@@ -232,7 +279,7 @@ public class PlayerController: MonoBehaviour
             noLock = true;
         }
         
-        if(noLock)
+        if(noLock && mode == Mode.Normal)
         {
             if (target != null)
             {
@@ -247,10 +294,14 @@ public class PlayerController: MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        // エネミーかどうか判定
         if(other.tag == "Enemy")
         {
+            int enemyId = 0;
+            int userId = UserRecord.ID;
+            int mapId = 0;
             // ここでデータを送る
-            Debug.Log("エネミーと当たってるYO");
+            WS.WsPlay.Instance.Send(new Packes.Attack(enemyId, userId, skilId, mapId).ToJson());
         }
     }
 

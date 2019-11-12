@@ -39,12 +39,13 @@ public class PlaySceneManager : MonoBehaviour
 
     private GameObject newEnemy = null;
 
+    private Ready ready;
     [SerializeField]
     private Vector3 playerSpawnPos = new Vector3(0, 0, 0);
 
     private void Awake()
     {
-
+        ready = Ready.Instance;
     }
 
     // Start is called before the first frame update
@@ -78,6 +79,7 @@ public class PlaySceneManager : MonoBehaviour
     void Update()
     {
         if (Input.GetKey(KeyCode.Escape)) Quit();
+        ready.ReadyGO();
         if (updateFlag)
         {
             if (player != null)
@@ -88,38 +90,13 @@ public class PlaySceneManager : MonoBehaviour
                     if (connectFlag)
                     {
                         SendPosition(playerData);
-                        SendStatus( UserRecord.ID, Packes.ObjectType.Player);
+                        SendStatus(UserRecord.ID, Packes.ObjectType.Player);
                         SendEnemyPosReq();
                     }
                 }
             }
         }
 
-        //// debug
-        //if (Input.GetKeyDown(KeyCode.Backspace))
-        //{
-        //    DeadEnemy(new Packes.EnemyDieStoC(0, 100)); // 100番を殺す
-        //}
-        //if (Input.GetKeyDown(KeyCode.L))
-        //{
-        //    Packes.GetEnemyDataStoC v = new Packes.GetEnemyDataStoC();
-        //    v.enemys.Add(new Packes.EnemyReceiveData(100, 0, 5, 1, 20, 0, 0, 10));
-
-        //    RegisterEnemies(v); // 100番を生み出す
-        //}
-        //if (Input.GetKeyDown(KeyCode.Comma))
-        //{
-        //    enemies[100].PlayTriggerAnimetion("Attack"); // 敵の攻撃モーションの再生
-        //}
-        //if (Input.GetKeyDown(KeyCode.Alpha0))
-        //{
-        //    wsp.Send(Json.ConvertToJson(new Packes.Attack(0, UserRecord.ID, 0, 0)));
-        //    Debug.Log("プレイヤーの攻撃");
-        //}
-        //if(Input.GetKeyDown(KeyCode.F12))
-        //{
-        //    AliveEnemy(new Packes.EnemyAliveStoC(100, 10, 0));
-        //}
     }
 
     /// <summary>
@@ -163,7 +140,7 @@ public class PlaySceneManager : MonoBehaviour
         _name = "player" + UserRecord.ID;
         if (player == null)
         {
-            var tmp = Instantiate<GameObject>(playerPre);
+            var tmp = Instantiate<GameObject>(playerPre, this.transform);
             tmp.transform.position = new Vector3(_save.x, _save.y, _save.z);
             tmp.name = (UserRecord.Name != "") ? UserRecord.Name : _name;
             tmp.tag = "Player";
@@ -235,7 +212,6 @@ public class PlaySceneManager : MonoBehaviour
                     if (enemies[ene.unique_id] != null)
                     {
                         enemies[ene.unique_id].UpdatePostionData(ene.x, ene.y, ene.z, ene.dir);
-                        Debug.Log("エネミーの位置情報の更新");
                     }
                 }
                 // 敵の作成
@@ -247,7 +223,9 @@ public class PlaySceneManager : MonoBehaviour
                     Enemy enemy = newEnemy.AddComponent<Enemy>();
                     enemy.Init(ene.x, ene.y, ene.z, ene.dir);
                     enemies[ene.unique_id] = enemy;
+                    enemies[ene.unique_id].ID = ene.unique_id;
                     charcters[ene.unique_id] = enemy;
+                    charcters[ene.unique_id].ID = ene.unique_id;
                     Debug.Log("エネミーの新規せいせ");
                 }
             }
