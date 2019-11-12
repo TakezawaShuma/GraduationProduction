@@ -42,19 +42,18 @@ public class PlayerController: MonoBehaviour
 
     private GameObject target;
 
-    // Tama: プレイヤーアニメーションデータ
-    private PlayerAnimData _playerAnim;
-
     private Rigidbody rigidbody1;
-    
+
+    // スキル再生（使用？）クラス
+    [SerializeField]
+    private SkillPlayer _skillPlayer = null;
+
 
     public void Init(Player _playerData,FollowingCamera _camera,PlayerSetting _setting, ChatController chat) {
         PlayerData = _playerData;
         FollowingCamera = _camera;
         playerSetting = _setting;
         chatController = chat;
-
-        _playerAnim = new PlayerAnimData(this.gameObject);
     }
 
     // 位置
@@ -85,6 +84,8 @@ public class PlayerController: MonoBehaviour
         currentState = IdleState.Instance;
 
         rigidbody1 = GetComponent<Rigidbody>();
+
+        _skillPlayer = GetComponent<SkillPlayer>();
     }
 
 
@@ -108,6 +109,12 @@ public class PlayerController: MonoBehaviour
             }
 
             currentState.Execute();
+        }
+
+        // デバッグ スキル使用
+        if (Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            _skillPlayer.GetSkill(0).Play();
         }
     }
 
