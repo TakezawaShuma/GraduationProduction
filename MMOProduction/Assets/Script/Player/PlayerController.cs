@@ -44,6 +44,7 @@ public class PlayerController: MonoBehaviour
 
     private Rigidbody rigidbody1;
 
+    private PlayerSound sound_ = null;
 
     public enum Mode
     {
@@ -110,6 +111,8 @@ public class PlayerController: MonoBehaviour
         rigidbody1 = GetComponent<Rigidbody>();
 
         _skillPlayer = GetComponent<SkillPlayer>();
+
+        sound_ = GetComponent<PlayerSound>();
     }
 
 
@@ -299,5 +302,9 @@ public class PlayerController: MonoBehaviour
             // ここでデータを送る
             WS.WsPlay.Instance.Send(new Packes.Attack(enemyId, userId, skilId, mapId).ToJson());
         }
+    }
+
+    private void OnCollisionStay(Collision _coll) {
+        if (currentState is KeyMoveState) sound_.WalkPlay(_coll.gameObject.tag);
     }
 }
