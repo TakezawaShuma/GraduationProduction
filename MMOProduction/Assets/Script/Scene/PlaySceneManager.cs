@@ -245,7 +245,9 @@ public class PlaySceneManager : MonoBehaviour
                     Enemy enemy = newEnemy.AddComponent<Enemy>();
                     enemy.Init(ene.x, ene.y, ene.z, ene.dir);
                     enemies[ene.unique_id] = enemy;
+                    enemies[ene.unique_id].ID = ene.unique_id;
                     charcters[ene.unique_id] = enemy;
+                    charcters[ene.unique_id].ID = ene.unique_id;
                     Debug.Log("エネミーの新規せいせ");
                 }
             }

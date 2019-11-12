@@ -44,7 +44,8 @@ public class SkillObject : MonoBehaviour
         if (other.tag == "Enemy")
         {
             WS.WsPlay wsp = WS.WsPlay.Instance;
-
+            Enemy enemy = other.GetComponent<Enemy>();
+            wsp.Send(new Packes.Attack(enemy.ID, UserRecord.ID, 0, 0).ToJson());
         }
     }
 }
