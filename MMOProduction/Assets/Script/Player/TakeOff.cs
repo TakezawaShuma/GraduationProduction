@@ -16,10 +16,10 @@ public class DressedList
 public class TakeOff : MonoBehaviour
 {
     [SerializeField]
-    Command command;
+    Command command = null;
 
     [SerializeField, Header("服")]
-    private GameObject[] clothes;
+    private GameObject[] clothes = null;
 
     public enum ClothesState
     {

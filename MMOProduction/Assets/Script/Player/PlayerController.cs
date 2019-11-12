@@ -49,11 +49,12 @@ public class PlayerController: MonoBehaviour
     private SkillPlayer _skillPlayer = null;
 
 
-    public void Init(Player _playerData,FollowingCamera _camera,PlayerSetting _setting, ChatController chat) {
+    public void Init(Player _playerData,FollowingCamera _camera,PlayerSetting _setting, ChatController chat, Animator _animator) {
         PlayerData = _playerData;
         FollowingCamera = _camera;
         playerSetting = _setting;
         chatController = chat;
+        animator = _animator;
     }
 
     // 位置

@@ -33,7 +33,7 @@ public class Marker : MonoBehaviour
     }
 
     [SerializeField, Header("ロックした時に注目するか")]
-    private bool lockObserve;
+    private bool lockObserve = false;
 
     public bool LOCK_OBSERVE
     {

@@ -30,7 +30,7 @@ public class PlayerSetting : MonoBehaviour
     public float TS { get { return TurnSpeed; } }
 
     [SerializeField, Header("アニメーションをするか")]
-    private bool IsAnimator = false;
+    private bool IsAnimator = true;
     public bool IA { get { return IsAnimator; } }
 
     [SerializeField, Range(0f,100f), Header("ロックオンの距離")]
