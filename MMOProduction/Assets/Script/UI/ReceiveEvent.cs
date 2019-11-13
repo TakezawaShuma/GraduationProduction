@@ -6,9 +6,11 @@ using UnityEngine.UI;
 public class ReceiveEvent : MonoBehaviour
 {
     private Vector3 startPosition;
-    GameObject hitObject;
-
+    private GameObject hitObject;
     private Vector3 length;
+
+    [SerializeField]
+    private Sprite initImage;
     // 押した時
     public void MyPointerDownUI()
     {
@@ -62,7 +64,19 @@ public class ReceiveEvent : MonoBehaviour
 
     public void MyPointerUpSlot()
     {
-
+        this.transform.position = startPosition;
+        if(hitObject == null)
+        {
+            hitObject.GetComponent<Image>().sprite = initImage;
+            hitObject.GetComponent<SlotData>().ID = -1;
+            hitObject.GetComponent<SlotData>().HOGE = SlotData.HOGEID.NONE;
+        }
+        else if (hitObject != null)
+        {
+            hitObject.GetComponent<Image>().sprite = this.GetComponent<Image>().sprite;
+            hitObject.GetComponent<SlotData>().ID = this.GetComponent<SlotData>().ID;
+            hitObject.GetComponent<SlotData>().HOGE = this.GetComponent<SlotData>().HOGE;
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
