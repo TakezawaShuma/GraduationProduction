@@ -99,7 +99,6 @@ public class PlaySceneManager : MonoBehaviour
                 }
             }
         }
-
     }
 
     /// <summary>
@@ -194,6 +193,8 @@ public class PlaySceneManager : MonoBehaviour
                 }
             }
         }
+
+
     }
 
 
