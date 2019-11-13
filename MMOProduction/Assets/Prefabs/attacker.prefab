@@ -1082,7 +1082,7 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2136695631195096698}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: fc03ef86630e7e847b7510af855cad5a, type: 3}
+  m_Avatar: {fileID: 90118416296786178}
   m_Controller: {fileID: 9100000, guid: 39544d1ac9c7c5a41b609761cc73f464, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
@@ -1345,7 +1345,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weapons:
-  - {fileID: 0}
+  - {fileID: 1909831974210040867}
 --- !u!114 &8225407507876919433
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4033,6 +4033,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a5b61410d7c33fb45b3be611b3482862, type: 3}
+--- !u!1 &1909831974210040867 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5817937949196412634, guid: a5b61410d7c33fb45b3be611b3482862,
+    type: 3}
+  m_PrefabInstance: {fileID: 5349257877232358137}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1909831974210463747 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5817937949196188410, guid: a5b61410d7c33fb45b3be611b3482862,

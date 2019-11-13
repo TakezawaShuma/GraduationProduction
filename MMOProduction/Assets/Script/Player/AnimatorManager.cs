@@ -21,7 +21,7 @@ public class AnimatorManager
         animator.SetBool("Idle", false);
         animator.SetBool("Walk", false);
         animator.SetBool("Run", false);
-        animator.SetBool("NormalAttack", false);
+        animator.SetBool("Attack", false);
     }
 
     public void Idle()
@@ -45,6 +45,6 @@ public class AnimatorManager
     public void NormalAttack()
     {
         AllFalse();
-        animator.SetBool("NormalAttack", true);
+        animator.SetBool("Attack", true);
     }
 }

@@ -36,7 +36,7 @@ public class NormalAttackState : BaseState
 
     public override void Execute()
     {
-        changeAnimeState = animatorManager.ANIMATOR.GetCurrentAnimatorStateInfo(0).shortNameHash.Equals(Animator.StringToHash("NormalAttack"));
+        changeAnimeState = animatorManager.ANIMATOR.GetCurrentAnimatorStateInfo(0).shortNameHash.Equals(Animator.StringToHash("Attack"));
 
         // Attackアニメに切り替わったら
         if (changeAnimeState)

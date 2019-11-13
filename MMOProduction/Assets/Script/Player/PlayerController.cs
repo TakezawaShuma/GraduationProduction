@@ -137,7 +137,7 @@ public class PlayerController: MonoBehaviour
                 }
             }
 
-            if (Input.GetMouseButtonDown(1) && target!=null)
+            if (Input.GetMouseButtonDown(1) && target != null)
             {
                 mode = Mode.Normal;
                 target.GetComponent<Marker>().STATE = Marker.State.None;

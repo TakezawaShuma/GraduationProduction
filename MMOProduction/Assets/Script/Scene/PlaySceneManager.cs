@@ -108,7 +108,6 @@ public class PlaySceneManager : MonoBehaviour
         //{
         //    Packes.GetEnemyDataStoC v = new Packes.GetEnemyDataStoC();
         //    v.enemys.Add(new Packes.EnemyReceiveData(100, 0, -210, 1, -210, 0, 0, 10));
-
         //    RegisterEnemies(v); // 100番を生み出す
         //}
         //if (Input.GetKeyDown(KeyCode.Comma))
