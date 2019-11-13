@@ -9,8 +9,8 @@ using UnityEngine;
 [System.Serializable]
 public class Player : MonoBehaviour
 {
-    [SerializeField, Header("プレイヤーの設定")]
-    private PlayerSetting playerSetting;
+    //[SerializeField, Header("プレイヤーの設定")]
+    //private PlayerSetting playerSetting;
 
     private Vector4 position = new Vector4();
 

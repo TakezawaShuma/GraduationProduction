@@ -5,10 +5,10 @@ using UnityEngine;
 public class WeaponList : MonoBehaviour
 {
     [SerializeField]
-    private CapsuleCollider[] weapons;
+    private GameObject[] weapons;
 
-    public CapsuleCollider[] WEAPONS
+    public GameObject GetWeapons(int _i)
     {
-        get { return weapons; }
+        return weapons[_i]; 
     }
 }

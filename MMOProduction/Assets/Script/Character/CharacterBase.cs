@@ -12,7 +12,7 @@ public abstract class CharacterBase : MonoBehaviour
 
     protected float nowFlame = 0;
 
-    protected int id;   // キャラクターごとのID
+    protected int id = 0;   // キャラクターごとのID
 
     protected Vector3 lastPos = new Vector3();
     protected Vector3 nextPos = new Vector3();
@@ -74,7 +74,7 @@ public abstract class CharacterBase : MonoBehaviour
     /// <summary>
     /// キャラクターごとのID
     /// </summary>
-    public virtual int ID
+    public int ID
     {
         get { return this.id; }
         set { this.id = value; }

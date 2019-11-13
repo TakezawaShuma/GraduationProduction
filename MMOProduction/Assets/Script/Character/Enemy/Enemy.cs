@@ -27,6 +27,23 @@ public class Enemy : CharacterBase
 
     // アニメーション関係
 
+    // アニメーションの種類
+    enum EnemyAnimetionType
+    {
+        Attack01,
+        Damage,
+        Dei,
+
+        Idol,
+        Non
+    }
+
+
+    public void PlayAnimetion()
+    {
+
+    }
+
     /// <summary>
     /// ワンプレイ系のアニメーションを再生する
     /// </summary>
@@ -34,7 +51,6 @@ public class Enemy : CharacterBase
     public void PlayTriggerAnimetion(string _animetionName)
     {
         gameObject.GetComponent<Animator>().SetTrigger(_animetionName);
-
     }
 
 

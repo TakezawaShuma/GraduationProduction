@@ -225,6 +225,7 @@ namespace UniHumanoid
                 PrefabUtility.CreatePrefab(path, Root);
             }
 
+
             AssetDatabase.ImportAsset(path);
         }
         #endregion

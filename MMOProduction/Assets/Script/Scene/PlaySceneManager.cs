@@ -93,12 +93,37 @@ public class PlaySceneManager : MonoBehaviour
                     if (connectFlag)
                     {
                         SendPosition(playerData);
-                        SendStatus(UserRecord.ID, Packes.ObjectType.Player);
+                        SendStatus(UserRecord.ID, Packes.OBJECT_TYPE.PLAYER);
                         SendEnemyPosReq();
                     }
                 }
             }
         }
+        // debug
+        //if (Input.GetKeyDown(KeyCode.Backspace))
+        //{
+        //    DeadEnemy(new Packes.EnemyDieStoC(0, 100)); // 100番を殺す
+        //}
+        //if (Input.GetKeyDown(KeyCode.L))
+        //{
+        //    Packes.GetEnemyDataStoC v = new Packes.GetEnemyDataStoC();
+        //    v.enemys.Add(new Packes.EnemyReceiveData(100, 0, -210, 1, -210, 0, 0, 10));
+
+        //    RegisterEnemies(v); // 100番を生み出す
+        //}
+        //if (Input.GetKeyDown(KeyCode.Comma))
+        //{
+        //    enemies[100].PlayTriggerAnimetion("Attack"); // 敵の攻撃モーションの再生
+        //}
+        //if (Input.GetKeyDown(KeyCode.Alpha0))   // 敵へ攻撃
+        //{
+        //    wsp.Send(Json.ConvertToJson(new Packes.Attack(0, UserRecord.ID, 0, 0)));
+        //    Debug.Log("プレイヤーの攻撃");
+        //}
+        //if (Input.GetKeyDown(KeyCode.F12))
+        //{
+        //    AliveEnemy(new Packes.EnemyAliveStoC(100, 10, 0));
+        //}
     }
 
     /// <summary>
@@ -330,6 +355,7 @@ public class PlaySceneManager : MonoBehaviour
     private void EnemyUseSkill(Packes.EnemyUseSkill _packet)
     {
         Debug.Log("敵のスキルが発動したよ");
+        enemies[_packet.enemy_id].PlayTriggerAnimetion("Attack");
     }
 
     /// <summary>
@@ -369,7 +395,7 @@ public class PlaySceneManager : MonoBehaviour
     /// </summary>
     /// <param name="_target_id">欲しい相手のID</param>
     /// <param name="_type">相手のタイプ</param>
-    private void SendStatus(int _target_id, Packes.ObjectType _type)
+    private void SendStatus(int _target_id, Packes.OBJECT_TYPE _type)
     {
         wsp.Send(new Packes.StatusCtoS(UserRecord.ID, _target_id, (int)_type).ToJson());
     }

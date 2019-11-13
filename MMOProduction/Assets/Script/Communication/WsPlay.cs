@@ -164,15 +164,15 @@ namespace WS
 
                         case CommandData.EnemyUseSkill:     // 敵スキルの使用
                             Debug.Log("スキルを使用します。");
-                            Packes.EnemyUseSkill skillUse = Json.ConvertToPackets<Packes.EnemyUseSkill>(e.Data);
-                            enemyUseSkillAction(skillUse);
+                            //Packes.EnemyUseSkill skillUse = Json.ConvertToPackets<Packes.EnemyUseSkill>(e.Data);
+                            //enemyUseSkillAction(skillUse);
                             enemyUseSkillAction(Json.ConvertToPackets<Packes.EnemyUseSkill>(e.Data));
                             break;
 
                         case CommandData.EnemyAttackResult: // 敵の攻撃結果の受信
                             Debug.Log("攻撃結果の受信");
-                            Packes.EnemyAttackResult attackRes = Json.ConvertToPackets<Packes.EnemyAttackResult>(e.Data);
-                            enemyAttackAction(attackRes);
+                            //Packes.EnemyAttackResult attackRes = Json.ConvertToPackets<Packes.EnemyAttackResult>(e.Data);
+                            //enemyAttackAction(attackRes);
                             enemyAttackAction(Json.ConvertToPackets<Packes.EnemyAttackResult>(e.Data));
                             break;
 

@@ -25,11 +25,12 @@ public class NormalAttackState : BaseState
     public override void Start()
     {
         animatorManager.NormalAttack();
-        foreach (CapsuleCollider weapon in playerController.AttackCollider)
-        {
-            weapon.enabled = true;
-        }
-        changeAnimeState = animatorManager.ANIMATOR.GetCurrentAnimatorStateInfo(0).shortNameHash.Equals(Animator.StringToHash("NormalAttack"));
+
+        Collider weapon = playerController.AttackCollider.GetComponent<Collider>();
+
+        weapon.enabled = true;
+
+        changeAnimeState = animatorManager.ANIMATOR.GetCurrentAnimatorStateInfo(0).shortNameHash.Equals(Animator.StringToHash("Attack"));
         playerController.SKIL = 0;
     }
 
@@ -50,9 +51,10 @@ public class NormalAttackState : BaseState
 
     public override void End()
     {
-        foreach (CapsuleCollider weapon in playerController.AttackCollider)
-        {
-            weapon.enabled = false;
-        }
+        playerController.AttackCollider.GetComponent<Collider>().enabled = false;
+
     }
+
+
+
 }

@@ -551,11 +551,11 @@ namespace Packes
 
 
 
-    enum ObjectType
+    enum OBJECT_TYPE
     {
-        Player,
-        OtherPlayer,
-        Enemy,
+        PLAYER,
+        OTHER_PLAYER,
+        ENEMY,
     }
 
     /// <summary> 敵の受信用データ </summary>
