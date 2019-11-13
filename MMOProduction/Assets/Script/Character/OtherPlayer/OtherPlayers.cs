@@ -43,9 +43,14 @@ public class OtherPlayers: CharacterBase
     void Update()
     {
         LerpMove();
+        Animation();
     }
 
-
-
-    
+    /// <summary>
+    /// アニメーション
+    /// </summary>
+    void Animation() {
+        if(lastPos != nextPos) animator_.SetBool("Walk", true);   
+        else animator_.SetBool("Walk", false);
+    }
 }

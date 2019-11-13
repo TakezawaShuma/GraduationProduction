@@ -3865,6 +3865,9 @@ GameObject:
   - component: {fileID: 8196176509976183118}
   - component: {fileID: 4447483158817345076}
   - component: {fileID: 411432136145780944}
+  - component: {fileID: 6199581100937757536}
+  - component: {fileID: 1690809893102796459}
+  - component: {fileID: 4011936273875283698}
   m_Layer: 0
   m_Name: Witch
   m_TagString: Untagged
@@ -3901,8 +3904,8 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7312705236510121977}
   m_Enabled: 1
-  m_Avatar: {fileID: 9000000, guid: 58fcd6be958eb0a44bda521d06047d24, type: 3}
-  m_Controller: {fileID: 9100000, guid: 39544d1ac9c7c5a41b609761cc73f464, type: 2}
+  m_Avatar: {fileID: 90118416296786178, guid: f60ab25478542df4281ac7e670433c26, type: 3}
+  m_Controller: {fileID: 9100000, guid: 141be06f7d164c24bbae63d8112e2270, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 1
@@ -3954,6 +3957,139 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _skillArray:
   - {fileID: 435033271424485202}
+--- !u!114 &6199581100937757536
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7312705236510121977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 16d51bbea6ef6bd47a70ccc6506dc828, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weapons:
+  - {fileID: 0}
+--- !u!114 &1690809893102796459
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7312705236510121977}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8052dc5ff31da484089429acfe883fed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  grassland_: {fileID: 0}
+  sandRoad_: {fileID: 0}
+  rockyPlace_: {fileID: 0}
+  sandyBeach_: {fileID: 0}
+  slashing_: {fileID: 0}
+  blow_: {fileID: 0}
+  fireBall_: {fileID: 0}
+  thunder_: {fileID: 0}
+  water_: {fileID: 0}
+  damage_: {fileID: 0}
+  die_: {fileID: 0}
+--- !u!82 &4011936273875283698
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7312705236510121977}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 0}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &7312705236510121981
 GameObject:
   m_ObjectHideFlags: 0
@@ -4022,11 +4158,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1252990092139585734}
     m_Modifications:
-    - target: {fileID: 2544170138122732748, guid: ccb653b8706b51345a657a9c873466b1,
-        type: 3}
-      propertyPath: m_Name
-      value: Explosion Effect
-      objectReference: {fileID: 0}
     - target: {fileID: 2544170138122732751, guid: ccb653b8706b51345a657a9c873466b1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4082,6 +4213,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2544170138122732748, guid: ccb653b8706b51345a657a9c873466b1,
+        type: 3}
+      propertyPath: m_Name
+      value: Explosion Effect
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ccb653b8706b51345a657a9c873466b1, type: 3}
 --- !u!4 &467633623173290570 stripped
@@ -4103,11 +4239,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1252990092139585734}
     m_Modifications:
-    - target: {fileID: 3512536706028623904, guid: 8919298617c56e84ab8216d2e5e311e6,
-        type: 3}
-      propertyPath: m_Name
-      value: Fireball
-      objectReference: {fileID: 0}
     - target: {fileID: 3512536706028623908, guid: 8919298617c56e84ab8216d2e5e311e6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -4168,6 +4299,11 @@ PrefabInstance:
       propertyPath: _explosionEffect
       value: 
       objectReference: {fileID: 467633623173290572}
+    - target: {fileID: 3512536706028623904, guid: 8919298617c56e84ab8216d2e5e311e6,
+        type: 3}
+      propertyPath: m_Name
+      value: Fireball
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8919298617c56e84ab8216d2e5e311e6, type: 3}
 --- !u!4 &435033271424485201 stripped

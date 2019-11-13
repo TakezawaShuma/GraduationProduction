@@ -15,6 +15,9 @@ public class PlaySceneManager : MonoBehaviour
     bool connectFlag = false;
     public GameObject playerPre = null;
 
+    [SerializeField]
+    private GameObject otherPlayerPre_;
+
     [SerializeField, Header("テストの敵")]
     private GameObject testEnemyPre = null;
 
@@ -180,7 +183,7 @@ public class PlaySceneManager : MonoBehaviour
                 // 他のユーザーの作成
                 else
                 {
-                    var otherPlayer = Instantiate<GameObject>(playerPre, new Vector3(data.x, data.y, data.z), Quaternion.Euler(0, data.dir, 0));
+                    var otherPlayer = Instantiate<GameObject>(otherPlayerPre_, new Vector3(data.x, data.y, data.z), Quaternion.Euler(0, data.dir, 0));
                     otherPlayer.name = "otherPlayer" + data.user_id;
                     otherPlayer.tag = "OtherPlayer";
                     otherPlayer.transform.localScale = new Vector3(2, 2, 2);

@@ -19,6 +19,8 @@ public abstract class CharacterBase : MonoBehaviour
     protected Quaternion lastDir = new Quaternion();
     protected Quaternion nextDir = new Quaternion();
 
+    protected Animator animator_;
+
     public const float UPDATE_SPEED = 1.0f / 3.0f;
 
     /// <summary>
@@ -34,6 +36,7 @@ public abstract class CharacterBase : MonoBehaviour
         nextPos = new Vector3(_x, _y, _z);
         lastDir = transform.rotation = Quaternion.Euler(new Vector3(0, _dir, 0));
         nextDir = Quaternion.Euler(new Vector3(0, _dir, 0));
+        animator_ = GetComponent<Animator>();
     }
 
 
