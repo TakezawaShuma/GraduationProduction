@@ -44,7 +44,7 @@ public class SystemSound : MonoBehaviour
     }
 
     private void Start() {
-        source_ = new AudioSource();
+        source_ = GetComponent<AudioSource>();
 
         Init();
     }
