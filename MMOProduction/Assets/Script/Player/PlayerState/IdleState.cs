@@ -35,13 +35,6 @@ public class IdleState : BaseState
             animatorManager.Idle();
         }
 
-        if(Input.GetMouseButtonDown(0))
-        {
-            playerController.LockOn();
-        }
-
-        playerController.NoMove();
-
         if (Input.GetKeyDown(playerSetting.FKey) || Input.GetKeyDown(playerSetting.BKey) || Input.GetKeyDown(playerSetting.LKey) || Input.GetKeyDown(playerSetting.RKey))
         {
             playerController.ChangeState(KeyMoveState.Instance);
@@ -50,13 +43,21 @@ public class IdleState : BaseState
         {
             playerController.ChangeState(AutoRunState.Instance);
         }
-        else if (Input.GetKeyDown(KeyCode.Z))
+        else if (Input.GetMouseButtonDown(0))
         {
             if (playerController.MODE == PlayerController.Mode.Battle)
             {
                 playerController.ChangeState(NormalAttackState.Instance);
+
             }
         }
+        if (Input.GetMouseButtonDown(0))
+        {
+            playerController.LockOn();
+        }
+
+        playerController.NoMove();
+
     }
 
     public override void End()

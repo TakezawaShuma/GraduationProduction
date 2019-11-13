@@ -17,11 +17,11 @@ public class WeaponManager : MonoBehaviour
     }
 
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider _other)
     {
-        if(gameObject.tag=="Weapon" && other.gameObject.tag=="Enemy")
+        if(gameObject.tag=="Weapon" && _other.gameObject.tag=="Enemy")
         {
-            WS.WsPlay.Instance.Send(new Packes.Attack(other.gameObject.GetComponent<Enemy>().ID, UserRecord.ID, 0, 0).ToJson());
+            WS.WsPlay.Instance.Send(new Packes.Attack(_other.gameObject.GetComponent<Enemy>().ID, UserRecord.ID, 0, 0).ToJson());
         }
     }
 }
