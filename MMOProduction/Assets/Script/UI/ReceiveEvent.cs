@@ -60,6 +60,11 @@ public class ReceiveEvent : MonoBehaviour
         component.color = color;
     }
 
+    public void MyPointerUpSlot()
+    {
+
+    }
+
     private void OnTriggerEnter2D(Collider2D collision)
     {
         if (collision.transform.tag == "Slot")

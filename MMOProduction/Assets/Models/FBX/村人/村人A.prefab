@@ -532,7 +532,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 690ea0146224b8b4694a1925dddeb352, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Meta: {fileID: 114409102951647650}
+  Meta: {fileID: 114124590904172860}
 --- !u!114 &749836386203272095
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -545,8 +545,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3869812175467a143ab9cd865752b4a9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Avatar: {fileID: 90076520752658706}
-  Description: {fileID: 114313967798052566}
+  Avatar: {fileID: 90427903332095844}
+  Description: {fileID: 114362257073936134}
 --- !u!95 &1967434983140796352
 Animator:
   serializedVersion: 3
@@ -556,7 +556,7 @@ Animator:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 715611661603285554}
   m_Enabled: 1
-  m_Avatar: {fileID: 90076520752658706}
+  m_Avatar: {fileID: 90427903332095844}
   m_Controller: {fileID: 0}
   m_CullingMode: 0
   m_UpdateMode: 0
@@ -6548,7 +6548,7 @@ Transform:
   m_Father: {fileID: 569766119300097225}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!90 &90076520752658706
+--- !u!90 &90427903332095844
 Avatar:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8758,7 +8758,33 @@ Avatar:
     4192783605: Root/J_Bip_C_Hips/J_Bip_C_Spine/J_Bip_C_Chest/J_Bip_C_UpperChest/J_Bip_L_Shoulder/J_Bip_L_UpperArm/J_Bip_L_LowerArm/J_Bip_L_Hand/J_Bip_L_Middle1
     4273055179: Root/J_Bip_C_Hips/J_Bip_L_UpperLeg/J_Sec_L_SkirtBack0/J_Sec_L_SkirtBack1/J_Sec_L_SkirtBack2/J_Sec_L_SkirtBack2_end
     4289881849: Root/J_Bip_C_Hips/J_Bip_L_UpperLeg/J_Bip_L_LowerLeg
---- !u!114 &114313967798052566
+--- !u!114 &114124590904172860
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 63b589176a34b344b9ccbee2b7e7114a, type: 3}
+  m_Name: Meta
+  m_EditorClassIdentifier: 
+  ExporterVersion: UniVRM-0.44
+  Title: "\u6751\u4EBAC"
+  Version: 
+  Author: 
+  ContactInformation: 
+  Reference: 
+  Thumbnail: {fileID: 2800000, guid: d0711447010cb014d99bb44d06dcb011, type: 3}
+  AllowedUser: 0
+  ViolentUssage: 1
+  SexualUssage: 1
+  CommercialUssage: 0
+  OtherPermissionUrl: 
+  LicenseType: 0
+  OtherLicenseUrl: 
+--- !u!114 &114362257073936134
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -9157,29 +9183,3 @@ MonoBehaviour:
     max: {x: 0, y: 0, z: 0}
     center: {x: 0, y: 0, z: 0}
     axisLength: 0
---- !u!114 &114409102951647650
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 63b589176a34b344b9ccbee2b7e7114a, type: 3}
-  m_Name: Meta
-  m_EditorClassIdentifier: 
-  ExporterVersion: UniVRM-0.44
-  Title: "\u6751\u4EBAC"
-  Version: 
-  Author: 
-  ContactInformation: 
-  Reference: 
-  Thumbnail: {fileID: 2800000, guid: d0711447010cb014d99bb44d06dcb011, type: 3}
-  AllowedUser: 0
-  ViolentUssage: 1
-  SexualUssage: 1
-  CommercialUssage: 0
-  OtherPermissionUrl: 
-  LicenseType: 0
-  OtherLicenseUrl: 
