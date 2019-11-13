@@ -24,12 +24,14 @@ public class PlayerController: MonoBehaviour
     [SerializeField, Header("チャットコントローラー")]
     private ChatController chatController = null;
 
-    [SerializeField, Header("攻撃判定用当たり判定")]
-    private CapsuleCollider[] attackCollider = null;
 
-    public CapsuleCollider[] AttackCollider
+    //[SerializeField, Header("攻撃判定用当たり判定")]
+    private GameObject weapon = null;
+
+    public GameObject AttackCollider
     {
-        get { return attackCollider; }
+        get { return weapon; }
+        set { weapon = value; }
     }
 
     // 現在のステート
@@ -103,7 +105,7 @@ public class PlayerController: MonoBehaviour
         AutoRunState.Instance.Initialized(this, playerSetting, animatorManager);
         NormalAttackState.Instance.Initialized(this, playerSetting, animatorManager);
 
-        attackCollider = GetComponent<WeaponList>().WEAPONS;
+        AttackCollider = GetComponent<WeaponList>().GetWeapons(0);
 
         currentState = IdleState.Instance;
         currentState.Start();
@@ -135,12 +137,13 @@ public class PlayerController: MonoBehaviour
                 }
             }
 
-            if(Input.GetMouseButtonDown(1))
+            if (Input.GetMouseButtonDown(1) && target!=null)
             {
                 mode = Mode.Normal;
                 target.GetComponent<Marker>().STATE = Marker.State.None;
                 target = null;
                 lockState = false;
+                weapon.SetActive(false);
                 FollowingCamera.LOCK = null;
             }
 
@@ -264,6 +267,7 @@ public class PlayerController: MonoBehaviour
                 if(target.GetComponent<Marker>().TYPE == Marker.Type.Enemy)
                 {
                     mode = Mode.Battle;
+                    weapon.SetActive(true);
                 }
                 
                 FollowingCamera.LOCK = target;
@@ -286,6 +290,7 @@ public class PlayerController: MonoBehaviour
             }
             target = null;
             lockState = false;
+            weapon.SetActive(false);
 
             FollowingCamera.LOCK = null;
         }
