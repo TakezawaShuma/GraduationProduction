@@ -274,33 +274,6 @@ namespace Packes
     }
 
 
-    // チャット--------------------------------------------------------------------------------------------------------
-    
-    /// <summary>
-    /// command 801　全体チャット(client->server)
-    /// </summary>
-    public class SendAllChat:IPacketDatas
-    {
-        public SendAllChat() { command = (int)CommandData.SendAllChat; }
-        public SendAllChat(string _name, string _msg)
-        { command = (int)CommandData.SendAllChat; user_name = _name; message = _msg; }
-        public string user_name;
-        public string message;
-    }
-    
-
-    /// <summary>
-    /// command 802 全体チャット(server->client)
-    /// </summary>
-    public class RecvAllChat:IPacketDatas
-    {
-        public RecvAllChat() { command = (int)CommandData.RecvAllChat; }
-
-        
-        public string user_name;
-        public string message;
-    }
-
     //// command 803 全体チャット受信(client->server)
     //public class RecvAllChat:IPacketDatas
     //{

@@ -18,25 +18,43 @@ namespace WS
     {
 
 
-        //// ログインサーバーのポート
-        //private const int port = 8009;
-        // 受信データ
-        //private Packes.IPacketDatas i_data = null;
+        // チャットサーバーのポート
+        private uint port = 8009;
+        private static WsChat instance = null;
         // チャットコールバック
         private Action<string, string> chatReceive_callback;
+        public Action<Packes.RecvAllChat> allChatAction;
 
-
-
-        public WsChat(uint _port)
+        public static WsChat Instance
         {
-            Init(_port);
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new WsChat();
+
+                }
+                return instance;
+            }
         }
 
+
+        public WsChat()
+        {
+            Init(port);
+        }
+
+        /// <summary>
+        /// 初期化処理
+        /// </summary>
+        /// <param name="_port"></param>
         private void Init(uint _port)
         {
             base.Connect(_port);
+            Receive();
         }
 
+ 
         public void Destroy()
         {
             base.Destroy("チャット切断");
@@ -44,7 +62,10 @@ namespace WS
 
         public void Send(string _json)
         {
-            base.ws.Send(_json);
+            if (base.ws.ReadyState == WebSocketState.Open)
+            {
+                base.ws.Send(_json);
+            }
         }
 
         private void Receive()
@@ -57,11 +78,9 @@ namespace WS
                 {
                     // 受信したデータからコマンドを取り出す
                     var command = (CommandData)int.Parse(e.Data.Substring(11, 3));
-                    switch (command)
-                    {
-                        default:
-                            break;
-                    }
+
+                    allChatAction(Json.ConvertToPackets<Packes.RecvAllChat>(e.Data));
+
 
                 }, e.Data);
             };
