@@ -50,9 +50,9 @@ namespace WS
             Receive();
         }
 
+        /// </summary>
         /// <summary>
         /// 終了処理
-        /// </summary>
         public void Destroy()
         {
             base.Destroy("ログインWSの終了");

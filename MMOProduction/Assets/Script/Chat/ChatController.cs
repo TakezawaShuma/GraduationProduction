@@ -41,7 +41,8 @@ public class ChatController : MonoBehaviour
         chatFlame.SetActive(chatActiveFlag);
         if (connectFlag)
         {
-            wsc = new WS.WsChat(8009);
+            wsc = WS.WsChat.Instance;
+            wsc.allChatAction = Receive;
         }
     }
 
@@ -49,13 +50,13 @@ public class ChatController : MonoBehaviour
     void Update()
     {
         // チャットのアクティブ化
-        if (Input.GetKeyUp(KeyCode.LeftControl) && chatActiveFlag == false)
+        if (Input.GetKeyUp(KeyCode.Return) && chatActiveFlag == false)
         {
             chatFlame.SetActive(true);
             chatActiveFlag = true;
             //chatFlame.GetComponent<ChatLogController>().Reset();
         }
-        else if (Input.GetKeyUp(KeyCode.LeftControl) && chatActiveFlag == true)
+        else if (Input.GetKeyUp(KeyCode.Return) && chatActiveFlag == true)
         {
             chatFlame.SetActive(false);
             chatActiveFlag = false;
@@ -97,10 +98,10 @@ public class ChatController : MonoBehaviour
         chatLog.Add(_addLog);
     }
 
-    public void Receive(string _name,string _massege)
+    public void Receive(Packes.RecvAllChat _packet)
     {
         string massege = "";
-        massege = massege + _name + "：" + _massege;
+        massege = massege + _packet.user_name + "：" + _packet.message;
         
         AddChatLog(massege);
     }
@@ -111,7 +112,6 @@ public class ChatController : MonoBehaviour
         Packes.SendAllChat mag = new Packes.SendAllChat(name, _massege);
         if (connectFlag) { wsc.Send(Json.ConvertToJson(mag)); }
         string mas = name + "：" + _massege;
-        AddChatLog(mas);
     }
 
     public bool GetChatActiveFlag()
