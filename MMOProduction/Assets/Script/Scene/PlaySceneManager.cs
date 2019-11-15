@@ -46,6 +46,13 @@ public class PlaySceneManager : MonoBehaviour
     [SerializeField]
     private Vector3 playerSpawnPos = new Vector3(0, 0, 0);
 
+    private GameObject userPlayer;
+
+    public GameObject USER
+    {
+        get { return userPlayer; }
+    }
+
     private void Awake()
     {
         ready = Ready.Instance;
@@ -176,7 +183,9 @@ public class PlaySceneManager : MonoBehaviour
             tmp.AddComponent<PlayerSetting>();
             tmp.GetComponent<PlayerController>().Init(tmp.GetComponent<Player>(), FollowingCamera, tmp.GetComponent<PlayerSetting>(), chat, tmp.GetComponent<Animator>());
             player = tmp.GetComponent<Player>();
+            tmp.GetComponent<NameUI>().TEXT.enabled = false;
             FollowingCamera.SetTarget(tmp);
+            userPlayer = tmp;
         }
     }
 
@@ -212,6 +221,7 @@ public class PlaySceneManager : MonoBehaviour
                     otherPlayer.transform.localScale = new Vector3(2, 2, 2);
                     var other = otherPlayer.AddComponent<OtherPlayers>();
                     other.Init(data.x, data.y, data.z, data.dir);
+                    otherPlayer.GetComponent<NameUI>().NameSet(data.user_id.ToString());
                     others.Add(data.user_id, other);
                     charcters.Add(data.user_id, other);
                 }
