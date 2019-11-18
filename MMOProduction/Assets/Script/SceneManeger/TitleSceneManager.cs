@@ -26,6 +26,7 @@ public class TitleSceneManager : MonoBehaviour
     }
     CANVAS_STATE inputState = CANVAS_STATE.SELECT;
 
+
     // UIのリスト化
     public List<GameObject> selectUIList_;
     public List<GameObject> loginUIList_;
@@ -46,10 +47,7 @@ public class TitleSceneManager : MonoBehaviour
     private Button sinupButton_;
     // キャンバス
     private GameObject canvas;
-    // ロード用の円
-    [SerializeField]
-    private GameObject loadingCirclePrefab_;
-    private GameObject loadingCircle;
+
 
     //Error用Text
     // 文字数が足りない時
@@ -70,6 +68,11 @@ public class TitleSceneManager : MonoBehaviour
     // 重複ログイン　command 901
     [SerializeField]
     private Text Error06;
+
+    // ロード用の円
+    [SerializeField]
+    private GameObject loadingCirclePrefab_;
+    private GameObject loadingCircle;
 
     // Start is called before the first frame update
     void Start()
@@ -159,7 +162,7 @@ public class TitleSceneManager : MonoBehaviour
     public void loginToGame_Click()
     {
         ButtonState(false);
-        LoadingUIInstantiate();
+        LoadingUIInstantiate(loginButton_.transform);
         ErrorMessageHide();
 
         string id = id_.text;
@@ -186,6 +189,8 @@ public class TitleSceneManager : MonoBehaviour
             case LoginCheck.CHECKRESULT.INVALID: Error02.gameObject.SetActive(true); break;
         }
         pw_.text = "";
+        LoadingUIDelete();
+        ButtonState(true);
     }
 
     /// <summary>
@@ -194,7 +199,7 @@ public class TitleSceneManager : MonoBehaviour
     public void RegisterClick02()
     {
         ButtonState(false);
-        LoadingUIInstantiate();
+        LoadingUIInstantiate(sinupButton_.transform);
         ErrorMessageHide();
 
         string id = id_.text;
@@ -332,7 +337,28 @@ public class TitleSceneManager : MonoBehaviour
 
 
     /// <summary>
-    /// ボタンの機能をいったんきる
+    /// キャンバスにオブジェクトを出す
+    /// </summary>
+    /// <param name="_prefubs"></param>
+    private void UIInstantiate<T>(List<GameObject> _prefabs, List<T> _tmpList) { 
+        foreach(var prefab in _prefabs) {
+            _tmpList.Add(Instantiate<GameObject>(prefab, canvas.transform).GetComponent<T>());
+        }
+    }
+
+    /// <summary>
+    /// UIの削除
+    /// </summary>
+    /// <param name="_ui"></param>
+    private void UIDelete(List<GameObject> _ui) { 
+        foreach(var ui in _ui) {
+            Destroy(ui);
+        }
+        _ui.Clear();
+    }
+
+    /// <summary>
+    /// ボタンの入力状態の変更
     /// </summary>
     private void ButtonState(bool _state) =>  loginButton_.interactable = sinupButton_.interactable = _state;
 
@@ -340,7 +366,7 @@ public class TitleSceneManager : MonoBehaviour
     /// <summary>
     /// 読み込みUIの実体化
     /// </summary>
-    private void LoadingUIInstantiate() => loadingCircle = Instantiate<GameObject>(loadingCirclePrefab_, loginButton_.transform);
+    private void LoadingUIInstantiate(Transform _parent) => loadingCircle = Instantiate<GameObject>(loadingCirclePrefab_, _parent);
 
     /// <summary>
     /// 読み込みUIの削除
