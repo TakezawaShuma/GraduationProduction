@@ -31,6 +31,12 @@ public class NormalAttackState : BaseState
         weapon.enabled = true;
 
         changeAnimeState = animatorManager.ANIMATOR.GetCurrentAnimatorStateInfo(0).shortNameHash.Equals(Animator.StringToHash("Attack"));
+        float dis = playerController.Distance(playerController.Target);
+        if (dis < 1)
+        {
+            WS.WsPlay.Instance.Send(new Packes.Attack(playerController.Target.GetComponent<Enemy>().ID, UserRecord.ID, 0, 0).ToJson());
+            //Debug.Log("攻撃が当たったよ");  // debug
+        }
         playerController.SKIL = 0;
     }
 
