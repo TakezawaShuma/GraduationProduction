@@ -19,8 +19,7 @@ public class TitleSceneManager : MonoBehaviour
     bool connectFlag = false;
 
     //ボタンの種類
-    public enum CANVAS_STATE
-    {
+    public enum CANVAS_STATE {
         SELECT,    //選択
         SIGN_IN,    //ログイン
         SIGN_UP,    //新規登録
@@ -34,11 +33,23 @@ public class TitleSceneManager : MonoBehaviour
 
     [SerializeField]
     //ログインID入力用
-    private InputField id_;[SerializeField]
+    private InputField id_;
+    [SerializeField]
     //ログインPW入力用
-    private InputField pw_;[SerializeField]
+    private InputField pw_;
+    [SerializeField]
     //PW確認用
     private InputField ConfirmPW_;
+    [SerializeField]
+    private Button loginButton_;
+    [SerializeField]
+    private Button sinupButton_;
+    // キャンバス
+    private GameObject canvas;
+    // ロード用の円
+    [SerializeField]
+    private GameObject loadingCirclePrefab_;
+    private GameObject loadingCircle;
 
     //Error用Text
     // 文字数が足りない時
@@ -59,8 +70,6 @@ public class TitleSceneManager : MonoBehaviour
     // 重複ログイン　command 901
     [SerializeField]
     private Text Error06;
-
-
 
     // Start is called before the first frame update
     void Start()
@@ -111,12 +120,17 @@ public class TitleSceneManager : MonoBehaviour
     }
     //public関数--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    // 
+    /// <summary>
+    /// ログインのボタン
+    /// </summary>
     public void LogInClick()
     {
         LogInActive();
     }
 
+    /// <summary>
+    /// 新規作成のボタン
+    /// </summary>
     public void RegisterClick()
     {
         RegisterActive();
@@ -133,6 +147,8 @@ public class TitleSceneManager : MonoBehaviour
         ConfirmPW_.text = "";
 
         ErrorMessageHide();
+        ButtonState(true);
+        LoadingUIDelete();
 
         inputState = CANVAS_STATE.SELECT;
     }
@@ -142,6 +158,8 @@ public class TitleSceneManager : MonoBehaviour
     /// </summary>
     public void loginToGame_Click()
     {
+        ButtonState(false);
+        LoadingUIInstantiate();
         ErrorMessageHide();
 
         string id = id_.text;
@@ -175,6 +193,8 @@ public class TitleSceneManager : MonoBehaviour
     /// </summary>
     public void RegisterClick02()
     {
+        ButtonState(false);
+        LoadingUIInstantiate();
         ErrorMessageHide();
 
         string id = id_.text;
@@ -272,9 +292,7 @@ public class TitleSceneManager : MonoBehaviour
     /// 入力完了
     /// </summary>
     /// <returns></returns>
-    private void EnterCheck() {
-        loginToGame_Click();
-    }
+    private void EnterCheck() => loginToGame_Click();
        
 
     // 新規登録選択時表示させる
@@ -310,5 +328,25 @@ public class TitleSceneManager : MonoBehaviour
         Error04.gameObject.SetActive(false);
         Error05.gameObject.SetActive(false);
         Error06.gameObject.SetActive(false);
+    }
+
+
+    /// <summary>
+    /// ボタンの機能をいったんきる
+    /// </summary>
+    private void ButtonState(bool _state) =>  loginButton_.interactable = sinupButton_.interactable = _state;
+
+
+    /// <summary>
+    /// 読み込みUIの実体化
+    /// </summary>
+    private void LoadingUIInstantiate() => loadingCircle = Instantiate<GameObject>(loadingCirclePrefab_, loginButton_.transform);
+
+    /// <summary>
+    /// 読み込みUIの削除
+    /// </summary>
+    private void LoadingUIDelete() {
+        Destroy(loadingCircle);
+        loadingCircle = null;
     }
 }
