@@ -532,7 +532,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u30ED\u30B0\u30A4\u30F3ID\n"
+  m_Text: "\u30ED\u30B0\u30A4\u30F3ID(4\u6587\u5B57\u4EE5\u4E0A)\n"
 --- !u!222 &66426012
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -6634,7 +6634,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u30D1\u30B9\u30EF\u30FC\u30C9\u78BA\u8A8D\n"
+  m_Text: "\u30D1\u30B9\u30EF\u30FC\u30C9\u78BA\u8A8D(4\u6587\u5B57\u4EE5\u4E0A)"
 --- !u!222 &1146795737
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -8233,7 +8233,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8207370bc14231049971798453a2e169, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  connectFlag: 1
+  connectFlag: 0
   selectUIList_:
   - {fileID: 927173938}
   - {fileID: 1207362943}
@@ -8251,12 +8251,16 @@ MonoBehaviour:
   id_: {fileID: 852131196}
   pw_: {fileID: 1948072631}
   ConfirmPW_: {fileID: 1079909026}
+  loginButton_: {fileID: 1183998531}
+  sinupButton_: {fileID: 372416688}
   Error01: {fileID: 1462817434}
   Error02: {fileID: 133005164}
   Error03: {fileID: 1229138759}
   Error04: {fileID: 1396620195}
   Error05: {fileID: 427480844}
   Error06: {fileID: 2094038156}
+  loadingCirclePrefab_: {fileID: 3501107033218772134, guid: d9ef8aaeac67bd1469cc7a3b12310dd7,
+    type: 3}
 --- !u!4 &1416931805
 Transform:
   m_ObjectHideFlags: 0
@@ -8679,7 +8683,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u30D1\u30B9\u30EF\u30FC\u30C9\n"
+  m_Text: "\u30D1\u30B9\u30EF\u30FC\u30C9(4\u6587\u5B57\u4EE5\u4E0A)\n"
 --- !u!222 &1525983360
 CanvasRenderer:
   m_ObjectHideFlags: 0
