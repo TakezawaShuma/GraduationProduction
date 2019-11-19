@@ -16,7 +16,10 @@ namespace WS
         private uint port = 8000;
         private static WsLogin instance = null;
 
+
         public Action<int> errerAction;
+        public Action<Packes.CreateOK> createAction;
+        public Action<Packes.LoginOK> loginAction;
 
         public static WsLogin Instance
         {
@@ -73,15 +76,14 @@ namespace WS
                 {
                     // 受信データからコマンドを取り出す
                     CommandData com = (CommandData)int.Parse(e.Data.Substring(11, 3));
+                    Debug.Log(e.Data);
                     // コマンドで受信データサイズを変える
                     // コマンド内容はDatas.csを参照
                     switch (com)
                     {
                         case CommandData.LoginOK: //103
                             Packes.LoginOK login = Json.ConvertToPackets<Packes.LoginOK>(e.Data);
-                            // IDの保管
-                            UserRecord.ID = login.user_id;
-                            ChangeScenetoPlay();
+                            loginAction(login);
                             break;
 
                         case CommandData.LoginError: // 104
@@ -91,9 +93,7 @@ namespace WS
 
                         case CommandData.CreateOK: //105
                             Packes.CreateOK create = Json.ConvertToPackets<Packes.CreateOK>(e.Data);
-                            // IDの保管
-                            UserRecord.ID = create.user_id;
-                            ChangeScenetoPlay();
+                            createAction(create);
                             break;
 
                         // 随時追加
@@ -103,14 +103,6 @@ namespace WS
                 }, e.Data);
             };
         }
-
-        /// <summary>
-        /// シーンを切り替える プレイ
-        /// </summary>
-        private void ChangeScenetoPlay() {
-            SceneManager.LoadScene("LoadingScene");
-        }
-
 
         /// <summary>
         /// 通信切断された時呼ばれるコールバック

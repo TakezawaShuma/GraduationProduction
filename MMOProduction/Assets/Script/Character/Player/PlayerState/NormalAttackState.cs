@@ -25,12 +25,8 @@ public class NormalAttackState : BaseState
     public override void Start()
     {
         animatorManager.NormalAttack();
-
-        Collider weapon = playerController.AttackCollider.GetComponent<Collider>();
-
-        weapon.enabled = true;
-
         changeAnimeState = animatorManager.ANIMATOR.GetCurrentAnimatorStateInfo(0).shortNameHash.Equals(Animator.StringToHash("Attack"));
+        HitRange(4);
         playerController.SKIL = 0;
     }
 
@@ -51,10 +47,22 @@ public class NormalAttackState : BaseState
 
     public override void End()
     {
-        playerController.AttackCollider.GetComponent<Collider>().enabled = false;
 
     }
 
+    private bool HitRange(float _range)
+    {
+        float dis = playerController.Distance(playerController.Target);
+        if (dis < _range)
+        {
+            int enemyID = playerController.Target.gameObject.GetComponentInParent<Enemy>().ID;
+            int myID = UserRecord.ID;
 
+            WS.WsPlay.Instance.Send(new Packes.Attack(enemyID, UserRecord.ID, 0, 0).ToJson());
+            //Debug.Log("攻撃が当たったよ");  // debug
+            return true;
+        }
+        return false;
+    }
 
 }
