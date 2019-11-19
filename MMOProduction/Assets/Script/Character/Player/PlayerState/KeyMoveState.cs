@@ -80,9 +80,9 @@ public class KeyMoveState : BaseState
             velocity.z += 1;
         }
 
-        if (playerController.TARGET)
+        if (playerController.Target)
         {
-            if (playerController.TARGET.GetComponent<Marker>().LOCK_OBSERVE)
+            if (playerController.Target.GetComponent<Marker>().LOCK_OBSERVE)
             {
                 if (velocity.x == 0)
                 {

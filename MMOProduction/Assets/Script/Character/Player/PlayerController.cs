@@ -7,7 +7,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerController: MonoBehaviour
+public class PlayerController : MonoBehaviour
 {
     [SerializeField, Header("プレイヤー")]
     private Player PlayerData = null;
@@ -36,17 +36,14 @@ public class PlayerController: MonoBehaviour
 
     // 現在のステート
     private BaseState currentState;
-    
+
     private AnimatorManager animatorManager;
 
     private bool lockState = false;
     public bool Lock { set { lockState = value; } }
 
     private GameObject target;
-    public GameObject TARGET
-    {
-        get { return target; }
-    }
+    public GameObject Target { get { return target; } }
 
     private Rigidbody rigidbody1;
 
@@ -75,8 +72,9 @@ public class PlayerController: MonoBehaviour
     // スキル再生（使用？）クラス
     [SerializeField]
     private SkillPlayer _skillPlayer = null;
-    
-    public void Init(Player _playerData,FollowingCamera _camera,PlayerSetting _setting, ChatController _chat, Animator _animator) {
+
+    public void Init(Player _playerData, FollowingCamera _camera, PlayerSetting _setting, ChatController _chat, Animator _animator)
+    {
         PlayerData = _playerData;
         FollowingCamera = _camera;
         playerSetting = _setting;
@@ -238,7 +236,7 @@ public class PlayerController: MonoBehaviour
         int layerNo = LayerMask.NameToLayer("Marker");
         int layerMask = 1 << layerNo;
 
-        if (Physics.Raycast(ray, out hit, playerSetting.LOD,layerMask))
+        if (Physics.Raycast(ray, out hit, playerSetting.LOD, layerMask))
         {
             Vector3 v = hit.transform.position - transform.position;
 
@@ -258,7 +256,7 @@ public class PlayerController: MonoBehaviour
                 {
                     lockState = true;
                 }
-                
+
                 if (target.GetComponent<Marker>().STATE != Marker.State.Choice)
                 {
                     target.GetComponent<Marker>().STATE = Marker.State.Choice;
@@ -268,12 +266,12 @@ public class PlayerController: MonoBehaviour
                     target.GetComponent<Marker>().Execute(transform.position);
                 }
 
-                if(target.GetComponent<Marker>().TYPE == Marker.Type.Enemy)
+                if (target.GetComponent<Marker>().TYPE == Marker.Type.Enemy)
                 {
                     mode = Mode.Battle;
                     weapon.SetActive(true);
                 }
-                
+
                 FollowingCamera.LOCK = target;
             }
             else
@@ -285,8 +283,8 @@ public class PlayerController: MonoBehaviour
         {
             noLock = true;
         }
-        
-        if(noLock && mode == Mode.Normal)
+
+        if (noLock && mode == Mode.Normal)
         {
             if (target != null)
             {
@@ -303,7 +301,7 @@ public class PlayerController: MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         // エネミーかどうか判定
-        if(other.tag == "Enemy")
+        if (other.tag == "Enemy")
         {
             int enemyId = 0;
             int userId = UserRecord.ID;
@@ -313,7 +311,13 @@ public class PlayerController: MonoBehaviour
         }
     }
 
-    private void OnCollisionStay(Collision _coll) {
+    private void OnCollisionStay(Collision _coll)
+    {
         if (currentState is KeyMoveState) sound_.WalkPlay(_coll.gameObject.tag);
+    }
+
+    public float Distance(GameObject _target)
+    {
+        return Vector3.Distance(_target.transform.position, transform.position);
     }
 }
