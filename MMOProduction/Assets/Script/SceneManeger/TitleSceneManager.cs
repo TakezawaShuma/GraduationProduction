@@ -14,7 +14,7 @@ public class TitleSceneManager : MonoBehaviour
     //ID,PWの最大文字数
     private const int MAX_WORD = 16;
     // wsソケット
-    WS.WsLogin wsl = null; 
+    WS.WsLogin wsl = null;
 
     [SerializeField]
     bool connectFlag = false;
@@ -86,7 +86,7 @@ public class TitleSceneManager : MonoBehaviour
         ErrorMessageHide();
 
         Error01.GetComponent<RectTransform>().localPosition =
-        Error02.GetComponent<RectTransform>().localPosition = 
+        Error02.GetComponent<RectTransform>().localPosition =
         new Vector3(75, -370, 0);
 
         //Input Field の入力文字数制限
@@ -103,7 +103,7 @@ public class TitleSceneManager : MonoBehaviour
     }
 
     void ErrorAction(int _data) {
-        if (inputState != CANVAS_STATE.SIGN_IN){
+        if (inputState != CANVAS_STATE.SIGN_IN) {
             ButtonState(true);
             LoadingUIDelete();
         } else wsl.Send(new Packes.LoginUser(id_.text, pw_.text).ToJson());
@@ -113,7 +113,7 @@ public class TitleSceneManager : MonoBehaviour
     void Update()
     {
         if (Input.GetKey(KeyCode.Escape)) Quit();
-        if(Input.GetKeyDown(KeyCode.Tab)) InputChange();
+        if (Input.GetKeyDown(KeyCode.Tab)) InputChange();
         if (Input.GetKeyDown(KeyCode.Return)) EnterCheck();
     }
 
@@ -122,15 +122,15 @@ public class TitleSceneManager : MonoBehaviour
     /// </summary>
     void Quit()
     {
-        #if UNITY_EDITOR
-                UnityEditor.EditorApplication.isPlaying = false;
-        #elif UNITY_STANDALONE
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#elif UNITY_STANDALONE
             UnityEngine.Application.Quit();
-        #endif
+#endif
     }
 
     private void OnDestroy() {
-        if(connectFlag) wsl.Destroy();
+        if (connectFlag) wsl.Destroy();
     }
     //public関数--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -283,7 +283,7 @@ public class TitleSceneManager : MonoBehaviour
                     pw_.DeactivateInputField();
                 }
                 break;
-                
+
             case CANVAS_STATE.SIGN_UP:
                 if (id_.isFocused) {
                     id_.DeactivateInputField();
@@ -308,7 +308,10 @@ public class TitleSceneManager : MonoBehaviour
     /// 入力完了
     /// </summary>
     /// <returns></returns>
-    private void EnterCheck() => loginToGame_Click();
+    private void EnterCheck(){
+        if (inputState == CANVAS_STATE.SIGN_IN) loginToGame_Click();
+        else if (inputState == CANVAS_STATE.SIGN_UP) RegisterClick02();
+    }
        
 
     // 新規登録選択時表示させる
