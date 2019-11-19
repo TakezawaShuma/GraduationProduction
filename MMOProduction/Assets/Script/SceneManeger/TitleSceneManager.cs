@@ -6,6 +6,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class TitleSceneManager : MonoBehaviour
 {
@@ -96,12 +97,16 @@ public class TitleSceneManager : MonoBehaviour
             // 接続開始
             wsl = WS.WsLogin.Instance;
             wsl.errerAction = ErrorAction;
+            wsl.createAction = CreateAction;
+            wsl.loginAction = LoginAction;
         }
     }
 
     void ErrorAction(int _data) {
-        ButtonState(true);
-        LoadingUIDelete();
+        if (inputState != CANVAS_STATE.SIGN_IN){
+            ButtonState(true);
+            LoadingUIDelete();
+        } else wsl.Send(new Packes.LoginUser(id_.text, pw_.text).ToJson());
     }
 
     // Update is called once per frame
@@ -380,5 +385,24 @@ public class TitleSceneManager : MonoBehaviour
     private void LoadingUIDelete() {
         Destroy(loadingCircle);
         loadingCircle = null;
+    }
+
+    /// <summary>
+    /// シーンを切り替える プレイ
+    /// </summary>
+    private void ChangeScenetoPlay(){
+        SceneManager.LoadScene("LoadingScene");
+    }
+
+
+    private void CreateAction(Packes.CreateOK _data) {
+        Debug.Log("create ok" + id_.text + "/" + pw_.text);
+        wsl.Send(new Packes.LoginUser(id_.text, pw_.text).ToJson());
+    }
+
+    private void LoginAction(Packes.LoginOK _data) {
+        Debug.Log("login ok");
+        ChangeScenetoPlay();
+        UserRecord.ID = _data.user_id;
     }
 }
