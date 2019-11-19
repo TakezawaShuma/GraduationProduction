@@ -95,7 +95,13 @@ public class TitleSceneManager : MonoBehaviour
         {
             // 接続開始
             wsl = WS.WsLogin.Instance;
+            wsl.errerAction = ErrorAction;
         }
+    }
+
+    void ErrorAction(int _data) {
+        ButtonState(true);
+        LoadingUIDelete();
     }
 
     // Update is called once per frame
