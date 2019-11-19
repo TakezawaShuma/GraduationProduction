@@ -1332,11 +1332,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1978500512613664657}
     m_Modifications:
-    - target: {fileID: 3512536706028623904, guid: 8919298617c56e84ab8216d2e5e311e6,
-        type: 3}
-      propertyPath: m_Name
-      value: Fireball
-      objectReference: {fileID: 0}
     - target: {fileID: 3512536706028623908, guid: 8919298617c56e84ab8216d2e5e311e6,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1397,6 +1392,16 @@ PrefabInstance:
       propertyPath: _explosionEffect
       value: 
       objectReference: {fileID: 8644732057096091491}
+    - target: {fileID: 3512536706028623904, guid: 8919298617c56e84ab8216d2e5e311e6,
+        type: 3}
+      propertyPath: m_Name
+      value: Fireball
+      objectReference: {fileID: 0}
+    - target: {fileID: 3512536706028623906, guid: 8919298617c56e84ab8216d2e5e311e6,
+        type: 3}
+      propertyPath: m_ProbeAnchor
+      value: 
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8919298617c56e84ab8216d2e5e311e6, type: 3}
 --- !u!4 &832975596460292588 stripped
@@ -1424,11 +1429,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1978500512613664657}
     m_Modifications:
-    - target: {fileID: 2544170138122732748, guid: ccb653b8706b51345a657a9c873466b1,
-        type: 3}
-      propertyPath: m_Name
-      value: Explosion Effect
-      objectReference: {fileID: 0}
     - target: {fileID: 2544170138122732751, guid: ccb653b8706b51345a657a9c873466b1,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1483,6 +1483,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2544170138122732748, guid: ccb653b8706b51345a657a9c873466b1,
+        type: 3}
+      propertyPath: m_Name
+      value: Explosion Effect
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ccb653b8706b51345a657a9c873466b1, type: 3}

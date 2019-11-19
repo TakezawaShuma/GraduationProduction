@@ -43,6 +43,10 @@ public class PlayerController: MonoBehaviour
     public bool Lock { set { lockState = value; } }
 
     private GameObject target;
+    public GameObject TARGET
+    {
+        get { return target; }
+    }
 
     private Rigidbody rigidbody1;
 
