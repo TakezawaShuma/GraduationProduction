@@ -61,6 +61,9 @@ public class FollowingCamera : MonoBehaviour
     [SerializeField, Header("近づく速度")]
     private float approachSpeed = 0.0f;
 
+    [SerializeField, Header("ロックオン時カメラが移動する角度")]
+    private float moveAngle = 25f;
+
     //[SerializeField]
     //private BoxCollider boxCollider = null;
 
@@ -78,6 +81,10 @@ public class FollowingCamera : MonoBehaviour
 
     private Vector3 hitPos;
 
+    private Vector3 lastPos;
+    private float lastDistance;
+    private float dist = 0;
+
     /// <summary>
     /// ターゲットの設定
     /// </summary>
@@ -92,7 +99,6 @@ public class FollowingCamera : MonoBehaviour
         {
             updateAngle(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
         }
-        updateDistance(Input.GetAxis("Mouse ScrollWheel"));
 
         Vector3 lookAtPos;
 
@@ -100,27 +106,38 @@ public class FollowingCamera : MonoBehaviour
         {
             if (lockOnTarget.GetComponent<Marker>().LOCK_OBSERVE)
             {
-                // ここでazimuthalAngleをいい感じにする
                 Vector3 v = lockOnTarget.transform.position - target.transform.position;
 
-                float a = Mathf.Atan2(v.x, v.z) * Mathf.Rad2Deg % 360 + 90;
+                dist = v.magnitude + lastDistance;
 
-                azimuthalAngle = -a;
+                {
+                    distance = dist;
+                }
+                //float a = Mathf.Atan2(v.x, v.z) * Mathf.Rad2Deg % 360 + 90;
 
-                lookAtPos = target.transform.position + offset;
+                //azimuthalAngle = -a;
+                updateAngle(0, 0);
+                lookAtPos = lockOnTarget.transform.position;
                 updatePosition(lookAtPos);
             }
             else
             {
                 lookAtPos = target.transform.position + offset;
                 updatePosition(lookAtPos);
+                lastDistance = distance;
+                lastPos = transform.position;
+                dist = 0;
             }
         }
         else
         {
             lookAtPos = target.transform.position + offset;
             updatePosition(lookAtPos);
+            lastDistance = distance;
+            lastPos = transform.position;
+            dist = 0;
         }
+        updateDistance(Input.GetAxis("Mouse ScrollWheel"));
 
         transform.LookAt(lookAtPos);
 
@@ -137,6 +154,29 @@ public class FollowingCamera : MonoBehaviour
         {
             x = azimuthalAngle - x * mouseXSensitivity;
             azimuthalAngle = Mathf.Repeat(x, 360);
+        }
+        else
+        {
+            Vector3 v = target.transform.position - transform.position;
+            float a = Mathf.Atan2(v.x, v.z) * Mathf.Rad2Deg;
+
+            Vector3 v2 = lockOnTarget.transform.position - transform.position;
+            float a2 = Mathf.Atan2(v2.x, v2.z) * Mathf.Rad2Deg;
+
+            float nas = Mathf.Acos(Vector2.Dot(new Vector2(v.x, v.z), new Vector2(v2.x, v2.z)) / (new Vector2(v.x,v.z).magnitude * new Vector2(v2.x,v2.z).magnitude)) * Mathf.Rad2Deg;
+            float gai = Vector3.Cross(v, v2).y;
+
+            if (nas > moveAngle)
+            {
+                if (gai < 0)
+                {
+                    azimuthalAngle += Mathf.Clamp((nas - moveAngle), 0, moveAngle);
+                }
+                else if (gai > 0)
+                {
+                    azimuthalAngle -= Mathf.Clamp((nas - moveAngle), 0, moveAngle);
+                }
+            }
         }
 
         y = polarAngle + y * mouseYSensitivity;
