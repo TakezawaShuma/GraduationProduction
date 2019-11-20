@@ -165,6 +165,8 @@ public class PlaySceneManager : MonoBehaviour
     }
 
 
+    public GameObject miniMapCameraPrefab_;
+
     /// <summary>
     /// 自分の作成
     /// </summary>
@@ -186,6 +188,10 @@ public class PlaySceneManager : MonoBehaviour
             tmp.GetComponent<NameUI>().TEXT.enabled = false;
             FollowingCamera.SetTarget(tmp);
             userPlayer = tmp;
+
+            // ミニマップのカメラの作成
+            var miniMapTmp = Instantiate<GameObject>(miniMapCameraPrefab_);
+            miniMapTmp.GetComponent<MiniMapController>().Init(tmp);
         }
     }
 
