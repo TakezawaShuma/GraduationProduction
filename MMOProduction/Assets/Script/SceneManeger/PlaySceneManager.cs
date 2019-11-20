@@ -27,6 +27,9 @@ public class PlaySceneManager : MonoBehaviour
     [SerializeField]
     private ChatController chat = default(ChatController);
 
+    [SerializeField, Header("エネミーのステータスUI")]
+    private GameObject enemyStatusCanvas = null;
+
     bool updateFlag = true;
 
     // ソケット
@@ -165,6 +168,8 @@ public class PlaySceneManager : MonoBehaviour
     }
 
 
+    public GameObject miniMapCameraPrefab_;
+
     /// <summary>
     /// 自分の作成
     /// </summary>
@@ -186,6 +191,10 @@ public class PlaySceneManager : MonoBehaviour
             tmp.GetComponent<NameUI>().TEXT.enabled = false;
             FollowingCamera.SetTarget(tmp);
             userPlayer = tmp;
+
+            // ミニマップのカメラの作成
+            var miniMapTmp = Instantiate<GameObject>(miniMapCameraPrefab_);
+            miniMapTmp.GetComponent<MiniMapController>().Init(tmp);
         }
     }
 
@@ -257,9 +266,13 @@ public class PlaySceneManager : MonoBehaviour
                 {
                     newEnemy = Instantiate<GameObject>(testEnemyPre, new Vector3(ene.x, ene.y, ene.z), Quaternion.Euler(0, ene.dir, 0));
                     newEnemy.name = "Enemy:" + ene.master_id + "->" + ene.unique_id;
+                    GameObject stutasCanvas = Instantiate(enemyStatusCanvas, newEnemy.transform);
+                    stutasCanvas.GetComponent<UIEnemyHP>().MAX_HP = ene.hp;
                     //newEnemy.GetComponent<Rigidbody>().useGravity = true;
                     Enemy enemy = newEnemy.AddComponent<Enemy>();
                     enemy.Init(ene.x, ene.y, ene.z, ene.dir);
+                    enemy.UI_HP = stutasCanvas.GetComponent<UIEnemyHP>();
+                    enemy.HP = ene.hp;
                     enemies[ene.unique_id] = enemy;
                     enemies[ene.unique_id].ID = ene.unique_id;
                     charcters[ene.unique_id] = enemy;
@@ -329,6 +342,7 @@ public class PlaySceneManager : MonoBehaviour
 
         Debug.Log("敵は生存している");
         enemies[_packet.unique_id].PlayTriggerAnimetion("Take Damage");
+        enemies[_packet.unique_id].GetComponent<Enemy>().HP = _packet.hp;
     }
 
     /// <summary>

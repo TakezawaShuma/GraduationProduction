@@ -80,6 +80,17 @@ public class KeyMoveState : BaseState
             velocity.z += 1;
         }
 
+        if (playerController.Target)
+        {
+            if (playerController.Target.GetComponent<Marker>().LOCK_OBSERVE)
+            {
+                if (velocity.x == 0)
+                {
+                    velocity.x = -1;
+                }
+            }
+        }
+
         // 正規化
         velocity = velocity.normalized;
 
