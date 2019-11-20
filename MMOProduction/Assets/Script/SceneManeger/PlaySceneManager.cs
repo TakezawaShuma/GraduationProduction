@@ -16,7 +16,7 @@ public class PlaySceneManager : MonoBehaviour
     public GameObject playerPre = null;
 
     [SerializeField]
-    private GameObject otherPlayerPre_;
+    private GameObject otherPlayerPre_ = null;
 
     [SerializeField, Header("テストの敵")]
     private GameObject testEnemyPre = null;
