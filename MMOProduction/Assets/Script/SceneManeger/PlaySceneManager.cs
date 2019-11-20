@@ -260,7 +260,7 @@ public class PlaySceneManager : MonoBehaviour
                 {
                     newEnemy = Instantiate<GameObject>(testEnemyPre, new Vector3(ene.x, ene.y, ene.z), Quaternion.Euler(0, ene.dir, 0));
                     newEnemy.name = "Enemy:" + ene.master_id + "->" + ene.unique_id;
-                    GameObject stutasCanvas = Instantiate(enemyStatusCanvas, this.transform);
+                    GameObject stutasCanvas = Instantiate(enemyStatusCanvas, newEnemy.transform);
                     stutasCanvas.GetComponent<UIEnemyHP>().MAX_HP = ene.hp;
                     //newEnemy.GetComponent<Rigidbody>().useGravity = true;
                     Enemy enemy = newEnemy.AddComponent<Enemy>();

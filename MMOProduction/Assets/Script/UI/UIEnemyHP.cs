@@ -8,6 +8,9 @@ public class UIEnemyHP : MonoBehaviour
     [SerializeField, Header("スライダー")]
     private Slider slider = null;
 
+    [SerializeField, Header("テスト用テキスト")]
+    private Text text = null;
+
     private float maxHP = 100;
 
     public float MAX_HP
@@ -22,5 +25,6 @@ public class UIEnemyHP : MonoBehaviour
     public void UpdateHP(float hp)
     {
         slider.value = hp;
+        text.text = hp.ToString();
     }
 }
