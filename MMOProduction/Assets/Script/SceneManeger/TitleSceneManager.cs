@@ -6,6 +6,7 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 
 public class TitleSceneManager : MonoBehaviour
 {
@@ -13,19 +14,19 @@ public class TitleSceneManager : MonoBehaviour
     //ID,PWの最大文字数
     private const int MAX_WORD = 16;
     // wsソケット
-    WS.WsLogin wsl = null; 
+    WS.WsLogin wsl = null;
 
     [SerializeField]
     bool connectFlag = false;
 
     //ボタンの種類
-    public enum CANVAS_STATE
-    {
+    public enum CANVAS_STATE {
         SELECT,    //選択
         SIGN_IN,    //ログイン
         SIGN_UP,    //新規登録
     }
     CANVAS_STATE inputState = CANVAS_STATE.SELECT;
+
 
     // UIのリスト化
     public List<GameObject> selectUIList_;
@@ -34,11 +35,20 @@ public class TitleSceneManager : MonoBehaviour
 
     [SerializeField]
     //ログインID入力用
-    private InputField id_;[SerializeField]
+    private InputField id_;
+    [SerializeField]
     //ログインPW入力用
-    private InputField pw_;[SerializeField]
+    private InputField pw_;
+    [SerializeField]
     //PW確認用
     private InputField ConfirmPW_;
+    [SerializeField]
+    private Button loginButton_;
+    [SerializeField]
+    private Button sinupButton_;
+    // キャンバス
+    private GameObject canvas;
+
 
     //Error用Text
     // 文字数が足りない時
@@ -60,7 +70,10 @@ public class TitleSceneManager : MonoBehaviour
     [SerializeField]
     private Text Error06;
 
-
+    // ロード用の円
+    [SerializeField]
+    private GameObject loadingCirclePrefab_;
+    private GameObject loadingCircle;
 
     // Start is called before the first frame update
     void Start()
@@ -73,7 +86,7 @@ public class TitleSceneManager : MonoBehaviour
         ErrorMessageHide();
 
         Error01.GetComponent<RectTransform>().localPosition =
-        Error02.GetComponent<RectTransform>().localPosition = 
+        Error02.GetComponent<RectTransform>().localPosition =
         new Vector3(75, -370, 0);
 
         //Input Field の入力文字数制限
@@ -83,14 +96,24 @@ public class TitleSceneManager : MonoBehaviour
         {
             // 接続開始
             wsl = WS.WsLogin.Instance;
+            wsl.errerAction = ErrorAction;
+            wsl.createAction = CreateAction;
+            wsl.loginAction = LoginAction;
         }
+    }
+
+    void ErrorAction(int _data) {
+        if (inputState != CANVAS_STATE.SIGN_IN) {
+            ButtonState(true);
+            LoadingUIDelete();
+        } else wsl.Send(new Packes.LoginUser(id_.text, pw_.text).ToJson());
     }
 
     // Update is called once per frame
     void Update()
     {
         if (Input.GetKey(KeyCode.Escape)) Quit();
-        if(Input.GetKeyDown(KeyCode.Tab)) InputChange();
+        if (Input.GetKeyDown(KeyCode.Tab)) InputChange();
         if (Input.GetKeyDown(KeyCode.Return)) EnterCheck();
     }
 
@@ -99,24 +122,29 @@ public class TitleSceneManager : MonoBehaviour
     /// </summary>
     void Quit()
     {
-        #if UNITY_EDITOR
-                UnityEditor.EditorApplication.isPlaying = false;
-        #elif UNITY_STANDALONE
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#elif UNITY_STANDALONE
             UnityEngine.Application.Quit();
-        #endif
+#endif
     }
 
     private void OnDestroy() {
-        if(connectFlag) wsl.Destroy();
+        if (connectFlag) wsl.Destroy();
     }
     //public関数--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
-    // 
+    /// <summary>
+    /// ログインのボタン
+    /// </summary>
     public void LogInClick()
     {
         LogInActive();
     }
 
+    /// <summary>
+    /// 新規作成のボタン
+    /// </summary>
     public void RegisterClick()
     {
         RegisterActive();
@@ -133,6 +161,8 @@ public class TitleSceneManager : MonoBehaviour
         ConfirmPW_.text = "";
 
         ErrorMessageHide();
+        ButtonState(true);
+        LoadingUIDelete();
 
         inputState = CANVAS_STATE.SELECT;
     }
@@ -142,6 +172,8 @@ public class TitleSceneManager : MonoBehaviour
     /// </summary>
     public void loginToGame_Click()
     {
+        ButtonState(false);
+        LoadingUIInstantiate(loginButton_.transform);
         ErrorMessageHide();
 
         string id = id_.text;
@@ -168,6 +200,8 @@ public class TitleSceneManager : MonoBehaviour
             case LoginCheck.CHECKRESULT.INVALID: Error02.gameObject.SetActive(true); break;
         }
         pw_.text = "";
+        LoadingUIDelete();
+        ButtonState(true);
     }
 
     /// <summary>
@@ -175,6 +209,8 @@ public class TitleSceneManager : MonoBehaviour
     /// </summary>
     public void RegisterClick02()
     {
+        ButtonState(false);
+        LoadingUIInstantiate(sinupButton_.transform);
         ErrorMessageHide();
 
         string id = id_.text;
@@ -247,7 +283,7 @@ public class TitleSceneManager : MonoBehaviour
                     pw_.DeactivateInputField();
                 }
                 break;
-                
+
             case CANVAS_STATE.SIGN_UP:
                 if (id_.isFocused) {
                     id_.DeactivateInputField();
@@ -272,8 +308,9 @@ public class TitleSceneManager : MonoBehaviour
     /// 入力完了
     /// </summary>
     /// <returns></returns>
-    private void EnterCheck() {
-        loginToGame_Click();
+    private void EnterCheck(){
+        if (inputState == CANVAS_STATE.SIGN_IN) loginToGame_Click();
+        else if (inputState == CANVAS_STATE.SIGN_UP) RegisterClick02();
     }
        
 
@@ -310,5 +347,65 @@ public class TitleSceneManager : MonoBehaviour
         Error04.gameObject.SetActive(false);
         Error05.gameObject.SetActive(false);
         Error06.gameObject.SetActive(false);
+    }
+
+
+    /// <summary>
+    /// キャンバスにオブジェクトを出す
+    /// </summary>
+    /// <param name="_prefubs"></param>
+    private void UIInstantiate<T>(List<GameObject> _prefabs, List<T> _tmpList) { 
+        foreach(var prefab in _prefabs) {
+            _tmpList.Add(Instantiate<GameObject>(prefab, canvas.transform).GetComponent<T>());
+        }
+    }
+
+    /// <summary>
+    /// UIの削除
+    /// </summary>
+    /// <param name="_ui"></param>
+    private void UIDelete(List<GameObject> _ui) { 
+        foreach(var ui in _ui) {
+            Destroy(ui);
+        }
+        _ui.Clear();
+    }
+
+    /// <summary>
+    /// ボタンの入力状態の変更
+    /// </summary>
+    private void ButtonState(bool _state) =>  loginButton_.interactable = sinupButton_.interactable = _state;
+
+
+    /// <summary>
+    /// 読み込みUIの実体化
+    /// </summary>
+    private void LoadingUIInstantiate(Transform _parent) => loadingCircle = Instantiate<GameObject>(loadingCirclePrefab_, _parent);
+
+    /// <summary>
+    /// 読み込みUIの削除
+    /// </summary>
+    private void LoadingUIDelete() {
+        Destroy(loadingCircle);
+        loadingCircle = null;
+    }
+
+    /// <summary>
+    /// シーンを切り替える プレイ
+    /// </summary>
+    private void ChangeScenetoPlay(){
+        SceneManager.LoadScene("LoadingScene");
+    }
+
+
+    private void CreateAction(Packes.CreateOK _data) {
+        Debug.Log("create ok" + id_.text + "/" + pw_.text);
+        wsl.Send(new Packes.LoginUser(id_.text, pw_.text).ToJson());
+    }
+
+    private void LoginAction(Packes.LoginOK _data) {
+        Debug.Log("login ok");
+        ChangeScenetoPlay();
+        UserRecord.ID = _data.user_id;
     }
 }
