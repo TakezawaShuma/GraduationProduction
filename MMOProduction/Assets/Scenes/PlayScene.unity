@@ -1261,6 +1261,7 @@ MonoBehaviour:
     type: 3}
   FollowingCamera: {fileID: 992294608}
   chat: {fileID: 809979501}
+  nameUI: {fileID: 1860603917932401239, guid: a88436e2d44261544bb11c73d88f019d, type: 3}
   playerSpawnPos: {x: -210, y: 10, z: -210}
 --- !u!224 &646274429 stripped
 RectTransform:
@@ -1650,7 +1651,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 992294604}
   m_LocalRotation: {x: 0.12968391, y: -0.0000000058982152, z: 7.71418e-10, w: 0.9915554}
-  m_LocalPosition: {x: 0.0038327607, y: 211039.73, z: -321264.3}
+  m_LocalPosition: {x: 0.0038357112, y: 211201.73, z: -321512.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1686,6 +1687,7 @@ MonoBehaviour:
     m_Bits: 32768
   isApproachGround: 1
   approachSpeed: 10
+  moveAngle: 25
 --- !u!65 &992294609
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -3329,6 +3331,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalPosition.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3100140770369237248, guid: 49b2f598d0de4e84594c2e0138c30f69,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1301484515635141634, guid: 49b2f598d0de4e84594c2e0138c30f69, type: 3}
