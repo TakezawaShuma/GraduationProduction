@@ -5,10 +5,15 @@ using UnityEngine;
 public class Enemy : CharacterBase
 {
 
-    public int HP { get { return hp; } set { hp = value; } }
+    public int HP { get { return hp; } set { hp = value; uIHP.UpdateHP(hp); } }
     public int MP { get { return mp; } set { mp = value; } }
 
-    
+    private UIEnemyHP uIHP = null;
+
+    public UIEnemyHP UI_HP
+    {
+        set { uIHP = value; }
+    }
     
     // Start is called before the first frame update
     void Start()
