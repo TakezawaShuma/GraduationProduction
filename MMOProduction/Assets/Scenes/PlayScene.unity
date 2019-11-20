@@ -1490,6 +1490,7 @@ MonoBehaviour:
   enemyStatusCanvas: {fileID: 2283633340352723908, guid: ccb73b1f8a779af46a1b14b4ed19daf6,
     type: 3}
   playerSpawnPos: {x: -210, y: 10, z: -210}
+  miniMapCameraPrefab_: {fileID: 0}
 --- !u!224 &646274429 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6631658281002984456, guid: 7f4271a449d825f42ac315b724d2b520,
@@ -1570,7 +1571,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4a63c264e55ad8498ebd18951f2109c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  connectFlag: 0
+  connectFlag: 1
   chatFlame: {fileID: 435296719}
   chatLogText: {fileID: 1826006565}
   inputMassege: {fileID: 887687663}
@@ -1879,7 +1880,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 992294604}
   m_LocalRotation: {x: 0.12968391, y: -0.0000000058982152, z: 7.71418e-10, w: 0.9915554}
-  m_LocalPosition: {x: 0.0039194296, y: 215798.48, z: -328549.3}
+  m_LocalPosition: {x: 0.00392049, y: 215856.7, z: -328638.44}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2738,11 +2739,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 809979505}
     m_Modifications:
-    - target: {fileID: 8163061522702348242, guid: 1ba778ea13c09d949b07806fcd4d08ad,
-        type: 3}
-      propertyPath: m_Name
-      value: SkiltreePanel
-      objectReference: {fileID: 0}
     - target: {fileID: 8163061522702348243, guid: 1ba778ea13c09d949b07806fcd4d08ad,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -2847,6 +2843,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8163061522702348242, guid: 1ba778ea13c09d949b07806fcd4d08ad,
+        type: 3}
+      propertyPath: m_Name
+      value: SkiltreePanel
       objectReference: {fileID: 0}
     - target: {fileID: 8163061524141354668, guid: 1ba778ea13c09d949b07806fcd4d08ad,
         type: 3}

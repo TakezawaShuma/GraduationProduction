@@ -318,6 +318,10 @@ public class PlayerController : MonoBehaviour
 
     public float Distance(GameObject _target)
     {
-        return Vector3.Distance(_target.transform.position, transform.position);
+        if (_target != null)
+        {
+            return Vector3.Distance(_target.transform.position, transform.position);
+        }
+        else { return -1; }
     }
 }
