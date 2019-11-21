@@ -29,22 +29,22 @@ public class SystemSound : MonoBehaviour
     private AudioClip login_ = null;
 
     // オーディオ
-    private AudioSource source_ = null;
+    private AudioSource audioSource_ = null;
     // サウンド
-    private Dictionary<SYSTEM_SOUND_TYPE, AudioClip> sounds_ = new Dictionary<SYSTEM_SOUND_TYPE, AudioClip>();
+    private Dictionary<SYSTEM_SOUND_TYPE, AudioClip> syatemClip_ = new Dictionary<SYSTEM_SOUND_TYPE, AudioClip>();
 
     /// <summary>
     /// 音の初期化
     /// </summary>
     private void Init() {
-        sounds_[SYSTEM_SOUND_TYPE.OPEN_MENU] = menuOpen_;
-        sounds_[SYSTEM_SOUND_TYPE.CLOSE_MENU] = meunClose_;
-        sounds_[SYSTEM_SOUND_TYPE.ENTER] = enter_;
-        sounds_[SYSTEM_SOUND_TYPE.LOGIN] = login_;
+        syatemClip_[SYSTEM_SOUND_TYPE.OPEN_MENU] = menuOpen_;
+        syatemClip_[SYSTEM_SOUND_TYPE.CLOSE_MENU] = meunClose_;
+        syatemClip_[SYSTEM_SOUND_TYPE.ENTER] = enter_;
+        syatemClip_[SYSTEM_SOUND_TYPE.LOGIN] = login_;
     }
 
     private void Start() {
-        source_ = GetComponent<AudioSource>();
+        audioSource_ = GetComponent<AudioSource>();
 
         Init();
     }
@@ -54,7 +54,21 @@ public class SystemSound : MonoBehaviour
     /// </summary>
     /// <param name="_type"></param>
     public void SystemPlay(SYSTEM_SOUND_TYPE _type) {
-        if (!sounds_.ContainsKey(_type)) return;
-        if(!source_.isPlaying) source_.PlayOneShot(sounds_[_type]);
+        if (!syatemClip_.ContainsKey(_type)) return;
+        if(!audioSource_.isPlaying) audioSource_.PlayOneShot(syatemClip_[_type]);
+    }
+
+    /// <summary>
+    /// 音量設定
+    /// </summary>
+    public void SettingVolume(float _val) {
+        audioSource_.volume = _val;
+    }
+
+    /// <summary>
+    /// ミュート
+    /// </summary>
+    public void Mute(bool _state){
+        audioSource_.mute = _state;
     }
 }
