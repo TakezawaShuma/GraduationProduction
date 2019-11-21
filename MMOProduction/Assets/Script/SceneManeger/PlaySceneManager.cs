@@ -230,10 +230,10 @@ public class PlaySceneManager : MonoBehaviour
                     otherPlayer.tag = "OtherPlayer";
                     otherPlayer.transform.localScale = new Vector3(2, 2, 2);
                     GameObject name = Instantiate(nameUI, otherPlayer.transform);
-                    name.GetComponent<OtherUserNameUI>().UserName = "hoge";
                     var other = otherPlayer.AddComponent<OtherPlayers>();
                     // 名前を登録
                     other.Name = _packet.name;
+                    name.GetComponent<OtherUserNameUI>().UserName = other.Name;
                     other.Init(data.x, data.y, data.z, data.dir);
                     others.Add(data.user_id, other);
                     charcters.Add(data.user_id, other);
