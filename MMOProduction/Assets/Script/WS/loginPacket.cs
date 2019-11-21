@@ -82,6 +82,8 @@ namespace Packes
     public class LoginOK : IPacketDatas{
         /// <summary>ユーザーID</summary>
         public int user_id;
+        /// <summary>ユーザーネーム</summary>
+        public string name;
 
         /// <summary>デフォルトコンストラクタ</summary>
         public LoginOK(){
@@ -90,10 +92,12 @@ namespace Packes
         /// <summary>フルコンストラクタ</summary>
         /// <param name="_user_id">ユーザーID</summary>
         public LoginOK(
-            int _user_id
+            int _user_id,
+            string _name
         ){
             this.command = (int)CommandData.LoginOK;
             this.user_id = _user_id;
+            this.name = _name;
         }
     }
 

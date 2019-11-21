@@ -75,6 +75,7 @@ public class TitleSceneManager : MonoBehaviour
     private GameObject loadingCirclePrefab_;
     private GameObject loadingCircle;
 
+    private SystemSound sound_;
     // Start is called before the first frame update
     void Start()
     {
@@ -100,17 +101,10 @@ public class TitleSceneManager : MonoBehaviour
             wsl.createAction = CreateAction;
             wsl.loginAction = LoginAction;
         }
+
+        sound_ = GetComponent<SystemSound>();
     }
-    int errorCount = 0;
-    void ErrorAction(int _data) {
-        if (inputState != CANVAS_STATE.SIGN_IN)
-        {
-            ButtonState(true);
-            LoadingUIDelete();
-        }
-        else if(errorCount<10){ wsl.Send(new Packes.LoginUser(id_.text, pw_.text).ToJson()); errorCount++; }
-        else { errorCount = 0; }
-    }
+
 
     // Update is called once per frame
     void Update()
@@ -400,15 +394,43 @@ public class TitleSceneManager : MonoBehaviour
         SceneManager.LoadScene("LoadingScene");
     }
 
-
-    private void CreateAction(Packes.CreateOK _data) {
+    // 受信時のメゾット -----------------------------------
+    /// <summary>
+    /// 新規作成完了
+    /// </summary>
+    /// <param name="_packet"></param>
+    private void CreateAction(Packes.CreateOK _packet) {
         Debug.Log("create ok" + id_.text + "/" + pw_.text);
         wsl.Send(new Packes.LoginUser(id_.text, pw_.text).ToJson());
     }
 
-    private void LoginAction(Packes.LoginOK _data) {
+    /// <summary>
+    /// ログイン完了
+    /// </summary>
+    /// <param name="_packet"></param>
+    private void LoginAction(Packes.LoginOK _packet) {
         Debug.Log("login ok");
         ChangeScenetoPlay();
-        UserRecord.ID = _data.user_id;
+        UserRecord.ID = _packet.user_id;
+        UserRecord.Name = _packet.name;
     }
+
+    int errorCount = 0;
+    /// <summary>
+    /// 確認エラー
+    /// </summary>
+    /// <param name="_packet"></param>
+    void ErrorAction(int _packet)
+    {
+        if (inputState != CANVAS_STATE.SIGN_IN)
+        {
+            ButtonState(true);
+            LoadingUIDelete();
+        }
+        else if (errorCount < 10) { wsl.Send(new Packes.LoginUser(id_.text, pw_.text).ToJson()); errorCount++; }
+        else { errorCount = 0; }
+    }
+
+    // 選択の音
+    public void EnterSoundPlay() => sound_.SystemPlay(SYSTEM_SOUND_TYPE.ENTER);
 }

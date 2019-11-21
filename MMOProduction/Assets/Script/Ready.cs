@@ -1,4 +1,8 @@
-﻿using System.Collections;
+﻿////////////////////////////////////////////
+// スタートが全部終了したか確認するクラス //
+////////////////////////////////////////////
+
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
