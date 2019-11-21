@@ -270,13 +270,12 @@ public class PlaySceneManager : MonoBehaviour
                     newEnemy.name = "Enemy:" + ene.master_id + "->" + ene.unique_id;
                     GameObject stutasCanvas = Instantiate(enemyStatusCanvas, newEnemy.transform);
                     stutasCanvas.GetComponent<UIEnemyHP>().MAX_HP = ene.hp;
+                    stutasCanvas.GetComponent<UIEnemyHP>().Off();
                     //newEnemy.GetComponent<Rigidbody>().useGravity = true;
                     Enemy enemy = newEnemy.AddComponent<Enemy>();
                     enemy.Init(ene.x, ene.y, ene.z, ene.dir);
                     enemy.UI_HP = stutasCanvas.GetComponent<UIEnemyHP>();
                     enemy.HP = ene.hp;
-                    newEnemy.GetComponent<EnemyMarker>().Marker.ENEMY_HP = enemy.UI_HP;
-                    newEnemy.GetComponent<EnemyMarker>().Marker.ENEMY_HP.Off();
                     enemies[ene.unique_id] = enemy;
                     enemies[ene.unique_id].ID = ene.unique_id;
                     charcters[ene.unique_id] = enemy;
