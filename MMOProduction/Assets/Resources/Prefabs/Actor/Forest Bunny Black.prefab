@@ -526,6 +526,7 @@ GameObject:
   - component: {fileID: 785115049242876177}
   - component: {fileID: 3234076335854187228}
   - component: {fileID: 6819410111095990909}
+  - component: {fileID: 5915304671236854311}
   m_Layer: 0
   m_Name: Forest Bunny Black
   m_TagString: Enemy
@@ -604,6 +605,19 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 1, z: 0}
+--- !u!114 &5915304671236854311
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 842962567749291421}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c2bc536bcded1f74885b44978e0bf5ad, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  marker: {fileID: 7255413950978638901}
 --- !u!1 &843021109807524617
 GameObject:
   m_ObjectHideFlags: 0
@@ -935,3 +949,15 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 7093053864104300346}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &7255413950978638901 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 495394191780137743, guid: de596fb218a51844ca2c68f312682837,
+    type: 3}
+  m_PrefabInstance: {fileID: 7093053864104300346}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a0957c89285dc9745ace8dc6a00594d0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

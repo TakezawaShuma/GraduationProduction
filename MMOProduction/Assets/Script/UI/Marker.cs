@@ -43,11 +43,30 @@ public class Marker : MonoBehaviour
     public State STATE
     {
         get { return state; }
-        set { state = value; }
+        set
+        {
+            if (value == State.Choice)
+            {
+                enemyHP.On();
+            }
+            else
+            {
+                enemyHP.Off();
+            }
+            state = value;
+        }
     }
 
     [SerializeField, Header("ロックした時に注目するか")]
     private bool lockObserve = false;
+
+    private UIEnemyHP enemyHP;
+
+    public UIEnemyHP ENEMY_HP
+    {
+        get { return enemyHP; }
+        set { enemyHP = value; }
+    }
 
     public bool LOCK_OBSERVE
     {

@@ -275,6 +275,8 @@ public class PlaySceneManager : MonoBehaviour
                     enemy.Init(ene.x, ene.y, ene.z, ene.dir);
                     enemy.UI_HP = stutasCanvas.GetComponent<UIEnemyHP>();
                     enemy.HP = ene.hp;
+                    newEnemy.GetComponent<EnemyMarker>().Marker.ENEMY_HP = enemy.UI_HP;
+                    newEnemy.GetComponent<EnemyMarker>().Marker.ENEMY_HP.Off();
                     enemies[ene.unique_id] = enemy;
                     enemies[ene.unique_id].ID = ene.unique_id;
                     charcters[ene.unique_id] = enemy;
