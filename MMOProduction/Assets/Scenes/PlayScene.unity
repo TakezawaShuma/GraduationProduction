@@ -2548,6 +2548,7 @@ MonoBehaviour:
     type: 3}
   FollowingCamera: {fileID: 992294608}
   chat: {fileID: 809979501}
+  nameUI: {fileID: 0}
   enemyStatusCanvas: {fileID: 2283633340352723908, guid: ccb73b1f8a779af46a1b14b4ed19daf6,
     type: 3}
   playerSpawnPos: {x: -210, y: 10, z: -210}
@@ -3626,7 +3627,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 992294604}
   m_LocalRotation: {x: 0.12968391, y: -0.0000000058982152, z: 7.71418e-10, w: 0.9915554}
-  m_LocalPosition: {x: 0.0039221956, y: 215950.36, z: -328781.8}
+  m_LocalPosition: {x: 0.0039234404, y: 216018.7, z: -328886.44}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -3649,7 +3650,7 @@ MonoBehaviour:
   distance: 4
   polarAngle: 75
   azimuthalAngle: 270
-  minDistance: 0.7
+  minDistance: 1.2
   maxDistance: 10
   minPolarAngle: 45
   maxPolarAngle: 120
@@ -3662,7 +3663,7 @@ MonoBehaviour:
     m_Bits: 32768
   isApproachGround: 1
   approachSpeed: 10
-  moveAngle: 25
+  moveAngle: 10
 --- !u!65 &992294609
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4487,8 +4488,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1514585325}
   m_HandleRect: {fileID: 1514585324}
   m_Direction: 3
-  m_Value: 0
-  m_Size: 0.76240754
+  m_Value: 0.00000070844584
+  m_Size: 0.84421915
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -4925,6 +4926,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 809979505}
     m_Modifications:
+    - target: {fileID: 8163061522702348242, guid: 1ba778ea13c09d949b07806fcd4d08ad,
+        type: 3}
+      propertyPath: m_Name
+      value: SkiltreePanel
+      objectReference: {fileID: 0}
     - target: {fileID: 8163061522702348243, guid: 1ba778ea13c09d949b07806fcd4d08ad,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -5029,11 +5035,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8163061522702348242, guid: 1ba778ea13c09d949b07806fcd4d08ad,
-        type: 3}
-      propertyPath: m_Name
-      value: SkiltreePanel
       objectReference: {fileID: 0}
     - target: {fileID: 8163061524141354668, guid: 1ba778ea13c09d949b07806fcd4d08ad,
         type: 3}
