@@ -26,8 +26,8 @@ Shader "Performance/Tornado"
 		#pragma fragment frag
 
 		#include "UnityCG.cginc"
-		#include "Assets/CGInclude/Transform.cginc"
-		#include "Assets/CGInclude/Noise.cginc"
+		#include "Assets/Ex/CGInclude/Transform.cginc"
+		#include "Assets/Ex/CGInclude/Noise.cginc"
 
 		struct appdata
 		{
