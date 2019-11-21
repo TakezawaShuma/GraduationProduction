@@ -26,7 +26,9 @@ public class PlaySceneManager : MonoBehaviour
 
     [SerializeField]
     private ChatController chat = default(ChatController);
-
+    
+    [SerializeField]
+    private GameObject nameUI = null;
     [SerializeField, Header("エネミーのステータスUI")]
     private GameObject enemyStatusCanvas = null;
 
@@ -188,7 +190,6 @@ public class PlaySceneManager : MonoBehaviour
             tmp.AddComponent<PlayerSetting>();
             tmp.GetComponent<PlayerController>().Init(tmp.GetComponent<Player>(), FollowingCamera, tmp.GetComponent<PlayerSetting>(), chat, tmp.GetComponent<Animator>());
             player = tmp.GetComponent<Player>();
-            tmp.GetComponent<NameUI>().TEXT.enabled = false;
             FollowingCamera.SetTarget(tmp);
             userPlayer = tmp;
 
@@ -228,11 +229,12 @@ public class PlaySceneManager : MonoBehaviour
                     otherPlayer.name = "otherPlayer" + data.user_id;
                     otherPlayer.tag = "OtherPlayer";
                     otherPlayer.transform.localScale = new Vector3(2, 2, 2);
+                    GameObject name = Instantiate(nameUI, otherPlayer.transform);
                     var other = otherPlayer.AddComponent<OtherPlayers>();
                     // 名前を登録
                     other.Name = _packet.name;
+                    name.GetComponent<OtherUserNameUI>().UserName = other.Name;
                     other.Init(data.x, data.y, data.z, data.dir);
-                    otherPlayer.GetComponent<NameUI>().NameSet(data.user_id.ToString());
                     others.Add(data.user_id, other);
                     charcters.Add(data.user_id, other);
                 }
