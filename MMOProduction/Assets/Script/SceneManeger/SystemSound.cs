@@ -19,14 +19,14 @@ public enum SYSTEM_SOUND_TYPE{
 public class SystemSound : MonoBehaviour
 {
     [Header("メニューを開く"), SerializeField]
-    private AudioClip menuOpen_;
+    private AudioClip menuOpen_ = null;
     [Header("メニューを閉じる"), SerializeField]
-    private AudioClip meunClose_;
+    private AudioClip meunClose_ = null;
     [Header("決定"), SerializeField]
-    private AudioClip enter_;
+    private AudioClip enter_ = null;
 
     [Header("ログイン"), SerializeField]
-    private AudioClip login_;
+    private AudioClip login_ = null;
 
     // オーディオ
     private AudioSource source_ = null;

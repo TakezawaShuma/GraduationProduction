@@ -14,12 +14,12 @@ namespace UniHumanoid
     public class RuntimeBvhLoader : MonoBehaviour
     {
         [SerializeField]
-        Button m_openButton;
+        Button m_openButton = null;
 
         [SerializeField]
-        HumanPoseTransfer m_dst;
+        HumanPoseTransfer m_dst = null;
 
-        UnityAction m_onClick;
+        UnityAction m_onClick = null;
 
         private void Awake()
         {

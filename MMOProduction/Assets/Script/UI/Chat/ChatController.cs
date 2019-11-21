@@ -6,6 +6,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class ChatController : MonoBehaviour
 {
@@ -54,12 +55,14 @@ public class ChatController : MonoBehaviour
         {
             chatFlame.SetActive(true);
             chatActiveFlag = true;
+            EventSystem.current.SetSelectedGameObject(inputMassege.gameObject);
             //chatFlame.GetComponent<ChatLogController>().Reset();
         }
         else if (Input.GetKeyUp(KeyCode.Return) && chatActiveFlag == true)
         {
             chatFlame.SetActive(false);
             chatActiveFlag = false;
+            EventSystem.current.SetSelectedGameObject(null);
         }
 
         if (chatActiveFlag)

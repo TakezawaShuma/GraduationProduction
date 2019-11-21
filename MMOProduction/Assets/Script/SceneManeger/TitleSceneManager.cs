@@ -101,12 +101,15 @@ public class TitleSceneManager : MonoBehaviour
             wsl.loginAction = LoginAction;
         }
     }
-
+    int errorCount = 0;
     void ErrorAction(int _data) {
-        if (inputState != CANVAS_STATE.SIGN_IN) {
+        if (inputState != CANVAS_STATE.SIGN_IN)
+        {
             ButtonState(true);
             LoadingUIDelete();
-        } else wsl.Send(new Packes.LoginUser(id_.text, pw_.text).ToJson());
+        }
+        else if(errorCount<10){ wsl.Send(new Packes.LoginUser(id_.text, pw_.text).ToJson()); errorCount++; }
+        else { errorCount = 0; }
     }
 
     // Update is called once per frame
