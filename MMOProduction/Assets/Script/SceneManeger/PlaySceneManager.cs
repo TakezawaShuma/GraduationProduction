@@ -103,7 +103,7 @@ public class PlaySceneManager : MonoBehaviour
                     if (connectFlag)
                     {
                         SendPosition(playerData);
-                        SendStatus(UserRecord.ID, Packes.OBJECT_TYPE.PLAYER);
+                        //SendStatus(UserRecord.ID, Packes.OBJECT_TYPE.PLAYER);
                         SendEnemyPosReq();
                     }
                 }
@@ -229,6 +229,8 @@ public class PlaySceneManager : MonoBehaviour
                     otherPlayer.tag = "OtherPlayer";
                     otherPlayer.transform.localScale = new Vector3(2, 2, 2);
                     var other = otherPlayer.AddComponent<OtherPlayers>();
+                    // 名前を登録
+                    other.Name = _packet.name;
                     other.Init(data.x, data.y, data.z, data.dir);
                     otherPlayer.GetComponent<NameUI>().NameSet(data.user_id.ToString());
                     others.Add(data.user_id, other);
@@ -296,6 +298,7 @@ public class PlaySceneManager : MonoBehaviour
             }
             else
             {
+                if(charcters.ContainsKey(tmp.charctor_id))
                 charcters[tmp.charctor_id].UpdateStatusData(tmp.hp, tmp.mp, tmp.status);
             }
         }
@@ -342,7 +345,7 @@ public class PlaySceneManager : MonoBehaviour
 
         Debug.Log("敵は生存している");
         enemies[_packet.unique_id].PlayTriggerAnimetion("Take Damage");
-        enemies[_packet.unique_id].GetComponent<Enemy>().HP = _packet.hp;
+        enemies[_packet.unique_id].HP = _packet.hp;
     }
 
     /// <summary>
@@ -354,11 +357,12 @@ public class PlaySceneManager : MonoBehaviour
         // todo
         // 戦闘で計算後エネミーが死亡していたら
         // HPを0にして死亡エフェクトやドロップアイテムの取得
+        enemies[_packet.unique_id].HP = 0;
         enemies[_packet.unique_id].PlayTriggerAnimetion("Die");
-        player.GetComponent<PlayerController>().Lock = false;
+        player.GetComponent<PlayerController>().RemoveTarget();
         enemies.Remove(_packet.unique_id);
-        //charcters.Remove(_packet.unique_id);
-        Debug.Log(charcters.Count);
+        charcters.Remove(_packet.unique_id);
+        //Debug.Log(charcters.Count);
         Debug.Log("敵は死んだ！！！");
     }
 
