@@ -2539,7 +2539,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cb1b657d808c7b4583315bc0749e915, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  connectFlag: 0
+  connectFlag: 1
   playerPre: {fileID: 2136695631195096698, guid: f60ab25478542df4281ac7e670433c26,
     type: 3}
   otherPlayerPre_: {fileID: 7312705236510121977, guid: 3d45b2269476ee840a4b39af3bd80452,
@@ -3626,7 +3626,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 992294604}
   m_LocalRotation: {x: 0.12968391, y: -0.0000000058982152, z: 7.71418e-10, w: 0.9915554}
-  m_LocalPosition: {x: 0.0039221956, y: 215950.36, z: -328781.8}
+  m_LocalPosition: {x: 0.003945799, y: 217246.36, z: -330765.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -4488,7 +4488,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1514585324}
   m_Direction: 3
   m_Value: 0
-  m_Size: 0.76240754
+  m_Size: 0.7661741
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -4598,6 +4598,31 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7318841422340017577, guid: 621fd7229ed2002498a2c5e6e44dbf7c,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -29.16
+      objectReference: {fileID: 0}
+    - target: {fileID: 7318841421747179293, guid: 621fd7229ed2002498a2c5e6e44dbf7c,
+        type: 3}
+      propertyPath: m_Size.z
+      value: 9.56666
+      objectReference: {fileID: 0}
+    - target: {fileID: 7318841421747179293, guid: 621fd7229ed2002498a2c5e6e44dbf7c,
+        type: 3}
+      propertyPath: m_Center.x
+      value: -0.3196155
+      objectReference: {fileID: 0}
+    - target: {fileID: 7318841421747179293, guid: 621fd7229ed2002498a2c5e6e44dbf7c,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 7.2948456
+      objectReference: {fileID: 0}
+    - target: {fileID: 7318841421747179293, guid: 621fd7229ed2002498a2c5e6e44dbf7c,
+        type: 3}
+      propertyPath: m_Center.z
+      value: 0.3327002
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 621fd7229ed2002498a2c5e6e44dbf7c, type: 3}
