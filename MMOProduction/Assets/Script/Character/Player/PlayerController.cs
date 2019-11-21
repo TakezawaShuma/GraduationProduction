@@ -255,6 +255,10 @@ public class PlayerController : MonoBehaviour
                 if (target.GetComponent<Marker>().STATE != Marker.State.Choice)
                 {
                     target.GetComponent<Marker>().STATE = Marker.State.Choice;
+                    if (target.GetComponent<Marker>().TYPE == Marker.Type.Enemy)
+                    {
+                        target.GetComponentInParent<Enemy>().UI_HP.On();
+                    }
                 }
                 else
                 {
@@ -324,6 +328,10 @@ public class PlayerController : MonoBehaviour
     {
         mode = Mode.Normal;
         target.GetComponent<Marker>().STATE = Marker.State.None;
+        if (target.GetComponent<Marker>().TYPE == Marker.Type.Enemy)
+        {
+            target.GetComponentInParent<Enemy>().UI_HP.Off();
+        }
         target = null;
         lockState = false;
         weapon.SetActive(false);
