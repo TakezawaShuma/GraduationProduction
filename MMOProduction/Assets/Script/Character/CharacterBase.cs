@@ -25,9 +25,6 @@ public abstract class CharacterBase : MonoBehaviour
 
     public const float UPDATE_SPEED = 1.0f / 3.0f;
 
-    [SerializeField]
-    private float aiu = 0f;
-
     /// <summary>
     /// キャラクターの初期化設定
     /// </summary>
