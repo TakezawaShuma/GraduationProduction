@@ -1651,7 +1651,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 992294604}
   m_LocalRotation: {x: 0.12968391, y: -0.0000000058982152, z: 7.71418e-10, w: 0.9915554}
-  m_LocalPosition: {x: 0.0038357112, y: 211201.73, z: -321512.3}
+  m_LocalPosition: {x: 0.0038385694, y: 211358.67, z: -321752.56}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1687,7 +1687,7 @@ MonoBehaviour:
     m_Bits: 32768
   isApproachGround: 1
   approachSpeed: 10
-  moveAngle: 25
+  moveAngle: 10
 --- !u!65 &992294609
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2085,8 +2085,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1514585325}
   m_HandleRect: {fileID: 1514585324}
   m_Direction: 3
-  m_Value: 0.0000017144707
-  m_Size: 0.7661741
+  m_Value: 0.0000035422268
+  m_Size: 0.844219
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

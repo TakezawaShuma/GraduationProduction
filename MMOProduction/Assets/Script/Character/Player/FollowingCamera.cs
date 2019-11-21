@@ -101,6 +101,7 @@ public class FollowingCamera : MonoBehaviour
         }
 
         Vector3 lookAtPos;
+        updateDistance(Input.GetAxis("Mouse ScrollWheel"));
 
         if (lockOnTarget)
         {
@@ -137,7 +138,6 @@ public class FollowingCamera : MonoBehaviour
             lastPos = transform.position;
             dist = 0;
         }
-        updateDistance(Input.GetAxis("Mouse ScrollWheel"));
 
         transform.LookAt(lookAtPos);
 
