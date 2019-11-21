@@ -75,6 +75,7 @@ public class TitleSceneManager : MonoBehaviour
     private GameObject loadingCirclePrefab_;
     private GameObject loadingCircle;
 
+    private SystemSound sound_;
     // Start is called before the first frame update
     void Start()
     {
@@ -100,6 +101,8 @@ public class TitleSceneManager : MonoBehaviour
             wsl.createAction = CreateAction;
             wsl.loginAction = LoginAction;
         }
+
+        sound_ = GetComponent<SystemSound>();
     }
 
 
@@ -427,4 +430,7 @@ public class TitleSceneManager : MonoBehaviour
         else if (errorCount < 10) { wsl.Send(new Packes.LoginUser(id_.text, pw_.text).ToJson()); errorCount++; }
         else { errorCount = 0; }
     }
+
+    // 選択の音
+    public void EnterSoundPlay() => sound_.SystemPlay(SYSTEM_SOUND_TYPE.ENTER);
 }
