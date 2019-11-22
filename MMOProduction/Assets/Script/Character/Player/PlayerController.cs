@@ -6,6 +6,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerController : MonoBehaviour
 {
@@ -132,10 +133,7 @@ public class PlayerController : MonoBehaviour
 
                 if (v.magnitude > playerSetting.LOD)
                 {
-                    target.GetComponent<Marker>().STATE = Marker.State.None;
-                    target = null;
-                    lockState = false;
-                    FollowingCamera.LOCK = null;
+                    RemoveTarget();
                 }
             }
 
@@ -224,6 +222,12 @@ public class PlayerController : MonoBehaviour
 
     public void LockOn()
     {
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            // かぶさってるので処理キャンセル
+            return;
+        }
+
         bool noLock = false;
 
         Ray ray = FollowingCamera.GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
@@ -327,10 +331,13 @@ public class PlayerController : MonoBehaviour
     public void RemoveTarget()
     {
         mode = Mode.Normal;
-        target.GetComponent<Marker>().STATE = Marker.State.None;
-        if (target.GetComponent<Marker>().TYPE == Marker.Type.Enemy)
+        if (target)
         {
-            target.GetComponentInParent<Enemy>().UI_HP.Off();
+            target.GetComponent<Marker>().STATE = Marker.State.None;
+            if (target.GetComponent<Marker>().TYPE == Marker.Type.Enemy)
+            {
+                target.GetComponentInParent<Enemy>().UI_HP.Off();
+            }
         }
         target = null;
         lockState = false;
