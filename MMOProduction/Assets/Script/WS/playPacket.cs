@@ -270,6 +270,8 @@ namespace Packes
         public float z;
         /// <summary>方向</summary>
         public float dir;
+        /// <summary>名前</summary>
+        public string name;
 
         /// <summary>デフォルトコンストラクタ</summary>
         public TranslationStoC()

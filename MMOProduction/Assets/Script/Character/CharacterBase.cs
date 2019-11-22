@@ -9,6 +9,8 @@ public abstract class CharacterBase : MonoBehaviour
     protected int hp = 0;
     protected int mp = 0;
     protected int status = 0;
+    protected string characterName = "";
+    public string Name { get { return characterName; } set { characterName = value; } }
 
     protected float nowFlame = 0;
 

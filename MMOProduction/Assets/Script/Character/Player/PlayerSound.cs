@@ -5,31 +5,31 @@ public class PlayerSound : MonoBehaviour
 {
     // -------- 歩く --------
     [Header("草原"), SerializeField]
-    private AudioClip grassland_;
+    private AudioClip grassland_ = null;
     [Header("砂道"), SerializeField]
-    private AudioClip sandRoad_;
+    private AudioClip sandRoad_ = null;
     [Header("岩場"), SerializeField]
-    private AudioClip rockyPlace_;
+    private AudioClip rockyPlace_ = null;
     [Header("砂浜"), SerializeField]
-    private AudioClip sandyBeach_;
+    private AudioClip sandyBeach_ = null;
 
     // -------- 攻撃 --------
     [Header("斬撃"), SerializeField]
-    private AudioClip slashing_;
+    private AudioClip slashing_ = null;
     [Header("打撃"), SerializeField]
-    private AudioClip blow_;
+    private AudioClip blow_ = null;
     [Header("炎魔法"), SerializeField]
-    private AudioClip fireBall_;
+    private AudioClip fireBall_ = null;
     [Header("雷魔法"), SerializeField]
-    private AudioClip thunder_;
+    private AudioClip thunder_ = null;
     [Header("水魔法"), SerializeField]
-    private AudioClip water_;
+    private AudioClip water_ = null;
 
     // -------- その他 --------
     [Header("被弾"), SerializeField]
-    private AudioClip damage_;
+    private AudioClip damage_ = null;
     [Header("死亡"), SerializeField]
-    private AudioClip die_;
+    private AudioClip die_ = null;
 
     // オーディオソース
     private AudioSource audioSource_ = null;
@@ -100,5 +100,19 @@ public class PlayerSound : MonoBehaviour
     /// </summary>
     public void Die() {
         if (audioSource_.isPlaying) audioSource_.PlayOneShot(die_);
+    }
+
+    /// <summary>
+    /// 音量設定
+    /// </summary>
+    public void SettingVolume(float _val) {
+        audioSource_.volume = _val;
+    }
+
+    /// <summary>
+    /// ミュート
+    /// </summary>
+    public void Mute(bool _state) {
+        audioSource_.mute = _state;
     }
 }

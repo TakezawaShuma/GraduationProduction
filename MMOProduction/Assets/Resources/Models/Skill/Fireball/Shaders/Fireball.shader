@@ -6,21 +6,21 @@
 
 Shader "Custom/Fireball"
 {
-    Properties
-    {
-        [HideInInspector] _MainTex ("Texture", 2D) = "white" {}
+	Properties
+	{
+		[HideInInspector] _MainTex ("Texture", 2D) = "white" {}
 
 		_DissolveTex ("Dissolve Tex", 2D) = "white" {}
 		_Color ("Main Color", Color) = (1, 1, 1, 1)
 		_GlowColor ("Glow Color", Color) = (1, 1, 1, 1)
 		_Opacity ("Glow Opacity", Float) = 2.0
 		_Strength ("Glow Strength", Float) = 0.3
-    }
-    SubShader
-    {
+	}
+	SubShader
+	{
 		CGINCLUDE
 		#include "UnityCG.cginc"
-		#include "Assets/CGInclude/Noise.cginc"
+		#include "Assets/Ex/CGInclude/Noise.cginc"
 
 		uniform sampler2D _MainTex;
 		uniform sampler2D _DissolveTex;
@@ -34,8 +34,8 @@ Shader "Custom/Fireball"
 		// 1パス目
 		// 通常のレンダリング
 		// ---------------------------------------
-        Pass
-        {
+		Pass
+		{
 			Tags
 			{
 				"LightMode" = "ForwardBase"
@@ -44,9 +44,9 @@ Shader "Custom/Fireball"
 
 			ZWrite Off
 
-            CGPROGRAM
-            #pragma vertex vert
-            #pragma fragment frag
+			CGPROGRAM
+			#pragma vertex vert
+			#pragma fragment frag
 
 			struct appdata
 			{
@@ -77,9 +77,9 @@ Shader "Custom/Fireball"
 				float c = fBm(i.uv * 100);
 				col.rgb += float3(c, c, c);
 				return col;
-            }
-            ENDCG
-        }
+			}
+			ENDCG
+		}
 
 		// ---------------------------------------
 		// 2パス目
@@ -158,5 +158,5 @@ Shader "Custom/Fireball"
 			}
 			ENDCG
 		}
-    }
+	}
 }

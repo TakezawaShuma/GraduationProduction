@@ -43,7 +43,7 @@ public class PlayerController : MonoBehaviour
     public bool Lock { set { lockState = value; } }
 
     private GameObject target;
-    public GameObject Target { get { return target; } }
+    public GameObject Target { get { return target; } set { target = value; } }
 
     private Rigidbody rigidbody1;
 
@@ -141,12 +141,7 @@ public class PlayerController : MonoBehaviour
 
             if (Input.GetMouseButtonDown(1) && target != null)
             {
-                mode = Mode.Normal;
-                target.GetComponent<Marker>().STATE = Marker.State.None;
-                target = null;
-                lockState = false;
-                weapon.SetActive(false);
-                FollowingCamera.LOCK = null;
+                RemoveTarget();
             }
 
             currentState.Execute();
@@ -260,6 +255,10 @@ public class PlayerController : MonoBehaviour
                 if (target.GetComponent<Marker>().STATE != Marker.State.Choice)
                 {
                     target.GetComponent<Marker>().STATE = Marker.State.Choice;
+                    if (target.GetComponent<Marker>().TYPE == Marker.Type.Enemy)
+                    {
+                        target.GetComponentInParent<Enemy>().UI_HP.On();
+                    }
                 }
                 else
                 {
@@ -318,6 +317,24 @@ public class PlayerController : MonoBehaviour
 
     public float Distance(GameObject _target)
     {
-        return Vector3.Distance(_target.transform.position, transform.position);
+        if (_target != null)
+        {
+            return Vector3.Distance(_target.transform.position, transform.position);
+        }
+        else { return -1; }
+    }
+
+    public void RemoveTarget()
+    {
+        mode = Mode.Normal;
+        target.GetComponent<Marker>().STATE = Marker.State.None;
+        if (target.GetComponent<Marker>().TYPE == Marker.Type.Enemy)
+        {
+            target.GetComponentInParent<Enemy>().UI_HP.Off();
+        }
+        target = null;
+        lockState = false;
+        weapon.SetActive(false);
+        FollowingCamera.LOCK = null;
     }
 }

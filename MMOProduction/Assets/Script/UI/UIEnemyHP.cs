@@ -5,6 +5,9 @@ using UnityEngine.UI;
 
 public class UIEnemyHP : MonoBehaviour
 {
+    [SerializeField, Header("キャンバス")]
+    private GameObject canvas = null;
+
     [SerializeField, Header("スライダー")]
     private Slider slider = null;
 
@@ -26,5 +29,15 @@ public class UIEnemyHP : MonoBehaviour
     {
         slider.value = hp;
         text.text = hp.ToString();
+    }
+
+    public void On()
+    {
+        canvas.SetActive(true);
+    }
+
+    public void Off()
+    {
+        canvas.SetActive(false);
     }
 }

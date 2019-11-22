@@ -12,6 +12,7 @@ public class Enemy : CharacterBase
 
     public UIEnemyHP UI_HP
     {
+        get { return uIHP; }
         set { uIHP = value; }
     }
     
@@ -56,23 +57,23 @@ public class Enemy : CharacterBase
     public void PlayTriggerAnimetion(string _animetionName)
     {
         gameObject.GetComponent<Animator>().SetTrigger(_animetionName);
+        Debug.Log(_animetionName);
     }
 
 
     private void OnCollisionEnter(Collision collision)
     {
         if (gameObject.GetComponent<Animator>().GetCurrentAnimatorClipInfo(0)[0].clip.name == "Attack 01"
-            && collision.gameObject.tag == "Player")
-        {
-
+            && collision.gameObject.tag == "Player"){
             Debug.Log("攻撃がヒットしたよ");
-
         }
     }
 
-    void DestroyMe()
+    public void DestroyMe()
     {
+        Debug.Log("エネミーの名前:" + this.gameObject.name);
         Destroy(this.gameObject);
+        Debug.Log("消したよ！");
     }
     
 }

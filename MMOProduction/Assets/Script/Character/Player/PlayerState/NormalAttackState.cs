@@ -53,7 +53,7 @@ public class NormalAttackState : BaseState
     private bool HitRange(float _range)
     {
         float dis = playerController.Distance(playerController.Target);
-        if (dis < _range)
+        if (dis < _range && dis > 0)
         {
             int enemyID = playerController.Target.gameObject.GetComponentInParent<Enemy>().ID;
             int myID = UserRecord.ID;
