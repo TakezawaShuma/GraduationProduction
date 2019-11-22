@@ -6783,8 +6783,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1151124041}
   m_TextComponent: {fileID: 545308634}
   m_Placeholder: {fileID: 241938734}
-  m_ContentType: 7
-  m_InputType: 2
+  m_ContentType: 0
+  m_InputType: 0
   m_AsteriskChar: 42
   m_KeyboardType: 0
   m_LineType: 0
@@ -8480,7 +8480,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8207370bc14231049971798453a2e169, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  connectFlag: 0
+  connectFlag: 1
   selectUIList_:
   - {fileID: 927173938}
   - {fileID: 1207362943}

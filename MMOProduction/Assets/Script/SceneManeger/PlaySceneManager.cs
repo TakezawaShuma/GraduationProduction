@@ -34,6 +34,9 @@ public class PlaySceneManager : MonoBehaviour
     [SerializeField]
     private PlayerUI playerUI = null;
 
+    [SerializeField]
+    private GameUserSetting userSeeting = null;
+
     bool updateFlag = true;
 
     // ソケット
@@ -191,6 +194,7 @@ public class PlaySceneManager : MonoBehaviour
             tmp.AddComponent<PlayerController>();
             tmp.AddComponent<PlayerSetting>();
             tmp.GetComponent<PlayerController>().Init(tmp.GetComponent<Player>(), FollowingCamera, tmp.GetComponent<PlayerSetting>(), chat, tmp.GetComponent<Animator>());
+            userSeeting.Init(tmp);
             player = tmp.GetComponent<Player>();
             FollowingCamera.SetTarget(tmp);
             userPlayer = tmp;
