@@ -31,6 +31,8 @@ public class PlaySceneManager : MonoBehaviour
     private GameObject nameUI = null;
     [SerializeField, Header("エネミーのステータスUI")]
     private GameObject enemyStatusCanvas = null;
+    [SerializeField]
+    private PlayerUI playerUI = null;
 
     bool updateFlag = true;
 
@@ -196,6 +198,9 @@ public class PlaySceneManager : MonoBehaviour
             // ミニマップのカメラの作成
             var miniMapTmp = Instantiate<GameObject>(miniMapCameraPrefab_);
             miniMapTmp.GetComponent<MiniMapController>().Init(tmp);
+
+            playerUI.PLAYER_CMP = tmp.GetComponent<Player>();
+            playerUI.PLAYER_NAME = UserRecord.Name;
         }
     }
 
