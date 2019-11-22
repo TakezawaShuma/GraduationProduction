@@ -189,7 +189,7 @@ public class TitleSceneManager : MonoBehaviour
             if (connectFlag)
             {
                 // ログイン処理
-                wsl.Send(new Packes.LoginUser(id, pw, userName_.text).ToJson());
+                wsl.Send(new Packes.LoginUser(id, pw).ToJson());
             }
         }
         else ErrorOn(result);
@@ -232,7 +232,7 @@ public class TitleSceneManager : MonoBehaviour
                 if (connectFlag)
                 {
                     // 送信処理
-                    wsl.Send(new Packes.CreateUser(id, pw).ToJson());
+                    wsl.Send(new Packes.CreateUser(id, pw, userName_.text).ToJson());
                 }
             }
             else
@@ -405,7 +405,7 @@ public class TitleSceneManager : MonoBehaviour
     /// <param name="_packet"></param>
     private void CreateAction(Packes.CreateOK _packet) {
         Debug.Log("create ok" + id_.text + "/" + pw_.text);
-        wsl.Send(new Packes.LoginUser(id_.text, pw_.text, "").ToJson());
+        wsl.Send(new Packes.LoginUser(id_.text, pw_.text).ToJson());
     }
 
     /// <summary>
@@ -431,7 +431,7 @@ public class TitleSceneManager : MonoBehaviour
             ButtonState(true);
             LoadingUIDelete();
         }
-        else if (errorCount < 10) { wsl.Send(new Packes.LoginUser(id_.text, pw_.text, userName_.text).ToJson()); errorCount++; }
+        else if (errorCount < 10) { wsl.Send(new Packes.LoginUser(id_.text, pw_.text).ToJson()); errorCount++; }
         else { errorCount = 0; }
     }
 

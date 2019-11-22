@@ -15,6 +15,8 @@ namespace Packes
         public string user_name;
         /// <summary>パスワード</summary>
         public string pass;
+        // <summary>キャラクター名</summary>
+        public string character_name;
 
         /// <summary>デフォルトコンストラクタ</summary>
         public CreateUser(){
@@ -25,11 +27,14 @@ namespace Packes
         /// <param name="_pass">パスワード</summary>
         public CreateUser(
             string _user_name,
-            string _pass
-        ){
+            string _pass,
+            string _character_name
+        )
+        {
             this.command = (int)CommandData.CreateUser;
             this.user_name = _user_name;
             this.pass = _pass;
+            this.character_name = _character_name;
         }
     }
 
@@ -41,8 +46,6 @@ namespace Packes
         public string user_name;
         /// <summary>パスワード</summary>
         public string pass;
-        // <summary>キャラクター名</summary>
-        public string character_name;
 
         /// <summary>デフォルトコンストラクタ</summary>
         public LoginUser(){
@@ -53,13 +56,11 @@ namespace Packes
         /// <param name="_name">パスワード</summary>
         public LoginUser(
             string _user_name,
-            string _pass,
-            string _character_name
+            string _pass
         ){
             this.command = (int)CommandData.LoginUser;
             this.user_name = _user_name;
             this.pass = _pass;
-            this.character_name = _character_name;
         }
     }
 

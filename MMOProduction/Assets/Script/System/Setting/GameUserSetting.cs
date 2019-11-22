@@ -23,6 +23,11 @@ public class GameUserSetting : MonoBehaviour
     [Header("BGM音"), SerializeField]
     private AudioSource backMusic;
 
+    public void Init(GameObject _player)
+    {
+        playerSound_ = _player.GetComponent<PlayerSound>();
+    }
+
     void Update() {
         if (!mute.isOn) SettingVolume();
         
