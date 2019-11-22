@@ -39,6 +39,12 @@ public class Player : MonoBehaviour
 
     private void Start()
     {
+        HP = 30;
+        MP = 80;
+
+        MaxHp = 100;
+        MaxMp = 100;
+
         x = 0;
         y = 0;
         z = 0;
