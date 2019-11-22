@@ -39,13 +39,18 @@ public class SkillObject : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         // 敵にヒットした時の処理
-        // TODO : サーバーにデータを送信する
-        HitAction.Invoke(other);
         if (other.tag == "Enemy")
         {
-            //WS.WsPlay wsp = WS.WsPlay.Instance;
-            //Enemy enemy = other.GetComponent<Enemy>();
-            //wsp.Send(new Packes.Attack(enemy.ID, UserRecord.ID, 0, 0).ToJson());
+            // サーバーにデータを送信する
+            WS.WsPlay.Instance.Send(new Packes.Attack(
+                0,  // 敵さんのID
+                0,  // ユーザーのID
+                0,  // 発動したスキルのID
+                0   // マップのID
+                ).ToJson());
         }
+
+        // 衝突アクションを行う
+        HitAction.Invoke(other);
     }
 }

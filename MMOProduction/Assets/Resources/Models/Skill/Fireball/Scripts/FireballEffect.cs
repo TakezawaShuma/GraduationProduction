@@ -45,7 +45,7 @@ public class FireballEffect : MonoBehaviour
     private void Start()
     {
         _material = new Material(_renderingShader);
-        //InitializeComputeBuffer();
+        InitializeComputeBuffer();
     }
 
     private void Update()
