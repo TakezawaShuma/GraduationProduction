@@ -196,7 +196,7 @@ public class PlaySceneManager : MonoBehaviour
             userPlayer = tmp;
 
             // ミニマップのカメラの作成
-            var miniMapTmp = Instantiate<GameObject>(miniMapCameraPrefab_);
+            var miniMapTmp = Instantiate<GameObject>(miniMapCameraPrefab_, this.transform);
             miniMapTmp.GetComponent<MiniMapController>().Init(tmp);
 
             playerUI.PLAYER_CMP = tmp.GetComponent<Player>();
@@ -230,7 +230,7 @@ public class PlaySceneManager : MonoBehaviour
                 // 他のユーザーの作成
                 else
                 {
-                    var otherPlayer = Instantiate<GameObject>(otherPlayerPre_, new Vector3(data.x, data.y, data.z), Quaternion.Euler(0, data.dir, 0));
+                    var otherPlayer = Instantiate<GameObject>(otherPlayerPre_, new Vector3(data.x, data.y, data.z), Quaternion.Euler(0, data.dir, 0), this.transform);
                     otherPlayer.name = "otherPlayer" + data.user_id;
                     otherPlayer.tag = "OtherPlayer";
                     otherPlayer.transform.localScale = new Vector3(2, 2, 2);
