@@ -99,7 +99,7 @@ MonoBehaviour:
   - {r: 1, g: 1, b: 1, a: 1}
   executeRange: 5
   type: 0
-  lockObserve: 1
+  lockObserve: 0
 --- !u!136 &6733209875478919647
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -108,7 +108,7 @@ CapsuleCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4871035294516008985}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   m_Radius: 1.5
   m_Height: 4.5

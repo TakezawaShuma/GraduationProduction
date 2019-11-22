@@ -101,4 +101,18 @@ public class PlayerSound : MonoBehaviour
     public void Die() {
         if (audioSource_.isPlaying) audioSource_.PlayOneShot(die_);
     }
+
+    /// <summary>
+    /// 音量設定
+    /// </summary>
+    public void SettingVolume(float _val) {
+        audioSource_.volume = _val;
+    }
+
+    /// <summary>
+    /// ミュート
+    /// </summary>
+    public void Mute(bool _state) {
+        audioSource_.mute = _state;
+    }
 }

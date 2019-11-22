@@ -26,9 +26,13 @@ public class PlaySceneManager : MonoBehaviour
 
     [SerializeField]
     private ChatController chat = default(ChatController);
-
+    
+    [SerializeField]
+    private GameObject nameUI = null;
     [SerializeField, Header("エネミーのステータスUI")]
     private GameObject enemyStatusCanvas = null;
+    [SerializeField]
+    private PlayerUI playerUI = null;
 
     bool updateFlag = true;
 
@@ -188,13 +192,15 @@ public class PlaySceneManager : MonoBehaviour
             tmp.AddComponent<PlayerSetting>();
             tmp.GetComponent<PlayerController>().Init(tmp.GetComponent<Player>(), FollowingCamera, tmp.GetComponent<PlayerSetting>(), chat, tmp.GetComponent<Animator>());
             player = tmp.GetComponent<Player>();
-            tmp.GetComponent<NameUI>().TEXT.enabled = false;
             FollowingCamera.SetTarget(tmp);
             userPlayer = tmp;
 
             // ミニマップのカメラの作成
-            var miniMapTmp = Instantiate<GameObject>(miniMapCameraPrefab_);
+            var miniMapTmp = Instantiate<GameObject>(miniMapCameraPrefab_, this.transform);
             miniMapTmp.GetComponent<MiniMapController>().Init(tmp);
+
+            playerUI.PLAYER_CMP = tmp.GetComponent<Player>();
+            playerUI.PLAYER_NAME = UserRecord.Name;
         }
     }
 
@@ -224,14 +230,15 @@ public class PlaySceneManager : MonoBehaviour
                 // 他のユーザーの作成
                 else
                 {
-                    var otherPlayer = Instantiate<GameObject>(otherPlayerPre_, new Vector3(data.x, data.y, data.z), Quaternion.Euler(0, data.dir, 0));
+                    var otherPlayer = Instantiate<GameObject>(otherPlayerPre_, new Vector3(data.x, data.y, data.z), Quaternion.Euler(0, data.dir, 0), this.transform);
                     otherPlayer.name = "otherPlayer" + data.user_id;
                     otherPlayer.tag = "OtherPlayer";
                     otherPlayer.transform.localScale = new Vector3(2, 2, 2);
+                    GameObject name = Instantiate(nameUI, otherPlayer.transform);
                     var other = otherPlayer.AddComponent<OtherPlayers>();
                     other.Name = _packet.name;
+                    name.GetComponent<OtherUserNameUI>().UserName = other.Name;
                     other.Init(data.x, data.y, data.z, data.dir);
-                    otherPlayer.GetComponent<NameUI>().NameSet(data.user_id.ToString());
                     others.Add(data.user_id, other);
                     charcters.Add(data.user_id, other);
                 }
@@ -269,6 +276,7 @@ public class PlaySceneManager : MonoBehaviour
                     newEnemy.name = "Enemy:" + ene.master_id + "->" + ene.unique_id;
                     GameObject stutasCanvas = Instantiate(enemyStatusCanvas, newEnemy.transform);
                     stutasCanvas.GetComponent<UIEnemyHP>().MAX_HP = ene.hp;
+                    stutasCanvas.GetComponent<UIEnemyHP>().Off();
                     //newEnemy.GetComponent<Rigidbody>().useGravity = true;
                     Enemy enemy = newEnemy.AddComponent<Enemy>();
                     enemy.Init(ene.x, ene.y, ene.z, ene.dir);

@@ -12,6 +12,7 @@ public class Enemy : CharacterBase
 
     public UIEnemyHP UI_HP
     {
+        get { return uIHP; }
         set { uIHP = value; }
     }
     
