@@ -12,6 +12,10 @@ public class ChatLogMove : MonoBehaviour, IDragHandler
 {
     public void OnDrag(PointerEventData e)
     {
-        transform.position = e.position;
+        if (e.position.y < Screen.height && e.position.y > 0 &&
+            e.position.x < Screen.width  && e.position.x > 0)
+        {
+            transform.position = e.position;
+        }
     }
 }

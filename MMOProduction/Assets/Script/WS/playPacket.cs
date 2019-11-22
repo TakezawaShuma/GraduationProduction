@@ -439,6 +439,37 @@ namespace Packes
         }
     }
 
+
+    /// <summary>
+    /// 他のプレイヤーがスキルを使用したとき
+    /// </summary>
+    public class OtherPlayerUseSkill : IPacketDatas
+    {
+        /// <summary>使用者ID</summary>
+        public int user_id;
+        /// <summary>スキルID</summary>
+        public int skill_id;
+
+        /// <summary>デフォルトコンストラクタ</summary>
+        public OtherPlayerUseSkill()
+        {
+            this.command = (int)CommandData.OtherPlayerUseSkill;
+        }
+        /// <summary>コンストラクタ</summary>
+        /// <param name="_user_id">使用者ID</summary>
+        /// <param name="_skill_id">スキルID</summary>
+        public OtherPlayerUseSkill(
+            int _user_id,
+            int _skill_id
+        )
+        {
+            this.command = (int)CommandData.OtherPlayerUseSkill;
+            this.user_id = _user_id;
+            this.skill_id = _skill_id;
+        }
+    }
+
+
     /// <summary>
     /// 敵のスキル使用申請 command:225
     /// </summary>

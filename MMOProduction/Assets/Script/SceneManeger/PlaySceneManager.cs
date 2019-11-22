@@ -229,7 +229,6 @@ public class PlaySceneManager : MonoBehaviour
                     otherPlayer.tag = "OtherPlayer";
                     otherPlayer.transform.localScale = new Vector3(2, 2, 2);
                     var other = otherPlayer.AddComponent<OtherPlayers>();
-                    // 名前を登録
                     other.Name = _packet.name;
                     other.Init(data.x, data.y, data.z, data.dir);
                     otherPlayer.GetComponent<NameUI>().NameSet(data.user_id.ToString());
@@ -317,6 +316,7 @@ public class PlaySceneManager : MonoBehaviour
         //wsp.SendSaveDataOK();
 
         // プレイヤーに受け取ったセーブデータを渡す。
+        // プレイヤーのインスタンスを取る
         MakePlayer(new Vector3(5, 1, 15));
 
     }
@@ -329,8 +329,6 @@ public class PlaySceneManager : MonoBehaviour
     {
         updateFlag = true;
         wsp.Send(new Packes.GetEnemysDataCtoS(0, UserRecord.ID).ToJson());
-        // プレイヤーのインスタンスを取る
-
     }
 
     /// <summary>
@@ -364,6 +362,13 @@ public class PlaySceneManager : MonoBehaviour
         charcters.Remove(_packet.unique_id);
         //Debug.Log(charcters.Count);
         Debug.Log("敵は死んだ！！！");
+    }
+
+
+    private void OthersUseSkills(Packes.OtherPlayerUseSkill _paket)
+    {
+        // todo
+        // 他プレイヤーがスキルを使ったときの処理
     }
 
     /// <summary>

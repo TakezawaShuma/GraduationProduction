@@ -69,6 +69,8 @@ public enum CommandData
     /// <summary>エネミーが死んでいる時</summary>
     EnemyDieStoC = (int)222,
 
+    /// <summary>他プレイヤーが攻撃した </summary>
+    OtherPlayerUseSkill=(int)224,
     /// <summary>敵のスキル使用申請</summary>
     EnemyUseSkillRequest = (int)225,
     /// <summary>敵のスキル使用</summary>

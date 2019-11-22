@@ -31,6 +31,8 @@ namespace WS
         public Action<Packes.EnemyAliveStoC> enemyAliveAction;
         // エネミーが死んだ 222
         public Action<Packes.EnemyDieStoC> enemyDeadAction;
+        // 他のプレイヤーがスキルを使った 224
+        public Action<Packes.OtherPlayerUseSkill> othersUseSkillAction;
         // エネミーの攻撃準備 225
         public Action<Packes.EnemyUseSkillRequest> enemySkillReqAction;
         // エネミーが攻撃する 226
@@ -128,7 +130,6 @@ namespace WS
                             //statusAction(status);
                             //Debug.Log("ステータス共有");
                             statusAction(Json.ConvertToPackets<Packes.StatusStoC>(e.Data));
-
                             break;
 
                         case CommandData.LoadSaveData:      // セーブデータの受信
@@ -155,8 +156,13 @@ namespace WS
                             enemyDeadAction(Json.ConvertToPackets<Packes.EnemyDieStoC>(e.Data));
                             break;
 
+                        case CommandData.OtherPlayerUseSkill:   // 他プレイヤーがスキルを使った
+                            //Packes.OtherPlayerUseSkill other = Json.ConvertToPackets<Packes.OtherPlayerUseSkill>(e.Data);
+                            //othersUseSkillAction(other);
+                            othersUseSkillAction(Json.ConvertToPackets<Packes.OtherPlayerUseSkill>(e.Data));
+                            break;
+
                         case CommandData.EnemyUseSkillRequest:  // 敵スキルの使用申請
-                            Debug.Log("スキルを使用します。準備してください");
                             //Packes.EnemyUseSkillRequest skillReq = Json.ConvertToPackets<Packes.EnemyUseSkillRequest>(e.Data);
                             //enemySkillReqAction(skillReq);
                             enemySkillReqAction(Json.ConvertToPackets<Packes.EnemyUseSkillRequest>(e.Data));
