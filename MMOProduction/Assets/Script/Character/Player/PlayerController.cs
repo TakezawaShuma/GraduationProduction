@@ -70,10 +70,6 @@ public class PlayerController : MonoBehaviour
         set { skilId = value; }
     }
 
-    // スキル再生（使用？）クラス
-    [SerializeField]
-    private SkillPlayer _skillPlayer = null;
-
     public void Init(Player _playerData, FollowingCamera _camera, PlayerSetting _setting, ChatController _chat, Animator _animator)
     {
         PlayerData = _playerData;
@@ -115,8 +111,6 @@ public class PlayerController : MonoBehaviour
 
         rigidbody1 = GetComponent<Rigidbody>();
 
-        _skillPlayer = GetComponent<SkillPlayer>();
-
         sound_ = GetComponent<PlayerSound>();
     }
 
@@ -146,9 +140,14 @@ public class PlayerController : MonoBehaviour
         }
 
         // デバッグ スキル使用
+        // ファイア・ボール
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
-            _skillPlayer.GetSkill(0).Play();
+            Vector3 pos = transform.position;
+            pos.y += 2;
+            pos += transform.forward * 1;
+            Quaternion rot = transform.rotation;
+            SkillHandler.Instance.RequestToUseSkill(SkillID.Fireball, gameObject, pos, rot);
         }
     }
 
