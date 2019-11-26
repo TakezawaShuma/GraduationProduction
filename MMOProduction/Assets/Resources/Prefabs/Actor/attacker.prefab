@@ -984,9 +984,9 @@ GameObject:
   - component: {fileID: 667564124551022295}
   - component: {fileID: 6613963366847100238}
   - component: {fileID: 6929568144851652780}
-  - component: {fileID: 8225407507876919433}
   - component: {fileID: 8347693087212569058}
   - component: {fileID: 4507254016858444953}
+  - component: {fileID: 6286242389546766525}
   m_Layer: 18
   m_Name: attacker
   m_TagString: Untagged
@@ -1313,20 +1313,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weapons:
   - {fileID: 1909831974210040867}
---- !u!114 &8225407507876919433
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2136695631195096698}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ca73dc0bff609fb43ad5960abc0f666f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _skillArray:
-  - {fileID: 0}
 --- !u!82 &8347693087212569058
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1446,6 +1432,28 @@ MonoBehaviour:
   water_: {fileID: 0}
   damage_: {fileID: 0}
   die_: {fileID: 8300000, guid: ef5bf6fd4c9e46d4eabeff74f958816e, type: 3}
+--- !u!195 &6286242389546766525
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2136695631195096698}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.5
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 2
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &2149958233113188971
 GameObject:
   m_ObjectHideFlags: 0

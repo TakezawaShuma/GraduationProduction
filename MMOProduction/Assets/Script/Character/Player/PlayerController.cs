@@ -7,6 +7,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.AI;
 
 public class PlayerController : MonoBehaviour
 {
@@ -25,6 +26,16 @@ public class PlayerController : MonoBehaviour
     [SerializeField, Header("チャットコントローラー")]
     private ChatController chatController = null;
 
+    public enum MOVE_MODE
+    {
+        RIGID_BODY,
+        NAV_MESH_AGENT,
+    }
+
+    [SerializeField]
+    private MOVE_MODE moveMode = MOVE_MODE.NAV_MESH_AGENT;
+
+    private NavMeshAgent navMeshAgent = null;
 
     //[SerializeField, Header("攻撃判定用当たり判定")]
     private GameObject weapon = null;
@@ -103,7 +114,7 @@ public class PlayerController : MonoBehaviour
         KeyMoveState.Instance.Initialized(this, playerSetting, animatorManager);
         AutoRunState.Instance.Initialized(this, playerSetting, animatorManager);
         NormalAttackState.Instance.Initialized(this, playerSetting, animatorManager);
-
+        navMeshAgent = GetComponent<NavMeshAgent>();
         AttackCollider = GetComponent<WeaponList>().GetWeapons(0);
 
         currentState = IdleState.Instance;
@@ -188,9 +199,19 @@ public class PlayerController : MonoBehaviour
         Vector3 v = FollowingCamera.Angle * velocity;
 
         // 移動
-        rigidbody1.velocity = new Vector3(v.x, rigidbody1.velocity.y, v.z);
+        switch(moveMode)
+        {
+            case MOVE_MODE.RIGID_BODY:
+                rigidbody1.velocity = new Vector3(v.x, rigidbody1.velocity.y, v.z);
 
-        pos = rigidbody1.position;
+                pos = rigidbody1.position;
+                break;
+            case MOVE_MODE.NAV_MESH_AGENT:
+                navMeshAgent.Move(v * Time.deltaTime);
+
+                pos = navMeshAgent.transform.position;
+                break;
+        }
 
         transform.rotation = Quaternion.Euler(0, rot.eulerAngles.y, 0);
 
