@@ -369,7 +369,10 @@ public class PlaySceneManager : MonoBehaviour
         // HPを0にして死亡エフェクトやドロップアイテムの取得
         enemies[_packet.unique_id].HP = 0;
         enemies[_packet.unique_id].PlayTriggerAnimetion("Die");
-        player.GetComponent<PlayerController>().RemoveTarget();
+        if (player.GetComponent<PlayerController>().GetTargetEnemy().ID== _packet.unique_id)
+        {
+            player.GetComponent<PlayerController>().RemoveTarget();
+        }
         enemies.Remove(_packet.unique_id);
         charcters.Remove(_packet.unique_id);
         //Debug.Log(charcters.Count);

@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
 using UnityEngine.SceneManagement;
+using System.Collections;
 
 public class TitleSceneManager : MonoBehaviour
 {
@@ -292,11 +293,14 @@ public class TitleSceneManager : MonoBehaviour
                 } else if (pw_.isFocused) {
                     ConfirmPW_.ActivateInputField();
                     pw_.DeactivateInputField();
-                } else {
-                    id_.ActivateInputField();
+                } else if(ConfirmPW_.isFocused){
+                    userName_.ActivateInputField();
                     ConfirmPW_.DeactivateInputField();
+                } else if(userName_.isFocused){
+                    id_.ActivateInputField();
+                    userName_.DeactivateInputField();
                 }
-                break;
+                break;  
 
             default: break;
         }
@@ -431,10 +435,16 @@ public class TitleSceneManager : MonoBehaviour
             ButtonState(true);
             LoadingUIDelete();
         }
-        else if (errorCount < 10) { wsl.Send(new Packes.LoginUser(id_.text, pw_.text).ToJson()); errorCount++; }
+        else if (errorCount < 10) { StartCoroutine(ReSend(new Packes.LoginUser(id_.text, pw_.text).ToJson()));  errorCount++; }
         else { errorCount = 0; }
     }
 
     // 選択の音
     public void EnterSoundPlay() => sound_.SystemPlay(SYSTEM_SOUND_TYPE.ENTER);
+
+    public IEnumerator ReSend(string _json)
+    {
+        yield return new WaitForSeconds(0.5f);
+        wsl.Send(_json);
+    }
 }
