@@ -1,0 +1,15 @@
+﻿AnimatorManagerの使い方
+＊AnimatorManagerには触らないこと
+＊変更するのはAnimatorParametorDataだけでOK
+
+①使いたいアニメーターのparametersの順番でScript(AnimatorParametorData)
+に列挙型を作成
+*namespaceを忘れずに
+
+②動かすためのScript上にAnimatorManagerを作成する
+
+③AnimatorManager.ANIMATORに動かすアニメーターを設定する
+
+④if(条件){
+AnimatorManager.AnimChange((int)列挙型で作った奴);}
+みたいに使えば完成！！
