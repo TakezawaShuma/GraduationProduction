@@ -78,7 +78,7 @@ public class ChatMessageController : MonoBehaviour
 
     private void SendInputMassege(string _massege)
     {
-        string name = UserRecord.ID.ToString();
+        string name = UserRecord.Name.ToString();
         Packes.SendAllChat mag = new Packes.SendAllChat(name, _massege);
         WS.WsChat.Instance.Send(Json.ConvertToJson(mag)); 
     }

@@ -86,7 +86,7 @@ public class KeyMoveState : BaseState
             {
                 if (velocity.x == 0)
                 {
-                    velocity.x = -1;
+                    velocity.x = -0.25f;
                 }
             }
         }

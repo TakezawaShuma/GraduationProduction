@@ -56,6 +56,7 @@ public class PlayerController : MonoBehaviour
 
     private GameObject target;
     public GameObject Target { get { return target; } set { target = value; } }
+    public Enemy GetTargetEnemy() { return target.GetComponent<Enemy>(); }
 
     private Rigidbody rigidbody1;
 
@@ -265,7 +266,7 @@ public class PlayerController : MonoBehaviour
                 {
                     if (target != hit.collider.gameObject)
                     {
-                        target.GetComponent<Marker>().STATE = Marker.State.None;
+                        RemoveTarget();
                     }
                 }
 
@@ -309,15 +310,7 @@ public class PlayerController : MonoBehaviour
 
         if (noLock && mode == Mode.Normal)
         {
-            if (target != null)
-            {
-                target.GetComponent<Marker>().STATE = Marker.State.None;
-            }
-            target = null;
-            lockState = false;
-            weapon.SetActive(false);
-
-            FollowingCamera.LOCK = null;
+            RemoveTarget();
         }
     }
 
