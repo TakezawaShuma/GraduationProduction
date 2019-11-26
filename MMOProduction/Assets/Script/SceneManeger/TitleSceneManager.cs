@@ -292,11 +292,14 @@ public class TitleSceneManager : MonoBehaviour
                 } else if (pw_.isFocused) {
                     ConfirmPW_.ActivateInputField();
                     pw_.DeactivateInputField();
-                } else {
-                    id_.ActivateInputField();
+                } else if(ConfirmPW_.isFocused){
+                    userName_.ActivateInputField();
                     ConfirmPW_.DeactivateInputField();
+                } else if(userName_.isFocused){
+                    id_.ActivateInputField();
+                    userName_.DeactivateInputField();
                 }
-                break;
+                break;  
 
             default: break;
         }
