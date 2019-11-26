@@ -10,6 +10,9 @@ public class UIManager : MonoBehaviour
     [SerializeField]
     private KeyCode[] key = null;
 
+    [SerializeField]
+    private ChatController chat = null;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -30,7 +33,7 @@ public class UIManager : MonoBehaviour
         {
             for (int i = 0; i < ui.Length; i++)
             {
-                if (Input.GetKeyDown(key[i]))
+                if (Input.GetKeyDown(key[i])&&!chat.GetChatActiveFlag())
                 {
                     if (ui[i].activeInHierarchy)
                     {
