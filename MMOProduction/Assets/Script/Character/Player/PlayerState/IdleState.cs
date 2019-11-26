@@ -32,7 +32,7 @@ public class IdleState : BaseState
     {
         if (playerSetting.IA)
         {
-            animatorManager.Idle();
+            animatorManager.AnimChange((int)PlayerAnim.PARAMETER_ID.IDLE);
         }
 
         if (Input.GetKeyDown(playerSetting.FKey) || Input.GetKeyDown(playerSetting.BKey) || Input.GetKeyDown(playerSetting.LKey) || Input.GetKeyDown(playerSetting.RKey))

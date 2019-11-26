@@ -24,7 +24,7 @@ public class NormalAttackState : BaseState
 
     public override void Start()
     {
-        animatorManager.NormalAttack();
+        animatorManager.AnimChange((int)PlayerAnim.PARAMETER_ID.ATTACK);
         changeAnimeState = animatorManager.ANIMATOR.GetCurrentAnimatorStateInfo(0).shortNameHash.Equals(Animator.StringToHash("Attack"));
         HitRange(4);
         playerController.SKIL = 0;

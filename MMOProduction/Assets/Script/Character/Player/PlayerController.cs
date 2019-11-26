@@ -99,7 +99,8 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         pos = Vector3.zero;
-        animatorManager = new AnimatorManager(animator);
+        animatorManager = new AnimatorManager();
+        animatorManager.ANIMATOR = animator;
         IdleState.Instance.Initialized(this, playerSetting, animatorManager);
         KeyMoveState.Instance.Initialized(this, playerSetting, animatorManager);
         AutoRunState.Instance.Initialized(this, playerSetting, animatorManager);
