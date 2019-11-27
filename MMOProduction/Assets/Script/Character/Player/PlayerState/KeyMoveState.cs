@@ -99,7 +99,7 @@ public class KeyMoveState : BaseState
         {
             if (playerSetting.IA)
             {
-                animatorManager.Run();
+                animatorManager.AnimChange((int)PlayerAnim.PARAMETER_ID.RUN);
             }
             velocity *= playerSetting.DS;
         }
@@ -107,7 +107,7 @@ public class KeyMoveState : BaseState
         {
             if (playerSetting.IA)
             {
-                animatorManager.Walk();
+                animatorManager.AnimChange((int)PlayerAnim.PARAMETER_ID.WALK);
             }
             velocity *= playerSetting.NS;
         }
