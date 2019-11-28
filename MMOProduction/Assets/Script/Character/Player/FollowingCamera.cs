@@ -95,7 +95,7 @@ public class FollowingCamera : MonoBehaviour
 
     void LateUpdate()
     {
-        if (Input.GetMouseButton(1))
+        if (InputManager.InputMouseCheck(1) == INPUT_MODE.PLAY)
         {
             updateAngle(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
         }

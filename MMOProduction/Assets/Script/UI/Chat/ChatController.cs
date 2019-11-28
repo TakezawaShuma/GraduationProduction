@@ -40,15 +40,15 @@ public class ChatController : MonoBehaviour
     void Update()
     {
         // チャットのアクティブ化
-        if (Input.GetKeyUp(KeyCode.Return) && chatActiveFlag == false)
+        if (InputManager.InputKeyCheckUp(KeyCode.Return) && chatActiveFlag == false)
         {
             chatActiveFlag = true;
             chatFlame.gameObject.SetActive(chatActiveFlag);
             EventSystem.current.SetSelectedGameObject(chatFlame.GetComponent<ChatMessageController>().InputField);
         }
-        else if (Input.GetKeyUp(KeyCode.Return) && chatActiveFlag == true)
+        else if (InputManager.InputKeyCheckUp(KeyCode.Return) && chatActiveFlag == true)
         {
-            if (!Input.GetKey(KeyCode.LeftControl) && !Input.GetKey(KeyCode.RightControl))
+            if (!InputManager.InputKeyCheck(KeyCode.LeftControl) && !InputManager.InputKeyCheck(KeyCode.RightControl))
             {
                 chatActiveFlag = false;
                 chatFlame.gameObject.SetActive(chatActiveFlag);
