@@ -43,8 +43,8 @@ public class PlaySceneManager : MonoBehaviour
     // ソケット
     private WS.WsPlay wsp = null;
     private Player player = null;
-    private Dictionary<int, OtherPlayers> others = new Dictionary<int, OtherPlayers>();
-    private Dictionary<int, Enemy> enemies = new Dictionary<int, Enemy>();
+    //private Dictionary<int, OtherPlayers> others = new Dictionary<int, OtherPlayers>();
+    //private Dictionary<int, Enemy> enemies = new Dictionary<int, Enemy>();
     private Dictionary<int, CharacterBase> charcters = new Dictionary<int, CharacterBase>();
 
     // コールバック関数をリスト化
@@ -224,11 +224,11 @@ public class PlaySceneManager : MonoBehaviour
             if (data.user_id != UserRecord.ID)
             {
                 // 他ユーザーの更新
-                if (others.ContainsKey(data.user_id))
+                if (charcters.ContainsKey(data.user_id))
                 {
-                    if (others[data.user_id] != null)
+                    if (charcters[data.user_id] != null)
                     {
-                        others[data.user_id].UpdatePostionData(data.x, data.y, data.z, data.dir);
+                        charcters[data.user_id].UpdatePostionData(data.x, data.y, data.z, data.dir);
                     }
                 }
                 // todo 他プレイヤーの更新と作成を関数分けする
@@ -244,8 +244,7 @@ public class PlaySceneManager : MonoBehaviour
                     other.Name = _packet.name;
                     name.GetComponent<OtherUserNameUI>().UserName = other.Name;
                     other.Init(data.x, data.y, data.z, data.dir);
-                    others.Add(data.user_id, other);
-                    charcters.Add(data.user_id, other);
+                    charcters[data.user_id] = other;
                 }
             }
         }
@@ -267,11 +266,11 @@ public class PlaySceneManager : MonoBehaviour
             if(ene.unique_id!=UserRecord.ID)
             {
                 // 敵の更新
-                if (enemies.ContainsKey(ene.unique_id))
+                if (charcters.ContainsKey(ene.unique_id))
                 {
-                    if (enemies[ene.unique_id] != null)
+                    if (charcters[ene.unique_id] != null)
                     {
-                        enemies[ene.unique_id].UpdatePostionData(ene.x, ene.y, ene.z, ene.dir);
+                        charcters[ene.unique_id].UpdatePostionData(ene.x, ene.y, ene.z, ene.dir);
                     }
                 }
                 // 敵の作成
@@ -287,8 +286,6 @@ public class PlaySceneManager : MonoBehaviour
                     enemy.Init(ene.x, ene.y, ene.z, ene.dir);
                     enemy.UI_HP = stutasCanvas.GetComponent<UIEnemyHP>();
                     enemy.HP = ene.hp;
-                    enemies[ene.unique_id] = enemy;
-                    enemies[ene.unique_id].ID = ene.unique_id;
                     charcters[ene.unique_id] = enemy;
                     charcters[ene.unique_id].ID = ene.unique_id;
                     Debug.Log("エネミーの新規せいせ");
@@ -355,8 +352,8 @@ public class PlaySceneManager : MonoBehaviour
         // HPを減らすや状態の更新
 
         Debug.Log("敵は生存している");
-        enemies[_packet.unique_id].PlayTriggerAnimetion("Take Damage");
-        enemies[_packet.unique_id].HP = _packet.hp;
+        charcters[_packet.unique_id].GetComponent<Enemy>().PlayTriggerAnimetion("Take Damage");
+        charcters[_packet.unique_id].GetComponent<Enemy>().HP = _packet.hp;
     }
 
     /// <summary>
@@ -368,13 +365,15 @@ public class PlaySceneManager : MonoBehaviour
         // todo
         // 戦闘で計算後エネミーが死亡していたら
         // HPを0にして死亡エフェクトやドロップアイテムの取得
-        enemies[_packet.unique_id].HP = 0;
-        enemies[_packet.unique_id].PlayTriggerAnimetion("Die");
-        if (player.GetComponent<PlayerController>().GetTargetEnemy().ID== _packet.unique_id)
+        charcters[_packet.unique_id].GetComponent<Enemy>().HP = 0;
+        charcters[_packet.unique_id].GetComponent<Enemy>().PlayTriggerAnimetion("Die");
+        int target = player.GetComponent<PlayerController>().GetTargetEnemy().ID;
+
+        Debug.Log("TargetID : " + target + " , DieEnemyID : " + _packet.unique_id);
+        if (target == _packet.unique_id)
         {
             player.GetComponent<PlayerController>().RemoveTarget();
         }
-        enemies.Remove(_packet.unique_id);
         charcters.Remove(_packet.unique_id);
         //Debug.Log(charcters.Count);
         Debug.Log("敵は死んだ！！！");
@@ -403,7 +402,7 @@ public class PlaySceneManager : MonoBehaviour
     private void EnemyUseSkill(Packes.EnemyUseSkill _packet)
     {
         Debug.Log("敵のスキルが発動したよ");
-        enemies[_packet.enemy_id].PlayTriggerAnimetion("Attack");
+        charcters[_packet.enemy_id].GetComponent<Enemy>().PlayTriggerAnimetion("Attack");
     }
 
     /// <summary>
@@ -428,9 +427,8 @@ public class PlaySceneManager : MonoBehaviour
         }
         else
         {
-            Destroy(others[_packet.user_id].gameObject);
+            Destroy(charcters[_packet.user_id].gameObject);
             charcters.Remove(_packet.user_id);
-            others.Remove(_packet.user_id);
             Debug.Log(_packet.user_id + "さんがログアウトしたよ！");
         }
     }
@@ -498,7 +496,7 @@ public class PlaySceneManager : MonoBehaviour
     /// <returns></returns>
     public　OtherPlayers GetOtherPlayer(int _playerId)
     {
-        return others[_playerId];
+        return charcters[_playerId].GetComponent<OtherPlayers>();
     }
 
 
