@@ -15,6 +15,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 装備の基礎データ
+/// </summary>
 public class EquipmentData : ItemData
 {
     // 武器種

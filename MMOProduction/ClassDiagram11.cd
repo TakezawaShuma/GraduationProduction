@@ -1,0 +1,1334 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="error" Collapsed="true">
+    <Position X="30.75" Y="15.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Scenes\Debug\error.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="CharacterBase" Collapsed="true">
+    <Position X="8.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>FAYAAAAAAAAAgQAAAgAIAIQAAAAAAgIABMBCABAAAgA=</HashCode>
+      <FileName>Assets\Script\Character\CharacterBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WeaponList" Collapsed="true">
+    <Position X="13" Y="3.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAEAAAAAA=</HashCode>
+      <FileName>Assets\Script\Character\Player\WeaponList.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AnimatorManager" Collapsed="true">
+    <Position X="8.75" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAABAAAAAAAAAAAAAAAQABAAAYAAAAAAAAAAAAAI=</HashCode>
+      <FileName>Assets\Script\Character\Player\AnimatorManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Command" Collapsed="true">
+    <Position X="12.75" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQQAAAAAAAAAAAEAAABAAAAAAQAAAAAAAAAIAAAIEA=</HashCode>
+      <FileName>Assets\Script\Character\Player\Command.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FollowingCamera" Collapsed="true">
+    <Position X="5.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QBCCASRAAAABCAgAIAAAICQEEkQkACAABUAAAAABGCI=</HashCode>
+      <FileName>Assets\Script\Character\Player\FollowingCamera.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Player" Collapsed="true">
+    <Position X="4.5" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAQAABAHACAAgCAkAAAIIQAAQgAAAAAAQABgAQAAACA=</HashCode>
+      <FileName>Assets\Script\Character\Player\Player.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerAnimData" Collapsed="true">
+    <Position X="6.25" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAgAAAAIAAAAAAAAAAAAAAAAAAIAAAIAAAAAAAAAI=</HashCode>
+      <FileName>Assets\Script\Character\Player\PlayerAnimData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerController" Collapsed="true">
+    <Position X="8" Y="10" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAQRkAQgALAABBChICAAIKAgCAgkAABBQAACAAEAQIA=</HashCode>
+      <FileName>Assets\Script\Character\Player\PlayerController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerData" Collapsed="true">
+    <Position X="8" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAABgAQAAAgA=</HashCode>
+      <FileName>Assets\Script\Character\Player\PlayerData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerStatus" Collapsed="true">
+    <Position X="8" Y="11" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABCAAAAAgA=</HashCode>
+      <FileName>Assets\Script\Character\Player\PlayerData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SaveData" Collapsed="true">
+    <Position X="6.25" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAACAAAAAAAAAAAAAAAAgE=</HashCode>
+      <FileName>Assets\Script\Character\Player\PlayerData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Weapon" Collapsed="true">
+    <Position X="13" Y="4.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAgAAAAAAAAACAAAAACQAAAAAAIAAAgAAAAAA=</HashCode>
+      <FileName>Assets\Script\Character\Player\PlayerData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerSetting" Collapsed="true">
+    <Position X="4.5" Y="11" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CCBAAAEEAAgDAEhAAAEABAAAEJEQAAAAIAAACACDApI=</HashCode>
+      <FileName>Assets\Script\Character\Player\PlayerSetting.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerSound" Collapsed="true">
+    <Position X="6.25" Y="11" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAAACAyAACQCAAAgrAQAAAAgBAgAWAAAIAAAAAAAgAA=</HashCode>
+      <FileName>Assets\Script\Character\Player\PlayerSound.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DressedList" Collapsed="true">
+    <Position X="12.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\Character\Player\TakeOff.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TakeOff" Collapsed="true">
+    <Position X="12.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AgQEAAAAACAAAACAAAAAAAAAAAQAAgAAAAAADAAAAAA=</HashCode>
+      <FileName>Assets\Script\Character\Player\TakeOff.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NormalAttackState" Collapsed="true">
+    <Position X="1" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAEAACAAAAQAAAAAAAAAAABAACAAQAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\Character\Player\PlayerState\NormalAttackState.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="AutoRunState" Collapsed="true">
+    <Position X="5.5" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAACAAAAQAAAAAAAAAAABAAAAAQAQAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\Character\Player\PlayerState\AutoRunState.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="BaseState" Collapsed="true">
+    <Position X="4.5" Y="13" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAkAAAACAAABQAAAAAAAAAAAAAAAAAAABAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\Character\Player\PlayerState\BaseState.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="IdleState" Collapsed="true">
+    <Position X="3.25" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAACAAAAQAAAAAAAAAAABAAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\Character\Player\PlayerState\IdleState.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="KeyMoveState" Collapsed="true">
+    <Position X="7.75" Y="14.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAIAAAAAACAAAAQAAQAAAAAAAABAAAAAQAQAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\Character\Player\PlayerState\KeyMoveState.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OtherPlayers" Collapsed="true">
+    <Position X="10" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAAAAgAAAAAAAQgAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\Character\OtherPlayer\OtherPlayers.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TitleEnemy" Collapsed="true">
+    <Position X="15.75" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAQAgACAACAAAAAAAAAQAAEAAEQAIACAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\Character\Enemy\TitleEnemy.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Enemy" Collapsed="true">
+    <Position X="7.5" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAwAAAAAACIAAAAAEAAAAAAAQgAgAAAIAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\Character\Enemy\Enemy.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EnemyManager" Collapsed="true">
+    <Position X="7.5" Y="8" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AACAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAA=</HashCode>
+      <FileName>Assets\Script\Character\Enemy\EnemyDatas.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EnemyData" Collapsed="true">
+    <Position X="7.5" Y="7" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>Assets\Script\Character\Enemy\EnemyDatas.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Blink" Collapsed="true">
+    <Position X="15.25" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACACAAAAAAAAAACAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\Character\Animations\Blink.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="FaceController" Collapsed="true">
+    <Position X="15.25" Y="6.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACACAAAAAAAAAACAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\Character\Animations\FaceController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TitleSceneManager" Collapsed="true">
+    <Position X="1.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ACT/UAQQASAEAAAEBEEQAAgCACaEgQhkAQAAEEFAEwA=</HashCode>
+      <FileName>Assets\Script\SceneManeger\TitleSceneManager.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="wsl" />
+      <Field Name="sound_" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="PlaySceneManager" Collapsed="true">
+    <Position X="1.5" Y="1.75" Width="1.5" />
+    <AssociationLine Name="FollowingCamera" Type="FollowingCamera" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="3" Y="2.062" />
+        <Point X="3.375" Y="2.062" />
+        <Point X="3.375" Y="0.908" />
+        <Point X="5.25" Y="0.908" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="chat" Type="ChatController" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="3" Y="2.062" />
+        <Point X="6.5" Y="2.062" />
+        <Point X="6.5" Y="3.25" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="playerUI" Type="PlayerUI" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="3" Y="2.062" />
+        <Point X="3.375" Y="2.062" />
+        <Point X="3.375" Y="12.312" />
+        <Point X="4.5" Y="12.312" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="userSeeting" Type="GameUserSetting" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="3" Y="2.062" />
+        <Point X="9.75" Y="2.062" />
+        <Point X="9.75" Y="1.25" />
+        <Point X="12.417" Y="1.25" Type="JumpStart" />
+        <Point X="12.583" Y="1.25" Type="JumpEnd" />
+        <Point X="16.844" Y="1.25" />
+        <Point X="16.844" Y="1.5" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="wsp" Type="WS.WsPlay" ManuallyRouted="true" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="3" Y="2.062" />
+        <Point X="3.375" Y="2.062" />
+        <Point X="3.375" Y="3.066" />
+        <Point X="4.604" Y="3.066" Type="JumpStart" />
+        <Point X="4.771" Y="3.066" Type="JumpEnd" />
+        <Point X="6.417" Y="3.066" Type="JumpStart" />
+        <Point X="6.583" Y="3.066" Type="JumpEnd" />
+        <Point X="14.25" Y="3.066" />
+        <Point X="14.25" Y="2.191" />
+      </Path>
+    </AssociationLine>
+    <AssociationLine Name="ready" Type="Ready" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="3" Y="2.062" />
+        <Point X="3.375" Y="2.062" />
+        <Point X="3.375" Y="6.875" />
+        <Point X="0.875" Y="6.875" />
+        <Point X="0.875" Y="7.531" />
+        <Point X="1.25" Y="7.531" />
+      </Path>
+    </AssociationLine>
+    <TypeIdentifier>
+      <HashCode>AQQEABgEQbECAECBDUBCiAIAAgAIBAEhEUAYAQwFhWA=</HashCode>
+      <FileName>Assets\Script\SceneManeger\PlaySceneManager.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="FollowingCamera" />
+      <Field Name="chat" />
+      <Field Name="playerUI" />
+      <Field Name="userSeeting" />
+      <Field Name="wsp" />
+      <Field Name="player" />
+      <Field Name="ready" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="PositionSetter" Collapsed="true">
+    <Position X="23" Y="9.75" Width="1.5" />
+    <Compartments>
+      <Compartment Name="Nested Types" Collapsed="false" />
+    </Compartments>
+    <TypeIdentifier>
+      <HashCode>AAQACAAAACAAAAAAEAAAIAAAAQAAAgAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\SceneManeger\PositionSetter.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SystemSound" Collapsed="true">
+    <Position X="1.25" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAQAACAAAAAACAAAAAAAACAAEAAEBAASAAAAEAA=</HashCode>
+      <FileName>Assets\Script\SceneManeger\SystemSound.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="skill_table" Collapsed="true">
+    <Position X="21.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\System\game_data\skill_table.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="enemy_table" Collapsed="true">
+    <Position X="20.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\System\game_data\enemy_table.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="item_table" Collapsed="true">
+    <Position X="23.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\System\game_data\item_table.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GameUserSetting" Collapsed="true">
+    <Position X="16.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAQAAAAIAAAAgAAAgAAAAAgAABCAAAACAAAAAAA=</HashCode>
+      <FileName>Assets\Script\System\Setting\GameUserSetting.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Build" Collapsed="true">
+    <Position X="13.75" Y="11.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\System\Setting\Build.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Ready" Collapsed="true">
+    <Position X="1.25" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAADYAAAAQAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\System\Ready.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChatController" Collapsed="true">
+    <Position X="5.75" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQBAAAAACAAAAAAAAQAAAAAAAAAAAAgAQAAAACAAAA=</HashCode>
+      <FileName>Assets\Script\UI\Chat\ChatController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ChatLogMove" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="5.75" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\UI\Chat\ChatLogMove.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.2" Collapsed="true" />
+  </Class>
+  <Class Name="ChatMessageController" Collapsed="true">
+    <Position X="5.75" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AKQAgAAAACAARAEAAAAAAAAAACBAAAAQAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\UI\Chat\ChatMessageController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SwipeMove" Collapsed="true" BaseTypeListCollapsed="true">
+    <Position X="24.75" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAABAEAAAAAAAACAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\UI\inventory\SwipeMove.cs</FileName>
+    </TypeIdentifier>
+    <Lollipop Position="0.222" Collapsed="true" />
+  </Class>
+  <Class Name="DoubleClickButtonInspector" Collapsed="true">
+    <Position X="35.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\UI\inventory\DoubleClickButton.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="DoubleClickButton" Collapsed="true">
+    <Position X="35.75" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAABAAAAAAAAAAAAAAAAAAAAAAAAAAJAAAAAEAQCAA=</HashCode>
+      <FileName>Assets\Script\UI\inventory\DoubleClickButton.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ItemController" Collapsed="true">
+    <Position X="31.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>gAQAEBAIACYAAlCAACBACAAgAQAQIQEAYAQBUSAIAIA=</HashCode>
+      <FileName>Assets\Script\UI\inventory\ItemController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Item" Collapsed="true">
+    <Position X="31.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAQAAAAAAAAAAAAAAAEAAAAAAAAAAAAIgA=</HashCode>
+      <FileName>Assets\Script\UI\inventory\ItemController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ItemButton" Collapsed="true">
+    <Position X="33.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAQAAACAAAAAABAAAAAAAAAIgA=</HashCode>
+      <FileName>Assets\Script\UI\inventory\ItemController.cs</FileName>
+    </TypeIdentifier>
+    <ShowAsAssociation>
+      <Field Name="itemScript" />
+    </ShowAsAssociation>
+  </Class>
+  <Class Name="ItemList" Collapsed="true">
+    <Position X="27.75" Y="9.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAACAAAAAAAAAAAEAAAgAAAAAAAAAACA=</HashCode>
+      <FileName>Assets\Script\UI\Item\ItemList.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsumablesData" Collapsed="true">
+    <Position X="29.75" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAABCAAAAAAAAAAAIAAAAAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\UI\Item\ConsumablesData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ConsumablesList" Collapsed="true">
+    <Position X="33.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAEAAAgAAAIAAAAAACA=</HashCode>
+      <FileName>Assets\Script\UI\Item\ConsumablesList.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EquipmentData" Collapsed="true">
+    <Position X="27.75" Y="8.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAABAAACAAAAAAAAIQAAAAAAAAAAAIAAAAAAA=</HashCode>
+      <FileName>Assets\Script\UI\Item\EquipmentData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="EquipmentList" Collapsed="true">
+    <Position X="33.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgAAAAAAAAAAAAAAAAAAAEAAAgAAAAAAAAAACA=</HashCode>
+      <FileName>Assets\Script\UI\Item\EquipmentList.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ItemData" Collapsed="true">
+    <Position X="28.75" Y="7.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAARAAAACAAAAAAAAAAAAAAAAAAEAAAAAQAICAAAAgA=</HashCode>
+      <FileName>Assets\Script\UI\Item\ItemData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MiniMapController" Collapsed="true">
+    <Position X="35.5" Y="4.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAACAAAABAA=</HashCode>
+      <FileName>Assets\Script\UI\MiniMap\MiniMapController.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShortcutButton" Collapsed="true">
+    <Position X="24.25" Y="4.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAABAACAAAAAAAAAAAAAAUAAAAAAIAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\UI\Shortcut\ShortcutButton.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ShortcutManager" Collapsed="true">
+    <Position X="24.25" Y="3.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\UI\Shortcut\ShortcutManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Get_Point" Collapsed="true">
+    <Position X="29" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAEAAAAAAAAAQAQAAAAAQAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\UI\Skill\Get_Point.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Skill_attach" Collapsed="true">
+    <Position X="27.25" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAUAAIAEACAABBAABCAAAEAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\UI\Skill\Skill_attach.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Skill_Count" Collapsed="true">
+    <Position X="27.25" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAgAAAACAAAAIAAAAAAAAAAAAAQAAAAQBAAAAAAUA=</HashCode>
+      <FileName>Assets\Script\UI\Skill\Skill_Count.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Skill_Number" Collapsed="true">
+    <Position X="29" Y="2.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAYAAAAAACAAAAAABAAAAQAAAAAAACAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\UI\Skill\Skill_Number.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SkilltreeManager" Collapsed="true">
+    <Position X="29.5" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>ABQkAIAAACAAAAAAYCAAAEACBIIAAAgAAAAIEQAAEJA=</HashCode>
+      <FileName>Assets\Script\UI\Skilltree\SkilltreeManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SkillData" Collapsed="true">
+    <Position X="27.25" Y="3.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAgAQAAAAAAAAAAAAAAAAAIAAAIAAAAgA=</HashCode>
+      <FileName>Assets\Script\UI\Skilltree\SkilltreeCreater.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SkilltreeData" Collapsed="true">
+    <Position X="27.75" Y="6.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAGAAAAAAAAAAAAAAAAAAAAAAAEAAAAAA=</HashCode>
+      <FileName>Assets\Script\UI\Skilltree\SkilltreeCreater.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SkilltreeCreater" Collapsed="true">
+    <Position X="29.5" Y="5.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AARAAFAAACAAAAAAAAAAAAAAAAACAGAAAAAAAAAAAgA=</HashCode>
+      <FileName>Assets\Script\UI\Skilltree\SkilltreeCreater.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="PlayerUI" Collapsed="true">
+    <Position X="4.5" Y="12" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQQAAAEACAAQAAAIAEEAAKBAAAQAAAhAAAAAAKBAIE=</HashCode>
+      <FileName>Assets\Script\UI\PlayerUI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WS.WsPlay" Collapsed="true">
+    <Position X="13.5" Y="1.5" Width="1.5" />
+    <InheritanceLine Type="WS.WsBase" FixedToPoint="true">
+      <Path>
+        <Point X="12.5" Y="1.062" />
+        <Point X="12.5" Y="1.364" />
+        <Point X="14.25" Y="1.364" />
+        <Point X="14.25" Y="1.5" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAIEgEBAAAQABgoggQQCACIgAAAAA=</HashCode>
+      <FileName>Assets\Script\WS\WsPlay.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Close" Collapsed="true">
+    <Position X="19.25" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABA=</HashCode>
+      <FileName>Assets\Script\UI\Close.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="GenerateInventory" Collapsed="true">
+    <Position X="11.75" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAgA=</HashCode>
+      <FileName>Assets\Script\UI\GenerateInventory.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Marker" Collapsed="true">
+    <Position X="13.75" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>QQQAAAQAAAABAAQCAAAAAAAAABABAACEAAAAAoAAAEA=</HashCode>
+      <FileName>Assets\Script\UI\Marker.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MoveRange" Collapsed="true">
+    <Position X="21" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAABAAAAAAAAAACAQAAAAAAAAAAAQAAAAA=</HashCode>
+      <FileName>Assets\Script\UI\MoveRange.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="NameUI" Collapsed="true">
+    <Position X="24.75" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAgAAAAAAAAAAAAgAAAIAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\UI\NameUI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="OtherUserNameUI" Collapsed="true">
+    <Position X="24.75" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAQAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\UI\OtherUserNameUI.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="QuestBoard" Collapsed="true">
+    <Position X="13.75" Y="10.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAIAAACAAAAABAAAAABAAAAAAAAAAAAAAAAAAAIA=</HashCode>
+      <FileName>Assets\Script\UI\QuestBoard.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ReceiveEvent" Collapsed="true">
+    <Position X="19.25" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>EAAAAACAAAAAABAAAMAAAAAAAEIAAQAAABgAAAAACAA=</HashCode>
+      <FileName>Assets\Script\UI\ReceiveEvent.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="SlotData" Collapsed="true">
+    <Position X="11.75" Y="11.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQABAAAACAAgAAAAAAAAAAAAAAAAAAEAAAAAAAAAgA=</HashCode>
+      <FileName>Assets\Script\UI\SlotData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Talk" Collapsed="true">
+    <Position X="11.75" Y="12.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAABAAACAAAAABAAAAAAAAAAAAAAAIAQIAggAAAIA=</HashCode>
+      <FileName>Assets\Script\UI\Talk.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UIController_WorldSpace" Collapsed="true">
+    <Position X="30.75" Y="14.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAEACAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\UI\UIController_WorldSpace.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UIEnemyHP" Collapsed="true">
+    <Position X="23" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAIAAAAAAAAAAAAAEAAACABAAAAAIAAAEAAAgAIA=</HashCode>
+      <FileName>Assets\Script\UI\UIEnemyHP.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="UIManager" Collapsed="true">
+    <Position X="23" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAAEAAAAAAEAAAAAAAAAAAAAAAIAAAAAAA=</HashCode>
+      <FileName>Assets\Script\UI\UIManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Packes.SendAllChat" Collapsed="true">
+    <Position X="52" Y="3.75" Width="1.5" />
+    <InheritanceLine Type="Packes.IPacketDatas" FixedToPoint="true">
+      <Path>
+        <Point X="45.75" Y="2.062" />
+        <Point X="45.75" Y="2.437" />
+        <Point X="51.625" Y="2.437" />
+        <Point X="51.625" Y="4.125" />
+        <Point X="52" Y="4.125" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAACA=</HashCode>
+      <FileName>Assets\Script\WS\ChatPacket.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Packes.RecvAllChat" Collapsed="true">
+    <Position X="52" Y="4.75" Width="1.5" />
+    <InheritanceLine Type="Packes.IPacketDatas" FixedFromPoint="true" FixedToPoint="true">
+      <Path>
+        <Point X="45.75" Y="2.062" />
+        <Point X="45.75" Y="2.437" />
+        <Point X="51.625" Y="2.437" />
+        <Point X="51.625" Y="5.062" />
+        <Point X="52" Y="5.062" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAACA=</HashCode>
+      <FileName>Assets\Script\WS\ChatPacket.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Packes.IPacketDatas" Collapsed="true">
+    <Position X="45" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAABAAAAAQAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\WS\IPacketDatas.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Packes.CreateUser" Collapsed="true">
+    <Position X="39.25" Y="3.75" Width="1.5" />
+    <InheritanceLine Type="Packes.IPacketDatas" FixedToPoint="true">
+      <Path>
+        <Point X="45.75" Y="2.062" />
+        <Point X="45.75" Y="2.437" />
+        <Point X="38.875" Y="2.437" />
+        <Point X="38.875" Y="4.062" />
+        <Point X="39.25" Y="4.062" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAgAAAAAAQAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\WS\loginPacket.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Packes.LoginUser" Collapsed="true">
+    <Position X="39.25" Y="4.75" Width="1.5" />
+    <InheritanceLine Type="Packes.IPacketDatas" FixedToPoint="true">
+      <Path>
+        <Point X="45.75" Y="2.062" />
+        <Point X="45.75" Y="2.437" />
+        <Point X="38.875" Y="2.437" />
+        <Point X="38.875" Y="5.188" />
+        <Point X="39.25" Y="5.188" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAEAAAAAAAAgAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\WS\loginPacket.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Packes.ReConnectionCtoS" Collapsed="true">
+    <Position X="39.25" Y="9.75" Width="1.5" />
+    <InheritanceLine Type="Packes.IPacketDatas" FixedToPoint="true">
+      <Path>
+        <Point X="45.75" Y="2.062" />
+        <Point X="45.75" Y="2.437" />
+        <Point X="38.875" Y="2.437" />
+        <Point X="38.875" Y="10" />
+        <Point X="39.25" Y="10" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\WS\loginPacket.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Packes.LoginOK" Collapsed="true">
+    <Position X="39.25" Y="5.75" Width="1.5" />
+    <InheritanceLine Type="Packes.IPacketDatas" FixedToPoint="true">
+      <Path>
+        <Point X="45.75" Y="2.062" />
+        <Point X="45.75" Y="2.437" />
+        <Point X="38.875" Y="2.437" />
+        <Point X="38.875" Y="6.062" />
+        <Point X="39.25" Y="6.062" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAAAAAAAAAAAAAAAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\WS\loginPacket.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Packes.LoginError" Collapsed="true">
+    <Position X="39.25" Y="6.75" Width="1.5" />
+    <InheritanceLine Type="Packes.IPacketDatas" FixedToPoint="true">
+      <Path>
+        <Point X="45.75" Y="2.062" />
+        <Point X="45.75" Y="2.437" />
+        <Point X="38.875" Y="2.437" />
+        <Point X="38.875" Y="7.062" />
+        <Point X="39.25" Y="7.062" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\WS\loginPacket.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Packes.CreateOK" Collapsed="true">
+    <Position X="39.25" Y="7.75" Width="1.5" />
+    <InheritanceLine Type="Packes.IPacketDatas" FixedToPoint="true">
+      <Path>
+        <Point X="45.75" Y="2.062" />
+        <Point X="45.75" Y="2.437" />
+        <Point X="38.875" Y="2.437" />
+        <Point X="38.875" Y="8.062" />
+        <Point X="39.25" Y="8.062" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\WS\loginPacket.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Packes.ReConnectionStoC" Collapsed="true">
+    <Position X="39.25" Y="10.75" Width="1.5" />
+    <InheritanceLine Type="Packes.IPacketDatas" FixedToPoint="true">
+      <Path>
+        <Point X="45.75" Y="2.062" />
+        <Point X="45.75" Y="2.437" />
+        <Point X="38.875" Y="2.437" />
+        <Point X="38.875" Y="10.938" />
+        <Point X="39.25" Y="10.938" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\WS\loginPacket.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Packes.TranslationCtoS" Collapsed="true">
+    <Position X="41.75" Y="3.75" Width="1.5" />
+    <InheritanceLine Type="Packes.IPacketDatas" FixedToPoint="true">
+      <Path>
+        <Point X="45.75" Y="2.062" />
+        <Point X="45.75" Y="2.437" />
+        <Point X="41.375" Y="2.437" />
+        <Point X="41.375" Y="4.062" />
+        <Point X="41.75" Y="4.062" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgACAAAAAAAAAAAAAAAAAAAAAAAABgAQAAAAA=</HashCode>
+      <FileName>Assets\Script\WS\playPacket.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Packes.GetEnemysDataCtoS" Collapsed="true">
+    <Position X="41.75" Y="5.75" Width="1.5" />
+    <InheritanceLine Type="Packes.IPacketDatas" FixedToPoint="true">
+      <Path>
+        <Point X="45.75" Y="2.062" />
+        <Point X="45.75" Y="2.437" />
+        <Point X="41.375" Y="2.437" />
+        <Point X="41.375" Y="6" />
+        <Point X="41.75" Y="6" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\WS\playPacket.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Packes.StatusCtoS" Collapsed="true">
+    <Position X="41.75" Y="7.75" Width="1.5" />
+    <InheritanceLine Type="Packes.IPacketDatas" FixedToPoint="true">
+      <Path>
+        <Point X="45.75" Y="2.062" />
+        <Point X="45.75" Y="2.437" />
+        <Point X="41.375" Y="2.437" />
+        <Point X="41.375" Y="8" />
+        <Point X="41.75" Y="8" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAACgAAAAAAAAAAAAAAAAAAABAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\WS\playPacket.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Packes.DataLoading" Collapsed="true">
+    <Position X="41.75" Y="11.75" Width="1.5" />
+    <InheritanceLine Type="Packes.IPacketDatas" FixedToPoint="true">
+      <Path>
+        <Point X="45.75" Y="2.062" />
+        <Point X="45.75" Y="2.437" />
+        <Point X="41.375" Y="2.437" />
+        <Point X="41.375" Y="12.062" />
+        <Point X="41.75" Y="12.062" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\WS\playPacket.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Packes.LoadingFinishCtoS" Collapsed="true">
+    <Position X="44" Y="3.75" Width="1.5" />
+    <InheritanceLine Type="Packes.IPacketDatas" FixedToPoint="true">
+      <Path>
+        <Point X="45.75" Y="2.062" />
+        <Point X="45.75" Y="2.437" />
+        <Point X="43.625" Y="2.437" />
+        <Point X="43.625" Y="4.188" />
+        <Point X="44" Y="4.188" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\WS\playPacket.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Packes.Attack" Collapsed="true">
+    <Position X="46" Y="2.75" Width="1.5" />
+    <InheritanceLine Type="Packes.IPacketDatas" FixedToPoint="true">
+      <Path>
+        <Point X="45.75" Y="2.062" />
+        <Point X="45.75" Y="3.25" />
+        <Point X="46" Y="3.25" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AIAAAAAgBAAAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\WS\playPacket.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Packes.UserHit" Collapsed="true">
+    <Position X="46" Y="10.75" Width="1.5" />
+    <InheritanceLine Type="Packes.IPacketDatas" FixedToPoint="true">
+      <Path>
+        <Point X="45.75" Y="2.062" />
+        <Point X="45.75" Y="11.062" />
+        <Point X="46" Y="11.062" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgBAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\WS\playPacket.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Packes.LogoutCtoS" Collapsed="true">
+    <Position X="49.75" Y="3.75" Width="1.5" />
+    <InheritanceLine Type="Packes.IPacketDatas" FixedToPoint="true">
+      <Path>
+        <Point X="45.75" Y="2.062" />
+        <Point X="45.75" Y="2.437" />
+        <Point X="49.375" Y="2.437" />
+        <Point X="49.375" Y="4.125" />
+        <Point X="49.75" Y="4.125" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\WS\playPacket.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Packes.TranslationStoC" Collapsed="true">
+    <Position X="41.75" Y="4.75" Width="1.5" />
+    <InheritanceLine Type="Packes.IPacketDatas" FixedToPoint="true">
+      <Path>
+        <Point X="45.75" Y="2.062" />
+        <Point X="45.75" Y="2.437" />
+        <Point X="41.375" Y="2.437" />
+        <Point X="41.375" Y="5.062" />
+        <Point X="41.75" Y="5.062" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgACAAAAAAAAAAAAAAAAAEAAAAAABgAQAAAAA=</HashCode>
+      <FileName>Assets\Script\WS\playPacket.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Packes.GetEnemyDataStoC" Collapsed="true">
+    <Position X="41.75" Y="6.75" Width="1.5" />
+    <InheritanceLine Type="Packes.IPacketDatas" FixedToPoint="true">
+      <Path>
+        <Point X="45.75" Y="2.062" />
+        <Point X="45.75" Y="2.437" />
+        <Point X="41.375" Y="2.437" />
+        <Point X="41.375" Y="7.062" />
+        <Point X="41.75" Y="7.062" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAI=</HashCode>
+      <FileName>Assets\Script\WS\playPacket.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Packes.StatusStoC" Collapsed="true">
+    <Position X="41.75" Y="8.75" Width="1.5" />
+    <InheritanceLine Type="Packes.IPacketDatas" FixedToPoint="true">
+      <Path>
+        <Point X="45.75" Y="2.062" />
+        <Point X="45.75" Y="2.437" />
+        <Point X="41.375" Y="2.437" />
+        <Point X="41.375" Y="9.125" />
+        <Point X="41.75" Y="9.125" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\WS\playPacket.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Packes.LoadSaveData" Collapsed="true">
+    <Position X="44" Y="2.75" Width="1.5" />
+    <InheritanceLine Type="Packes.IPacketDatas" ManuallyRouted="true" FixedToPoint="true">
+      <Path>
+        <Point X="45.75" Y="2.062" />
+        <Point X="45.75" Y="2.412" />
+        <Point X="43.625" Y="2.412" />
+        <Point X="43.625" Y="3.125" />
+        <Point X="44" Y="3.125" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\WS\playPacket.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Packes.LoadingFinishStoC" Collapsed="true">
+    <Position X="44" Y="4.75" Width="1.5" />
+    <InheritanceLine Type="Packes.IPacketDatas" FixedToPoint="true">
+      <Path>
+        <Point X="45.75" Y="2.062" />
+        <Point X="45.75" Y="2.437" />
+        <Point X="43.625" Y="2.437" />
+        <Point X="43.625" Y="5.062" />
+        <Point X="44" Y="5.062" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\WS\playPacket.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Packes.EnemyAliveStoC" Collapsed="true">
+    <Position X="46" Y="3.75" Width="1.5" />
+    <InheritanceLine Type="Packes.IPacketDatas" FixedToPoint="true">
+      <Path>
+        <Point X="45.75" Y="2.062" />
+        <Point X="45.75" Y="4.125" />
+        <Point X="46" Y="4.125" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAAAAAAAAAIAAAAAAAAAAAAAAAABAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\WS\playPacket.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Packes.EnemyDieStoC" Collapsed="true">
+    <Position X="46" Y="4.75" Width="1.5" />
+    <InheritanceLine Type="Packes.IPacketDatas" FixedToPoint="true">
+      <Path>
+        <Point X="45.75" Y="2.062" />
+        <Point X="45.75" Y="5.062" />
+        <Point X="46" Y="5.062" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAEIAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\WS\playPacket.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Packes.OtherPlayerUseSkill" Collapsed="true">
+    <Position X="46" Y="6.75" Width="1.5" />
+    <InheritanceLine Type="Packes.IPacketDatas" FixedToPoint="true">
+      <Path>
+        <Point X="45.75" Y="2.062" />
+        <Point X="45.75" Y="7.188" />
+        <Point X="46" Y="7.188" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AIAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\WS\playPacket.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Packes.EnemyUseSkillRequest" Collapsed="true">
+    <Position X="46" Y="7.75" Width="1.5" />
+    <InheritanceLine Type="Packes.IPacketDatas" FixedToPoint="true">
+      <Path>
+        <Point X="45.75" Y="2.062" />
+        <Point X="45.75" Y="8.062" />
+        <Point X="46" Y="8.062" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AIAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\WS\playPacket.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Packes.EnemyUseSkill" Collapsed="true">
+    <Position X="46" Y="8.75" Width="1.5" />
+    <InheritanceLine Type="Packes.IPacketDatas" FixedToPoint="true">
+      <Path>
+        <Point X="45.75" Y="2.062" />
+        <Point X="45.75" Y="9.125" />
+        <Point X="46" Y="9.125" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AIAAAAAABAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\WS\playPacket.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Packes.EnemyAttackResult" Collapsed="true">
+    <Position X="46" Y="9.75" Width="1.5" />
+    <InheritanceLine Type="Packes.IPacketDatas" FixedToPoint="true">
+      <Path>
+        <Point X="45.75" Y="2.062" />
+        <Point X="45.75" Y="10.062" />
+        <Point X="46" Y="10.062" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\WS\playPacket.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Packes.LogoutStoC" Collapsed="true">
+    <Position X="49.75" Y="9.75" Width="1.5" />
+    <InheritanceLine Type="Packes.IPacketDatas" FixedToPoint="true">
+      <Path>
+        <Point X="45.75" Y="2.062" />
+        <Point X="45.75" Y="2.437" />
+        <Point X="49.375" Y="2.437" />
+        <Point X="49.375" Y="10" />
+        <Point X="49.75" Y="10" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\WS\playPacket.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Packes.SendItemList" Collapsed="true">
+    <Position X="49.75" Y="4.75" Width="1.5" />
+    <InheritanceLine Type="Packes.IPacketDatas" FixedToPoint="true">
+      <Path>
+        <Point X="45.75" Y="2.062" />
+        <Point X="45.75" Y="2.437" />
+        <Point X="49.375" Y="2.437" />
+        <Point X="49.375" Y="5.062" />
+        <Point X="49.75" Y="5.062" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\WS\WsDatas.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Packes.SendSkillList" Collapsed="true">
+    <Position X="49.75" Y="5.75" Width="1.5" />
+    <InheritanceLine Type="Packes.IPacketDatas" ManuallyRouted="true" FixedToPoint="true">
+      <Path>
+        <Point X="45.75" Y="2.062" />
+        <Point X="45.75" Y="2.455" />
+        <Point X="49.368" Y="2.455" />
+        <Point X="49.368" Y="6.187" />
+        <Point X="49.75" Y="6.187" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\WS\WsDatas.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Packes.RecvItemList" Collapsed="true">
+    <Position X="49.75" Y="6.75" Width="1.5" />
+    <InheritanceLine Type="Packes.IPacketDatas" FixedToPoint="true">
+      <Path>
+        <Point X="45.75" Y="2.062" />
+        <Point X="45.75" Y="2.437" />
+        <Point X="49.375" Y="2.437" />
+        <Point X="49.375" Y="7.125" />
+        <Point X="49.75" Y="7.125" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\WS\WsDatas.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Packes.RecvSkillList" Collapsed="true">
+    <Position X="49.75" Y="7.75" Width="1.5" />
+    <InheritanceLine Type="Packes.IPacketDatas" FixedToPoint="true">
+      <Path>
+        <Point X="45.75" Y="2.062" />
+        <Point X="45.75" Y="2.437" />
+        <Point X="49.375" Y="2.437" />
+        <Point X="49.375" Y="8.062" />
+        <Point X="49.75" Y="8.062" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\WS\WsDatas.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Packes.FinishComplete" Collapsed="true">
+    <Position X="49.75" Y="8.75" Width="1.5" />
+    <InheritanceLine Type="Packes.IPacketDatas" FixedToPoint="true">
+      <Path>
+        <Point X="45.75" Y="2.062" />
+        <Point X="45.75" Y="2.437" />
+        <Point X="49.375" Y="2.437" />
+        <Point X="49.375" Y="9.062" />
+        <Point X="49.75" Y="9.062" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\WS\WsDatas.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Packes.Duplicate" Collapsed="true">
+    <Position X="54" Y="3.75" Width="1.5" />
+    <InheritanceLine Type="Packes.IPacketDatas" FixedToPoint="true">
+      <Path>
+        <Point X="45.75" Y="2.062" />
+        <Point X="45.75" Y="2.412" />
+        <Point X="53.76" Y="2.412" />
+        <Point X="53.76" Y="4.062" />
+        <Point X="54" Y="4.062" />
+      </Path>
+    </InheritanceLine>
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\WS\WsDatas.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WS.WsBase" Collapsed="true">
+    <Position X="11.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAIAAAABAAAAAAQAAACAAgAA=</HashCode>
+      <FileName>Assets\Script\WS\WsBase.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WS.WsChat" Collapsed="true">
+    <Position X="10" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AABAAAAAAAAAAAAAAEAAAAAAAABAAAgQQAACAAAAAAA=</HashCode>
+      <FileName>Assets\Script\WS\WsChat.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WS.WsLogin" Collapsed="true">
+    <Position X="11.75" Y="1.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAABEAAAAgAAABAAAgUQAACAAAgABA=</HashCode>
+      <FileName>Assets\Script\WS\WsLogin.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="WaveNowLoading" Collapsed="true">
+    <Position X="20.5" Y="16.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQEAAAACCAgAAAAAAAAAAAAAAAAAAAAAAAAAAAgAAA=</HashCode>
+      <FileName>Assets\Resources\Image\UI\LoadingWindow\Scripts\WaveNowLoading.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="ColumnWindow" Collapsed="true">
+    <Position X="18.75" Y="15.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Resources\Image\UI\LoadingWindow\Scripts\ColumnWindow.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Fade" Collapsed="true">
+    <Position X="20.5" Y="15.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAQAAAAAAAAAAAAAAAAAAAAAAEACAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Resources\Image\UI\LoadingWindow\Scripts\Fade.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="MyMath" Collapsed="true">
+    <Position X="18.75" Y="16.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Resources\Image\UI\LoadingWindow\Scripts\MyMath.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="TitleLogo" Collapsed="true">
+    <Position X="19.25" Y="11.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAACAEAAAAAAAAAAAAAAAAAAAACAAAAAAAEAA=</HashCode>
+      <FileName>Assets\Resources\Image\UI\TitleLogo\Script\TitleLogo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="LoadSceneManager" Collapsed="true">
+    <Position X="1.5" Y="0.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQIAAAgASAAAABAAEACCEACIAAAAAIAAAAAAEAAAIA=</HashCode>
+      <FileName>Assets\Resources\Image\UI\LoadingWindow\Scripts\LoadSceneManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Struct Name="Status" Collapsed="true">
+    <Position X="19" Y="5.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAAIAABAAAAgAAAAAAAAQEAAAAAAAAAQAAABAAAAAA=</HashCode>
+      <FileName>Assets\Script\UI\Status\Status.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Packes.EnemyReceiveData" Collapsed="true">
+    <Position X="41.75" Y="13.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAIAAAAAAAAAAAAAAAABgAQAABAA=</HashCode>
+      <FileName>Assets\Script\WS\playPacket.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="Packes.CharctorSatusData" Collapsed="true">
+    <Position X="41.75" Y="12.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAABCAAAAAAA=</HashCode>
+      <FileName>Assets\Script\WS\playPacket.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Struct Name="WS.ChatMassege" Collapsed="true">
+    <Position X="52" Y="11.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAIAAAAAAEAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\WS\WsChat.cs</FileName>
+    </TypeIdentifier>
+  </Struct>
+  <Interface Name="IAnimData" Collapsed="true">
+    <Position X="5" Y="7.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\Character\Player\IAnimData.cs</FileName>
+    </TypeIdentifier>
+  </Interface>
+  <Enum Name="SYSTEM_SOUND_TYPE" Collapsed="true">
+    <Position X="1.25" Y="5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAEAAAAQAgAAQAAAQAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\SceneManeger\SystemSound.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="range_type" Collapsed="true">
+    <Position X="24.75" Y="6.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAEAAAAAAAgAAAAAAAAgAAAAAAAEAAAAAAA=</HashCode>
+      <FileName>Assets\Script\System\game_data\skill_table.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="target_type" Collapsed="true">
+    <Position X="24.75" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAMAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Assets\Script\System\game_data\skill_table.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="Packes.OBJECT_TYPE" Collapsed="true">
+    <Position X="41.75" Y="14.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAMAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAA=</HashCode>
+      <FileName>Assets\Script\WS\playPacket.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Enum Name="CommandData" Collapsed="true">
+    <Position X="45" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AcAAAEQAAQAEkQAABIQESAAAAoBAIAwAEAAAAEAAAQE=</HashCode>
+      <FileName>Assets\Script\WS\IPacketDatas.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Yu Gothic UI" Size="9" />
+</ClassDiagram>

@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
+/// <summary>
+/// UIが移動範囲外に出ないようにする
+/// </summary>
 public class MoveRange : MonoBehaviour
 {
     public GameObject canvas;

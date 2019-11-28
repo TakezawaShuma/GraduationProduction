@@ -15,6 +15,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 装備を管理するリストクラス
+/// </summary>
 public class EquipmentList
 {
     private Dictionary<int, EquipmentData> equipmentList;

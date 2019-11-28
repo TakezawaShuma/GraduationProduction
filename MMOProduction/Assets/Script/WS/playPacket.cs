@@ -441,7 +441,7 @@ namespace Packes
 
 
     /// <summary>
-    /// 他のプレイヤーがスキルを使用したとき
+    /// 他のプレイヤーがスキルを使用したとき command = 224
     /// </summary>
     public class OtherPlayerUseSkill : IPacketDatas
     {

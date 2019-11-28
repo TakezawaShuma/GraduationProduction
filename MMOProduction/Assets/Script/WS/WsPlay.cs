@@ -131,7 +131,7 @@ namespace WS
                         case CommandData.GetEnemyDataStoC:  // エネミーの位置情報を受信
                             //Packes.GetEnemyDataStoC init = Json.ConvertToPackets<Packes.GetEnemyDataStoC>(e.Data);
                             //enemysAction(init);
-                            //Debug.Log("敵の位置情報");
+                            Debug.Log(e.Data);
                             enemysAction(Json.ConvertToPackets<Packes.GetEnemyDataStoC>(e.Data));
                             break;
 

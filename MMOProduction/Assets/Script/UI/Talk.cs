@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// NPCとの会話用クラス？
+/// </summary>
 public class Talk : MonoBehaviour
 {
     // なんのオブジェクトなのかわからない？

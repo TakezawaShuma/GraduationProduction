@@ -15,6 +15,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 消費アイテムの基礎データ
+/// </summary>
 [System.Serializable]
 public class ConsumablesData : ItemData
 {

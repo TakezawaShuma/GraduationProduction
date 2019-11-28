@@ -5,6 +5,9 @@ using UnityEngine.AI;
 using System.Linq;
 using System;
 
+/// <summary>
+/// タイトルのエネミー
+/// </summary>
 public class TitleEnemy : MonoBehaviour
 {
     [SerializeField]

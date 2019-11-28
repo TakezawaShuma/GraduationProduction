@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using VRM;
 
+/// <summary>
+/// NPCやキャラクターの顔をコントロールするクラス
+/// </summary>
 public class FaceController : MonoBehaviour
 {
     public float interval;

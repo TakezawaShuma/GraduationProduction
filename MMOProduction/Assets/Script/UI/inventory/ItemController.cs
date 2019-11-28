@@ -7,6 +7,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// 消費アイテムのコントローラー
+/// </summary>
 public class ItemController : MonoBehaviour
 {
 #pragma warning disable 0649
@@ -314,6 +317,9 @@ public class ItemController : MonoBehaviour
     }
 }
 
+/// <summary>
+/// アイテムクラス
+/// </summary>
 public class Item
 {
     public string name_ = "test";
@@ -338,6 +344,9 @@ public class Item
 
 }
 
+/// <summary>
+/// アイテムの使用ボタン　かな？
+/// </summary>
 public class ItemButton
 {
     public string name_ = "none";

@@ -2,6 +2,10 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+
+/// <summary>
+/// インベントリを作成するクラス
+/// </summary>
 public class GenerateInventory : MonoBehaviour
 {
     public GameObject Slot;

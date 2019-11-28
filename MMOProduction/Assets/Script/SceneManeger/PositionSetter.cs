@@ -7,6 +7,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// タイトルシーンのボタン等の位置を設定するクラス
+/// </summary>
 public class PositionSetter : MonoBehaviour
 {
     public enum PositionX

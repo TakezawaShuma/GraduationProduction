@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Events;
 
+/// <summary>
+/// マーカーを管理するクラス
+/// </summary>
 public class Marker : MonoBehaviour
 {
     public enum State

@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// インベントリスロットのデータ
+/// </summary>
 public class SlotData : MonoBehaviour
 {
     public enum HOGEID

@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// エネミーのHPを表示させる
+/// </summary>
 public class UIEnemyHP : MonoBehaviour
 {
     [SerializeField, Header("キャンバス")]
