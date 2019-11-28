@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// UI全般を管理するクラス
+/// </summary>
 public class UIManager : MonoBehaviour
 {
     [SerializeField]

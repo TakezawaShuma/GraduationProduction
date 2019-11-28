@@ -9,7 +9,9 @@ using System.Collections.Generic;
 using UnityEngine;
 
 
-// 汎用計算関数
+/// <summary>
+/// 汎用計算関数
+/// </summary>
 public class MyMath
 {
     // -------------------------------------

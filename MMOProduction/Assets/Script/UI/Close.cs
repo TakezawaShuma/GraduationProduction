@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// UIの×ボタン
+/// </summary>
 public class Close : MonoBehaviour
 {
     // Start is called before the first frame update

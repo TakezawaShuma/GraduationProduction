@@ -1,11 +1,9 @@
-﻿//////////////////////////////////
-// D＆Dで操作できるようにした？ //
-//////////////////////////////////
-
-
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.EventSystems;
 
+/// <summary>
+/// D&DでUIを動かせるようにする
+/// </summary>
 public class SwipeMove : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
 

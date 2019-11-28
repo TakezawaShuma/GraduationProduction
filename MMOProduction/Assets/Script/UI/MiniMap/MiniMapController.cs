@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// ミニマップのコントローラークラス
+/// </summary>
 public class MiniMapController : MonoBehaviour
 {
     // プレイヤー

@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using VRM;
 
+/// <summary>
+/// 瞬きをさせる
+/// </summary>
 public class Blink : MonoBehaviour
 {
     public float interval;

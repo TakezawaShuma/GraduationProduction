@@ -15,6 +15,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// 消費アイテムリストを管理するクラス
+/// </summary>
 public class ConsumablesList
 {
     private Dictionary<int, ConsumablesData> consumablesList;

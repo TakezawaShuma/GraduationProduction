@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 
+/// <summary>
+/// スキルの基礎データ
+/// </summary>
 public class SkillData
 {
     public SkillData(int Id,int pId,bool act)
@@ -24,6 +27,9 @@ public class SkillData
     public bool active = false;
 }
 
+/// <summary>
+/// スキルツリーの基礎データ
+/// </summary>
 public class SkilltreeData
 {
     public List<SkillData> skilltree;
@@ -81,29 +87,32 @@ public class SkilltreeData
         return sd;
     }
 
-    public (int[] id,bool[] active) CheckActiveReturnArray(int id_,int[] id,bool[] active)
-    {
-        foreach(var v in skilltree)
-        {
-            if(v.id==id_)
-            {
-                Array.Resize(ref id, id.Length + 1);
-                id[id.Length - 1] = v.id;
-                Array.Resize(ref active, active.Length + 1);
-                active[active.Length - 1] = v.active;
+    //public (int[] id,bool[] active) CheckActiveReturnArray(int id_,int[] id,bool[] active)
+    //{
+    //    foreach(var v in skilltree)
+    //    {
+    //        if(v.id==id_)
+    //        {
+    //            Array.Resize(ref id, id.Length + 1);
+    //            id[id.Length - 1] = v.id;
+    //            Array.Resize(ref active, active.Length + 1);
+    //            active[active.Length - 1] = v.active;
                 
-            }
-            if (v.childList.Capacity == 0) break;
-            foreach(var vv in v.childList)
-            {
-                CheckActiveReturnArray(vv.id, id, active);
-            }
-        }
+    //        }
+    //        if (v.childList.Capacity == 0) break;
+    //        foreach(var vv in v.childList)
+    //        {
+    //            CheckActiveReturnArray(vv.id, id, active);
+    //        }
+    //    }
 
-        return (id, active);
-    }
+    //    return (id, active);
+    //}
 }
 
+/// <summary>
+/// スキルツリーを作る
+/// </summary>
 public class SkilltreeCreater : MonoBehaviour
 {
     [SerializeField]

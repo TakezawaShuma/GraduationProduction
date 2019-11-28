@@ -15,6 +15,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// アイテムのマスターデータ
+/// </summary>
 public class ItemList
 {
     private Dictionary<int, ItemData> itemList;
