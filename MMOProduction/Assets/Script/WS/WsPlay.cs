@@ -15,6 +15,7 @@ namespace WS
         // ログインサーバーのポート
         private uint port = 8001;
         private static WsPlay instance = null;
+        private bool logoutFlag = false;
 
 
         // 位置同期 202
@@ -72,6 +73,7 @@ namespace WS
         /// <param name="_port"></param>
         private void Init(uint _port)
         {
+            logoutFlag = false;
             base.Connect(_port);
             Receive();
 
@@ -82,8 +84,15 @@ namespace WS
         /// </summary>
         public void Destroy()
         {
-            Send(new Packes.LogoutCtoS(UserRecord.ID).ToJson());
+            if (!logoutFlag) { Send(new Packes.LogoutCtoS(UserRecord.ID).ToJson()); }
             base.Destroy("プレイの終了");
+            instance = null;
+        }
+
+        public void Logout()
+        {
+            Send(new Packes.LogoutCtoS(UserRecord.ID).ToJson());
+            Debug.Log("ログアウト要請送信");
         }
 
         /// <summary>
@@ -109,6 +118,7 @@ namespace WS
                 {
                     // 受信したデータからコマンドを取り出す
                     var command = (CommandData)int.Parse(e.Data.Substring(11, 3));
+                    Debug.Log((int)command);
 
                     switch (command)
                     {

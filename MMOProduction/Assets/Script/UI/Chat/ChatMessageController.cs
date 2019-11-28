@@ -25,7 +25,6 @@ public class ChatMessageController : MonoBehaviour
     {
         controller = this.gameObject.GetComponentInParent<ChatController>();
         ChatLogUpdate();
-        WS.WsChat.Instance.allChatAction = Receive;
     }
 
     // Update is called once per frame

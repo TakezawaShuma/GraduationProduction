@@ -15,7 +15,7 @@ public class ChatController : MonoBehaviour
 
     // チャット全体のフレーム
     [Header("チャットフレーム"), SerializeField]
-    private GameObject chatFlame = default(GameObject);
+    private ChatMessageController chatFlame = null;
     
     // チャットサーバー
     WS.WsChat wsc = null; 
@@ -28,10 +28,11 @@ public class ChatController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        chatFlame.SetActive(chatActiveFlag);
+        chatFlame.gameObject.SetActive(chatActiveFlag);
         if (connectFlag)
         {
             wsc = WS.WsChat.Instance;
+            WS.WsChat.Instance.allChatAction = chatFlame.Receive;
         }
     }
 
@@ -42,7 +43,7 @@ public class ChatController : MonoBehaviour
         if (Input.GetKeyUp(KeyCode.Return) && chatActiveFlag == false)
         {
             chatActiveFlag = true;
-            chatFlame.SetActive(chatActiveFlag);
+            chatFlame.gameObject.SetActive(chatActiveFlag);
             EventSystem.current.SetSelectedGameObject(chatFlame.GetComponent<ChatMessageController>().InputField);
         }
         else if (Input.GetKeyUp(KeyCode.Return) && chatActiveFlag == true)
@@ -50,12 +51,10 @@ public class ChatController : MonoBehaviour
             if (!Input.GetKey(KeyCode.LeftControl) && !Input.GetKey(KeyCode.RightControl))
             {
                 chatActiveFlag = false;
-                chatFlame.SetActive(chatActiveFlag);
+                chatFlame.gameObject.SetActive(chatActiveFlag);
                 EventSystem.current.SetSelectedGameObject(null);
             }
         }
-
-        Debug.Log(Input.GetKey(KeyCode.LeftControl));
     }
 
     private void OnDestroy()
