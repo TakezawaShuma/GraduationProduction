@@ -94,7 +94,8 @@ public class ItemController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Y) && openInventory_ == false)
+        /*
+        if  Input.GetKeyDown(KeyCode.Y) && openInventory_ == false)
         {
             SortItem(ITEM_TYPE.ALL);
             openInventory_ = true;
@@ -109,6 +110,7 @@ public class ItemController : MonoBehaviour
         {
             scrollbar_.value = 1.0f;
         }
+        */
 
     }
 
