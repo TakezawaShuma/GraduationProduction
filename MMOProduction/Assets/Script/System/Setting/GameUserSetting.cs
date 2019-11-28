@@ -22,6 +22,8 @@ public class GameUserSetting : MonoBehaviour
 
     [Header("BGM音"), SerializeField]
     private AudioSource backMusic;
+    [Header("Logout"), SerializeField]
+    private Button logoutButon; 
 
     public void Init(GameObject _player)
     {
@@ -45,5 +47,12 @@ public class GameUserSetting : MonoBehaviour
         systemSound_.SettingVolume(seVolume_.value);
 
         backMusic.volume = bgmVolume_.value;
+    }
+
+    public void LogoutClick()
+    {
+        WS.WsPlay.Instance.Logout();
+
+        Debug.Log("button");
     }
 }

@@ -47,7 +47,7 @@ namespace WS
         /// 初期化処理
         /// </summary>
         /// <param name="_port"></param>
-        private void Init(uint _port)
+        public void Init(uint _port)
         {
             base.Connect(_port);
             Receive();
@@ -59,6 +59,7 @@ namespace WS
         public void Destroy()
         {
             base.Destroy("ログインWSの終了");
+            instance = null;
         }
 
         public void Send(string _json)
@@ -102,6 +103,11 @@ namespace WS
                     }
                 }, e.Data);
             };
+        }
+
+        public WebSocketState WSState()
+        {
+            return base.ws.ReadyState;
         }
 
         /// <summary>

@@ -27,8 +27,8 @@ namespace WS
         /// <param name="_port">ポート</param>
         protected void Connect(uint _port)
         {
-                    ws = new WebSocket("ws://" + server_ip + ":" + _port.ToString());
-                    Debug.Log("IPアドレス : " + server_ip + "ポート : " + _port);
+            ws = new WebSocket("ws://" + server_ip + ":" + _port.ToString());
+            Debug.Log("IPアドレス : " + server_ip + "ポート : " + _port);
             //ws = new WebSocket("ws://" + server_ip + ":" + _port.ToString());
             WsInit();
             ws.Connect();

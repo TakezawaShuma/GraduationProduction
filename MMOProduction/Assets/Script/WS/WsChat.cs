@@ -48,6 +48,7 @@ namespace WS
         public void Destroy()
         {
             base.Destroy("チャット切断");
+            instance = null;
         }
 
         public void Send(string _json)

@@ -8,6 +8,7 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 public class PlaySceneManager : MonoBehaviour
 {
@@ -420,10 +421,18 @@ public class PlaySceneManager : MonoBehaviour
     /// <param name="_packet"></param>
     private void Logout(Packes.LogoutStoC _packet)
     {
-        Destroy(others[_packet.user_id].gameObject);
-        charcters.Remove(_packet.user_id);
-        others.Remove(_packet.user_id);
-        Debug.Log(_packet.user_id + "さんがログアウトしたよ！");
+        if (_packet.user_id == UserRecord.ID)
+        {
+            Debug.Log("ログアウトしたよ");
+            ChangeScene("LoginScene");
+        }
+        else
+        {
+            Destroy(others[_packet.user_id].gameObject);
+            charcters.Remove(_packet.user_id);
+            others.Remove(_packet.user_id);
+            Debug.Log(_packet.user_id + "さんがログアウトしたよ！");
+        }
     }
 
 
@@ -492,4 +501,9 @@ public class PlaySceneManager : MonoBehaviour
         return others[_playerId];
     }
 
+
+    private void ChangeScene(string _sceneName)
+    {
+        SceneManager.LoadScene(_sceneName);
+    }
 }
