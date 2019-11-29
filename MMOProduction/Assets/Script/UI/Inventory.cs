@@ -15,8 +15,6 @@ public class Inventory : MonoBehaviour
     [SerializeField]
     private Sprite sprite;
 
-    int[] inve;
-
     // Start is called before the first frame update
     void Start()
     {
