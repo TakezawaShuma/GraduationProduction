@@ -5,15 +5,15 @@ using UnityEngine.UI;
 
 public class ReceiveEvent : MonoBehaviour
 {
-    private Vector3 startPosition;
-    GameObject hitObject;
 
-    private Vector3 length;
+    private Vector3 clickPosition;
+
+    private GameObject hitObject;
+
     // 押した時
     public void MyPointerDownUI()
     {
-        length = Input.mousePosition - this.transform.position;
-        startPosition = this.transform.position;
+        clickPosition = this.transform.position;
     }
 
     // 離した時
@@ -21,6 +21,7 @@ public class ReceiveEvent : MonoBehaviour
     {
         if (hitObject != null)
         {
+            //ショートカットスロットに登録
             if(hitObject.tag == "Slot")
             {
                 hitObject.GetComponent<Image>().sprite = this.GetComponent<Image>().sprite;
@@ -28,6 +29,7 @@ public class ReceiveEvent : MonoBehaviour
                 hitObject.GetComponent<SlotData>().HOGE = this.GetComponent<SlotData>().HOGE;
             }
 
+            //インベントリ内で入れ替え
             if(hitObject.tag == "Inventory")
             {
                 GameObject temp = hitObject;
@@ -47,15 +49,16 @@ public class ReceiveEvent : MonoBehaviour
             }
         }
 
-        this.transform.position = startPosition;
+        //初期位置に戻す
+        this.transform.position = clickPosition;
     }
 
     // ドラッグ時の関数
     public void MyDragUI()
     {
-        if(hitObject.GetComponent<SlotData>().ID != -1)
+        if(Input.GetMouseButton(0))
         {
-            transform.position = Input.mousePosition - length;
+            this.transform.parent.transform.position = Input.mousePosition;
         }
     }
 

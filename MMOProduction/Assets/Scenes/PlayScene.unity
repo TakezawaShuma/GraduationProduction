@@ -4493,7 +4493,7 @@ PrefabInstance:
     - target: {fileID: 5726655133401845474, guid: f775286550711774bbaaf89532340bb0,
         type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 5726655133401845474, guid: f775286550711774bbaaf89532340bb0,
         type: 3}
@@ -4620,6 +4620,46 @@ PrefabInstance:
       propertyPath: m_Delegates.Array.data[2].callback.m_TypeName
       value: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI, Version=1.0.0.0,
         Culture=neutral, PublicKeyToken=null
+      objectReference: {fileID: 0}
+    - target: {fileID: 2969520771356217316, guid: f775286550711774bbaaf89532340bb0,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2969520771356217316, guid: f775286550711774bbaaf89532340bb0,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2969520771356217316, guid: f775286550711774bbaaf89532340bb0,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 365276631455390144, guid: f775286550711774bbaaf89532340bb0,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 365276631455390144, guid: f775286550711774bbaaf89532340bb0,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 365276631455390144, guid: f775286550711774bbaaf89532340bb0,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 904321249676418444, guid: f775286550711774bbaaf89532340bb0,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 904321249676418444, guid: f775286550711774bbaaf89532340bb0,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f775286550711774bbaaf89532340bb0, type: 3}
@@ -6345,8 +6385,8 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 646274429}
-  - {fileID: 1374719275}
   - {fileID: 1354133660}
+  - {fileID: 1374719275}
   - {fileID: 7945896690441163281}
   - {fileID: 1016102475}
   - {fileID: 1790725278}
@@ -6835,7 +6875,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 992294604}
   m_LocalRotation: {x: 0.12968391, y: -0.0000000058982152, z: 7.71418e-10, w: 0.9915554}
-  m_LocalPosition: {x: 0.004032468, y: 222005.11, z: -338050.8}
+  m_LocalPosition: {x: 0.0040584225, y: 223430.2, z: -340232.44}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -10371,7 +10411,7 @@ PrefabInstance:
     - target: {fileID: 8163061522702348243, guid: 1ba778ea13c09d949b07806fcd4d08ad,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8163061522702348243, guid: 1ba778ea13c09d949b07806fcd4d08ad,
         type: 3}
