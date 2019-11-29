@@ -7,6 +7,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// 消費アイテムのコントローラー
+/// </summary>
 public class ItemController : MonoBehaviour
 {
 #pragma warning disable 0649
@@ -91,7 +94,8 @@ public class ItemController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Y) && openInventory_ == false)
+        /*
+        if  Input.GetKeyDown(KeyCode.Y) && openInventory_ == false)
         {
             SortItem(ITEM_TYPE.ALL);
             openInventory_ = true;
@@ -106,6 +110,7 @@ public class ItemController : MonoBehaviour
         {
             scrollbar_.value = 1.0f;
         }
+        */
 
     }
 
@@ -314,6 +319,9 @@ public class ItemController : MonoBehaviour
     }
 }
 
+/// <summary>
+/// アイテムクラス
+/// </summary>
 public class Item
 {
     public string name_ = "test";
@@ -338,6 +346,9 @@ public class Item
 
 }
 
+/// <summary>
+/// アイテムの使用ボタン　かな？
+/// </summary>
 public class ItemButton
 {
     public string name_ = "none";

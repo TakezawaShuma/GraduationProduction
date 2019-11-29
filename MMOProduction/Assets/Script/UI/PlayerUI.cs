@@ -3,6 +3,10 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
+/// <summary>
+/// プレイヤーの情報をUI化する
+/// </summary>
 public class PlayerUI : MonoBehaviour
 {
     //プレイヤ情報

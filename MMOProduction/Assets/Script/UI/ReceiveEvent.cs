@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// UIを動かす
+/// </summary>
 public class ReceiveEvent : MonoBehaviour
 {
 

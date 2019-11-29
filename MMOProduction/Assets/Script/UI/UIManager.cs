@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// UI全般を管理するクラス
+/// </summary>
 public class UIManager : MonoBehaviour
 {
     [SerializeField]
@@ -33,7 +36,7 @@ public class UIManager : MonoBehaviour
         {
             for (int i = 0; i < ui.Length; i++)
             {
-                if (Input.GetKeyDown(key[i])&&!chat.GetChatActiveFlag())
+                if (InputManager.InputKeyCheckDown(key[i])&&!chat.GetChatActiveFlag())
                 {
                     if (ui[i].activeInHierarchy)
                     {

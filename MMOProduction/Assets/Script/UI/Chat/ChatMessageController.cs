@@ -25,7 +25,6 @@ public class ChatMessageController : MonoBehaviour
     {
         controller = this.gameObject.GetComponentInParent<ChatController>();
         ChatLogUpdate();
-        WS.WsChat.Instance.allChatAction = Receive;
     }
 
     // Update is called once per frame
@@ -33,9 +32,9 @@ public class ChatMessageController : MonoBehaviour
     {
         if (controller.GetChatActiveFlag())
         {
-            if (Input.GetKeyDown(KeyCode.Return) && messageInput.text != "")
+            if (InputManager.InputKeyCheckDown(KeyCode.Return) && messageInput.text != "")
             {
-                if (Input.GetKey(KeyCode.LeftControl) || Input.GetKey(KeyCode.RightControl))
+                if (InputManager.InputKeyCheck(KeyCode.LeftControl) || InputManager.InputKeyCheck(KeyCode.RightControl))
                 {
                     SendInputMassege(messageInput.text);
                     messageInput.text = "";

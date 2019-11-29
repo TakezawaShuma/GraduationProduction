@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// クエストボード
+/// </summary>
 public class QuestBoard : MonoBehaviour
 {
     // クエストパネル

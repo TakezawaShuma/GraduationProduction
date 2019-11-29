@@ -45,7 +45,7 @@ public class PlayerController : MonoBehaviour
 
     private GameObject target;
     public GameObject Target { get { return target; } set { target = value; } }
-    public Enemy GetTargetEnemy() { return target.GetComponent<Enemy>(); }
+    public Enemy GetTargetEnemy() { return target.GetComponentInParent<Enemy>(); }
 
     private Rigidbody rigidbody1;
 
@@ -133,7 +133,7 @@ public class PlayerController : MonoBehaviour
                 }
             }
 
-            if (Input.GetMouseButtonDown(1) && target != null)
+            if (InputManager.InputMouseCheckDown(1) == INPUT_MODE.PLAY && target != null)
             {
                 RemoveTarget();
             }
@@ -143,7 +143,7 @@ public class PlayerController : MonoBehaviour
 
         // デバッグ スキル使用
         // ファイア・ボール
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        if (InputManager.InputKeyCheckDown(KeyCode.Alpha1))
         {
             Vector3 pos = transform.position;
             pos.y += 2;
@@ -334,7 +334,14 @@ public class PlayerController : MonoBehaviour
         }
         target = null;
         lockState = false;
-        weapon.SetActive(false);
         FollowingCamera.LOCK = null;
+    }
+
+    public void ReleaseWeapon()
+    {
+        if (target == null)
+        {
+            weapon.SetActive(false);
+        }
     }
 }

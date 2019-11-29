@@ -45,7 +45,7 @@ public class Skill_attach : MonoBehaviour
         float heightd = (this.rectT.sizeDelta.x / 2) * this.rectT.lossyScale.y;
 
         //スキルの座標移動
-        if (Input.GetMouseButtonDown(0))
+        if (InputManager.InputMouseCheckDown(0) == INPUT_MODE.UI)
         {
             if ((this.transform.position.x - widthd <= (Input.mousePosition.x)) && (this.transform.position.x + widthd >= (Input.mousePosition.x)))
             {
@@ -70,7 +70,7 @@ public class Skill_attach : MonoBehaviour
         }
 
         //マウスの左ボタンを離したら
-        if (Input.GetMouseButtonUp(0))
+        if (InputManager.InputMouseCheckUp(0) == INPUT_MODE.UI)
         {
             isTrack = false;
             //スキルを元の位置に戻す
@@ -87,7 +87,7 @@ public class Skill_attach : MonoBehaviour
         //スキルをスキル枠に付ける
         OnCollisionTag(other.gameObject);
 
-        if (Input.GetMouseButtonUp(1))
+        if (InputManager.InputMouseCheckUp(1) == INPUT_MODE.UI)
         {
             transform.position = startPosition;
         }
@@ -96,7 +96,7 @@ public class Skill_attach : MonoBehaviour
     void OnCollisionTag(GameObject slot)
     {
         //マウスの左ボタンを離したときSlotタグが重なったらisBackをfalseにする
-        if (Input.GetMouseButtonUp(0))
+        if (InputManager.InputMouseCheckUp(0) == INPUT_MODE.UI)
         {
             if (slot.tag == "Slot")
             {

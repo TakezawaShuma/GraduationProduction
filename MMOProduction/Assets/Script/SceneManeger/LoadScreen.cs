@@ -57,7 +57,9 @@ public class LoadScreen : MonoBehaviour
     private void Update()
     {
         // 画面クリックでコラムを変更
-        if (Input.GetMouseButtonDown(0))
+        if (InputManager.InputMouseCheckDown(0) == INPUT_MODE.PLAY ||
+            InputManager.InputMouseCheckDown(0) == INPUT_MODE.NONE ||
+            InputManager.InputMouseCheckDown(0) == INPUT_MODE.UI)
         {
             ChangeColumn();
         }
@@ -67,7 +69,7 @@ public class LoadScreen : MonoBehaviour
         _progressUI.text = Mathf.Floor(_progress * 100.0f).ToString() + "%";
 
 #if DEBUG 
-        if (Input.GetKey(KeyCode.Space))
+        if (InputManager.InputKeyCheck(KeyCode.Space))
         {
             _progress += 0.01f;
         }
