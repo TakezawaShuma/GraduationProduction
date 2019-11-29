@@ -16,7 +16,7 @@ public class ReceiveEvent : MonoBehaviour
     // 押した時
     public void MyPointerDownUI()
     {
-        clickPosition = this.transform.position;
+        clickPosition = this.transform.localPosition;
     }
 
     // 離した時
@@ -61,7 +61,7 @@ public class ReceiveEvent : MonoBehaviour
     {
         if(Input.GetMouseButton(0))
         {
-            this.transform.parent.transform.position = Input.mousePosition;
+            this.transform.parent.transform.position = Input.mousePosition - clickPosition;
         }
     }
 
