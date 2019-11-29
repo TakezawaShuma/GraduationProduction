@@ -21,7 +21,7 @@ Sutas　常(変)
 
  */
 
-public class OtherPlayers: CharacterBase
+public class OtherPlayers: NonPlayer
 {
 
 

@@ -7,7 +7,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class Player : MonoBehaviour
+public class Player : CharacterBase
 {
     //[SerializeField, Header("プレイヤーの設定")]
     //private PlayerSetting playerSetting;

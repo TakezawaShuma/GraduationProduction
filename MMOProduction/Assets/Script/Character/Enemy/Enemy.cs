@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : CharacterBase
+public class Enemy : NonPlayer
 {
 
     public int HP { get { return hp; } set { hp = value; uIHP.UpdateHP(hp); } }

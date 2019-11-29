@@ -45,7 +45,7 @@ public class PlaySceneManager : MonoBehaviour
     private Player player = null;
     //private Dictionary<int, OtherPlayers> others = new Dictionary<int, OtherPlayers>();
     //private Dictionary<int, Enemy> enemies = new Dictionary<int, Enemy>();
-    private Dictionary<int, CharacterBase> charcters = new Dictionary<int, CharacterBase>();
+    private Dictionary<int, NonPlayer> charcters = new Dictionary<int, NonPlayer>();
 
     // コールバック関数をリスト化
     private List<Action<string>> callbackList = new List<Action<string>>();
