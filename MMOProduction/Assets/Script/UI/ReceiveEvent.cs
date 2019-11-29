@@ -12,8 +12,11 @@ public class ReceiveEvent : MonoBehaviour
     private Vector3 clickPosition;
     private Vector3 clickThisPosition;
     private Vector3 clickPositionParent;
+
     private GameObject hitObject;
 
+    [SerializeField]
+    private Sprite defoSprite;
     // 押した時
     public void MyPointerDownUI()
     {
@@ -22,8 +25,8 @@ public class ReceiveEvent : MonoBehaviour
         clickPositionParent = this.transform.parent.position;
     }
 
-    // 離した時
-    public void MyPointerUpUI()
+    // インベントリから移動した後
+    public void MyPointerUpInventory()
     {
         if (hitObject != null)
         {
@@ -33,14 +36,12 @@ public class ReceiveEvent : MonoBehaviour
                 hitObject.GetComponent<Image>().sprite = this.GetComponent<Image>().sprite;
                 hitObject.GetComponent<SlotData>().ID = this.GetComponent<SlotData>().ID;
                 hitObject.GetComponent<SlotData>().HOGE = this.GetComponent<SlotData>().HOGE;
-                Debug.Log("ショトカ");
             }
 
             //インベントリ内で入れ替え
             if(hitObject.tag == "Inventory")
             {
                 GameObject temp = hitObject;
-                temp.AddComponent<Image>();
 
                 temp.GetComponent<Image>().sprite = hitObject.GetComponent<Image>().sprite;
                 temp.GetComponent<SlotData>().ID = hitObject.GetComponent<SlotData>().ID;
@@ -53,11 +54,23 @@ public class ReceiveEvent : MonoBehaviour
                 this.GetComponent<Image>().sprite = temp.GetComponent<Image>().sprite;
                 this.GetComponent<SlotData>().ID = temp.GetComponent<SlotData>().ID;
                 this.GetComponent<SlotData>().HOGE = temp.GetComponent<SlotData>().HOGE;
-                Debug.Log("インベ");
             }
         }
     }
 
+    public void MyPointerUpShortcut()
+    {
+        if (hitObject != null && hitObject.tag == "Slot")
+        {
+            Shift();
+        }
+        else
+        {
+            this.GetComponent<Image>().sprite = defoSprite;
+            this.GetComponent<SlotData>().ID = -1;
+            this.GetComponent<SlotData>().HOGE = SlotData.HOGEID.NONE;
+        }
+    }
 
     public void MyPositionResetParent()
     {
@@ -90,6 +103,24 @@ public class ReceiveEvent : MonoBehaviour
             this.transform.position = Input.mousePosition;
         }
     }
+
+    private void Shift()
+    {
+        GameObject temp = hitObject;
+
+        temp.GetComponent<Image>().sprite = hitObject.GetComponent<Image>().sprite;
+        temp.GetComponent<SlotData>().ID = hitObject.GetComponent<SlotData>().ID;
+        temp.GetComponent<SlotData>().HOGE = hitObject.GetComponent<SlotData>().HOGE;
+
+        hitObject.GetComponent<Image>().sprite = this.GetComponent<Image>().sprite;
+        hitObject.GetComponent<SlotData>().ID = this.GetComponent<SlotData>().ID;
+        hitObject.GetComponent<SlotData>().HOGE = this.GetComponent<SlotData>().HOGE;
+
+        this.GetComponent<Image>().sprite = temp.GetComponent<Image>().sprite;
+        this.GetComponent<SlotData>().ID = temp.GetComponent<SlotData>().ID;
+        this.GetComponent<SlotData>().HOGE = temp.GetComponent<SlotData>().HOGE;
+    }
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
