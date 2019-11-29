@@ -36,8 +36,8 @@ public static class InputManager
         // プレイとUIの時は何もしない
         if (type_ != INPUT_MODE.PLAY && type_ != INPUT_MODE.UI && type_ != INPUT_MODE.NONE) return;
 
-        if (IsExist()) type_ = INPUT_MODE.UI;
-        else type_ = INPUT_MODE.PLAY;
+        if (IsExist() && !Input.GetMouseButton(1)) type_ = INPUT_MODE.UI;
+        else if(!Input.GetMouseButton(1)) type_ = INPUT_MODE.PLAY;
     }
 
     static bool IsExist()
