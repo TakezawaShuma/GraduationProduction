@@ -496,6 +496,7 @@ GameObject:
   - component: {fileID: 2577528838245198186}
   - component: {fileID: 9176909422783641508}
   - component: {fileID: 2485294027689709980}
+  - component: {fileID: 7731105684301227280}
   m_Layer: 5
   m_Name: Image
   m_TagString: Slot
@@ -550,7 +551,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 377dc4f95259f324895614452faea723, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -606,6 +607,20 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &7731105684301227280
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1099674839924842134}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f87e57f39da689c4c9eeb586962dd39a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: -1
+  hoge: 2
 --- !u!1 &1972166520552490477
 GameObject:
   m_ObjectHideFlags: 0
@@ -619,6 +634,7 @@ GameObject:
   - component: {fileID: 7317596438340800182}
   - component: {fileID: 5114032358240195802}
   - component: {fileID: 3303750286498852434}
+  - component: {fileID: 6309713199476896863}
   m_Layer: 5
   m_Name: Image
   m_TagString: Slot
@@ -673,7 +689,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 377dc4f95259f324895614452faea723, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -729,6 +745,20 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &6309713199476896863
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1972166520552490477}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f87e57f39da689c4c9eeb586962dd39a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: -1
+  hoge: 2
 --- !u!1 &1978345667049723441
 GameObject:
   m_ObjectHideFlags: 0
@@ -905,6 +935,7 @@ GameObject:
   - component: {fileID: 9059957996297596384}
   - component: {fileID: 6616866461584362848}
   - component: {fileID: 2201548290017554077}
+  - component: {fileID: 88331847193349154}
   m_Layer: 5
   m_Name: Image
   m_TagString: Slot
@@ -959,7 +990,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 377dc4f95259f324895614452faea723, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1027,6 +1058,20 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &88331847193349154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2259546466793380679}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f87e57f39da689c4c9eeb586962dd39a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: -1
+  hoge: 2
 --- !u!1 &2588490717871814151
 GameObject:
   m_ObjectHideFlags: 0
@@ -1121,6 +1166,7 @@ GameObject:
   - component: {fileID: 7012263657319862062}
   - component: {fileID: 2256516129590105541}
   - component: {fileID: 4294229609642611894}
+  - component: {fileID: 4118177908555639148}
   m_Layer: 5
   m_Name: Image
   m_TagString: Slot
@@ -1175,7 +1221,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 377dc4f95259f324895614452faea723, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1231,6 +1277,20 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &4118177908555639148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2608320245958255763}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f87e57f39da689c4c9eeb586962dd39a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: -1
+  hoge: 2
 --- !u!1 &2763537498749390093
 GameObject:
   m_ObjectHideFlags: 0
@@ -1325,6 +1385,7 @@ GameObject:
   - component: {fileID: 7791262204961885324}
   - component: {fileID: 4471560685242334782}
   - component: {fileID: 1714151187956975477}
+  - component: {fileID: 4902903448841863385}
   m_Layer: 5
   m_Name: Image
   m_TagString: Slot
@@ -1379,7 +1440,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 377dc4f95259f324895614452faea723, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1435,6 +1496,20 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &4902903448841863385
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2790497640363013901}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f87e57f39da689c4c9eeb586962dd39a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: -1
+  hoge: 2
 --- !u!1 &2848381967030191442
 GameObject:
   m_ObjectHideFlags: 0
@@ -1448,6 +1523,7 @@ GameObject:
   - component: {fileID: 6538253172494491312}
   - component: {fileID: 937551506524121856}
   - component: {fileID: 528661427086008256}
+  - component: {fileID: 8869839753880538994}
   m_Layer: 5
   m_Name: Image
   m_TagString: Slot
@@ -1502,7 +1578,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 377dc4f95259f324895614452faea723, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1558,6 +1634,20 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &8869839753880538994
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2848381967030191442}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f87e57f39da689c4c9eeb586962dd39a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: -1
+  hoge: 2
 --- !u!1 &3362659181407024638
 GameObject:
   m_ObjectHideFlags: 0
@@ -1652,6 +1742,7 @@ GameObject:
   - component: {fileID: 3023813120589244525}
   - component: {fileID: 3917111028808062419}
   - component: {fileID: 415516770961118936}
+  - component: {fileID: 6356218014340592479}
   m_Layer: 5
   m_Name: Image
   m_TagString: Slot
@@ -1706,7 +1797,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 377dc4f95259f324895614452faea723, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1762,6 +1853,20 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &6356218014340592479
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3727058470836579190}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f87e57f39da689c4c9eeb586962dd39a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: -1
+  hoge: 2
 --- !u!1 &3873539947351925942
 GameObject:
   m_ObjectHideFlags: 0
@@ -1856,6 +1961,7 @@ GameObject:
   - component: {fileID: 5613108128326021340}
   - component: {fileID: 4896920476684896648}
   - component: {fileID: 7027032424441985086}
+  - component: {fileID: 5906930681089069323}
   m_Layer: 5
   m_Name: Image
   m_TagString: Slot
@@ -1910,7 +2016,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 377dc4f95259f324895614452faea723, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1966,6 +2072,20 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &5906930681089069323
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4517943724837929903}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f87e57f39da689c4c9eeb586962dd39a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: -1
+  hoge: 2
 --- !u!1 &4612392877302939031
 GameObject:
   m_ObjectHideFlags: 0
@@ -1979,6 +2099,7 @@ GameObject:
   - component: {fileID: 3636387969812686656}
   - component: {fileID: 7640652941894385014}
   - component: {fileID: 8037212190422763825}
+  - component: {fileID: 7707767798865464793}
   m_Layer: 5
   m_Name: Image
   m_TagString: Slot
@@ -2033,7 +2154,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 377dc4f95259f324895614452faea723, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2089,6 +2210,20 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &7707767798865464793
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4612392877302939031}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f87e57f39da689c4c9eeb586962dd39a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: -1
+  hoge: 2
 --- !u!1 &4981060375406951671
 GameObject:
   m_ObjectHideFlags: 0
@@ -2102,6 +2237,7 @@ GameObject:
   - component: {fileID: 4426192053037965089}
   - component: {fileID: 4798433625145390717}
   - component: {fileID: 2545407187825597445}
+  - component: {fileID: 6639218022962416401}
   m_Layer: 5
   m_Name: Image
   m_TagString: Slot
@@ -2156,7 +2292,7 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 0}
+  m_Sprite: {fileID: 21300000, guid: 377dc4f95259f324895614452faea723, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2212,6 +2348,20 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &6639218022962416401
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4981060375406951671}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f87e57f39da689c4c9eeb586962dd39a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  id: -1
+  hoge: 2
 --- !u!1 &5074956596874402068
 GameObject:
   m_ObjectHideFlags: 0

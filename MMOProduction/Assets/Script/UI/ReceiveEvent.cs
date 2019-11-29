@@ -10,13 +10,16 @@ public class ReceiveEvent : MonoBehaviour
 {
 
     private Vector3 clickPosition;
-
+    private Vector3 clickThisPosition;
+    private Vector3 clickPositionParent;
     private GameObject hitObject;
 
     // 押した時
     public void MyPointerDownUI()
     {
-        clickPosition = this.transform.localPosition;
+        clickPosition = Input.mousePosition;
+        clickThisPosition = this.transform.position;
+        clickPositionParent = this.transform.parent.position;
     }
 
     // 離した時
@@ -30,6 +33,7 @@ public class ReceiveEvent : MonoBehaviour
                 hitObject.GetComponent<Image>().sprite = this.GetComponent<Image>().sprite;
                 hitObject.GetComponent<SlotData>().ID = this.GetComponent<SlotData>().ID;
                 hitObject.GetComponent<SlotData>().HOGE = this.GetComponent<SlotData>().HOGE;
+                Debug.Log("ショトカ");
             }
 
             //インベントリ内で入れ替え
@@ -49,10 +53,24 @@ public class ReceiveEvent : MonoBehaviour
                 this.GetComponent<Image>().sprite = temp.GetComponent<Image>().sprite;
                 this.GetComponent<SlotData>().ID = temp.GetComponent<SlotData>().ID;
                 this.GetComponent<SlotData>().HOGE = temp.GetComponent<SlotData>().HOGE;
+                Debug.Log("インベ");
             }
         }
+    }
 
-        //初期位置に戻す
+
+    public void MyPositionResetParent()
+    {
+        this.transform.position = clickPositionParent;
+    }
+
+    public void MyPositionResetThis()
+    {
+        this.transform.position = clickThisPosition;
+    }
+
+    public void MyPositionResetClick()
+    {
         this.transform.position = clickPosition;
     }
 
@@ -61,7 +79,15 @@ public class ReceiveEvent : MonoBehaviour
     {
         if(Input.GetMouseButton(0))
         {
-            this.transform.parent.transform.position = Input.mousePosition - clickPosition;
+            this.transform.parent.transform.position = Input.mousePosition + (clickPositionParent - clickPosition);
+        }
+    }
+
+    public void MyDragContents()
+    {
+        if(Input.GetMouseButton(0))
+        {
+            this.transform.position = Input.mousePosition;
         }
     }
 
