@@ -9,20 +9,21 @@ using UnityEngine.UI;
 public class ReceiveEvent : MonoBehaviour
 {
 
-    private Vector3 clickPosition;
-    private Vector3 clickThisPosition;
-    private Vector3 clickPositionParent;
+    private Vector3 clickMousePosition;
+    private Vector3 clickThisObjectPosition;
+    private Vector3 clickParentObjectPosition;
 
     private GameObject hitObject;
 
     [SerializeField]
     private Sprite defoSprite;
+
     // 押した時
     public void MyPointerDownUI()
     {
-        clickPosition = Input.mousePosition;
-        clickThisPosition = this.transform.position;
-        clickPositionParent = this.transform.parent.position;
+        clickMousePosition = Input.mousePosition;
+        clickThisObjectPosition = this.transform.position;
+        clickParentObjectPosition = this.transform.parent.position;
     }
 
     // インベントリから移動した後
@@ -31,7 +32,7 @@ public class ReceiveEvent : MonoBehaviour
         if (hitObject != null)
         {
             //ショートカットスロットに登録
-            if(hitObject.tag == "Slot")
+            if (hitObject.tag == "Slot")
             {
                 hitObject.GetComponent<Image>().sprite = this.GetComponent<Image>().sprite;
                 hitObject.GetComponent<SlotData>().ID = this.GetComponent<SlotData>().ID;
@@ -39,21 +40,9 @@ public class ReceiveEvent : MonoBehaviour
             }
 
             //インベントリ内で入れ替え
-            if(hitObject.tag == "Inventory")
+            if (hitObject.tag == "Inventory")
             {
-                GameObject temp = hitObject;
-
-                temp.GetComponent<Image>().sprite = hitObject.GetComponent<Image>().sprite;
-                temp.GetComponent<SlotData>().ID = hitObject.GetComponent<SlotData>().ID;
-                temp.GetComponent<SlotData>().HOGE = hitObject.GetComponent<SlotData>().HOGE;
-
-                hitObject.GetComponent<Image>().sprite = this.GetComponent<Image>().sprite;
-                hitObject.GetComponent<SlotData>().ID = this.GetComponent<SlotData>().ID;
-                hitObject.GetComponent<SlotData>().HOGE = this.GetComponent<SlotData>().HOGE;
-
-                this.GetComponent<Image>().sprite = temp.GetComponent<Image>().sprite;
-                this.GetComponent<SlotData>().ID = temp.GetComponent<SlotData>().ID;
-                this.GetComponent<SlotData>().HOGE = temp.GetComponent<SlotData>().HOGE;
+                Swap();
             }
         }
     }
@@ -62,7 +51,7 @@ public class ReceiveEvent : MonoBehaviour
     {
         if (hitObject != null && hitObject.tag == "Slot")
         {
-            Shift();
+            Swap();
         }
         else
         {
@@ -74,51 +63,55 @@ public class ReceiveEvent : MonoBehaviour
 
     public void MyPositionResetParent()
     {
-        this.transform.position = clickPositionParent;
+        this.transform.position = clickParentObjectPosition;
     }
 
     public void MyPositionResetThis()
     {
-        this.transform.position = clickThisPosition;
+        this.transform.position = clickThisObjectPosition;
     }
 
     public void MyPositionResetClick()
     {
-        this.transform.position = clickPosition;
+        this.transform.position = clickMousePosition;
     }
 
     // ドラッグ時の関数
     public void MyDragUI()
     {
-        if(InputManager.InputMouseCheck(0)== INPUT_MODE.UI)
+        if (InputManager.InputMouseCheck(0) == INPUT_MODE.UI)
         {
-            this.transform.parent.transform.position = Input.mousePosition + (clickPositionParent - clickPosition);
+            this.transform.parent.transform.position = Input.mousePosition + (clickParentObjectPosition - clickMousePosition);
         }
     }
 
     public void MyDragContents()
     {
-        if(InputManager.InputMouseCheck(0) == INPUT_MODE.UI)
+        if (InputManager.InputMouseCheck(0) == INPUT_MODE.UI)
         {
             this.transform.position = Input.mousePosition;
         }
     }
 
-    private void Shift()
+    private void Swap()
     {
-        GameObject temp = hitObject;
+        GameObject temp = new GameObject();
+        temp.AddComponent<Image>();
+        temp.AddComponent<SlotData>();
 
-        temp.GetComponent<Image>().sprite = hitObject.GetComponent<Image>().sprite;
-        temp.GetComponent<SlotData>().ID = hitObject.GetComponent<SlotData>().ID;
-        temp.GetComponent<SlotData>().HOGE = hitObject.GetComponent<SlotData>().HOGE;
+        temp.GetComponent<Image>().sprite = this.GetComponent<Image>().sprite;
+        temp.GetComponent<SlotData>().ID = this.GetComponent<SlotData>().ID;
+        temp.GetComponent<SlotData>().HOGE = this.GetComponent<SlotData>().HOGE;
 
-        hitObject.GetComponent<Image>().sprite = this.GetComponent<Image>().sprite;
-        hitObject.GetComponent<SlotData>().ID = this.GetComponent<SlotData>().ID;
-        hitObject.GetComponent<SlotData>().HOGE = this.GetComponent<SlotData>().HOGE;
+        this.GetComponent<Image>().sprite = hitObject.GetComponent<Image>().sprite;
+        this.GetComponent<SlotData>().ID = hitObject.GetComponent<SlotData>().ID;
+        this.GetComponent<SlotData>().HOGE = hitObject.GetComponent<SlotData>().HOGE;
 
-        this.GetComponent<Image>().sprite = temp.GetComponent<Image>().sprite;
-        this.GetComponent<SlotData>().ID = temp.GetComponent<SlotData>().ID;
-        this.GetComponent<SlotData>().HOGE = temp.GetComponent<SlotData>().HOGE;
+        hitObject.GetComponent<Image>().sprite = temp.GetComponent<Image>().sprite;
+        hitObject.GetComponent<SlotData>().ID = temp.GetComponent<SlotData>().ID;
+        hitObject.GetComponent<SlotData>().HOGE = temp.GetComponent<SlotData>().HOGE;
+
+        Destroy(temp);
     }
 
 

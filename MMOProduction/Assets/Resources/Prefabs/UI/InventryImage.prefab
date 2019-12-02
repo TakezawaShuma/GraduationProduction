@@ -70,8 +70,8 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 58b2da3b9468c2643839301385bf8733, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 377dc4f95259f324895614452faea723, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -117,6 +117,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b9b5e56d4fdc0a42a765e6892e6fe06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defoSprite: {fileID: 0}
 --- !u!114 &6333024833836228513
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -152,7 +153,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 6333024833836228514}
-          m_MethodName: MyPointerUpUI
+          m_MethodName: MyPointerUpInventory
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
