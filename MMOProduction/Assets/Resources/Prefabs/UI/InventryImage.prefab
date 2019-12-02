@@ -14,10 +14,11 @@ GameObject:
   - component: {fileID: 6333024833836228515}
   - component: {fileID: 6333024833836228514}
   - component: {fileID: 6333024833836228513}
-  - component: {fileID: 3051394375211429641}
+  - component: {fileID: 7236855675469547725}
+  - component: {fileID: 592707661166633362}
   m_Layer: 5
   m_Name: InventryImage
-  m_TagString: Untagged
+  m_TagString: Inventory
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -69,8 +70,8 @@ MonoBehaviour:
       m_Calls: []
     m_TypeName: UnityEngine.UI.MaskableGraphic+CullStateChangedEvent, UnityEngine.UI,
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
-  m_Sprite: {fileID: 21300000, guid: 58b2da3b9468c2643839301385bf8733, type: 3}
-  m_Type: 1
+  m_Sprite: {fileID: 21300000, guid: 377dc4f95259f324895614452faea723, type: 3}
+  m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
   m_FillMethod: 4
@@ -88,9 +89,9 @@ BoxCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
-  m_UsedByComposite: 1
+  m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
@@ -102,7 +103,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 4, y: 4}
+  m_Size: {x: 20, y: 20}
   m_EdgeRadius: 0
 --- !u!114 &6333024833836228514
 MonoBehaviour:
@@ -116,7 +117,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b9b5e56d4fdc0a42a765e6892e6fe06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  panel: {fileID: 0}
+  defoSprite: {fileID: 0}
 --- !u!114 &6333024833836228513
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -135,7 +136,7 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 6333024833836228514}
-          m_MethodName: MyDragUI
+          m_MethodName: MyDragContents
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -152,7 +153,18 @@ MonoBehaviour:
       m_PersistentCalls:
         m_Calls:
         - m_Target: {fileID: 6333024833836228514}
-          m_MethodName: MyPointerUpUI
+          m_MethodName: MyPointerUpInventory
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+        - m_Target: {fileID: 6333024833836228514}
+          m_MethodName: MyPositionResetThis
           m_Mode: 1
           m_Arguments:
             m_ObjectArgument: {fileID: 0}
@@ -182,7 +194,7 @@ MonoBehaviour:
       m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
         Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   delegates: []
---- !u!114 &3051394375211429641
+--- !u!114 &7236855675469547725
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -194,4 +206,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f87e57f39da689c4c9eeb586962dd39a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 0
+  id: -1
+  hoge: 2
+--- !u!50 &592707661166633362
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6333024833836228519}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 0

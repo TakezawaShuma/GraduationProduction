@@ -35,15 +35,18 @@ public class IdleState : BaseState
             animatorManager.AnimChange((int)PlayerAnim.PARAMETER_ID.IDLE);
         }
 
-        if (Input.GetKeyDown(playerSetting.FKey) || Input.GetKeyDown(playerSetting.BKey) || Input.GetKeyDown(playerSetting.LKey) || Input.GetKeyDown(playerSetting.RKey))
+        if (InputManager.InputKeyCheckDown(playerSetting.FKey) || 
+            InputManager.InputKeyCheckDown(playerSetting.BKey) || 
+            InputManager.InputKeyCheckDown(playerSetting.LKey) || 
+            InputManager.InputKeyCheckDown(playerSetting.RKey))
         {
             playerController.ChangeState(KeyMoveState.Instance);
         }
-        else if (Input.GetKeyDown(playerSetting.AKey))
+        else if (InputManager.InputKeyCheckDown(playerSetting.AKey))
         {
             playerController.ChangeState(AutoRunState.Instance);
         }
-        else if (Input.GetMouseButtonDown(0))
+        else if (InputManager.InputMouseCheckDown(0) == INPUT_MODE.PLAY)
         {
             if (playerController.MODE == PlayerController.Mode.Battle)
             {
@@ -51,7 +54,7 @@ public class IdleState : BaseState
 
             }
         }
-        if (Input.GetMouseButtonDown(0))
+        if (InputManager.InputMouseCheckDown(0) == INPUT_MODE.PLAY)
         {
             playerController.LockOn();
         }

@@ -16,6 +16,8 @@ public enum INPUT_MODE {
     CHAT,
     UI,
 
+    NOT,
+
     NONE,
 }
 
@@ -34,8 +36,8 @@ public static class InputManager
         // プレイとUIの時は何もしない
         if (type_ != INPUT_MODE.PLAY && type_ != INPUT_MODE.UI && type_ != INPUT_MODE.NONE) return;
 
-        if (IsExist()) type_ = INPUT_MODE.UI;
-        else type_ = INPUT_MODE.PLAY;
+        if (IsExist() && !Input.GetMouseButton(1)) type_ = INPUT_MODE.UI;
+        else if(!Input.GetMouseButton(1)) type_ = INPUT_MODE.PLAY;
     }
 
     static bool IsExist()
@@ -59,6 +61,17 @@ public static class InputManager
             return false;
         
         return Input.GetKeyDown(_code);
+    }    
+    
+    /// <summary>
+    /// 押されたとき
+    /// </summary>
+    public static bool InputKeyCheckDown(string _code) {
+        if (type_ == INPUT_MODE.KEY_STOP || type_ == INPUT_MODE.ALL_STOP || 
+            type_ == INPUT_MODE.CHAT) 
+            return false;
+        
+        return Input.GetKeyDown(_code);
     }
 
     /// <summary>
@@ -66,7 +79,7 @@ public static class InputManager
     /// </summary>
     public static bool InputKeyCheck(KeyCode _code) {
         if (type_ == INPUT_MODE.KEY_STOP || type_ == INPUT_MODE.ALL_STOP || 
-            (type_ == INPUT_MODE.CHAT &&  _code != KeyCode.LeftControl || _code != KeyCode.RightControl)) 
+            (type_ == INPUT_MODE.CHAT &&  (_code != KeyCode.LeftControl || _code != KeyCode.RightControl))) 
             return false;
 
         return Input.GetKey(_code);
@@ -84,28 +97,29 @@ public static class InputManager
     /// <summary>
     /// マウス判定
     /// </summary>
-    public static bool InputMouseCheck(int _dir) {
+    public static INPUT_MODE InputMouseCheck(int _dir) {
         if (type_ == INPUT_MODE.MOUSE_STOP || type_ == INPUT_MODE.ALL_STOP) 
-            return false;
-        return Input.GetMouseButton(_dir);
+            return INPUT_MODE.NOT;
+
+        return (Input.GetMouseButton(_dir)) ? type_ : INPUT_MODE.NOT;
     }
 
     /// <summary>
     /// マウス判定
     /// </summary>
-    public static bool InputMouseCheckDown(int _type) {
+    public static INPUT_MODE InputMouseCheckDown(int _type) {
         if (type_ == INPUT_MODE.MOUSE_STOP || type_ == INPUT_MODE.ALL_STOP) 
-            return false;
-        return Input.GetMouseButtonDown(_type);
+            return INPUT_MODE.NOT;
+        return (Input.GetMouseButtonDown(_type))? type_ : INPUT_MODE.NOT;
     }
 
     /// <summary>
     /// マウス判定
     /// </summary>
-    public static bool InputMouseCheckUp(int _type){
+    public static INPUT_MODE InputMouseCheckUp(int _type){
         if (type_ == INPUT_MODE.MOUSE_STOP || type_ == INPUT_MODE.ALL_STOP) 
-            return false;
-        return Input.GetMouseButtonUp(_type);
+            return INPUT_MODE.NOT;
+        return (Input.GetMouseButtonUp(_type)) ? type_ : INPUT_MODE.NOT;
     }
 
 

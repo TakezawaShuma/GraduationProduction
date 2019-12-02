@@ -25,7 +25,7 @@ public class ShortcutManager : MonoBehaviour
     {
         for(int i = 0; i < 10; i++)
         {
-            if(Input.GetKeyDown(i.ToString()))
+            if(InputManager.InputKeyCheckDown(i.ToString()))
             {
                 buttons[i].onClick.Invoke();
             }

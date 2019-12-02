@@ -23,11 +23,11 @@ Sutas　常(変)
 
 public class OtherPlayers: NonPlayer
 {
-
+    private AnimatorManager am;
 
     public int HP { get { return hp; } set { hp = value; } }
     public int MP { get { return mp; } set { mp = value; } }
-    
+
     //public int id = 0;
     //public void Init(int _i) { id = _i; }
 
@@ -36,6 +36,8 @@ public class OtherPlayers: NonPlayer
     {
         lastPos = transform.position;
         lastDir = nextDir = transform.rotation;
+        am = new AnimatorManager();
+        am.ANIMATOR = animator_;
     }
 
 
@@ -49,8 +51,16 @@ public class OtherPlayers: NonPlayer
     /// <summary>
     /// アニメーション
     /// </summary>
-    void Animation() {
-        if(lastPos != nextPos) animator_.SetBool("Walk", true);   
-        else animator_.SetBool("Walk", false);
+    void Animation()
+    {
+        am.AnimChange((int)PlayerAnim.PARAMETER_ID.WALK);
+        if (lastPos != nextPos)
+        {
+            am.AnimChange((int)PlayerAnim.PARAMETER_ID.WALK);
+        }
+        else
+        {
+            am.AnimChange((int)PlayerAnim.PARAMETER_ID.IDLE);
+        }
     }
 }
