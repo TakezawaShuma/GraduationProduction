@@ -15,7 +15,7 @@ public class SlotData : MonoBehaviour
     }
 
     [SerializeField]
-    private int id;
+    private int id = -1;
 
     [SerializeField]
     private HOGEID hoge = HOGEID.NONE;
@@ -45,6 +45,7 @@ public class SlotData : MonoBehaviour
             hoge = value;
         }
     }
+
     // Start is called before the first frame update
     void Start()
     {
