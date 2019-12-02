@@ -13,7 +13,7 @@ using UnityEngine.SceneManagement;
 // ---------------------------------------------
 // ロード画面で使用
 // ---------------------------------------------
-public class LoadScreen : MonoBehaviour
+public class LoadScreen : SceneManagerBase
 {
 
     [SerializeField]

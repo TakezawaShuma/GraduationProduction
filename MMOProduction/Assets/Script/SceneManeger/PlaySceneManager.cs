@@ -10,10 +10,8 @@ using UnityEngine;
 using System.Linq;
 using UnityEngine.SceneManagement;
 
-public class PlaySceneManager : MonoBehaviour
+public class PlaySceneManager : SceneManagerBase
 {
-    [SerializeField]
-    bool connectFlag = false;
     public GameObject playerPre = null;
 
     [SerializeField]
@@ -45,7 +43,7 @@ public class PlaySceneManager : MonoBehaviour
     private Player player = null;
     //private Dictionary<int, OtherPlayers> others = new Dictionary<int, OtherPlayers>();
     //private Dictionary<int, Enemy> enemies = new Dictionary<int, Enemy>();
-    private Dictionary<int, CharacterBase> charcters = new Dictionary<int, CharacterBase>();
+    private Dictionary<int, NonPlayer> charcters = new Dictionary<int, NonPlayer>();
 
     // コールバック関数をリスト化
     private List<Action<string>> callbackList = new List<Action<string>>();
@@ -144,17 +142,6 @@ public class PlaySceneManager : MonoBehaviour
         //}
     }
 
-    /// <summary>
-    /// .exeの終了関数
-    /// </summary>
-    void Quit()
-    {
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#elif UNITY_STANDALONE
-    UnityEngine.Application.Quit();
-#endif
-    }
 
 
     private void OnApplicationQuit()
@@ -501,8 +488,8 @@ public class PlaySceneManager : MonoBehaviour
     }
 
 
-    private void ChangeScene(string _sceneName)
-    {
-        SceneManager.LoadScene(_sceneName);
-    }
+    //private void ChangeScene(string _sceneName)
+    //{
+    //    SceneManager.LoadScene(_sceneName);
+    //}
 }

@@ -5,8 +5,11 @@ using UnityEngine;
 /// <summary>
 /// クエストボード
 /// </summary>
-public class QuestBoard : MonoBehaviour
+public class QuestBoard : StageObject
 {
+    //[SerializeField]
+    //private Targetable targetMarker = null;
+
     // クエストパネル
     [SerializeField]
     private GameObject questPanel = null;
