@@ -26,6 +26,21 @@ public class ReceiveEvent : MonoBehaviour
         clickParentObjectPosition = this.transform.parent.position;
     }
 
+    public void MyForeground()
+    {
+        this.transform.SetAsLastSibling();
+    }
+
+    public void MyParentForeground()
+    {
+        this.transform.parent.SetAsLastSibling();
+    }
+
+    public void MyParentParentForeground()
+    {
+        this.transform.parent.parent.SetAsLastSibling();
+    }
+
     // インベントリから移動した後
     public void MyPointerUpInventory()
     {

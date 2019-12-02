@@ -45,6 +45,7 @@ public class UIManager : MonoBehaviour
                     else
                     {
                         ui[i].SetActive(true);
+                        ui[i].transform.SetAsLastSibling();
                     }
                 }
             }
