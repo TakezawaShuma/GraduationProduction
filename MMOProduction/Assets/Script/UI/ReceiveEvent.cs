@@ -90,7 +90,7 @@ public class ReceiveEvent : MonoBehaviour
     // ドラッグ時の関数
     public void MyDragUI()
     {
-        if(Input.GetMouseButton(0))
+        if(InputManager.InputMouseCheck(0)== INPUT_MODE.UI)
         {
             this.transform.parent.transform.position = Input.mousePosition + (clickPositionParent - clickPosition);
         }
@@ -98,7 +98,7 @@ public class ReceiveEvent : MonoBehaviour
 
     public void MyDragContents()
     {
-        if(Input.GetMouseButton(0))
+        if(InputManager.InputMouseCheck(0) == INPUT_MODE.UI)
         {
             this.transform.position = Input.mousePosition;
         }
