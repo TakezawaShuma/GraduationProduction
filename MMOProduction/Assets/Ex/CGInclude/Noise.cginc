@@ -7,8 +7,12 @@
 // ノイズ表現用の汎用関数をまとめたファイル
 //
 
-#include "UnityCG.cginc"
+// ファイルインクルード --------------------------
 #include "SimpleMath.cginc"
+
+// 多重インクルード防止 --------------------------
+#ifndef NOISE_CGINC
+#define NOISE_CGINC
 
 // -----------------------------------------------
 // ブロックノイズ
@@ -61,7 +65,7 @@ float perlinNoise(float2 st)
 // -----------------------------------------------
 // fbmノイズ
 // -----------------------------------------------
-float fBm (fixed2 st) 
+float fBm (float2 st) 
 {
     float f = 0;
     float2 q = st;
@@ -73,3 +77,5 @@ float fBm (fixed2 st)
 
     return f;
 }
+
+#endif
