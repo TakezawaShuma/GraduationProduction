@@ -18,8 +18,17 @@ public class CharacterSelect : MonoBehaviour
 
         if(Physics.Raycast(ray,out hit, 50.0f))
         {
-            if (hit.transform.gameObject.tag == "Player")
-            Debug.Log(hit.transform.name);
+            if (Input.GetMouseButtonDown(0))
+            {
+                if (hit.transform.gameObject.tag == "attacker")
+                    Debug.Log("1");
+                if (hit.transform.gameObject.tag == "defense")
+                    Debug.Log("2");
+                if (hit.transform.gameObject.tag == "Healer")
+                    Debug.Log("3");
+                if (hit.transform.gameObject.tag == "Witch")
+                    Debug.Log("4");
+            }
         }
 
     }
