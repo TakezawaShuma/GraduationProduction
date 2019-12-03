@@ -52,11 +52,9 @@ public class SkilltreeData
                     if (v.pearentID != 0)
                     {
                         vv.childList.Add(v);
-                        Debug.Log(vv.id + "の子リストに" + v.id + "を追加");
                     }
                     else
                     {
-                        Debug.Log(v.id + "は一番上のスキル");
                     }
                 }
             }
@@ -128,29 +126,10 @@ public class SkilltreeCreater : MonoBehaviour
 
     private int mostRight = 0;
 
-    const int SIZE = 50;
-
     // Start is called before the first frame update
     void Start()
     {
         skilltreeDatas = new List<SkilltreeData>();
-
-
-        //デバッグ用消してどうぞ
-        //SkilltreeData test = new SkilltreeData();
-        //test.skilltree.Add(new SkillData(100, 0,true));
-        //test.skilltree.Add(new SkillData(101, 100,true));
-        //test.skilltree.Add(new SkillData(102, 101,false));
-        //test.skilltree.Add(new SkillData(103, 101,true));
-        //test.AddChild();
-        //List<SkillData> t = new List<SkillData>();
-        //test.CheckActiveReturnList(100,t);
-        //foreach(var v in t)
-        //{
-        //    Debug.Log(v.id + "はアクティブ");
-        //}
-        //ここまでデバッグ
-
 
         for (int i = 0; i < 10; i++)
         {
@@ -200,9 +179,10 @@ public class SkilltreeCreater : MonoBehaviour
 
     public void Create(SkillData SkillData, Vector2 point, int num)
     {
+        var size = skill.transform.GetComponent<RectTransform>().rect.height;
         GameObject gameObject = Instantiate(skill, transform);
         gameObject.name = num.ToString();
-        gameObject.GetComponent<RectTransform>().localPosition = new Vector2(point.x * SIZE, point.y * -SIZE);
+        gameObject.GetComponent<RectTransform>().localPosition = new Vector2(point.x * size, point.y * -size);
 
         if (SkillData.children.Length != 0)
         {
@@ -215,7 +195,7 @@ public class SkilltreeCreater : MonoBehaviour
                     nextPoint.x += 1;
 
                     GameObject horizontalLine = Instantiate(horizontal, transform);
-                    horizontalLine.GetComponent<RectTransform>().localPosition = new Vector2(nextPoint.x * SIZE, nextPoint.y * -SIZE);
+                    horizontalLine.GetComponent<RectTransform>().localPosition = new Vector2(nextPoint.x * size, nextPoint.y * -size);
 
                     nextPoint.x += 1;
 
@@ -229,7 +209,7 @@ public class SkilltreeCreater : MonoBehaviour
                     nextPoint.y += 1;
 
                     GameObject verticalLine = Instantiate(vertical, transform);
-                    verticalLine.GetComponent<RectTransform>().localPosition = new Vector2(nextPoint.x * SIZE, nextPoint.y * -SIZE);
+                    verticalLine.GetComponent<RectTransform>().localPosition = new Vector2(nextPoint.x * size, nextPoint.y * -size);
 
                     nextPoint.y += 1;
                 }
