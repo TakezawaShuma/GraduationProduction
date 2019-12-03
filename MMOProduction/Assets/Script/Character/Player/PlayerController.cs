@@ -35,6 +35,9 @@ public class PlayerController : MonoBehaviour
         set { weapon = value; }
     }
 
+    // プレイヤーの武器プロパティ
+    public Sword Sword { get; private set; }
+
     // 現在のステート
     private BaseState currentState;
 
@@ -50,6 +53,7 @@ public class PlayerController : MonoBehaviour
     private Rigidbody rigidbody1;
 
     private PlayerSound sound_ = null;
+
 
     public enum Mode
     {
@@ -107,6 +111,9 @@ public class PlayerController : MonoBehaviour
         NormalAttackState.Instance.Initialized(this, playerSetting, animatorManager);
 
         AttackCollider = GetComponent<WeaponList>().GetWeapons(0);
+
+        // 武器リストから各種武器の参照を取得
+        Sword = AttackCollider.GetComponent<Sword>();
 
         currentState = IdleState.Instance;
         currentState.Start();
