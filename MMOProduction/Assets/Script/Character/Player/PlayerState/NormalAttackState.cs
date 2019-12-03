@@ -28,6 +28,8 @@ public class NormalAttackState : BaseState
         changeAnimeState = animatorManager.ANIMATOR.GetCurrentAnimatorStateInfo(0).shortNameHash.Equals(Animator.StringToHash("Attack"));
         HitRange(4);
         playerController.SKIL = 0;
+
+        this.playerController.Sword.PlayAttack();
     }
 
     public override void Execute()
@@ -40,6 +42,8 @@ public class NormalAttackState : BaseState
             // Attackアニメが終了したら
             if (animatorManager.ANIMATOR.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.99f)
             {
+                // 剣の軌跡の表示を停止する
+                this.playerController.Sword.StopAttack();
                 playerController.ChangeState(IdleState.Instance);
             }
         }
