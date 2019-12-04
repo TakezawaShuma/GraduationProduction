@@ -64,5 +64,14 @@ namespace WS
             ws.OnError += (sender, e) => { Debug.LogError("WebSocket Error Message: " + e.Message); };
             ws.OnClose += (sender, e) => { Destroy("通信が切断されました: " + _closeMsg, false); };
         }
+
+        /// <summary>
+        /// 送信関数
+        /// </summary>
+        /// <param name="_json"></param>
+        public abstract void Send(string _json);
+
+        protected abstract void Receive();
+
     }
 }

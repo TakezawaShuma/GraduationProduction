@@ -10,7 +10,7 @@ public class Ready
 {
     private static Ready instance;
 
-    private bool isReady;
+    private bool isReady = false;
 
     public static Ready Instance
     {
