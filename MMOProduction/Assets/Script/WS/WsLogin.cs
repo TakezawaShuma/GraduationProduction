@@ -62,12 +62,12 @@ namespace WS
             instance = null;
         }
 
-        public void Send(string _json)
+        public override void Send(string _json)
         {
             base.ws.Send(_json);
         }
 
-        public void Receive()
+        protected override void Receive()
         {
             var context = SynchronizationContext.Current;
             // 受信したデータが正常なものなら発火する
@@ -77,7 +77,7 @@ namespace WS
                 {
                     // 受信データからコマンドを取り出す
                     CommandData com = (CommandData)int.Parse(e.Data.Substring(11, 3));
-                    Debug.Log(e.Data);
+                    //Debug.Log(e.Data);
                     // コマンドで受信データサイズを変える
                     // コマンド内容はDatas.csを参照
                     switch (com)
