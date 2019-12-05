@@ -28,6 +28,7 @@ public class CharacterSelect : MonoBehaviour
             {
                 if (hit.transform.gameObject.tag == "attacker")
                     anime.SetBool("AttackerPause", true);
+                    anime.SetBool("AuraAnimation", true);
                 if (hit.transform.gameObject.tag == "defense")
                     anime.SetBool("DefensePause", true);
                 if (hit.transform.gameObject.tag == "Healer")
@@ -36,6 +37,7 @@ public class CharacterSelect : MonoBehaviour
                     anime.SetBool("WitchPause", true);
             }
         }
+       
 
     }
 }
