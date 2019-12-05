@@ -7,7 +7,7 @@
 using UnityEngine;
 
 
-public class FireballController : MonoBehaviour
+public class FireballController : SkillBase
 {
 
     private float _startLife;   // 開始ライフ

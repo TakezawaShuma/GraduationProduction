@@ -6814,12 +6814,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 992294604}
-  m_LocalRotation: {x: 0.12968391, y: -0.0000000058982152, z: 7.71418e-10, w: 0.9915554}
-  m_LocalPosition: {x: 0.004314234, y: 237476.11, z: -361734.8}
+  m_LocalRotation: {x: 0.013721991, y: 0.9853542, z: -0.13973677, w: 0.09676065}
+  m_LocalPosition: {x: -243.52605, y: 238351.92, z: -360513.94}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalRotation: {x: 0.011244891, y: 0.98819494, z: -0.12346676, w: 0.090001106}
-  m_LocalPosition: {x: -41022.855, y: 147945.78, z: 221389.4}
-  m_LocalScale: {x: 0.66666704, y: 0.6666667, z: 0.666667}
   m_Children: []
   m_Father: {fileID: 3278045186938042501}
   m_RootOrder: 8
@@ -13383,7 +13380,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _skillArray:
-  - {fileID: 3604881555418993990, guid: dd76a579b588f9b42bc81b44b8271d97, type: 3}
+  - {fileID: 6779593876538898757, guid: dd76a579b588f9b42bc81b44b8271d97, type: 3}
+  - {fileID: 8695340120250622819, guid: 82830133fa2fe0a48bf0e35c11ac0a71, type: 3}
 --- !u!4 &1631059801
 Transform:
   m_ObjectHideFlags: 0
@@ -13937,6 +13935,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Riko
+      objectReference: {fileID: 0}
+    - target: {fileID: 3274201342871926291, guid: 49b2f598d0de4e84594c2e0138c30f69,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 3278045186938042501, guid: 49b2f598d0de4e84594c2e0138c30f69,
         type: 3}
