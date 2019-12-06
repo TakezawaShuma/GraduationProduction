@@ -5869,15 +5869,17 @@ MonoBehaviour:
   connectFlag: 1
   playerPre: {fileID: 2136695631195096698, guid: f60ab25478542df4281ac7e670433c26,
     type: 3}
-  otherPlayerPre_: {fileID: 7312705236510121977, guid: 3d45b2269476ee840a4b39af3bd80452,
-    type: 3}
-  testEnemyPre: {fileID: 842962567749291421, guid: 796be72676539b34dbc1ac6907da5760,
-    type: 3}
-  FollowingCamera: {fileID: 992294608}
-  chat: {fileID: 809979501}
+  playerAvatars: {fileID: 0}
+  enemyDataList: {fileID: 0}
   nameUI: {fileID: 1860603917932401239, guid: a88436e2d44261544bb11c73d88f019d, type: 3}
   enemyStatusCanvas: {fileID: 2283633340352723908, guid: ccb73b1f8a779af46a1b14b4ed19daf6,
     type: 3}
+  testEnemyPre: {fileID: 842962567749291421, guid: 796be72676539b34dbc1ac6907da5760,
+    type: 3}
+  otherPlayerPre_: {fileID: 7312705236510121977, guid: 3d45b2269476ee840a4b39af3bd80452,
+    type: 3}
+  FollowingCamera: {fileID: 992294608}
+  chat: {fileID: 809979501}
   playerUI: {fileID: 6631658281430464886}
   userSeeting: {fileID: 1533655886}
   playerSpawnPos: {x: -210, y: 10, z: -210}
@@ -6814,12 +6816,9 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 992294604}
-  m_LocalRotation: {x: 0.12968391, y: -0.0000000058982152, z: 7.71418e-10, w: 0.9915554}
-  m_LocalPosition: {x: 0.0043290323, y: 238288.64, z: -362978.7}
+  m_LocalRotation: {x: 0.014127111, y: 0.9848993, z: -0.1420607, w: 0.097942516}
+  m_LocalPosition: {x: -38.463543, y: 238427.05, z: -362786}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_LocalRotation: {x: 0.011244891, y: 0.98819494, z: -0.12346676, w: 0.090001106}
-  m_LocalPosition: {x: -41022.855, y: 147945.78, z: 221389.4}
-  m_LocalScale: {x: 0.66666704, y: 0.6666667, z: 0.666667}
   m_Children: []
   m_Father: {fileID: 3278045186938042501}
   m_RootOrder: 8
@@ -10242,11 +10241,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 809979505}
     m_Modifications:
-    - target: {fileID: 8163061522702348242, guid: 1ba778ea13c09d949b07806fcd4d08ad,
-        type: 3}
-      propertyPath: m_Name
-      value: SkiltreePanel
-      objectReference: {fileID: 0}
     - target: {fileID: 8163061522702348243, guid: 1ba778ea13c09d949b07806fcd4d08ad,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -10351,6 +10345,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 8163061522702348242, guid: 1ba778ea13c09d949b07806fcd4d08ad,
+        type: 3}
+      propertyPath: m_Name
+      value: SkiltreePanel
       objectReference: {fileID: 0}
     - target: {fileID: 8163061524141354668, guid: 1ba778ea13c09d949b07806fcd4d08ad,
         type: 3}

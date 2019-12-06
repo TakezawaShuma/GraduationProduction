@@ -31,6 +31,7 @@ public class Inventory : MonoBehaviour
                 var b = a.GetComponent<SlotData>().HOGE;
                 var c = a.GetComponent<SlotData>().ID;
 
+
                 //使った報告
                 a.GetComponent<SlotData>().UseFlagOff();
             }
