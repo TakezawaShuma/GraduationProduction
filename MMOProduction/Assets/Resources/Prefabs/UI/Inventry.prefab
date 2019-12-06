@@ -894,6 +894,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 5726655133401845474}
     m_Modifications:
+    - target: {fileID: 5230221849727753799, guid: bcd38cc7ad402fe46aaaf40e335cb3a7,
+        type: 3}
+      propertyPath: m_Name
+      value: CloseButton
+      objectReference: {fileID: 0}
     - target: {fileID: 5230221849727753798, guid: bcd38cc7ad402fe46aaaf40e335cb3a7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -998,11 +1003,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Pivot.y
       value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 5230221849727753799, guid: bcd38cc7ad402fe46aaaf40e335cb3a7,
-        type: 3}
-      propertyPath: m_Name
-      value: CloseButton
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: bcd38cc7ad402fe46aaaf40e335cb3a7, type: 3}
