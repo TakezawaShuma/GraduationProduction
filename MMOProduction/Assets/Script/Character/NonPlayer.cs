@@ -21,8 +21,9 @@ public class NonPlayer :CharacterBase
     /// <param name="_y"></param>
     /// <param name="_z"></param>
     /// <param name="_dir"></param>
-    public void Init(float _x, float _y, float _z, float _dir)
+    public void Init(float _x, float _y, float _z, float _dir,int _id)
     {
+        ID = _id;
         lastPos = transform.position = new Vector3(_x, _y, _z);
         nextPos = new Vector3(_x, _y, _z);
         lastDir = transform.rotation = Quaternion.Euler(new Vector3(0, _dir, 0));

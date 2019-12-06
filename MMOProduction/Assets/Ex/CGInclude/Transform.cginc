@@ -7,18 +7,20 @@
 // 変換情報用の関数をまとめたファイル
 //	
 
-#include "UnityCG.cginc"
+// 多重インクルード防止 ----------------------------
+#ifndef TRANSFORM_CGINC
+#define TRANSFORM_CGINC
 
 // -------------------------------------------------
 // 回転
 // -------------------------------------------------
-float3 rotate(float3 p, float angle, float3 axis) 
+float3 rotate(float3 p, float angle, float3 axis)
 {
-	float3 a = normalize(axis);
-	float s = sin(angle);
-	float c = cos(angle);
-	float r = 1.0 - c;
-	float3x3 m = float3x3(
+    float3 a = normalize(axis);
+    float s = sin(angle);
+    float c = cos(angle);
+    float r = 1.0 - c;
+    float3x3 m = float3x3(
 		a.x * a.x * r + c,
 		a.y * a.x * r + a.z * s,
 		a.z * a.x * r - a.y * s,
@@ -29,7 +31,18 @@ float3 rotate(float3 p, float angle, float3 axis)
 		a.y * a.z * r - a.x * s,
 		a.z * a.z * r + c
 		);
-	return mul(p, m);
+    return mul(p, m);
+}
+
+float2 rotate(float2 pos, float angle)
+{
+    const float pi = 3.1415;
+    angle *= pi / 180;
+    float2x2 rotateMatrix = float2x2(
+        cos(angle), -sin(angle),
+        sin(angle), cos(angle)
+        );
+    return mul(pos, rotateMatrix);
 }
 
 // -------------------------------------------------
@@ -37,24 +50,26 @@ float3 rotate(float3 p, float angle, float3 axis)
 // -------------------------------------------------
 float3 scale(float3 p, float3 s)
 {
-	float3x3 m = float3x3(
+    float3x3 m = float3x3(
 		s.x, 0, 0,
 		0, s.y, 0,
 		0, 0, s.z
 		);
-		return mul(p, m);
-}			
+    return mul(p, m);
+}
 
 // -------------------------------------------------
 // 平行移動
 // -------------------------------------------------
 float4 trans(float3 p, float3 t)
 {
-	float4x4 m = float4x4(
+    float4x4 m = float4x4(
 		1, 0, 0, t.x,
 		0, 1, 0, t.y,
 		0, 0, 1, t.z,
 		0, 0, 0, 1
 		);
-		return mul(p, m);
-}		
+    return mul(p, m);
+}
+
+#endif

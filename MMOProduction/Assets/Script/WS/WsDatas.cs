@@ -229,49 +229,7 @@ namespace Packes
     //    public float exp;
     //}
     
-    /// <summary>
-    /// command 702 アイテム一覧(client->server)
-    /// </summary>
-    public class SendItemList : IPacketDatas
-    {
-        public SendItemList() { command = (int)CommandData.SendItemList; }
 
-    }
-    
-    /// <summary>
-    /// command 703 スキル一覧(client->server)
-    /// </summary>
-    public class SendSkillList : IPacketDatas
-    {
-        public SendSkillList() { command = (int)CommandData.SendSkillList; }
-
-    }
-    
-    /// <summary>
-    /// command 704 アイテム一覧(server->client)
-    /// </summary>
-    public class RecvItemList : IPacketDatas
-    {
-        public RecvItemList() { command = (int)CommandData.RecvItemList; }
-
-    }
-
-    /// <summary>
-    /// command 705 スキル一覧(server->client)
-    /// </summary>
-    public class RecvSkillList : IPacketDatas
-    {
-        public RecvSkillList() { command = (int)CommandData.RecvSkillList; }
-
-    }
-
-    /// <summary>
-    /// command 706 ログアウト完了(server->client)
-    /// </summary>
-    public class FinishComplete : IPacketDatas
-    {
-        public FinishComplete() { command = (int)CommandData.FinishComplete; }
-    }
 
 
     //// command 803 全体チャット受信(client->server)

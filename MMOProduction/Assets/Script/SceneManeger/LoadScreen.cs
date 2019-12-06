@@ -125,9 +125,6 @@ public class LoadScreen : SceneManagerBase
         {
             yield return null;
         }
-
-        Debug.Log("このシーンを消す");
-
         SceneManager.UnloadSceneAsync(SceneManager.GetActiveScene().name);
     }
 }

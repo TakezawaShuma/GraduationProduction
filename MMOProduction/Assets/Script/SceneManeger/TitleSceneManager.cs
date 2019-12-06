@@ -170,7 +170,6 @@ public class TitleSceneManager : SceneManagerBase
         var result = cheack.CheckIdAndPassword(id, pw);
         if (result == LoginCheck.CHECKRESULT.OK)
         {
-            //Debug.Log("ログイン ID:" + id + "  PW:" + pw);
             ErrorMessageHide();
             if (connectFlag)
             {
@@ -415,16 +414,12 @@ public class TitleSceneManager : SceneManagerBase
             ButtonState(true);
             LoadingUIDelete();
         }
-        else if (errorCount < 10) { StartCoroutine(ReSend(new Packes.LoginUser(id_.text, pw_.text).ToJson()));  errorCount++; }
+        else if (errorCount < 10) { StartCoroutine(ReSend(wsl,new Packes.LoginUser(id_.text, pw_.text).ToJson()));  errorCount++; }
         else { errorCount = 0; }
     }
 
     // 選択の音
     public void EnterSoundPlay() => sound_.SystemPlay(SYSTEM_SOUND_TYPE.ENTER);
 
-    public IEnumerator ReSend(string _json)
-    {
-        yield return new WaitForSeconds(0.5f);
-        wsl.Send(_json);
-    }
+
 }
