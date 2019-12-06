@@ -5853,6 +5853,7 @@ GameObject:
   m_Component:
   - component: {fileID: 645858242}
   - component: {fileID: 645858244}
+  - component: {fileID: 645858243}
   m_Layer: 0
   m_Name: PlaySceneManager
   m_TagString: Untagged
@@ -5874,6 +5875,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &645858243
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 645858241}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1081bc7be1ce1484bb1db717f0825228, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  modelTables_: {fileID: 11400000, guid: 8ee8a3db3f0db5743a8475cc341f027e, type: 2}
 --- !u!114 &645858244
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -6835,7 +6849,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 992294604}
   m_LocalRotation: {x: 0.12968391, y: -0.0000000058982152, z: 7.71418e-10, w: 0.9915554}
-  m_LocalPosition: {x: 0.004022003, y: 221430.52, z: -337171.2}
+  m_LocalPosition: {x: 0.0040396596, y: 222399.98, z: -338655.3}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -13901,9 +13915,24 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1781345919314673155, guid: 60f291891277049469bd2b1df4c8605c,
+        type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 1781345917657327607, guid: 60f291891277049469bd2b1df4c8605c,
         type: 3}
       propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1781345917657327607, guid: 60f291891277049469bd2b1df4c8605c,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1781345917657327607, guid: 60f291891277049469bd2b1df4c8605c,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

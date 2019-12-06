@@ -22,6 +22,7 @@ public abstract class CharacterBase : MonoBehaviour
     protected Quaternion nextDir = new Quaternion();
 
     protected Animator animator_;
+    private GameObject model_ = null;
 
     public const float UPDATE_SPEED = 1.0f / 3.0f;
 
@@ -81,4 +82,8 @@ public abstract class CharacterBase : MonoBehaviour
         get { return this.id; }
         set { this.id = value; }
     }
+
+    public void SetModel(GameObject _object) => model_ = _object;
+
+
 }

@@ -59,6 +59,8 @@ public class PlaySceneManager : MonoBehaviour
 
     private GameObject userPlayer;
 
+    private MasterDatas masterData_ = null;
+
     public GameObject USER
     {
         get { return userPlayer; }
@@ -93,6 +95,7 @@ public class PlaySceneManager : MonoBehaviour
             wsp.Send(new Packes.DataLoading(UserRecord.ID).ToJson());
 
         }
+        masterData_ = GetComponent<MasterDatas>();
         MakePlayer(new Vector3(-210, 5, -210));
     }
 
@@ -187,7 +190,7 @@ public class PlaySceneManager : MonoBehaviour
         _name = "player" + UserRecord.ID;
         if (player == null)
         {
-            var tmp = Instantiate<GameObject>(playerPre, this.transform);
+            var tmp = Instantiate<GameObject>(masterData_.FindById(101), this.transform);
             tmp.transform.position = new Vector3(_save.x, _save.y, _save.z);
             tmp.name = (UserRecord.Name != "") ? UserRecord.Name : _name;
             tmp.tag = "Player";
@@ -236,7 +239,7 @@ public class PlaySceneManager : MonoBehaviour
                 // 他のユーザーの作成
                 else
                 {
-                    var otherPlayer = Instantiate<GameObject>(otherPlayerPre_, new Vector3(data.x, data.y, data.z), Quaternion.Euler(0, data.dir, 0), this.transform);
+                    var otherPlayer = Instantiate<GameObject>(masterData_.FindById(102), new Vector3(data.x, data.y, data.z), Quaternion.Euler(0, data.dir, 0), this.transform);
                     otherPlayer.name = "otherPlayer" + data.user_id;
                     otherPlayer.tag = "OtherPlayer";
                     otherPlayer.transform.localScale = new Vector3(2, 2, 2);
@@ -277,7 +280,7 @@ public class PlaySceneManager : MonoBehaviour
                 // 敵の作成
                 else
                 {
-                    newEnemy = Instantiate<GameObject>(testEnemyPre, new Vector3(ene.x, ene.y, ene.z), Quaternion.Euler(0, ene.dir, 0));
+                    newEnemy = Instantiate<GameObject>(masterData_.FindById(201), new Vector3(ene.x, ene.y, ene.z), Quaternion.Euler(0, ene.dir, 0));
                     newEnemy.name = "Enemy:" + ene.master_id + "->" + ene.unique_id;
                     GameObject stutasCanvas = Instantiate(enemyStatusCanvas, newEnemy.transform);
                     stutasCanvas.GetComponent<UIEnemyHP>().MAX_HP = ene.hp;
