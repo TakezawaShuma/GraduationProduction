@@ -2,24 +2,6 @@
 // プレイヤーの簡易データ //
 ////////////////////////////
 
-[System.Serializable]
-public class PlayerData
-{
-    public int id;
-    public float x;
-    public float y;
-    public float z;
-    public int dir;
-
-    public PlayerData() { }
-    public PlayerData(int _id,float _x,float _y,float _z,int _dir) {
-        id = _id; x = _x; y = _y; z = _z; dir = _dir;
-    }
-
-    //public PlayerData(Packes.RecvPosSync _data) {
-    //    id = _data.user_id; x = _data.x; y = _data.y; z = _data.z; dir = _data.dir;
-    //}
-}
 
 /// <summary>
 /// プレイヤーの状態
@@ -35,10 +17,7 @@ public class PlayerStatus{
 /// セーブデータ
 /// </summary>
 public class SaveData{
-    public SaveData() { }
-    public SaveData(Weapon _weapon, UnityEngine.Vector3 _pos, int _lv, int _exp) { weapon = _weapon; position = _pos; lv = _lv; exp = _exp; }
-    public Weapon weapon;
-    public UnityEngine.Vector3 position;
+    public Equipment equipment;
     public int lv;
     public int exp;
 }
@@ -46,12 +25,18 @@ public class SaveData{
 /// <summary>
 /// 装備クラス
 /// </summary>
-public class Weapon
+public class Equipment
 {
+    // 武器ID
     int weapon;
+    // 兜ID
     int head;
+    // 鎧ID
     int body;
+    // 具足ID
     int leg;
+    // アクセサリー1ID
     int accessoryL;
+    // アクセサリー2ID
     int accessoryR;
 }
