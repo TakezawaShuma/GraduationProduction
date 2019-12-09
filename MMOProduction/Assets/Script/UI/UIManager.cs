@@ -32,11 +32,11 @@ public class UIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (ui != null)
+        if (ui != null && !chat.GetChatActiveFlag())
         {
             for (int i = 0; i < ui.Length; i++)
             {
-                if (InputManager.InputKeyCheckDown(key[i])&&!chat.GetChatActiveFlag())
+                if (InputManager.InputKeyCheckDown(key[i]))
                 {
                     if (ui[i].activeInHierarchy)
                     {
