@@ -19,8 +19,8 @@ Shader "Custom/FireballEffect"
 			#pragma fragment frag
 
 			#include "UnityCG.cginc"
-			#include "Assets/CGInclude/Shape.cginc"
-			#include "Assets/CGInclude/Noise.cginc"
+			#include "Assets/Ex/CGInclude/Shape.cginc"
+			#include "Assets/Ex/CGInclude/Noise.cginc"
 
 			struct VS_INPUT
 			{

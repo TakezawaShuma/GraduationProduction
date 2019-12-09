@@ -4,6 +4,9 @@ using UnityEngine;
 using UnityEngine.UI;
 using System;
 
+/// <summary>
+/// スキルの基礎データ
+/// </summary>
 public class SkillData
 {
     public SkillData(int Id,int pId,bool act)
@@ -24,6 +27,9 @@ public class SkillData
     public bool active = false;
 }
 
+/// <summary>
+/// スキルツリーの基礎データ
+/// </summary>
 public class SkilltreeData
 {
     public List<SkillData> skilltree;
@@ -46,11 +52,9 @@ public class SkilltreeData
                     if (v.pearentID != 0)
                     {
                         vv.childList.Add(v);
-                        Debug.Log(vv.id + "の子リストに" + v.id + "を追加");
                     }
                     else
                     {
-                        Debug.Log(v.id + "は一番上のスキル");
                     }
                 }
             }
@@ -81,29 +85,32 @@ public class SkilltreeData
         return sd;
     }
 
-    public (int[] id,bool[] active) CheckActiveReturnArray(int id_,int[] id,bool[] active)
-    {
-        foreach(var v in skilltree)
-        {
-            if(v.id==id_)
-            {
-                Array.Resize(ref id, id.Length + 1);
-                id[id.Length - 1] = v.id;
-                Array.Resize(ref active, active.Length + 1);
-                active[active.Length - 1] = v.active;
+    //public (int[] id,bool[] active) CheckActiveReturnArray(int id_,int[] id,bool[] active)
+    //{
+    //    foreach(var v in skilltree)
+    //    {
+    //        if(v.id==id_)
+    //        {
+    //            Array.Resize(ref id, id.Length + 1);
+    //            id[id.Length - 1] = v.id;
+    //            Array.Resize(ref active, active.Length + 1);
+    //            active[active.Length - 1] = v.active;
                 
-            }
-            if (v.childList.Capacity == 0) break;
-            foreach(var vv in v.childList)
-            {
-                CheckActiveReturnArray(vv.id, id, active);
-            }
-        }
+    //        }
+    //        if (v.childList.Capacity == 0) break;
+    //        foreach(var vv in v.childList)
+    //        {
+    //            CheckActiveReturnArray(vv.id, id, active);
+    //        }
+    //    }
 
-        return (id, active);
-    }
+    //    return (id, active);
+    //}
 }
 
+/// <summary>
+/// スキルツリーを作る
+/// </summary>
 public class SkilltreeCreater : MonoBehaviour
 {
     [SerializeField]
@@ -119,29 +126,10 @@ public class SkilltreeCreater : MonoBehaviour
 
     private int mostRight = 0;
 
-    const int SIZE = 50;
-
     // Start is called before the first frame update
     void Start()
     {
         skilltreeDatas = new List<SkilltreeData>();
-
-
-        //デバッグ用消してどうぞ
-        //SkilltreeData test = new SkilltreeData();
-        //test.skilltree.Add(new SkillData(100, 0,true));
-        //test.skilltree.Add(new SkillData(101, 100,true));
-        //test.skilltree.Add(new SkillData(102, 101,false));
-        //test.skilltree.Add(new SkillData(103, 101,true));
-        //test.AddChild();
-        //List<SkillData> t = new List<SkillData>();
-        //test.CheckActiveReturnList(100,t);
-        //foreach(var v in t)
-        //{
-        //    Debug.Log(v.id + "はアクティブ");
-        //}
-        //ここまでデバッグ
-
 
         for (int i = 0; i < 10; i++)
         {
@@ -191,9 +179,10 @@ public class SkilltreeCreater : MonoBehaviour
 
     public void Create(SkillData SkillData, Vector2 point, int num)
     {
+        var size = skill.transform.GetComponent<RectTransform>().rect.height;
         GameObject gameObject = Instantiate(skill, transform);
         gameObject.name = num.ToString();
-        gameObject.GetComponent<RectTransform>().localPosition = new Vector2(point.x * SIZE, point.y * -SIZE);
+        gameObject.GetComponent<RectTransform>().localPosition = new Vector2(point.x * size, point.y * -size);
 
         if (SkillData.children.Length != 0)
         {
@@ -206,7 +195,7 @@ public class SkilltreeCreater : MonoBehaviour
                     nextPoint.x += 1;
 
                     GameObject horizontalLine = Instantiate(horizontal, transform);
-                    horizontalLine.GetComponent<RectTransform>().localPosition = new Vector2(nextPoint.x * SIZE, nextPoint.y * -SIZE);
+                    horizontalLine.GetComponent<RectTransform>().localPosition = new Vector2(nextPoint.x * size, nextPoint.y * -size);
 
                     nextPoint.x += 1;
 
@@ -220,7 +209,7 @@ public class SkilltreeCreater : MonoBehaviour
                     nextPoint.y += 1;
 
                     GameObject verticalLine = Instantiate(vertical, transform);
-                    verticalLine.GetComponent<RectTransform>().localPosition = new Vector2(nextPoint.x * SIZE, nextPoint.y * -SIZE);
+                    verticalLine.GetComponent<RectTransform>().localPosition = new Vector2(nextPoint.x * size, nextPoint.y * -size);
 
                     nextPoint.y += 1;
                 }

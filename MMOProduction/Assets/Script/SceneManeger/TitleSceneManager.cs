@@ -6,19 +6,16 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections.Generic;
-using UnityEngine.SceneManagement;
+using System.Collections;
 
-public class TitleSceneManager : MonoBehaviour
+public class TitleSceneManager : SceneManagerBase
 {
 #pragma warning disable 0649
     //ID,PWの最大文字数
     private const int MAX_WORD = 16;
     // wsソケット
     WS.WsLogin wsl = null;
-
-    [SerializeField]
-    bool connectFlag = false;
-
+    
     //ボタンの種類
     public enum CANVAS_STATE {
         SELECT,    //選択
@@ -39,6 +36,9 @@ public class TitleSceneManager : MonoBehaviour
     [SerializeField]
     //ログインPW入力用
     private InputField pw_;
+    // ユーザー名入力
+    [SerializeField]
+    private InputField userName_;
     [SerializeField]
     //PW確認用
     private InputField ConfirmPW_;
@@ -114,17 +114,6 @@ public class TitleSceneManager : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.Return)) EnterCheck();
     }
 
-    /// <summary>
-    /// .exeの終了関数
-    /// </summary>
-    void Quit()
-    {
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#elif UNITY_STANDALONE
-            UnityEngine.Application.Quit();
-#endif
-    }
 
     private void OnDestroy() {
         if (connectFlag) wsl.Destroy();
@@ -156,6 +145,7 @@ public class TitleSceneManager : MonoBehaviour
         id_.text = "";
         pw_.text = "";
         ConfirmPW_.text = "";
+        userName_.text = "";
 
         ErrorMessageHide();
         ButtonState(true);
@@ -180,7 +170,6 @@ public class TitleSceneManager : MonoBehaviour
         var result = cheack.CheckIdAndPassword(id, pw);
         if (result == LoginCheck.CHECKRESULT.OK)
         {
-            //Debug.Log("ログイン ID:" + id + "  PW:" + pw);
             ErrorMessageHide();
             if (connectFlag)
             {
@@ -228,7 +217,7 @@ public class TitleSceneManager : MonoBehaviour
                 if (connectFlag)
                 {
                     // 送信処理
-                    wsl.Send(new Packes.CreateUser(id, pw).ToJson());
+                    wsl.Send(new Packes.CreateUser(id, pw, userName_.text).ToJson());
                 }
             }
             else
@@ -288,11 +277,14 @@ public class TitleSceneManager : MonoBehaviour
                 } else if (pw_.isFocused) {
                     ConfirmPW_.ActivateInputField();
                     pw_.DeactivateInputField();
-                } else {
-                    id_.ActivateInputField();
+                } else if(ConfirmPW_.isFocused){
+                    userName_.ActivateInputField();
                     ConfirmPW_.DeactivateInputField();
+                } else if(userName_.isFocused){
+                    id_.ActivateInputField();
+                    userName_.DeactivateInputField();
                 }
-                break;
+                break;  
 
             default: break;
         }
@@ -387,12 +379,7 @@ public class TitleSceneManager : MonoBehaviour
         loadingCircle = null;
     }
 
-    /// <summary>
-    /// シーンを切り替える プレイ
-    /// </summary>
-    private void ChangeScenetoPlay(){
-        SceneManager.LoadScene("LoadingScene");
-    }
+
 
     // 受信時のメゾット -----------------------------------
     /// <summary>
@@ -410,7 +397,7 @@ public class TitleSceneManager : MonoBehaviour
     /// <param name="_packet"></param>
     private void LoginAction(Packes.LoginOK _packet) {
         Debug.Log("login ok");
-        ChangeScenetoPlay();
+        ChangeScene("LoadingScene");
         UserRecord.ID = _packet.user_id;
         UserRecord.Name = _packet.name;
     }
@@ -427,10 +414,12 @@ public class TitleSceneManager : MonoBehaviour
             ButtonState(true);
             LoadingUIDelete();
         }
-        else if (errorCount < 10) { wsl.Send(new Packes.LoginUser(id_.text, pw_.text).ToJson()); errorCount++; }
+        else if (errorCount < 10) { StartCoroutine(ReSend(wsl,new Packes.LoginUser(id_.text, pw_.text).ToJson()));  errorCount++; }
         else { errorCount = 0; }
     }
 
     // 選択の音
     public void EnterSoundPlay() => sound_.SystemPlay(SYSTEM_SOUND_TYPE.ENTER);
+
+
 }

@@ -34,10 +34,10 @@ public class AutoRunState : BaseState
     {
         if(playerSetting.IA)
         {
-            animatorManager.Run();
+            animatorManager.AnimChange((int) PlayerAnim.PARAMETER_ID.RUN);
         }
 
-        if (Input.GetMouseButtonDown(0))
+        if (InputManager.InputMouseCheckDown(0) == INPUT_MODE.PLAY)
         {
             playerController.LockOn();
         }
@@ -47,7 +47,10 @@ public class AutoRunState : BaseState
 
         playerController.Move(velocity);
 
-        if (Input.GetKeyDown(playerSetting.FKey) || Input.GetKeyDown(playerSetting.BKey) || Input.GetKeyDown(playerSetting.LKey) || Input.GetKeyDown(playerSetting.RKey))
+        if (InputManager.InputKeyCheckDown(playerSetting.FKey) || 
+            InputManager.InputKeyCheckDown(playerSetting.BKey) || 
+            InputManager.InputKeyCheckDown(playerSetting.LKey) || 
+            InputManager.InputKeyCheckDown(playerSetting.RKey))
         {
             playerController.ChangeState(KeyMoveState.Instance);
         }

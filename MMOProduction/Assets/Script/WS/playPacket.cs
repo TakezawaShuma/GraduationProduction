@@ -118,47 +118,50 @@ namespace Packes
     }
 
     /// <summary>
-    /// セーブデータの読み込み要請 command:209
+    /// セーブデータの読み込み要請 command:211
     /// </summary>
-    public class DataLoading : IPacketDatas
+    public class SaveLoadCtoS : IPacketDatas
     {
         /// <summary>ユーザーID</summary>
         public int user_id;
 
         /// <summary>デフォルトコンストラクタ</summary>
-        public DataLoading()
+        public SaveLoadCtoS()
         {
-            this.command = (int)CommandData.DataLoading;
+            this.command = (int)CommandData.SaveLoadCtoS;
         }
         /// <summary>フルコンストラクタ</summary>
         /// <param name="_user_id">ユーザーID</summary>
-        public DataLoading(
+        public SaveLoadCtoS(
             int _user_id
         )
         {
-            this.command = (int)CommandData.DataLoading;
+            this.command = (int)CommandData.SaveLoadCtoS;
             this.user_id = _user_id;
         }
     }
 
     /// <summary>
-    /// データの読み込み終了 command:211
+    /// セーブデータの読み込み完了 command:213
     /// </summary>
-    public class LoadingFinishCtoS : IPacketDatas
+    public class LoadingOK : IPacketDatas
     {
+        /// <summary>ユーザーID</summary>
         public int user_id;
+
         /// <summary>デフォルトコンストラクタ</summary>
-        public LoadingFinishCtoS()
-        {
-            this.command = (int)CommandData.LoadingFinishCtoS;
-        }
+        public LoadingOK() { this.command = (int)CommandData.LoadingOK; }
+
         /// <summary>フルコンストラクタ</summary>
-        public LoadingFinishCtoS(int _id)
+        public LoadingOK(int _id)
         {
-            this.command = (int)CommandData.LoadingFinishCtoS;
+            this.command = (int)CommandData.LoadingOK;
             this.user_id = _id;
         }
     }
+
+
+
 
     /// <summary>
     /// 攻撃 P->E CtoS command:220
@@ -225,30 +228,6 @@ namespace Packes
             this.command = (int)CommandData.UserHit;
             this.user_id = _user_id;
             this.enemy_id = _enemy_id;
-        }
-    }
-
-    /// <summary>
-    /// ログアウト command:701
-    /// </summary>
-    public class LogoutCtoS : IPacketDatas
-    {
-        /// <summary>ユーザーのID</summary>
-        public int user_id;
-
-        /// <summary>デフォルトコンストラクタ</summary>
-        public LogoutCtoS()
-        {
-            this.command = (int)CommandData.LogoutCtoS;
-        }
-        /// <summary>フルコンストラクタ</summary>
-        /// <param name="_user_id">ユーザーのID</summary>
-        public LogoutCtoS(
-            int _user_id
-        )
-        {
-            this.command = (int)CommandData.LogoutCtoS;
-            this.user_id = _user_id;
         }
     }
 
@@ -343,39 +322,105 @@ namespace Packes
     }
 
     /// <summary>
-    /// セーブデータ command:210
+    /// セーブデータの読み込み command:212
     /// </summary>
-    public class LoadSaveData : IPacketDatas
+    public class SaveLoadStoC : IPacketDatas
     {
+        /// <summary>位置X</summary>
+        public float x;
+        /// <summary>位置Y</summary>
+        public float y;
+        /// <summary>位置Z</summary>
+        public float z;
+        /// <summary>モデルID</summary>
+        public int model_id;
 
         /// <summary>デフォルトコンストラクタ</summary>
-        public LoadSaveData()
+        public SaveLoadStoC()
         {
-            this.command = (int)CommandData.LoadSaveData;
+            this.command = (int)CommandData.SaveLoadStoC;
         }
-        /// <summary>フルコンストラクタ</summary>
-        public LoadSaveData(int _i)
+        /// <summary>コンストラクタ</summary>
+        /// <param name="_x">位置X</summary>
+        /// <param name="_y">位置Y</summary>
+        /// <param name="_z">位置Z</summary>
+        /// <param name="_model_id">モデルID</summary>
+        public SaveLoadStoC(
+            float _x,
+            float _y,
+            float _z,
+            int _model_id
+        )
         {
-            this.command = (int)CommandData.LoadSaveData;
+            this.command = (int)CommandData.SaveLoadStoC;
+            this.x = _x;
+            this.y = _y;
+            this.z = _z;
+            this.model_id = _model_id;
         }
     }
 
     /// <summary>
-    /// セーブデータの読み込み完了 command:212
+    /// プレイシーンにいる他ユーザーの一覧 command:214
     /// </summary>
-    public class LoadingFinishStoC:IPacketDatas
+    public class OtherPlayerList : IPacketDatas
     {
+        public List<OtherPlayersData> players = new List<OtherPlayersData>();
         /// <summary>デフォルトコンストラクタ</summary>
-        public LoadingFinishStoC()
+        public OtherPlayerList()
         {
-            this.command = (int)CommandData.LoadingFinishStoC;
-        }
-        /// <summary>フルコンストラクタ</summary>
-        public LoadingFinishStoC(int _i)
-        {
-            this.command = (int)CommandData.LoadingFinishStoC;
+            this.command = (int)CommandData.OtherPlayerList;
         }
     }
+
+    /// <summary>
+    /// 他ユーザーの途中ログイン command:215
+    /// </summary>
+    public class NewOtherUser : IPacketDatas
+    {
+        /// <summary>ユーザーのID</summary>
+        public int user_id;
+        /// <summary>位置X</summary>
+        public float x;
+        /// <summary>位置Y</summary>
+        public float y;
+        /// <summary>位置Z</summary>
+        public float z;
+        /// <summary>キャラクター名</summary>
+        public string name;
+        /// <summary>モデルID</summary>
+        public int model_id;
+
+        /// <summary>デフォルトコンストラクタ</summary>
+        public NewOtherUser()
+        {
+            this.command = (int)CommandData.NewOtherUser;
+        }
+        /// <summary>コンストラクタ</summary>
+        /// <param name="_user_id">ユーザーのID</summary>
+        /// <param name="_x">位置X</summary>
+        /// <param name="_y">位置Y</summary>
+        /// <param name="_z">位置Z</summary>
+        /// <param name="_name">キャラクター名</summary>
+        public NewOtherUser(
+            int _user_id,
+            float _x,
+            float _y,
+            float _z,
+            string _name,
+            int _model_id
+        )
+        {
+            this.command = (int)CommandData.NewOtherUser;
+            this.user_id = _user_id;
+            this.x = _x;
+            this.y = _y;
+            this.z = _z;
+            this.name = _name;
+            this.model_id = _model_id;
+        }
+    }
+    
 
     /// <summary>
     /// 判定後生きている command:221
@@ -439,6 +484,37 @@ namespace Packes
         }
     }
 
+
+    /// <summary>
+    /// 他のプレイヤーがスキルを使用したとき command = 224
+    /// </summary>
+    public class OtherPlayerUseSkill : IPacketDatas
+    {
+        /// <summary>使用者ID</summary>
+        public int user_id;
+        /// <summary>スキルID</summary>
+        public int skill_id;
+
+        /// <summary>デフォルトコンストラクタ</summary>
+        public OtherPlayerUseSkill()
+        {
+            this.command = (int)CommandData.OtherPlayerUseSkill;
+        }
+        /// <summary>コンストラクタ</summary>
+        /// <param name="_user_id">使用者ID</summary>
+        /// <param name="_skill_id">スキルID</summary>
+        public OtherPlayerUseSkill(
+            int _user_id,
+            int _skill_id
+        )
+        {
+            this.command = (int)CommandData.OtherPlayerUseSkill;
+            this.user_id = _user_id;
+            this.skill_id = _skill_id;
+        }
+    }
+
+
     /// <summary>
     /// 敵のスキル使用申請 command:225
     /// </summary>
@@ -477,6 +553,8 @@ namespace Packes
         public int skill_id;
         /// <summary>敵のID</summary>
         public int enemy_id;
+        /// <summary>ターゲットのID</summary>
+        public int target_id;
 
         /// <summary>デフォルトコンストラクタ</summary>
         public EnemyUseSkill()
@@ -488,17 +566,19 @@ namespace Packes
         /// <param name="_enemy_id">敵のID</summary>
         public EnemyUseSkill(
             int _skill_id,
-            int _enemy_id
+            int _enemy_id,
+            int _target_id
         )
         {
             this.command = (int)CommandData.EnemyUseSkill;
             this.skill_id = _skill_id;
             this.enemy_id = _enemy_id;
+            this.target_id = _target_id;
         }
     }
 
     /// <summary>
-    /// 敵の攻撃 command:227
+    /// 敵の攻撃の結果 command:227
     /// </summary>
     public class EnemyAttackResult : IPacketDatas
     {
@@ -527,30 +607,40 @@ namespace Packes
     }
 
 
-
-
-    /// <summary>
-    /// ログアウト command:707
-    /// </summary>
-    public class LogoutStoC : IPacketDatas
-    {
-
+    /// <summary> 他プレイヤーの作成用データ </summary>
+    [System.Serializable]
+    public struct OtherPlayersData
+    {  
+        /// <summary>ユーザーID</summary>
         public int user_id;
+        /// <summary>位置X</summary>
+        public float x;
+        /// <summary>位置Y</summary>
+        public float y;
+        /// <summary>位置Z</summary>
+        public float z;
+        /// <summary>モデルのID</summary>
+        int model_id;
+        /// <summary>名前</summary>
+        public string name;
 
-        /// <summary>デフォルトコンストラクタ</summary>
-        public LogoutStoC()
-        {
-            this.command = (int)CommandData.LogoutStoC;
-        }
-        public LogoutStoC(
-            int _user_id
-        )
+        public OtherPlayersData(
+            int _user_id,
+            float _x,
+            float _y,
+            float _z,
+            int _model_id,
+        string _name)
         {
             this.user_id = _user_id;
+            this.x = _x;
+            this.y = _y;
+            this.z = _z;
+            this.model_id = _model_id;
+            this.name = _name;
         }
     }
-
-
+    
 
 
     enum OBJECT_TYPE
@@ -560,7 +650,7 @@ namespace Packes
         ENEMY,
     }
 
-    /// <summary> 敵の受信用データ </summary>
+    /// <summary> 敵の受信用データ</summary>
     [System.Serializable]
     public struct EnemyReceiveData
     {

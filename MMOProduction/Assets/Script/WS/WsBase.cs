@@ -27,8 +27,8 @@ namespace WS
         /// <param name="_port">ポート</param>
         protected void Connect(uint _port)
         {
-                    ws = new WebSocket("ws://" + server_ip + ":" + _port.ToString());
-                    Debug.Log("IPアドレス : " + server_ip + "ポート : " + _port);
+            ws = new WebSocket("ws://" + server_ip + ":" + _port.ToString());
+            Debug.Log("IPアドレス : " + server_ip + "ポート : " + _port);
             //ws = new WebSocket("ws://" + server_ip + ":" + _port.ToString());
             WsInit();
             ws.Connect();
@@ -64,5 +64,14 @@ namespace WS
             ws.OnError += (sender, e) => { Debug.LogError("WebSocket Error Message: " + e.Message); };
             ws.OnClose += (sender, e) => { Destroy("通信が切断されました: " + _closeMsg, false); };
         }
+
+        /// <summary>
+        /// 送信関数
+        /// </summary>
+        /// <param name="_json"></param>
+        public abstract void Send(string _json);
+
+        protected abstract void Receive();
+
     }
 }

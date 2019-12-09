@@ -53,14 +53,19 @@ public enum CommandData
     StatusCtoS = (int)205,
     /// <summary>状態受信</summary>
     StatusStoC = (int)206,
+
+
+    /// <summary>セーブデータの読み込み要請</summary>
+    SaveLoadCtoS = (int)211,
     /// <summary>セーブデータの読み込み</summary>
-    DataLoading = (int)209,
-    /// <summary>セーブデータ</summary>
-    LoadSaveData = (int)210,
-    /// <summary>データの読み込み終了報告</summary>
-    LoadingFinishCtoS = (int)211,
-    /// <summary>データの読み込み終了報告</summary>
-    LoadingFinishStoC = (int)212,
+    SaveLoadStoC = (int)212,
+    /// <summary>セーブデータの読み込み完了</summary>
+    LoadingOK = (int)213,
+    /// <summary>プレイシーンにいる他ユーザーの一覧</summary>
+    OtherPlayerList = (int)214,
+    /// <summary>他ユーザーの途中ログイン</summary>
+    NewOtherUser = (int)215,
+
 
     /// <summary>戦闘処理送信</summary>
     Attack = (int)220,
@@ -69,6 +74,8 @@ public enum CommandData
     /// <summary>エネミーが死んでいる時</summary>
     EnemyDieStoC = (int)222,
 
+    /// <summary>他プレイヤーが攻撃した </summary>
+    OtherPlayerUseSkill = (int)224,
     /// <summary>敵のスキル使用申請</summary>
     EnemyUseSkillRequest = (int)225,
     /// <summary>敵のスキル使用</summary>
@@ -82,6 +89,10 @@ public enum CommandData
 
     /// <summary>ログアウト要請</summary>
     LogoutCtoS = (int)701,
+    /// <summary> ログアウト完了 </summary>
+    FinishComplete = (int)706,
+    /// <summary>他ユーザーのログアウト</summary>
+    LogoutStoC = (int)707,
     /// <summary> アイテム一覧送信 </summary>
     SendItemList = (int)702,
     /// <summary> スキル一覧送信 </summary>
@@ -90,11 +101,14 @@ public enum CommandData
     RecvItemList = (int)704,
     /// <summary> スキル一覧受信 </summary>
     RecvSkillList = (int)705,
-    /// <summary> ログアウト完了 </summary>
-    FinishComplete = (int)706,
 
-    /// <summary>他ユーザーのログアウト</summary>
-    LogoutStoC = (int)707,
+
+
+    /// <summary>キャラクターの詳細取得</summary>
+    FindOfPlayerCtoS = (int)711,
+    /// <summary>キャラクターの詳細</summary>
+    FindOfPlayerStoC = (int)712,
+
 
     // チャット
     /// <summary> 全体チャット送信 </summary>

@@ -24,10 +24,12 @@ public class NormalAttackState : BaseState
 
     public override void Start()
     {
-        animatorManager.NormalAttack();
+        animatorManager.AnimChange((int)PlayerAnim.PARAMETER_ID.ATTACK);
         changeAnimeState = animatorManager.ANIMATOR.GetCurrentAnimatorStateInfo(0).shortNameHash.Equals(Animator.StringToHash("Attack"));
         HitRange(4);
         playerController.SKIL = 0;
+
+        this.playerController.Sword.PlayAttack();
     }
 
     public override void Execute()
@@ -40,6 +42,8 @@ public class NormalAttackState : BaseState
             // Attackアニメが終了したら
             if (animatorManager.ANIMATOR.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.99f)
             {
+                // 剣の軌跡の表示を停止する
+                this.playerController.Sword.StopAttack();
                 playerController.ChangeState(IdleState.Instance);
             }
         }
@@ -59,7 +63,6 @@ public class NormalAttackState : BaseState
             int myID = UserRecord.ID;
 
             WS.WsPlay.Instance.Send(new Packes.Attack(enemyID, UserRecord.ID, 0, 0).ToJson());
-            //Debug.Log("攻撃が当たったよ");  // debug
             return true;
         }
         return false;

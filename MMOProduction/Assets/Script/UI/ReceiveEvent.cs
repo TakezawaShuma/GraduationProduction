@@ -3,66 +3,136 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// UIを動かす
+/// </summary>
 public class ReceiveEvent : MonoBehaviour
 {
-    private Vector3 startPosition;
-    GameObject hitObject;
 
-    private Vector3 length;
+    private Vector3 clickMousePosition;
+    private Vector3 clickThisObjectPosition;
+    private Vector3 clickParentObjectPosition;
+
+    private GameObject hitObject;
+
+    [SerializeField]
+    private Sprite defoSprite;
+
     // 押した時
     public void MyPointerDownUI()
     {
-        length = Input.mousePosition - this.transform.position;
-        
-
-        startPosition = this.transform.position;
-        ChangeAlpha(0.5f);
+        clickMousePosition = Input.mousePosition;
+        clickThisObjectPosition = this.transform.position;
+        clickParentObjectPosition = this.transform.parent.position;
     }
 
-    // 離した時
-    public void MyPointerUpUI()
+    public void MyForeground()
     {
-        ChangeAlpha(1.0f);
+        this.transform.SetAsLastSibling();
+    }
 
+    public void MyParentForeground()
+    {
+        this.transform.parent.SetAsLastSibling();
+    }
+
+    public void MyParentParentForeground()
+    {
+        this.transform.parent.parent.SetAsLastSibling();
+    }
+
+    // インベントリから移動した後
+    public void MyPointerUpInventory()
+    {
         if (hitObject != null)
         {
-            hitObject.GetComponent<Image>().sprite = this.GetComponent<Image>().sprite;
-            hitObject.GetComponent<SlotData>().ID = this.GetComponent<SlotData>().ID;
-            hitObject.GetComponent<SlotData>().HOGE = this.GetComponent<SlotData>().HOGE;
-        }
+            //ショートカットスロットに登録
+            if (hitObject.tag == "Slot")
+            {
+                hitObject.GetComponent<Image>().sprite = this.GetComponent<Image>().sprite;
+                hitObject.GetComponent<SlotData>().ID = this.GetComponent<SlotData>().ID;
+                hitObject.GetComponent<SlotData>().HOGE = this.GetComponent<SlotData>().HOGE;
+            }
 
-        this.transform.position = startPosition;
+            //インベントリ内で入れ替え
+            if (hitObject.tag == "Inventory")
+            {
+                Swap();
+            }
+        }
     }
 
-    public void MyPointerUpUIBack()
+    public void MyPointerUpShortcut()
     {
-        ChangeAlpha(1.0f);
+        if (hitObject != null && hitObject.tag == "Slot")
+        {
+            Swap();
+        }
+        else
+        {
+            this.GetComponent<Image>().sprite = defoSprite;
+            this.GetComponent<SlotData>().ID = -1;
+            this.GetComponent<SlotData>().HOGE = SlotData.HOGEID.NONE;
+        }
+    }
+
+    public void MyPositionResetParent()
+    {
+        this.transform.position = clickParentObjectPosition;
+    }
+
+    public void MyPositionResetThis()
+    {
+        this.transform.position = clickThisObjectPosition;
+    }
+
+    public void MyPositionResetClick()
+    {
+        this.transform.position = clickMousePosition;
     }
 
     // ドラッグ時の関数
     public void MyDragUI()
     {
-        transform.position = Input.mousePosition- length;
+        if (InputManager.InputMouseCheck(0) == INPUT_MODE.UI)
+        {
+            this.transform.parent.transform.position = Input.mousePosition + (clickParentObjectPosition - clickMousePosition);
+        }
     }
 
-    public void MyDragMoveChild()
+    public void MyDragContents()
     {
-        transform.GetChild(0).localPosition = Input.mousePosition + length;
+        if (InputManager.InputMouseCheck(0) == INPUT_MODE.UI)
+        {
+            this.transform.position = Input.mousePosition;
+        }
     }
 
-
-    // Imageのalpha値の変更
-    public void ChangeAlpha(float alpha)
+    private void Swap()
     {
-        var component = GetComponent<Image>();
-        var color = component.color;
-        color.a = alpha;
-        component.color = color;
+        GameObject temp = new GameObject();
+        temp.AddComponent<Image>();
+        temp.AddComponent<SlotData>();
+
+        temp.GetComponent<Image>().sprite = this.GetComponent<Image>().sprite;
+        temp.GetComponent<SlotData>().ID = this.GetComponent<SlotData>().ID;
+        temp.GetComponent<SlotData>().HOGE = this.GetComponent<SlotData>().HOGE;
+
+        this.GetComponent<Image>().sprite = hitObject.GetComponent<Image>().sprite;
+        this.GetComponent<SlotData>().ID = hitObject.GetComponent<SlotData>().ID;
+        this.GetComponent<SlotData>().HOGE = hitObject.GetComponent<SlotData>().HOGE;
+
+        hitObject.GetComponent<Image>().sprite = temp.GetComponent<Image>().sprite;
+        hitObject.GetComponent<SlotData>().ID = temp.GetComponent<SlotData>().ID;
+        hitObject.GetComponent<SlotData>().HOGE = temp.GetComponent<SlotData>().HOGE;
+
+        Destroy(temp);
     }
+
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.transform.tag == "Slot")
+        if (collision.transform.tag == "Slot" || collision.transform.tag == "Inventory")
         {
             hitObject = collision.gameObject;
         }
@@ -70,7 +140,7 @@ public class ReceiveEvent : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.transform.tag == "Slot")
+        if (collision.transform.tag == "Slot" || collision.transform.tag == "Inventory")
         {
             hitObject = null;
         }

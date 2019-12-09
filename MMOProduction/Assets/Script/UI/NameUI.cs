@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// プレイヤーの名前を表示
+/// </summary>
 public class NameUI : MonoBehaviour
 {
     [SerializeField]

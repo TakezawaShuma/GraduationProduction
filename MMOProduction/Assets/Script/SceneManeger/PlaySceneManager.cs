@@ -8,36 +8,54 @@ using System.Collections.Generic;
 using System;
 using UnityEngine;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
-public class PlaySceneManager : MonoBehaviour
+public class PlaySceneManager : SceneManagerBase
 {
-    [SerializeField]
-    bool connectFlag = false;
     public GameObject playerPre = null;
 
+    [SerializeField,Header("プレイヤーモデルリスト")]
+    private character_table playerAvatars = null;
+   [Header("敵のマスターデータ"), SerializeField]
+    private enemy_table enemyDataList;
+
+    [SerializeField,Header("プレイヤーの名前表示UI")]
+    private GameObject nameUI = null;
+    [SerializeField, Header("エネミーのステータスUI")]
+    private GameObject enemyStatusCanvas = null;
+
+ 
+    [SerializeField, Header("テストの敵")]
+    private GameObject testEnemyPre = null;
     [SerializeField]
     private GameObject otherPlayerPre_ = null;
 
-    [SerializeField, Header("テストの敵")]
-    private GameObject testEnemyPre = null;
+
 
     [SerializeField, Header("カメラ")]
     private FollowingCamera FollowingCamera = default(FollowingCamera);
 
     [SerializeField]
     private ChatController chat = default(ChatController);
+    
+ 
+    [SerializeField]
+    private PlayerUI playerUI = null;
 
-    [SerializeField, Header("エネミーのステータスUI")]
-    private GameObject enemyStatusCanvas = null;
+    [SerializeField]
+    private GameUserSetting userSeeting = null;
 
-    bool updateFlag = true;
+    bool updateFlag = false;
+
+    // 通信やその他で不具合が生じた場合の再試行用カウンター
+    int countOfTrials = 0;
 
     // ソケット
     private WS.WsPlay wsp = null;
+
     private Player player = null;
-    private Dictionary<int, OtherPlayers> others = new Dictionary<int, OtherPlayers>();
-    private Dictionary<int, Enemy> enemies = new Dictionary<int, Enemy>();
-    private Dictionary<int, CharacterBase> charcters = new Dictionary<int, CharacterBase>();
+
+    private Dictionary<int, NonPlayer> charcters = new Dictionary<int, NonPlayer>();
 
     // コールバック関数をリスト化
     private List<Action<string>> callbackList = new List<Action<string>>();
@@ -73,28 +91,36 @@ public class PlaySceneManager : MonoBehaviour
             wsp.moveingAction = UpdatePlayersPostion;           // 202
             wsp.enemysAction = RegisterEnemies;                 // 204
             wsp.statusAction = UpdateStatus;                    // 206
-            wsp.loadSaveAction = RecvSaveData;                  // 210
-            wsp.loadFinAction = LoadFinish;                     // 212
+
+            wsp.loadSaveAction= ReceiveSaveData;                // 212
+            wsp.loadOtherListAction = ReceiveOtherListData;     // 214
+            wsp.loadOtherAction = ReceiveOtherData;             // 215
+
             wsp.enemyAliveAction = AliveEnemy;                  // 221
             wsp.enemyDeadAction = DeadEnemy;                    // 222
             wsp.enemySkillReqAction = EnemyUseSkillRequest;     // 225
             wsp.enemyUseSkillAction = EnemyUseSkill;            // 226
             wsp.enemyAttackAction = EnemyAttackResult;          // 227
+
             wsp.logoutAction = Logout;                          // 707
+            wsp.findResultsAction = ReceivingFindResults;       // 712
+
             // セーブデータを要請する。
-            wsp.Send(new Packes.DataLoading(UserRecord.ID).ToJson());
+            wsp.Send(new Packes.SaveLoadCtoS(UserRecord.ID).ToJson());
+           
 
         }
-        MakePlayer(new Vector3(-210, 5, -210));
+        //MakePlayer(new Vector3(-210, 5, -210), playerPre);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Input.GetKey(KeyCode.Escape)) Quit();
-        ready.ReadyGO();
+        InputManager.Update();
+        if (InputManager.InputKeyCheck(KeyCode.Escape)) Quit();
         if (updateFlag)
         {
+            ready.ReadyGO();
             if (player != null)
             {
                 var playerData = player.GetPosition();
@@ -135,17 +161,6 @@ public class PlaySceneManager : MonoBehaviour
         //}
     }
 
-    /// <summary>
-    /// .exeの終了関数
-    /// </summary>
-    void Quit()
-    {
-#if UNITY_EDITOR
-        UnityEditor.EditorApplication.isPlaying = false;
-#elif UNITY_STANDALONE
-    UnityEngine.Application.Quit();
-#endif
-    }
 
 
     private void OnApplicationQuit()
@@ -173,12 +188,15 @@ public class PlaySceneManager : MonoBehaviour
     /// <summary>
     /// 自分の作成
     /// </summary>
-    private void MakePlayer(Vector3 _save,string _name= "player0")
+    private bool MakePlayer(Vector3 _save,GameObject _playerModel, string _name= "player0")
     {
-        _name = "player" + UserRecord.ID;
+        bool ret = false;
+        _name = (_name == "player0") ? _name = "player" + UserRecord.ID : _name;
+        
+        // プレイヤーが作られた事がないなら
         if (player == null)
         {
-            var tmp = Instantiate<GameObject>(playerPre, this.transform);
+            var tmp = Instantiate<GameObject>(_playerModel, this.transform);
             tmp.transform.position = new Vector3(_save.x, _save.y, _save.z);
             tmp.name = (UserRecord.Name != "") ? UserRecord.Name : _name;
             tmp.tag = "Player";
@@ -187,61 +205,80 @@ public class PlaySceneManager : MonoBehaviour
             tmp.AddComponent<PlayerController>();
             tmp.AddComponent<PlayerSetting>();
             tmp.GetComponent<PlayerController>().Init(tmp.GetComponent<Player>(), FollowingCamera, tmp.GetComponent<PlayerSetting>(), chat, tmp.GetComponent<Animator>());
+            userSeeting.Init(tmp);
             player = tmp.GetComponent<Player>();
-            tmp.GetComponent<NameUI>().TEXT.enabled = false;
             FollowingCamera.SetTarget(tmp);
             userPlayer = tmp;
 
             // ミニマップのカメラの作成
-            var miniMapTmp = Instantiate<GameObject>(miniMapCameraPrefab_);
+            var miniMapTmp = Instantiate<GameObject>(miniMapCameraPrefab_, this.transform);
             miniMapTmp.GetComponent<MiniMapController>().Init(tmp);
+
+            playerUI.PLAYER_CMP = tmp.GetComponent<Player>();
+            playerUI.PLAYER_NAME = UserRecord.Name;
+
+            ret = true;
         }
+        return ret;
     }
 
 
     // コールバック系統↓
 
     /// <summary>
-    /// 自分以外のユーザーの更新　→　moveingAction
+    /// 自分以外のユーザーの位置更新　→　moveingAction
     /// </summary>
     private void UpdatePlayersPostion(Packes.TranslationStoC _packet)
     {
-        Packes.TranslationStoC data = _packet;
-
-        if (data.user_id != 0)
+        if (_packet.user_id != 0)
         {
-            if (data.user_id != UserRecord.ID)
+            if (_packet.user_id != UserRecord.ID)
             {
                 // 他ユーザーの更新
-                if (others.ContainsKey(data.user_id))
+                if (charcters.ContainsKey(_packet.user_id))
                 {
-                    if (others[data.user_id] != null)
+                    if (charcters[_packet.user_id] != null)
                     {
-                        others[data.user_id].UpdatePostionData(data.x, data.y, data.z, data.dir);
+                        charcters[_packet.user_id].UpdatePostionData(_packet.x, _packet.y, _packet.z, _packet.dir);
                     }
                 }
                 // todo 他プレイヤーの更新と作成を関数分けする
                 // 他のユーザーの作成
                 else
                 {
-                    var otherPlayer = Instantiate<GameObject>(otherPlayerPre_, new Vector3(data.x, data.y, data.z), Quaternion.Euler(0, data.dir, 0));
-                    otherPlayer.name = "otherPlayer" + data.user_id;
-                    otherPlayer.tag = "OtherPlayer";
-                    otherPlayer.transform.localScale = new Vector3(2, 2, 2);
-                    var other = otherPlayer.AddComponent<OtherPlayers>();
-                    // 名前を登録
-                    other.Name = _packet.name;
-                    other.Init(data.x, data.y, data.z, data.dir);
-                    otherPlayer.GetComponent<NameUI>().NameSet(data.user_id.ToString());
-                    others.Add(data.user_id, other);
-                    charcters.Add(data.user_id, other);
+                    // リストに登録されていないIDが来たときの処理
+                    // そのIDは何なのか確認をとる
+                    wsp.Send(new Packes.FindOfPlayerCtoS(_packet.user_id, 0).ToJson());
                 }
             }
         }
-
-
     }
 
+    /// <summary>
+    /// 他プレイヤーの作成
+    /// </summary>
+    /// <param name="_packet">作成に必要なデータ</param>
+    private void CreateOtherPlayers(Packes.OtherPlayersData _packet)
+    {
+        //  GameObject avatar = playerAvatars.FindModel(_packet.modelId);
+
+        var otherPlayer = Instantiate<GameObject>
+                          (otherPlayerPre_,
+                          Vector3.zero,
+                          Quaternion.Euler(0, 0, 0),
+                          this.transform);                                  // 本体生成
+
+        GameObject name = Instantiate(nameUI, otherPlayer.transform);       // プレイヤーアイコン生成
+        var other = otherPlayer.AddComponent<OtherPlayers>();               // OtherPlayerの追加
+        name.GetComponent<OtherUserNameUI>().UserName = otherPlayer.name
+                                                      = other.Name
+                                                      = _packet.name;       // 名前の共通化
+
+        otherPlayer.tag = "OtherPlayer";                                    // タグ
+        otherPlayer.transform.localScale = new Vector3(2, 2, 2);
+        other.Init(0, 0, 0, 0, _packet.user_id);
+        charcters[_packet.user_id] = other;                                 // キャラクター管理に登録
+    }
 
     /// <summary>
     /// エネミーの情報の更新と作成　→ enemysAction
@@ -256,33 +293,44 @@ public class PlaySceneManager : MonoBehaviour
             if(ene.unique_id!=UserRecord.ID)
             {
                 // 敵の更新
-                if (enemies.ContainsKey(ene.unique_id))
+                if (charcters.ContainsKey(ene.unique_id))
                 {
-                    if (enemies[ene.unique_id] != null)
+                    if (charcters[ene.unique_id] != null)
                     {
-                        enemies[ene.unique_id].UpdatePostionData(ene.x, ene.y, ene.z, ene.dir);
+                        charcters[ene.unique_id].UpdatePostionData(ene.x, ene.y, ene.z, ene.dir);
                     }
                 }
                 // 敵の作成
                 else
                 {
-                    newEnemy = Instantiate<GameObject>(testEnemyPre, new Vector3(ene.x, ene.y, ene.z), Quaternion.Euler(0, ene.dir, 0));
-                    newEnemy.name = "Enemy:" + ene.master_id + "->" + ene.unique_id;
-                    GameObject stutasCanvas = Instantiate(enemyStatusCanvas, newEnemy.transform);
-                    stutasCanvas.GetComponent<UIEnemyHP>().MAX_HP = ene.hp;
-                    //newEnemy.GetComponent<Rigidbody>().useGravity = true;
-                    Enemy enemy = newEnemy.AddComponent<Enemy>();
-                    enemy.Init(ene.x, ene.y, ene.z, ene.dir);
-                    enemy.UI_HP = stutasCanvas.GetComponent<UIEnemyHP>();
-                    enemy.HP = ene.hp;
-                    enemies[ene.unique_id] = enemy;
-                    enemies[ene.unique_id].ID = ene.unique_id;
-                    charcters[ene.unique_id] = enemy;
-                    charcters[ene.unique_id].ID = ene.unique_id;
-                    Debug.Log("エネミーの新規せいせ");
+                    // 登録外のIDが来たら新規作成する
+                    CreateEnemys(ene);
                 }
             }
         }
+    }
+
+    /// <summary>
+    /// エネミー作成
+    /// </summary>
+    /// <param name="_ene">作成に必要なデータ</param>
+    private void CreateEnemys(Packes.EnemyReceiveData _ene)
+    {
+        newEnemy = Instantiate<GameObject>
+           (testEnemyPre,
+           Vector3.zero,
+           Quaternion.Euler(0, 0, 0));
+        GameObject stutasCanvas = Instantiate(enemyStatusCanvas, newEnemy.transform);
+
+        Enemy enemy = newEnemy.AddComponent<Enemy>();
+
+        stutasCanvas.GetComponent<UIEnemyHP>().MAX_HP = enemy.HP = _ene.hp;
+        stutasCanvas.GetComponent<UIEnemyHP>().Off();
+
+        newEnemy.name = "Enemy:" + _ene.master_id + "->" + _ene.unique_id;
+        enemy.Init(_ene.x, _ene.y, _ene.z, _ene.dir, _ene.unique_id);
+        enemy.UI_HP = stutasCanvas.GetComponent<UIEnemyHP>();
+        charcters[_ene.unique_id] = enemy;
     }
 
     /// <summary>
@@ -306,32 +354,70 @@ public class PlaySceneManager : MonoBehaviour
 
     }
 
+
     /// <summary>
     /// セーブデータを受け取る→　loadSaveAction
     /// </summary>
     /// <param name="_save"></param>
-    private void RecvSaveData(Packes.LoadSaveData _packet)
+    private void ReceiveSaveData(Packes.SaveLoadStoC _packet)
     {
+        // GameObject model = playerAvatars.FindModel(_packet.model_id);
 
-        wsp.Send(new Packes.LoadingFinishCtoS().ToJson());
-        //wsp.SendSaveDataOK();
+        GameObject model = playerPre;
 
-        // プレイヤーに受け取ったセーブデータを渡す。
-        MakePlayer(new Vector3(5, 1, 15));
+        if (MakePlayer(new Vector3(_packet.x, _packet.y, _packet.z), model))
+        {
+            wsp.Send(new Packes.LoadingOK(UserRecord.ID).ToJson());
+            Debug.Log("セーブデータを受けとり自分を作成した。→ロード完了");
+            updateFlag = true;
+        }
+        else
+        {
+            if (countOfTrials < 3)
+            {
+                // セーブデータを再度要請する
+                StartCoroutine(ReSend(wsp, new Packes.SaveLoadCtoS(UserRecord.ID).ToJson()));
+                countOfTrials++;
+            }
+            else { countOfTrials = 0; }
 
+        }
     }
 
     /// <summary>
-    /// セーブデータの読み込みが完了したら呼ばれる　→ loadFinAction
+    /// 他プレイヤーの一覧取得 → loadOtherListAction
     /// </summary>
     /// <param name="_packet"></param>
-    private void LoadFinish(Packes.LoadingFinishStoC _packet)
+    private void ReceiveOtherListData(Packes.OtherPlayerList _packet)
     {
-        updateFlag = true;
-        wsp.Send(new Packes.GetEnemysDataCtoS(0, UserRecord.ID).ToJson());
-        // プレイヤーのインスタンスを取る
-
+        Debug.Log("他プレイヤーの一覧取得");
+        // ほかプレイヤー一覧の生成
+        foreach (var tmp in _packet.players)
+        {
+            CreateOtherPlayers(tmp);
+        }
     }
+
+    /// <summary>
+    /// 新規入室者の登録 → loadOtherAction
+    /// </summary>
+    /// <param name="_packet"></param>
+    private void ReceiveOtherData(Packes.NewOtherUser _packet)
+    {
+
+        Debug.Log("新規さん入室");
+        Packes.OtherPlayersData tmp = new Packes.OtherPlayersData
+                                            (_packet.user_id,
+                                            _packet.x,
+                                            _packet.y,
+                                            _packet.z,
+                                            _packet.model_id,
+                                            _packet.name);
+        // 新規入室プレイヤーの作成
+        CreateOtherPlayers(tmp);
+    }
+
+
 
     /// <summary>
     /// 戦闘処理生存 → enemyAliveAction
@@ -344,8 +430,8 @@ public class PlaySceneManager : MonoBehaviour
         // HPを減らすや状態の更新
 
         Debug.Log("敵は生存している");
-        enemies[_packet.unique_id].PlayTriggerAnimetion("Take Damage");
-        enemies[_packet.unique_id].HP = _packet.hp;
+        charcters[_packet.unique_id].GetComponent<Enemy>().PlayTriggerAnimetion("Take Damage");
+        charcters[_packet.unique_id].GetComponent<Enemy>().HP = _packet.hp;
     }
 
     /// <summary>
@@ -357,13 +443,27 @@ public class PlaySceneManager : MonoBehaviour
         // todo
         // 戦闘で計算後エネミーが死亡していたら
         // HPを0にして死亡エフェクトやドロップアイテムの取得
-        enemies[_packet.unique_id].HP = 0;
-        enemies[_packet.unique_id].PlayTriggerAnimetion("Die");
-        player.GetComponent<PlayerController>().RemoveTarget();
-        enemies.Remove(_packet.unique_id);
+        charcters[_packet.unique_id].GetComponent<Enemy>().HP = 0;
+        charcters[_packet.unique_id].GetComponent<Enemy>().PlayTriggerAnimetion("Die");
+        int target = player.GetComponent<PlayerController>().GetTargetEnemy().ID;
+
+        Debug.Log("TargetID : " + target + " , DieEnemyID : " + _packet.unique_id);
+        if (target == _packet.unique_id)
+        {
+            player.GetComponent<PlayerController>().RemoveTarget();
+        }
         charcters.Remove(_packet.unique_id);
-        //Debug.Log(charcters.Count);
-        Debug.Log("敵は死んだ！！！");
+    }
+
+
+    /// <summary>
+    /// 他プレイヤーのスキルを再生 → ???
+    /// </summary>
+    /// <param name="_paket"></param>
+    private void OthersUseSkills(Packes.OtherPlayerUseSkill _paket)
+    {
+        // todo
+        // 他プレイヤーがスキルを使ったときの処理
     }
 
     /// <summary>
@@ -373,6 +473,8 @@ public class PlaySceneManager : MonoBehaviour
     private void EnemyUseSkillRequest(Packes.EnemyUseSkillRequest _packet)
     {
         Debug.Log("敵のスキル発動を検知したよ");
+        // todo
+        // 敵がスキルを使ったときの準備モーション等の処理
     }
 
     /// <summary>
@@ -382,7 +484,7 @@ public class PlaySceneManager : MonoBehaviour
     private void EnemyUseSkill(Packes.EnemyUseSkill _packet)
     {
         Debug.Log("敵のスキルが発動したよ");
-        enemies[_packet.enemy_id].PlayTriggerAnimetion("Attack");
+        charcters[_packet.enemy_id].GetComponent<Enemy>().PlayTriggerAnimetion("Attack");
     }
 
     /// <summary>
@@ -400,10 +502,27 @@ public class PlaySceneManager : MonoBehaviour
     /// <param name="_packet"></param>
     private void Logout(Packes.LogoutStoC _packet)
     {
-        Destroy(others[_packet.user_id].gameObject);
-        charcters.Remove(_packet.user_id);
-        others.Remove(_packet.user_id);
-        Debug.Log(_packet.user_id + "さんがログアウトしたよ！");
+        if (_packet.user_id == UserRecord.ID)
+        {
+            Debug.Log("ログアウトしたよ");
+            ChangeScene("LoginScene");
+        }
+        else
+        {
+            Destroy(charcters[_packet.user_id].gameObject);
+            charcters.Remove(_packet.user_id);
+            Debug.Log(_packet.user_id + "さんがログアウトしたよ！");
+        }
+    }
+
+    /// <summary>
+    /// 検索結果のユーザーを作成 → findResultsAction
+    /// </summary>
+    /// <param name="_packet"></param>
+    private void ReceivingFindResults(Packes.FindOfPlayerStoC _packet)
+    {
+        Packes.OtherPlayersData tmp = new Packes.OtherPlayersData(_packet.user_id, _packet.x, _packet.y, _packet.z, _packet.model_id, _packet.name);
+        CreateOtherPlayers(tmp);
     }
 
 
@@ -443,11 +562,7 @@ public class PlaySceneManager : MonoBehaviour
     {
         return player;
     } 
-
-
-
-
-
+    
 
 
     /// <summary>
@@ -469,7 +584,12 @@ public class PlaySceneManager : MonoBehaviour
     /// <returns></returns>
     public　OtherPlayers GetOtherPlayer(int _playerId)
     {
-        return others[_playerId];
+        return charcters[_playerId].GetComponent<OtherPlayers>();
     }
 
+
+    //private void ChangeScene(string _sceneName)
+    //{
+    //    SceneManager.LoadScene(_sceneName);
+    //}
 }

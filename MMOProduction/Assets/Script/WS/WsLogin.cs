@@ -47,7 +47,7 @@ namespace WS
         /// 初期化処理
         /// </summary>
         /// <param name="_port"></param>
-        private void Init(uint _port)
+        public void Init(uint _port)
         {
             base.Connect(_port);
             Receive();
@@ -59,14 +59,15 @@ namespace WS
         public void Destroy()
         {
             base.Destroy("ログインWSの終了");
+            instance = null;
         }
 
-        public void Send(string _json)
+        public override void Send(string _json)
         {
             base.ws.Send(_json);
         }
 
-        public void Receive()
+        protected override void Receive()
         {
             var context = SynchronizationContext.Current;
             // 受信したデータが正常なものなら発火する
@@ -76,7 +77,7 @@ namespace WS
                 {
                     // 受信データからコマンドを取り出す
                     CommandData com = (CommandData)int.Parse(e.Data.Substring(11, 3));
-                    Debug.Log(e.Data);
+                    //Debug.Log(e.Data);
                     // コマンドで受信データサイズを変える
                     // コマンド内容はDatas.csを参照
                     switch (com)
@@ -102,6 +103,11 @@ namespace WS
                     }
                 }, e.Data);
             };
+        }
+
+        public WebSocketState WSState()
+        {
+            return base.ws.ReadyState;
         }
 
         /// <summary>

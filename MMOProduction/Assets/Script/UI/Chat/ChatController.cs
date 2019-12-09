@@ -14,20 +14,9 @@ public class ChatController : MonoBehaviour
     bool connectFlag = false;
 
     // チャット全体のフレーム
-    [SerializeField]
-    private GameObject chatFlame = default(GameObject);
-
-    // チャットログのテキスト
-    [SerializeField]
-    private Text chatLogText = default(Text);
-
-    // 入力メッセージ
-    [SerializeField]
-    private InputField inputMassege = default(InputField);
-
-    // チャットログ
-    private List<string> chatLog = new List<string>();
-
+    [Header("チャットフレーム"), SerializeField]
+    private ChatMessageController chatFlame = null;
+    
     // チャットサーバー
     WS.WsChat wsc = null; 
 
@@ -39,11 +28,11 @@ public class ChatController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        chatFlame.SetActive(chatActiveFlag);
+        chatFlame.gameObject.SetActive(chatActiveFlag);
         if (connectFlag)
         {
             wsc = WS.WsChat.Instance;
-            wsc.allChatAction = Receive;
+            WS.WsChat.Instance.allChatAction = chatFlame.Receive;
         }
     }
 
@@ -51,27 +40,19 @@ public class ChatController : MonoBehaviour
     void Update()
     {
         // チャットのアクティブ化
-        if (Input.GetKeyUp(KeyCode.Return) && chatActiveFlag == false)
+        if (InputManager.InputKeyCheckUp(KeyCode.Return) && chatActiveFlag == false)
         {
-            chatFlame.SetActive(true);
             chatActiveFlag = true;
-            EventSystem.current.SetSelectedGameObject(inputMassege.gameObject);
-            //chatFlame.GetComponent<ChatLogController>().Reset();
+            chatFlame.gameObject.SetActive(chatActiveFlag);
+            EventSystem.current.SetSelectedGameObject(chatFlame.GetComponent<ChatMessageController>().InputField);
         }
-        else if (Input.GetKeyUp(KeyCode.Return) && chatActiveFlag == true)
+        else if (InputManager.InputKeyCheckUp(KeyCode.Return) && chatActiveFlag == true)
         {
-            chatFlame.SetActive(false);
-            chatActiveFlag = false;
-            EventSystem.current.SetSelectedGameObject(null);
-        }
-
-        if (chatActiveFlag)
-        {
-            ChatLogUpdate();
-            if (Input.GetKeyDown(KeyCode.Return) && inputMassege.text != "")
+            if (!InputManager.InputKeyCheck(KeyCode.LeftControl) && !InputManager.InputKeyCheck(KeyCode.RightControl))
             {
-                SendInputMassege(inputMassege.text);
-                inputMassege.text = "";
+                chatActiveFlag = false;
+                chatFlame.gameObject.SetActive(chatActiveFlag);
+                EventSystem.current.SetSelectedGameObject(null);
             }
         }
     }
@@ -80,43 +61,7 @@ public class ChatController : MonoBehaviour
     {
         if (connectFlag) { wsc.Destroy(); }
     }
-
-    // チャットログの更新
-    private void ChatLogUpdate()
-    {
-        chatLogText.text = "";
-        for (int i = 0; i < chatLog.Count; i++)
-        {
-            chatLogText.text += chatLog[i] + "\n";
-        }
-    }
-
-    // チャットログの追加
-    public  void AddChatLog(string _addLog)
-    {
-        if (chatLog.Count > 100)
-        {
-            chatLog.RemoveAt(0);
-        }
-        chatLog.Add(_addLog);
-    }
-
-    public void Receive(Packes.RecvAllChat _packet)
-    {
-        string massege = "";
-        massege = massege + _packet.user_name + "：" + _packet.message;
-        
-        AddChatLog(massege);
-    }
-
-    private void SendInputMassege(string _massege)
-    {
-        string name = UserRecord.ID.ToString();
-        Packes.SendAllChat mag = new Packes.SendAllChat(name, _massege);
-        if (connectFlag) { wsc.Send(Json.ConvertToJson(mag)); }
-        string mas = name + "：" + _massege;
-    }
-
+    
     public bool GetChatActiveFlag()
     {
         return chatActiveFlag;

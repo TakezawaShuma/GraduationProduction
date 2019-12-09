@@ -34,7 +34,7 @@ public class KeyMoveState : BaseState
     // 実行関数
     public override void Execute()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (InputManager.InputMouseCheckDown(0) == INPUT_MODE.PLAY)
         {
             playerController.LockOn();
         }
@@ -48,7 +48,10 @@ public class KeyMoveState : BaseState
             playerController.Move(velocity);
         }
 
-        if(!Input.GetKey(playerSetting.FKey) && !Input.GetKey(playerSetting.BKey) && !Input.GetKey(playerSetting.LKey) && !Input.GetKey(playerSetting.RKey))
+        if(!InputManager.InputKeyCheck(playerSetting.FKey) && 
+            !InputManager.InputKeyCheck(playerSetting.BKey) && 
+            !InputManager.InputKeyCheck(playerSetting.LKey) && 
+            !InputManager.InputKeyCheck(playerSetting.RKey))
         {
             playerController.ChangeState(IdleState.Instance);
         }
@@ -62,20 +65,20 @@ public class KeyMoveState : BaseState
     private void VelocityDecision()
     {
         // キー判定
-        if (Input.GetKey(playerSetting.FKey))
+        if (InputManager.InputKeyCheck(playerSetting.FKey))
         {
             velocity.x -= 1;
         }
-        else if (Input.GetKey(playerSetting.BKey))
+        else if (InputManager.InputKeyCheck(playerSetting.BKey))
         {
             velocity.x += 1;
         }
 
-        if (Input.GetKey(playerSetting.LKey))
+        if (InputManager.InputKeyCheck(playerSetting.LKey))
         {
             velocity.z -= 1;
         }
-        else if (Input.GetKey(playerSetting.RKey))
+        else if (InputManager.InputKeyCheck(playerSetting.RKey))
         {
             velocity.z += 1;
         }
@@ -86,7 +89,7 @@ public class KeyMoveState : BaseState
             {
                 if (velocity.x == 0)
                 {
-                    velocity.x = -1;
+                    velocity.x = -0.25f;
                 }
             }
         }
@@ -95,11 +98,11 @@ public class KeyMoveState : BaseState
         velocity = velocity.normalized;
 
         // 押していたらダッシュ
-        if (Input.GetKey(playerSetting.DKey))
+        if (InputManager.InputKeyCheck(playerSetting.DKey))
         {
             if (playerSetting.IA)
             {
-                animatorManager.Run();
+                animatorManager.AnimChange((int)PlayerAnim.PARAMETER_ID.RUN);
             }
             velocity *= playerSetting.DS;
         }
@@ -107,7 +110,7 @@ public class KeyMoveState : BaseState
         {
             if (playerSetting.IA)
             {
-                animatorManager.Walk();
+                animatorManager.AnimChange((int)PlayerAnim.PARAMETER_ID.WALK);
             }
             velocity *= playerSetting.NS;
         }

@@ -3,10 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
+/// <summary>
+/// プレイヤーの情報をUI化する
+/// </summary>
 public class PlayerUI : MonoBehaviour
 {
     //プレイヤ情報
     private Player playerCmp;
+
+    public Player PLAYER_CMP
+    {
+        set { playerCmp = value; }
+    }
+
     [SerializeField]
     private GameObject player = null;
 
@@ -32,7 +42,14 @@ public class PlayerUI : MonoBehaviour
     [SerializeField]
     private Image target = null;
     [SerializeField]
-    private Text lvName = null;
+    private Text lv = null;
+    [SerializeField]
+    private Text playerName = null;
+
+    public string PLAYER_NAME
+    {
+        set { playerName.text = value; }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -46,25 +63,26 @@ public class PlayerUI : MonoBehaviour
         hpRed.name = "BGHP";
         job.name = "Job";
         number.name = "Num";
-        lvName.name = "Player";
+        lv.name = "LV";
+        playerName.name = "Player";
         target.name = "Target";
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(player == null)
-        {
-            player = GameObject.Find("player" + UserRecord.ID);
-            if (player != null)
-            {
-                playerCmp = player.GetComponent<Player>();
-                playerCmp.MaxHp = 100;
-                playerCmp.HP = 30;
-                playerCmp.MaxMp = 100;
-                playerCmp.MP = 60;
-            }
-        }
+        //if(player == null)
+        //{
+        //    player = GameObject.Find("player" + UserRecord.ID);
+        //    if (player != null)
+        //    {
+        //        playerCmp = player.GetComponent<Player>();
+        //        playerCmp.MaxHp = 100;
+        //        playerCmp.HP = 30;
+        //        playerCmp.MaxMp = 100;
+        //        playerCmp.MP = 60;
+        //    }
+        //}
         if (playerCmp)
         {
             StatusUpdate();

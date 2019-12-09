@@ -2,16 +2,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Enemy : CharacterBase
+public class Enemy : NonPlayer
 {
 
-    public int HP { get { return hp; } set { hp = value; uIHP.UpdateHP(hp); } }
+    public int HP { get { return hp; } set { hp = value; } }
     public int MP { get { return mp; } set { mp = value; } }
+
+    // 敵が使用できるスキル
+    public ScriptableObject enemySkills;
 
     private UIEnemyHP uIHP = null;
 
     public UIEnemyHP UI_HP
     {
+        get { return uIHP; }
         set { uIHP = value; }
     }
     
@@ -25,7 +29,7 @@ public class Enemy : CharacterBase
     // Update is called once per frame
     void Update()
     {
-
+        uIHP.UpdateHP(hp);
         LerpMove();
     }
 
@@ -60,6 +64,17 @@ public class Enemy : CharacterBase
     }
 
 
+    /// <summary>
+    /// 攻撃したときに計算する
+    /// </summary>
+    public void Attacked()
+    {
+        // 敵が攻撃してきたときに距離を判定する
+    }
+
+
+    /// 
+    /// <param name="collision"></param>
     private void OnCollisionEnter(Collision collision)
     {
         if (gameObject.GetComponent<Animator>().GetCurrentAnimatorClipInfo(0)[0].clip.name == "Attack 01"
@@ -70,9 +85,8 @@ public class Enemy : CharacterBase
 
     public void DestroyMe()
     {
-        Debug.Log("エネミーの名前:" + this.gameObject.name);
+        Debug.Log("エネミーの名前:" + this.gameObject.name+ "消したよ!");
         Destroy(this.gameObject);
-        Debug.Log("消したよ！");
     }
     
 }

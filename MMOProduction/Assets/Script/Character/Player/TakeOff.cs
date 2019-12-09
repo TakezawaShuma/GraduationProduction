@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// TakeOffするパーツ
+/// </summary>
 [System.SerializableAttribute]
 public class DressedList
 {
@@ -13,6 +16,9 @@ public class DressedList
     }
 }
 
+/// <summary>
+/// 服を脱ぐ
+/// </summary>
 public class TakeOff : MonoBehaviour
 {
     [SerializeField]

@@ -7,8 +7,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-
-// ロード中に表示するコラム画面
+/// <summary>
+/// ロード中に表示するコラム画面
+/// </summary>
 public class ColumnWindow
 {
 

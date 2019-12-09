@@ -15,6 +15,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// アイテムの基礎データ
+/// </summary>
 [System.Serializable]
 public class ItemData
 {

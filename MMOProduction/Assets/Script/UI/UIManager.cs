@@ -2,6 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// UI全般を管理するクラス
+/// </summary>
 public class UIManager : MonoBehaviour
 {
     [SerializeField]
@@ -9,6 +12,9 @@ public class UIManager : MonoBehaviour
 
     [SerializeField]
     private KeyCode[] key = null;
+
+    [SerializeField]
+    private ChatController chat = null;
 
     // Start is called before the first frame update
     void Start()
@@ -30,7 +36,7 @@ public class UIManager : MonoBehaviour
         {
             for (int i = 0; i < ui.Length; i++)
             {
-                if (Input.GetKeyDown(key[i]))
+                if (InputManager.InputKeyCheckDown(key[i])&&!chat.GetChatActiveFlag())
                 {
                     if (ui[i].activeInHierarchy)
                     {
@@ -39,6 +45,7 @@ public class UIManager : MonoBehaviour
                     else
                     {
                         ui[i].SetActive(true);
+                        ui[i].transform.SetAsLastSibling();
                     }
                 }
             }

@@ -95,12 +95,13 @@ public class FollowingCamera : MonoBehaviour
 
     void LateUpdate()
     {
-        if (Input.GetMouseButton(1))
+        if (InputManager.InputMouseCheck(1) == INPUT_MODE.PLAY)
         {
             updateAngle(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
         }
 
         Vector3 lookAtPos;
+        updateDistance(Input.GetAxis("Mouse ScrollWheel"));
 
         if (lockOnTarget)
         {
@@ -137,7 +138,6 @@ public class FollowingCamera : MonoBehaviour
             lastPos = transform.position;
             dist = 0;
         }
-        updateDistance(Input.GetAxis("Mouse ScrollWheel"));
 
         transform.LookAt(lookAtPos);
 

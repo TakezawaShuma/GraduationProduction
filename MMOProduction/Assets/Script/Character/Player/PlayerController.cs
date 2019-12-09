@@ -6,6 +6,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerController : MonoBehaviour
 {
@@ -34,6 +35,9 @@ public class PlayerController : MonoBehaviour
         set { weapon = value; }
     }
 
+    // プレイヤーの武器プロパティ
+    public Sword Sword { get; private set; }
+
     // 現在のステート
     private BaseState currentState;
 
@@ -44,10 +48,12 @@ public class PlayerController : MonoBehaviour
 
     private GameObject target;
     public GameObject Target { get { return target; } set { target = value; } }
+    public Enemy GetTargetEnemy() { return target.GetComponentInParent<Enemy>(); }
 
     private Rigidbody rigidbody1;
 
     private PlayerSound sound_ = null;
+
 
     public enum Mode
     {
@@ -68,10 +74,6 @@ public class PlayerController : MonoBehaviour
     {
         set { skilId = value; }
     }
-
-    // スキル再生（使用？）クラス
-    [SerializeField]
-    private SkillPlayer _skillPlayer = null;
 
     public void Init(Player _playerData, FollowingCamera _camera, PlayerSetting _setting, ChatController _chat, Animator _animator)
     {
@@ -101,7 +103,8 @@ public class PlayerController : MonoBehaviour
     void Start()
     {
         pos = Vector3.zero;
-        animatorManager = new AnimatorManager(animator);
+        animatorManager = new AnimatorManager();
+        animatorManager.ANIMATOR = animator;
         IdleState.Instance.Initialized(this, playerSetting, animatorManager);
         KeyMoveState.Instance.Initialized(this, playerSetting, animatorManager);
         AutoRunState.Instance.Initialized(this, playerSetting, animatorManager);
@@ -109,12 +112,13 @@ public class PlayerController : MonoBehaviour
 
         AttackCollider = GetComponent<WeaponList>().GetWeapons(0);
 
+        // 武器リストから各種武器の参照を取得
+        Sword = AttackCollider.GetComponent<Sword>();
+
         currentState = IdleState.Instance;
         currentState.Start();
 
         rigidbody1 = GetComponent<Rigidbody>();
-
-        _skillPlayer = GetComponent<SkillPlayer>();
 
         sound_ = GetComponent<PlayerSound>();
     }
@@ -132,14 +136,11 @@ public class PlayerController : MonoBehaviour
 
                 if (v.magnitude > playerSetting.LOD)
                 {
-                    target.GetComponent<Marker>().STATE = Marker.State.None;
-                    target = null;
-                    lockState = false;
-                    FollowingCamera.LOCK = null;
+                    RemoveTarget();
                 }
             }
 
-            if (Input.GetMouseButtonDown(1) && target != null)
+            if (InputManager.InputMouseCheckDown(1) == INPUT_MODE.PLAY && target != null)
             {
                 RemoveTarget();
             }
@@ -148,9 +149,14 @@ public class PlayerController : MonoBehaviour
         }
 
         // デバッグ スキル使用
-        if (Input.GetKeyDown(KeyCode.Alpha1))
+        // ファイア・ボール
+        if (InputManager.InputKeyCheckDown(KeyCode.Alpha1))
         {
-            _skillPlayer.GetSkill(0).Play();
+            Vector3 pos = transform.position;
+            pos.y += 2;
+            pos += transform.forward * 1;
+            Quaternion rot = transform.rotation;
+            SkillHandler.Instance.RequestToUseSkill(SkillID.Fireball, gameObject, pos, rot);
         }
     }
 
@@ -224,6 +230,12 @@ public class PlayerController : MonoBehaviour
 
     public void LockOn()
     {
+        if (EventSystem.current.IsPointerOverGameObject())
+        {
+            // かぶさってるので処理キャンセル
+            return;
+        }
+
         bool noLock = false;
 
         Ray ray = FollowingCamera.GetComponent<Camera>().ScreenPointToRay(Input.mousePosition);
@@ -241,7 +253,7 @@ public class PlayerController : MonoBehaviour
                 {
                     if (target != hit.collider.gameObject)
                     {
-                        target.GetComponent<Marker>().STATE = Marker.State.None;
+                        RemoveTarget();
                     }
                 }
 
@@ -255,6 +267,10 @@ public class PlayerController : MonoBehaviour
                 if (target.GetComponent<Marker>().STATE != Marker.State.Choice)
                 {
                     target.GetComponent<Marker>().STATE = Marker.State.Choice;
+                    if (target.GetComponent<Marker>().TYPE == Marker.Type.Enemy)
+                    {
+                        target.GetComponentInParent<Enemy>().UI_HP.On();
+                    }
                 }
                 else
                 {
@@ -281,15 +297,7 @@ public class PlayerController : MonoBehaviour
 
         if (noLock && mode == Mode.Normal)
         {
-            if (target != null)
-            {
-                target.GetComponent<Marker>().STATE = Marker.State.None;
-            }
-            target = null;
-            lockState = false;
-            weapon.SetActive(false);
-
-            FollowingCamera.LOCK = null;
+            RemoveTarget();
         }
     }
 
@@ -323,10 +331,24 @@ public class PlayerController : MonoBehaviour
     public void RemoveTarget()
     {
         mode = Mode.Normal;
-        target.GetComponent<Marker>().STATE = Marker.State.None;
+        if (target)
+        {
+            target.GetComponent<Marker>().STATE = Marker.State.None;
+            if (target.GetComponent<Marker>().TYPE == Marker.Type.Enemy)
+            {
+                target.GetComponentInParent<Enemy>().UI_HP.Off();
+            }
+        }
         target = null;
         lockState = false;
-        weapon.SetActive(false);
         FollowingCamera.LOCK = null;
+    }
+
+    public void ReleaseWeapon()
+    {
+        if (target == null)
+        {
+            weapon.SetActive(false);
+        }
     }
 }

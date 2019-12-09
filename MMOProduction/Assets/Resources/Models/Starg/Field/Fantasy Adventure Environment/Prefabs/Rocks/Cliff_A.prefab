@@ -134,7 +134,6 @@ GameObject:
   - component: {fileID: 7919908588907754547}
   - component: {fileID: 272166891833637173}
   - component: {fileID: 4595658036305673605}
-  - component: {fileID: 3399008901625623639}
   m_Layer: 9
   m_Name: MapRender
   m_TagString: Untagged
@@ -150,8 +149,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7377252784441478353}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 0.50917065, y: 0.68458134, z: 0.5091708}
+  m_LocalPosition: {x: 0.502, y: -0.5, z: -1.26}
+  m_LocalScale: {x: 9.81954, y: 8.4988, z: 11.777709}
   m_Children: []
   m_Father: {fileID: 4000012239912756}
   m_RootOrder: 1
@@ -201,16 +200,3 @@ MeshRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
---- !u!65 &3399008901625623639
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7377252784441478353}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1.0000001, y: 1, z: 1.0000001}
-  m_Center: {x: 0, y: 0, z: 0}

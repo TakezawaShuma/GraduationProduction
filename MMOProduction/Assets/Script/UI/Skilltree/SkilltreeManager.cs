@@ -3,6 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+/// <summary>
+/// スキルツリーのマネ―ジャー
+/// </summary>
 public class SkilltreeManager : MonoBehaviour
 {
     private enum Buttons

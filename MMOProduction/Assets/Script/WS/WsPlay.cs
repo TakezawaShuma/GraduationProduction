@@ -15,6 +15,7 @@ namespace WS
         // ログインサーバーのポート
         private uint port = 8001;
         private static WsPlay instance = null;
+        private bool logoutFlag = false;
 
 
         // 位置同期 202
@@ -23,14 +24,18 @@ namespace WS
         public Action<Packes.GetEnemyDataStoC> enemysAction;
         // 状態 206
         public Action<Packes.StatusStoC> statusAction;
-        // セーブ読み込み 210
-        public Action<Packes.LoadSaveData> loadSaveAction;
-        // ロード終了 212
-        public Action<Packes.LoadingFinishStoC> loadFinAction;
+        // セーブデータの読み込み 212
+        public Action<Packes.SaveLoadStoC> loadSaveAction;
+        // プレイシーンにいる他ユーザーの一覧 214
+        public Action<Packes.OtherPlayerList> loadOtherListAction;
+        // 新しく入室してきたプレイヤーの情報 215
+        public Action<Packes.NewOtherUser> loadOtherAction;
         // エネミーが生存している 221
         public Action<Packes.EnemyAliveStoC> enemyAliveAction;
         // エネミーが死んだ 222
         public Action<Packes.EnemyDieStoC> enemyDeadAction;
+        // 他のプレイヤーがスキルを使った 224
+        public Action<Packes.OtherPlayerUseSkill> othersUseSkillAction;
         // エネミーの攻撃準備 225
         public Action<Packes.EnemyUseSkillRequest> enemySkillReqAction;
         // エネミーが攻撃する 226
@@ -39,6 +44,8 @@ namespace WS
         public Action<Packes.EnemyAttackResult> enemyAttackAction;
         // 他プレイヤーがログアウトした 707
         public Action<Packes.LogoutStoC> logoutAction;
+        // 検索したプレイヤー情報を受け取る 712
+        public Action<Packes.FindOfPlayerStoC> findResultsAction;
 
         public static WsPlay Instance
         {
@@ -70,6 +77,7 @@ namespace WS
         /// <param name="_port"></param>
         private void Init(uint _port)
         {
+            logoutFlag = false;
             base.Connect(_port);
             Receive();
 
@@ -80,24 +88,34 @@ namespace WS
         /// </summary>
         public void Destroy()
         {
-            Send(new Packes.LogoutCtoS(UserRecord.ID).ToJson());
+            if (!logoutFlag) { Send(new Packes.LogoutCtoS(UserRecord.ID).ToJson()); }
             base.Destroy("プレイの終了");
+            instance = null;
+        }
+
+        public void Logout()
+        {
+            Send(new Packes.LogoutCtoS(UserRecord.ID).ToJson());
+            Debug.Log("ログアウト要請送信");
         }
 
         /// <summary>
         /// 送信処理
         /// </summary>
         /// <param name="_json"></param>
-        public void Send(string _json)
+        public override void Send(string _json) 
         {
+            Debug.Log(int.Parse(_json.Substring(11, 3)));
             if (base.ws.ReadyState == WebSocketState.Open)
             {
                 base.ws.Send(_json);
             }
         }
 
-
-        private void Receive()
+        /// <summary>
+        /// 受信処理
+        /// </summary>
+        protected override void Receive()
         {
             var context = SynchronizationContext.Current;
             // 受信したデータが正常なものなら発火する
@@ -107,6 +125,7 @@ namespace WS
                 {
                     // 受信したデータからコマンドを取り出す
                     var command = (CommandData)int.Parse(e.Data.Substring(11, 3));
+                    Debug.Log((int)command);
 
                     switch (command)
                     {
@@ -119,7 +138,7 @@ namespace WS
                         case CommandData.GetEnemyDataStoC:  // エネミーの位置情報を受信
                             //Packes.GetEnemyDataStoC init = Json.ConvertToPackets<Packes.GetEnemyDataStoC>(e.Data);
                             //enemysAction(init);
-                            //Debug.Log("敵の位置情報");
+                            //Debug.Log(e.Data);
                             enemysAction(Json.ConvertToPackets<Packes.GetEnemyDataStoC>(e.Data));
                             break;
 
@@ -128,19 +147,24 @@ namespace WS
                             //statusAction(status);
                             //Debug.Log("ステータス共有");
                             statusAction(Json.ConvertToPackets<Packes.StatusStoC>(e.Data));
-
                             break;
 
-                        case CommandData.LoadSaveData:      // セーブデータの受信
+                        case CommandData.SaveLoadStoC:      // セーブデータの受信
                             //Packes.LoadSaveData save = Json.ConvertToPackets<Packes.LoadSaveData>(e.Data);
                             //loadSaveAction(save);
-                            loadSaveAction(Json.ConvertToPackets<Packes.LoadSaveData>(e.Data));
+                            loadSaveAction(Json.ConvertToPackets<Packes.SaveLoadStoC>(e.Data));
                             break;
 
-                        case CommandData.LoadingFinishStoC: // セーブデータの受信関係の終了
-                            //Packes.LoadingFinishStoC loadFin = Json.ConvertToPackets<Packes.LoadingFinishStoC>(e.Data);
-                            //loadFinAction(loadFin);
-                            loadFinAction(Json.ConvertToPackets<Packes.LoadingFinishStoC>(e.Data));
+                        case CommandData.OtherPlayerList: // 他プレイヤーの一覧を取得
+                            //Packes.OtherPlayerList otherlist = Json.ConvertToPackets<Packes.OtherPlayerList>(e.Data);
+                            //loadOtherListAction(otherlist);
+                            loadOtherListAction(Json.ConvertToPackets<Packes.OtherPlayerList>(e.Data));
+                            break;
+
+                        case CommandData.NewOtherUser:  // 新規入室プレイヤーの取得
+                            //Packes.NewOtherUser loadFin = Json.ConvertToPackets<Packes.NewOtherUser>(e.Data);
+                            //loadOtherAction(loadFin);
+                            loadOtherAction(Json.ConvertToPackets<Packes.NewOtherUser>(e.Data));
                             break;
 
                         case CommandData.EnemyAliveStoC:    // 戦闘結果(エネミーは生きている)
@@ -155,8 +179,13 @@ namespace WS
                             enemyDeadAction(Json.ConvertToPackets<Packes.EnemyDieStoC>(e.Data));
                             break;
 
+                        case CommandData.OtherPlayerUseSkill:   // 他プレイヤーがスキルを使った
+                            //Packes.OtherPlayerUseSkill other = Json.ConvertToPackets<Packes.OtherPlayerUseSkill>(e.Data);
+                            //othersUseSkillAction(other);
+                            othersUseSkillAction(Json.ConvertToPackets<Packes.OtherPlayerUseSkill>(e.Data));
+                            break;
+
                         case CommandData.EnemyUseSkillRequest:  // 敵スキルの使用申請
-                            Debug.Log("スキルを使用します。準備してください");
                             //Packes.EnemyUseSkillRequest skillReq = Json.ConvertToPackets<Packes.EnemyUseSkillRequest>(e.Data);
                             //enemySkillReqAction(skillReq);
                             enemySkillReqAction(Json.ConvertToPackets<Packes.EnemyUseSkillRequest>(e.Data));
@@ -181,7 +210,13 @@ namespace WS
                             //logoutAction(logout);
                             logoutAction(Json.ConvertToPackets<Packes.LogoutStoC>(e.Data));
                             break;
-                        // 随時追加
+
+                        case CommandData.FindOfPlayerStoC:  // 
+
+
+                           findResultsAction(Json.ConvertToPackets<Packes.FindOfPlayerStoC>(e.Data));
+                            break;
+                            // 随時追加
                         default:
                             break;
                     }
