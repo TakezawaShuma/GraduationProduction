@@ -13,10 +13,9 @@ public class TutorialItem : MonoBehaviour
     void Start() => image_.SetActive(false);
 
     private void OnTriggerEnter(Collider _other) {
-        if(_other.gameObject.tag == "Player") image_.SetActive(true);
-    }
-
-    private void OnTriggerExit(Collider _other){
-        if(_other.gameObject.tag == "Player") image_.SetActive(false);
+        if (_other.gameObject.tag == "Player") { 
+            image_.SetActive(true);
+            //InputManager
+        }
     }
 }
