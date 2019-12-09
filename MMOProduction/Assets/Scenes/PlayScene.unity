@@ -13389,7 +13389,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _skillArray:
-  - {fileID: 3604881555418993990, guid: dd76a579b588f9b42bc81b44b8271d97, type: 3}
+  - {fileID: 6779593876538898757, guid: dd76a579b588f9b42bc81b44b8271d97, type: 3}
+  - {fileID: 8695340120250622819, guid: 82830133fa2fe0a48bf0e35c11ac0a71, type: 3}
 --- !u!4 &1631059801
 Transform:
   m_ObjectHideFlags: 0
@@ -13943,6 +13944,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Riko
+      objectReference: {fileID: 0}
+    - target: {fileID: 3274201342871926291, guid: 49b2f598d0de4e84594c2e0138c30f69,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 3278045186938042501, guid: 49b2f598d0de4e84594c2e0138c30f69,
         type: 3}
