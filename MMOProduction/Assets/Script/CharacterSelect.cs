@@ -4,30 +4,36 @@ using UnityEngine;
 
 public class CharacterSelect : MonoBehaviour
 {
+    //アニメーションするための変数
+    Animator anime;
+
     // Start is called before the first frame update
     void Start()
     {
-        
+        //animatorを所得
+        anime = GetComponent<Animator>();
     }
 
     // Update is called once per frame
     void Update()
     {
+        //マウスの位置調整
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
 
         if(Physics.Raycast(ray,out hit, 50.0f))
         {
+            //各キャラクターに左クリックしたら番号が出る
             if (Input.GetMouseButtonDown(0))
             {
                 if (hit.transform.gameObject.tag == "attacker")
-                    Debug.Log("1");
+                    anime.SetBool("AttackerPause", true);
                 if (hit.transform.gameObject.tag == "defense")
-                    Debug.Log("2");
+                    anime.SetBool("DefensePause", true);
                 if (hit.transform.gameObject.tag == "Healer")
-                    Debug.Log("3");
+                    anime.SetBool("HealerPause", true);
                 if (hit.transform.gameObject.tag == "Witch")
-                    Debug.Log("4");
+                    anime.SetBool("WitchPause", true);
             }
         }
 
