@@ -63,7 +63,6 @@ public class NormalAttackState : BaseState
             int myID = UserRecord.ID;
 
             WS.WsPlay.Instance.Send(new Packes.Attack(enemyID, UserRecord.ID, 0, 0).ToJson());
-            //Debug.Log("攻撃が当たったよ");  // debug
             return true;
         }
         return false;

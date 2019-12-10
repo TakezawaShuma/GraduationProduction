@@ -24,10 +24,12 @@ namespace WS
         public Action<Packes.GetEnemyDataStoC> enemysAction;
         // 状態 206
         public Action<Packes.StatusStoC> statusAction;
-        // セーブ読み込み 210
-        public Action<Packes.LoadSaveData> loadSaveAction;
-        // ロード終了 212
-        public Action<Packes.LoadingFinishStoC> loadFinAction;
+        // セーブデータの読み込み 212
+        public Action<Packes.SaveLoadStoC> loadSaveAction;
+        // プレイシーンにいる他ユーザーの一覧 214
+        public Action<Packes.OtherPlayerList> loadOtherListAction;
+        // 新しく入室してきたプレイヤーの情報 215
+        public Action<Packes.NewOtherUser> loadOtherAction;
         // エネミーが生存している 221
         public Action<Packes.EnemyAliveStoC> enemyAliveAction;
         // エネミーが死んだ 222
@@ -42,6 +44,8 @@ namespace WS
         public Action<Packes.EnemyAttackResult> enemyAttackAction;
         // 他プレイヤーがログアウトした 707
         public Action<Packes.LogoutStoC> logoutAction;
+        // 検索したプレイヤー情報を受け取る 712
+        public Action<Packes.FindOfPlayerStoC> findResultsAction;
 
         public static WsPlay Instance
         {
@@ -99,16 +103,19 @@ namespace WS
         /// 送信処理
         /// </summary>
         /// <param name="_json"></param>
-        public void Send(string _json)
+        public override void Send(string _json) 
         {
+            Debug.Log(int.Parse(_json.Substring(11, 3)));
             if (base.ws.ReadyState == WebSocketState.Open)
             {
                 base.ws.Send(_json);
             }
         }
 
-
-        private void Receive()
+        /// <summary>
+        /// 受信処理
+        /// </summary>
+        protected override void Receive()
         {
             var context = SynchronizationContext.Current;
             // 受信したデータが正常なものなら発火する
@@ -131,7 +138,7 @@ namespace WS
                         case CommandData.GetEnemyDataStoC:  // エネミーの位置情報を受信
                             //Packes.GetEnemyDataStoC init = Json.ConvertToPackets<Packes.GetEnemyDataStoC>(e.Data);
                             //enemysAction(init);
-                            Debug.Log(e.Data);
+                            //Debug.Log(e.Data);
                             enemysAction(Json.ConvertToPackets<Packes.GetEnemyDataStoC>(e.Data));
                             break;
 
@@ -142,16 +149,22 @@ namespace WS
                             statusAction(Json.ConvertToPackets<Packes.StatusStoC>(e.Data));
                             break;
 
-                        case CommandData.LoadSaveData:      // セーブデータの受信
+                        case CommandData.SaveLoadStoC:      // セーブデータの受信
                             //Packes.LoadSaveData save = Json.ConvertToPackets<Packes.LoadSaveData>(e.Data);
                             //loadSaveAction(save);
-                            loadSaveAction(Json.ConvertToPackets<Packes.LoadSaveData>(e.Data));
+                            loadSaveAction(Json.ConvertToPackets<Packes.SaveLoadStoC>(e.Data));
                             break;
 
-                        case CommandData.LoadingFinishStoC: // セーブデータの受信関係の終了
-                            //Packes.LoadingFinishStoC loadFin = Json.ConvertToPackets<Packes.LoadingFinishStoC>(e.Data);
-                            //loadFinAction(loadFin);
-                            loadFinAction(Json.ConvertToPackets<Packes.LoadingFinishStoC>(e.Data));
+                        case CommandData.OtherPlayerList: // 他プレイヤーの一覧を取得
+                            //Packes.OtherPlayerList otherlist = Json.ConvertToPackets<Packes.OtherPlayerList>(e.Data);
+                            //loadOtherListAction(otherlist);
+                            loadOtherListAction(Json.ConvertToPackets<Packes.OtherPlayerList>(e.Data));
+                            break;
+
+                        case CommandData.NewOtherUser:  // 新規入室プレイヤーの取得
+                            //Packes.NewOtherUser loadFin = Json.ConvertToPackets<Packes.NewOtherUser>(e.Data);
+                            //loadOtherAction(loadFin);
+                            loadOtherAction(Json.ConvertToPackets<Packes.NewOtherUser>(e.Data));
                             break;
 
                         case CommandData.EnemyAliveStoC:    // 戦闘結果(エネミーは生きている)
@@ -197,7 +210,13 @@ namespace WS
                             //logoutAction(logout);
                             logoutAction(Json.ConvertToPackets<Packes.LogoutStoC>(e.Data));
                             break;
-                        // 随時追加
+
+                        case CommandData.FindOfPlayerStoC:  // 
+
+
+                           findResultsAction(Json.ConvertToPackets<Packes.FindOfPlayerStoC>(e.Data));
+                            break;
+                            // 随時追加
                         default:
                             break;
                     }

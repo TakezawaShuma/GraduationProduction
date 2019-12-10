@@ -51,7 +51,7 @@ namespace WS
             instance = null;
         }
 
-        public void Send(string _json)
+        public override void Send(string _json)
         {
             if (base.ws.ReadyState == WebSocketState.Open)
             {
@@ -59,7 +59,7 @@ namespace WS
             }
         }
 
-        private void Receive()
+        protected override void Receive()
         {
             var context = SynchronizationContext.Current;
             // 受信したデータが正常なものなら発火する

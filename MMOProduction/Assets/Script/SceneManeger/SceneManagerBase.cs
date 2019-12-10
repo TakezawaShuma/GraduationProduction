@@ -25,4 +25,14 @@ public abstract class SceneManagerBase : MonoBehaviour
         SceneManager.LoadScene(_sceneName);
     }
 
+    /// <summary>
+    /// 再度要請する
+    /// </summary>
+    /// <param name="_json"></param>
+    /// <returns></returns>
+    public IEnumerator ReSend(WS.WsBase _ws,　string _json)
+    {
+        yield return new WaitForSeconds(0.5f);
+        _ws.Send(_json);
+    }
 }

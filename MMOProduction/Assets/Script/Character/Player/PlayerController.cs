@@ -118,6 +118,7 @@ public class PlayerController : MonoBehaviour
         KeyMoveState.Instance.Initialized(this, playerSetting, animatorManager);
         AutoRunState.Instance.Initialized(this, playerSetting, animatorManager);
         NormalAttackState.Instance.Initialized(this, playerSetting, animatorManager);
+        SkillUsingState.Instance.Initialized(this, playerSetting, animatorManager);
 
         AttackCollider = GetComponent<WeaponList>().GetWeapons(0);
 
@@ -137,7 +138,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!chatController.GetChatActiveFlag())
+        if (chatController == null || !chatController.GetChatActiveFlag())
         {
             if (target != null)
             {
@@ -165,7 +166,7 @@ public class PlayerController : MonoBehaviour
             pos.y += 2;
             pos += transform.forward * 1;
             Quaternion rot = transform.rotation;
-            SkillHandler.Instance.RequestToUseSkill(SkillID.Fireball, gameObject, pos, rot);
+            SkillHandler.Instance.RequestToUseSkill(SkillID.MiniFire, gameObject, pos, rot);
         }
     }
 
