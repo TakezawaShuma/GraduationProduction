@@ -1,0 +1,126 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!241 &24100000
+AudioMixerController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: RockyPlace
+  m_OutputGroup: {fileID: 0}
+  m_MasterGroup: {fileID: 24300002}
+  m_Snapshots:
+  - {fileID: 24500006}
+  m_StartSnapshot: {fileID: 24500006}
+  m_SuspendThreshold: -80
+  m_EnableSuspend: 1
+  m_UpdateMode: 0
+  m_ExposedParameters:
+  - guid: 4aff6cd2f55eea344b16c11d9c036824
+    name: RockyPlace
+  m_AudioMixerGroupViews:
+  - guids:
+    - 9577e6cebb8fc6c42a4c3fa9008ce2d6
+    - 25ae6728b72058b4e88011c6e7f47a9e
+    name: View
+  m_CurrentViewIndex: 0
+  m_TargetSnapshot: {fileID: 24500006}
+--- !u!243 &24300002
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Master
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: 9577e6cebb8fc6c42a4c3fa9008ce2d6
+  m_Children:
+  - {fileID: 243131687594412082}
+  m_Volume: d244a5be426d1a0448342994a1ce4a36
+  m_Pitch: 6d34ea4dbb69cc44698556f3c3ffd620
+  m_Effects:
+  - {fileID: 24400004}
+  m_UserColorIndex: 0
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
+--- !u!244 &24400004
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: 4e1e4140243c5034682d3edb0789ded1
+  m_EffectName: Attenuation
+  m_MixLevel: ce34ffc0a4a90744a8407eb5dc69eba6
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
+--- !u!245 &24500006
+AudioMixerSnapshotController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Snapshot
+  m_AudioMixer: {fileID: 24100000}
+  m_SnapshotID: 7358e856a1d0eaa42ad6b3123bb3818c
+  m_FloatValues: {}
+  m_TransitionOverrides: {}
+--- !u!243 &243131687594412082
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: RockyPlace
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: 25ae6728b72058b4e88011c6e7f47a9e
+  m_Children: []
+  m_Volume: 80423b9b0e753e547863a0a9f6d83906
+  m_Pitch: 62e2bfdecfbd57d498e0cd9623d5f0fe
+  m_Effects:
+  - {fileID: 244881308724502368}
+  - {fileID: 244900215996804092}
+  m_UserColorIndex: 0
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
+--- !u!244 &244881308724502368
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: 07196b15a1b741b4fbce34a30707004c
+  m_EffectName: Attenuation
+  m_MixLevel: 876a758de7233f3458e0c3511c84f9a9
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
+--- !u!244 &244900215996804092
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: c95e942c6bf7eef4b889d49f0787f259
+  m_EffectName: Pitch Shifter
+  m_MixLevel: 315a89b148fa7e541b983e0444e60169
+  m_Parameters:
+  - m_ParameterName: Pitch
+    m_GUID: 4aff6cd2f55eea344b16c11d9c036824
+  - m_ParameterName: FFT size
+    m_GUID: b1a5fd65e7e51cc41918e1be4d787404
+  - m_ParameterName: Overlap
+    m_GUID: 08fe64034a437ba4384a6d1bf36ddb8d
+  - m_ParameterName: Max channels
+    m_GUID: cfc848a98bcdd5647aca400cde09705a
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
