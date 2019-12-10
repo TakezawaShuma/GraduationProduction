@@ -7,6 +7,8 @@ using UnityEngine;
 /// </summary>
 public class SlotData : MonoBehaviour
 {
+    private bool useFlag = false;
+
     public enum HOGEID
     {
         SKILL,
@@ -56,5 +58,20 @@ public class SlotData : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void OnClick()
+    {
+        useFlag = true;
+    }
+
+    public bool GetUseFlag()
+    {
+        return useFlag;
+    }
+
+    public void UseFlagOff()
+    {
+        useFlag = false;
     }
 }

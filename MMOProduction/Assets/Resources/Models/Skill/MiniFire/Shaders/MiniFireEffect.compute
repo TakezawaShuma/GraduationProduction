@@ -1,0 +1,36 @@
+﻿// Each #kernel tells which function to compile; you can have many kernels
+#pragma kernel CSMain
+
+// パーティクルバッファ
+struct Particle
+{
+	float3 pos;
+	float3 startPos;
+	float3 accel;
+	float4 col;
+};
+
+float _DeltaTime;
+float4 _Center;
+RWStructuredBuffer<Particle> _Particle;
+
+// メイン処理
+[numthreads(8, 1, 1)]
+void CSMain(uint3 id : SV_DispatchThreadID)
+{
+    int i = id.x;
+    
+    float3 pos = _Particle[i].pos;
+    float4 col = _Particle[i].col;
+    
+    col.a = lerp(col.a, 0, _DeltaTime);
+    if (col.a <= 0.1)
+    {
+        pos = _Center;
+        col.a = 1;
+    }
+
+    // 変更を適用
+    _Particle[i].pos = pos;
+    _Particle[i].col = col;
+}
