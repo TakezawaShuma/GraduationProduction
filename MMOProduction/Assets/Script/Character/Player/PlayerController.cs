@@ -98,6 +98,15 @@ public class PlayerController : MonoBehaviour
         get { return dir; }
     }
 
+    //走り判定
+    private bool runFlag;
+
+    public bool RunFlag
+    {
+        get { return runFlag; }set
+        { runFlag = value; }
+    }
+
 
     // Use this for initialization
     void Start()

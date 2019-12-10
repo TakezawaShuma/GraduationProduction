@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6301e3d856a2c034488db592725a9c89, type: 3}
+  m_Name: player_sound
+  m_EditorClassIdentifier: 
+  grasslandSetting_:
+    walkPitch:
+      tempo: 1
+      pitch: 1
+    runPitch:
+      tempo: 2
+      pitch: 0.5
+    clip: {fileID: 8300000, guid: 6ba77b7df97422042b2c6295ab489bb2, type: 3}
+  sandRoadSetting_:
+    walkPitch:
+      tempo: 1
+      pitch: 1
+    runPitch:
+      tempo: 2
+      pitch: 0.5
+    clip: {fileID: 8300000, guid: caf2638b956e0334f9898a970d303e98, type: 3}
+  rockyPlaceSetting_:
+    walkPitch:
+      tempo: 1
+      pitch: 1
+    runPitch:
+      tempo: 2
+      pitch: 0.5
+    clip: {fileID: 8300000, guid: f57b73086b57a194cb0e684fef5ae505, type: 3}
+  sandyBeachSetting_:
+    walkPitch:
+      tempo: 1
+      pitch: 1
+    runPitch:
+      tempo: 2
+      pitch: 0.5
+    clip: {fileID: 8300000, guid: 3a03e9e326d89534db2874d75ed94407, type: 3}

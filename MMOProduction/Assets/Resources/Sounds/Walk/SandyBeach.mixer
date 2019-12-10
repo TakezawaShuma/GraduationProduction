@@ -1,0 +1,126 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!241 &24100000
+AudioMixerController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: SandyBeach
+  m_OutputGroup: {fileID: 0}
+  m_MasterGroup: {fileID: 24300002}
+  m_Snapshots:
+  - {fileID: 24500006}
+  m_StartSnapshot: {fileID: 24500006}
+  m_SuspendThreshold: -80
+  m_EnableSuspend: 1
+  m_UpdateMode: 0
+  m_ExposedParameters:
+  - guid: c7824dbaff014da45abb63d98cab8152
+    name: MyExposedParam
+  m_AudioMixerGroupViews:
+  - guids:
+    - 616020e8b4f4bca4eb813cc9da8550d8
+    - a9bb356b7bdeda549bdd17027ac90307
+    name: View
+  m_CurrentViewIndex: 0
+  m_TargetSnapshot: {fileID: 24500006}
+--- !u!243 &24300002
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Master
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: 616020e8b4f4bca4eb813cc9da8550d8
+  m_Children:
+  - {fileID: 243885235444196066}
+  m_Volume: f37b5ccfe96e2e441859fff1f8aa471d
+  m_Pitch: 53e9ce5a4ebd5e146b925622a71fc798
+  m_Effects:
+  - {fileID: 24400004}
+  m_UserColorIndex: 0
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
+--- !u!244 &24400004
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: 61ce07ee6a06a424d85d5d6e774f2f32
+  m_EffectName: Attenuation
+  m_MixLevel: 7591639cbe9ad714d9a779346f0aa706
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
+--- !u!245 &24500006
+AudioMixerSnapshotController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Snapshot
+  m_AudioMixer: {fileID: 24100000}
+  m_SnapshotID: 2e2eba06fc8164b4dadbb83f8888ab1d
+  m_FloatValues: {}
+  m_TransitionOverrides: {}
+--- !u!243 &243885235444196066
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: SandyBeach
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: a9bb356b7bdeda549bdd17027ac90307
+  m_Children: []
+  m_Volume: f70c3bd32eeac4744b6e4cb1aadac68f
+  m_Pitch: 2546749dbc029a24ebe168d6917964ed
+  m_Effects:
+  - {fileID: 244435956602134244}
+  - {fileID: 244477583438009966}
+  m_UserColorIndex: 0
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
+--- !u!244 &244435956602134244
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: 336dc0832a8b5ea448f5eddee6936971
+  m_EffectName: Attenuation
+  m_MixLevel: ddeaca89184c97148921707fae86178c
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
+--- !u!244 &244477583438009966
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: 0da0d98827af8f44bae8b46400602a0e
+  m_EffectName: Pitch Shifter
+  m_MixLevel: 9e2575553cf27464c97c636a1fbd497c
+  m_Parameters:
+  - m_ParameterName: Pitch
+    m_GUID: c7824dbaff014da45abb63d98cab8152
+  - m_ParameterName: FFT size
+    m_GUID: e677e77e9f6d5ae45ae3fe47465e18a4
+  - m_ParameterName: Overlap
+    m_GUID: 3fb1adf4b08846d40a3ca990c297fc4c
+  - m_ParameterName: Max channels
+    m_GUID: 58309b42e3d47204ead28ba0752fb0d9
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
