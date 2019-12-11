@@ -84,6 +84,15 @@ public class PlayerController : MonoBehaviour
         get { return dir; }
     }
 
+    //走り判定
+    private bool runFlag;
+
+    public bool RunFlag
+    {
+        get { return runFlag; }set
+        { runFlag = value; }
+    }
+
 
     // Use this for initialization
     void Start()
@@ -94,6 +103,7 @@ public class PlayerController : MonoBehaviour
         KeyMoveState.Instance.Initialized(this, playerSetting, animatorManager);
         AutoRunState.Instance.Initialized(this, playerSetting, animatorManager);
         NormalAttackState.Instance.Initialized(this, playerSetting, animatorManager);
+        SkillUsingState.Instance.Initialized(this, playerSetting, animatorManager);
 
         // 初期武器を取得
         weaponList = GetComponent<WeaponList>();
@@ -113,7 +123,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!chatController.GetChatActiveFlag())
+        if (chatController == null || !chatController.GetChatActiveFlag())
         {
             if (target != null)
             {
