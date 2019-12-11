@@ -89,7 +89,7 @@ public class PlaySceneManager : SceneManagerBase
             wsp.enemysAction = RegisterEnemies;                 // 204
             wsp.statusAction = UpdateStatus;                    // 206
 
-            wsp.loadSaveAction= ReceiveSaveData;                // 212
+            wsp.loadSaveAction = ReceiveSaveData;                // 212
             wsp.loadOtherListAction = ReceiveOtherListData;     // 214
             wsp.loadOtherAction = ReceiveOtherData;             // 215
 
@@ -104,10 +104,10 @@ public class PlaySceneManager : SceneManagerBase
 
             // セーブデータを要請する。
             wsp.Send(new Packes.SaveLoadCtoS(UserRecord.ID).ToJson());
-           
+
 
         }
-        MakePlayer(new Vector3(-210, 5, -210), playerPre);
+        if (!connectFlag) { MakePlayer(new Vector3(-210, 5, -210), playerPre); }
     }
 
 
