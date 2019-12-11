@@ -1321,8 +1321,9 @@ AudioSource:
   m_GameObject: {fileID: 2136695631195096698}
   m_Enabled: 1
   serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
+  OutputAudioMixerGroup: {fileID: 243229864269865102, guid: fe702af1e4dc6504480a3f8cc8cb5091,
+    type: 2}
+  m_audioClip: {fileID: 8300000, guid: 6ba77b7df97422042b2c6295ab489bb2, type: 3}
   m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
@@ -1420,10 +1421,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8052dc5ff31da484089429acfe883fed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  grassland_: {fileID: 8300000, guid: 6ba77b7df97422042b2c6295ab489bb2, type: 3}
-  sandRoad_: {fileID: 8300000, guid: caf2638b956e0334f9898a970d303e98, type: 3}
-  rockyPlace_: {fileID: 8300000, guid: f57b73086b57a194cb0e684fef5ae505, type: 3}
-  sandyBeach_: {fileID: 8300000, guid: 3a03e9e326d89534db2874d75ed94407, type: 3}
+  walkSoundTable_: {fileID: 11400000, guid: 0cc43c8d9aa3e4546a846656fbb22fd3, type: 2}
+  playerController_: {fileID: 0}
   slashing_: {fileID: 8300000, guid: 22b63e7fd45ef234a9200c3026280595, type: 3}
   blow_: {fileID: 8300000, guid: 2d241d4d74004264ab8ad6d10bd8761c, type: 3}
   fireBall_: {fileID: 0}
@@ -1431,6 +1430,7 @@ MonoBehaviour:
   water_: {fileID: 0}
   damage_: {fileID: 0}
   die_: {fileID: 8300000, guid: ef5bf6fd4c9e46d4eabeff74f958816e, type: 3}
+  audioMixer_: {fileID: 24100000, guid: fe702af1e4dc6504480a3f8cc8cb5091, type: 2}
 --- !u!1 &2149958233113188971
 GameObject:
   m_ObjectHideFlags: 0

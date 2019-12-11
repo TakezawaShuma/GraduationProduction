@@ -1,0 +1,130 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!241 &24100000
+AudioMixerController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Grassland
+  m_OutputGroup: {fileID: 0}
+  m_MasterGroup: {fileID: 24300002}
+  m_Snapshots:
+  - {fileID: 24500006}
+  m_StartSnapshot: {fileID: 24500006}
+  m_SuspendThreshold: -80
+  m_EnableSuspend: 1
+  m_UpdateMode: 0
+  m_ExposedParameters:
+  - guid: 4e71fc5709020994cbfa7eb1a095a25d
+    name: Grassland
+  m_AudioMixerGroupViews:
+  - guids:
+    - fdf4cb12ec7fd3741999221450bbfea9
+    - 1c0949c43a06deb47a4ff6ca88bce128
+    name: View
+  m_CurrentViewIndex: 0
+  m_TargetSnapshot: {fileID: 24500006}
+--- !u!243 &24300002
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Master
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: fdf4cb12ec7fd3741999221450bbfea9
+  m_Children:
+  - {fileID: 243229864269865102}
+  m_Volume: fc657c2cfc456e24cbda9c5efbaa35b4
+  m_Pitch: a4a83d7ebfa0e4944ab5524481eedd96
+  m_Effects:
+  - {fileID: 24400004}
+  m_UserColorIndex: 0
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
+--- !u!244 &24400004
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: bae39e4072f3afc4c9192558b3e88ce8
+  m_EffectName: Attenuation
+  m_MixLevel: b86fb3d99e824894bb05b6eac0f2adfe
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
+--- !u!245 &24500006
+AudioMixerSnapshotController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Snapshot
+  m_AudioMixer: {fileID: 24100000}
+  m_SnapshotID: 1ffd5fc5d4c29f1468bb778b5270b763
+  m_FloatValues:
+    16a9d9926a97c3442809169df700e25b: 2
+    30c8e16577b74c94f82962bf12387ae5: 1
+    4e71fc5709020994cbfa7eb1a095a25d: 1
+    fc657c2cfc456e24cbda9c5efbaa35b4: -0.0025634395
+  m_TransitionOverrides: {}
+--- !u!243 &243229864269865102
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Grassland
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: 1c0949c43a06deb47a4ff6ca88bce128
+  m_Children: []
+  m_Volume: 5315d436734f23d48b523270b5f473e9
+  m_Pitch: 2f8d51929426d1448ab85db046ef8128
+  m_Effects:
+  - {fileID: 244620519009521102}
+  - {fileID: 244982854122128374}
+  m_UserColorIndex: 0
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
+--- !u!244 &244620519009521102
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: 40978dbffc822204f923fc8501ede9c9
+  m_EffectName: Attenuation
+  m_MixLevel: faa71af8c0e692c4ea9a5b79e39b388f
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
+--- !u!244 &244982854122128374
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: 792b9b0d65950e642a367ba36d3172e7
+  m_EffectName: Pitch Shifter
+  m_MixLevel: 7a664ae1e8af7db4fa71e9d259981c92
+  m_Parameters:
+  - m_ParameterName: Pitch
+    m_GUID: 4e71fc5709020994cbfa7eb1a095a25d
+  - m_ParameterName: FFT size
+    m_GUID: d5b1a9dea37c22f439095f8691f67eaf
+  - m_ParameterName: Overlap
+    m_GUID: 55448c49bf819f94abf41bed125b14e4
+  - m_ParameterName: Max channels
+    m_GUID: b205d162b7401b846b2b4bfb6f79f4ec
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
