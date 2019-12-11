@@ -55,6 +55,9 @@ public class PlaySceneManager : SceneManagerBase
 
     private Player player = null;
 
+    /// <summary> 自分自身の情報を渡す </summary>
+    public Player Player { get { return player; } }
+
     private Dictionary<int, NonPlayer> charcters = new Dictionary<int, NonPlayer>();
 
     // コールバック関数をリスト化
@@ -67,12 +70,6 @@ public class PlaySceneManager : SceneManagerBase
     [SerializeField]
     private Vector3 playerSpawnPos = new Vector3(0, 0, 0);
 
-    private GameObject userPlayer;
-
-    public GameObject USER
-    {
-        get { return userPlayer; }
-    }
 
     private void Awake()
     {
@@ -92,7 +89,7 @@ public class PlaySceneManager : SceneManagerBase
             wsp.enemysAction = RegisterEnemies;                 // 204
             wsp.statusAction = UpdateStatus;                    // 206
 
-            wsp.loadSaveAction= ReceiveSaveData;                // 212
+            wsp.loadSaveAction = ReceiveSaveData;                // 212
             wsp.loadOtherListAction = ReceiveOtherListData;     // 214
             wsp.loadOtherAction = ReceiveOtherData;             // 215
 
@@ -107,11 +104,28 @@ public class PlaySceneManager : SceneManagerBase
 
             // セーブデータを要請する。
             wsp.Send(new Packes.SaveLoadCtoS(UserRecord.ID).ToJson());
-           
+
 
         }
-        //MakePlayer(new Vector3(-210, 5, -210), playerPre);
+        if (!connectFlag) { MakePlayer(new Vector3(-210, 5, -210), playerPre); }
     }
+
+
+    /// <summary>
+    /// フレーム数を数える
+    /// </summary>
+    /// <returns></returns>
+    private bool Timer()
+    {
+        count++;
+        if (count > UPDATE_MAX_COUNT)
+        {
+            count = 0;
+            return true;
+        }
+        return false;
+    }
+
 
     // Update is called once per frame
     void Update()
@@ -123,7 +137,7 @@ public class PlaySceneManager : SceneManagerBase
             ready.ReadyGO();
             if (player != null)
             {
-                var playerData = player.GetPosition();
+                var playerData = player.PositionV4;
                 if (Timer())
                 {
                     if (connectFlag)
@@ -163,24 +177,16 @@ public class PlaySceneManager : SceneManagerBase
 
 
 
+    /// <summary>
+    /// エディター上でプレイを停止する
+    /// </summary>
     private void OnApplicationQuit()
     {
         if (connectFlag) { wsp.Destroy(); }
     }
 
     private int count = 0;
-    private int updateMaxCount = 3;
-
-    private bool Timer()
-    {
-        count++;
-        if (count > updateMaxCount)
-        {
-            count = 0;
-            return true;
-        }
-        return false;
-    }
+    private const int UPDATE_MAX_COUNT = 3;
 
 
     public GameObject miniMapCameraPrefab_;
@@ -201,20 +207,22 @@ public class PlaySceneManager : SceneManagerBase
             tmp.name = (UserRecord.Name != "") ? UserRecord.Name : _name;
             tmp.tag = "Player";
             tmp.transform.localScale = new Vector3(2, 2, 2);
-            tmp.AddComponent<Player>();
-            tmp.AddComponent<PlayerController>();
-            tmp.AddComponent<PlayerSetting>();
-            tmp.GetComponent<PlayerController>().Init(tmp.GetComponent<Player>(), FollowingCamera, tmp.GetComponent<PlayerSetting>(), chat, tmp.GetComponent<Animator>());
+
+            Player playerComponent = tmp.AddComponent<Player>();
+            PlayerController playerCComponent = tmp.AddComponent<PlayerController>();
+            PlayerSetting playerSetComponent = tmp.AddComponent<PlayerSetting>();
+
+            playerCComponent.Init(playerComponent, FollowingCamera, playerSetComponent, chat, tmp.GetComponent<Animator>());
             userSeeting.Init(tmp);
-            player = tmp.GetComponent<Player>();
-            FollowingCamera.SetTarget(tmp);
-            userPlayer = tmp;
+            player = playerComponent;
+            FollowingCamera.Target = tmp;
+            //userPlayer = tmp;
 
             // ミニマップのカメラの作成
             var miniMapTmp = Instantiate<GameObject>(miniMapCameraPrefab_, this.transform);
             miniMapTmp.GetComponent<MiniMapController>().Init(tmp);
 
-            playerUI.PLAYER_CMP = tmp.GetComponent<Player>();
+            playerUI.PLAYER_CMP = playerComponent;
             playerUI.PLAYER_NAME = UserRecord.Name;
 
             ret = true;
@@ -418,7 +426,6 @@ public class PlaySceneManager : SceneManagerBase
     }
 
 
-
     /// <summary>
     /// 戦闘処理生存 → enemyAliveAction
     /// </summary>
@@ -430,8 +437,9 @@ public class PlaySceneManager : SceneManagerBase
         // HPを減らすや状態の更新
 
         Debug.Log("敵は生存している");
-        charcters[_packet.unique_id].GetComponent<Enemy>().PlayTriggerAnimetion("Take Damage");
-        charcters[_packet.unique_id].GetComponent<Enemy>().HP = _packet.hp;
+        Enemy enemy = charcters[_packet.unique_id].GetComponent<Enemy>();
+        enemy.PlayTriggerAnimetion("Take Damage");
+        enemy.HP = _packet.hp;
     }
 
     /// <summary>
@@ -443,14 +451,17 @@ public class PlaySceneManager : SceneManagerBase
         // todo
         // 戦闘で計算後エネミーが死亡していたら
         // HPを0にして死亡エフェクトやドロップアイテムの取得
-        charcters[_packet.unique_id].GetComponent<Enemy>().HP = 0;
-        charcters[_packet.unique_id].GetComponent<Enemy>().PlayTriggerAnimetion("Die");
-        int target = player.GetComponent<PlayerController>().GetTargetEnemy().ID;
+        Enemy enemy = charcters[_packet.unique_id].GetComponent<Enemy>();
+        enemy.HP = 0;
+        enemy.PlayTriggerAnimetion("Die");
+
+        PlayerController pc = player.GetComponent<PlayerController>();
+        int target = pc.Target.GetComponentInParent<Enemy>().ID;
 
         Debug.Log("TargetID : " + target + " , DieEnemyID : " + _packet.unique_id);
         if (target == _packet.unique_id)
         {
-            player.GetComponent<PlayerController>().RemoveTarget();
+            pc.RemoveTarget();
         }
         charcters.Remove(_packet.unique_id);
     }
@@ -554,16 +565,6 @@ public class PlaySceneManager : SceneManagerBase
         wsp.Send(new Packes.GetEnemysDataCtoS(0, UserRecord.ID).ToJson());
     }
 
-    /// <summary>
-    /// 自分自身の情報を渡す
-    /// </summary>
-    /// <returns></returns>
-    public Player GetPlayerData()
-    {
-        return player;
-    } 
-    
-
 
     /// <summary>
     /// パーティの情報を渡す
@@ -586,10 +587,4 @@ public class PlaySceneManager : SceneManagerBase
     {
         return charcters[_playerId].GetComponent<OtherPlayers>();
     }
-
-
-    //private void ChangeScene(string _sceneName)
-    //{
-    //    SceneManager.LoadScene(_sceneName);
-    //}
 }

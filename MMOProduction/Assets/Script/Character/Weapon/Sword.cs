@@ -6,7 +6,7 @@
 
 using UnityEngine;
 
-public class Sword : MonoBehaviour
+public class Sword : WeaponBase
 {
 
     [SerializeField]
@@ -40,7 +40,6 @@ public class Sword : MonoBehaviour
     /// <param name="activeFlag">アクティブ状態フラグ</param>
     public void SetActive(bool activeFlag)
     {
-        if (activeFlag) this.gameObject.SetActive(true);
-        else this.gameObject.SetActive(false);
+        this.gameObject.SetActive(activeFlag);
     }
 }

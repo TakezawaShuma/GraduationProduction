@@ -103,7 +103,7 @@ namespace Packes
     }
 
     /// <summary>
-    /// command 706 ログアウト完了(server->client)
+    /// ログアウト完了(server->client) command 706
     /// </summary>
     public class FinishComplete : IPacketDatas
     {
@@ -113,11 +113,10 @@ namespace Packes
 
 
     /// <summary>
-    /// ログアウト command:707
+    /// ログアウトした人の報告 command:707
     /// </summary>
     public class LogoutStoC : IPacketDatas
     {
-
         public int user_id;
 
         /// <summary>デフォルトコンストラクタ</summary>

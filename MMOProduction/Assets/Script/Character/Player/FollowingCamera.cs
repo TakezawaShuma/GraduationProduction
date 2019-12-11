@@ -12,10 +12,8 @@ public class FollowingCamera : MonoBehaviour
     [SerializeField, Header("写したいターゲット")]
     private GameObject target; // an object to follow
 
-    public GameObject Target
-    {
-        set { target = value; }
-    }
+    /// <summary> ターゲットの設定 </summary>
+    public GameObject Target { set { target = value; } }
 
     [SerializeField, Header("オフセット")]
     private Vector3 offset = new Vector3(0f, 1.5f, 0f); // offset form the target object
@@ -85,13 +83,8 @@ public class FollowingCamera : MonoBehaviour
     private float lastDistance;
     private float dist = 0;
 
-    /// <summary>
-    /// ターゲットの設定
-    /// </summary>
-    /// <param name="_target"></param>
-    public void SetTarget(GameObject _target) {
-        target = _target;
-    }
+    
+
 
     void LateUpdate()
     {
