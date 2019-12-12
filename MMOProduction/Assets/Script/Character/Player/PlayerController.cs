@@ -151,7 +151,7 @@ public class PlayerController : MonoBehaviour
             pos.y += 2;
             pos += player.transform.forward * 1;
             Quaternion rot = player.Rotation;
-            SkillHandler.Instance.RequestToUseSkill(SkillID.Fireball, gameObject, pos, rot);
+            SkillHandler.Instance.RequestToUseSkill(SkillID.MiniIce, gameObject, pos, rot);
         }
     }
 
