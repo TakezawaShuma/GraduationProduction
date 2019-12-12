@@ -12,11 +12,17 @@ public class Player : CharacterBase
     //[SerializeField, Header("プレイヤーの設定")]
     //private PlayerSetting playerSetting;
 
-    private Vector4 position = new Vector4();
+    // 位置
+    private Vector4 position = default(Vector4);
+    public Vector3 PositionV3 { get { return new Vector3(position.x, position.y, position.z); } }
+    public Vector4 PositionV4 { get { return position; } set { position = value; } }
 
-    private float x;
-    private float y;
-    private float z;
+    // 回転
+    private Quaternion rotation = default(Quaternion);
+    public Quaternion Rotation { get { return rotation; } set { rotation = value; } }
+
+    // リジッドボディ
+    private Rigidbody playerRigid = null;
 
     //private Status status;
     public int HP { get; set; }
@@ -24,17 +30,18 @@ public class Player : CharacterBase
     public int MaxHp { get; set; }
     public int MaxMp { get; set; }
     public int Status { get; set; }
-    public Vector4 Position { get { return position; } set { position = value; } }
-    private int strength;
-    private int vitality;
-    private int Intelligence;
-    private int mind;
-    private int dexterity;
-    private int agility;
+    public int Lv { get; set; }
+    public int EXP { get; set; }
 
-    private float dir;
+    // ステータス
+    public int STR { get; set; }        // 筋力 攻撃力 所持アイテム数等
+    public int VIT { get; set; }        // 体力 防御力 状態異常耐性
+    public int INT { get; set; }        // 知力 魔法攻撃力 MP最大値
+    public int MND { get; set; }        // 精神力 魔法防御力 
+    public int DEX { get; set; }        // 器用 
+    public int AGI { get; set; }        // 機動力 移動速度 攻撃範囲に影響？
 
-    private Rigidbody rb;
+    public Rigidbody Rigid { get { return playerRigid; } set { playerRigid = value; } }
 
 
     private void Start()
@@ -45,37 +52,19 @@ public class Player : CharacterBase
         MaxHp = 100;
         MaxMp = 100;
 
-        x = 0;
-        y = 0;
-        z = 0;
-
-        dir = transform.rotation.eulerAngles.y;
-
-        rb = GetComponent<Rigidbody>();
+        position = transform.position;
+        rotation = transform.rotation;
+        
+        playerRigid = GetComponent<Rigidbody>();
     }
 
     private void Update()
     {
-        //rb.AddForce(new Vector3(x, y, z) * 100);
-        //transform.rotation = Quaternion.Euler(0, dir, 0);
+        position = Rigid.position;
+        playerRigid.rotation = rotation;
     }
 
-    public void UpdatePosition(float _x, float _y, float _z)
-    {
-        x = _x;
-        y = _y;
-        z = _z;
-    }
 
-    public void UpdateDirection(float _dir)
-    {
-        dir = _dir;
-    }
-
-    public Vector4 GetPosition()
-    {
-        return position;
-    }
     public void UpdateStatus( int _hp,  int _mp, int _status)
     {
         HP = _hp;
