@@ -8,6 +8,19 @@ TagManager:
   - Marker
   - Ground
   - Enemy
+  - OtherPlayer
+  - SandRoad
+  - RockyPlace
+  - SandyBeach
+  - Grassland
+  - Weapon
+  - Undefined
+  - Inventory
+  - attacker
+  - defense
+  - Healer
+  - Witch
+  - Aur
   layers:
   - Default
   - TransparentFX
@@ -18,7 +31,7 @@ TagManager:
   - 
   - 
   - PostProcessing
-  - 
+  - MiniMap
   - PlayerModel
   - 
   - 
@@ -29,11 +42,11 @@ TagManager:
   - Marker
   - Player
   - NPC
-  - 
-  - 
-  - 
-  - 
-  - 
+  - Grassland
+  - SandRoad
+  - RockyPlace
+  - SandyBeach
+  - Other
   - 
   - 
   - 

@@ -1,0 +1,126 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!241 &24100000
+AudioMixerController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: SandRoad
+  m_OutputGroup: {fileID: 0}
+  m_MasterGroup: {fileID: 24300002}
+  m_Snapshots:
+  - {fileID: 24500006}
+  m_StartSnapshot: {fileID: 24500006}
+  m_SuspendThreshold: -80
+  m_EnableSuspend: 1
+  m_UpdateMode: 0
+  m_ExposedParameters:
+  - guid: 3324958ad294b1d4585a191835ec3a36
+    name: MyExposedParam
+  m_AudioMixerGroupViews:
+  - guids:
+    - b9c51629ee137a145b128c3da770c509
+    - cda381d79909b574cae8a8e9b3150b72
+    name: View
+  m_CurrentViewIndex: 0
+  m_TargetSnapshot: {fileID: 24500006}
+--- !u!243 &24300002
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Master
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: b9c51629ee137a145b128c3da770c509
+  m_Children:
+  - {fileID: 243838332850154366}
+  m_Volume: a7c3cc40f41282f44aacf68d23b081b2
+  m_Pitch: 0c62f24ea56b2a046a2774efab99ecac
+  m_Effects:
+  - {fileID: 24400004}
+  m_UserColorIndex: 0
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
+--- !u!244 &24400004
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: ad2d85aec9d420748a16387b98070d86
+  m_EffectName: Attenuation
+  m_MixLevel: 481b8fb0e2b071546a80b311afbe18df
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
+--- !u!245 &24500006
+AudioMixerSnapshotController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Snapshot
+  m_AudioMixer: {fileID: 24100000}
+  m_SnapshotID: 7991b5a4a2fb639449aa47386b708a48
+  m_FloatValues: {}
+  m_TransitionOverrides: {}
+--- !u!243 &243838332850154366
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: SandRoad
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: cda381d79909b574cae8a8e9b3150b72
+  m_Children: []
+  m_Volume: ba5848ca16d30bd4db3976e0faaf35a5
+  m_Pitch: a07778cb645c66747bc3ee62c8ce04b3
+  m_Effects:
+  - {fileID: 244337768924852578}
+  - {fileID: 244922118425779374}
+  m_UserColorIndex: 0
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
+--- !u!244 &244337768924852578
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: 8c2b671ea0110cc41a373a7ab0456a5d
+  m_EffectName: Attenuation
+  m_MixLevel: dd472e4505e236248bfde103a4f61cee
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
+--- !u!244 &244922118425779374
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: 426178b01fd8a4444a27cdfc058c1385
+  m_EffectName: Pitch Shifter
+  m_MixLevel: 480af9fc5fe1e9c438694c741a1d35c7
+  m_Parameters:
+  - m_ParameterName: Pitch
+    m_GUID: 3324958ad294b1d4585a191835ec3a36
+  - m_ParameterName: FFT size
+    m_GUID: 5e134e8fa7a277044a53ea35f477601a
+  - m_ParameterName: Overlap
+    m_GUID: dde00eb84a0b1be479455db8acd8a933
+  - m_ParameterName: Max channels
+    m_GUID: 38a0f8e96a338ae49ba0d0bd2cfd72af
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0

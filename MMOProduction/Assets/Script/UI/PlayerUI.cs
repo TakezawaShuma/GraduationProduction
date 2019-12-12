@@ -3,10 +3,20 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
+
+/// <summary>
+/// プレイヤーの情報をUI化する
+/// </summary>
 public class PlayerUI : MonoBehaviour
 {
     //プレイヤ情報
     private Player playerCmp;
+
+    public Player PLAYER_CMP
+    {
+        set { playerCmp = value; }
+    }
+
     [SerializeField]
     private GameObject player = null;
 
@@ -18,21 +28,28 @@ public class PlayerUI : MonoBehaviour
 
     // UI情報
     [SerializeField]
-    private Image job;
+    private Image job = null;
     [SerializeField]
-    private Slider hpRed;
+    private Slider hpRed = null;
     [SerializeField]
-    private Slider hpGreen;
+    private Slider hpGreen = null;
     [SerializeField]
-    private Slider mpYellow;
+    private Slider mpYellow = null;
     [SerializeField]
-    private Slider mpBlue;
+    private Slider mpBlue = null;
     [SerializeField]
-    private Image number;
+    private Image number = null;
     [SerializeField]
-    private Image target;
+    private Image target = null;
     [SerializeField]
-    private Text lvName;
+    private Text lv = null;
+    [SerializeField]
+    private Text playerName = null;
+
+    public string PLAYER_NAME
+    {
+        set { playerName.text = value; }
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -42,30 +59,42 @@ public class PlayerUI : MonoBehaviour
         //playerCmp = player.GetComponent<Player>();
 
         // アイコンやプレイヤ情報の初期設定
+        mpYellow.name = "BGMP";
+        hpRed.name = "BGHP";
+        job.name = "Job";
+        number.name = "Num";
+        lv.name = "LV";
+        playerName.name = "Player";
+        target.name = "Target";
     }
 
     // Update is called once per frame
     void Update()
     {
-        if(player == null)
+        //if(player == null)
+        //{
+        //    player = GameObject.Find("player" + UserRecord.ID);
+        //    if (player != null)
+        //    {
+        //        playerCmp = player.GetComponent<Player>();
+        //        playerCmp.MaxHp = 100;
+        //        playerCmp.HP = 30;
+        //        playerCmp.MaxMp = 100;
+        //        playerCmp.MP = 60;
+        //    }
+        //}
+        if (playerCmp)
         {
-            player = GameObject.Find("player" + Retention.ID);
-            playerCmp = player.GetComponent<Player>();
-            playerCmp.maxHp = 100;
-            playerCmp.hp = 30;
-            playerCmp.maxMp = 100;
-            playerCmp.mp = 60;
+            StatusUpdate();
         }
-
-        StatusUpdate();
     }
 
     private void StatusUpdate()
     {
-        int hp = playerCmp.hp;
-        int maxHp = playerCmp.maxHp;
-        int mp = playerCmp.mp;
-        int maxMp = playerCmp.maxMp;
+        int hp = playerCmp.HP;
+        int maxHp = playerCmp.MaxHp;
+        int mp = playerCmp.MP;
+        int maxMp = playerCmp.MaxMp;
 
         if (Observar(hp, currentHp) || Observar(maxHp,currentMaxHp))
         {

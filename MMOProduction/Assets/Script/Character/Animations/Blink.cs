@@ -1,0 +1,27 @@
+﻿using UnityEngine;
+using VRM;
+
+/// <summary>
+/// 瞬きをさせる
+/// </summary>
+public class Blink : MonoBehaviour
+{
+    public float interval;
+
+    private VRMBlendShapeProxy param;
+
+    float timer = 0;
+    // Start is called before the first frame update
+    void Start()
+    {
+        param = GetComponent<VRM.VRMBlendShapeProxy>();
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        timer += Time.deltaTime;
+        if (timer > interval) { param.SetValue(VRM.BlendShapePreset.Blink, 1); timer = 0; }
+        else { param.SetValue(VRM.BlendShapePreset.Blink, 0); }
+    }
+}

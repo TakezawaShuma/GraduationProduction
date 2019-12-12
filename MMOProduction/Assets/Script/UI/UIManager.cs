@@ -2,36 +2,50 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+/// <summary>
+/// UI全般を管理するクラス
+/// </summary>
 public class UIManager : MonoBehaviour
 {
     [SerializeField]
-    private GameObject[] ui;
+    private GameObject[] ui = null;
 
     [SerializeField]
-    private KeyCode[] key;
+    private KeyCode[] key = null;
+
+    [SerializeField]
+    private ChatController chat = null;
 
     // Start is called before the first frame update
     void Start()
     {
+        if (ui != null)
+        {
+            for (int i = 0; i < ui.Length; i++)
+            {
+                ui[i].SetActive(false);
+            }
+        }
 
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (ui != null)
+        if (ui != null && !chat.GetChatActiveFlag())
         {
             for (int i = 0; i < ui.Length; i++)
             {
-                if(Input.GetKeyDown(key[i]))
+                if (InputManager.InputKeyCheckDown(key[i]))
                 {
-                    if(ui[i].activeInHierarchy)
+                    if (ui[i].activeInHierarchy)
                     {
                         ui[i].SetActive(false);
                     }
                     else
                     {
                         ui[i].SetActive(true);
+                        ui[i].transform.SetAsLastSibling();
                     }
                 }
             }
