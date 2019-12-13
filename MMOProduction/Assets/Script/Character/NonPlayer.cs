@@ -11,6 +11,9 @@ public class NonPlayer :CharacterBase
     protected Quaternion nextDir = new Quaternion();
 
 
+    // スキル一覧
+    protected skill_table skillTable;
+
     protected float nowFlame = 0;
     public const float UPDATE_SPEED = 1.0f / 3.0f;
 
@@ -21,7 +24,7 @@ public class NonPlayer :CharacterBase
     /// <param name="_y"></param>
     /// <param name="_z"></param>
     /// <param name="_dir"></param>
-    public void Init(float _x, float _y, float _z, float _dir,int _id)
+    public void Init(float _x, float _y, float _z, float _dir,int _id,skill_table _skills)
     {
         ID = _id;
         lastPos = transform.position = new Vector3(_x, _y, _z);
@@ -29,6 +32,7 @@ public class NonPlayer :CharacterBase
         lastDir = transform.rotation = Quaternion.Euler(new Vector3(0, _dir, 0));
         nextDir = Quaternion.Euler(new Vector3(0, _dir, 0));
         animator_ = GetComponent<Animator>();
+        skillTable = _skills;
     }
 
     /// <summary>

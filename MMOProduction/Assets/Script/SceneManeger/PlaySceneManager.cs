@@ -14,10 +14,13 @@ public class PlaySceneManager : SceneManagerBase
 {
     public GameObject playerPre = null;
 
-    [SerializeField,Header("プレイヤーモデルリスト")]
+    [SerializeField,Header("キャラクターモデルリスト")]
     private character_table playerAvatars = null;
-   [Header("敵のマスターデータ"), SerializeField]
-    private enemy_table enemyDataList;
+    [Header("敵のマスターデータ"), SerializeField]
+    private enemy_table enemyTable;
+    [Header("スキルの全データ"), SerializeField]
+    private skill_table skillTabe;
+
 
     [SerializeField,Header("プレイヤーの名前表示UI")]
     private GameObject nameUI = null;
@@ -53,22 +56,19 @@ public class PlaySceneManager : SceneManagerBase
     // ソケット
     private WS.WsPlay wsp = null;
 
+    // プレイヤー情報
     private Player player = null;
-
     /// <summary> 自分自身の情報を渡す </summary>
     public Player Player { get { return player; } }
 
+    // プレイヤー以外のキャラクター情報
     private Dictionary<int, NonPlayer> charcters = new Dictionary<int, NonPlayer>();
 
     // コールバック関数をリスト化
     private List<Action<string>> callbackList = new List<Action<string>>();
     
 
-    private GameObject newEnemy = null;
-
     private Ready ready;
-    [SerializeField]
-    private Vector3 playerSpawnPos = new Vector3(0, 0, 0);
 
 
     private void Awake()
@@ -286,7 +286,7 @@ public class PlaySceneManager : SceneManagerBase
 
         otherPlayer.tag = "OtherPlayer";                                    // タグ
         otherPlayer.transform.localScale = new Vector3(2, 2, 2);
-        other.Init(0, 0, 0, 0, _packet.user_id);
+        other.Init(0, 0, 0, 0, _packet.user_id, skillTabe);
         charcters[_packet.user_id] = other;                                 // キャラクター管理に登録
         Debug.Log("他キャラ生成" + _packet.user_id);
     }
@@ -327,10 +327,10 @@ public class PlaySceneManager : SceneManagerBase
     /// <param name="_ene">作成に必要なデータ</param>
     private void CreateEnemys(Packes.EnemyReceiveData _ene)
     {
-        newEnemy = Instantiate<GameObject>
-           (testEnemyPre,
-           Vector3.zero,
-           Quaternion.Euler(0, 0, 0));
+        GameObject newEnemy = Instantiate<GameObject>
+                              (testEnemyPre,
+                              Vector3.zero,
+                              Quaternion.Euler(0, 0, 0));
         GameObject stutasCanvas = Instantiate(enemyStatusCanvas, newEnemy.transform);
 
         Enemy enemy = newEnemy.AddComponent<Enemy>();
@@ -339,7 +339,7 @@ public class PlaySceneManager : SceneManagerBase
         stutasCanvas.GetComponent<UIEnemyHP>().Off();
 
         newEnemy.name = "Enemy:" + _ene.master_id + "->" + _ene.unique_id;
-        enemy.Init(_ene.x, _ene.y, _ene.z, _ene.dir, _ene.unique_id);
+        enemy.Init(_ene.x, _ene.y, _ene.z, _ene.dir, _ene.unique_id,skillTabe);
         enemy.UI_HP = stutasCanvas.GetComponent<UIEnemyHP>();
         charcters[_ene.unique_id] = enemy;
     }
@@ -503,7 +503,7 @@ public class PlaySceneManager : SceneManagerBase
         enemy.PlayTriggerAnimetion("Attack");
         if (_packet.target_id == UserRecord.ID)
         {
-            enemy.Attacked(player.gameObject);
+            enemy.Attacked(player.gameObject,_packet.skill_id);
         }
     }
 

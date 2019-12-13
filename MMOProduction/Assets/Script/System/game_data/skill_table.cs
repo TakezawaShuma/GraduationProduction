@@ -38,7 +38,7 @@ public class skill_table : ScriptableObject
         //エフェクトID
         public int effectId;
 
-        //名前
+        //スキル名
         public string name;
 
         //最大レベル
@@ -62,7 +62,7 @@ public class skill_table : ScriptableObject
         //消費コスト
         public int cost;
 
-        //時間
+        //効果時間
         public int time;
 
         //ヘイト値
@@ -71,12 +71,14 @@ public class skill_table : ScriptableObject
         //親のID
         public int pearentID;
 
-
         //必要ポイント
         public int pearentPoint;
 
         //武器
         public int weapon;
+
+        //効果範囲(武器攻撃ならプレイヤーから/魔法系なら着弾位置から)
+        public int range;
 
         // ステータスに及ぼす効果
         public int hp;
@@ -94,5 +96,15 @@ public class skill_table : ScriptableObject
         public range_type rangeType;
 
         public target_type targetType;
+    }
+
+    public skill_data FindSkill(int _skill_id)
+    {
+        skill_data ret = null;
+        foreach(var skill in tables)
+        {
+            if (skill.id == _skill_id) { ret = skill; break; }
+        }
+        return ret;
     }
 }
