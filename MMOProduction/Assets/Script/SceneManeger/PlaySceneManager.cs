@@ -89,7 +89,7 @@ public class PlaySceneManager : SceneManagerBase
             wsp.enemysAction = RegisterEnemies;                 // 204
             wsp.statusAction = UpdateStatus;                    // 206
 
-            wsp.loadSaveAction = ReceiveSaveData;                // 212
+            wsp.loadSaveAction = ReceiveSaveData;               // 212
             wsp.loadOtherListAction = ReceiveOtherListData;     // 214
             wsp.loadOtherAction = ReceiveOtherData;             // 215
 
@@ -104,6 +104,7 @@ public class PlaySceneManager : SceneManagerBase
 
             // セーブデータを要請する。
             wsp.Send(new Packes.SaveLoadCtoS(UserRecord.ID).ToJson());
+            Debug.Log("自分のID->" + UserRecord.ID);
 
 
         }
@@ -256,7 +257,8 @@ public class PlaySceneManager : SceneManagerBase
                 {
                     // リストに登録されていないIDが来たときの処理
                     // そのIDは何なのか確認をとる
-                    wsp.Send(new Packes.FindOfPlayerCtoS(_packet.user_id, 0).ToJson());
+                    Debug.Log("この人誰？->" + _packet.user_id);
+                    wsp.Send(new Packes.FindOfPlayerCtoS(UserRecord.ID,_packet.user_id, 0).ToJson());
                 }
             }
         }
@@ -286,6 +288,7 @@ public class PlaySceneManager : SceneManagerBase
         otherPlayer.transform.localScale = new Vector3(2, 2, 2);
         other.Init(0, 0, 0, 0, _packet.user_id);
         charcters[_packet.user_id] = other;                                 // キャラクター管理に登録
+        Debug.Log("他キャラ生成" + _packet.user_id);
     }
 
     /// <summary>
@@ -423,6 +426,7 @@ public class PlaySceneManager : SceneManagerBase
                                             _packet.name);
         // 新規入室プレイヤーの作成
         CreateOtherPlayers(tmp);
+
     }
 
 
@@ -495,7 +499,12 @@ public class PlaySceneManager : SceneManagerBase
     private void EnemyUseSkill(Packes.EnemyUseSkill _packet)
     {
         Debug.Log("敵のスキルが発動したよ");
-        charcters[_packet.enemy_id].GetComponent<Enemy>().PlayTriggerAnimetion("Attack");
+        Enemy enemy = charcters[_packet.enemy_id].GetComponent<Enemy>();
+        enemy.PlayTriggerAnimetion("Attack");
+        if (_packet.target_id == UserRecord.ID)
+        {
+            enemy.Attacked(player.gameObject);
+        }
     }
 
     /// <summary>
@@ -532,6 +541,7 @@ public class PlaySceneManager : SceneManagerBase
     /// <param name="_packet"></param>
     private void ReceivingFindResults(Packes.FindOfPlayerStoC _packet)
     {
+        Debug.Log("検索の結果他プレイヤーを作成 -> " + _packet.user_id);
         Packes.OtherPlayersData tmp = new Packes.OtherPlayersData(_packet.user_id, _packet.x, _packet.y, _packet.z, _packet.model_id, _packet.name);
         CreateOtherPlayers(tmp);
     }

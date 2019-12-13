@@ -20,7 +20,7 @@ public class skill_Editor : EditorWindow
         tablelist = Resources.Load<skill_table>("GameData\\skill_data");
         // 生成
         window = GetWindow<skill_Editor>("skill_setting");
-        window.maxSize = window.minSize = new Vector2(450, 500);
+        window.maxSize = window.minSize = new Vector2(460, 500);
         foreach (var table in tablelist.tables)
         {
             delete_flag.Add(false);
@@ -53,11 +53,12 @@ public class skill_Editor : EditorWindow
             EditorGUILayout.LabelField("最大Lv", GUILayout.Width(50));
             table.maxLv = EditorGUILayout.IntField(table.maxLv, GUILayout.Width(40));
 
-            EditorGUILayout.LabelField("親ID", GUILayout.Width(40));
+            EditorGUILayout.LabelField("親ID", GUILayout.Width(50));
             table.pearentID = EditorGUILayout.IntField(table.pearentID, GUILayout.Width(40));
 
-            EditorGUILayout.LabelField("取得必要ポイント", GUILayout.Width(100));
-            table.pearentPoint = EditorGUILayout.IntField(table.pearentPoint, GUILayout.Width(40));
+
+            EditorGUILayout.LabelField("使用者", GUILayout.Width(40));
+            table.user = EditorGUILayout.TextArea(table.user, GUILayout.Width(150));
 
             EditorGUILayout.EndHorizontal();
             EditorGUILayout.BeginHorizontal();
@@ -68,8 +69,11 @@ public class skill_Editor : EditorWindow
             EditorGUILayout.LabelField("ヘイト値", GUILayout.Width(50));
             table.hate = EditorGUILayout.IntField(table.hate, GUILayout.Width(40));
 
-            EditorGUILayout.LabelField("武器", GUILayout.Width(50));
+            EditorGUILayout.LabelField("武器", GUILayout.Width(30));
             table.weapon = EditorGUILayout.IntField(table.weapon, GUILayout.Width(40));
+
+            EditorGUILayout.LabelField("取得必要ポイント", GUILayout.Width(100));
+            table.pearentPoint = EditorGUILayout.IntField(table.pearentPoint, GUILayout.Width(40));
 
             EditorGUILayout.EndHorizontal();
 
@@ -91,7 +95,7 @@ public class skill_Editor : EditorWindow
             EditorGUILayout.BeginHorizontal();
 
             string[] nameTable = { "HP", "MP", "STR", "VIT", "INT", "MND", "DEX", "AGI", "状態異常", "威力" };
-            int[] statusTable = { 0,0,0,0,0,0,0,0,0,0 };
+            int[] statusTable = { table.hp, table.mp, table.str, table.vit, table.inte, table.mnd, table.dex, table.agi, table.effect, table.condition };
             for (int j = 0; j < 5; j++)
             {
                 EditorGUILayout.LabelField(nameTable[j].ToString(), GUILayout.Width(50));
@@ -166,7 +170,10 @@ public class skill_Editor : EditorWindow
 
         // ボタンの配置
         if (GUILayout.Button("保存"))
+        {
             textSave(JsonUtility.ToJson(tablelist));
+
+        }
     }
 
     /// <summary>
@@ -179,6 +186,7 @@ public class skill_Editor : EditorWindow
         sw.WriteLine(txt);
         sw.Flush();
         sw.Close();
+
 
         Debug.Log(txt);
     }

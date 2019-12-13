@@ -84,15 +84,6 @@ public class PlayerController : MonoBehaviour
         get { return dir; }
     }
 
-    //走り判定
-    private bool runFlag;
-
-    public bool RunFlag
-    {
-        get { return runFlag; }set
-        { runFlag = value; }
-    }
-
 
     // Use this for initialization
     void Start()
@@ -294,7 +285,8 @@ public class PlayerController : MonoBehaviour
 
     private void OnCollisionStay(Collision _coll)
     {
-        if (currentState is KeyMoveState) sound_.WalkPlay(_coll.gameObject.tag);
+        if (currentState is KeyMoveState && InputManager.InputKeyCheck(playerSetting.DKey)) { sound_.RunPlay(_coll.gameObject.tag); }
+        else if(currentState is KeyMoveState) { sound_.WalkPlay(_coll.gameObject.tag); }
     }
 
     public float Distance(GameObject _target)
