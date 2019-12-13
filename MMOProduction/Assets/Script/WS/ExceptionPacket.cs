@@ -56,8 +56,10 @@ namespace Packes
     /// </summary>
     public class FindOfPlayerCtoS : IPacketDatas
     {
-        /// <summary>ユーザーID</summary>
+        /// <summary>自分のID</summary>
         public int user_id;
+        /// <summary>調べたい人のID</summary>
+        public int target_id;
         /// <summary>マップID</summary>
         public int map_id;
 
@@ -71,11 +73,13 @@ namespace Packes
         /// <param name="_map_id">マップID</summary>
         public FindOfPlayerCtoS(
             int _user_id,
+            int _target_id,
             int _map_id
         )
         {
             this.command = (int)CommandData.FindOfPlayerCtoS;
             this.user_id = _user_id;
+            this.target_id = _target_id;
             this.map_id = _map_id;
         }
     }

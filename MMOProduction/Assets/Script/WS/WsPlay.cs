@@ -105,7 +105,7 @@ namespace WS
         /// <param name="_json"></param>
         public override void Send(string _json) 
         {
-            Debug.Log(int.Parse(_json.Substring(11, 3)));
+            //Debug.Log(int.Parse(_json.Substring(11, 3)));
             if (base.ws.ReadyState == WebSocketState.Open)
             {
                 base.ws.Send(_json);
@@ -125,7 +125,7 @@ namespace WS
                 {
                     // 受信したデータからコマンドを取り出す
                     var command = (CommandData)int.Parse(e.Data.Substring(11, 3));
-                    Debug.Log((int)command);
+                    //Debug.Log((int)command);
 
                     switch (command)
                     {
@@ -212,9 +212,10 @@ namespace WS
                             break;
 
                         case CommandData.FindOfPlayerStoC:  // 
+                            //Packes.FindOfPlayerStoC find = Json.ConvertToPackets<Packes.FindOfPlayerStoC>(e.Data);
+                            //findResultsAction(find);
 
-
-                           findResultsAction(Json.ConvertToPackets<Packes.FindOfPlayerStoC>(e.Data));
+                            findResultsAction(Json.ConvertToPackets<Packes.FindOfPlayerStoC>(e.Data));
                             break;
                             // 随時追加
                         default:
