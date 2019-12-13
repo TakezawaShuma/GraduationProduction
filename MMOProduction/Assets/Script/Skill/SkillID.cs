@@ -12,7 +12,8 @@
 public enum SkillID
 { 
     Fireball,   // 火球
-    MiniFire,   // 火球のミニver
+    MiniFire,   // 火球（ミニver）
+    MiniIce,    // 氷の塊（ミニver）
 
     SkillNum    // 最大スキル数
 }
