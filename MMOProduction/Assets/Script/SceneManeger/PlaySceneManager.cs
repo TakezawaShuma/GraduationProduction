@@ -503,7 +503,7 @@ public class PlaySceneManager : SceneManagerBase
         enemy.PlayTriggerAnimetion("Attack");
         if (_packet.target_id == UserRecord.ID)
         {
-            enemy.Attacked(player.gameObject);
+            //enemy.Attacked(player.gameObject);
         }
     }
 
