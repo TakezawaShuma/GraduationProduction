@@ -50,6 +50,9 @@ public class skill_table : ScriptableObject
         //説明文
         public string detail;
 
+        // 使用者
+        public string user;
+
         //リキャスト時間
         public int cast;
 
