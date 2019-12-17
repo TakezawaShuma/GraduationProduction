@@ -5403,6 +5403,11 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: d370d2b28db6b1242acde8161dfb3d35, type: 2}
+    - target: {fileID: 4073673553837808654, guid: c5361a5f4f3e9ea40931a4bc79bd27db,
+        type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4073673553965975331, guid: c5361a5f4f3e9ea40931a4bc79bd27db,
         type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -5866,7 +5871,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cb1b657d808c7b4583315bc0749e915, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  connectFlag: 1
+  connectFlag: 0
   playerPre: {fileID: 2136695631195096698, guid: f60ab25478542df4281ac7e670433c26,
     type: 3}
   playerAvatars: {fileID: 0}
@@ -6816,8 +6821,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 992294604}
-  m_LocalRotation: {x: 0.013721991, y: 0.9853542, z: -0.13973677, w: 0.09676065}
-  m_LocalPosition: {x: -15.026042, y: 231207.05, z: -351979.84}
+  m_LocalRotation: {x: 0.013751849, y: 0.9854162, z: -0.13857383, w: 0.09779115}
+  m_LocalPosition: {x: -963.38025, y: 234615.8, z: -347227.5}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3278045186938042501}

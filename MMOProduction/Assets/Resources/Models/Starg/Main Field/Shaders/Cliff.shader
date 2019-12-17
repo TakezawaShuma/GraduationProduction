@@ -73,6 +73,6 @@ Shader "Custom/Stage/Cliff"
             }
             ENDCG
         }
-		UsePass "Legacy Shaders/VertexLit/SHADOWCASTER"
+		//UsePass "Legacy Shaders/VertexLit/SHADOWCASTER"
     }
 }
