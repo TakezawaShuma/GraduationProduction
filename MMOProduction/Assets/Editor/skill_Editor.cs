@@ -43,9 +43,12 @@ public class skill_Editor : EditorWindow
             table.id = EditorGUILayout.IntField(table.id, GUILayout.Width(40));
             EditorGUILayout.LabelField("名前", GUILayout.Width(35));
             table.name = EditorGUILayout.TextArea(table.name, GUILayout.Width(100));
-            EditorGUILayout.LabelField("", GUILayout.Width(50));
+            //EditorGUILayout.LabelField("", GUILayout.Width(50));
             EditorGUILayout.LabelField("エフェクトID", GUILayout.Width(80));
             table.effectId = EditorGUILayout.IntField(table.effectId, GUILayout.Width(40));
+
+            EditorGUILayout.LabelField("親ID", GUILayout.Width(30));
+            table.pearentID = EditorGUILayout.IntField(table.pearentID, GUILayout.Width(40));
 
             EditorGUILayout.EndHorizontal();
             EditorGUILayout.BeginHorizontal();
@@ -53,12 +56,11 @@ public class skill_Editor : EditorWindow
             EditorGUILayout.LabelField("最大Lv", GUILayout.Width(50));
             table.maxLv = EditorGUILayout.IntField(table.maxLv, GUILayout.Width(40));
 
-            EditorGUILayout.LabelField("親ID", GUILayout.Width(50));
-            table.pearentID = EditorGUILayout.IntField(table.pearentID, GUILayout.Width(40));
-
+            EditorGUILayout.LabelField("アニメ", GUILayout.Width(40));
+            table.animation = EditorGUILayout.TextArea(table.animation, GUILayout.Width(50));
 
             EditorGUILayout.LabelField("使用者", GUILayout.Width(40));
-            table.user = EditorGUILayout.TextArea(table.user, GUILayout.Width(150));
+            table.user = EditorGUILayout.TextArea(table.user, GUILayout.Width(130));
 
             EditorGUILayout.EndHorizontal();
             EditorGUILayout.BeginHorizontal();

@@ -61,10 +61,18 @@ public class Enemy : NonPlayer
         Debug.Log(_animetionName);
     }
 
+    public void PlayAttackAnimation(int _skillId)
+    {
+        // アニメーションをスキル事に再生させる
+        PlayTriggerAnimetion(skillTable.FindSkill(_skillId).animation);
+    }
+
+
+
     /// <summary>
     /// 攻撃したときに計算する
     /// </summary>
-    public void Attacked(GameObject _player,int _skillId)
+    public int Attacked(GameObject _player,int _skillId)
     {
         // 敵が攻撃したときに距離を判定する
         Vector3 vec = this.transform.position - _player.transform.position;
@@ -75,7 +83,11 @@ public class Enemy : NonPlayer
         {
             // 敵の攻撃が当たった時の処理をする
             Debug.Log("攻撃がヒットしたよ");
+            // 攻撃が当たり、ダメージが発生したらダメージを返す
+            return 10;
         }
+        // ダメージが発生しなかったら-1を返す
+        return -1;
     }
 
 

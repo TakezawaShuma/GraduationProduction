@@ -208,6 +208,7 @@ namespace WS
                         case CommandData.LogoutStoC:        // 他プレイヤーがログアウトした
                             //Packes.LogoutStoC logout = Json.ConvertToPackets<Packes.LogoutStoC>(e.Data);
                             //logoutAction(logout);
+                            if (Json.ConvertToPackets<Packes.LogoutStoC>(e.Data).user_id == UserRecord.ID) { logoutFlag = true; }
                             logoutAction(Json.ConvertToPackets<Packes.LogoutStoC>(e.Data));
                             break;
 

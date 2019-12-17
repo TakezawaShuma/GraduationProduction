@@ -5869,8 +5869,9 @@ MonoBehaviour:
   connectFlag: 1
   playerPre: {fileID: 2136695631195096698, guid: f60ab25478542df4281ac7e670433c26,
     type: 3}
-  playerAvatars: {fileID: 0}
-  enemyDataList: {fileID: 0}
+  characterModel: {fileID: 11400000, guid: 324f4e86b8b3bff4b99ae5c867aa456c, type: 2}
+  enemyTable: {fileID: 11400000, guid: f386c039a56b44140a9842a5fa893b76, type: 2}
+  skillTabe: {fileID: 11400000, guid: d2f11e41ac860894692481b991d94813, type: 2}
   nameUI: {fileID: 1860603917932401239, guid: a88436e2d44261544bb11c73d88f019d, type: 3}
   enemyStatusCanvas: {fileID: 2283633340352723908, guid: ccb73b1f8a779af46a1b14b4ed19daf6,
     type: 3}
@@ -5882,7 +5883,6 @@ MonoBehaviour:
   chat: {fileID: 809979501}
   playerUI: {fileID: 6631658281430464886}
   userSeeting: {fileID: 1533655886}
-  playerSpawnPos: {x: -210, y: 10, z: -210}
   miniMapCameraPrefab_: {fileID: 5801146024303339791, guid: e65eb86ba10b9b94abf8ae49c0b2f41a,
     type: 3}
 --- !u!224 &646274429 stripped
@@ -6816,8 +6816,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 992294604}
-  m_LocalRotation: {x: 0.013721991, y: 0.9853542, z: -0.13973677, w: 0.09676065}
-  m_LocalPosition: {x: -15.026042, y: 231207.05, z: -351979.84}
+  m_LocalRotation: {x: 0.013874764, y: 0.9852481, z: -0.13971753, w: 0.09784087}
+  m_LocalPosition: {x: -85.34375, y: 231460.17, z: -351627.2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 3278045186938042501}

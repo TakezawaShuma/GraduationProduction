@@ -15,7 +15,7 @@ public class PlaySceneManager : SceneManagerBase
     public GameObject playerPre = null;
 
     [SerializeField,Header("キャラクターモデルリスト")]
-    private character_table playerAvatars = null;
+    private character_table characterModel = null;
     [Header("敵のマスターデータ"), SerializeField]
     private enemy_table enemyTable;
     [Header("スキルの全データ"), SerializeField]
@@ -270,10 +270,10 @@ public class PlaySceneManager : SceneManagerBase
     /// <param name="_packet">作成に必要なデータ</param>
     private void CreateOtherPlayers(Packes.OtherPlayersData _packet)
     {
-        //  GameObject avatar = playerAvatars.FindModel(_packet.modelId);
+        GameObject avatar = characterModel.FindModel(2);
 
         var otherPlayer = Instantiate<GameObject>
-                          (otherPlayerPre_,
+                          (avatar,
                           Vector3.zero,
                           Quaternion.Euler(0, 0, 0),
                           this.transform);                                  // 本体生成
@@ -327,6 +327,8 @@ public class PlaySceneManager : SceneManagerBase
     /// <param name="_ene">作成に必要なデータ</param>
     private void CreateEnemys(Packes.EnemyReceiveData _ene)
     {
+        GameObject enemyModel = enemyTable.FindModel(_ene.master_id);
+
         GameObject newEnemy = Instantiate<GameObject>
                               (testEnemyPre,
                               Vector3.zero,
@@ -372,9 +374,9 @@ public class PlaySceneManager : SceneManagerBase
     /// <param name="_save"></param>
     private void ReceiveSaveData(Packes.SaveLoadStoC _packet)
     {
-        // GameObject model = playerAvatars.FindModel(_packet.model_id);
+        //GameObject model = playerPre;
+        GameObject model = characterModel.FindModel(1);
 
-        GameObject model = playerPre;
 
         if (MakePlayer(new Vector3(_packet.x, _packet.y, _packet.z), model))
         {
@@ -500,7 +502,8 @@ public class PlaySceneManager : SceneManagerBase
     {
         Debug.Log("敵のスキルが発動したよ");
         Enemy enemy = charcters[_packet.enemy_id].GetComponent<Enemy>();
-        enemy.PlayTriggerAnimetion("Attack");
+        // enemy.PlayTriggerAnimetion("Attack");
+        enemy.PlayAttackAnimation(_packet.skill_id);
         if (_packet.target_id == UserRecord.ID)
         {
             enemy.Attacked(player.gameObject,_packet.skill_id);
@@ -517,7 +520,7 @@ public class PlaySceneManager : SceneManagerBase
     }
 
     /// <summary>
-    /// 他プレイヤーがログアウトした時 → logoutAction
+    /// プレイヤーがログアウトした時 → logoutAction
     /// </summary>
     /// <param name="_packet"></param>
     private void Logout(Packes.LogoutStoC _packet)
@@ -525,6 +528,7 @@ public class PlaySceneManager : SceneManagerBase
         if (_packet.user_id == UserRecord.ID)
         {
             Debug.Log("ログアウトしたよ");
+            if (connectFlag) { wsp.Destroy(); }
             ChangeScene("LoginScene");
         }
         else
