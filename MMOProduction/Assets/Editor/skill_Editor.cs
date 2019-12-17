@@ -43,9 +43,12 @@ public class skill_Editor : EditorWindow
             table.id = EditorGUILayout.IntField(table.id, GUILayout.Width(40));
             EditorGUILayout.LabelField("名前", GUILayout.Width(35));
             table.name = EditorGUILayout.TextArea(table.name, GUILayout.Width(100));
-            EditorGUILayout.LabelField("", GUILayout.Width(50));
+            //EditorGUILayout.LabelField("", GUILayout.Width(50));
             EditorGUILayout.LabelField("エフェクトID", GUILayout.Width(80));
             table.effectId = EditorGUILayout.IntField(table.effectId, GUILayout.Width(40));
+
+            EditorGUILayout.LabelField("親ID", GUILayout.Width(30));
+            table.pearentID = EditorGUILayout.IntField(table.pearentID, GUILayout.Width(40));
 
             EditorGUILayout.EndHorizontal();
             EditorGUILayout.BeginHorizontal();
@@ -53,12 +56,11 @@ public class skill_Editor : EditorWindow
             EditorGUILayout.LabelField("最大Lv", GUILayout.Width(50));
             table.maxLv = EditorGUILayout.IntField(table.maxLv, GUILayout.Width(40));
 
-            EditorGUILayout.LabelField("親ID", GUILayout.Width(50));
-            table.pearentID = EditorGUILayout.IntField(table.pearentID, GUILayout.Width(40));
-
+            EditorGUILayout.LabelField("アニメ", GUILayout.Width(40));
+            table.animation = EditorGUILayout.TextArea(table.animation, GUILayout.Width(50));
 
             EditorGUILayout.LabelField("使用者", GUILayout.Width(40));
-            table.user = EditorGUILayout.TextArea(table.user, GUILayout.Width(150));
+            table.user = EditorGUILayout.TextArea(table.user, GUILayout.Width(130));
 
             EditorGUILayout.EndHorizontal();
             EditorGUILayout.BeginHorizontal();
@@ -69,7 +71,7 @@ public class skill_Editor : EditorWindow
             EditorGUILayout.LabelField("ヘイト値", GUILayout.Width(50));
             table.hate = EditorGUILayout.IntField(table.hate, GUILayout.Width(40));
 
-            EditorGUILayout.LabelField("武器", GUILayout.Width(30));
+            EditorGUILayout.LabelField("武器", GUILayout.Width(40));
             table.weapon = EditorGUILayout.IntField(table.weapon, GUILayout.Width(40));
 
             EditorGUILayout.LabelField("取得必要ポイント", GUILayout.Width(100));
@@ -79,11 +81,14 @@ public class skill_Editor : EditorWindow
 
             EditorGUILayout.BeginHorizontal();
 
-            EditorGUILayout.LabelField("ターゲット種類 : ", GUILayout.Width(60));
-            table.targetType = (target_type)EditorGUILayout.EnumPopup(table.targetType, GUILayout.Width(100));
+            EditorGUILayout.LabelField("ターゲット種類：", GUILayout.Width(90));
+            table.targetType = (target_type)EditorGUILayout.EnumPopup(table.targetType, GUILayout.Width(80));
 
-            EditorGUILayout.LabelField("範囲種類 : ", GUILayout.Width(60));
-            table.rangeType = (range_type)EditorGUILayout.EnumPopup(table.rangeType, GUILayout.Width(100));
+            EditorGUILayout.LabelField("範囲種類：", GUILayout.Width(60));
+            table.rangeType = (range_type)EditorGUILayout.EnumPopup(table.rangeType, GUILayout.Width(80));
+
+            EditorGUILayout.LabelField("効果範囲", GUILayout.Width(50));
+            table.range = EditorGUILayout.IntField(table.range, GUILayout.Width(50));
 
             EditorGUILayout.EndHorizontal();
             EditorGUILayout.BeginHorizontal();
@@ -94,7 +99,7 @@ public class skill_Editor : EditorWindow
             EditorGUILayout.EndHorizontal();
             EditorGUILayout.BeginHorizontal();
 
-            string[] nameTable = { "HP", "MP", "STR", "VIT", "INT", "MND", "DEX", "AGI", "状態異常", "威力" };
+            string[] nameTable = { "HP", "MP", "STR", "VIT", "INT", "MND", "DEX", "AGI", "状態", "威力" };
             int[] statusTable = { table.hp, table.mp, table.str, table.vit, table.inte, table.mnd, table.dex, table.agi, table.effect, table.condition };
             for (int j = 0; j < 5; j++)
             {
@@ -172,7 +177,8 @@ public class skill_Editor : EditorWindow
         if (GUILayout.Button("保存"))
         {
             textSave(JsonUtility.ToJson(tablelist));
-
+            EditorUtility.SetDirty(tablelist);
+            AssetDatabase.SaveAssets();
         }
     }
 

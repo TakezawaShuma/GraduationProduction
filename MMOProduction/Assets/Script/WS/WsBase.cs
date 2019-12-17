@@ -14,7 +14,7 @@ namespace WS
     public abstract class WsBase
     {
         // ソケット
-        protected WebSocket ws;
+        protected WebSocket ws = null;
         // サーバーのIP
         private string server_ip = "172.24.52.250";
         //private string server_ip = "localhost";
@@ -27,9 +27,12 @@ namespace WS
         /// <param name="_port">ポート</param>
         protected void Connect(uint _port)
         {
-            ws = new WebSocket("ws://" + server_ip + ":" + _port.ToString());
+            if(ws==null)ws = new WebSocket("ws://" + server_ip + ":" + _port.ToString());
+            if (ws.ReadyState == WebSocketState.Open)
+            {
+                Debug.LogWarning("すでに接続済み");return;
+             }
             Debug.Log("IPアドレス : " + server_ip + "ポート : " + _port);
-            //ws = new WebSocket("ws://" + server_ip + ":" + _port.ToString());
             WsInit();
             ws.Connect();
         }

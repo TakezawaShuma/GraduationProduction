@@ -9,11 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 16d51bbea6ef6bd47a70ccc6506dc828, type: 3}
-  m_Name: weapon_list
+  m_Script: {fileID: 11500000, guid: c982e2e8ef14bf240ac430ef0bc09fe0, type: 3}
+  m_Name: enemy_models
   m_EditorClassIdentifier: 
-  weapons:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  tables:
+  - modelId: 100
+    model: {fileID: 842962567749291421, guid: 796be72676539b34dbc1ac6907da5760, type: 3}

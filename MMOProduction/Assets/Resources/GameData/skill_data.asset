@@ -16,10 +16,11 @@ MonoBehaviour:
   - id: 101
     Icon: 0
     effectId: 0
-    name: 
+    name: "\u4F53\u5F53\u305F\u308A"
     maxLv: 0
     currentLv: 0
-    detail: 
+    detail: "\u30D5\u30A9\u30EC\u30B9\u30C8\u30E9\u30D3\u30C3\u30C8\u306E\u4F53\u5F53\u305F\u308A\u3002"
+    user: ForestRabbit
     cast: 0
     currentCast: 0
     cost: 0
@@ -28,6 +29,36 @@ MonoBehaviour:
     pearentID: 0
     pearentPoint: 0
     weapon: 0
+    range: 5
+    hp: 0
+    mp: 0
+    str: 0
+    vit: 0
+    inte: 0
+    mnd: 0
+    dex: 0
+    agi: 0
+    effect: 0
+    condition: 10
+    rangeType: 1
+    targetType: 0
+  - id: 0
+    Icon: 0
+    effectId: 0
+    name: 
+    maxLv: 0
+    currentLv: 0
+    detail: 
+    user: 
+    cast: 0
+    currentCast: 0
+    cost: 0
+    time: 0
+    hate: 0
+    pearentID: 0
+    pearentPoint: 0
+    weapon: 0
+    range: 0
     hp: 0
     mp: 0
     str: 0
@@ -47,6 +78,7 @@ MonoBehaviour:
     maxLv: 0
     currentLv: 0
     detail: 
+    user: 
     cast: 0
     currentCast: 0
     cost: 0
@@ -55,87 +87,7 @@ MonoBehaviour:
     pearentID: 0
     pearentPoint: 0
     weapon: 0
-    hp: 0
-    mp: 0
-    str: 0
-    vit: 0
-    inte: 0
-    mnd: 0
-    dex: 0
-    agi: 0
-    effect: 0
-    condition: 0
-    rangeType: 0
-    targetType: 0
-  - id: 0
-    Icon: 0
-    effectId: 0
-    name: 
-    maxLv: 0
-    currentLv: 0
-    detail: 
-    cast: 0
-    currentCast: 0
-    cost: 0
-    time: 0
-    hate: 0
-    pearentID: 0
-    pearentPoint: 0
-    weapon: 0
-    hp: 0
-    mp: 0
-    str: 0
-    vit: 0
-    inte: 0
-    mnd: 0
-    dex: 0
-    agi: 0
-    effect: 0
-    condition: 0
-    rangeType: 0
-    targetType: 0
-  - id: 0
-    Icon: 0
-    effectId: 0
-    name: 
-    maxLv: 0
-    currentLv: 0
-    detail: 
-    cast: 0
-    currentCast: 0
-    cost: 0
-    time: 0
-    hate: 0
-    pearentID: 0
-    pearentPoint: 0
-    weapon: 0
-    hp: 0
-    mp: 0
-    str: 0
-    vit: 0
-    inte: 0
-    mnd: 0
-    dex: 0
-    agi: 0
-    effect: 0
-    condition: 0
-    rangeType: 0
-    targetType: 0
-  - id: 0
-    Icon: 0
-    effectId: 0
-    name: 
-    maxLv: 0
-    currentLv: 0
-    detail: 
-    cast: 0
-    currentCast: 0
-    cost: 0
-    time: 0
-    hate: 0
-    pearentID: 0
-    pearentPoint: 0
-    weapon: 0
+    range: 0
     hp: 0
     mp: 0
     str: 0
