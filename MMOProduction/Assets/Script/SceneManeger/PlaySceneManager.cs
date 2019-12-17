@@ -381,8 +381,6 @@ public class PlaySceneManager : SceneManagerBase
         //GameObject model = playerPre;
         GameObject model = characterModel.FindModel(CheckModel(_packet.model_id));
 
-
-
         if (MakePlayer(new Vector3(_packet.x, _packet.y, _packet.z), model))
         {
             wsp.Send(new Packes.LoadingOK(UserRecord.ID).ToJson());
