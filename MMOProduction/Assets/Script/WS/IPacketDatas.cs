@@ -109,6 +109,9 @@ public enum CommandData
     /// <summary>キャラクターの詳細</summary>
     FindOfPlayerStoC = (int)712,
 
+    /// <summary>モデルの保存</summary>
+    SaveModelType = (int)713,
+
 
     // チャット
     /// <summary> 全体チャット送信 </summary>

@@ -397,9 +397,9 @@ public class TitleSceneManager : SceneManagerBase
     /// <param name="_packet"></param>
     private void LoginAction(Packes.LoginOK _packet) {
         Debug.Log("login ok");
-        ChangeScene("LoadingScene");
         UserRecord.ID = _packet.user_id;
         UserRecord.Name = _packet.name;
+        ChangeScene("LoadingScene");
     }
 
     int errorCount = 0;

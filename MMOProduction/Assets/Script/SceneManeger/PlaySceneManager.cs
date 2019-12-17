@@ -81,6 +81,7 @@ public class PlaySceneManager : SceneManagerBase
     {
         // ユーザーID
         var user_id = UserRecord.ID;
+
         if (connectFlag)
         {
             // プレイサーバに接続
@@ -105,8 +106,6 @@ public class PlaySceneManager : SceneManagerBase
             // セーブデータを要請する。
             wsp.Send(new Packes.SaveLoadCtoS(UserRecord.ID).ToJson());
             Debug.Log("自分のID->" + UserRecord.ID);
-
-
         }
         if (!connectFlag) { MakePlayer(new Vector3(-210, 5, -210), playerPre); }
     }
@@ -270,7 +269,7 @@ public class PlaySceneManager : SceneManagerBase
     /// <param name="_packet">作成に必要なデータ</param>
     private void CreateOtherPlayers(Packes.OtherPlayersData _packet)
     {
-        GameObject avatar = characterModel.FindModel(2);
+        GameObject avatar = characterModel.FindModel(CheckModel(_packet.model_id));
 
         var otherPlayer = Instantiate<GameObject>
                           (avatar,
@@ -289,6 +288,10 @@ public class PlaySceneManager : SceneManagerBase
         other.Init(0, 0, 0, 0, _packet.user_id, skillTabe);
         charcters[_packet.user_id] = other;                                 // キャラクター管理に登録
         Debug.Log("他キャラ生成" + _packet.user_id);
+    }
+
+    private int CheckModel(int _id) {
+        return (_id == 0) ? 101 : _id;
     }
 
     /// <summary>
@@ -375,7 +378,7 @@ public class PlaySceneManager : SceneManagerBase
     private void ReceiveSaveData(Packes.SaveLoadStoC _packet)
     {
         //GameObject model = playerPre;
-        GameObject model = characterModel.FindModel(1);
+        GameObject model = characterModel.FindModel(CheckModel(_packet.model_id));
 
 
         if (MakePlayer(new Vector3(_packet.x, _packet.y, _packet.z), model))
