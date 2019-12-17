@@ -271,6 +271,7 @@ public class PlaySceneManager : SceneManagerBase
     {
         GameObject avatar = characterModel.FindModel(CheckModel(_packet.model_id));
 
+
         var otherPlayer = Instantiate<GameObject>
                           (avatar,
                           Vector3.zero,
@@ -379,6 +380,7 @@ public class PlaySceneManager : SceneManagerBase
     {
         //GameObject model = playerPre;
         GameObject model = characterModel.FindModel(CheckModel(_packet.model_id));
+
 
 
         if (MakePlayer(new Vector3(_packet.x, _packet.y, _packet.z), model))
