@@ -10,7 +10,7 @@ public class enemy_table : ScriptableObject
     public List<enemy_data> tables;
 
     [Header("敵キャラクターモデル"), SerializeField]
-    private character_table models;
+    private character_table models = null;
 
     [System.SerializableAttribute]
     public class enemy_data

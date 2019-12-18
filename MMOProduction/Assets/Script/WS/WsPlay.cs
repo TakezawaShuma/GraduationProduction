@@ -89,6 +89,7 @@ namespace WS
         public void Destroy()
         {
             if (!logoutFlag) { Send(new Packes.LogoutCtoS(UserRecord.ID).ToJson()); }
+            UserRecord.DiscardAll();
             base.Destroy("プレイの終了");
             instance = null;
         }

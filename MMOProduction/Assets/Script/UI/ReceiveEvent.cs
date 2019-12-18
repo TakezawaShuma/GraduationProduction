@@ -16,7 +16,7 @@ public class ReceiveEvent : MonoBehaviour
     private GameObject hitObject;
 
     [SerializeField]
-    private Sprite defoSprite;
+    private Sprite defoSprite = null;
 
     // 押した時
     public void MyPointerDownUI()

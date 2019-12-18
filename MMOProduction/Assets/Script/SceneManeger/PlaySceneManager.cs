@@ -17,9 +17,9 @@ public class PlaySceneManager : SceneManagerBase
     [SerializeField,Header("キャラクターモデルリスト")]
     private character_table characterModel = null;
     [Header("敵のマスターデータ"), SerializeField]
-    private enemy_table enemyTable;
+    private enemy_table enemyTable = null;
     [Header("スキルの全データ"), SerializeField]
-    private skill_table skillTabe;
+    private skill_table skillTabe = null;
 
 
     [SerializeField,Header("プレイヤーの名前表示UI")]
