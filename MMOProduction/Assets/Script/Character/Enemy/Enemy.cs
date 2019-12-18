@@ -7,9 +7,7 @@ public class Enemy : NonPlayer
 
     public int HP { get { return hp; } set { hp = value; } }
     public int MP { get { return mp; } set { mp = value; } }
-
-    // 敵が使用できるスキル
-    public ScriptableObject enemySkills;
+    
 
     private UIEnemyHP uIHP = null;
 
@@ -63,25 +61,45 @@ public class Enemy : NonPlayer
         Debug.Log(_animetionName);
     }
 
+    public void PlayAttackAnimation(int _skillId)
+    {
+        // アニメーションをスキル事に再生させる
+        PlayTriggerAnimetion(skillTable.FindSkill(_skillId).animation);
+    }
+
+
 
     /// <summary>
     /// 攻撃したときに計算する
     /// </summary>
-    public void Attacked()
+    public int Attacked(GameObject _player,int _skillId)
     {
-        // 敵が攻撃してきたときに距離を判定する
-    }
+        // 敵が攻撃したときに距離を判定する
+        Vector3 vec = this.transform.position - _player.transform.position;
+        float distance = vec.magnitude;
+        skill_table.skill_data useSkill = skillTable.FindSkill(_skillId);
 
-
-    /// 
-    /// <param name="collision"></param>
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (gameObject.GetComponent<Animator>().GetCurrentAnimatorClipInfo(0)[0].clip.name == "Attack 01"
-            && collision.gameObject.tag == "Player"){
+        if (useSkill.range > distance)
+        {
+            // 敵の攻撃が当たった時の処理をする
             Debug.Log("攻撃がヒットしたよ");
+            // 攻撃が当たり、ダメージが発生したらダメージを返す
+            return 10;
         }
+        // ダメージが発生しなかったら-1を返す
+        return -1;
     }
+
+
+    ///// 
+    ///// <param name="collision"></param>
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    if (gameObject.GetComponent<Animator>().GetCurrentAnimatorClipInfo(0)[0].clip.name == "Attack 01"
+    //        && collision.gameObject.tag == "Player"){
+    //        Debug.Log("攻撃がヒットしたよ");
+    //    }
+    //}
 
     public void DestroyMe()
     {

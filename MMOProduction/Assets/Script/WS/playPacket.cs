@@ -620,7 +620,7 @@ namespace Packes
         /// <summary>位置Z</summary>
         public float z;
         /// <summary>モデルのID</summary>
-        int model_id;
+        public int model_id;
         /// <summary>名前</summary>
         public string name;
 

@@ -14,10 +14,13 @@ public class PlaySceneManager : SceneManagerBase
 {
     public GameObject playerPre = null;
 
-    [SerializeField,Header("プレイヤーモデルリスト")]
-    private character_table playerAvatars = null;
-   [Header("敵のマスターデータ"), SerializeField]
-    private enemy_table enemyDataList;
+    [SerializeField,Header("キャラクターモデルリスト")]
+    private character_table characterModel = null;
+    [Header("敵のマスターデータ"), SerializeField]
+    private enemy_table enemyTable = null;
+    [Header("スキルの全データ"), SerializeField]
+    private skill_table skillTabe = null;
+
 
     [SerializeField,Header("プレイヤーの名前表示UI")]
     private GameObject nameUI = null;
@@ -53,22 +56,19 @@ public class PlaySceneManager : SceneManagerBase
     // ソケット
     private WS.WsPlay wsp = null;
 
+    // プレイヤー情報
     private Player player = null;
-
     /// <summary> 自分自身の情報を渡す </summary>
     public Player Player { get { return player; } }
 
+    // プレイヤー以外のキャラクター情報
     private Dictionary<int, NonPlayer> charcters = new Dictionary<int, NonPlayer>();
 
     // コールバック関数をリスト化
     private List<Action<string>> callbackList = new List<Action<string>>();
     
 
-    private GameObject newEnemy = null;
-
     private Ready ready;
-    [SerializeField]
-    private Vector3 playerSpawnPos = new Vector3(0, 0, 0);
 
 
     private void Awake()
@@ -81,6 +81,7 @@ public class PlaySceneManager : SceneManagerBase
     {
         // ユーザーID
         var user_id = UserRecord.ID;
+
         if (connectFlag)
         {
             // プレイサーバに接続
@@ -89,7 +90,7 @@ public class PlaySceneManager : SceneManagerBase
             wsp.enemysAction = RegisterEnemies;                 // 204
             wsp.statusAction = UpdateStatus;                    // 206
 
-            wsp.loadSaveAction = ReceiveSaveData;                // 212
+            wsp.loadSaveAction = ReceiveSaveData;               // 212
             wsp.loadOtherListAction = ReceiveOtherListData;     // 214
             wsp.loadOtherAction = ReceiveOtherData;             // 215
 
@@ -104,8 +105,7 @@ public class PlaySceneManager : SceneManagerBase
 
             // セーブデータを要請する。
             wsp.Send(new Packes.SaveLoadCtoS(UserRecord.ID).ToJson());
-
-
+            Debug.Log("自分のID->" + UserRecord.ID);
         }
         if (!connectFlag) { MakePlayer(new Vector3(-210, 5, -210), playerPre); }
     }
@@ -256,7 +256,8 @@ public class PlaySceneManager : SceneManagerBase
                 {
                     // リストに登録されていないIDが来たときの処理
                     // そのIDは何なのか確認をとる
-                    wsp.Send(new Packes.FindOfPlayerCtoS(_packet.user_id, 0).ToJson());
+                    Debug.Log("この人誰？->" + _packet.user_id);
+                    wsp.Send(new Packes.FindOfPlayerCtoS(UserRecord.ID,_packet.user_id, 0).ToJson());
                 }
             }
         }
@@ -268,10 +269,11 @@ public class PlaySceneManager : SceneManagerBase
     /// <param name="_packet">作成に必要なデータ</param>
     private void CreateOtherPlayers(Packes.OtherPlayersData _packet)
     {
-        //  GameObject avatar = playerAvatars.FindModel(_packet.modelId);
+        GameObject avatar = characterModel.FindModel(CheckModel(_packet.model_id));
+
 
         var otherPlayer = Instantiate<GameObject>
-                          (otherPlayerPre_,
+                          (avatar,
                           Vector3.zero,
                           Quaternion.Euler(0, 0, 0),
                           this.transform);                                  // 本体生成
@@ -284,8 +286,13 @@ public class PlaySceneManager : SceneManagerBase
 
         otherPlayer.tag = "OtherPlayer";                                    // タグ
         otherPlayer.transform.localScale = new Vector3(2, 2, 2);
-        other.Init(0, 0, 0, 0, _packet.user_id);
+        other.Init(0, 0, 0, 0, _packet.user_id, skillTabe);
         charcters[_packet.user_id] = other;                                 // キャラクター管理に登録
+        Debug.Log("他キャラ生成" + _packet.user_id);
+    }
+
+    private int CheckModel(int _id) {
+        return (_id == 0) ? 101 : _id;
     }
 
     /// <summary>
@@ -324,10 +331,12 @@ public class PlaySceneManager : SceneManagerBase
     /// <param name="_ene">作成に必要なデータ</param>
     private void CreateEnemys(Packes.EnemyReceiveData _ene)
     {
-        newEnemy = Instantiate<GameObject>
-           (testEnemyPre,
-           Vector3.zero,
-           Quaternion.Euler(0, 0, 0));
+        GameObject enemyModel = enemyTable.FindModel(_ene.master_id);
+
+        GameObject newEnemy = Instantiate<GameObject>
+                              (testEnemyPre,
+                              Vector3.zero,
+                              Quaternion.Euler(0, 0, 0));
         GameObject stutasCanvas = Instantiate(enemyStatusCanvas, newEnemy.transform);
 
         Enemy enemy = newEnemy.AddComponent<Enemy>();
@@ -336,7 +345,7 @@ public class PlaySceneManager : SceneManagerBase
         stutasCanvas.GetComponent<UIEnemyHP>().Off();
 
         newEnemy.name = "Enemy:" + _ene.master_id + "->" + _ene.unique_id;
-        enemy.Init(_ene.x, _ene.y, _ene.z, _ene.dir, _ene.unique_id);
+        enemy.Init(_ene.x, _ene.y, _ene.z, _ene.dir, _ene.unique_id,skillTabe);
         enemy.UI_HP = stutasCanvas.GetComponent<UIEnemyHP>();
         charcters[_ene.unique_id] = enemy;
     }
@@ -369,9 +378,8 @@ public class PlaySceneManager : SceneManagerBase
     /// <param name="_save"></param>
     private void ReceiveSaveData(Packes.SaveLoadStoC _packet)
     {
-        // GameObject model = playerAvatars.FindModel(_packet.model_id);
-
-        GameObject model = playerPre;
+        //GameObject model = playerPre;
+        GameObject model = characterModel.FindModel(CheckModel(_packet.model_id));
 
         if (MakePlayer(new Vector3(_packet.x, _packet.y, _packet.z), model))
         {
@@ -423,6 +431,7 @@ public class PlaySceneManager : SceneManagerBase
                                             _packet.name);
         // 新規入室プレイヤーの作成
         CreateOtherPlayers(tmp);
+
     }
 
 
@@ -495,7 +504,13 @@ public class PlaySceneManager : SceneManagerBase
     private void EnemyUseSkill(Packes.EnemyUseSkill _packet)
     {
         Debug.Log("敵のスキルが発動したよ");
-        charcters[_packet.enemy_id].GetComponent<Enemy>().PlayTriggerAnimetion("Attack");
+        Enemy enemy = charcters[_packet.enemy_id].GetComponent<Enemy>();
+        // enemy.PlayTriggerAnimetion("Attack");
+        enemy.PlayAttackAnimation(_packet.skill_id);
+        if (_packet.target_id == UserRecord.ID)
+        {
+            enemy.Attacked(player.gameObject,_packet.skill_id);
+        }
     }
 
     /// <summary>
@@ -508,7 +523,7 @@ public class PlaySceneManager : SceneManagerBase
     }
 
     /// <summary>
-    /// 他プレイヤーがログアウトした時 → logoutAction
+    /// プレイヤーがログアウトした時 → logoutAction
     /// </summary>
     /// <param name="_packet"></param>
     private void Logout(Packes.LogoutStoC _packet)
@@ -516,6 +531,7 @@ public class PlaySceneManager : SceneManagerBase
         if (_packet.user_id == UserRecord.ID)
         {
             Debug.Log("ログアウトしたよ");
+            if (connectFlag) { wsp.Destroy(); }
             ChangeScene("LoginScene");
         }
         else
@@ -532,6 +548,7 @@ public class PlaySceneManager : SceneManagerBase
     /// <param name="_packet"></param>
     private void ReceivingFindResults(Packes.FindOfPlayerStoC _packet)
     {
+        Debug.Log("検索の結果他プレイヤーを作成 -> " + _packet.user_id);
         Packes.OtherPlayersData tmp = new Packes.OtherPlayersData(_packet.user_id, _packet.x, _packet.y, _packet.z, _packet.model_id, _packet.name);
         CreateOtherPlayers(tmp);
     }

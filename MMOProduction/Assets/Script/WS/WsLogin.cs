@@ -47,7 +47,7 @@ namespace WS
         /// 初期化処理
         /// </summary>
         /// <param name="_port"></param>
-        public void Init(uint _port)
+        private void Init(uint _port)
         {
             base.Connect(_port);
             Receive();
