@@ -5,9 +5,9 @@ using UnityEngine;
 public class TutorialUIController : MonoBehaviour
 {
     [SerializeField]
-    private GameObject moveImage_;
+    private GameObject moveImage_ = null;
     [SerializeField]
-    private GameObject battleImage_;
+    private GameObject battleImage_ = null;
 
     void Start(){
         AllActiveOff();

@@ -6,11 +6,11 @@ public class Inventory : MonoBehaviour
 {
     //管理系
     [SerializeField]
-    private List<GameObject> list;
+    private List<GameObject> list = null;
 
     //生成に必要な物群
     [SerializeField]
-    private GameObject Slot;
+    private GameObject Slot = null;
 
     [SerializeField]
     private Sprite sprite;
