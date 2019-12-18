@@ -9,21 +9,21 @@ using UnityEngine.UI;
 public class GameUserSetting : MonoBehaviour
 {
     [Header("ミュート設定項目"), SerializeField]
-    private Toggle mute;
+    private Toggle mute = null;
     [Header("BGM設定項目"), SerializeField]
-    private Slider bgmVolume_;
+    private Slider bgmVolume_ = null;
     [Header("SE設定項目"), SerializeField]
-    private Slider seVolume_;
+    private Slider seVolume_ = null;
 
     [Header("プレイヤー音"), SerializeField]
-    private PlayerSound playerSound_;
+    private PlayerSound playerSound_ = null;
     [Header("システム音"), SerializeField]
-    private SystemSound systemSound_;
+    private SystemSound systemSound_ = null;
 
     [Header("BGM音"), SerializeField]
-    private AudioSource backMusic;
+    private AudioSource backMusic = null;
     [Header("Logout"), SerializeField]
-    private Button logoutButon; 
+    private Button logoutButon = null;
 
     public void Init(GameObject _player)
     {

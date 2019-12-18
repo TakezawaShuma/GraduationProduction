@@ -5,7 +5,7 @@ using UnityEngine.Audio;
 public class PlayerSound : MonoBehaviour
 {
     [SerializeField]
-    private SoundTable walkSoundTable_;
+    private SoundTable walkSoundTable_ = null;
 
 
     // -------- 攻撃 --------
