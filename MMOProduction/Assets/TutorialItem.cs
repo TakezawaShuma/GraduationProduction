@@ -8,7 +8,7 @@ using UnityEngine;
 public class TutorialItem : MonoBehaviour
 {
     [SerializeField]
-    private GameObject image_;
+    private GameObject image_ = null;
 
     private bool flag = true;
 

@@ -14,5 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tables:
   - id: 100
-    modelId: 0
+    modelId: 100
     maxHp: 0
+  models: {fileID: 11400000, guid: ab4899188e127264c844690d2aa09daa, type: 2}
