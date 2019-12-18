@@ -332,9 +332,10 @@ public class PlaySceneManager : SceneManagerBase
     private void CreateEnemys(Packes.EnemyReceiveData _ene)
     {
         GameObject enemyModel = enemyTable.FindModel(_ene.master_id);
+        if (enemyModel == null) return;
 
         GameObject newEnemy = Instantiate<GameObject>
-                              (testEnemyPre,
+                              (enemyModel,
                               Vector3.zero,
                               Quaternion.Euler(0, 0, 0));
         GameObject stutasCanvas = Instantiate(enemyStatusCanvas, newEnemy.transform);

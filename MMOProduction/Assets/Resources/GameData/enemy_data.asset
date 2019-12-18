@@ -13,7 +13,16 @@ MonoBehaviour:
   m_Name: enemy_data
   m_EditorClassIdentifier: 
   tables:
-  - id: 100
+  - id: 0
+    modelId: 103
+    maxHp: 0
+  - id: 1
     modelId: 100
+    maxHp: 0
+  - id: 2
+    modelId: 101
+    maxHp: 0
+  - id: 3
+    modelId: 102
     maxHp: 0
   models: {fileID: 11400000, guid: ab4899188e127264c844690d2aa09daa, type: 2}
