@@ -1,8 +1,11 @@
 ﻿using System;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CharacterSelectManager : MonoBehaviour
 {
+    WS.WsPlay ws = null;
+
     // ---モデル---//
     public GameObject attackerModel_;
     public GameObject defenderModel_;
@@ -117,7 +120,9 @@ public class CharacterSelectManager : MonoBehaviour
     {
         if(modelID_ != 0)
         {
-
+            ws.Send(new Packes.SaveModelType(UserRecord.ID, modelID_).ToJson());
+            SceneManager.LoadScene("LoadingScene");
+            //Debug.Log(new Packes.SaveModelType(UserRecord.ID, modelID_).ToJson());
         }
     }
 
@@ -150,6 +155,8 @@ public class CharacterSelectManager : MonoBehaviour
     {
         rotating_ = false;
         Enabled = true;
+
+        ws = WS.WsPlay.Instance;
     }
 
     void Update()

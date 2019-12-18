@@ -399,7 +399,8 @@ public class TitleSceneManager : SceneManagerBase
         Debug.Log("login ok");
         UserRecord.ID = _packet.user_id;
         UserRecord.Name = _packet.name;
-        ChangeScene("LoadingScene");
+        if(inputState == CANVAS_STATE.SIGN_IN) ChangeScene("LoadingScene");
+        else if(inputState == CANVAS_STATE.SIGN_UP) ChangeScene("CharacterSelect");
     }
 
     int errorCount = 0;
