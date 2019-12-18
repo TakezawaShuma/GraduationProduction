@@ -9338,7 +9338,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e4a63c264e55ad8498ebd18951f2109c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  connectFlag: 1
+  connectFlag: 0
   chatFlame: {fileID: 668253574}
 --- !u!1 &1425762582
 GameObject:
@@ -9416,8 +9416,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1425762582}
-  m_LocalRotation: {x: 0.13052607, y: -0.0000000059114353, z: 7.782544e-10, w: 0.9914449}
-  m_LocalPosition: {x: 0.00000073718724, y: 41.564415, z: -71.81925}
+  m_LocalRotation: {x: 0.1305263, y: -0.0000000059114087, z: 7.7825235e-10, w: 0.9914449}
+  m_LocalPosition: {x: 0.000009122675, y: 502.98505, z: -775.01404}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -9435,7 +9435,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 84e7c0a8348d86442907aea86af111f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  target: {fileID: 1425762582}
+  target: {fileID: 0}
   offset: {x: 0, y: 1.5, z: 0}
   distance: 4
   polarAngle: 75
@@ -9454,6 +9454,18 @@ MonoBehaviour:
   isApproachGround: 1
   approachSpeed: 10
   moveAngle: 10
+--- !u!114 &1426919607 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8800217897477896294, guid: 7f4271a449d825f42ac315b724d2b520,
+    type: 3}
+  m_PrefabInstance: {fileID: 805955890}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5d29a8d7a83d7cf4290b4be6c83c2692, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &1615511463
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9703,6 +9715,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1710962668 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 6263080829498978618, guid: f0899e8167ff47c4e80874e8714041d1,
+    type: 3}
+  m_PrefabInstance: {fileID: 723138725}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 68d9d6c5491bdcc4fa9fb3c5a1013feb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1725062545
 GameObject:
   m_ObjectHideFlags: 0
@@ -9798,7 +9822,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cb1b657d808c7b4583315bc0749e915, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  connectFlag: 1
+  connectFlag: 0
   playerPre: {fileID: 2383645577890099024, guid: 13914dc0cf4bd7343992080ee468b004,
     type: 3}
   characterModel: {fileID: 11400000, guid: 324f4e86b8b3bff4b99ae5c867aa456c, type: 2}
@@ -9811,10 +9835,10 @@ MonoBehaviour:
     type: 3}
   otherPlayerPre_: {fileID: 7312705236510121977, guid: 3d45b2269476ee840a4b39af3bd80452,
     type: 3}
-  FollowingCamera: {fileID: 0}
-  chat: {fileID: 0}
-  playerUI: {fileID: 0}
-  userSeeting: {fileID: 0}
+  FollowingCamera: {fileID: 1425762586}
+  chat: {fileID: 1333592938}
+  playerUI: {fileID: 1426919607}
+  userSeeting: {fileID: 1710962668}
   miniMapCameraPrefab_: {fileID: 5801146024303339791, guid: e65eb86ba10b9b94abf8ae49c0b2f41a,
     type: 3}
 --- !u!4 &1830518198
