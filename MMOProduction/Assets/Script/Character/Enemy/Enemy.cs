@@ -7,7 +7,8 @@ public class Enemy : NonPlayer
 
     public int HP { get { return hp; } set { hp = value; } }
     public int MP { get { return mp; } set { mp = value; } }
-    
+
+    private Ray ray = default(Ray);
 
     private UIEnemyHP uIHP = null;
 
@@ -16,7 +17,7 @@ public class Enemy : NonPlayer
         get { return uIHP; }
         set { uIHP = value; }
     }
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,6 +30,8 @@ public class Enemy : NonPlayer
     {
         uIHP.UpdateHP(hp);
         LerpMove();
+        RayBeeeeeam();
+
     }
 
 
@@ -72,7 +75,7 @@ public class Enemy : NonPlayer
     /// <summary>
     /// 攻撃したときに計算する
     /// </summary>
-    public int Attacked(GameObject _player,int _skillId)
+    public int Attacked(GameObject _player, int _skillId)
     {
         // 敵が攻撃したときに距離を判定する
         Vector3 vec = this.transform.position - _player.transform.position;
@@ -90,21 +93,38 @@ public class Enemy : NonPlayer
         return -1;
     }
 
+    private void RayBeeeeeam()
+    {
+        // Ray作成 　　飛ばす頂点            飛ばす方向
+        Ray ray = new Ray(transform.position, -transform.up);
 
-    ///// 
-    ///// <param name="collision"></param>
-    //private void OnCollisionEnter(Collision collision)
-    //{
-    //    if (gameObject.GetComponent<Animator>().GetCurrentAnimatorClipInfo(0)[0].clip.name == "Attack 01"
-    //        && collision.gameObject.tag == "Player"){
-    //        Debug.Log("攻撃がヒットしたよ");
-    //    }
-    //}
+        RaycastHit hitObj;
+        // 飛ばす距離
+        int distance = 10;
+        if (Physics.Raycast(ray, out hitObj, distance))
+        {
+            // Rayが当たったオブジェクトのtagがGroundだったら
+            if (hitObj.collider.tag == "Ground")
+            {
+                //Debug.Log("移動して！！！！！！！");
+                //Debug.Log(hitObj.point);
+                Vector3 trans = hitObj.point - ray.origin;
+
+                float dis = trans.y * trans.y;
+                if (dis > 1)
+                {
+                    transform.position = new Vector3(transform.position.x, hitObj.point.y + 0.5f, transform.position.z);
+                    Debug.Log(transform.position + " : " + hitObj.point);
+                }
+            }
+        }
+    }
+
 
     public void DestroyMe()
     {
-        Debug.Log("エネミーの名前:" + this.gameObject.name+ "消したよ!");
+        Debug.Log("エネミーの名前:" + this.gameObject.name + "消したよ!");
         Destroy(this.gameObject);
     }
-    
+
 }
