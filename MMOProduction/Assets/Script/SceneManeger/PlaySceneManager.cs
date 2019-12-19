@@ -48,6 +48,9 @@ public class PlaySceneManager : SceneManagerBase
     [SerializeField]
     private GameUserSetting userSeeting = null;
 
+    [SerializeField]
+    private PlayerSetting playerSetting = null;
+
     bool updateFlag = false;
 
     // 通信やその他で不具合が生じた場合の再試行用カウンター
@@ -210,9 +213,8 @@ public class PlaySceneManager : SceneManagerBase
 
             Player playerComponent = tmp.AddComponent<Player>();
             PlayerController playerCComponent = tmp.AddComponent<PlayerController>();
-            PlayerSetting playerSetComponent = tmp.AddComponent<PlayerSetting>();
 
-            playerCComponent.Init(playerComponent, FollowingCamera, playerSetComponent, chat, tmp.GetComponent<Animator>());
+            playerCComponent.Init(playerComponent, FollowingCamera, playerSetting, chat, tmp.GetComponent<Animator>());
             userSeeting.Init(tmp);
             player = playerComponent;
             FollowingCamera.Target = tmp;
