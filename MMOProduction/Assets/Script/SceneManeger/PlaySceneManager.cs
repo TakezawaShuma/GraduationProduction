@@ -27,19 +27,12 @@ public class PlaySceneManager : SceneManagerBase
     [SerializeField, Header("エネミーのステータスUI")]
     private GameObject enemyStatusCanvas = null;
 
- 
-    [SerializeField, Header("テストの敵")]
-    private GameObject testEnemyPre = null;
-    [SerializeField]
-    private GameObject otherPlayerPre_ = null;
-
-
 
     [SerializeField, Header("カメラ")]
     private FollowingCamera FollowingCamera = default(FollowingCamera);
 
-    [SerializeField]
-    private ChatController chat = default(ChatController);
+    [SerializeField,Header("チャットコントローラー")]
+    private ChatController chatController = default(ChatController);
     
  
     [SerializeField]
@@ -212,7 +205,7 @@ public class PlaySceneManager : SceneManagerBase
             PlayerController playerCComponent = tmp.AddComponent<PlayerController>();
             PlayerSetting playerSetComponent = tmp.AddComponent<PlayerSetting>();
 
-            playerCComponent.Init(playerComponent, FollowingCamera, playerSetComponent, chat, tmp.GetComponent<Animator>());
+            playerCComponent.Init(playerComponent, FollowingCamera, playerSetComponent, chatController, tmp.GetComponent<Animator>());
             userSeeting.Init(tmp);
             player = playerComponent;
             FollowingCamera.Target = tmp;
