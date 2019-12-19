@@ -27,19 +27,12 @@ public class PlaySceneManager : SceneManagerBase
     [SerializeField, Header("エネミーのステータスUI")]
     private GameObject enemyStatusCanvas = null;
 
- 
-    [SerializeField, Header("テストの敵")]
-    private GameObject testEnemyPre = null;
-    [SerializeField]
-    private GameObject otherPlayerPre_ = null;
-
-
 
     [SerializeField, Header("カメラ")]
     private FollowingCamera FollowingCamera = default(FollowingCamera);
 
-    [SerializeField]
-    private ChatController chat = default(ChatController);
+    [SerializeField,Header("チャットコントローラー")]
+    private ChatController chatController = default(ChatController);
     
  
     [SerializeField]
@@ -177,10 +170,14 @@ public class PlaySceneManager : SceneManagerBase
 
 
 
-    /// <summary>
-    /// エディター上でプレイを停止する
-    /// </summary>
-    private void OnApplicationQuit()
+    ///// <summary>
+    ///// エディター上でプレイを停止する
+    ///// </summary>
+    //private void OnApplicationQuit()
+    //{
+    //    if (connectFlag) { wsp.Destroy(); }
+    //}
+    public void OnDestroy()
     {
         if (connectFlag) { wsp.Destroy(); }
     }
@@ -212,7 +209,7 @@ public class PlaySceneManager : SceneManagerBase
             PlayerController playerCComponent = tmp.AddComponent<PlayerController>();
             PlayerSetting playerSetComponent = tmp.AddComponent<PlayerSetting>();
 
-            playerCComponent.Init(playerComponent, FollowingCamera, playerSetComponent, chat, tmp.GetComponent<Animator>());
+            playerCComponent.Init(playerComponent, FollowingCamera, playerSetComponent, chatController, tmp.GetComponent<Animator>());
             userSeeting.Init(tmp);
             player = playerComponent;
             FollowingCamera.Target = tmp;
@@ -256,7 +253,6 @@ public class PlaySceneManager : SceneManagerBase
                 {
                     // リストに登録されていないIDが来たときの処理
                     // そのIDは何なのか確認をとる
-                    Debug.Log("この人誰？->" + _packet.user_id);
                     wsp.Send(new Packes.FindOfPlayerCtoS(UserRecord.ID,_packet.user_id, 0).ToJson());
                 }
             }
@@ -407,7 +403,6 @@ public class PlaySceneManager : SceneManagerBase
     /// <param name="_packet"></param>
     private void ReceiveOtherListData(Packes.OtherPlayerList _packet)
     {
-        Debug.Log("他プレイヤーの一覧取得");
         // ほかプレイヤー一覧の生成
         foreach (var tmp in _packet.players)
         {
@@ -472,7 +467,7 @@ public class PlaySceneManager : SceneManagerBase
         {
             pc.RemoveTarget();
         }
-        charcters.Remove(_packet.unique_id); 
+        charcters.Remove(_packet.unique_id);
         enemy.PlayTriggerAnimetion("Die");
     }
 
@@ -549,7 +544,7 @@ public class PlaySceneManager : SceneManagerBase
     /// <param name="_packet"></param>
     private void ReceivingFindResults(Packes.FindOfPlayerStoC _packet)
     {
-        Debug.Log("検索の結果他プレイヤーを作成 -> " + _packet.user_id);
+        //Debug.Log("検索の結果他プレイヤーを作成 -> " + _packet.user_id);
         Packes.OtherPlayersData tmp = new Packes.OtherPlayersData(_packet.user_id, _packet.x, _packet.y, _packet.z, _packet.model_id, _packet.name);
         CreateOtherPlayers(tmp);
     }
