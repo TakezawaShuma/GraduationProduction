@@ -5842,6 +5842,7 @@ GameObject:
   - component: {fileID: 645858245}
   - component: {fileID: 645858243}
   - component: {fileID: 645858246}
+  - component: {fileID: 645858248}
   m_Layer: 0
   m_Name: PlaySceneManager
   m_TagString: Untagged
@@ -5949,11 +5950,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerSetting: {fileID: 11400000, guid: 3e527ec6b81f01c47a7915e7e523702e, type: 2}
   upSpeedValue: 1
+  upDownSpeed: 5
   upSpeedCommand: {fileID: 645858245}
   resetSpeedCommand: {fileID: 645858243}
   resetPosCommand: {fileID: 645858246}
+  airWalkCommand: {fileID: 645858248}
   player: {fileID: 0}
   startPos: {x: -210, y: 2, z: -210}
+--- !u!114 &645858248
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 645858241}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4976b84afccc9a0448faff22c18e4da5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  command: airwalk
 --- !u!224 &646274429 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 6631658281002984456, guid: 7f4271a449d825f42ac315b724d2b520,
@@ -6886,7 +6902,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 992294604}
   m_LocalRotation: {x: 0.12968391, y: 0, z: 0, w: 0.9915554}
-  m_LocalPosition: {x: 95705.305, y: 347691.84, z: 517687.44}
+  m_LocalPosition: {x: 95705.305, y: 347993.06, z: 517226.3}
   m_LocalScale: {x: 1.5000008, y: 1.5000002, z: 1.5000006}
   m_Children: []
   m_Father: {fileID: 0}
