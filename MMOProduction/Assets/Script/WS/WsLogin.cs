@@ -84,17 +84,17 @@ namespace WS
                     {
                         case CommandData.LoginOK: //103
                             Packes.LoginOK login = Json.ConvertToPackets<Packes.LoginOK>(e.Data);
-                            loginAction(login);
+                            loginAction?.Invoke(login);
                             break;
 
                         case CommandData.LoginError: // 104
                             Packes.LoginError logError = Json.ConvertToPackets<Packes.LoginError>(e.Data);
-                            errerAction((int)com);
+                            errerAction?.Invoke((int)com);
                             break;
 
                         case CommandData.CreateOK: //105
                             Packes.CreateOK create = Json.ConvertToPackets<Packes.CreateOK>(e.Data);
-                            createAction(create);
+                            createAction?.Invoke(create);
                             break;
 
                         // 随時追加
