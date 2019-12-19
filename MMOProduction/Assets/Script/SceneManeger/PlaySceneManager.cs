@@ -463,7 +463,6 @@ public class PlaySceneManager : SceneManagerBase
         // HPを0にして死亡エフェクトやドロップアイテムの取得
         Enemy enemy = charcters[_packet.unique_id].GetComponent<Enemy>();
         enemy.HP = 0;
-        enemy.PlayTriggerAnimetion("Die");
 
         PlayerController pc = player.GetComponent<PlayerController>();
         int target = pc.Target.GetComponentInParent<Enemy>().ID;
@@ -473,7 +472,8 @@ public class PlaySceneManager : SceneManagerBase
         {
             pc.RemoveTarget();
         }
-        charcters.Remove(_packet.unique_id);
+        charcters.Remove(_packet.unique_id); 
+        enemy.PlayTriggerAnimetion("Die");
     }
 
 
