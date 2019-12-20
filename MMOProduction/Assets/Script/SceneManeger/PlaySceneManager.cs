@@ -136,7 +136,7 @@ public class PlaySceneManager : SceneManagerBase
                     if (connectFlag)
                     {
                         SendPosition(playerData);
-                        //SendStatus(UserRecord.ID, Packes.OBJECT_TYPE.PLAYER);
+                        SendStatus(UserRecord.ID, Packes.OBJECT_TYPE.PLAYER);
                         SendEnemyPosReq();
                     }
                 }
