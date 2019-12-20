@@ -144,6 +144,8 @@ public class PlaySceneManager : SceneManagerBase
                         SendPosition(playerData);
                         SendStatus(UserRecord.ID, Packes.OBJECT_TYPE.PLAYER);
                         SendEnemyPosReq();
+
+                        Debug.Log("update status");
                     }
                 }
             }
@@ -363,7 +365,8 @@ public class PlaySceneManager : SceneManagerBase
         {
             if (tmp.charctor_id == UserRecord.ID)
             {
-                player.UpdateStatus( tmp.hp, tmp.mp, tmp.status);
+                Debug.Log("update hp and mp");
+                player.UpdateStatus(tmp.max_hp, tmp.hp,tmp.max_mp, tmp.mp, tmp.status);
             }
             else
             {
