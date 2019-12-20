@@ -30,7 +30,6 @@ public class Enemy : NonPlayer
     {
         uIHP.UpdateHP(hp);
         LerpMove();
-        RayBeeeeeam();
 
     }
 
@@ -91,33 +90,6 @@ public class Enemy : NonPlayer
         }
         // ダメージが発生しなかったら-1を返す
         return -1;
-    }
-
-    private void RayBeeeeeam()
-    {
-        // Ray作成 　　飛ばす頂点            飛ばす方向
-        Ray ray = new Ray(transform.position, -transform.up);
-
-        RaycastHit hitObj;
-        // 飛ばす距離
-        int distance = 10;
-        if (Physics.Raycast(ray, out hitObj, distance))
-        {
-            // Rayが当たったオブジェクトのtagがGroundだったら
-            if (hitObj.collider.tag == "Ground")
-            {
-                //Debug.Log("移動して！！！！！！！");
-                //Debug.Log(hitObj.point);
-                Vector3 trans = hitObj.point - ray.origin;
-
-                float dis = trans.y * trans.y;
-                if (dis > 1)
-                {
-                    transform.position = new Vector3(transform.position.x, hitObj.point.y + 0.5f, transform.position.z);
-                    Debug.Log(transform.position + " : " + hitObj.point);
-                }
-            }
-        }
     }
 
 
