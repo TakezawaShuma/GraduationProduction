@@ -92,6 +92,17 @@ public class FollowingCamera : MonoBehaviour
         {
             updateAngle(Input.GetAxis("Mouse X"), Input.GetAxis("Mouse Y"));
         }
+        else
+        {
+            if (Input.GetKey(KeyCode.Q))
+            {
+                azimuthalAngle += 1;
+            }
+            else if (Input.GetKey(KeyCode.E))
+            {
+                azimuthalAngle -= 1;
+            }
+        }
 
         Vector3 lookAtPos;
         updateDistance(Input.GetAxis("Mouse ScrollWheel"));
