@@ -7,7 +7,8 @@ public class Enemy : NonPlayer
 
     public int HP { get { return hp; } set { hp = value; } }
     public int MP { get { return mp; } set { mp = value; } }
-    
+
+    private Ray ray = default(Ray);
 
     private UIEnemyHP uIHP = null;
 
@@ -16,7 +17,7 @@ public class Enemy : NonPlayer
         get { return uIHP; }
         set { uIHP = value; }
     }
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -29,6 +30,7 @@ public class Enemy : NonPlayer
     {
         uIHP.UpdateHP(hp);
         LerpMove();
+
     }
 
 
@@ -72,7 +74,7 @@ public class Enemy : NonPlayer
     /// <summary>
     /// 攻撃したときに計算する
     /// </summary>
-    public int Attacked(GameObject _player,int _skillId)
+    public int Attacked(GameObject _player, int _skillId)
     {
         // 敵が攻撃したときに距離を判定する
         Vector3 vec = this.transform.position - _player.transform.position;
@@ -91,20 +93,10 @@ public class Enemy : NonPlayer
     }
 
 
-    ///// 
-    ///// <param name="collision"></param>
-    //private void OnCollisionEnter(Collision collision)
-    //{
-    //    if (gameObject.GetComponent<Animator>().GetCurrentAnimatorClipInfo(0)[0].clip.name == "Attack 01"
-    //        && collision.gameObject.tag == "Player"){
-    //        Debug.Log("攻撃がヒットしたよ");
-    //    }
-    //}
-
     public void DestroyMe()
     {
-        Debug.Log("エネミーの名前:" + this.gameObject.name+ "消したよ!");
+        Debug.Log("エネミーの名前:" + this.gameObject.name + "消したよ!");
         Destroy(this.gameObject);
     }
-    
+
 }
