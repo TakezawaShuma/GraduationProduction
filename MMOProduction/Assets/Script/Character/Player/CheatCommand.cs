@@ -56,6 +56,7 @@ public class CheatCommand : MonoBehaviour
         if(airFlag)
         {
             Vector3 vel = player.GetComponent<Rigidbody>().velocity;
+
             if (Input.GetKey(KeyCode.UpArrow))
             {
                 vel.y = upDownSpeed;
