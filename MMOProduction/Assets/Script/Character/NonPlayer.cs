@@ -15,7 +15,7 @@ public class NonPlayer : CharacterBase
     protected skill_table skillTable;
 
     protected float nowFlame = 0;
-    public const float UPDATE_SPEED = 1.0f / 6.0f;
+    public const float UPDATE_SPEED = 1.0f / 3.0f;
 
     /// <summary>
     /// キャラクターの初期化設定
@@ -54,7 +54,6 @@ public class NonPlayer : CharacterBase
 
         // カウントを初期化
         nowFlame = 0;
-        Debug.Log("update position data");
     }
 
     /// <summary>
@@ -78,8 +77,6 @@ public class NonPlayer : CharacterBase
         nowFlame += UPDATE_SPEED;
         transform.rotation = Quaternion.Lerp(lastDir, nextDir, nowFlame);
         transform.position = Vector3.Lerp(lastPos, nextPos, nowFlame);
-
-        Debug.Log("lerp move");
     }
 
     /// <summary>
