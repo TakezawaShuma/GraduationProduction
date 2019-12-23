@@ -41,6 +41,12 @@ public class PlaySceneManager : SceneManagerBase
     [SerializeField]
     private GameUserSetting userSeeting = null;
 
+    [SerializeField]
+    private PlayerSetting playerSetting = null;
+
+    [SerializeField]
+    private CheatCommand cheatCommand = null;
+
     bool updateFlag = false;
 
     // 通信やその他で不具合が生じた場合の再試行用カウンター
@@ -205,11 +211,12 @@ public class PlaySceneManager : SceneManagerBase
             tmp.tag = "Player";
             tmp.transform.localScale = new Vector3(2, 2, 2);
 
+            cheatCommand.PLAYER = tmp;
+
             Player playerComponent = tmp.AddComponent<Player>();
             PlayerController playerCComponent = tmp.AddComponent<PlayerController>();
-            PlayerSetting playerSetComponent = tmp.AddComponent<PlayerSetting>();
 
-            playerCComponent.Init(playerComponent, FollowingCamera, playerSetComponent, chatController, tmp.GetComponent<Animator>());
+            playerCComponent.Init(playerComponent, FollowingCamera, playerSetting, chatController, tmp.GetComponent<Animator>());
             userSeeting.Init(tmp);
             player = playerComponent;
             FollowingCamera.Target = tmp;

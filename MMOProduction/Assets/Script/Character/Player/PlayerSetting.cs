@@ -7,23 +7,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerSetting : MonoBehaviour
+public class PlayerSetting : ScriptableObject
 {
     [SerializeField, Header("通常スピード(1秒間で進む距離)")]
-    private float NomalSpeed = 2.5f;
-    public float NS { get { return NomalSpeed; } }
+    private float NormalSpeed = 2.5f;
+    public float NS { get { return NormalSpeed; } set { NormalSpeed = value; } }
 
     [SerializeField, Header("ダッシュスピード(1秒間で進む距離)")]
     private float DashSpeed = 6.25f;
-    public float DS { get { return DashSpeed; } }
-
-    [SerializeField, Header("ジャンプ力")]
-    private float JumpPower = 300f;
-    public float JP { get { return JumpPower; } }
-
-    [SerializeField, Header("重力")]
-    private float FallSpeed = 0.98f;
-    public float FS { get { return FallSpeed; } }
+    public float DS { get { return DashSpeed; } set { DashSpeed = value; } }
 
     [SerializeField, Range(0f, 1f), Header("振り向き速度")]
     private float TurnSpeed = 0.15f;
