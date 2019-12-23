@@ -1,10 +1,7 @@
-//////////////////////////////////////////////////////////////
-// パケットデータ等プレイシーンの通信で使うデータをまとめた //
-//////////////////////////////////////////////////////////////
-
 using System.Collections.Generic;
+
 /// <summary>
-/// パケットデータ
+/// パケットデータ　200番台(プレイシーン用)
 /// </summary>
 namespace Packes
 {
@@ -295,7 +292,7 @@ namespace Packes
     }
 
     /// <summary>
-    /// 状態送信 command:206
+    /// 状態受信 command:206
     /// </summary>
     public class StatusStoC : IPacketDatas
     {
@@ -704,13 +701,17 @@ namespace Packes
     public struct CharctorSatusData
     {
         public int charctor_id;
+        public int max_hp;
         public int hp;
+        public int max_mp;
         public int mp;
         public int status;
-        public CharctorSatusData(int _charctor_id, int _hp, int _mp, int _status)
+        public CharctorSatusData(int _charctor_id, int _max_hp, int _hp, int _max_mp, int _mp, int _status)
         {
             this.charctor_id = _charctor_id;
+            this.max_hp = _max_hp;
             this.hp = _hp;
+            this.max_mp = _max_mp;
             this.mp = _mp;
             this.status = _status;
         }

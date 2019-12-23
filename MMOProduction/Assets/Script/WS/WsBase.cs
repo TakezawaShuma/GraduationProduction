@@ -27,11 +27,11 @@ namespace WS
         /// <param name="_port">ポート</param>
         protected void Connect(uint _port)
         {
-            if(ws==null)ws = new WebSocket("ws://" + server_ip + ":" + _port.ToString());
-            if (ws.ReadyState == WebSocketState.Open)
+            if (ws == null) ws = new WebSocket("ws://" + server_ip + ":" + _port.ToString());
+            if (ws.ReadyState == WebSocketState.Open && ws != null)
             {
-                Debug.LogWarning("すでに接続済み");return;
-             }
+                Debug.LogWarning("すでに接続済み"); return;
+            }
             Debug.Log("IPアドレス : " + server_ip + "ポート : " + _port);
             WsInit();
             ws.Connect();
@@ -45,6 +45,7 @@ namespace WS
         /// <param name="_msg">削除した際のメッセージ</param>
         protected virtual void Destroy(string _msg = "", bool type = true)
         {
+            if (ws != null) return;
             if (ws.ReadyState != WebSocketState.Closed)
             {
                 if (_msg != "")
