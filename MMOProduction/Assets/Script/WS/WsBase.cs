@@ -32,8 +32,7 @@ namespace WS
             {
                 Debug.LogWarning("すでに接続済み"); return;
             }
-            Debug.Log("IPアドレス : " + server_ip + "ポート : " + _port);
-            WsInit();
+            WsInit(_port.ToString());
             ws.Connect();
         }
 

@@ -447,11 +447,13 @@ public class PlaySceneManager : SceneManagerBase
         // todo
         // 戦闘で計算後エネミーが生きていたら
         // HPを減らすや状態の更新
-
-        Debug.Log("敵は生存している");
-        Enemy enemy = charcters[_packet.unique_id].GetComponent<Enemy>();
-        enemy.PlayTriggerAnimetion("Take Damage");
-        enemy.HP = _packet.hp;
+        if (charcters.ContainsKey(_packet.unique_id))
+        {
+            Debug.Log("敵は生存している");
+            Enemy enemy = charcters[_packet.unique_id].GetComponent<Enemy>();
+            enemy.PlayTriggerAnimetion("Take Damage");
+            enemy.HP = _packet.hp;
+        }
     }
 
     /// <summary>
@@ -463,21 +465,22 @@ public class PlaySceneManager : SceneManagerBase
         // todo
         // 戦闘で計算後エネミーが死亡していたら
         // HPを0にして死亡エフェクトやドロップアイテムの取得
-        Enemy enemy = charcters[_packet.unique_id].GetComponent<Enemy>();
-        enemy.HP = 0;
-
-        PlayerController pc = player.GetComponent<PlayerController>();
-        int target = pc.Target.GetComponentInParent<Enemy>().ID;
-
-        Debug.Log("TargetID : " + target + " , DieEnemyID : " + _packet.unique_id);
-        if (target == _packet.unique_id)
+        if (charcters.ContainsKey(_packet.unique_id))
         {
-            pc.RemoveTarget();
-        }
-        charcters.Remove(_packet.unique_id);
-        enemy.PlayTriggerAnimetion("Die");
-    }
+            Enemy enemy = charcters[_packet.unique_id].GetComponent<Enemy>();
+            enemy.HP = 0;
 
+            PlayerController pc = player.GetComponent<PlayerController>();
+            int target = pc.Target.GetComponentInParent<Enemy>().ID;
+            
+            if (target == _packet.unique_id)
+            {
+                pc.RemoveTarget();
+            }
+            charcters.Remove(_packet.unique_id);
+            enemy.PlayTriggerAnimetion("Die");
+        }
+    }
 
     /// <summary>
     /// 他プレイヤーのスキルを再生 → ???
@@ -509,11 +512,16 @@ public class PlaySceneManager : SceneManagerBase
         Debug.Log("敵のスキルが発動したよ");
         Enemy enemy = charcters[_packet.enemy_id].GetComponent<Enemy>();
         // enemy.PlayTriggerAnimetion("Attack");
+        Debug.Log("スキルID : " + _packet.skill_id);
         enemy.PlayAttackAnimation(_packet.skill_id);
-        if (_packet.target_id == UserRecord.ID)
+        //if (_packet.target_id == UserRecord.ID)
+        //{
+        if (enemy.Attacked(player.gameObject, _packet.skill_id))
         {
-            enemy.Attacked(player.gameObject,_packet.skill_id);
+            Debug.Log("攻撃がヒットしたよ");
+            wsp.Send(new Packes.Attack(UserRecord.ID, _packet.enemy_id, 0, 0).ToJson());
         }
+        //}
     }
 
     /// <summary>
@@ -537,7 +545,7 @@ public class PlaySceneManager : SceneManagerBase
             if (connectFlag) { wsp.Destroy(); }
             ChangeScene("LoginScene");
         }
-        else
+        else if (UserRecord.ID != 0)
         {
             Destroy(charcters[_packet.user_id].gameObject);
             charcters.Remove(_packet.user_id);

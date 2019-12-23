@@ -32,9 +32,9 @@ public class SoundTable: ScriptableObject
     [System.Serializable]
     public struct WalkPitch
     {
-        [Header("テンポ"), SerializeField]
+        [SerializeField]
         public float tempo;
-        [Header("ピッチ"), SerializeField]
+        [SerializeField]
         public float pitch;
     }
 

@@ -50,7 +50,5 @@ public class GameUserSetting : MonoBehaviour
     public void LogoutClick()
     {
         WS.WsPlay.Instance.Logout();
-
-        Debug.Log("button");
     }
 }
