@@ -1,32 +1,47 @@
 ﻿using System;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class CharacterSelectManager : MonoBehaviour
 {
     WS.WsPlay ws = null;
 
-    // ---モデル---//
-    public GameObject attackerModel_;
-    public GameObject defenderModel_;
-    public GameObject witchModel_;
-    public GameObject healerModel_;
+    //---モデル・ラベル---//
+    [SerializeField]
+    private GameObject parentAttacker_;
+    [SerializeField]
+    private GameObject parentDefender_;
+    [SerializeField]
+    private GameObject parentWitch_;
+    [SerializeField]
+    private GameObject parentHealer_;
 
-    //---ジョブ説明テキスト---//
-    public GameObject attackerInfoText_;
-    public GameObject defenderInfoText_;
-    public GameObject witchInfoText_;
-    public GameObject healerInfoText_;
-    
-    //---現在表示されているモデルとテキスト---//
-    public GameObject nowActiveModel_ = null;
-    public GameObject nowActiveText_ = null;
 
-    public bool Enabled;
+    //---テキスト---//
+    [SerializeField]
+    private Text jobText_;
+    [SerializeField, MultilineAttribute(10)]
+    string attackerText_;
+    [SerializeField, MultilineAttribute(10)]
+    string defenderText_;
+    [SerializeField, MultilineAttribute(10)]
+    string witchText_;
+    [SerializeField, MultilineAttribute(10)]
+    string healerText_;
 
     //---回転させるモデル---//
-    [SerializeField]
-    private GameObject target_ = null;
+    public GameObject target_ = null;
+    public GameObject Target
+    {
+        get { return target_; }
+
+        set
+        {
+            target_ = value;
+            rotating_ = false;
+        }
+    }
 
     //---回転---//
     private bool rotating_;
@@ -35,84 +50,77 @@ public class CharacterSelectManager : MonoBehaviour
     //---ID---//
     public int modelID_ = 0;
 
-    //---アタッカーボタン処理---//
-    public void clickAttacker()
+    
+
+    void Start()
     {
-        if(nowActiveModel_ != null && nowActiveText_ != null)
-        {
-            nowActiveModel_.SetActive(false);
-            nowActiveText_.SetActive(false);
-            target_ = null;
-        }
-
-        nowActiveModel_ = attackerModel_;
-        nowActiveText_ = attackerInfoText_;
-
-        attackerModel_.SetActive(true);
-        attackerInfoText_.SetActive(true);
-        target_ = attackerModel_;
-
-        modelID_ = 101;
+        rotating_ = false;
+        ws = WS.WsPlay.Instance; ;
     }
 
-    //---ディフェンダーボタン処理---//
-    public void clickDefender()
+    void Update()
     {
-        if (nowActiveModel_ != null && nowActiveText_ != null)
+        if (Input.GetMouseButtonDown(0))
         {
-            nowActiveModel_.SetActive(false);
-            nowActiveText_.SetActive(false);
-            target_ = null;
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit, 50.0f))
+            {
+                if(hit.collider.tag == "Player") AnimationPause(hit.collider.gameObject);
+            }
         }
 
-        nowActiveModel_ = defenderModel_;
-        nowActiveText_ = defenderInfoText_;
+        if (target_ == null)
+        {
+            return;
+        }
 
-        defenderModel_.SetActive(true);
-        defenderInfoText_.SetActive(true);
-        target_ = defenderModel_;
+        if (Input.GetMouseButtonDown(1))
+        {
+            rot_ = target_.transform.localEulerAngles.y - GetAngle(Input.mousePosition);
+            rotating_ = true;
+        }
+        else if (Input.GetMouseButtonUp(1))
+        {
+            rotating_ = false;
+        }
 
-        modelID_ =  102;
+        if (!rotating_)
+        {
+            return;
+        }
+
+        target_.transform.localRotation = Quaternion.Euler(0f, rot_ + GetAngle(Input.mousePosition), 0f);
+        
     }
 
-    //---メイジボタン処理---//
-    public void clickWitch()
-    {
-        if (nowActiveModel_ != null && nowActiveText_ != null)
-        {
-            nowActiveModel_.SetActive(false);
-            nowActiveText_.SetActive(false);
-            target_ = null;
+    //---ボタン処理---//
+
+    public void TypeButtonClick(int _id) {
+        GameObject parent = FindModel(_id);
+        
+        if (!parent) {
+            Debug.LogError("not model type");
+            return;
         }
+        ModelActiveAllOff();
 
-        nowActiveModel_ = witchModel_;
-        nowActiveText_ = witchInfoText_;
+        //---ラベル・モデル表示---//
+        parent.SetActive(true);
+        target_ = parent.transform.GetChild(0).gameObject;
 
-        witchModel_.SetActive(true);
-        witchInfoText_.SetActive(true);
-        target_ = witchModel_;
+        //---テキスト表示---//
+        string text = FindComment(_id);
+        jobText_.text = text;
 
-        modelID_ = 103;
-    }
+        //---正面を向かせる---//
+        target_.transform.rotation = Quaternion.Euler(0f, 183f, 0f);
 
-    //---ヒーラーボタン処理---//
-    public void clickHealer()
-    {
-        if (nowActiveModel_ != null && nowActiveText_ != null)
-        {
-            nowActiveModel_.SetActive(false);
-            nowActiveText_.SetActive(false);
-            target_ = null;
-        }
+        //---IDを割り振る---//
+        modelID_ = _id;
 
-        nowActiveModel_ = healerModel_;
-        nowActiveText_ = healerInfoText_;
-
-        healerModel_.SetActive(true);
-        healerInfoText_.SetActive(true);
-        target_ = healerModel_;
-
-        modelID_ = 104;
+        //---アニメーションを行う---//
+        AnimationPause(parent.transform.GetChild(0).gameObject);         
     }
 
     //---決定ボタン処理---//
@@ -122,18 +130,6 @@ public class CharacterSelectManager : MonoBehaviour
         {
             ws.Send(new Packes.SaveModelType(UserRecord.ID, modelID_).ToJson());
             SceneManager.LoadScene("LoadingScene");
-            //Debug.Log(new Packes.SaveModelType(UserRecord.ID, modelID_).ToJson());
-        }
-    }
-
-    public GameObject Target
-    {
-        get { return target_; }
-
-        set
-        {
-            target_ = value;
-            rotating_ = false; 
         }
     }
 
@@ -150,47 +146,32 @@ public class CharacterSelectManager : MonoBehaviour
 
         return angle * Mathf.Rad2Deg;
     }
-
-    void Start()
-    {
-        rotating_ = false;
-        Enabled = true;
-
-        ws = WS.WsPlay.Instance;
+    
+    public void AnimationPause(GameObject _obj) {
+        try { _obj.GetComponent<Animator>().SetBool("pause", true); }
+        catch (ArithmeticException _error) { Debug.LogError(_error); }
     }
 
-    void Update()
-    {
-        if (Input.GetMouseButtonDown(0)){
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, 50.0f)){
-                try { hit.collider.gameObject.GetComponent<Animator>().SetBool("pause", true); }
-                catch (ArithmeticException _error) { Debug.LogError(_error); }
-            }
-        }
-
-        if(Enabled == false || target_ == null)
-        {
-            return;
-        }
-
-        if(Input.GetMouseButtonDown(1))
-        {
-            rot_ = target_.transform.eulerAngles.y - GetAngle(Input.mousePosition);
-            rotating_ = true;
-        }
-        else if(Input.GetMouseButtonUp(1))
-        {
-            rotating_ = false;
-        }
-        
-        if(!rotating_)
-        {
-            return;
-        }
-
-        target_.transform.rotation = Quaternion.Euler(0f, rot_ + GetAngle(Input.mousePosition), 0f);
+    private GameObject FindModel(int _id) {
+        if (_id == 101) return parentAttacker_;
+        else if (_id == 102) return parentDefender_;
+        else if (_id == 103) return parentWitch_;
+        else if (_id == 104) return parentHealer_;
+        return null;
     }
-         
+
+    private string FindComment(int _id) {
+        if (_id == 101) return attackerText_;
+        else if (_id == 102) return defenderText_;
+        else if (_id == 103) return witchText_;
+        else if (_id == 104) return healerText_;
+        return null;
+    }
+
+    private void ModelActiveAllOff() {
+        parentAttacker_.SetActive(false);
+        parentDefender_.SetActive(false);
+        parentWitch_.SetActive(false);
+        parentHealer_.SetActive(false);
+    }
 }
