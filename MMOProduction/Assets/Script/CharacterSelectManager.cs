@@ -146,50 +146,6 @@ public class CharacterSelectManager : MonoBehaviour
 
         return angle * Mathf.Rad2Deg;
     }
-<<<<<<< HEAD
-    void Start()
-    {
-        rotating_ = false;
-        Enabled = true;
-
-        ws = WS.WsPlay.Instance;
-    }
-
-    void Update()
-    {
-        if (Input.GetMouseButtonDown(0)){
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, 50.0f)){
-                try { hit.collider.gameObject.GetComponent<Animator>().SetBool("pause", true); }
-                catch (ArithmeticException _error) { Debug.LogError(_error); }
-            }
-        }
-
-        if(Enabled == false || target_ == null)
-        {
-            return;
-        }
-
-        if(Input.GetMouseButtonDown(1))
-        {
-            rot_ = target_.transform.eulerAngles.y - GetAngle(Input.mousePosition);
-            rotating_ = true;
-        }
-        else if(Input.GetMouseButtonUp(1))
-        {
-            rotating_ = false;
-        }
-        
-        if(!rotating_)
-        {
-            return;
-        }
-
-        target_.transform.rotation = Quaternion.Euler(0f, rot_ + GetAngle(Input.mousePosition), 0f);
-    }
-}
-=======
     
     public void AnimationPause(GameObject _obj) {
         try { _obj.GetComponent<Animator>().SetBool("pause", true); }
@@ -219,4 +175,3 @@ public class CharacterSelectManager : MonoBehaviour
         parentHealer_.SetActive(false);
     }
 }
->>>>>>> CharaSelectManagerスクリプトの修正
