@@ -505,7 +505,7 @@ public class PlaySceneManager : SceneManagerBase
         enemy.PlayAttackAnimation(_packet.skill_id);
         if (_packet.target_id == UserRecord.ID)
         {
-            enemy.Attacked(player.gameObject,_packet.skill_id);
+            enemy.Attacked(player.gameObject, _packet.skill_id);
         }
     }
 
