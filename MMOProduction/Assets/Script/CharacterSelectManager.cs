@@ -12,13 +12,20 @@ public class CharacterSelectManager : MonoBehaviour
     public GameObject witchModel_;
     public GameObject healerModel_;
 
+    //---ラベル---//
+    public GameObject attackerLabel_;
+    public GameObject defenderLabel_;
+    public GameObject witchLabel_;
+    public GameObject healerLabel_;
+
     //---ジョブ説明テキスト---//
     public GameObject attackerInfoText_;
     public GameObject defenderInfoText_;
     public GameObject witchInfoText_;
     public GameObject healerInfoText_;
-    
+
     //---現在表示されているモデルとテキスト---//
+    public GameObject nowActiveLabel_ = null;
     public GameObject nowActiveModel_ = null;
     public GameObject nowActiveText_ = null;
 
@@ -26,7 +33,7 @@ public class CharacterSelectManager : MonoBehaviour
 
     //---回転させるモデル---//
     [SerializeField]
-    private GameObject target_ = null;
+    public GameObject target_ = null;
 
     //---回転---//
     private bool rotating_;
@@ -35,22 +42,72 @@ public class CharacterSelectManager : MonoBehaviour
     //---ID---//
     public int modelID_ = 0;
 
+    private GameObject modelRot = null;
+
+    void Start()
+    {
+        rotating_ = false;
+        Enabled = true;
+    }
+
+    void Update()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+            RaycastHit hit;
+            if (Physics.Raycast(ray, out hit, 50.0f))
+            {
+                try { hit.collider.gameObject.GetComponent<Animator>().SetBool("pause", true); }
+                catch (ArithmeticException _error) { Debug.LogError(_error); }
+            }
+        }
+
+        if (Enabled == false || target_ == null)
+        {
+            return;
+        }
+
+        if (Input.GetMouseButtonDown(1))
+        {
+            rot_ = target_.transform.eulerAngles.y - GetAngle(Input.mousePosition);
+            rotating_ = true;
+        }
+        else if (Input.GetMouseButtonUp(1))
+        {
+            rotating_ = false;
+        }
+
+        if (!rotating_)
+        {
+            return;
+        }
+
+        target_.transform.rotation = Quaternion.Euler(0f, rot_ + GetAngle(Input.mousePosition), 0f);
+
+    }
+
     //---アタッカーボタン処理---//
     public void clickAttacker()
     {
-        if(nowActiveModel_ != null && nowActiveText_ != null)
+        if(nowActiveModel_ != null && nowActiveText_ != null && nowActiveLabel_ != null)
         {
+            nowActiveLabel_.SetActive(false);
             nowActiveModel_.SetActive(false);
             nowActiveText_.SetActive(false);
             target_ = null;
         }
 
+        nowActiveLabel_ = attackerLabel_;
         nowActiveModel_ = attackerModel_;
         nowActiveText_ = attackerInfoText_;
 
+        attackerLabel_.SetActive(true);
         attackerModel_.SetActive(true);
         attackerInfoText_.SetActive(true);
         target_ = attackerModel_;
+
+        target_.transform.rotation = Quaternion.Euler(0f, 183f, 0f);
 
         modelID_ = 101;
     }
@@ -58,19 +115,24 @@ public class CharacterSelectManager : MonoBehaviour
     //---ディフェンダーボタン処理---//
     public void clickDefender()
     {
-        if (nowActiveModel_ != null && nowActiveText_ != null)
+        if (nowActiveModel_ != null && nowActiveText_ != null && nowActiveLabel_ != null)
         {
+            nowActiveLabel_.SetActive(false);
             nowActiveModel_.SetActive(false);
             nowActiveText_.SetActive(false);
             target_ = null;
         }
 
+        nowActiveLabel_ = defenderLabel_;
         nowActiveModel_ = defenderModel_;
         nowActiveText_ = defenderInfoText_;
 
+        defenderLabel_.SetActive(true);
         defenderModel_.SetActive(true);
         defenderInfoText_.SetActive(true);
         target_ = defenderModel_;
+
+        target_.transform.rotation = Quaternion.Euler(0f, 183f, 0f);
 
         modelID_ =  102;
     }
@@ -78,19 +140,24 @@ public class CharacterSelectManager : MonoBehaviour
     //---メイジボタン処理---//
     public void clickWitch()
     {
-        if (nowActiveModel_ != null && nowActiveText_ != null)
+        if (nowActiveModel_ != null && nowActiveText_ != null && nowActiveLabel_ != null)
         {
+            nowActiveLabel_.SetActive(false);
             nowActiveModel_.SetActive(false);
             nowActiveText_.SetActive(false);
             target_ = null;
         }
 
+        nowActiveLabel_ = witchLabel_;
         nowActiveModel_ = witchModel_;
         nowActiveText_ = witchInfoText_;
 
+        witchLabel_.SetActive(true);
         witchModel_.SetActive(true);
         witchInfoText_.SetActive(true);
         target_ = witchModel_;
+
+        target_.transform.rotation = Quaternion.Euler(0f, 183f, 0f);
 
         modelID_ = 103;
     }
@@ -98,19 +165,24 @@ public class CharacterSelectManager : MonoBehaviour
     //---ヒーラーボタン処理---//
     public void clickHealer()
     {
-        if (nowActiveModel_ != null && nowActiveText_ != null)
+        if (nowActiveModel_ != null && nowActiveText_ != null && nowActiveLabel_ != null)
         {
+            nowActiveLabel_.SetActive(false);
             nowActiveModel_.SetActive(false);
             nowActiveText_.SetActive(false);
             target_ = null;
         }
 
+        nowActiveLabel_ = healerLabel_;
         nowActiveModel_ = healerModel_;
         nowActiveText_ = healerInfoText_;
 
+        healerLabel_.SetActive(true);
         healerModel_.SetActive(true);
         healerInfoText_.SetActive(true);
         target_ = healerModel_;
+
+        target_.transform.rotation = Quaternion.Euler(0f, 183f, 0f);
 
         modelID_ = 104;
     }
@@ -150,7 +222,6 @@ public class CharacterSelectManager : MonoBehaviour
 
         return angle * Mathf.Rad2Deg;
     }
-
     void Start()
     {
         rotating_ = false;
@@ -192,5 +263,4 @@ public class CharacterSelectManager : MonoBehaviour
 
         target_.transform.rotation = Quaternion.Euler(0f, rot_ + GetAngle(Input.mousePosition), 0f);
     }
-         
 }
