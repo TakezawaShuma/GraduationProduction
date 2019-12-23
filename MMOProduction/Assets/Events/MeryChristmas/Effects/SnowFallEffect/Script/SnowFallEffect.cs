@@ -48,6 +48,7 @@ public class SnowFallEffect : MonoBehaviour
     private ComputeBuffer _computeBuffer;   // コンピュートシェーダに渡すバッファ
 
     [SerializeField] int _maxParticles = 1000; // エフェクト最大生成数
+    [SerializeField] Color _color = Color.white;    // パーティクルの色
 
     [SerializeField] Transform _target = null;     // 雪を降らせるターゲット
     [SerializeField] float _range = 250;    // 雪を降らせる範囲
@@ -103,7 +104,7 @@ public class SnowFallEffect : MonoBehaviour
                 startPos,
                 startPos,
                 new Vector3(Random.Range(-1f, 1f), -Random.Range(1f, 3f), Random.Range(-1f, 1f)),
-                new Color(1, 1, 1, 1),
+                _color,
                 1
                 ); ;
         }

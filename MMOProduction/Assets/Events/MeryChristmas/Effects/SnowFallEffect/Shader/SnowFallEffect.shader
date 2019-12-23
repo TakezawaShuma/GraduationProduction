@@ -102,9 +102,9 @@ Shader "Custom/Event/MeryChristmas/SnowFallEffect"
                 stream.RestartStrip();
             }
 
-            float4 frag(VSOut i) : SV_Target
+            fixed4 frag(VSOut i) : SV_Target
             {
-                float4 col = tex2D(_MainTex, i.uv);
+                fixed4 col = tex2D(_MainTex, i.uv) * i.col;
                 col.rgb = 1;
                 return col;
             }
