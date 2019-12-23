@@ -13,7 +13,7 @@ public class Inventory : MonoBehaviour
     private GameObject Slot = null;
 
     [SerializeField]
-    private Sprite sprite;
+    private Sprite sprite = null;
 
     // Start is called before the first frame update
     void Start()

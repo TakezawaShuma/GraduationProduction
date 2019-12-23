@@ -1,5 +1,5 @@
 ﻿/// <summary>
-/// パケットデータ
+/// パケットデータ 700番台(例外処理用)
 /// </summary>
 namespace Packes
 {

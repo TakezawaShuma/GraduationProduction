@@ -22,8 +22,6 @@ public class GameUserSetting : MonoBehaviour
 
     [Header("BGM音"), SerializeField]
     private AudioSource backMusic = null;
-    [Header("Logout"), SerializeField]
-    private Button logoutButon = null;
 
     public void Init(GameObject _player)
     {

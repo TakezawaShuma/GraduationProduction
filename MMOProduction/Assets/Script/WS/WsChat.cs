@@ -73,7 +73,7 @@ namespace WS
                     switch (command)
                     {
                         case CommandData.RecvAllChat:
-                            allChatAction(Json.ConvertToPackets<Packes.RecvAllChat>(e.Data));
+                            allChatAction?.Invoke(Json.ConvertToPackets<Packes.RecvAllChat>(e.Data));
                             break;
                     }
                 }, e.Data);
