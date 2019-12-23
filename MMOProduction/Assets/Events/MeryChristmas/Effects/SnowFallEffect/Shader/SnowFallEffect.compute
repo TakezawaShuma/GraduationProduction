@@ -1,0 +1,28 @@
+﻿// Each #kernel tells which function to compile; you can have many kernels
+#pragma kernel CSMain
+
+// パーティクルバッファデータ
+struct Particle
+{
+    float3 startPos;
+    float3 pos;
+    float3 vel;
+    float4 col;
+    float life;
+};
+
+float _DeltaTime;
+float _Gravity;
+RWStructuredBuffer<Particle> _Particle;
+
+[numthreads(8, 1, 1)]
+void CSMain(uint3 id : SV_DispatchThreadID)
+{
+    uint i = id.x;
+    //_Particle[i].vel.y = _Gravity;
+    _Particle[i].pos += _Particle[i].vel * _DeltaTime;
+    if (_Particle[i].pos.y <= 0)
+    {
+        _Particle[i].pos.y += 250;
+    }
+}
