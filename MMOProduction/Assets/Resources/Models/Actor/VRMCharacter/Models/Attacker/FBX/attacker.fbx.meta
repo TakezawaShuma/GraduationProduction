@@ -195,10 +195,10 @@ ModelImporter:
     2100014: F00_000_00_Face_00_SKIN
     2100016: F00_000_00_EyeExtra_01_EYE
     2100018: F00_001_01_Body_00_SKIN
-    2100020: F00_001_01_Bottoms_01_CLOTH
-    2100022: F00_001_01_AccessoryNeck_01_CLOTH
-    2100024: F00_001_01_Shoes_01_CLOTH
-    2100026: F00_001_02_Tops_01_CLOTH
+    2100020: F00_001_02_Tops_01_CLOTH
+    2100022: F00_001_01_Bottoms_01_CLOTH
+    2100024: F00_001_01_AccessoryNeck_01_CLOTH
+    2100026: F00_001_01_Shoes_01_CLOTH
     2100028: F00_000_HairBack_00_HAIR
     2100030: F00_000_Hair_00_HAIR_01
     2100032: F00_000_Hair_00_HAIR_02
@@ -209,92 +209,7 @@ ModelImporter:
     13700000: Body
     13700002: Face
     13700004: Hair001
-  externalObjects:
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: F00_000_00_EyeExtra_01_EYE
-    second: {fileID: 2100000, guid: 4b7ee53e60bec2e4bb7ec4a3190de0a3, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: F00_000_00_EyeHighlight_00_EYE
-    second: {fileID: 2100000, guid: 3cbf208b224fed140995d031ef71e65a, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: F00_000_00_EyeIris_00_EYE
-    second: {fileID: 2100000, guid: 0629bc1a01a3cbc41ab320e6029059ad, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: F00_000_00_EyeWhite_00_EYE
-    second: {fileID: 2100000, guid: 032b468a4bfab1e4685d299ade7d0916, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: F00_000_00_FaceBrow_00_FACE
-    second: {fileID: 2100000, guid: d5bfd4c1c23b46e4392fe382c7b58cfb, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: F00_000_00_FaceEyelash_00_FACE
-    second: {fileID: 2100000, guid: 77dc577e8e4c49b49a8a86ac37c03681, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: F00_000_00_FaceEyeline_00_FACE
-    second: {fileID: 2100000, guid: da7292afd789d21468bfc32d4c64fa53, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: F00_000_00_FaceMouth_00_FACE
-    second: {fileID: 2100000, guid: fc219ff92e3c9cc42be2a63dc91ba9cd, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: F00_000_00_Face_00_SKIN
-    second: {fileID: 2100000, guid: f0efc1f7a340d7945968c0864be9aaee, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: F00_000_HairBack_00_HAIR
-    second: {fileID: 2100000, guid: e31631dc32ca9a341986b9635b158858, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: F00_000_Hair_00_HAIR_01
-    second: {fileID: 2100000, guid: c1fd0f5bea8d1554aad8473305aac32e, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: F00_000_Hair_00_HAIR_02
-    second: {fileID: 2100000, guid: 320159a1f964ce34a96da3c21ab15987, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: F00_001_01_AccessoryNeck_01_CLOTH
-    second: {fileID: 2100000, guid: 7e694b9da09744f47bd0f9498126317e, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: F00_001_01_Body_00_SKIN
-    second: {fileID: 2100000, guid: 03ca5491d4793854992204f2ef61854d, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: F00_001_01_Bottoms_01_CLOTH
-    second: {fileID: 2100000, guid: f440e3a00aa3cae4a8d675daa0bec842, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: F00_001_01_Shoes_01_CLOTH
-    second: {fileID: 2100000, guid: 998a4a8739d82174bae829846bc8d0ea, type: 2}
-  - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: F00_001_02_Tops_01_CLOTH
-    second: {fileID: 2100000, guid: 972233dbd711ee548b96120e81552897, type: 2}
+  externalObjects: {}
   materials:
     importMaterials: 1
     materialName: 0
