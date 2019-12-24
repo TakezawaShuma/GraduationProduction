@@ -103,6 +103,14 @@ public class FollowingCamera : MonoBehaviour
             {
                 azimuthalAngle -= 1;
             }
+
+            if(InputManager.InputMouseCheck(2) == INPUT_MODE.PLAY)
+            {
+                float y = Input.GetAxis("Mouse Y");
+
+                y = polarAngle + y * mouseYSensitivity;
+                polarAngle = Mathf.Clamp(y, minPolarAngle, maxPolarAngle);
+            }
         }
 
         Vector3 lookAtPos;
@@ -133,6 +141,7 @@ public class FollowingCamera : MonoBehaviour
                 lastDistance = distance;
                 lastPos = transform.position;
                 distFlag = false;
+                dist = 10f;
             }
         }
         else
@@ -142,6 +151,7 @@ public class FollowingCamera : MonoBehaviour
             lastDistance = distance;
             lastPos = transform.position;
             distFlag = false;
+            dist = 10f;
         }
 
         transform.LookAt(lookAtPos);
