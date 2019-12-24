@@ -81,7 +81,8 @@ public class FollowingCamera : MonoBehaviour
 
     private Vector3 lastPos;
     private float lastDistance;
-    private float dist = 0;
+    private float dist = 10f;
+    private bool distFlag;
 
     
 
@@ -102,6 +103,14 @@ public class FollowingCamera : MonoBehaviour
             {
                 azimuthalAngle -= 1;
             }
+
+            if(InputManager.InputMouseCheck(2) == INPUT_MODE.PLAY)
+            {
+                float y = Input.GetAxis("Mouse Y");
+
+                y = polarAngle + y * mouseYSensitivity;
+                polarAngle = Mathf.Clamp(y, minPolarAngle, maxPolarAngle);
+            }
         }
 
         Vector3 lookAtPos;
@@ -113,10 +122,10 @@ public class FollowingCamera : MonoBehaviour
             {
                 Vector3 v = lockOnTarget.transform.position - target.transform.position;
 
-                dist = v.magnitude + lastDistance;
-
+                if (distFlag)
                 {
-                    distance = dist;
+                    dist = v.magnitude + lastDistance;
+                    distFlag = true;
                 }
                 //float a = Mathf.Atan2(v.x, v.z) * Mathf.Rad2Deg % 360 + 90;
 
@@ -131,7 +140,8 @@ public class FollowingCamera : MonoBehaviour
                 updatePosition(lookAtPos);
                 lastDistance = distance;
                 lastPos = transform.position;
-                dist = 0;
+                distFlag = false;
+                dist = 10f;
             }
         }
         else
@@ -140,7 +150,8 @@ public class FollowingCamera : MonoBehaviour
             updatePosition(lookAtPos);
             lastDistance = distance;
             lastPos = transform.position;
-            dist = 0;
+            distFlag = false;
+            dist = 10f;
         }
 
         transform.LookAt(lookAtPos);
@@ -189,10 +200,18 @@ public class FollowingCamera : MonoBehaviour
 
     void updateDistance(float scroll)
     {
-        if (!collisionObstacle && !stop)
+        if (lockOnTarget)
         {
-            scroll = distance - scroll * scrollSensitivity;
-            distance = Mathf.Clamp(scroll, minDistance, maxDistance);
+            scroll = dist - scroll * scrollSensitivity;
+            dist = Mathf.Clamp(scroll, minDistance + 10f, maxDistance + 30f);
+        }
+        else
+        {
+            if (!collisionObstacle && !stop)
+            {
+                scroll = distance - scroll * scrollSensitivity;
+                distance = Mathf.Clamp(scroll, minDistance, maxDistance);
+            }
         }
     }
 
@@ -200,10 +219,20 @@ public class FollowingCamera : MonoBehaviour
     {
         var da = azimuthalAngle * Mathf.Deg2Rad;
         var dp = polarAngle * Mathf.Deg2Rad;
-        transform.position = new Vector3(
-            lookAtPos.x + distance * Mathf.Sin(dp) * Mathf.Cos(da),
-            lookAtPos.y + distance * Mathf.Cos(dp),
-            lookAtPos.z + distance * Mathf.Sin(dp) * Mathf.Sin(da));
+        if (lockOnTarget)
+        {
+            transform.position = new Vector3(
+                lookAtPos.x + dist * Mathf.Sin(dp) * Mathf.Cos(da),
+                lookAtPos.y + dist * Mathf.Cos(dp),
+                lookAtPos.z + dist * Mathf.Sin(dp) * Mathf.Sin(da));
+        }
+        else
+        {
+            transform.position = new Vector3(
+                lookAtPos.x + distance * Mathf.Sin(dp) * Mathf.Cos(da),
+                lookAtPos.y + distance * Mathf.Cos(dp),
+                lookAtPos.z + distance * Mathf.Sin(dp) * Mathf.Sin(da));
+        }
     }
 
     void CantPenetrateObstacle()
