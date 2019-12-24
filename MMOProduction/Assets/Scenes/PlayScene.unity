@@ -6978,10 +6978,30 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 7628656139669487488, guid: 8d7079c131d5a71498ac53bf47b617b2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7628656140402101178, guid: 8d7079c131d5a71498ac53bf47b617b2,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7c28596c360155b449964b2a0f2333ff, type: 2}
+    - target: {fileID: 7628656140402101180, guid: 8d7079c131d5a71498ac53bf47b617b2,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7c28596c360155b449964b2a0f2333ff, type: 2}
     - target: {fileID: 7628656140825949254, guid: 8d7079c131d5a71498ac53bf47b617b2,
         type: 3}
       propertyPath: m_Layer
       value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 7628656140825949254, guid: 8d7079c131d5a71498ac53bf47b617b2,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8d7079c131d5a71498ac53bf47b617b2, type: 3}
@@ -9167,7 +9187,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 8
   m_Type: 1
-  m_Color: {r: 1, g: 0.95686275, b: 0.8392157, a: 1}
+  m_Color: {r: 0.8207547, g: 0.8207547, b: 0.8207547, a: 1}
   m_Intensity: 1
   m_Range: 10
   m_SpotAngle: 30
@@ -11532,6 +11552,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4038160669237707227, guid: 27081a4f8daa5c346b3884985c570136,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7c28596c360155b449964b2a0f2333ff, type: 2}
     - target: {fileID: 4038160669765123702, guid: 27081a4f8daa5c346b3884985c570136,
         type: 3}
       propertyPath: m_Layer
@@ -13151,6 +13176,11 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 8139232757030837801, guid: f024516b2cf958b4696d08a56040de69,
+        type: 3}
+      propertyPath: m_Layer
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 5829866035418247833, guid: f024516b2cf958b4696d08a56040de69,
         type: 3}
       propertyPath: m_LocalPosition.y
@@ -13281,6 +13311,16 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 15
       objectReference: {fileID: 0}
+    - target: {fileID: 8139232757032763625, guid: f024516b2cf958b4696d08a56040de69,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a9210a9b453702346a5b0b69d0ef9fd3, type: 2}
+    - target: {fileID: 8139232757369616418, guid: f024516b2cf958b4696d08a56040de69,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7c28596c360155b449964b2a0f2333ff, type: 2}
     - target: {fileID: 8396686398176565714, guid: f024516b2cf958b4696d08a56040de69,
         type: 3}
       propertyPath: m_Layer
@@ -13304,6 +13344,26 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1623201742}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1623201744 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8139232757369616428, guid: f024516b2cf958b4696d08a56040de69,
+    type: 3}
+  m_PrefabInstance: {fileID: 1623201742}
+  m_PrefabAsset: {fileID: 0}
+--- !u!64 &1623201745
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1623201744}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Convex: 0
+  m_CookingOptions: 14
+  m_Mesh: {fileID: 10209, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &1631059799
 GameObject:
   m_ObjectHideFlags: 0
@@ -13877,8 +13937,8 @@ BoxCollider:
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 2.2666092, y: 0.01425444, z: 1}
+  m_Center: {x: 0.1935058, y: -0.49287274, z: 0}
 --- !u!1001 &1864718191
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15159,17 +15219,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6046036961892417605, guid: 60f291891277049469bd2b1df4c8605c,
         type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6046036961892417605, guid: 60f291891277049469bd2b1df4c8605c,
+        type: 3}
       propertyPath: m_AnchorMax.x
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6046036961892417605, guid: 60f291891277049469bd2b1df4c8605c,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6046036961892417605, guid: 60f291891277049469bd2b1df4c8605c,
-        type: 3}
-      propertyPath: m_AnchorMin.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

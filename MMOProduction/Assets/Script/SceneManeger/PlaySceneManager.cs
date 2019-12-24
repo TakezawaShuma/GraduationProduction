@@ -518,6 +518,7 @@ public class PlaySceneManager : SceneManagerBase
         //{
         if (enemy.Attacked(player.gameObject, _packet.skill_id))
         {
+            enemy.Attacked(player.gameObject, _packet.skill_id);
             Debug.Log("攻撃がヒットしたよ");
             wsp.Send(new Packes.Attack(UserRecord.ID, _packet.enemy_id, 0, 0).ToJson());
         }
