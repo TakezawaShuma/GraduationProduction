@@ -65,11 +65,13 @@ public class Player : CharacterBase
     }
 
 
-    public void UpdateStatus( int _hp,  int _mp, int _status)
+    public void UpdateStatus(int _maxHp, int _hp,int _maxMp,int _mp, int _status)
     {
         HP = _hp;
         MP = _mp;
         Status = _status;
+        maxHp = _maxHp;
+        maxMp = _maxMp;
     }
 
 }

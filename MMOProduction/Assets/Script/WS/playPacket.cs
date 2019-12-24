@@ -185,15 +185,15 @@ namespace Packes
         /// <param name="_skill_id">スキルID</summary>
         /// <param name="_map_id">マップのID</summary>
         public Attack(
-            int _enemy_id,
-            int _user_id,
+            int _target_id,
+            int _usecharacter_id,
             int _skill_id,
             int _map_id
         )
         {
             this.command = (int)CommandData.Attack;
-            this.enemy_id = _enemy_id;
-            this.user_id = _user_id;
+            this.enemy_id = _target_id;
+            this.user_id = _usecharacter_id;
             this.skill_id = _skill_id;
             this.map_id = _map_id;
         }
@@ -700,7 +700,7 @@ namespace Packes
     [System.Serializable]
     public struct CharctorSatusData
     {
-        public int charctor_id;
+        public int charcter_id;
         public int max_hp;
         public int hp;
         public int max_mp;
@@ -708,7 +708,7 @@ namespace Packes
         public int status;
         public CharctorSatusData(int _charctor_id, int _max_hp, int _hp, int _max_mp, int _mp, int _status)
         {
-            this.charctor_id = _charctor_id;
+            this.charcter_id = _charctor_id;
             this.max_hp = _max_hp;
             this.hp = _hp;
             this.max_mp = _max_mp;

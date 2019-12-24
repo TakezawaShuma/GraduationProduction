@@ -387,7 +387,6 @@ public class TitleSceneManager : SceneManagerBase
     /// </summary>
     /// <param name="_packet"></param>
     private void CreateAction(Packes.CreateOK _packet) {
-        Debug.Log("create ok" + id_.text + "/" + pw_.text);
         wsl.Send(new Packes.LoginUser(id_.text, pw_.text).ToJson());
     }
 
@@ -396,7 +395,6 @@ public class TitleSceneManager : SceneManagerBase
     /// </summary>
     /// <param name="_packet"></param>
     private void LoginAction(Packes.LoginOK _packet) {
-        Debug.Log("login ok");
         UserRecord.ID = _packet.user_id;
         UserRecord.Name = _packet.name;
         if(inputState == CANVAS_STATE.SIGN_IN) ChangeScene("LoadingScene");

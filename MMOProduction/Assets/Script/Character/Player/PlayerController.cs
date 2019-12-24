@@ -155,7 +155,12 @@ public class PlayerController : MonoBehaviour
             Vector3 dir = target.transform.position - player.PositionV3;
             rot = Quaternion.Slerp(player.Rotation, Quaternion.LookRotation(dir), playerSetting.TS);
         }
-        
+
+        Vector3 vel = player.Rigid.velocity;
+        vel.x = 0;
+        vel.z = 0;
+
+        player.Rigid.velocity = vel;
         player.Rotation = Quaternion.Euler(0, rot.eulerAngles.y, 0);
 
         SendMoveDeta(player.PositionV3, player.Rotation.eulerAngles.y);
