@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: skill_data
   m_EditorClassIdentifier: 
   tables:
-  - id: 101
+  - id: 0
     Icon: 0
     effectId: 0
     name: "\u4F53\u5F53\u305F\u308A"
@@ -21,6 +21,7 @@ MonoBehaviour:
     currentLv: 0
     detail: "\u30D5\u30A9\u30EC\u30B9\u30C8\u30E9\u30D3\u30C3\u30C8\u306E\u4F53\u5F53\u305F\u308A\u3002"
     user: ForestRabbit
+    animation: Attack
     cast: 0
     currentCast: 0
     cost: 0
@@ -50,6 +51,7 @@ MonoBehaviour:
     currentLv: 0
     detail: 
     user: 
+    animation: 
     cast: 0
     currentCast: 0
     cost: 0
@@ -79,6 +81,7 @@ MonoBehaviour:
     currentLv: 0
     detail: 
     user: 
+    animation: 
     cast: 0
     currentCast: 0
     cost: 0
