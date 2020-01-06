@@ -101,8 +101,8 @@ public enum CommandData
     RecvItemList = (int)704,
     /// <summary> スキル一覧受信 </summary>
     RecvSkillList = (int)705,
-    SendAccessory = 706,
-    RecvAccessory = 707,
+    SendAccessory = 708,
+    RecvAccessory = 709,
 
 
 
