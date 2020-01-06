@@ -619,7 +619,9 @@ namespace Packes
     }
 
     public class LoadingSkillDataSend : IPacketDatas {
+        public int user_id;
         LoadingSkillDataSend() {
+            user_id = 0;
             command = (int)CommandData.SendSkillList;
         }
     }
@@ -640,7 +642,14 @@ namespace Packes
     }
 
     public class LoadingAccessoryMasterSend : IPacketDatas {
-
+        public int user_id;
+        LoadingAccessoryMasterSend() {
+            command = (int)CommandData.SendAccessory;
+        }
+        LoadingAccessoryMasterSend(int _user_id) {
+            command = (int)CommandData.SendAccessory;
+            user_id = _user_id;
+        }
     }
 
     /// <summary> 他プレイヤーの作成用データ </summary>
