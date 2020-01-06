@@ -608,13 +608,19 @@ namespace Packes
 		public SkillMasterData[] skills;
 
         LoadingSkillMaster() {
-            command = (int)CommandData.SendSkillList;
+            command = (int)CommandData.RecvSkillList;
         }
 
         LoadingSkillMaster(int _version, SkillMasterData[] _skills) {
-            command = (int)CommandData.SendSkillList;
+            command = (int)CommandData.RecvSkillList;
             version = _version;
             skills = _skills;
+        }
+    }
+
+    public class LoadingSkillDataSend : IPacketDatas {
+        LoadingSkillDataSend() {
+            command = (int)CommandData.SendSkillList;
         }
     }
 
