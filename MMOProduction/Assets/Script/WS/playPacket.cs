@@ -624,6 +624,25 @@ namespace Packes
         }
     }
 
+    public class LoadingAccessoryMaster : IPacketDatas {
+        public int version;
+        public List<AccessoryMasterData> accessorys;
+
+        LoadingAccessoryMaster() {
+            command = (int)CommandData.RecvAccessory;
+        }
+
+        LoadingAccessoryMaster(int _version, List<AccessoryMasterData> _accessorys) {
+            command = (int)CommandData.RecvAccessory;
+            version = _version;
+            accessorys = _accessorys;
+        }
+    }
+
+    public class LoadingAccessoryMasterSend : IPacketDatas {
+
+    }
+
     /// <summary> 他プレイヤーの作成用データ </summary>
     [System.Serializable]
     public struct OtherPlayersData
@@ -776,6 +795,50 @@ namespace Packes
             target = _target;
             target_type = _target_type;
             range = _range;
+        }
+    }
+
+    [System.Serializable]
+    public struct AccessoryMasterData {
+        public int id;	
+	    public int category;
+	    public string name;
+	    public int level;
+	    public string comment;
+               
+	    public int str;
+	    public int vit;
+	    public int mmd;
+	    public int dex;
+	    public int agi;
+               
+	    public string image;
+
+        AccessoryMasterData(
+            int _id,
+            int _category,
+            string _name,
+            int _level,
+            string _comment,
+            int _str,
+            int _vit,
+            int _mmd,
+            int _dex,
+            int _agi,
+            string _image
+            )
+        {
+            id = _id;
+            category = _category;
+            name = _name;
+            level = _level;
+            comment = _comment;
+            str = _str;
+            vit = _vit;
+            mmd = _mmd;
+            dex = _dex;
+            agi = _agi;
+            image = _image;
         }
     }
 }
