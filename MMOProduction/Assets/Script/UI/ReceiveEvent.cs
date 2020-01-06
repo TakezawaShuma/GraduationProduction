@@ -54,6 +54,13 @@ public class ReceiveEvent : MonoBehaviour
                 hitObject.GetComponent<SlotData>().HOGE = this.GetComponent<SlotData>().HOGE;
             }
 
+            if(hitObject.tag == "Accessory")
+            {
+                hitObject.GetComponent<Image>().sprite = this.GetComponent<Image>().sprite;
+                hitObject.GetComponent<SlotData>().ID = this.GetComponent<SlotData>().ID;
+                hitObject.GetComponent<SlotData>().HOGE = this.GetComponent<SlotData>().HOGE;
+            }
+
             //インベントリ内で入れ替え
             if (hitObject.tag == "Inventory")
             {
@@ -132,7 +139,9 @@ public class ReceiveEvent : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.transform.tag == "Slot" || collision.transform.tag == "Inventory")
+        if (collision.transform.tag == "Slot" 
+            || collision.transform.tag == "Inventory" 
+            || collision.transform.tag == "Accessory")
         {
             hitObject = collision.gameObject;
         }
@@ -140,7 +149,9 @@ public class ReceiveEvent : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.transform.tag == "Slot" || collision.transform.tag == "Inventory")
+        if (collision.transform.tag == "Slot" 
+            || collision.transform.tag == "Inventory"
+            || collision.transform.tag == "Accessory")
         {
             hitObject = null;
         }

@@ -603,6 +603,54 @@ namespace Packes
         }
     }
 
+    public class LoadingSkillMaster : IPacketDatas {
+        public int version;
+		public SkillMasterData[] skills;
+
+        LoadingSkillMaster() {
+            command = (int)CommandData.RecvSkillList;
+        }
+
+        LoadingSkillMaster(int _version, SkillMasterData[] _skills) {
+            command = (int)CommandData.RecvSkillList;
+            version = _version;
+            skills = _skills;
+        }
+    }
+
+    public class LoadingSkillDataSend : IPacketDatas {
+        public int user_id;
+        LoadingSkillDataSend() {
+            user_id = 0;
+            command = (int)CommandData.SendSkillList;
+        }
+    }
+
+    public class LoadingAccessoryMaster : IPacketDatas {
+        public int version;
+        public List<AccessoryMasterData> accessorys;
+
+        LoadingAccessoryMaster() {
+            command = (int)CommandData.RecvAccessory;
+        }
+
+        LoadingAccessoryMaster(int _version, List<AccessoryMasterData> _accessorys) {
+            command = (int)CommandData.RecvAccessory;
+            version = _version;
+            accessorys = _accessorys;
+        }
+    }
+
+    public class LoadingAccessoryMasterSend : IPacketDatas {
+        public int user_id;
+        LoadingAccessoryMasterSend() {
+            command = (int)CommandData.SendAccessory;
+        }
+        LoadingAccessoryMasterSend(int _user_id) {
+            command = (int)CommandData.SendAccessory;
+            user_id = _user_id;
+        }
+    }
 
     /// <summary> 他プレイヤーの作成用データ </summary>
     [System.Serializable]
@@ -717,4 +765,89 @@ namespace Packes
         }
     }
 
+    /// <summary>
+    /// スキルのマスターデータ
+    /// </summary>
+    [System.Serializable]
+    public struct SkillMasterData {
+        public int      id;						 //スキルID
+	    public int      icon_id;				 //アイコンID
+	    public int      animation_id;			 //アニメーションID
+	    public int      effect_id;				 //エフェクトID
+	    public string   comment;				 //効果説明文
+	    public int      parent_id;				 //親スキルID
+	    public int      max_level;				 //最大レベル
+	    public int      recast_time;			 //リキャスト
+	    public int      consumption_hit_point;	 //消費HP
+	    public int      consumption_magic_point; //消費MP
+	    public int      power;					 //威力
+	    public int      target;					 //効果ターゲット
+	    public int      range;		    		 //効果範囲
+	    public int      target_type;			 //効果範囲のタイプ
+
+        public SkillMasterData(int _id, int _cast_time, int _recast_time, int _icon_id, int _animation_id,
+                               int _consumption_hit_point, int _consumption_magic_point,
+                               int _power,int _effect_id, int _target, int _range,int _target_type,
+                               string _comment, int _parent_id, int _max_level)
+        {
+            id = _id;
+            icon_id = _icon_id;
+            animation_id = _animation_id;
+            effect_id = _effect_id;
+            comment = _comment;
+            parent_id = _parent_id;
+            max_level = _max_level;
+            recast_time = _recast_time;
+            consumption_hit_point = _consumption_hit_point;
+            consumption_magic_point = _consumption_magic_point;
+            power = _power;
+            target = _target;
+            target_type = _target_type;
+            range = _range;
+        }
+    }
+
+    [System.Serializable]
+    public struct AccessoryMasterData {
+        public int id;	
+	    public int category;
+	    public string name;
+	    public int level;
+	    public string comment;
+               
+	    public int str;
+	    public int vit;
+	    public int mmd;
+	    public int dex;
+	    public int agi;
+               
+	    public string image;
+
+        AccessoryMasterData(
+            int _id,
+            int _category,
+            string _name,
+            int _level,
+            string _comment,
+            int _str,
+            int _vit,
+            int _mmd,
+            int _dex,
+            int _agi,
+            string _image
+            )
+        {
+            id = _id;
+            category = _category;
+            name = _name;
+            level = _level;
+            comment = _comment;
+            str = _str;
+            vit = _vit;
+            mmd = _mmd;
+            dex = _dex;
+            agi = _agi;
+            image = _image;
+        }
+    }
 }
