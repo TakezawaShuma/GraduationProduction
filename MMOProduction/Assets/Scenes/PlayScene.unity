@@ -5824,7 +5824,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cb1b657d808c7b4583315bc0749e915, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  connectFlag: 0
+  connectFlag: 1
   playerPre: {fileID: 2136695631195096698, guid: f60ab25478542df4281ac7e670433c26,
     type: 3}
   characterModel: {fileID: 11400000, guid: 324f4e86b8b3bff4b99ae5c867aa456c, type: 2}
@@ -15930,7 +15930,22 @@ PrefabInstance:
     - target: {fileID: 6880532109006458115, guid: 7f4271a449d825f42ac315b724d2b520,
         type: 3}
       propertyPath: m_Value
-      value: 100
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6880532109006458115, guid: 7f4271a449d825f42ac315b724d2b520,
+        type: 3}
+      propertyPath: m_MaxValue
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 65202302930779678, guid: 7f4271a449d825f42ac315b724d2b520,
+        type: 3}
+      propertyPath: m_MaxValue
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 65202302930779678, guid: 7f4271a449d825f42ac315b724d2b520,
+        type: 3}
+      propertyPath: m_Value
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7f4271a449d825f42ac315b724d2b520, type: 3}

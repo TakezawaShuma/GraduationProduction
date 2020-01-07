@@ -54,10 +54,6 @@ public class PlayerUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //プレイヤ番号判定して+""で取る予定
-        //player = GameObject.Find("yuki(Clone)");
-        //playerCmp = player.GetComponent<Player>();
-
         // アイコンやプレイヤ情報の初期設定
         mpYellow.name = "BGMP";
         hpRed.name = "BGHP";
@@ -71,18 +67,6 @@ public class PlayerUI : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //if(player == null)
-        //{
-        //    player = GameObject.Find("player" + UserRecord.ID);
-        //    if (player != null)
-        //    {
-        //        playerCmp = player.GetComponent<Player>();
-        //        playerCmp.MaxHp = 100;
-        //        playerCmp.HP = 30;
-        //        playerCmp.MaxMp = 100;
-        //        playerCmp.MP = 60;
-        //    }
-        //}
         if (playerCmp)
         {
             StatusUpdate();
@@ -91,21 +75,25 @@ public class PlayerUI : MonoBehaviour
 
     private void StatusUpdate()
     {
-        int hp = playerCmp.HP;
-        int maxHp = playerCmp.MaxHp;
-        int mp = playerCmp.MP;
-        int maxMp = playerCmp.MaxMp;
+        int hp = playerCmp.hp;
+        int maxHp = playerCmp.maxHp;
+        int mp = playerCmp.mp;
+        int maxMp = playerCmp.maxMp;
 
-        if (Observar(hp, currentHp) || Observar(maxHp,currentMaxHp))
+        if (Observar(hp, currentHp) || Observar(maxHp, currentMaxHp))
         {
             // HPの表示を更新する
             hpGreen.value = hp;
+            hpGreen.maxValue = maxHp;
+            Debug.Log("MaxHP : "+maxHp);
         }
 
         if (Observar(mp, currentMp) || Observar(maxMp,currentMaxMp))
         {
             // MPの表示を更新する
             mpBlue.value = mp;
+            mpBlue.maxValue = maxMp;
+            Debug.Log("MaxMP : " + maxMp);
         }
 
         currentHp = hp;
