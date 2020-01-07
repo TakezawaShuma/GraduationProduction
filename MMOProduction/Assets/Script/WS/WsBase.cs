@@ -15,9 +15,6 @@ namespace WS
     {
         // ソケット
         protected WebSocket ws = null;
-        // サーバーのIP
-        private string server_ip = "172.24.52.250";
-        //private string server_ip = "localhost";
 
 
 
@@ -27,6 +24,7 @@ namespace WS
         /// <param name="_port">ポート</param>
         protected void Connect(uint _port)
         {
+            string server_ip = ExternalFileAccess.ReadFile("../ip.txt");
             if (ws == null) ws = new WebSocket("ws://" + server_ip + ":" + _port.ToString());
             if (ws.ReadyState == WebSocketState.Open && ws != null)
             {
