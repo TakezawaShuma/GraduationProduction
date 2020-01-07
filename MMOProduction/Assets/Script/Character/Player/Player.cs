@@ -25,10 +25,7 @@ public class Player : CharacterBase
     private Rigidbody playerRigid = null;
 
     //private Status status;
-    public int HP { get; set; }
-    public int MP { get; set; }
-    public int MaxHp { get; set; }
-    public int MaxMp { get; set; }
+
     public int Status { get; set; }
     public int Lv { get; set; }
     public int EXP { get; set; }
@@ -46,11 +43,11 @@ public class Player : CharacterBase
 
     private void Start()
     {
-        HP = 30;
-        MP = 80;
+        hp = 30;
+        mp = 80;
 
-        MaxHp = 100;
-        MaxMp = 100;
+        maxHp = 100;
+        maxMp = 100;
 
         position = transform.position;
         rotation = transform.rotation;
@@ -67,11 +64,13 @@ public class Player : CharacterBase
 
     public void UpdateStatus(int _maxHp, int _hp,int _maxMp,int _mp, int _status)
     {
-        HP = _hp;
-        MP = _mp;
+        hp = _hp;
+        mp = _mp;
         Status = _status;
         maxHp = _maxHp;
         maxMp = _maxMp;
+
+
     }
 
 }

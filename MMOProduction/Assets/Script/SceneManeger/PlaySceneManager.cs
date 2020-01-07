@@ -61,7 +61,7 @@ public class PlaySceneManager : SceneManagerBase
     public Player Player { get { return player; } }
 
     // プレイヤー以外のキャラクター情報
-    private Dictionary<int, NonPlayer> charcters = new Dictionary<int, NonPlayer>();
+    private Dictionary<int, NonPlayer> characters = new Dictionary<int, NonPlayer>();
 
     // コールバック関数をリスト化
     private List<Action<string>> callbackList = new List<Action<string>>();
@@ -131,9 +131,9 @@ public class PlaySceneManager : SceneManagerBase
     {
         InputManager.Update();
         if (InputManager.InputKeyCheck(KeyCode.Escape)) Quit();
-        if (updateFlag)
+        if (ready.CheckReady())
         {
-            ready.ReadyGO();
+            //ready.ReadyGO();
             if (player != null)
             {
                 var playerData = player.PositionV4;
@@ -213,20 +213,19 @@ public class PlaySceneManager : SceneManagerBase
 
             cheatCommand.PLAYER = tmp;
 
-            Player playerComponent = tmp.AddComponent<Player>();
+            player = tmp.AddComponent<Player>();
             PlayerController playerCComponent = tmp.AddComponent<PlayerController>();
 
-            playerCComponent.Init(playerComponent, FollowingCamera, playerSetting, chatController, tmp.GetComponent<Animator>());
+            playerCComponent.Init(player, FollowingCamera, playerSetting, chatController, tmp.GetComponent<Animator>());
             userSeeting.Init(tmp);
-            player = playerComponent;
             FollowingCamera.Target = tmp;
-            //userPlayer = tmp;
+
 
             // ミニマップのカメラの作成
             var miniMapTmp = Instantiate<GameObject>(miniMapCameraPrefab_, this.transform);
             miniMapTmp.GetComponent<MiniMapController>().Init(tmp);
 
-            playerUI.PLAYER_CMP = playerComponent;
+            playerUI.PLAYER_CMP = player;
             playerUI.PLAYER_NAME = UserRecord.Name;
 
             ret = true;
@@ -247,11 +246,11 @@ public class PlaySceneManager : SceneManagerBase
             if (_packet.user_id != UserRecord.ID)
             {
                 // 他ユーザーの更新
-                if (charcters.ContainsKey(_packet.user_id))
+                if (characters.ContainsKey(_packet.user_id))
                 {
-                    if (charcters[_packet.user_id] != null)
+                    if (characters[_packet.user_id] != null)
                     {
-                        charcters[_packet.user_id].UpdatePostionData(_packet.x, _packet.y, _packet.z, _packet.dir);
+                        characters[_packet.user_id].UpdatePostionData(_packet.x, _packet.y, _packet.z, _packet.dir);
                     }
                 }
                 // todo 他プレイヤーの更新と作成を関数分けする
@@ -290,7 +289,8 @@ public class PlaySceneManager : SceneManagerBase
         otherPlayer.tag = "OtherPlayer";                                    // タグ
         otherPlayer.transform.localScale = new Vector3(2, 2, 2);
         other.Init(0, 0, 0, 0, _packet.user_id, skillTabe);
-        charcters[_packet.user_id] = other;                                 // キャラクター管理に登録
+        other.Type = CharacterType.Other;
+        characters[_packet.user_id] = other;                                 // キャラクター管理に登録
         Debug.Log("他キャラ生成" + _packet.user_id);
     }
 
@@ -311,11 +311,11 @@ public class PlaySceneManager : SceneManagerBase
             if(ene.unique_id!=UserRecord.ID)
             {
                 // 敵の更新
-                if (charcters.ContainsKey(ene.unique_id))
+                if (characters.ContainsKey(ene.unique_id))
                 {
-                    if (charcters[ene.unique_id] != null)
+                    if (characters[ene.unique_id] != null)
                     {
-                        charcters[ene.unique_id].UpdatePostionData(ene.x, ene.y, ene.z, ene.dir);
+                        characters[ene.unique_id].UpdatePostionData(ene.x, ene.y, ene.z, ene.dir);
                     }
                 }
                 // 敵の作成
@@ -351,7 +351,8 @@ public class PlaySceneManager : SceneManagerBase
         newEnemy.name = "Enemy:" + _ene.master_id + "->" + _ene.unique_id;
         enemy.Init(_ene.x, _ene.y, _ene.z, _ene.dir, _ene.unique_id,skillTabe);
         enemy.UI_HP = stutasCanvas.GetComponent<UIEnemyHP>();
-        charcters[_ene.unique_id] = enemy;
+        enemy.Type = CharacterType.Enemy;
+        characters[_ene.unique_id] = enemy;
     }
 
     /// <summary>
@@ -367,8 +368,8 @@ public class PlaySceneManager : SceneManagerBase
             }
             else
             {
-                if(charcters.ContainsKey(tmp.charcter_id))
-                charcters[tmp.charcter_id].UpdateStatusData(tmp.hp, tmp.mp, tmp.status);
+                if(characters.ContainsKey(tmp.charcter_id))
+                characters[tmp.charcter_id].UpdateStatusData(tmp.hp, tmp.mp, tmp.status);
             }
         }
 
@@ -390,6 +391,7 @@ public class PlaySceneManager : SceneManagerBase
             wsp.Send(new Packes.LoadingOK(UserRecord.ID).ToJson());
             Debug.Log("セーブデータを受けとり自分を作成した。→ロード完了");
             updateFlag = true;
+            ready.ReadyGO();
         }
         else
         {
@@ -447,13 +449,13 @@ public class PlaySceneManager : SceneManagerBase
         // todo
         // 戦闘で計算後エネミーが生きていたら
         // HPを減らすや状態の更新
-        if (charcters.ContainsKey(_packet.unique_id))
-        {
-            Debug.Log("敵は生存している");
-            Enemy enemy = charcters[_packet.unique_id].GetComponent<Enemy>();
-            enemy.PlayTriggerAnimetion("Take Damage");
-            enemy.HP = _packet.hp;
-        }
+        if (!characters.ContainsKey(_packet.unique_id)) return;
+        if (characters[_packet.unique_id].Type != CharacterType.Enemy) return;
+
+        Debug.Log("敵は生存している");
+        Enemy enemy = characters[_packet.unique_id].GetComponent<Enemy>();
+        enemy.PlayTriggerAnimetion("Take Damage");
+        enemy.HP = _packet.hp;
     }
 
     /// <summary>
@@ -465,21 +467,22 @@ public class PlaySceneManager : SceneManagerBase
         // todo
         // 戦闘で計算後エネミーが死亡していたら
         // HPを0にして死亡エフェクトやドロップアイテムの取得
-        if (charcters.ContainsKey(_packet.unique_id))
-        {
-            Enemy enemy = charcters[_packet.unique_id].GetComponent<Enemy>();
-            enemy.HP = 0;
+        if (!characters.ContainsKey(_packet.unique_id)) return;
+        if (characters[_packet.unique_id].Type != CharacterType.Enemy) return;
 
-            PlayerController pc = player.GetComponent<PlayerController>();
-            int target = pc.Target.GetComponentInParent<Enemy>().ID;
-            
-            if (target == _packet.unique_id)
-            {
-                pc.RemoveTarget();
-            }
-            charcters.Remove(_packet.unique_id);
-            enemy.PlayTriggerAnimetion("Die");
+        Enemy enemy = characters[_packet.unique_id].GetComponent<Enemy>();
+        enemy.HP = 0;
+
+        PlayerController pc = player.GetComponent<PlayerController>();
+        int target = pc.Target.GetComponentInParent<Enemy>().ID;
+
+        if (target == _packet.unique_id)
+        {
+            pc.RemoveTarget();
         }
+        characters.Remove(_packet.unique_id);
+        enemy.PlayTriggerAnimetion("Die");
+
     }
 
     /// <summary>
@@ -510,7 +513,7 @@ public class PlaySceneManager : SceneManagerBase
     private void EnemyUseSkill(Packes.EnemyUseSkill _packet)
     {
         Debug.Log("敵のスキルが発動したよ");
-        Enemy enemy = charcters[_packet.enemy_id].GetComponent<Enemy>();
+        Enemy enemy = characters[_packet.enemy_id].GetComponent<Enemy>();
         // enemy.PlayTriggerAnimetion("Attack");
         Debug.Log("スキルID : " + _packet.skill_id);
         enemy.PlayAttackAnimation(_packet.skill_id);
@@ -548,8 +551,8 @@ public class PlaySceneManager : SceneManagerBase
         }
         else if (UserRecord.ID != 0)
         {
-            Destroy(charcters[_packet.user_id].gameObject);
-            charcters.Remove(_packet.user_id);
+            Destroy(characters[_packet.user_id].gameObject);
+            characters.Remove(_packet.user_id);
             Debug.Log(_packet.user_id + "さんがログアウトしたよ！");
         }
     }
@@ -614,6 +617,6 @@ public class PlaySceneManager : SceneManagerBase
     /// <returns></returns>
     public　OtherPlayers GetOtherPlayer(int _playerId)
     {
-        return charcters[_playerId].GetComponent<OtherPlayers>();
+        return characters[_playerId].GetComponent<OtherPlayers>();
     }
 }
