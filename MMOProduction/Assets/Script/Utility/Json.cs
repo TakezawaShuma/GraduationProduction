@@ -2,11 +2,7 @@
 // 何処でも使うクラスや関数をまとめる.cs //
 ///////////////////////////////////////////
 
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using WebSocketSharp;
-using System;
 
 /// <summary>
 /// パケットデータのJSON化かけるクラス
@@ -45,13 +41,13 @@ public static class Json
     /// アクセサリーのマスターパーサー
     /// </summary>
     public static void ReadAccessoryMasterData() {
-        InputFile.ReadFile("accessoryMaster.json");
+        InputFile.ReadFile(MasterFileNameList.accessory);
     }
 
     /// <summary>
     /// マップのマスターパーサー
     /// </summary>
     public static void ReadMapMasterData() {
-        InputFile.ReadFile("mapMaster.json");
+        InputFile.ReadFile(MasterFileNameList.map);
     }
 }
