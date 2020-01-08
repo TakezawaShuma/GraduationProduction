@@ -430,6 +430,7 @@ namespace Packes
         public int hp;
         /// <summary>状態</summary>
         public int status;
+        public float damage_value;
 
         /// <summary>デフォルトコンストラクタ</summary>
         public EnemyAliveStoC()
@@ -443,13 +444,15 @@ namespace Packes
         public EnemyAliveStoC(
             int _unique_id,
             int _hp,
-            int _status
+            int _status,
+            float _damage_value
         )
         {
             this.command = (int)CommandData.EnemyAliveStoC;
             this.unique_id = _unique_id;
             this.hp = _hp;
             this.status = _status;
+            this.damage_value = _damage_value;
         }
     }
 
@@ -462,7 +465,7 @@ namespace Packes
         public int drop;
         /// <summary>敵のID</summary>
         public int unique_id;
-
+        public float damage_value;
         /// <summary>デフォルトコンストラクタ</summary>
         public EnemyDieStoC()
         {
@@ -472,12 +475,14 @@ namespace Packes
         /// <param name="_drop">ドロップ品のID</summary>
         public EnemyDieStoC(
             int _drop,
-            int _unique_id
+            int _unique_id,
+            float _damage_value
         )
         {
             this.command = (int)CommandData.EnemyDieStoC;
             this.drop = _drop;
             this.unique_id = _unique_id;
+            this.damage_value = _damage_value;
         }
     }
 
