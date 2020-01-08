@@ -23,19 +23,19 @@ public class Inventory : MonoBehaviour
 
     void Update()
     {
-        foreach(var a in list)
-        {
-            if(a.GetComponent<SlotData>().GetUseFlag())
-            {
-                //アイテムを使う
-                var b = a.GetComponent<SlotData>().HOGE;
-                var c = a.GetComponent<SlotData>().ID;
+        //foreach(var a in list)
+        //{
+        //    if(a.GetComponent<SlotData>().GetUseFlag())
+        //    {
+        //        //アイテムを使う
+        //        var b = a.GetComponent<SlotData>().HOGE;
+        //        var c = a.GetComponent<SlotData>().ID;
 
 
-                //使った報告
-                a.GetComponent<SlotData>().UseFlagOff();
-            }
-        }
+        //        //使った報告
+        //        a.GetComponent<SlotData>().UseFlagOff();
+        //    }
+        //}
     }
 
     private void GenerateInventory()
@@ -50,7 +50,7 @@ public class Inventory : MonoBehaviour
                 obj.transform.parent = this.transform;
                 obj.transform.localPosition = pos + new Vector3(j * 48, i * -48, 0);
                 obj.transform.localScale = new Vector3(1, 1, 1);
-                obj.GetComponent<Image>().sprite = sprite;
+                obj.transform.GetChild(0).GetComponent<Image>().sprite = sprite;
 
                 list.Add(obj);
             }
