@@ -607,11 +607,11 @@ namespace Packes
         public int version;
 		public SkillMasterData[] skills;
 
-        LoadingSkillMaster() {
+        public LoadingSkillMaster() {
             command = (int)CommandData.RecvSkillList;
         }
 
-        LoadingSkillMaster(int _version, SkillMasterData[] _skills) {
+        public LoadingSkillMaster(int _version, SkillMasterData[] _skills) {
             command = (int)CommandData.RecvSkillList;
             version = _version;
             skills = _skills;
@@ -620,7 +620,7 @@ namespace Packes
 
     public class LoadingSkillDataSend : IPacketDatas {
         public int user_id;
-        LoadingSkillDataSend() {
+        public LoadingSkillDataSend() {
             user_id = 0;
             command = (int)CommandData.SendSkillList;
         }
@@ -630,11 +630,11 @@ namespace Packes
         public int version;
         public List<AccessoryMasterData> accessorys;
 
-        LoadingAccessoryMaster() {
+        public LoadingAccessoryMaster() {
             command = (int)CommandData.RecvAccessory;
         }
 
-        LoadingAccessoryMaster(int _version, List<AccessoryMasterData> _accessorys) {
+        public LoadingAccessoryMaster(int _version, List<AccessoryMasterData> _accessorys) {
             command = (int)CommandData.RecvAccessory;
             version = _version;
             accessorys = _accessorys;
@@ -643,10 +643,10 @@ namespace Packes
 
     public class LoadingAccessoryMasterSend : IPacketDatas {
         public int user_id;
-        LoadingAccessoryMasterSend() {
+        public LoadingAccessoryMasterSend() {
             command = (int)CommandData.SendAccessory;
         }
-        LoadingAccessoryMasterSend(int _user_id) {
+        public LoadingAccessoryMasterSend(int _user_id) {
             command = (int)CommandData.SendAccessory;
             user_id = _user_id;
         }

@@ -47,6 +47,9 @@ namespace WS
         // 検索したプレイヤー情報を受け取る 712
         public Action<Packes.FindOfPlayerStoC> findResultsAction;
 
+        // アクセサリのマスター
+        public Action<Packes.LoadingAccessoryMaster> loadingAccessoryMasterAction;
+
         public static WsPlay Instance
         {
             get
@@ -231,8 +234,12 @@ namespace WS
 
                             findResultsAction?.Invoke(Json.ConvertToPackets<Packes.FindOfPlayerStoC>(e.Data));
                             break;
+                        case CommandData.RecvAccessory:
+                            loadingAccessoryMasterAction?.Invoke(Json.ConvertToPackets<Packes.LoadingAccessoryMaster>(e.Data));
+                            break;
                         // 随時追加
                         default:
+                            Debug.Log(e.Data);
                             break;
                     }
 

@@ -102,6 +102,8 @@ public class PlaySceneManager : SceneManagerBase
             wsp.logoutAction = Logout;                          // 707
             wsp.findResultsAction = ReceivingFindResults;       // 712
 
+            wsp.loadingAccessoryMasterAction = LoadingAccessoryMaster; 
+
             // セーブデータを要請する。
             wsp.Send(new Packes.SaveLoadCtoS(UserRecord.ID).ToJson());
             Debug.Log("自分のID->" + UserRecord.ID);
@@ -618,5 +620,14 @@ public class PlaySceneManager : SceneManagerBase
     public　OtherPlayers GetOtherPlayer(int _playerId)
     {
         return characters[_playerId].GetComponent<OtherPlayers>();
+    }
+
+    /// <summary>
+    /// アクセサリのマスター保存
+    /// </summary>
+    /// <param name="_data"></param>
+    private void LoadingAccessoryMaster(Packes.LoadingAccessoryMaster _data) {
+        InputFile.WriterJson(MasterFileNameList.accessory, JsonUtility.ToJson(_data), FILETYPE.JSON);
+        AccessoryDatas.SaveingData(_data.accessorys);
     }
 }
