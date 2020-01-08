@@ -51,7 +51,7 @@ public class LoadScreen : SceneManagerBase
         _columnWindow = new ColumnWindow("Images/ColumnWindow");
         // 標準ウィンドウ幅 width:500 height:300
 
-        StartCoroutine("LoadScene");
+        StartCoroutine(LoadScene(UserRecord.MapID));
     }
 
     private void Update()
@@ -111,9 +111,24 @@ public class LoadScreen : SceneManagerBase
         _loadingInfoWindow.sprite = _columnWindow.GetRandomImage();
     }
 
-    private IEnumerator LoadScene()
+    private IEnumerator LoadScene(MapID _mapId)
     {
-        async = SceneManager.LoadSceneAsync("PlayScene", LoadSceneMode.Additive);
+        switch (_mapId)
+        {
+            case MapID.Title:
+                async = SceneManager.LoadSceneAsync("PlayScene", LoadSceneMode.Additive);
+                break;
+            case MapID.Base:
+                async = SceneManager.LoadSceneAsync("DebugPlay", LoadSceneMode.Additive);
+                break;
+            case MapID.Field:
+                async = SceneManager.LoadSceneAsync("PlayScene", LoadSceneMode.Additive);
+                break;
+            default:
+                async = SceneManager.LoadSceneAsync("PlayScene", LoadSceneMode.Additive);
+                break;
+        }
+    
         while (!async.isDone)
         {
             SetProgress(Mathf.Clamp01(async.progress / 0.9f));
