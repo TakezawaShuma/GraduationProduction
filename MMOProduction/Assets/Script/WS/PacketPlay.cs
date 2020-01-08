@@ -115,6 +115,41 @@ namespace Packes
     }
 
     /// <summary>
+    /// アクセサリー装備変更 command:207
+    /// </summary>
+    public class AccessoryChange : IPacketDatas
+    {
+        /// <summary>ユーザーID</summary>
+        public int user_id;
+        /// <summary>アクセサリーID</summary>
+        public int accessory_id;
+        /// <summary>装備部位ID</summary>
+        public int part_id;
+
+        /// <summary>デフォルトコンストラクタ</summary>
+        public AccessoryChange()
+        {
+            this.command = (int)CommandData.AccessoryChange;
+        }
+        /// <summary>コンストラクタ</summary>
+        /// <param name="_user_id">ユーザーID</summary>
+        /// <param name="_accessory_id">アクセサリーID</summary>
+        /// <param name="_part_id">装備部位ID</summary>
+        public AccessoryChange(
+            int _user_id,
+            int _accessory_id,
+            int _part_id
+        )
+        {
+            this.command = (int)CommandData.AccessoryChange;
+            this.user_id = _user_id;
+            this.accessory_id = _accessory_id;
+            this.part_id = _part_id;
+        }
+    }
+
+
+    /// <summary>
     /// セーブデータの読み込み要請 command:211
     /// </summary>
     public class SaveLoadCtoS : IPacketDatas
@@ -228,6 +263,113 @@ namespace Packes
         }
     }
 
+
+    /// <summary>
+    /// マップ移動コール command:251
+    /// (クエスト受注やリタイアに紐づく)
+    /// </summary>
+    public class MoveingMap : IPacketDatas
+    {
+        /// <summary>ユーザーID</summary>
+        public int user_id;
+        /// <summary>移動先のマップID</summary>
+        public int map_id;
+
+        /// <summary>デフォルトコンストラクタ</summary>
+        public MoveingMap()
+        {
+            this.command = (int)CommandData.MoveingMap;
+        }
+        /// <summary>コンストラクタ</summary>
+        /// <param name="_user_id">ユーザーID</summary>
+        /// <param name="_map_id">マップID</summary>
+        public MoveingMap(
+            int _user_id,
+            int _map_id
+        )
+        {
+            this.command = (int)CommandData.MoveingMap;
+            this.user_id = _user_id;
+            this.map_id = _map_id;
+        }
+    }
+
+    /// <summary>
+    /// 報酬選択 command:253
+    /// </summary>
+    public class SelectReward : IPacketDatas
+    {
+        /// <summary>ユーザーID</summary>
+        public int user_id;
+        /// <summary>アクセサリーID</summary>
+        public int accessory_id;
+
+        /// <summary>デフォルトコンストラクタ</summary>
+        public SelectReward()
+        {
+            this.command = (int)CommandData.SelectReward;
+        }
+        /// <summary>コンストラクタ</summary>
+        /// <param name="_user_id">ユーザーID</summary>
+        /// <param name="_accessory_id">アクセサリーID</summary>
+        public SelectReward(
+            int _user_id,
+            int _accessory_id
+        )
+        {
+            this.command = (int)CommandData.SelectReward;
+            this.user_id = _user_id;
+            this.accessory_id = _accessory_id;
+        }
+    }
+
+    /// <summary>
+    /// 永久インべの取得コール command:255
+    /// </summary>
+    public class GetInventory : IPacketDatas
+    {
+        /// <summary>ユーザーID</summary>
+        public int user_id;
+
+        /// <summary>デフォルトコンストラクタ</summary>
+        public GetInventory()
+        {
+            this.command = (int)CommandData.GetInventory;
+        }
+        /// <summary>コンストラクタ</summary>
+        /// <param name="_user_id">ユーザーID</summary>
+        public GetInventory(
+            int _user_id
+        )
+        {
+            this.command = (int)CommandData.GetInventory;
+            this.user_id = _user_id;
+        }
+    }
+
+    /// <summary>
+    /// ドロップインベの取得コール command:291
+    /// </summary>
+    public class GetDropInventory : IPacketDatas
+    {
+        /// <summary>ユーザーID</summary>
+        public int user_id;
+
+        /// <summary>デフォルトコンストラクタ</summary>
+        public GetDropInventory()
+        {
+            this.command = (int)CommandData.GetDropInventory;
+        }
+        /// <summary>コンストラクタ</summary>
+        /// <param name="_user_id">ユーザーID</summary>
+        public GetDropInventory(
+            int _user_id
+        )
+        {
+            this.command = (int)CommandData.GetDropInventory;
+            this.user_id = _user_id;
+        }
+    }
 
     // -------------------受信パケット------------------- //
 
@@ -417,7 +559,7 @@ namespace Packes
             this.model_id = _model_id;
         }
     }
-    
+
 
     /// <summary>
     /// 判定後生きている command:221
@@ -430,6 +572,7 @@ namespace Packes
         public int hp;
         /// <summary>状態</summary>
         public int status;
+        /// <summary>与えたダメージ </summary>
         public float damage_value;
 
         /// <summary>デフォルトコンストラクタ</summary>
@@ -465,7 +608,9 @@ namespace Packes
         public int drop;
         /// <summary>敵のID</summary>
         public int unique_id;
+        /// <summary>与えたダメージ </summary>
         public float damage_value;
+
         /// <summary>デフォルトコンストラクタ</summary>
         public EnemyDieStoC()
         {
@@ -608,59 +753,88 @@ namespace Packes
         }
     }
 
-    public class LoadingSkillMaster : IPacketDatas {
-        public int version;
-		public SkillMasterData[] skills;
-
-        public LoadingSkillMaster() {
-            command = (int)CommandData.RecvSkillList;
-        }
-
-        public LoadingSkillMaster(int _version, SkillMasterData[] _skills) {
-            command = (int)CommandData.RecvSkillList;
-            version = _version;
-            skills = _skills;
+    /// <summary>
+    /// マップ移動完了 command:252
+    /// (クエスト受注やリタイアに紐づく)
+    /// </summary>
+    public class MoveingMapOk : IPacketDatas
+    {
+        /// <summary>デフォルトコンストラクタ</summary>
+        public MoveingMapOk()
+        {
+            this.command = (int)CommandData.MoveingMapOk;
         }
     }
 
-    public class LoadingSkillDataSend : IPacketDatas {
-        public int user_id;
-        public LoadingSkillDataSend() {
-            user_id = 0;
-            command = (int)CommandData.SendSkillList;
+    /// <summary>
+    /// 報酬選択完了 command:254
+    /// </summary>
+    public class SelectRewardOk : IPacketDatas
+    {
+
+        /// <summary>デフォルトコンストラクタ</summary>
+        public SelectRewardOk()
+        {
+            this.command = (int)CommandData.SelectRewardOk;
         }
     }
 
-    public class LoadingAccessoryMaster : IPacketDatas {
-        public int version;
-        public List<AccessoryMasterData> accessorys;
+    /// <summary>
+    /// 永久インべの取得 command:256
+    /// </summary>
+    public class InventoryList : IPacketDatas
+    {
+        /// <summary>アクセサリーID</summary>
+        public int[] accessory_ids;
 
-        public LoadingAccessoryMaster() {
-            command = (int)CommandData.RecvAccessory;
+        /// <summary>デフォルトコンストラクタ</summary>
+        public InventoryList()
+        {
+            this.command = (int)CommandData.InventoryList;
         }
-
-        public LoadingAccessoryMaster(int _version, List<AccessoryMasterData> _accessorys) {
-            command = (int)CommandData.RecvAccessory;
-            version = _version;
-            accessorys = _accessorys;
+        /// <summary>コンストラクタ</summary>
+        /// <param name="_accessory_ids">アクセサリーID</summary>
+        public InventoryList(
+            int[] _accessory_ids
+        )
+        {
+            this.command = (int)CommandData.InventoryList;
+            this.accessory_ids = _accessory_ids;
         }
     }
 
-    public class LoadingAccessoryMasterSend : IPacketDatas {
-        public int user_id;
-        public LoadingAccessoryMasterSend() {
-            command = (int)CommandData.SendAccessory;
+
+
+    /// <summary>
+    /// ドロップインベの取得 command:292
+    /// </summary>
+    public class DropInventoryList : IPacketDatas
+    {
+        /// <summary>アクセサリーID</summary>
+        public int[] accessory_ids;
+
+        /// <summary>デフォルトコンストラクタ</summary>
+        public DropInventoryList()
+        {
+            this.command = (int)CommandData.DropInventoryList;
         }
-        public LoadingAccessoryMasterSend(int _user_id) {
-            command = (int)CommandData.SendAccessory;
-            user_id = _user_id;
+        /// <summary>コンストラクタ</summary>
+        /// <param name="_accessory_ids">アクセサリーID</summary>
+        public DropInventoryList(
+            int[] _accessory_ids
+        )
+        {
+            this.command = (int)CommandData.DropInventoryList;
+            this.accessory_ids = _accessory_ids;
         }
     }
+
+
 
     /// <summary> 他プレイヤーの作成用データ </summary>
     [System.Serializable]
     public struct OtherPlayersData
-    {  
+    {
         /// <summary>ユーザーID</summary>
         public int user_id;
         /// <summary>位置X</summary>
@@ -690,8 +864,6 @@ namespace Packes
             this.name = _name;
         }
     }
-    
-
 
     enum OBJECT_TYPE
     {
@@ -767,92 +939,6 @@ namespace Packes
             this.max_mp = _max_mp;
             this.mp = _mp;
             this.status = _status;
-        }
-    }
-
-    /// <summary>
-    /// スキルのマスターデータ
-    /// </summary>
-    [System.Serializable]
-    public struct SkillMasterData {
-        public int      id;						 //スキルID
-	    public int      icon_id;				 //アイコンID
-	    public int      animation_id;			 //アニメーションID
-	    public int      effect_id;				 //エフェクトID
-	    public string   comment;				 //効果説明文
-	    public int      parent_id;				 //親スキルID
-	    public int      max_level;				 //最大レベル
-	    public int      recast_time;			 //リキャスト
-	    public int      consumption_hit_point;	 //消費HP
-	    public int      consumption_magic_point; //消費MP
-	    public int      power;					 //威力
-	    public int      target;					 //効果ターゲット
-	    public int      range;		    		 //効果範囲
-	    public int      target_type;			 //効果範囲のタイプ
-
-        public SkillMasterData(int _id, int _cast_time, int _recast_time, int _icon_id, int _animation_id,
-                               int _consumption_hit_point, int _consumption_magic_point,
-                               int _power,int _effect_id, int _target, int _range,int _target_type,
-                               string _comment, int _parent_id, int _max_level)
-        {
-            id = _id;
-            icon_id = _icon_id;
-            animation_id = _animation_id;
-            effect_id = _effect_id;
-            comment = _comment;
-            parent_id = _parent_id;
-            max_level = _max_level;
-            recast_time = _recast_time;
-            consumption_hit_point = _consumption_hit_point;
-            consumption_magic_point = _consumption_magic_point;
-            power = _power;
-            target = _target;
-            target_type = _target_type;
-            range = _range;
-        }
-    }
-
-    [System.Serializable]
-    public struct AccessoryMasterData {
-        public int id;	
-	    public int category;
-	    public string name;
-	    public int level;
-	    public string comment;
-               
-	    public int str;
-	    public int vit;
-	    public int mmd;
-	    public int dex;
-	    public int agi;
-               
-	    public string image;
-
-        AccessoryMasterData(
-            int _id,
-            int _category,
-            string _name,
-            int _level,
-            string _comment,
-            int _str,
-            int _vit,
-            int _mmd,
-            int _dex,
-            int _agi,
-            string _image
-            )
-        {
-            id = _id;
-            category = _category;
-            name = _name;
-            level = _level;
-            comment = _comment;
-            str = _str;
-            vit = _vit;
-            mmd = _mmd;
-            dex = _dex;
-            agi = _agi;
-            image = _image;
         }
     }
 }

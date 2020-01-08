@@ -12,6 +12,10 @@ using UnityEngine.SceneManagement;
 
 public class PlaySceneManager : SceneManagerBase
 {
+
+    private const int UPDATE_MAX_COUNT = 3;
+
+
     public GameObject playerPre = null;
 
     [SerializeField,Header("キャラクターモデルリスト")]
@@ -47,6 +51,9 @@ public class PlaySceneManager : SceneManagerBase
     [SerializeField]
     private CheatCommand cheatCommand = null;
 
+    [SerializeField]
+    private GameObject miniMapCameraPrefab_;
+
     bool updateFlag = false;
 
     // 通信やその他で不具合が生じた場合の再試行用カウンター
@@ -62,10 +69,7 @@ public class PlaySceneManager : SceneManagerBase
 
     // プレイヤー以外のキャラクター情報
     private Dictionary<int, NonPlayer> characters = new Dictionary<int, NonPlayer>();
-
-    // コールバック関数をリスト化
-    private List<Action<string>> callbackList = new List<Action<string>>();
-    
+        
 
     private Ready ready;
 
@@ -85,33 +89,18 @@ public class PlaySceneManager : SceneManagerBase
         {
             // プレイサーバに接続
             wsp = WS.WsPlay.Instance;
-            wsp.moveingAction = UpdatePlayersPostion;           // 202
-            wsp.enemysAction = RegisterEnemies;                 // 204
-            wsp.statusAction = UpdateStatus;                    // 206
 
-            wsp.loadSaveAction = ReceiveSaveData;               // 212
-            wsp.loadOtherListAction = ReceiveOtherListData;     // 214
-            wsp.loadOtherAction = ReceiveOtherData;             // 215
-
-            wsp.enemyAliveAction = AliveEnemy;                  // 221
-            wsp.enemyDeadAction = DeadEnemy;                    // 222
-            wsp.enemySkillReqAction = EnemyUseSkillRequest;     // 225
-            wsp.enemyUseSkillAction = EnemyUseSkill;            // 226
-            wsp.enemyAttackAction = EnemyAttackResult;          // 227
-
-            wsp.logoutAction = Logout;                          // 707
-            wsp.findResultsAction = ReceivingFindResults;       // 712
-
-            wsp.loadingAccessoryMasterAction = LoadingAccessoryMaster; 
-
+            SettingCallback();
+            
             // セーブデータを要請する。
             wsp.Send(new Packes.SaveLoadCtoS(UserRecord.ID).ToJson());
-            Debug.Log("自分のID->" + UserRecord.ID);
+
         }
-        if (!connectFlag) { MakePlayer(new Vector3(-210, 5, -210), playerPre); }
+        else { MakePlayer(new Vector3(-210, 5, -210), playerPre); }
     }
 
 
+    private int count = 0;
     /// <summary>
     /// フレーム数を数える
     /// </summary>
@@ -153,7 +142,7 @@ public class PlaySceneManager : SceneManagerBase
         // debug
         //if (Input.GetKeyDown(KeyCode.Backspace))
         //{
-        //    DeadEnemy(new Packes.EnemyDieStoC(0, 100)); // 100番を殺す
+        //    MoveingMapCall(MapID.Base);
         //}
         //if (Input.GetKeyDown(KeyCode.L))
         //{
@@ -177,24 +166,13 @@ public class PlaySceneManager : SceneManagerBase
     }
 
 
-
-    ///// <summary>
-    ///// エディター上でプレイを停止する
-    ///// </summary>
-    //private void OnApplicationQuit()
-    //{
-    //    if (connectFlag) { wsp.Destroy(); }
-    //}
     public void OnDestroy()
     {
         if (connectFlag) { wsp.Destroy(); }
     }
 
-    private int count = 0;
-    private const int UPDATE_MAX_COUNT = 3;
 
 
-    public GameObject miniMapCameraPrefab_;
 
     /// <summary>
     /// 自分の作成
@@ -296,6 +274,11 @@ public class PlaySceneManager : SceneManagerBase
         Debug.Log("他キャラ生成" + _packet.user_id);
     }
 
+    /// <summary>
+    /// モデルIDのチェック
+    /// </summary>
+    /// <param name="_id"></param>
+    /// <returns></returns>
     private int CheckModel(int _id) {
         return (_id == 0) ? 101 : _id;
     }
@@ -391,7 +374,6 @@ public class PlaySceneManager : SceneManagerBase
         if (MakePlayer(new Vector3(_packet.x, _packet.y, _packet.z), model))
         {
             wsp.Send(new Packes.LoadingOK(UserRecord.ID).ToJson());
-            Debug.Log("セーブデータを受けとり自分を作成した。→ロード完了");
             updateFlag = true;
             ready.ReadyGO();
         }
@@ -540,6 +522,16 @@ public class PlaySceneManager : SceneManagerBase
     }
 
     /// <summary>
+    /// マップ移動の許可が出たので移動を開始する → mapAction
+    /// </summary>
+    /// <param name="_packet"></param>
+    private void MovingMap(Packes.MoveingMapOk _packet)
+    {
+        ChangeScene("LoadingScene");
+    }
+
+
+    /// <summary>
     /// プレイヤーがログアウトした時 → logoutAction
     /// </summary>
     /// <param name="_packet"></param>
@@ -548,6 +540,8 @@ public class PlaySceneManager : SceneManagerBase
         if (_packet.user_id == UserRecord.ID)
         {
             Debug.Log("ログアウトしたよ");
+
+            UserRecord.DiscardAll();
             if (connectFlag) { wsp.Destroy(); }
             ChangeScene("LoginScene");
         }
@@ -599,6 +593,14 @@ public class PlaySceneManager : SceneManagerBase
         wsp.Send(new Packes.GetEnemysDataCtoS(0, UserRecord.ID).ToJson());
     }
 
+    private void MoveingMapCall(MapID _mapId)
+    {
+        Debug.Log(UserRecord.MapID);
+        wsp.Send(Json.ConvertToJson(new Packes.MoveingMap(UserRecord.ID, (int)UserRecord.MapID)));
+
+    }
+
+    // ----------------ゲッター＆セッター--------------------------
 
     /// <summary>
     /// パーティの情報を渡す
@@ -629,5 +631,33 @@ public class PlaySceneManager : SceneManagerBase
     private void LoadingAccessoryMaster(Packes.LoadingAccessoryMaster _data) {
         InputFile.WriterJson(MasterFileNameList.accessory, JsonUtility.ToJson(_data), FILETYPE.JSON);
         AccessoryDatas.SaveingData(_data.accessorys);
+	}
+    /// <summary>
+    /// コールバックを設定
+    /// </summary>
+    private void SettingCallback()
+    {
+        wsp.moveingAction = UpdatePlayersPostion;           // 202
+        wsp.enemysAction = RegisterEnemies;                 // 204
+        wsp.statusAction = UpdateStatus;                    // 206
+
+        wsp.loadSaveAction = ReceiveSaveData;               // 212
+        wsp.loadOtherListAction = ReceiveOtherListData;     // 214
+        wsp.loadOtherAction = ReceiveOtherData;             // 215
+
+        wsp.enemyAliveAction = AliveEnemy;                  // 221
+        wsp.enemyDeadAction = DeadEnemy;                    // 222
+        wsp.enemySkillReqAction = EnemyUseSkillRequest;     // 225
+        wsp.enemyUseSkillAction = EnemyUseSkill;            // 226
+        wsp.enemyAttackAction = EnemyAttackResult;          // 227
+
+        wsp.mapAction = MovingMap;                          // 252
+
+        wsp.logoutAction = Logout;                          // 707
+        wsp.findResultsAction = ReceivingFindResults;       // 712
+        
+        
+        wsp.loadingAccessoryMasterAction = LoadingAccessoryMaster; 
     }
 }
+
