@@ -40,4 +40,18 @@ public static class Json
     public static string ToJson(this Packes.IPacketDatas _data) {
         return JsonUtility.ToJson(_data);
     }
+
+    /// <summary>
+    /// アクセサリーのマスターパーサー
+    /// </summary>
+    public static void ReadAccessoryMasterData() {
+        InputFile.ReadFile("accessoryMaster.json");
+    }
+
+    /// <summary>
+    /// マップのマスターパーサー
+    /// </summary>
+    public static void ReadMapMasterData() {
+        InputFile.ReadFile("mapMaster.json");
+    }
 }
