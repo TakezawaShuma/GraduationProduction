@@ -473,6 +473,8 @@ namespace Packes
         public float z;
         /// <summary>モデルID</summary>
         public int model_id;
+        // アクセサリー一覧
+        public List<int> accessorys;
 
         /// <summary>デフォルトコンストラクタ</summary>
         public SaveLoadStoC()
@@ -488,7 +490,8 @@ namespace Packes
             float _x,
             float _y,
             float _z,
-            int _model_id
+            int _model_id,
+            List<int> _accessorys
         )
         {
             this.command = (int)CommandData.SaveLoadStoC;
@@ -496,6 +499,7 @@ namespace Packes
             this.y = _y;
             this.z = _z;
             this.model_id = _model_id;
+            this.accessorys = _accessorys;
         }
     }
 
