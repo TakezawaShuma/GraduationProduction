@@ -14,7 +14,7 @@ public class MyEditor : AssetPostprocessor {
         foreach (string str in importedAsset)
         {
            
-            CheckSceneSetting();
+           // CheckSceneSetting();
         }
         //foreach (string str in deletedAssets)
         //{
