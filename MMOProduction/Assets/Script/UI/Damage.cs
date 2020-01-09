@@ -9,59 +9,47 @@ public class Damage : MonoBehaviour
     private Canvas canvas;
 
     [SerializeField]
-    private GameObject damageParent;
-
-    [SerializeField]
     private Sprite[] number = new Sprite[10];
 
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        if (InputManager.InputKeyCheckDown(KeyCode.L))
-        {
-            CreateDamageUI(new Vector3(0, 0, 0), 4);
-        }
-    }
-
-    void CreateDamageUI(Vector3 pos, int damage)
+    public void CreateDamageUI(Vector3 pos, int damage)
     {
         var obj = DamageNumber(damage);
-        obj.transform.position = WorldtoCamera(pos);
-
         obj.transform.parent = canvas.transform;
+
+        obj.transform.localPosition = WorldtoCamera(pos);
     }
 
-    Vector2 WorldtoCamera(Vector3 pos)
+    private Vector2 WorldtoCamera(Vector3 pos)
     {
-        Vector2 a = Vector2.zero;
-        return a;
+        //var ret = RectTransformUtility.WorldToScreenPoint(Camera.main, pos);
+        Vector2 ret = new Vector2(Random.Range(-100,100), Random.Range(-100, 100));
+        return ret;
     }
 
-    GameObject DamageNumber(int num)
+    private GameObject DamageNumber(int num)
     {
-        var obj = Instantiate(damageParent);
-
+        GameObject obj = new GameObject();
+        obj.AddComponent<DamageMove>();
         int n = num;
         int l = 0;
         while (n != 0)
         {
             int ans = n % 10;
             n /= 10;
-            Number(ans).transform.parent = damageParent.transform;
+            Number(ans).transform.parent = obj.transform;
             l++;
+        }
+
+        for (int i = 0;i < obj.transform.childCount;i++)
+        {
+            obj.transform.GetChild(i).transform.position = new Vector3(55 * -i, 0, 0);
         }
 
         return obj;
     }
 
     //一桁用
-    GameObject Number(int num)
+    private GameObject Number(int num)
     {
         // 画像生成
         GameObject obj = new GameObject();
