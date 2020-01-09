@@ -54,6 +54,9 @@ public class PlaySceneManager : SceneManagerBase
     [SerializeField]
     private GameObject miniMapCameraPrefab_;
 
+    [SerializeField]
+    private UIManager uiManager;
+
     bool updateFlag = false;
 
     // 通信やその他で不具合が生じた場合の再試行用カウンター
@@ -440,6 +443,9 @@ public class PlaySceneManager : SceneManagerBase
         Enemy enemy = characters[_packet.unique_id].GetComponent<Enemy>();
         enemy.PlayTriggerAnimetion("Take Damage");
         enemy.HP = _packet.hp;
+
+        var damageValue = (int)_packet.damage_value;
+        uiManager.GetComponent<Damage>().CreateDamageUI(new Vector3(0, 0, 0), damageValue);
     }
 
     /// <summary>
@@ -467,6 +473,8 @@ public class PlaySceneManager : SceneManagerBase
         characters.Remove(_packet.unique_id);
         enemy.PlayTriggerAnimetion("Die");
 
+        var damageValue = (int)_packet.damage_value;
+        uiManager.GetComponent<Damage>().CreateDamageUI(new Vector3(0, 0, 0), damageValue);
     }
 
     /// <summary>

@@ -22,7 +22,7 @@ public class Damage : MonoBehaviour
     private Vector2 WorldtoCamera(Vector3 pos)
     {
         //var ret = RectTransformUtility.WorldToScreenPoint(Camera.main, pos);
-        Vector2 ret = new Vector2(Random.Range(-100,100), Random.Range(-100, 100));
+        Vector2 ret = new Vector2(Random.Range(-50,50), Random.Range(-50, 50));
         return ret;
     }
 
