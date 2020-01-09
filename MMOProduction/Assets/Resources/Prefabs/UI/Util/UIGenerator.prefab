@@ -323,6 +323,8 @@ GameObject:
   - component: {fileID: 7322025232944224076}
   - component: {fileID: 6880629162666518339}
   - component: {fileID: 6233141553070228254}
+  - component: {fileID: 2592269618780305505}
+  - component: {fileID: 8954300562721585368}
   m_Layer: 5
   m_Name: Back
   m_TagString: Untagged
@@ -386,6 +388,50 @@ MonoBehaviour:
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0
+--- !u!114 &2592269618780305505
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5442251439990057865}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1b9b5e56d4fdc0a42a765e6892e6fe06, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  defoSprite: {fileID: 10917, guid: 0000000000000000f000000000000000, type: 0}
+--- !u!114 &8954300562721585368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5442251439990057865}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: -1862395651, guid: f70555f144d8491a825f0804e09c671c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 2
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 2592269618780305505}
+          m_MethodName: MyParentForeground
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+      m_TypeName: UnityEngine.EventSystems.EventTrigger+TriggerEvent, UnityEngine.UI,
+        Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
+  delegates: []
 --- !u!1 &8111649580022407628
 GameObject:
   m_ObjectHideFlags: 0

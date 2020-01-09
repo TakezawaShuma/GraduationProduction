@@ -36,3 +36,11 @@ public abstract class SceneManagerBase : MonoBehaviour
         _ws.Send(_json);
     }
 }
+
+public enum MapID
+{
+    Title,
+    Base,
+    Field,
+    Non
+}

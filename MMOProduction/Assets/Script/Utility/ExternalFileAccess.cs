@@ -6,10 +6,10 @@ using System;
 using System.Text;
 
 
-public static class ExternalFileAccess 
+public static class ExternalFileAccess
 {
     // ファイルに追加
-    public static void Additional(string _path,string _data)
+    public static void Additional(string _path, string _data)
     {
         StreamWriter sw = new StreamWriter(_path, true);
         sw.Write(_data);
@@ -18,7 +18,7 @@ public static class ExternalFileAccess
     }
 
     // ファイルを上書き
-    public static void Overwrite(string _path,string _data)
+    public static void Overwrite(string _path, string _data)
     {
         StreamWriter sw = new StreamWriter(_path, false);
         sw.Write(_data);
@@ -29,20 +29,22 @@ public static class ExternalFileAccess
     // ファイルの読み込み
     public static string ReadFile(string _path)
     {
-        string ret="";
+        string ret = "";
         FileInfo fi = new FileInfo(_path);
         try
         {
-            using(StreamReader sr=new StreamReader(fi.OpenRead(), Encoding.UTF8))
+            using (StreamReader sr = new StreamReader(fi.OpenRead(), Encoding.UTF8))
             {
-                ret=sr.ReadToEnd();
+                ret = sr.ReadToEnd();
             }
-        }catch(Exception e)
+        }
+        catch
         {
             ret += SetDefaultText();
         }
         return ret;
     }
+    
 
     private static string SetDefaultText()
     {

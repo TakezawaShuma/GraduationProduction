@@ -24,7 +24,13 @@ namespace WS
         /// <param name="_port">ポート</param>
         protected void Connect(uint _port)
         {
-            string server_ip = ExternalFileAccess.ReadFile("../ip.txt");
+            string server_ip;
+#if UNITY_EDITOR
+            server_ip = ExternalFileAccess.ReadFile("../ip.txt");
+#elif UNITY_STANDALONE
+            server_ip = ExternalFileAccess.ReadFile(Application.dataPath+"/ip.txt");
+#endif
+            
             if (ws == null) ws = new WebSocket("ws://" + server_ip + ":" + _port.ToString());
             if (ws.ReadyState == WebSocketState.Open && ws != null)
             {
