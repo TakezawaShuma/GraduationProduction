@@ -97,6 +97,7 @@ public class PlaySceneManager : SceneManagerBase
 
             // セーブデータを要請する。
             wsp.Send(new Packes.SaveLoadCtoS(UserRecord.ID).ToJson());
+            wsp.Send(new Packes.LoadingAccessoryMasterSend(UserRecord.ID).ToJson());
 
         }
         else { MakePlayer(new Vector3(-210, 5, -210), playerPre); }
