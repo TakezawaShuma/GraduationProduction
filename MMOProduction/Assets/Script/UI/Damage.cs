@@ -53,8 +53,9 @@ public class Damage : MonoBehaviour
     {
         // 画像生成
         GameObject obj = new GameObject();
-        obj.AddComponent<Image>();
-        obj.GetComponent<Image>().sprite = number[num];
+        Image image = obj.AddComponent<Image>();
+        image.raycastTarget = false;
+        image.sprite = number[num];
         return obj;
     }
 }
