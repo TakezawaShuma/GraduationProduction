@@ -45,7 +45,7 @@ namespace Packes
     public class LoadingSkillDataSend : IPacketDatas
     {
         public int user_id;
-        LoadingSkillDataSend()
+        public LoadingSkillDataSend()
         {
             user_id = 0;
             command = (int)CommandData.LoadingSkillDataSend;
@@ -58,11 +58,11 @@ namespace Packes
     public class LoadingAccessoryMasterSend : IPacketDatas
     {
         public int user_id;
-        LoadingAccessoryMasterSend()
+        public LoadingAccessoryMasterSend()
         {
             command = (int)CommandData.LoadingAccessoryMasterSend;
         }
-        LoadingAccessoryMasterSend(int _user_id)
+        public LoadingAccessoryMasterSend(int _user_id)
         {
             command = (int)CommandData.LoadingAccessoryMasterSend;
             user_id = _user_id;
@@ -398,6 +398,8 @@ namespace Packes
         public int level;
         public string comment;
 
+        public int hp;
+        public int mp;
         public int str;
         public int vit;
         public int mmd;
@@ -412,6 +414,8 @@ namespace Packes
             string _name,
             int _level,
             string _comment,
+            int _hp,
+            int _mp,
             int _str,
             int _vit,
             int _mmd,
@@ -425,6 +429,8 @@ namespace Packes
             name = _name;
             level = _level;
             comment = _comment;
+            hp = _hp;
+            mp = _mp;
             str = _str;
             vit = _vit;
             mmd = _mmd;
