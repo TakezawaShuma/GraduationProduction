@@ -48,7 +48,7 @@ namespace WS
         /// <param name="_msg">削除した際のメッセージ</param>
         protected virtual void Destroy(string _msg = "", bool type = true)
         {
-            if (ws != null) return;
+            if (ws == null) return;
             if (ws.ReadyState != WebSocketState.Closed)
             {
                 if (_msg != "")

@@ -3,7 +3,7 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
-public class CharacterSelectManager : MonoBehaviour
+public class CharacterSelectSceneManager : SceneManagerBase
 {
     WS.WsPlay ws = null;
 
@@ -129,7 +129,7 @@ public class CharacterSelectManager : MonoBehaviour
         if(modelID_ != 0)
         {
             ws.Send(new Packes.SaveModelType(UserRecord.ID, modelID_).ToJson());
-            SceneManager.LoadScene("LoadingScene");
+            ChangeScene("LoadingScene");
         }
     }
 

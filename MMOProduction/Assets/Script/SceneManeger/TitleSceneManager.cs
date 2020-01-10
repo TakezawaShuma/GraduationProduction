@@ -17,7 +17,8 @@ public class TitleSceneManager : SceneManagerBase
     WS.WsLogin wsl = null;
     
     //ボタンの種類
-    public enum CANVAS_STATE {
+    public enum CANVAS_STATE
+    {
         SELECT,    //選択
         SIGN_IN,    //ログイン
         SIGN_UP,    //新規登録
@@ -115,7 +116,8 @@ public class TitleSceneManager : SceneManagerBase
     }
 
 
-    private void OnDestroy() {
+    private void OnDestroy()
+    {
         if (connectFlag) wsl.Destroy();
     }
     //public関数--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
@@ -180,8 +182,10 @@ public class TitleSceneManager : SceneManagerBase
         else ErrorOn(result);
     }
 
-    private void ErrorOn(LoginCheck.CHECKRESULT _type) {
-        switch (_type) {
+    private void ErrorOn(LoginCheck.CHECKRESULT _type)
+    {
+        switch (_type)
+        {
             case LoginCheck.CHECKRESULT.MINSTRING: Error01.gameObject.SetActive(true); break;
             case LoginCheck.CHECKRESULT.INVALID: Error02.gameObject.SetActive(true); break;
         }
@@ -242,8 +246,10 @@ public class TitleSceneManager : SceneManagerBase
     /// <summary>
     /// 最初の選択ボタンの状態変化
     /// </summary>
-    private void ChangeActiveUI(List<GameObject> _uis, bool _active = true) {
-        foreach (var _ui in _uis) {
+    private void ChangeActiveUI(List<GameObject> _uis, bool _active = true)
+    {
+        foreach (var _ui in _uis)
+        {
             _ui.SetActive(_active);
         }
     }
@@ -252,7 +258,8 @@ public class TitleSceneManager : SceneManagerBase
     /// 入力の反転
     /// </summary>
     /// <returns>成功/失敗</returns>
-    private bool InputChange() {
+    private bool InputChange()
+    {
         if (!id_.isFocused && !pw_.isFocused && !ConfirmPW_.isFocused) return false;
         switch (inputState)
         {
@@ -271,20 +278,27 @@ public class TitleSceneManager : SceneManagerBase
                 break;
 
             case CANVAS_STATE.SIGN_UP:
-                if (id_.isFocused) {
+                if (id_.isFocused)
+                {
                     id_.DeactivateInputField();
                     pw_.ActivateInputField();
-                } else if (pw_.isFocused) {
+                }
+                else if (pw_.isFocused)
+                {
                     ConfirmPW_.ActivateInputField();
                     pw_.DeactivateInputField();
-                } else if(ConfirmPW_.isFocused){
+                }
+                else if (ConfirmPW_.isFocused)
+                {
                     userName_.ActivateInputField();
                     ConfirmPW_.DeactivateInputField();
-                } else if(userName_.isFocused){
+                }
+                else if (userName_.isFocused)
+                {
                     id_.ActivateInputField();
                     userName_.DeactivateInputField();
                 }
-                break;  
+                break;
 
             default: break;
         }
@@ -297,11 +311,12 @@ public class TitleSceneManager : SceneManagerBase
     /// 入力完了
     /// </summary>
     /// <returns></returns>
-    private void EnterCheck(){
+    private void EnterCheck()
+    {
         if (inputState == CANVAS_STATE.SIGN_IN) loginToGame_Click();
         else if (inputState == CANVAS_STATE.SIGN_UP) RegisterClick02();
     }
-       
+
 
     // 新規登録選択時表示させる
     private void RegisterActive()
@@ -343,8 +358,10 @@ public class TitleSceneManager : SceneManagerBase
     /// キャンバスにオブジェクトを出す
     /// </summary>
     /// <param name="_prefubs"></param>
-    private void UIInstantiate<T>(List<GameObject> _prefabs, List<T> _tmpList) { 
-        foreach(var prefab in _prefabs) {
+    private void UIInstantiate<T>(List<GameObject> _prefabs, List<T> _tmpList)
+    {
+        foreach (var prefab in _prefabs)
+        {
             _tmpList.Add(Instantiate<GameObject>(prefab, canvas.transform).GetComponent<T>());
         }
     }
@@ -353,8 +370,10 @@ public class TitleSceneManager : SceneManagerBase
     /// UIの削除
     /// </summary>
     /// <param name="_ui"></param>
-    private void UIDelete(List<GameObject> _ui) { 
-        foreach(var ui in _ui) {
+    private void UIDelete(List<GameObject> _ui)
+    {
+        foreach (var ui in _ui)
+        {
             Destroy(ui);
         }
         _ui.Clear();
@@ -363,7 +382,7 @@ public class TitleSceneManager : SceneManagerBase
     /// <summary>
     /// ボタンの入力状態の変更
     /// </summary>
-    private void ButtonState(bool _state) =>  loginButton_.interactable = sinupButton_.interactable = _state;
+    private void ButtonState(bool _state) => loginButton_.interactable = sinupButton_.interactable = _state;
 
 
     /// <summary>
@@ -374,7 +393,8 @@ public class TitleSceneManager : SceneManagerBase
     /// <summary>
     /// 読み込みUIの削除
     /// </summary>
-    private void LoadingUIDelete() {
+    private void LoadingUIDelete()
+    {
         Destroy(loadingCircle);
         loadingCircle = null;
     }
@@ -386,7 +406,8 @@ public class TitleSceneManager : SceneManagerBase
     /// 新規作成完了
     /// </summary>
     /// <param name="_packet"></param>
-    private void CreateAction(Packes.CreateOK _packet) {
+    private void CreateAction(Packes.CreateOK _packet)
+    {
         wsl.Send(new Packes.LoginUser(id_.text, pw_.text).ToJson());
     }
 
@@ -394,11 +415,13 @@ public class TitleSceneManager : SceneManagerBase
     /// ログイン完了
     /// </summary>
     /// <param name="_packet"></param>
-    private void LoginAction(Packes.LoginOK _packet) {
+    private void LoginAction(Packes.LoginOK _packet)
+    {
         UserRecord.ID = _packet.user_id;
         UserRecord.Name = _packet.name;
-        if(inputState == CANVAS_STATE.SIGN_IN) ChangeScene("LoadingScene");
-        else if(inputState == CANVAS_STATE.SIGN_UP) ChangeScene("CharacterSelect");
+
+        if (inputState == CANVAS_STATE.SIGN_IN) { UserRecord.MapID = MapID.Base; ChangeScene("LoadingScene"); }
+        else if (inputState == CANVAS_STATE.SIGN_UP) { UserRecord.MapID = MapID.Base; ChangeScene("CharacterSelect"); }
     }
 
     int errorCount = 0;
@@ -413,12 +436,11 @@ public class TitleSceneManager : SceneManagerBase
             ButtonState(true);
             LoadingUIDelete();
         }
-        else if (errorCount < 10) { StartCoroutine(ReSend(wsl,new Packes.LoginUser(id_.text, pw_.text).ToJson()));  errorCount++; }
+        else if (errorCount < 10) { StartCoroutine(ReSend(wsl, new Packes.LoginUser(id_.text, pw_.text).ToJson())); errorCount++; }
         else { errorCount = 0; }
     }
 
     // 選択の音
     public void EnterSoundPlay() => sound_.SystemPlay(SYSTEM_SOUND_TYPE.ENTER);
-
 
 }

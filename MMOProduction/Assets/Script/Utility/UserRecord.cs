@@ -23,6 +23,6 @@ public static class UserRecord
         id = 0;
         name = "";
         ip = "";
-        mapId = MapID.Non;
+        mapId = MapID.Title;
     }
 }

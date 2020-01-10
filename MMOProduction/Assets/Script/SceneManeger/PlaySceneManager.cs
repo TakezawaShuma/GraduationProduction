@@ -18,7 +18,7 @@ public class PlaySceneManager : SceneManagerBase
 
     public GameObject playerPre = null;
 
-    [SerializeField,Header("キャラクターモデルリスト")]
+    [SerializeField, Header("キャラクターモデルリスト")]
     private character_table characterModel = null;
     [Header("敵のマスターデータ"), SerializeField]
     private enemy_table enemyTable = null;
@@ -26,7 +26,7 @@ public class PlaySceneManager : SceneManagerBase
     private skill_table skillTabe = null;
 
 
-    [SerializeField,Header("プレイヤーの名前表示UI")]
+    [SerializeField, Header("プレイヤーの名前表示UI")]
     private GameObject nameUI = null;
     [SerializeField, Header("エネミーのステータスUI")]
     private GameObject enemyStatusCanvas = null;
@@ -35,10 +35,10 @@ public class PlaySceneManager : SceneManagerBase
     [SerializeField, Header("カメラ")]
     private FollowingCamera FollowingCamera = default(FollowingCamera);
 
-    [SerializeField,Header("チャットコントローラー")]
+    [SerializeField, Header("チャットコントローラー")]
     private ChatController chatController = default(ChatController);
-    
- 
+
+
     [SerializeField]
     private PlayerUI playerUI = null;
 
@@ -72,7 +72,7 @@ public class PlaySceneManager : SceneManagerBase
 
     // プレイヤー以外のキャラクター情報
     private Dictionary<int, NonPlayer> characters = new Dictionary<int, NonPlayer>();
-        
+
 
     private Ready ready;
 
@@ -94,7 +94,7 @@ public class PlaySceneManager : SceneManagerBase
             wsp = WS.WsPlay.Instance;
 
             SettingCallback();
-            
+
             // セーブデータを要請する。
             wsp.Send(new Packes.SaveLoadCtoS(UserRecord.ID).ToJson());
 
@@ -180,11 +180,11 @@ public class PlaySceneManager : SceneManagerBase
     /// <summary>
     /// 自分の作成
     /// </summary>
-    private bool MakePlayer(Vector3 _save,GameObject _playerModel, string _name= "player0")
+    private bool MakePlayer(Vector3 _save, GameObject _playerModel, string _name = "player0")
     {
         bool ret = false;
         _name = (_name == "player0") ? _name = "player" + UserRecord.ID : _name;
-        
+
         // プレイヤーが作られた事がないなら
         if (player == null)
         {
@@ -208,6 +208,7 @@ public class PlaySceneManager : SceneManagerBase
             var miniMapTmp = Instantiate<GameObject>(miniMapCameraPrefab_, this.transform);
             miniMapTmp.GetComponent<MiniMapController>().Init(tmp);
 
+            // プレイヤーUIを設定
             playerUI.PLAYER_CMP = player;
             playerUI.PLAYER_NAME = UserRecord.Name;
 
@@ -242,7 +243,7 @@ public class PlaySceneManager : SceneManagerBase
                 {
                     // リストに登録されていないIDが来たときの処理
                     // そのIDは何なのか確認をとる
-                    wsp.Send(new Packes.FindOfPlayerCtoS(UserRecord.ID,_packet.user_id, 0).ToJson());
+                    wsp.Send(new Packes.FindOfPlayerCtoS(UserRecord.ID, _packet.user_id, 0).ToJson());
                 }
             }
         }
@@ -282,7 +283,8 @@ public class PlaySceneManager : SceneManagerBase
     /// </summary>
     /// <param name="_id"></param>
     /// <returns></returns>
-    private int CheckModel(int _id) {
+    private int CheckModel(int _id)
+    {
         return (_id == 0) ? 101 : _id;
     }
 
@@ -293,10 +295,10 @@ public class PlaySceneManager : SceneManagerBase
     private void RegisterEnemies(Packes.GetEnemyDataStoC _packet)
     {
         List<Packes.EnemyReceiveData> list = _packet.enemys;
-        
+
         foreach (var ene in list)
         {
-            if(ene.unique_id!=UserRecord.ID)
+            if (ene.unique_id != UserRecord.ID)
             {
                 // 敵の更新
                 if (characters.ContainsKey(ene.unique_id))
@@ -337,7 +339,7 @@ public class PlaySceneManager : SceneManagerBase
         stutasCanvas.GetComponent<UIEnemyHP>().Off();
 
         newEnemy.name = "Enemy:" + _ene.master_id + "->" + _ene.unique_id;
-        enemy.Init(_ene.x, _ene.y, _ene.z, _ene.dir, _ene.unique_id,skillTabe);
+        enemy.Init(_ene.x, _ene.y, _ene.z, _ene.dir, _ene.unique_id, skillTabe);
         enemy.UI_HP = stutasCanvas.GetComponent<UIEnemyHP>();
         enemy.Type = CharacterType.Enemy;
         characters[_ene.unique_id] = enemy;
@@ -348,16 +350,16 @@ public class PlaySceneManager : SceneManagerBase
     /// </summary>
     private void UpdateStatus(Packes.StatusStoC _packet)
     {
-        foreach(var tmp in _packet.status)
+        foreach (var tmp in _packet.status)
         {
             if (tmp.charcter_id == UserRecord.ID)
             {
-                player.UpdateStatus(tmp.max_hp, tmp.hp,tmp.max_mp, tmp.mp, tmp.status);
+                player.UpdateStatus(tmp.max_hp, tmp.hp, tmp.max_mp, tmp.mp, tmp.status);
             }
             else
             {
-                if(characters.ContainsKey(tmp.charcter_id))
-                characters[tmp.charcter_id].UpdateStatusData(tmp.hp, tmp.mp, tmp.status);
+                if (characters.ContainsKey(tmp.charcter_id))
+                    characters[tmp.charcter_id].UpdateStatusData(tmp.hp, tmp.mp, tmp.status);
             }
         }
 
@@ -551,7 +553,7 @@ public class PlaySceneManager : SceneManagerBase
 
             UserRecord.DiscardAll();
             if (connectFlag) { wsp.Destroy(); }
-            ChangeScene("LoginScene");
+            ChangeScene("LoadingScene");
         }
         else if (UserRecord.ID != 0)
         {
@@ -572,6 +574,16 @@ public class PlaySceneManager : SceneManagerBase
         CreateOtherPlayers(tmp);
     }
 
+
+    /// <summary>
+    /// アクセサリのマスター保存 → loadingAccessoryMasterAction
+    /// </summary>
+    /// <param name="_data"></param>
+    private void LoadingAccessoryMaster(Packes.LoadingAccessoryMaster _data)
+    {
+        InputFile.WriterJson(MasterFileNameList.accessory, JsonUtility.ToJson(_data), FILETYPE.JSON);
+        AccessoryDatas.SaveingData(_data.accessorys);
+    }
 
     // --------------------送信関係--------------------
 
@@ -601,6 +613,10 @@ public class PlaySceneManager : SceneManagerBase
         wsp.Send(new Packes.GetEnemysDataCtoS(0, UserRecord.ID).ToJson());
     }
 
+    /// <summary>
+    /// マップ移動許可を求める
+    /// </summary>
+    /// <param name="_mapId"></param>
     private void MoveingMapCall(MapID _mapId)
     {
         Debug.Log(UserRecord.MapID);
@@ -627,45 +643,35 @@ public class PlaySceneManager : SceneManagerBase
     /// </summary>
     /// <param name="_playerId"></param>
     /// <returns></returns>
-    public　OtherPlayers GetOtherPlayer(int _playerId)
+    public OtherPlayers GetOtherPlayer(int _playerId)
     {
         return characters[_playerId].GetComponent<OtherPlayers>();
     }
 
-    /// <summary>
-    /// アクセサリのマスター保存
-    /// </summary>
-    /// <param name="_data"></param>
-    private void LoadingAccessoryMaster(Packes.LoadingAccessoryMaster _data) {
-        InputFile.WriterJson(MasterFileNameList.accessory, JsonUtility.ToJson(_data), FILETYPE.JSON);
-        AccessoryDatas.SaveingData(_data.accessorys);
-	}
+
     /// <summary>
     /// コールバックを設定
     /// </summary>
     private void SettingCallback()
     {
-        wsp.moveingAction = UpdatePlayersPostion;           // 202
-        wsp.enemysAction = RegisterEnemies;                 // 204
-        wsp.statusAction = UpdateStatus;                    // 206
+        wsp.moveingAction = UpdatePlayersPostion;                   // 202
+        wsp.enemysAction = RegisterEnemies;                         // 204
+        wsp.statusAction = UpdateStatus;                            // 206
 
-        wsp.loadSaveAction = ReceiveSaveData;               // 212
-        wsp.loadOtherListAction = ReceiveOtherListData;     // 214
-        wsp.loadOtherAction = ReceiveOtherData;             // 215
+        wsp.loadSaveAction = ReceiveSaveData;                       // 212
+        wsp.loadOtherListAction = ReceiveOtherListData;             // 214
+        wsp.loadOtherAction = ReceiveOtherData;                     // 215
 
-        wsp.enemyAliveAction = AliveEnemy;                  // 221
-        wsp.enemyDeadAction = DeadEnemy;                    // 222
-        wsp.enemySkillReqAction = EnemyUseSkillRequest;     // 225
-        wsp.enemyUseSkillAction = EnemyUseSkill;            // 226
-        wsp.enemyAttackAction = EnemyAttackResult;          // 227
+        wsp.enemyAliveAction = AliveEnemy;                          // 221
+        wsp.enemyDeadAction = DeadEnemy;                            // 222
+        wsp.enemySkillReqAction = EnemyUseSkillRequest;             // 225
+        wsp.enemyUseSkillAction = EnemyUseSkill;                    // 226
+        wsp.enemyAttackAction = EnemyAttackResult;                  // 227
 
-        wsp.mapAction = MovingMap;                          // 252
+        wsp.mapAction = MovingMap;                                  // 252
 
-        wsp.logoutAction = Logout;                          // 707
-        wsp.findResultsAction = ReceivingFindResults;       // 712
-        
-        
-        wsp.loadingAccessoryMasterAction = LoadingAccessoryMaster; 
+        wsp.logoutAction = Logout;                                  // 707
+        wsp.loadingAccessoryMasterAction = LoadingAccessoryMaster;  // 709
+        wsp.findResultsAction = ReceivingFindResults;               // 712
     }
 }
-

@@ -83,17 +83,17 @@ public class PlayerUI : MonoBehaviour
         if (Observar(hp, currentHp) || Observar(maxHp, currentMaxHp))
         {
             // HPの表示を更新する
-            hpGreen.value = hp;
             hpGreen.maxValue = maxHp;
-            Debug.Log("MaxHP : "+maxHp);
+            hpGreen.value = hp;
+            Debug.Log("MaxHP : "+ hpGreen.maxValue+ " , HP : " + hpGreen.value);
         }
 
         if (Observar(mp, currentMp) || Observar(maxMp,currentMaxMp))
         {
             // MPの表示を更新する
-            mpBlue.value = mp;
             mpBlue.maxValue = maxMp;
-            Debug.Log("MaxMP : " + maxMp);
+            mpBlue.value = mp;
+            Debug.Log("MaxMP : " + mpBlue.maxValue + " , MaxMP: " + mpBlue.value);
         }
 
         currentHp = hp;
