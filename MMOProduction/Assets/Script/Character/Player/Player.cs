@@ -43,15 +43,11 @@ public class Player : CharacterBase
 
     private void Start()
     {
-        hp = 30;
-        mp = 80;
-
-        maxHp = 100;
-        maxMp = 100;
+        hp = mp = maxHp = maxMp = 0;
 
         position = transform.position;
         rotation = transform.rotation;
-        
+
         playerRigid = GetComponent<Rigidbody>();
     }
 
@@ -69,8 +65,6 @@ public class Player : CharacterBase
         Status = _status;
         maxHp = _maxHp;
         maxMp = _maxMp;
-
-
     }
 
 }
