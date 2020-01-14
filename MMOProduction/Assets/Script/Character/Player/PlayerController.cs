@@ -275,18 +275,6 @@ public class PlayerController : MonoBehaviour
         }
     }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        // エネミーかどうか判定
-        if (other.tag == "Enemy")
-        {
-            int enemyId = 0;
-            int userId = UserRecord.ID;
-            int mapId = 0;
-            // ここでデータを送る
-            WS.WsPlay.Instance.Send(new Packes.Attack(enemyId, userId, skilId, mapId).ToJson());
-        }
-    }
 
     private void OnCollisionStay(Collision _coll)
     {
