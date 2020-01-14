@@ -367,6 +367,8 @@ public class PlaySceneManager : SceneManagerBase
 
     }
 
+    [SerializeField]
+    private Inventory inventory_;
 
     /// <summary>
     /// セーブデータを受け取る→　loadSaveAction
@@ -381,6 +383,7 @@ public class PlaySceneManager : SceneManagerBase
         {
             wsp.Send(new Packes.LoadingOK(UserRecord.ID).ToJson());
             updateFlag = true;
+            inventory_.ChangeItems(_packet.accessorys);
             ready.ReadyGO();
         }
         else
@@ -392,7 +395,6 @@ public class PlaySceneManager : SceneManagerBase
                 countOfTrials++;
             }
             else { countOfTrials = 0; }
-
         }
     }
 
