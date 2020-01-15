@@ -393,7 +393,6 @@ namespace Packes
     public struct AccessoryMasterData
     {
         public int id;
-        public int category;
         public string name;
         public int level;
         public string comment;
@@ -410,7 +409,6 @@ namespace Packes
 
         AccessoryMasterData(
             int _id,
-            int _category,
             string _name,
             int _level,
             string _comment,
@@ -425,7 +423,6 @@ namespace Packes
             )
         {
             id = _id;
-            category = _category;
             name = _name;
             level = _level;
             comment = _comment;
