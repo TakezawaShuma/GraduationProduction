@@ -421,7 +421,7 @@ public class TitleSceneManager : SceneManagerBase
         UserRecord.Name = _packet.name;
 
         if (inputState == CANVAS_STATE.SIGN_IN) { UserRecord.MapID = MapID.Base; ChangeScene("LoadingScene"); }
-        else if (inputState == CANVAS_STATE.SIGN_UP) { UserRecord.MapID = MapID.Base; ChangeScene("CharacterSelect"); }
+        else if (inputState == CANVAS_STATE.SIGN_UP) { UserRecord.MapID = MapID.Base; ChangeScene("CharacterSelectScene"); }
     }
 
     int errorCount = 0;
