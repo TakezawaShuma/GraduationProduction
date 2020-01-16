@@ -56,7 +56,7 @@ public class ReceiveEvent : MonoBehaviour
             {
                 Overwrite();
 
-                WS.WsPlay.Instance.Send(new Packes.AccessoryChange(UserRecord.ID, 1, hitObject.GetComponent<SlotId>().id).ToJson());
+                WS.WsPlay.Instance.Send(new Packes.AccessoryChange(UserRecord.ID, this.GetComponent<SlotData>().ID, hitObject.GetComponent<SlotId>().id).ToJson());
             }
 
             //インベントリ内で入れ替え
