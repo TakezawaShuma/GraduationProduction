@@ -49,16 +49,12 @@ public class ReceiveEvent : MonoBehaviour
             //ショートカットスロットに登録
             if (hitObject.tag == "Slot")
             {
-                hitObject.GetComponent<Image>().sprite = this.GetComponent<Image>().sprite;
-                hitObject.GetComponent<SlotData>().ID = this.GetComponent<SlotData>().ID;
-                hitObject.GetComponent<SlotData>().HOGE = this.GetComponent<SlotData>().HOGE;
+                Overwrite();
             }
 
             if(hitObject.tag == "Accessory")
             {
-                hitObject.GetComponent<Image>().sprite = this.GetComponent<Image>().sprite;
-                hitObject.GetComponent<SlotData>().ID = this.GetComponent<SlotData>().ID;
-                hitObject.GetComponent<SlotData>().HOGE = this.GetComponent<SlotData>().HOGE;
+                Overwrite();
 
                 WS.WsPlay.Instance.Send(new Packes.AccessoryChange(UserRecord.ID, 1, hitObject.GetComponent<SlotId>().id).ToJson());
             }
@@ -73,29 +69,48 @@ public class ReceiveEvent : MonoBehaviour
 
     public void MyPointerUpShortcut()
     {
+        //入れ替えるか消すか判定
+        bool initFlag = true;
         if (hitObject != null && hitObject.tag == "Slot")
         {
-            Swap();
+            //左クリックの場合入れ替える
+            if (InputManager.InputMouseCheckDown(0) == INPUT_MODE.PLAY)
+            {
+                initFlag = false;
+            }
+        }
+
+        if (initFlag)
+        {
+            Init();
         }
         else
         {
-            this.GetComponent<Image>().sprite = defoSprite;
-            this.GetComponent<SlotData>().ID = -1;
-            this.GetComponent<SlotData>().HOGE = SlotData.STATUS.NONE;
+            Swap();
         }
     }
 
     public void MyPointerUpAccessory()
     {
+        //入れ替えるか消すか判定
+        bool initFlag = true;
         if (hitObject != null && hitObject.tag == "Accessory")
         {
-            Swap();
+            //左クリックの場合入れ替える
+            if (InputManager.InputMouseCheckDown(0) == INPUT_MODE.PLAY)
+            {
+                initFlag = false;
+            }
+        }
+
+        //データ移動
+        if (initFlag)
+        {
+            Init();
         }
         else
         {
-            this.GetComponent<Image>().sprite = defoSprite;
-            this.GetComponent<SlotData>().ID = -1;
-            this.GetComponent<SlotData>().HOGE = SlotData.STATUS.NONE;
+            Swap();
         }
     }
 
@@ -152,6 +167,19 @@ public class ReceiveEvent : MonoBehaviour
         Destroy(temp);
     }
 
+    private void Init()
+    {
+        this.GetComponent<Image>().sprite = defoSprite;
+        this.GetComponent<SlotData>().ID = -1;
+        this.GetComponent<SlotData>().HOGE = SlotData.STATUS.NONE;
+    }
+
+    private void Overwrite()
+    {
+        hitObject.GetComponent<Image>().sprite = this.GetComponent<Image>().sprite;
+        hitObject.GetComponent<SlotData>().ID = this.GetComponent<SlotData>().ID;
+        hitObject.GetComponent<SlotData>().HOGE = this.GetComponent<SlotData>().HOGE;
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
