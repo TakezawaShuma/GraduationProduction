@@ -79,10 +79,10 @@ public class PlaySceneManager : SceneManagerBase
     public StageTable stages;
     private void Awake()
     {
-
-        MapDatas.MapData mapdata = MapDatas.FindOne(UserRecord.MapID);
         // ステージの作成
-        Instantiate<GameObject>(stages.FindPrefab(UserRecord.MapID), new Vector3(mapdata.x, mapdata.y, mapdata.z), Quaternion.identity);
+        GameObject stage = Instantiate<GameObject>(stages.FindPrefab(UserRecord.MapID), transform);
+        stage.transform.position = Vector3.zero;
+
         if (connectFlag)
         {
             wsp = WS.WsPlay.Instance;
@@ -206,8 +206,9 @@ public class PlaySceneManager : SceneManagerBase
         // プレイヤーが作られた事がないなら
         if (player == null)
         {
+            MapDatas.MapData mapdata = MapDatas.FindOne(UserRecord.MapID);
             var tmp = Instantiate<GameObject>(_playerModel, this.transform);
-            tmp.transform.position = new Vector3(_save.x, _save.y, _save.z);
+            tmp.transform.position = new Vector3(mapdata.x, mapdata.y, mapdata.z);
             tmp.name = (UserRecord.Name != "") ? UserRecord.Name : _name;
             tmp.tag = "Player";
             tmp.transform.localScale = new Vector3(2, 2, 2);

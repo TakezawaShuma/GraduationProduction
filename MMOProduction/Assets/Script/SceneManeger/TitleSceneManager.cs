@@ -420,8 +420,8 @@ public class TitleSceneManager : SceneManagerBase
         UserRecord.ID = _packet.user_id;
         UserRecord.Name = _packet.name;
 
-        if (inputState == CANVAS_STATE.SIGN_IN) { UserRecord.MapID = MapID.Base; ChangeScene("LoadingScene"); }
-        else if (inputState == CANVAS_STATE.SIGN_UP) { UserRecord.MapID = MapID.Base; ChangeScene("CharacterSelectScene"); }
+        if (inputState == CANVAS_STATE.SIGN_IN) { UserRecord.MapID = MapID.Field; ChangeScene("LoadingScene"); }
+        else if (inputState == CANVAS_STATE.SIGN_UP) { UserRecord.MapID = MapID.Field; ChangeScene("CharacterSelectScene"); }
     }
 
     int errorCount = 0;
@@ -455,7 +455,7 @@ public class TitleSceneManager : SceneManagerBase
         {
             maps.Add(new MapDatas.MapData(map.id, map.x, map.y, map.z, map.dir, null));
         }
-        InputFile.WriterJson(MasterFileNameList.map, JsonUtility.ToJson(maps), FILETYPE.JSON);
+        InputFile.WriterJson(MasterFileNameList.map, JsonUtility.ToJson(_data), FILETYPE.JSON);
         MapDatas.SaveingData(maps);
     }
 
