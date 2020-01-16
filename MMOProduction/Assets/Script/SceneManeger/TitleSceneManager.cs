@@ -103,10 +103,9 @@ public class TitleSceneManager : SceneManagerBase
             wsl.loginAction = LoginAction;
             wsl.loadingAccessoryMasterAction = LoadingAccessoryMaster;
             wsl.loadingMapMasterAction = LoadingMapMaster;
-
-            // ここでマスターの設定
-            AccessoryDatas.SaveingData(JsonUtility.FromJson<List<Packes.AccessoryMasterData>>(InputFile.ReadFile(MasterFileNameList.accessory, FILETYPE.JSON)));
-            MapDatas.SaveingData(JsonUtility.FromJson<List<MapDatas.MapData>>(InputFile.ReadFile(MasterFileNameList.map, FILETYPE.JSON)));
+            
+            wsl.Send(new Packes.LoadingAccessoryMasterSend(UserRecord.ID).ToJson());
+            wsl.Send(new Packes.LoadingMapMasterSend(UserRecord.ID).ToJson());
         }
 
         sound_ = GetComponent<SystemSound>();
@@ -119,10 +118,6 @@ public class TitleSceneManager : SceneManagerBase
         if (Input.GetKey(KeyCode.Escape)) Quit();
         if (Input.GetKeyDown(KeyCode.Tab)) InputChange();
         if (Input.GetKeyDown(KeyCode.Return)) EnterCheck();
-        if(Input.GetKeyDown(KeyCode.F12)) {
-            wsl.Send(new Packes.LoadingAccessoryMasterSend(UserRecord.ID).ToJson());
-            wsl.Send(new Packes.LoadingMapMasterSend(UserRecord.ID).ToJson());
-        }
     }
 
 
