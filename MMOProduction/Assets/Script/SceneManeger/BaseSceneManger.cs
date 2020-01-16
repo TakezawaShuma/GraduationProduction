@@ -67,9 +67,8 @@ public class BaseSceneManger : SceneManagerBase
         // プレイヤーが作られた事がないなら
         if (player == null)
         {
-            /*
             var tmp = Instantiate<GameObject>(_playerModel, this.transform);
-            tmp.transform.position = new Vector3(_save.x, _save.y, _save.z);
+            tmp.transform.position = new Vector3(10,2,10);
             tmp.name = (UserRecord.Name != "") ? UserRecord.Name : _name;
             tmp.tag = "Player";
             tmp.transform.localScale = new Vector3(2, 2, 2);
@@ -79,6 +78,7 @@ public class BaseSceneManger : SceneManagerBase
             player = tmp.AddComponent<Player>();
             PlayerController playerCComponent = tmp.AddComponent<PlayerController>();
 
+            /*
             playerCComponent.Init(player, FollowingCamera, playerSetting, chatController, tmp.GetComponent<Animator>());
             userSeeting.Init(tmp);
             FollowingCamera.Target = tmp;

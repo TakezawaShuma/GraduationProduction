@@ -76,9 +76,17 @@ public class PlaySceneManager : SceneManagerBase
 
     private Ready ready;
 
+    public GameObject stage;
 
     private void Awake()
     {
+
+        // ステージの作成
+        Instantiate<GameObject>(stage, transform);
+        if (connectFlag)
+        {
+            wsp = WS.WsPlay.Instance;
+        }
         ready = Ready.Instance;
     }
 
@@ -87,18 +95,25 @@ public class PlaySceneManager : SceneManagerBase
     {
         // ユーザーID
         var user_id = UserRecord.ID;
+        Debug.Log("play start");
 
         if (connectFlag)
         {
-            // プレイサーバに接続
-            wsp = WS.WsPlay.Instance;
+            if (!UserRecord.FAST) { 
+                SettingCallback();
 
-            SettingCallback();
-
-            // セーブデータを要請する。
-            wsp.Send(new Packes.SaveLoadCtoS(UserRecord.ID).ToJson());
-            wsp.Send(new Packes.LoadingAccessoryMasterSend(UserRecord.ID).ToJson());
-
+                // セーブデータを要請する。
+                wsp.Send(new Packes.SaveLoadCtoS(UserRecord.ID).ToJson());
+                wsp.Send(new Packes.LoadingAccessoryMasterSend(UserRecord.ID).ToJson());
+                UserRecord.FAST = true;
+            } else {
+                if (MakePlayer(new Vector3(-210, 0, -210), UserRecord.MODEL))
+                {
+                    updateFlag = true;
+                    ready.ReadyGO();
+                }
+            }
+            
         }
         else { MakePlayer(new Vector3(-210, 5, -210), playerPre); }
     }
@@ -142,6 +157,9 @@ public class PlaySceneManager : SceneManagerBase
                     }
                 }
             }
+        }
+        if (Input.GetKeyDown(KeyCode.Space)) {
+            ChangeScene("LoadingScene");
         }
         // debug
         //if (Input.GetKeyDown(KeyCode.Backspace))
@@ -377,9 +395,9 @@ public class PlaySceneManager : SceneManagerBase
     private void ReceiveSaveData(Packes.SaveLoadStoC _packet)
     {
         //GameObject model = playerPre;
-        GameObject model = characterModel.FindModel(CheckModel(_packet.model_id));
+        UserRecord.MODEL = characterModel.FindModel(CheckModel(_packet.model_id));
 
-        if (MakePlayer(new Vector3(_packet.x, _packet.y, _packet.z), model))
+        if (MakePlayer(new Vector3(_packet.x, _packet.y, _packet.z), UserRecord.MODEL))
         {
             wsp.Send(new Packes.LoadingOK(UserRecord.ID).ToJson());
             updateFlag = true;

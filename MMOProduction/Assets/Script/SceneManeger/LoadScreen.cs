@@ -119,7 +119,7 @@ public class LoadScreen : SceneManagerBase
                 async = SceneManager.LoadSceneAsync("LoginScene", LoadSceneMode.Additive);
                 break;
             case MapID.Base:
-                async = SceneManager.LoadSceneAsync("BaseScene", LoadSceneMode.Additive);
+                async = SceneManager.LoadSceneAsync("PlayScene", LoadSceneMode.Additive);
                 break;
             case MapID.Field:
                 async = SceneManager.LoadSceneAsync("PlayScene", LoadSceneMode.Additive);
