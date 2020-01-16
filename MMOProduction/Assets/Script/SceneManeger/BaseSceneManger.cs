@@ -51,7 +51,7 @@ public class BaseSceneManger : SceneManagerBase
     // Update is called once per frame
     void Update()
     {
-        
+        ready.ReadyGO();
     }
 
 
