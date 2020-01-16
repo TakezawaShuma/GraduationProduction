@@ -76,13 +76,13 @@ public class PlaySceneManager : SceneManagerBase
 
     private Ready ready;
 
-    public GameObject stage;
-
+    public StageTable stages;
     private void Awake()
     {
 
+        MapDatas.MapData mapdata = MapDatas.FindOne(UserRecord.MapID);
         // ステージの作成
-        Instantiate<GameObject>(stage, transform);
+        Instantiate<GameObject>(stages.FindPrefab(UserRecord.MapID), new Vector3(mapdata.x, mapdata.y, mapdata.z), Quaternion.identity);
         if (connectFlag)
         {
             wsp = WS.WsPlay.Instance;
@@ -95,7 +95,6 @@ public class PlaySceneManager : SceneManagerBase
     {
         // ユーザーID
         var user_id = UserRecord.ID;
-        Debug.Log("play start");
 
         if (connectFlag)
         {
@@ -596,17 +595,10 @@ public class PlaySceneManager : SceneManagerBase
     }
 
 
-    /// <summary>
-    /// アクセサリのマスター保存 → loadingAccessoryMasterAction
-    /// </summary>
-    /// <param name="_data"></param>
-    private void LoadingAccessoryMaster(Packes.LoadingAccessoryMaster _data)
-    {
-        InputFile.WriterJson(MasterFileNameList.accessory, JsonUtility.ToJson(_data), FILETYPE.JSON);
-        AccessoryDatas.SaveingData(_data.accessorys);
-    }
+ 
 
     // --------------------送信関係--------------------
+
 
     /// <summary>
     /// 位置情報の送信
@@ -669,7 +661,6 @@ public class PlaySceneManager : SceneManagerBase
         return characters[_playerId].GetComponent<OtherPlayers>();
     }
 
-
     /// <summary>
     /// コールバックを設定
     /// </summary>
@@ -692,7 +683,7 @@ public class PlaySceneManager : SceneManagerBase
         wsp.mapAction = MovingMap;                                  // 252
 
         wsp.logoutAction = Logout;                                  // 707
-        wsp.loadingAccessoryMasterAction = LoadingAccessoryMaster;  // 709
+        //wsp.loadingAccessoryMasterAction = LoadingAccessoryMaster;  // 709
         wsp.findResultsAction = ReceivingFindResults;               // 712
     }
 }

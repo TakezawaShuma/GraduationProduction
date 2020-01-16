@@ -69,7 +69,22 @@ namespace Packes
         }
     }
 
-    
+    /// <summary>
+    /// アクセサリーのマスターデータを取得コール command:708
+    /// </summary>
+    public class LoadingMapMasterSend : IPacketDatas
+    {
+        public int user_id;
+        public LoadingMapMasterSend()
+        {
+            command = (int)CommandData.LoadingMapMasterSend;
+        }
+        public LoadingMapMasterSend(int _user_id)
+        {
+            command = (int)CommandData.LoadingMapMasterSend;
+            user_id = _user_id;
+        }
+    }
     /// <summary>
     /// キャラクターの詳細取得 command:711
     /// </summary>
@@ -339,9 +354,24 @@ namespace Packes
         }
     }
 
+    public class LoadingMapMaster : IPacketDatas {
+        public int version;
+        public List<MapMasterData> maps;
 
-    
- 
+        LoadingMapMaster()
+        {
+            command = (int)CommandData.LoadingMapMaster;
+        }
+
+        LoadingMapMaster(int _version, List<MapMasterData> _maps)
+        {
+            command = (int)CommandData.LoadingMapMaster;
+            version = _version;
+            maps = _maps;
+        }
+    }
+
+
 
     /// <summary>
     /// スキルのマスターデータ
@@ -434,6 +464,30 @@ namespace Packes
             dex = _dex;
             agi = _agi;
             image = _image;
+        }
+    }
+
+    [System.Serializable]
+    public struct MapMasterData {
+        public int id;
+        public int x;
+        public int y;
+        public int z;
+        public int dir;
+
+        MapMasterData(
+            int _id,
+            int _x,
+            int _y,
+            int _z,
+            int _dir
+            ) 
+        {
+            id = _id;
+            x = _x;
+            y = _y;
+            z = _z;
+            dir = _dir;
         }
     }
 }
