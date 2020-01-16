@@ -26,6 +26,7 @@ public class ReceiveEvent : MonoBehaviour
         clickParentObjectPosition = this.transform.parent.position;
     }
 
+    //その階層の先頭にする
     public void MyForeground()
     {
         this.transform.SetAsLastSibling();
@@ -41,6 +42,11 @@ public class ReceiveEvent : MonoBehaviour
         this.transform.parent.parent.SetAsLastSibling();
     }
 
+    public void MyParentParentParentForeground()
+    {
+        this.transform.parent.parent.parent.SetAsLastSibling();
+    }
+
     // インベントリから移動した後
     public void MyPointerUpInventory()
     {
@@ -49,17 +55,13 @@ public class ReceiveEvent : MonoBehaviour
             //ショートカットスロットに登録
             if (hitObject.tag == "Slot")
             {
-                hitObject.GetComponent<Image>().sprite = this.GetComponent<Image>().sprite;
-                hitObject.GetComponent<SlotData>().ID = this.GetComponent<SlotData>().ID;
-                hitObject.GetComponent<SlotData>().HOGE = this.GetComponent<SlotData>().HOGE;
+                Overwrite();
             }
 
+            //装備に登録
             if(hitObject.tag == "Accessory")
             {
-                hitObject.GetComponent<Image>().sprite = this.GetComponent<Image>().sprite;
-                hitObject.GetComponent<SlotData>().ID = this.GetComponent<SlotData>().ID;
-                hitObject.GetComponent<SlotData>().HOGE = this.GetComponent<SlotData>().HOGE;
-
+                Overwrite();
                 WS.WsPlay.Instance.Send(new Packes.AccessoryChange(UserRecord.ID, this.GetComponent<SlotData>().ID, hitObject.GetComponent<SlotId>().id).ToJson());
             }
 
@@ -73,15 +75,48 @@ public class ReceiveEvent : MonoBehaviour
 
     public void MyPointerUpShortcut()
     {
+        //入れ替えるか消すか判定
+        bool initFlag = true;
         if (hitObject != null && hitObject.tag == "Slot")
         {
-            Swap();
+            //左クリックの場合入れ替える
+            if (InputManager.InputMouseCheckDown(0) == INPUT_MODE.PLAY)
+            {
+                initFlag = false;
+            }
+        }
+
+        if (initFlag)
+        {
+            Init();
         }
         else
         {
-            this.GetComponent<Image>().sprite = defoSprite;
-            this.GetComponent<SlotData>().ID = -1;
-            this.GetComponent<SlotData>().HOGE = SlotData.HOGEID.NONE;
+            Swap();
+        }
+    }
+
+    public void MyPointerUpAccessory()
+    {
+        //入れ替えるか消すか判定
+        bool initFlag = true;
+        if (hitObject != null && hitObject.tag == "Accessory")
+        {
+            //左クリックの場合入れ替える
+            if (InputManager.InputMouseCheckDown(0) == INPUT_MODE.PLAY)
+            {
+                initFlag = false;
+            }
+        }
+
+        //データ移動
+        if (initFlag)
+        {
+            Init();
+        }
+        else
+        {
+            Swap();
         }
     }
 
@@ -119,6 +154,8 @@ public class ReceiveEvent : MonoBehaviour
 
     private void Swap()
     {
+        if (this.name == hitObject.name) return;
+
         GameObject temp = new GameObject();
         temp.AddComponent<Image>();
         temp.AddComponent<SlotData>();
@@ -136,8 +173,24 @@ public class ReceiveEvent : MonoBehaviour
         hitObject.GetComponent<SlotData>().HOGE = temp.GetComponent<SlotData>().HOGE;
 
         Destroy(temp);
+        Debug.Log("Swap");
     }
 
+    private void Init()
+    {
+        this.GetComponent<Image>().sprite = defoSprite;
+        this.GetComponent<SlotData>().ID = -1;
+        this.GetComponent<SlotData>().HOGE = SlotData.STATUS.NONE;
+        Debug.Log("Init");
+    }
+
+    private void Overwrite()
+    {
+        hitObject.GetComponent<Image>().sprite = this.GetComponent<Image>().sprite;
+        hitObject.GetComponent<SlotData>().ID = this.GetComponent<SlotData>().ID;
+        hitObject.GetComponent<SlotData>().HOGE = this.GetComponent<SlotData>().HOGE;
+        Debug.Log("Overwrite");
+    }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
