@@ -9,7 +9,7 @@ public class SlotData : MonoBehaviour
 {
     private bool useFlag = false;
 
-    public enum HOGEID
+    public enum STATUS
     {
         SKILL,
         ITEM,
@@ -20,7 +20,7 @@ public class SlotData : MonoBehaviour
     private int id = -1;
 
     [SerializeField]
-    private HOGEID hoge = HOGEID.NONE;
+    private STATUS hoge = STATUS.NONE;
 
     public int ID
     {
@@ -35,7 +35,7 @@ public class SlotData : MonoBehaviour
         }
     }
 
-    public HOGEID HOGE
+    public STATUS HOGE
     {
         get
         {
@@ -52,7 +52,7 @@ public class SlotData : MonoBehaviour
     void Start()
     {
         id = -1;
-        hoge = HOGEID.NONE;
+        hoge = STATUS.NONE;
     }
 
     public void OnClick()

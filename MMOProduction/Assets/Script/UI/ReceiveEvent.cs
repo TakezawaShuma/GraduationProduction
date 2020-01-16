@@ -81,7 +81,21 @@ public class ReceiveEvent : MonoBehaviour
         {
             this.GetComponent<Image>().sprite = defoSprite;
             this.GetComponent<SlotData>().ID = -1;
-            this.GetComponent<SlotData>().HOGE = SlotData.HOGEID.NONE;
+            this.GetComponent<SlotData>().HOGE = SlotData.STATUS.NONE;
+        }
+    }
+
+    public void MyPointerUpAccessory()
+    {
+        if (hitObject != null && hitObject.tag == "Accessory")
+        {
+            Swap();
+        }
+        else
+        {
+            this.GetComponent<Image>().sprite = defoSprite;
+            this.GetComponent<SlotData>().ID = -1;
+            this.GetComponent<SlotData>().HOGE = SlotData.STATUS.NONE;
         }
     }
 
