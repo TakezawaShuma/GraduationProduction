@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using UnityEngine;
 
 // TODO: 処理速度に心配あり
 public static class AccessoryDatas

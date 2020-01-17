@@ -76,9 +76,17 @@ public class PlaySceneManager : SceneManagerBase
 
     private Ready ready;
 
-
+    public StageTable stages;
     private void Awake()
     {
+        // ステージの作成
+        GameObject stage = Instantiate<GameObject>(stages.FindPrefab(UserRecord.MapID), transform);
+        stage.transform.position = Vector3.zero;
+
+        if (connectFlag)
+        {
+            wsp = WS.WsPlay.Instance;
+        }
         ready = Ready.Instance;
     }
 
@@ -90,15 +98,21 @@ public class PlaySceneManager : SceneManagerBase
 
         if (connectFlag)
         {
-            // プレイサーバに接続
-            wsp = WS.WsPlay.Instance;
+            if (!UserRecord.FAST) { 
+                SettingCallback();
 
-            SettingCallback();
-
-            // セーブデータを要請する。
-            wsp.Send(new Packes.SaveLoadCtoS(UserRecord.ID).ToJson());
-            wsp.Send(new Packes.LoadingAccessoryMasterSend(UserRecord.ID).ToJson());
-
+                // セーブデータを要請する。
+                wsp.Send(new Packes.SaveLoadCtoS(UserRecord.ID).ToJson());
+                wsp.Send(new Packes.LoadingAccessoryMasterSend(UserRecord.ID).ToJson());
+                UserRecord.FAST = true;
+            } else {
+                if (MakePlayer(new Vector3(-210, 0, -210), UserRecord.MODEL))
+                {
+                    updateFlag = true;
+                    ready.ReadyGO();
+                }
+            }
+            
         }
         else { MakePlayer(new Vector3(-210, 5, -210), playerPre); }
     }
@@ -142,6 +156,9 @@ public class PlaySceneManager : SceneManagerBase
                     }
                 }
             }
+        }
+        if (Input.GetKeyDown(KeyCode.Space)) {
+            ChangeScene("LoadingScene");
         }
         // debug
         //if (Input.GetKeyDown(KeyCode.Backspace))
@@ -189,8 +206,9 @@ public class PlaySceneManager : SceneManagerBase
         // プレイヤーが作られた事がないなら
         if (player == null)
         {
+            MapDatas.MapData mapdata = MapDatas.FindOne(UserRecord.MapID);
             var tmp = Instantiate<GameObject>(_playerModel, this.transform);
-            tmp.transform.position = new Vector3(_save.x, _save.y, _save.z);
+            tmp.transform.position = new Vector3(mapdata.x, mapdata.y, mapdata.z);
             tmp.name = (UserRecord.Name != "") ? UserRecord.Name : _name;
             tmp.tag = "Player";
             tmp.transform.localScale = new Vector3(2, 2, 2);
@@ -377,9 +395,9 @@ public class PlaySceneManager : SceneManagerBase
     private void ReceiveSaveData(Packes.SaveLoadStoC _packet)
     {
         //GameObject model = playerPre;
-        GameObject model = characterModel.FindModel(CheckModel(_packet.model_id));
+        UserRecord.MODEL = characterModel.FindModel(CheckModel(_packet.model_id));
 
-        if (MakePlayer(new Vector3(_packet.x, _packet.y, _packet.z), model))
+        if (MakePlayer(new Vector3(_packet.x, _packet.y, _packet.z), UserRecord.MODEL))
         {
             wsp.Send(new Packes.LoadingOK(UserRecord.ID).ToJson());
             updateFlag = true;
@@ -578,17 +596,10 @@ public class PlaySceneManager : SceneManagerBase
     }
 
 
-    /// <summary>
-    /// アクセサリのマスター保存 → loadingAccessoryMasterAction
-    /// </summary>
-    /// <param name="_data"></param>
-    private void LoadingAccessoryMaster(Packes.LoadingAccessoryMaster _data)
-    {
-        InputFile.WriterJson(MasterFileNameList.accessory, JsonUtility.ToJson(_data), FILETYPE.JSON);
-        AccessoryDatas.SaveingData(_data.accessorys);
-    }
+ 
 
     // --------------------送信関係--------------------
+
 
     /// <summary>
     /// 位置情報の送信
@@ -651,7 +662,6 @@ public class PlaySceneManager : SceneManagerBase
         return characters[_playerId].GetComponent<OtherPlayers>();
     }
 
-
     /// <summary>
     /// コールバックを設定
     /// </summary>
@@ -674,7 +684,7 @@ public class PlaySceneManager : SceneManagerBase
         wsp.mapAction = MovingMap;                                  // 252
 
         wsp.logoutAction = Logout;                                  // 707
-        wsp.loadingAccessoryMasterAction = LoadingAccessoryMaster;  // 709
+        //wsp.loadingAccessoryMasterAction = LoadingAccessoryMaster;  // 709
         wsp.findResultsAction = ReceivingFindResults;               // 712
     }
 }

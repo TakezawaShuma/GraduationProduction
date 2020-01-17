@@ -101,6 +101,11 @@ public class TitleSceneManager : SceneManagerBase
             wsl.errerAction = ErrorAction;
             wsl.createAction = CreateAction;
             wsl.loginAction = LoginAction;
+            wsl.loadingAccessoryMasterAction = LoadingAccessoryMaster;
+            wsl.loadingMapMasterAction = LoadingMapMaster;
+            
+            wsl.Send(new Packes.LoadingAccessoryMasterSend(UserRecord.ID).ToJson());
+            wsl.Send(new Packes.LoadingMapMasterSend(UserRecord.ID).ToJson());
         }
 
         sound_ = GetComponent<SystemSound>();
@@ -213,11 +218,6 @@ public class TitleSceneManager : SceneManagerBase
             // 新規登録
             if (pw_.text == ConfirmPW_.text)
             {
-                //Debug.Log("新規登録 ID:" + id + "  PW:" + pw);
-                //Error01.gameObject.SetActive(false);
-                //Error02.gameObject.SetActive(false);
-                //Error03.gameObject.SetActive(false);
-                //Error04.gameObject.SetActive(false);
                 if (connectFlag)
                 {
                     // 送信処理
@@ -420,8 +420,8 @@ public class TitleSceneManager : SceneManagerBase
         UserRecord.ID = _packet.user_id;
         UserRecord.Name = _packet.name;
 
-        if (inputState == CANVAS_STATE.SIGN_IN) { UserRecord.MapID = MapID.Base; ChangeScene("LoadingScene"); }
-        else if (inputState == CANVAS_STATE.SIGN_UP) { UserRecord.MapID = MapID.Base; ChangeScene("CharacterSelectScene"); }
+        if (inputState == CANVAS_STATE.SIGN_IN) { UserRecord.MapID = MapID.Field; ChangeScene("LoadingScene"); }
+        else if (inputState == CANVAS_STATE.SIGN_UP) { UserRecord.MapID = MapID.Field; ChangeScene("CharacterSelectScene"); }
     }
 
     int errorCount = 0;
@@ -443,4 +443,29 @@ public class TitleSceneManager : SceneManagerBase
     // 選択の音
     public void EnterSoundPlay() => sound_.SystemPlay(SYSTEM_SOUND_TYPE.ENTER);
 
+
+    /// <summary>
+    /// マップのマスター取得
+    /// </summary>
+    /// <param name="_data"></param>
+    private void LoadingMapMaster(Packes.LoadingMapMaster _data)
+    {
+        List<MapDatas.MapData> maps = new List<MapDatas.MapData>();
+        foreach (var map in _data.maps)
+        {
+            maps.Add(new MapDatas.MapData(map.id, map.x, map.y, map.z, map.dir, null));
+        }
+        InputFile.WriterJson(MasterFileNameList.map, JsonUtility.ToJson(_data), FILETYPE.JSON);
+        MapDatas.SaveingData(maps);
+    }
+
+    /// <summary>
+    /// アクセサリのマスター保存 → loadingAccessoryMasterAction
+    /// </summary>
+    /// <param name="_data"></param>
+    private void LoadingAccessoryMaster(Packes.LoadingAccessoryMaster _data)
+    {
+        InputFile.WriterJson(MasterFileNameList.accessory, JsonUtility.ToJson(_data), FILETYPE.JSON);
+        AccessoryDatas.SaveingData(_data.accessorys);
+    }
 }
