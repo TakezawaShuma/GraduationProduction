@@ -624,7 +624,7 @@ public class PlaySceneManager : SceneManagerBase
     /// </summary>
     private void SendEnemyPosReq()
     {
-        wsp.Send(new Packes.GetEnemysDataCtoS(0, UserRecord.ID).ToJson());
+        wsp.Send(new Packes.GetEnemysDataCtoS((int)UserRecord.MapID, UserRecord.ID).ToJson());
     }
 
     /// <summary>
