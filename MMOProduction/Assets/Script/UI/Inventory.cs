@@ -72,7 +72,6 @@ public class Inventory : MonoBehaviour
     public void ChangeItems(List<int> _ids) {
         List<Packes.AccessoryMasterData> imageName = AccessoryDatas.Find(_ids);
         foreach(var id in _ids) {
-            Debug.Log(id);
             if (id <= 0) continue;
             SlotData data = new SlotData();
             data.ID = id;

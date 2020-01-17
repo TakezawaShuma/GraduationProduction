@@ -319,7 +319,6 @@ public class PlaySceneManager : SceneManagerBase
     private void RegisterEnemies(Packes.GetEnemyDataStoC _packet)
     {
         List<Packes.EnemyReceiveData> list = _packet.enemys;
-        Debug.Log(_packet.ToJson());
         foreach (var ene in list)
         {
             if (ene.unique_id != UserRecord.ID)
@@ -404,7 +403,6 @@ public class PlaySceneManager : SceneManagerBase
 
         if (MakePlayer(new Vector3(_packet.x, _packet.y, _packet.z), UserRecord.MODEL))
         {
-            Debug.Log(_packet.ToJson());
             wsp.Send(new Packes.LoadingOK(UserRecord.ID).ToJson());
             updateFlag = true;
             inventory_.ChangeItems(_packet.accessorys);
