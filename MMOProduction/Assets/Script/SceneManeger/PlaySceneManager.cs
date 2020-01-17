@@ -77,6 +77,9 @@ public class PlaySceneManager : SceneManagerBase
     private Ready ready;
 
     public StageTable stages;
+
+    private bool isLogout = true;
+
     private void Awake()
     {
         // ステージの作成
@@ -105,6 +108,7 @@ public class PlaySceneManager : SceneManagerBase
                 wsp.Send(new Packes.SaveLoadCtoS(UserRecord.ID).ToJson());
                 wsp.Send(new Packes.LoadingAccessoryMasterSend(UserRecord.ID).ToJson());
                 UserRecord.FAST = true;
+
             } else {
                 if (MakePlayer(new Vector3(-210, 0, -210), UserRecord.MODEL))
                 {
@@ -157,9 +161,9 @@ public class PlaySceneManager : SceneManagerBase
                 }
             }
         }
-        if (Input.GetKeyDown(KeyCode.Space)) {
-            ChangeScene("LoadingScene");
-        }
+        if (Input.GetKeyDown(KeyCode.F12)) SendMoveMap(MapID.Field);
+        if (Input.GetKeyDown(KeyCode.F11)) SendMoveMap(MapID.Base);
+
         // debug
         //if (Input.GetKeyDown(KeyCode.Backspace))
         //{
@@ -189,11 +193,12 @@ public class PlaySceneManager : SceneManagerBase
 
     public void OnDestroy()
     {
-        if (connectFlag) { wsp.Destroy(); }
+        if (connectFlag) {
+            if (isLogout) { 
+                wsp.Destroy(); 
+            }
+        }
     }
-
-
-
 
     /// <summary>
     /// 自分の作成
@@ -314,7 +319,6 @@ public class PlaySceneManager : SceneManagerBase
     private void RegisterEnemies(Packes.GetEnemyDataStoC _packet)
     {
         List<Packes.EnemyReceiveData> list = _packet.enemys;
-
         foreach (var ene in list)
         {
             if (ene.unique_id != UserRecord.ID)
@@ -558,6 +562,8 @@ public class PlaySceneManager : SceneManagerBase
     /// <param name="_packet"></param>
     private void MovingMap(Packes.MoveingMapOk _packet)
     {
+        UserRecord.MapID = (MapID)_packet.mapId;
+        isLogout = false;
         ChangeScene("LoadingScene");
     }
 
@@ -625,6 +631,14 @@ public class PlaySceneManager : SceneManagerBase
     private void SendEnemyPosReq()
     {
         wsp.Send(new Packes.GetEnemysDataCtoS((int)UserRecord.MapID, UserRecord.ID).ToJson());
+    }
+
+    /// <summary>
+    /// マップの移動申請
+    /// </summary>
+    /// <param name="_mapId"></param>
+    private void SendMoveMap(MapID _mapId) {
+        wsp.Send(new Packes.MoveingMap(UserRecord.ID, (int)_mapId).ToJson());
     }
 
     /// <summary>

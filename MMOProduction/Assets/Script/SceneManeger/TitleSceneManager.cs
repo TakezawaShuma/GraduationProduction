@@ -118,6 +118,7 @@ public class TitleSceneManager : SceneManagerBase
         if (Input.GetKey(KeyCode.Escape)) Quit();
         if (Input.GetKeyDown(KeyCode.Tab)) InputChange();
         if (Input.GetKeyDown(KeyCode.Return)) EnterCheck();
+
     }
 
 
@@ -420,8 +421,8 @@ public class TitleSceneManager : SceneManagerBase
         UserRecord.ID = _packet.user_id;
         UserRecord.Name = _packet.name;
 
-        if (inputState == CANVAS_STATE.SIGN_IN) { UserRecord.MapID = MapID.Field; ChangeScene("LoadingScene"); }
-        else if (inputState == CANVAS_STATE.SIGN_UP) { UserRecord.MapID = MapID.Field; ChangeScene("CharacterSelectScene"); }
+        if (inputState == CANVAS_STATE.SIGN_IN) { UserRecord.MapID = MapID.Base; ChangeScene("LoadingScene"); }
+        else if (inputState == CANVAS_STATE.SIGN_UP) { UserRecord.MapID = MapID.Base; ChangeScene("CharacterSelectScene"); }
     }
 
     int errorCount = 0;

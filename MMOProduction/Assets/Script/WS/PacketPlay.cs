@@ -767,10 +767,18 @@ namespace Packes
     /// </summary>
     public class MoveingMapOk : IPacketDatas
     {
+        public int mapId;
         /// <summary>デフォルトコンストラクタ</summary>
         public MoveingMapOk()
         {
             this.command = (int)CommandData.MoveingMapOk;
+            mapId = 0;
+        }
+
+        public MoveingMapOk(int _mapId)
+        {
+            this.command = (int)CommandData.MoveingMapOk;
+            mapId = _mapId;
         }
     }
 

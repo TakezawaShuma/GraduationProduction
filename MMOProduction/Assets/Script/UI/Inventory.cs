@@ -8,8 +8,7 @@ public class Inventory : MonoBehaviour
     private readonly int WIDTH = 9;
     private readonly int HEIGHT = 10;
     //管理系
-    [SerializeField]
-    private List<Image> list = null;
+    private List<Image> list = new List<Image>();
 
     private List<SlotData> sloatDatas_ = new List<SlotData>();
 
@@ -67,6 +66,7 @@ public class Inventory : MonoBehaviour
             data.ID = id;
             sloatDatas_.Add(data);
         }
+        ImageCheck();
     }
 
     public void ChangeItems(List<int> _ids) {
@@ -77,6 +77,7 @@ public class Inventory : MonoBehaviour
             data.ID = id;
             sloatDatas_.Add(data);
         }
+        ImageCheck();
     }
 
     private void ImageCheck() { 
