@@ -105,6 +105,7 @@ public class PlaySceneManager : SceneManagerBase
                 wsp.Send(new Packes.SaveLoadCtoS(UserRecord.ID).ToJson());
                 wsp.Send(new Packes.LoadingAccessoryMasterSend(UserRecord.ID).ToJson());
                 UserRecord.FAST = true;
+
             } else {
                 if (MakePlayer(new Vector3(-210, 0, -210), UserRecord.MODEL))
                 {
@@ -157,7 +158,14 @@ public class PlaySceneManager : SceneManagerBase
                 }
             }
         }
-        if (Input.GetKeyDown(KeyCode.Space)) {
+        if (Input.GetKeyDown(KeyCode.F12))
+        {
+            UserRecord.MapID = MapID.Field;
+            ChangeScene("LoadingScene");
+        }
+        if (Input.GetKeyDown(KeyCode.F11))
+        {
+            UserRecord.MapID = MapID.Base;
             ChangeScene("LoadingScene");
         }
         // debug
@@ -399,6 +407,7 @@ public class PlaySceneManager : SceneManagerBase
 
         if (MakePlayer(new Vector3(_packet.x, _packet.y, _packet.z), UserRecord.MODEL))
         {
+            Debug.Log(_packet.ToJson());
             wsp.Send(new Packes.LoadingOK(UserRecord.ID).ToJson());
             updateFlag = true;
             inventory_.ChangeItems(_packet.accessorys);
