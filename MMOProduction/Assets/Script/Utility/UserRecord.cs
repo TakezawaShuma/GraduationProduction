@@ -15,6 +15,7 @@ public static class UserRecord
 
     private static bool fastCheck = false;
     private static GameObject model = null;
+    private static MapID nextMap = MapID.Non;
 
     public static GameObject MODEL { get { return model; } set { model = value; } }
     public static bool FAST { get { return fastCheck; } set { fastCheck = value; } }
@@ -22,6 +23,7 @@ public static class UserRecord
     public static string Name { get { return name; } set { if (name == "") name = value; } }
     public static string IP { get { return ip; } set { ip = value; } }
     public static MapID MapID { get { return mapId; } set { mapId = value; } }
+    public static MapID NextMap { get { return nextMap; } set { nextMap = value; } }
 
     public static void DiscardAll()
     {

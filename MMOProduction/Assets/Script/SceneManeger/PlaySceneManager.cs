@@ -161,8 +161,9 @@ public class PlaySceneManager : SceneManagerBase
                 }
             }
         }
-        if (Input.GetKeyDown(KeyCode.F12)) SendMoveMap(MapID.Field);
-        if (Input.GetKeyDown(KeyCode.F11)) SendMoveMap(MapID.Base);
+        //if (Input.GetKeyDown(KeyCode.F12)) SendMoveMap(MapID.Field);
+        //if (Input.GetKeyDown(KeyCode.F11)) SendMoveMap(MapID.Base);
+        if (Input.GetKeyDown(KeyCode.F12)) SendMoveMap(UserRecord.NextMap);
 
         // debug
         //if (Input.GetKeyDown(KeyCode.Backspace))
@@ -638,6 +639,9 @@ public class PlaySceneManager : SceneManagerBase
     /// </summary>
     /// <param name="_mapId"></param>
     private void SendMoveMap(MapID _mapId) {
+        if (_mapId == MapID.Non) return;
+
+        UserRecord.NextMap = MapID.Non;
         wsp.Send(new Packes.MoveingMap(UserRecord.ID, (int)_mapId).ToJson());
     }
 
