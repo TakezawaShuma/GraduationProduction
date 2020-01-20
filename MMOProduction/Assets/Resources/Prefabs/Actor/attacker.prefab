@@ -1408,7 +1408,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   walkSoundTable_: {fileID: 11400000, guid: 0cc43c8d9aa3e4546a846656fbb22fd3, type: 2}
-  playerController_: {fileID: 0}
   slashing_: {fileID: 8300000, guid: 22b63e7fd45ef234a9200c3026280595, type: 3}
   blow_: {fileID: 8300000, guid: 2d241d4d74004264ab8ad6d10bd8761c, type: 3}
   fireBall_: {fileID: 0}
@@ -3839,7 +3838,7 @@ PrefabInstance:
     - target: {fileID: 5817937949196188410, guid: a5b61410d7c33fb45b3be611b3482862,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.043
+      value: 0.05
       objectReference: {fileID: 0}
     - target: {fileID: 5817937949196188410, guid: a5b61410d7c33fb45b3be611b3482862,
         type: 3}
@@ -3849,7 +3848,7 @@ PrefabInstance:
     - target: {fileID: 5817937949196188410, guid: a5b61410d7c33fb45b3be611b3482862,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.064
+      value: -0.1
       objectReference: {fileID: 0}
     - target: {fileID: 5817937949196188410, guid: a5b61410d7c33fb45b3be611b3482862,
         type: 3}
@@ -3890,6 +3889,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5817937949196188410, guid: a5b61410d7c33fb45b3be611b3482862,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.18
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a5b61410d7c33fb45b3be611b3482862, type: 3}
