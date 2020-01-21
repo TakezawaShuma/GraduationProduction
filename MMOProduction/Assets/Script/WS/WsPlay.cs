@@ -112,7 +112,7 @@ namespace WS
         /// <param name="_json"></param>
         public override void Send(string _json)
         {
-            //Debug.Log(int.Parse(_json);
+            if (base.ws == null) return;
             if (base.ws.ReadyState == WebSocketState.Open)
             {
                 base.ws.Send(_json);
