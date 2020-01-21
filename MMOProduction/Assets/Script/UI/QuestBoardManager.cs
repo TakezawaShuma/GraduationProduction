@@ -2,45 +2,48 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
 
 public class QuestBoardManager : MonoBehaviour
 {
     [SerializeField, Header("パネル")]
     private GameObject panel = null;
 
-    [SerializeField, Header("クエストボタン")]
-    private List<Button> questButton = null;
+    [SerializeField, Header("トグルグループ")]
+    private ToggleGroup toggleGroup = null;
 
     [SerializeField, Header("マーカー")]
     private Marker marker = null;
 
     // 現在選択されているクエストID
-    private int currentID = -1;
+    private MapID currentID = MapID.Non;
 
     private void Start()
     {
-        int i = 1;
-
-        foreach(Button button in questButton)
-        {
-            button.onClick.AddListener(() => { ButtonMapID(i); });
-            i++;
-        }
+        panel.SetActive(false);
 
         marker.SetFunction(Open);
     }
 
     public void DecisionMapID()
     {
-        if (currentID != -1)
+        if (currentID != MapID.Non)
         {
-            UserRecord.MapID = (MapID)currentID;
+            UserRecord.MapID = currentID;
+            Debug.Log(currentID);
         }
     }
 
-    private void ButtonMapID(int id)
+    public void SetMapID()
     {
-        currentID = id;
+        if (toggleGroup.ActiveToggles().FirstOrDefault() != null)
+        {
+            currentID = toggleGroup.ActiveToggles().FirstOrDefault().gameObject.GetComponent<QuestToggle>().GetMapID();
+        }
+        else
+        {
+            currentID = MapID.Non;
+        }
     }
 
     public void Open()

@@ -42,7 +42,7 @@ public class MapMovePoint : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         // プレイヤーが移動ポイントに触れたとき
-        if (other.tag == "Player")
+        if (other.tag == "Player" && UserRecord.MapID != MapID.Non)
         {
             text.enabled = true;
         }
