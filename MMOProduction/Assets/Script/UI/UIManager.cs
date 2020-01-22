@@ -87,7 +87,6 @@ public class UIManager : MonoBehaviour
         {
             obj[i].transform.position = pos;
             pos.x -= 110;
-            Debug.Log(i);
         }
         
     }
