@@ -93,6 +93,8 @@ public class UIManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        InputManager.Update();
+
         if (ui != null && !chat.GetChatActiveFlag())
         {
             for (int i = 0; i < ui.Length; i++)

@@ -148,7 +148,6 @@ public class PlaySceneManager : SceneManagerBase
     // Update is called once per frame
     void Update()
     {
-        InputManager.Update();
         if (InputManager.InputKeyCheck(KeyCode.Escape)) Quit();
         if (ready.CheckReady())
         {
