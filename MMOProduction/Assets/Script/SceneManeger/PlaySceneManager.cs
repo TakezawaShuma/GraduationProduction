@@ -83,7 +83,7 @@ public class PlaySceneManager : SceneManagerBase
 
     public StageTable stages;
 
-    private bool isLogout = false;
+    private bool isLogout = true;
 
     private void Awake()
     {
@@ -170,7 +170,7 @@ public class PlaySceneManager : SceneManagerBase
         if (Input.GetKeyDown(KeyCode.F11)) SendMoveMap(MapID.Base);
 
         // debug
-        //if (Input.GetKeyDown(KeyCode.Backspace)) questResult.SetQuestCrear(Time.time);        
+        if (Input.GetKeyDown(KeyCode.Backspace)) questResult.SetQuestCrear(Time.time);        
         //if (Input.GetKeyDown(KeyCode.L))
         //{
         //    Packes.GetEnemyDataStoC v = new Packes.GetEnemyDataStoC();
@@ -392,7 +392,7 @@ public class PlaySceneManager : SceneManagerBase
     }
 
     [SerializeField]
-    private Inventory inventory_;
+    private Inventory inventory_ = null;
 
     /// <summary>
     /// セーブデータを受け取る→　loadSaveAction

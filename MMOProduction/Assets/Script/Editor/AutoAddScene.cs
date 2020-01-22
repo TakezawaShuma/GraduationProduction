@@ -13,7 +13,7 @@ public class AutoAddScene
         );
     }
 
-    [MenuItem("Assets/Create/Scene")]
+    [MenuItem("Assets/Create/New Scene")]
     private static void CreateScene()
     {
         CreateScene(
