@@ -33,11 +33,11 @@ public class ReceiveEvent : MonoBehaviour
         leftClickFlag = false;
         rightClickFlag = false;
 
-        if(InputManager.InputMouseCheckDown(0) == INPUT_MODE.UI)
+        if (InputManager.InputMouseCheck(0) == INPUT_MODE.UI)
         {
             leftClickFlag = true;
         }
-        if (InputManager.InputMouseCheckDown(1) == INPUT_MODE.UI)
+        if (InputManager.InputMouseCheck(1) == INPUT_MODE.UI)
         {
             rightClickFlag = true;
         }
@@ -182,10 +182,7 @@ public class ReceiveEvent : MonoBehaviour
     // 親を移動させるドラッグ時の関数
     public void MyDragUI()
     {
-        if (InputManager.InputMouseCheck(0) == INPUT_MODE.UI)
-        {
-            this.transform.parent.transform.position = Input.mousePosition + (clickParentObjectPosition - clickMousePosition);
-        }
+        this.transform.parent.transform.position = Input.mousePosition + (clickParentObjectPosition - clickMousePosition);
     }
 
     /// <summary>
@@ -243,8 +240,8 @@ public class ReceiveEvent : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if (collision.transform.tag == "Slot" 
-            || collision.transform.tag == "Inventory" 
+        if (collision.transform.tag == "Slot"
+            || collision.transform.tag == "Inventory"
             || collision.transform.tag == "Accessory")
         {
             hitObject = collision.gameObject;
@@ -253,7 +250,7 @@ public class ReceiveEvent : MonoBehaviour
 
     private void OnTriggerExit2D(Collider2D collision)
     {
-        if (collision.transform.tag == "Slot" 
+        if (collision.transform.tag == "Slot"
             || collision.transform.tag == "Inventory"
             || collision.transform.tag == "Accessory")
         {

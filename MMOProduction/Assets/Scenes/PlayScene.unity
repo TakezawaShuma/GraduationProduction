@@ -386,11 +386,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   ui:
-  - {fileID: 44066667}
-  - {fileID: 1354133661}
-  - {fileID: 1533655885}
   - {fileID: 39911716}
-  key: 690000006b0000000900000063000000
+  - {fileID: 44066667}
+  - {fileID: 1778040159}
+  - {fileID: 1533655885}
+  key: 63000000690000007100000009000000
   shortcut: []
   chat: {fileID: 3266970890983044155}
   canvas: {fileID: 809979504}
@@ -1043,7 +1043,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 3349917795832867408}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1778040159}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: decbc5abe6ed1c741b7393ba24190ff1, type: 3}
@@ -1129,7 +1129,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 992294604}
   m_LocalRotation: {x: 0.13063945, y: -0.000000005913365, z: 7.791964e-10, w: 0.99143}
-  m_LocalPosition: {x: 0.00070903014, y: 46709.766, z: -59454.125}
+  m_LocalPosition: {x: 0.0007101711, y: 46784.918, z: -59549.773}
   m_LocalScale: {x: 1.5000008, y: 1.5000002, z: 1.5000006}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1457,6 +1457,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: SkiltreePanel
       objectReference: {fileID: 0}
+    - target: {fileID: 8163061522702348242, guid: 1ba778ea13c09d949b07806fcd4d08ad,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8163061522702348243, guid: 1ba778ea13c09d949b07806fcd4d08ad,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -1585,32 +1590,32 @@ PrefabInstance:
     - target: {fileID: 8163061524141354668, guid: 1ba778ea13c09d949b07806fcd4d08ad,
         type: 3}
       propertyPath: m_AnchorMin.y
-      value: 0
+      value: 0.6693121
       objectReference: {fileID: 0}
     - target: {fileID: 8163061524141354668, guid: 1ba778ea13c09d949b07806fcd4d08ad,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8163061524141354668, guid: 1ba778ea13c09d949b07806fcd4d08ad,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 0.9920634
       objectReference: {fileID: 0}
     - target: {fileID: 8163061523518389295, guid: 1ba778ea13c09d949b07806fcd4d08ad,
         type: 3}
       propertyPath: m_AnchorMin.x
-      value: 0
+      value: 0.005095541
       objectReference: {fileID: 0}
     - target: {fileID: 8163061523518389295, guid: 1ba778ea13c09d949b07806fcd4d08ad,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 0.3821656
       objectReference: {fileID: 0}
     - target: {fileID: 8163061523518389295, guid: 1ba778ea13c09d949b07806fcd4d08ad,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1ba778ea13c09d949b07806fcd4d08ad, type: 3}
@@ -1927,6 +1932,12 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1778040159 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3349917796045330651, guid: 1dba9fb859ac0d0459da284b1f787ace,
+    type: 3}
+  m_PrefabInstance: {fileID: 3349917795832867408}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1838121571
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2044,22 +2055,22 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 2238215083173572094, guid: 4caa5454c954d1c46b306447aa1df9e8,
+    - target: {fileID: 4691498435420953021, guid: 4caa5454c954d1c46b306447aa1df9e8,
         type: 3}
       propertyPath: m_TagString
       value: Untagged
       objectReference: {fileID: 0}
-    - target: {fileID: 2238215083173572094, guid: 4caa5454c954d1c46b306447aa1df9e8,
+    - target: {fileID: 4691498435420953021, guid: 4caa5454c954d1c46b306447aa1df9e8,
         type: 3}
       propertyPath: m_Name
       value: InventryImage
       objectReference: {fileID: 0}
-    - target: {fileID: 4691498435420953021, guid: 4caa5454c954d1c46b306447aa1df9e8,
+    - target: {fileID: 2238215083173572094, guid: 4caa5454c954d1c46b306447aa1df9e8,
         type: 3}
       propertyPath: m_TagString
       value: Untagged
       objectReference: {fileID: 0}
-    - target: {fileID: 4691498435420953021, guid: 4caa5454c954d1c46b306447aa1df9e8,
+    - target: {fileID: 2238215083173572094, guid: 4caa5454c954d1c46b306447aa1df9e8,
         type: 3}
       propertyPath: m_Name
       value: InventryImage
