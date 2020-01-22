@@ -41,8 +41,6 @@ public class ReceiveEvent : MonoBehaviour
         {
             rightClickFlag = true;
         }
-
-        Debug.Log("left:" + leftClickFlag + " right:" + rightClickFlag);
     }
     /// <summary>
     ///その階層内で描画順を一番上にする
@@ -138,11 +136,9 @@ public class ReceiveEvent : MonoBehaviour
         bool initFlag = true;
         if (hitObject != null && hitObject.tag == "Accessory")
         {
-            Debug.Log("hitAccessory");
             //左クリックの場合入れ替える
             if (leftClickFlag)
             {
-                Debug.Log("leftClick");
                 initFlag = false;
             }
         }
@@ -202,32 +198,34 @@ public class ReceiveEvent : MonoBehaviour
 
         var tempSprite = this.GetComponent<Image>().sprite;
         var tempId = this.GetComponent<SlotData>().ID;
-        var tempStatus = this.GetComponent<SlotData>().HOGE;
+        var tempStatus = this.GetComponent<SlotData>().Status;
+        var tempName = this.GetComponent<SlotData>().Name;
 
         this.GetComponent<Image>().sprite = hitObject.GetComponent<Image>().sprite;
         this.GetComponent<SlotData>().ID = hitObject.GetComponent<SlotData>().ID;
-        this.GetComponent<SlotData>().HOGE = hitObject.GetComponent<SlotData>().HOGE;
+        this.GetComponent<SlotData>().Status = hitObject.GetComponent<SlotData>().Status;
+        this.GetComponent<SlotData>().Name = hitObject.GetComponent<SlotData>().Name;
 
         hitObject.GetComponent<Image>().sprite = tempSprite;
         hitObject.GetComponent<SlotData>().ID = tempId;
-        hitObject.GetComponent<SlotData>().HOGE = tempStatus;
-        Debug.Log("Swap");
+        hitObject.GetComponent<SlotData>().Status = tempStatus;
+        hitObject.GetComponent<SlotData>().Name = tempName;
     }
 
     private void Init()
     {
         this.GetComponent<Image>().sprite = defoSprite;
         this.GetComponent<SlotData>().ID = -1;
-        this.GetComponent<SlotData>().HOGE = SlotData.STATUS.NONE;
-        Debug.Log("Init");
+        this.GetComponent<SlotData>().Status = SlotData.STATUS.NONE;
+        this.GetComponent<SlotData>().Name = this.transform.parent.name;
     }
 
     private void Overwrite()
     {
         hitObject.GetComponent<Image>().sprite = this.GetComponent<Image>().sprite;
         hitObject.GetComponent<SlotData>().ID = this.GetComponent<SlotData>().ID;
-        hitObject.GetComponent<SlotData>().HOGE = this.GetComponent<SlotData>().HOGE;
-        Debug.Log("Overwrite");
+        hitObject.GetComponent<SlotData>().Status = this.GetComponent<SlotData>().Status;
+        hitObject.GetComponent<SlotData>().Name = this.GetComponent<SlotData>().Name;
     }
 
     private bool IsSameName()
