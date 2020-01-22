@@ -15,28 +15,52 @@ public class ReceiveEvent : MonoBehaviour
 
     private GameObject hitObject;
 
+    private bool leftClickFlag = false;
+    private bool rightClickFlag = false;
+
     [SerializeField]
     private Sprite defoSprite = null;
 
-    // 押した時
+    /// <summary>
+    /// 押した時の情報を保存する関数
+    /// </summary>
     public void MyPointerDownUI()
     {
         clickMousePosition = Input.mousePosition;
         clickThisObjectPosition = this.transform.position;
         clickParentObjectPosition = this.transform.parent.position;
-    }
 
-    //その階層の先頭にする
+        leftClickFlag = false;
+        rightClickFlag = false;
+
+        if(InputManager.InputMouseCheckDown(0) == INPUT_MODE.UI)
+        {
+            leftClickFlag = true;
+        }
+        if (InputManager.InputMouseCheckDown(1) == INPUT_MODE.UI)
+        {
+            rightClickFlag = true;
+        }
+    }
+    /// <summary>
+    ///その階層内で描画順を一番上にする
+    /// </summary>
     public void MyForeground()
     {
         this.transform.SetAsLastSibling();
     }
 
+    /// <summary>
+    /// 上の親版
+    /// </summary>
     public void MyParentForeground()
     {
         this.transform.parent.SetAsLastSibling();
     }
 
+    /// <summary>
+    /// 更に親版
+    /// </summary>
     public void MyParentParentForeground()
     {
         this.transform.parent.parent.SetAsLastSibling();
@@ -47,7 +71,9 @@ public class ReceiveEvent : MonoBehaviour
         this.transform.parent.parent.parent.SetAsLastSibling();
     }
 
-    // インベントリから移動した後
+    /// <summary>
+    /// インベントリから移動
+    /// </summary>
     public void MyPointerUpInventory()
     {
         if (hitObject != null)
@@ -59,7 +85,7 @@ public class ReceiveEvent : MonoBehaviour
             }
 
             //装備に登録
-            if(hitObject.tag == "Accessory")
+            if (hitObject.tag == "Accessory")
             {
                 Overwrite();
                 WS.WsPlay.Instance.Send(new Packes.AccessoryChange(UserRecord.ID, this.GetComponent<SlotData>().ID, hitObject.GetComponent<SlotId>().id).ToJson());
@@ -73,14 +99,19 @@ public class ReceiveEvent : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// ショートカットから移動
+    /// </summary>
     public void MyPointerUpShortcut()
     {
         //入れ替えるか消すか判定
         bool initFlag = true;
+
+        //ショートカット内に入っているか
         if (hitObject != null && hitObject.tag == "Slot")
         {
             //左クリックの場合入れ替える
-            if (InputManager.InputMouseCheckDown(0) == INPUT_MODE.PLAY)
+            if (leftClickFlag)
             {
                 initFlag = false;
             }
@@ -96,19 +127,23 @@ public class ReceiveEvent : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// アクセサリーから移動
+    /// </summary>
     public void MyPointerUpAccessory()
     {
         //入れ替えるか消すか判定
         bool initFlag = true;
         if (hitObject != null && hitObject.tag == "Accessory")
         {
+            Debug.Log("hitAccessory");
             //左クリックの場合入れ替える
-            if (InputManager.InputMouseCheckDown(0) == INPUT_MODE.PLAY)
+            if (leftClickFlag)
             {
+                Debug.Log("leftClick");
                 initFlag = false;
             }
         }
-
         //データ移動
         if (initFlag)
         {
@@ -120,22 +155,31 @@ public class ReceiveEvent : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 親の座標に戻す
+    /// </summary>
     public void MyPositionResetParent()
     {
         this.transform.position = clickParentObjectPosition;
     }
 
+    /// <summary>
+    /// 自身の座標に戻す
+    /// </summary>
     public void MyPositionResetThis()
     {
         this.transform.position = clickThisObjectPosition;
     }
 
+    /// <summary>
+    /// マウスクリック時の座標に戻す
+    /// </summary>
     public void MyPositionResetClick()
     {
         this.transform.position = clickMousePosition;
     }
 
-    // ドラッグ時の関数
+    // 親を移動させるドラッグ時の関数
     public void MyDragUI()
     {
         if (InputManager.InputMouseCheck(0) == INPUT_MODE.UI)
@@ -144,6 +188,9 @@ public class ReceiveEvent : MonoBehaviour
         }
     }
 
+    /// <summary>
+    /// 自身のみを移動させる
+    /// </summary>
     public void MyDragContents()
     {
         if (InputManager.InputMouseCheck(0) == INPUT_MODE.UI)
@@ -154,25 +201,19 @@ public class ReceiveEvent : MonoBehaviour
 
     private void Swap()
     {
-        if (this.name == hitObject.name) return;
+        if (this.transform.parent.name == hitObject.transform.parent.name) return;
 
-        GameObject temp = new GameObject();
-        temp.AddComponent<Image>();
-        temp.AddComponent<SlotData>();
-
-        temp.GetComponent<Image>().sprite = this.GetComponent<Image>().sprite;
-        temp.GetComponent<SlotData>().ID = this.GetComponent<SlotData>().ID;
-        temp.GetComponent<SlotData>().HOGE = this.GetComponent<SlotData>().HOGE;
+        var tempSprite = this.GetComponent<Image>().sprite;
+        var tempId = this.GetComponent<SlotData>().ID;
+        var tempStatus = this.GetComponent<SlotData>().HOGE;
 
         this.GetComponent<Image>().sprite = hitObject.GetComponent<Image>().sprite;
         this.GetComponent<SlotData>().ID = hitObject.GetComponent<SlotData>().ID;
         this.GetComponent<SlotData>().HOGE = hitObject.GetComponent<SlotData>().HOGE;
 
-        hitObject.GetComponent<Image>().sprite = temp.GetComponent<Image>().sprite;
-        hitObject.GetComponent<SlotData>().ID = temp.GetComponent<SlotData>().ID;
-        hitObject.GetComponent<SlotData>().HOGE = temp.GetComponent<SlotData>().HOGE;
-
-        Destroy(temp);
+        hitObject.GetComponent<Image>().sprite = tempSprite;
+        hitObject.GetComponent<SlotData>().ID = tempId;
+        hitObject.GetComponent<SlotData>().HOGE = tempStatus;
         Debug.Log("Swap");
     }
 
@@ -190,6 +231,14 @@ public class ReceiveEvent : MonoBehaviour
         hitObject.GetComponent<SlotData>().ID = this.GetComponent<SlotData>().ID;
         hitObject.GetComponent<SlotData>().HOGE = this.GetComponent<SlotData>().HOGE;
         Debug.Log("Overwrite");
+    }
+
+    private bool IsSameName()
+    {
+        if (hitObject == null) return false;
+
+        if (this.transform.parent.name == hitObject.transform.parent.name) return true;
+        return false;
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
