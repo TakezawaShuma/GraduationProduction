@@ -55,7 +55,10 @@ public class PlaySceneManager : SceneManagerBase
     private GameObject miniMapCameraPrefab_;
 
     [SerializeField]
-    private UIManager uiManager;
+    private UIManager uiManager = null;
+
+    [SerializeField]
+    private QuestResult questResult = null;
 
     bool updateFlag = false;
 
@@ -76,9 +79,11 @@ public class PlaySceneManager : SceneManagerBase
 
     private Ready ready;
 
+    
+
     public StageTable stages;
 
-    private bool isLogout = true;
+    private bool isLogout = false;
 
     private void Awake()
     {
@@ -119,6 +124,7 @@ public class PlaySceneManager : SceneManagerBase
             
         }
         else { MakePlayer(new Vector3(-210, 5, -210), playerPre); }
+        questResult.SetScenes(this);
     }
 
 
@@ -165,10 +171,7 @@ public class PlaySceneManager : SceneManagerBase
         if (Input.GetKeyDown(KeyCode.F11)) SendMoveMap(MapID.Base);
 
         // debug
-        //if (Input.GetKeyDown(KeyCode.Backspace))
-        //{
-        //    MoveingMapCall(MapID.Base);
-        //}
+        //if (Input.GetKeyDown(KeyCode.Backspace)) questResult.SetQuestCrear(Time.time);        
         //if (Input.GetKeyDown(KeyCode.L))
         //{
         //    Packes.GetEnemyDataStoC v = new Packes.GetEnemyDataStoC();
@@ -194,7 +197,7 @@ public class PlaySceneManager : SceneManagerBase
     public void OnDestroy()
     {
         if (connectFlag) {
-            if (isLogout) { 
+            if (isLogout) {
                 wsp.Destroy(); 
             }
         }
@@ -218,7 +221,7 @@ public class PlaySceneManager : SceneManagerBase
             tmp.tag = "Player";
             tmp.transform.localScale = new Vector3(2, 2, 2);
 
-            cheatCommand.PLAYER = tmp;
+            if(cheatCommand!=null)cheatCommand.PLAYER = tmp;
 
             player = tmp.AddComponent<Player>();
             PlayerController playerCComponent = tmp.AddComponent<PlayerController>();
@@ -564,6 +567,8 @@ public class PlaySceneManager : SceneManagerBase
     {
         UserRecord.MapID = (MapID)_packet.mapId;
         isLogout = false;
+        Debug.Log(_packet.ToJson());
+        Debug.Log(_packet.mapId.ToString());
         ChangeScene("LoadingScene");
     }
 
@@ -637,19 +642,8 @@ public class PlaySceneManager : SceneManagerBase
     /// マップの移動申請
     /// </summary>
     /// <param name="_mapId"></param>
-    private void SendMoveMap(MapID _mapId) {
+    public void SendMoveMap(MapID _mapId) {
         wsp.Send(new Packes.MoveingMap(UserRecord.ID, (int)_mapId).ToJson());
-    }
-
-    /// <summary>
-    /// マップ移動許可を求める
-    /// </summary>
-    /// <param name="_mapId"></param>
-    private void MoveingMapCall(MapID _mapId)
-    {
-        Debug.Log(UserRecord.MapID);
-        wsp.Send(Json.ConvertToJson(new Packes.MoveingMap(UserRecord.ID, (int)UserRecord.MapID)));
-
     }
 
     // ----------------ゲッター＆セッター--------------------------

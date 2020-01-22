@@ -16,9 +16,9 @@ public class ChatController : MonoBehaviour
     // チャット全体のフレーム
     [Header("チャットフレーム"), SerializeField]
     private ChatMessageController chatFlame = null;
-    
+
     // チャットサーバー
-    WS.WsChat wsc = null; 
+    WS.WsChat wsc = null;
 
 
     // チャット画面表示フラグ
@@ -59,9 +59,17 @@ public class ChatController : MonoBehaviour
 
     private void OnDestroy()
     {
-        if (connectFlag) { wsc.Destroy(); }
+        if (connectFlag)
+        {
+            if (wsc != null) wsc.Destroy();
+            else
+            {
+                wsc = WS.WsChat.Instance;
+                wsc.Destroy();
+            }
+        }
     }
-    
+
     public bool GetChatActiveFlag()
     {
         return chatActiveFlag;
