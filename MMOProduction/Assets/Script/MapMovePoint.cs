@@ -11,11 +11,11 @@ public class MapMovePoint : MonoBehaviour
     [SerializeField, Header("現在のマップID")]
     private MapID currentMapID = MapID.Base;
 
-    [SerializeField, Header("テキスト")]
-    private Text text = null;
+    [SerializeField, Header("スライダー")]
+    private Slider slider = null;
 
-    [SerializeField, Header("テキストを使用するか")]
-    private bool textUse = false;
+    [SerializeField]
+    private QuestMapMoveImage questMapMoveImage = null;
 
     private PlaySceneManager manager = null;
 
@@ -24,12 +24,13 @@ public class MapMovePoint : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        manager = GameObject.Find("PlaySceneManager").GetComponent<PlaySceneManager>();
+        questMapMoveImage.SetState(false);
 
         // ユーザーレコードから現在のマップIDを取得
         currentMapID = UserRecord.MapID;
 
-        text.enabled = false;
+        slider.maxValue = moveTime;
+        slider.gameObject.SetActive(false);
     }
 
     // Update is called once per frame
@@ -37,6 +38,7 @@ public class MapMovePoint : MonoBehaviour
     {
         if(currentTime > moveTime)
         {
+            manager = GameObject.Find("PlaySceneManager").GetComponent<PlaySceneManager>();
             // ここでマップを移動
             manager.SendMoveMap(UserRecord.MapID);
         }
@@ -47,7 +49,8 @@ public class MapMovePoint : MonoBehaviour
         // プレイヤーが移動ポイントに触れたとき
         if (other.tag == "Player" && UserRecord.MapID != MapID.Non)
         {
-            text.enabled = true;
+            slider.gameObject.SetActive(true);
+            questMapMoveImage.SetState(true);
         }
     }
 
@@ -57,7 +60,7 @@ public class MapMovePoint : MonoBehaviour
         if(other.tag == "Player")
         {
             currentTime += Time.deltaTime;
-            text.text = "クエスト開始まで" + (int)(moveTime - currentTime + 0.5f) +"秒";
+            slider.value = currentTime;
         }
     }
 
@@ -67,7 +70,8 @@ public class MapMovePoint : MonoBehaviour
         if (other.tag == "Player")
         {
             currentTime = 0;
-            text.enabled = false;
+            slider.gameObject.SetActive(false);
+            questMapMoveImage.SetState(false);
         }
     }
 }
