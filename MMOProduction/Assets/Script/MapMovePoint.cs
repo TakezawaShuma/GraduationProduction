@@ -2,7 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.SceneManagement;
 
 public class MapMovePoint : MonoBehaviour
 {
@@ -18,11 +17,15 @@ public class MapMovePoint : MonoBehaviour
     [SerializeField, Header("テキストを使用するか")]
     private bool textUse = false;
 
+    private PlaySceneManager manager = null;
+
     private float currentTime = 0f;
 
     // Start is called before the first frame update
     void Start()
     {
+        manager = GameObject.Find("PlaySceneManager").GetComponent<PlaySceneManager>();
+
         // ユーザーレコードから現在のマップIDを取得
         currentMapID = UserRecord.MapID;
 
@@ -35,7 +38,7 @@ public class MapMovePoint : MonoBehaviour
         if(currentTime > moveTime)
         {
             // ここでマップを移動
-            SceneManager.LoadScene("LoadingScene");
+            manager.SendMoveMap(UserRecord.MapID);
         }
     }
 
