@@ -618,6 +618,7 @@ namespace Packes
         public int unique_id;
         /// <summary>与えたダメージ </summary>
         public float damage_value;
+        public int last_attack_id;
 
         /// <summary>デフォルトコンストラクタ</summary>
         public EnemyDieStoC()
@@ -629,13 +630,15 @@ namespace Packes
         public EnemyDieStoC(
             int _drop,
             int _unique_id,
-            float _damage_value
+            float _damage_value,
+            int _last_attack_id
         )
         {
             this.command = (int)CommandData.EnemyDieStoC;
             this.drop = _drop;
             this.unique_id = _unique_id;
             this.damage_value = _damage_value;
+            this.last_attack_id = _last_attack_id;
         }
     }
 

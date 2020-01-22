@@ -80,5 +80,9 @@ namespace WS
 
         protected abstract void Receive();
 
+        public WebSocketState WsStatus()
+        {
+            return ws.ReadyState;
+        }
     }
 }

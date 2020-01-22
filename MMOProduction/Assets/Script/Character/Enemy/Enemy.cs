@@ -7,9 +7,7 @@ public class Enemy : NonPlayer
 
     public int HP { get { return hp; } set { hp = value; } }
     public int MP { get { return mp; } set { mp = value; } }
-
-    private Ray ray = default(Ray);
-
+    
     private UIEnemyHP uIHP = null;
 
     public UIEnemyHP UI_HP
