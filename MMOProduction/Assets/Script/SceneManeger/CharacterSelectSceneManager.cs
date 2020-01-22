@@ -9,26 +9,26 @@ public class CharacterSelectSceneManager : SceneManagerBase
 
     //---モデル・ラベル---//
     [SerializeField]
-    private GameObject parentAttacker_;
+    private GameObject parentAttacker_=null;
     [SerializeField]
-    private GameObject parentDefender_;
+    private GameObject parentDefender_ = null;
     [SerializeField]
-    private GameObject parentWitch_;
+    private GameObject parentWitch_ = null;
     [SerializeField]
-    private GameObject parentHealer_;
+    private GameObject parentHealer_ = null;
 
 
     //---テキスト---//
     [SerializeField]
-    private Text jobText_;
+    private Text jobText_ = null;
     [SerializeField, MultilineAttribute(10)]
-    string attackerText_;
+    string attackerText_ = null;
     [SerializeField, MultilineAttribute(10)]
-    string defenderText_;
+    string defenderText_ = null;
     [SerializeField, MultilineAttribute(10)]
-    string witchText_;
+    string witchText_ = null;
     [SerializeField, MultilineAttribute(10)]
-    string healerText_;
+    string healerText_ = null;
 
     //---回転させるモデル---//
     public GameObject target_ = null;

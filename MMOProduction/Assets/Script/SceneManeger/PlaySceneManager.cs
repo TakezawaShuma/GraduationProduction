@@ -55,7 +55,10 @@ public class PlaySceneManager : SceneManagerBase
     private GameObject miniMapCameraPrefab_;
 
     [SerializeField]
-    private UIManager uiManager;
+    private UIManager uiManager = null;
+
+    [SerializeField]
+    private QuestResult questResult = null;
 
     bool updateFlag = false;
 
@@ -76,9 +79,22 @@ public class PlaySceneManager : SceneManagerBase
 
     private Ready ready;
 
+    
+
+    public StageTable stages;
+
+    private bool isLogout = false;
 
     private void Awake()
     {
+        // ステージの作成
+        GameObject stage = Instantiate<GameObject>(stages.FindPrefab(UserRecord.MapID), transform);
+        stage.transform.position = Vector3.zero;
+
+        if (connectFlag)
+        {
+            wsp = WS.WsPlay.Instance;
+        }
         ready = Ready.Instance;
     }
 
@@ -90,17 +106,25 @@ public class PlaySceneManager : SceneManagerBase
 
         if (connectFlag)
         {
-            // プレイサーバに接続
-            wsp = WS.WsPlay.Instance;
+            if (!UserRecord.FAST) { 
+                SettingCallback();
 
-            SettingCallback();
+                // セーブデータを要請する。
+                wsp.Send(new Packes.SaveLoadCtoS(UserRecord.ID).ToJson());
+                wsp.Send(new Packes.LoadingAccessoryMasterSend(UserRecord.ID).ToJson());
+                UserRecord.FAST = true;
 
-            // セーブデータを要請する。
-            wsp.Send(new Packes.SaveLoadCtoS(UserRecord.ID).ToJson());
-            wsp.Send(new Packes.LoadingAccessoryMasterSend(UserRecord.ID).ToJson());
-
+            } else {
+                if (MakePlayer(new Vector3(-210, 0, -210), UserRecord.MODEL))
+                {
+                    updateFlag = true;
+                    ready.ReadyGO();
+                }
+            }
+            
         }
         else { MakePlayer(new Vector3(-210, 5, -210), playerPre); }
+        questResult.SetScenes(this);
     }
 
 
@@ -143,11 +167,11 @@ public class PlaySceneManager : SceneManagerBase
                 }
             }
         }
+        if (Input.GetKeyDown(KeyCode.F12)) SendMoveMap(MapID.Field);
+        if (Input.GetKeyDown(KeyCode.F11)) SendMoveMap(MapID.Base);
+
         // debug
-        //if (Input.GetKeyDown(KeyCode.Backspace))
-        //{
-        //    MoveingMapCall(MapID.Base);
-        //}
+        //if (Input.GetKeyDown(KeyCode.Backspace)) questResult.SetQuestCrear(Time.time);        
         //if (Input.GetKeyDown(KeyCode.L))
         //{
         //    Packes.GetEnemyDataStoC v = new Packes.GetEnemyDataStoC();
@@ -172,11 +196,12 @@ public class PlaySceneManager : SceneManagerBase
 
     public void OnDestroy()
     {
-        if (connectFlag) { wsp.Destroy(); }
+        if (connectFlag) {
+            if (isLogout) {
+                wsp.Destroy(); 
+            }
+        }
     }
-
-
-
 
     /// <summary>
     /// 自分の作成
@@ -189,13 +214,14 @@ public class PlaySceneManager : SceneManagerBase
         // プレイヤーが作られた事がないなら
         if (player == null)
         {
+            MapDatas.MapData mapdata = MapDatas.FindOne(UserRecord.MapID);
             var tmp = Instantiate<GameObject>(_playerModel, this.transform);
-            tmp.transform.position = new Vector3(_save.x, _save.y, _save.z);
+            tmp.transform.position = new Vector3(mapdata.x, mapdata.y, mapdata.z);
             tmp.name = (UserRecord.Name != "") ? UserRecord.Name : _name;
             tmp.tag = "Player";
             tmp.transform.localScale = new Vector3(2, 2, 2);
 
-            cheatCommand.PLAYER = tmp;
+            if(cheatCommand!=null)cheatCommand.PLAYER = tmp;
 
             player = tmp.AddComponent<Player>();
             PlayerController playerCComponent = tmp.AddComponent<PlayerController>();
@@ -296,7 +322,6 @@ public class PlaySceneManager : SceneManagerBase
     private void RegisterEnemies(Packes.GetEnemyDataStoC _packet)
     {
         List<Packes.EnemyReceiveData> list = _packet.enemys;
-
         foreach (var ene in list)
         {
             if (ene.unique_id != UserRecord.ID)
@@ -377,9 +402,9 @@ public class PlaySceneManager : SceneManagerBase
     private void ReceiveSaveData(Packes.SaveLoadStoC _packet)
     {
         //GameObject model = playerPre;
-        GameObject model = characterModel.FindModel(CheckModel(_packet.model_id));
+        UserRecord.MODEL = characterModel.FindModel(CheckModel(_packet.model_id));
 
-        if (MakePlayer(new Vector3(_packet.x, _packet.y, _packet.z), model))
+        if (MakePlayer(new Vector3(_packet.x, _packet.y, _packet.z), UserRecord.MODEL))
         {
             wsp.Send(new Packes.LoadingOK(UserRecord.ID).ToJson());
             updateFlag = true;
@@ -540,6 +565,10 @@ public class PlaySceneManager : SceneManagerBase
     /// <param name="_packet"></param>
     private void MovingMap(Packes.MoveingMapOk _packet)
     {
+        UserRecord.MapID = (MapID)_packet.mapId;
+        isLogout = false;
+        Debug.Log(_packet.ToJson());
+        Debug.Log(_packet.mapId.ToString());
         ChangeScene("LoadingScene");
     }
 
@@ -578,17 +607,10 @@ public class PlaySceneManager : SceneManagerBase
     }
 
 
-    /// <summary>
-    /// アクセサリのマスター保存 → loadingAccessoryMasterAction
-    /// </summary>
-    /// <param name="_data"></param>
-    private void LoadingAccessoryMaster(Packes.LoadingAccessoryMaster _data)
-    {
-        InputFile.WriterJson(MasterFileNameList.accessory, JsonUtility.ToJson(_data), FILETYPE.JSON);
-        AccessoryDatas.SaveingData(_data.accessorys);
-    }
+ 
 
     // --------------------送信関係--------------------
+
 
     /// <summary>
     /// 位置情報の送信
@@ -613,18 +635,15 @@ public class PlaySceneManager : SceneManagerBase
     /// </summary>
     private void SendEnemyPosReq()
     {
-        wsp.Send(new Packes.GetEnemysDataCtoS(0, UserRecord.ID).ToJson());
+        wsp.Send(new Packes.GetEnemysDataCtoS((int)UserRecord.MapID, UserRecord.ID).ToJson());
     }
 
     /// <summary>
-    /// マップ移動許可を求める
+    /// マップの移動申請
     /// </summary>
     /// <param name="_mapId"></param>
-    private void MoveingMapCall(MapID _mapId)
-    {
-        Debug.Log(UserRecord.MapID);
-        wsp.Send(Json.ConvertToJson(new Packes.MoveingMap(UserRecord.ID, (int)UserRecord.MapID)));
-
+    public void SendMoveMap(MapID _mapId) {
+        wsp.Send(new Packes.MoveingMap(UserRecord.ID, (int)_mapId).ToJson());
     }
 
     // ----------------ゲッター＆セッター--------------------------
@@ -651,7 +670,6 @@ public class PlaySceneManager : SceneManagerBase
         return characters[_playerId].GetComponent<OtherPlayers>();
     }
 
-
     /// <summary>
     /// コールバックを設定
     /// </summary>
@@ -674,7 +692,7 @@ public class PlaySceneManager : SceneManagerBase
         wsp.mapAction = MovingMap;                                  // 252
 
         wsp.logoutAction = Logout;                                  // 707
-        wsp.loadingAccessoryMasterAction = LoadingAccessoryMaster;  // 709
+        //wsp.loadingAccessoryMasterAction = LoadingAccessoryMaster;  // 709
         wsp.findResultsAction = ReceivingFindResults;               // 712
     }
 }

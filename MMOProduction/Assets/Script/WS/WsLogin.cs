@@ -20,7 +20,10 @@ namespace WS
         public Action<int> errerAction;
         public Action<Packes.CreateOK> createAction;
         public Action<Packes.LoginOK> loginAction;
-
+        // マップのマスター
+        public Action<Packes.LoadingMapMaster> loadingMapMasterAction;
+        // アクセサリのマスター
+        public Action<Packes.LoadingAccessoryMaster> loadingAccessoryMasterAction;
         public static WsLogin Instance
         {
             get
@@ -97,6 +100,15 @@ namespace WS
                             createAction?.Invoke(create);
                             break;
 
+                        case CommandData.LoadingMapMaster:
+                            Packes.LoadingMapMaster mapMaster = Json.ConvertToPackets<Packes.LoadingMapMaster>(e.Data);
+                            loadingMapMasterAction?.Invoke(mapMaster);
+                            break;
+
+                        case CommandData.LoadingAccessoryMaster:
+                            Packes.LoadingAccessoryMaster accessory = Json.ConvertToPackets<Packes.LoadingAccessoryMaster>(e.Data);
+                            loadingAccessoryMasterAction?.Invoke(accessory);
+                            break;
                         // 随時追加
 
                         default: break;

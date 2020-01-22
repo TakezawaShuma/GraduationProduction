@@ -47,7 +47,7 @@ public static class InputManager
             position = Input.mousePosition
         };
         var raycastResults = new List<RaycastResult>();
-        current.RaycastAll(eventData, raycastResults);
+        if( current!=null)current.RaycastAll(eventData, raycastResults);
         var isExist = 0 < raycastResults.Count;
         return isExist;
     }

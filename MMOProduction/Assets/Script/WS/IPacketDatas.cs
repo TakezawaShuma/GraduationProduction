@@ -138,6 +138,8 @@ public enum CommandData
 	/// <summary>クエストマスター取得</summary>
 	QuestMasterDataList = 715,
 
+    LoadingMapMasterSend = 716,
+    LoadingMapMaster = 717,
 
 
 

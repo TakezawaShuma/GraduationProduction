@@ -200,7 +200,7 @@ public class FollowingCamera : MonoBehaviour
 
     void updateDistance(float scroll)
     {
-        if (lockOnTarget)
+        if (lockOnTarget && lockOnTarget.GetComponent<Marker>().LOCK_OBSERVE)
         {
             scroll = dist - scroll * scrollSensitivity;
             dist = Mathf.Clamp(scroll, minDistance + 10f, maxDistance + 30f);
@@ -219,7 +219,7 @@ public class FollowingCamera : MonoBehaviour
     {
         var da = azimuthalAngle * Mathf.Deg2Rad;
         var dp = polarAngle * Mathf.Deg2Rad;
-        if (lockOnTarget)
+        if (lockOnTarget && lockOnTarget.GetComponent<Marker>().LOCK_OBSERVE)
         {
             transform.position = new Vector3(
                 lookAtPos.x + dist * Mathf.Sin(dp) * Mathf.Cos(da),
