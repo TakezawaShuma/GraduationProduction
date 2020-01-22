@@ -17,8 +17,8 @@ public class PlayerUI : MonoBehaviour
         set { playerCmp = value; }
     }
 
-    [SerializeField]
-    private GameObject player = null;
+    //[SerializeField]
+    // GameObject player = null;
 
     // 監視用変数
     private int currentHp;
