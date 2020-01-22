@@ -95,4 +95,12 @@ public class MapDatas
     {
         datas_ = _data;
     }
+
+    public static void Dump()
+    {
+        foreach (MapData _data in datas_)
+        {
+            Debug.Log(_data.id);
+        }
+    }
 }
