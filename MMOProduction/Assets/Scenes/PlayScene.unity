@@ -391,7 +391,9 @@ MonoBehaviour:
   - {fileID: 1533655885}
   - {fileID: 39911716}
   key: 690000006b0000000900000063000000
+  shortcut: []
   chat: {fileID: 3266970890983044155}
+  canvas: {fileID: 809979504}
 --- !u!4 &82423898
 Transform:
   m_ObjectHideFlags: 0
@@ -1219,7 +1221,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 992294604}
   m_LocalRotation: {x: 0.13063945, y: -0.000000005913365, z: 7.791964e-10, w: 0.99143}
-  m_LocalPosition: {x: 0.00069934904, y: 46072.11, z: -58642.562}
+  m_LocalPosition: {x: 0.0006997985, y: 46101.715, z: -58680.242}
   m_LocalScale: {x: 1.5000008, y: 1.5000002, z: 1.5000006}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2134,22 +2136,22 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 4691498435420953021, guid: 4caa5454c954d1c46b306447aa1df9e8,
+    - target: {fileID: 2238215083173572094, guid: 4caa5454c954d1c46b306447aa1df9e8,
         type: 3}
       propertyPath: m_TagString
       value: Untagged
       objectReference: {fileID: 0}
-    - target: {fileID: 4691498435420953021, guid: 4caa5454c954d1c46b306447aa1df9e8,
+    - target: {fileID: 2238215083173572094, guid: 4caa5454c954d1c46b306447aa1df9e8,
         type: 3}
       propertyPath: m_Name
       value: InventryImage
       objectReference: {fileID: 0}
-    - target: {fileID: 2238215083173572094, guid: 4caa5454c954d1c46b306447aa1df9e8,
+    - target: {fileID: 4691498435420953021, guid: 4caa5454c954d1c46b306447aa1df9e8,
         type: 3}
       propertyPath: m_TagString
       value: Untagged
       objectReference: {fileID: 0}
-    - target: {fileID: 2238215083173572094, guid: 4caa5454c954d1c46b306447aa1df9e8,
+    - target: {fileID: 4691498435420953021, guid: 4caa5454c954d1c46b306447aa1df9e8,
         type: 3}
       propertyPath: m_Name
       value: InventryImage

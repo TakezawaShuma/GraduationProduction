@@ -41,6 +41,7 @@ public class Inventory : MonoBehaviour
             GameObject obj = Instantiate(Slot, transform);
             obj.transform.localPosition = pos + new Vector3(x * 48, y * -48, 0);
             obj.transform.localScale = new Vector3(1, 1, 1);
+            obj.name = "Inventory" + i;
             list.Add(obj.transform.GetChild(0).GetComponent<Image>());
         }
         ImageCheck();
