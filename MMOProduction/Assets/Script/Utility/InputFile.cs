@@ -15,6 +15,7 @@ public enum FILETYPE
 public static class MasterFileNameList {
     public static string accessory = "accessoryMaster";
     public static string map = "mapMaster";
+    public static string quest = "questMaster";
 }
 
 public class InputFile : MonoBehaviour
