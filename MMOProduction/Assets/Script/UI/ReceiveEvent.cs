@@ -200,17 +200,24 @@ public class ReceiveEvent : MonoBehaviour
     {
         if (this.transform.parent.name == hitObject.transform.parent.name) return;
 
-        var tempSprite = this.GetComponent<Image>().sprite;
-        var tempId = this.GetComponent<SlotData>().ID;
-        var tempStatus = this.GetComponent<SlotData>().HOGE;
+        var tempSprite = this.GetComponent<Image>();
+        var tempData = this.GetComponent<SlotData>();
 
-        this.GetComponent<Image>().sprite = hitObject.GetComponent<Image>().sprite;
-        this.GetComponent<SlotData>().ID = hitObject.GetComponent<SlotData>().ID;
-        this.GetComponent<SlotData>().HOGE = hitObject.GetComponent<SlotData>().HOGE;
+        var thisSprite = this.GetComponent<Image>();
+        var thisData = this.GetComponent<SlotData>();
 
-        hitObject.GetComponent<Image>().sprite = tempSprite;
-        hitObject.GetComponent<SlotData>().ID = tempId;
-        hitObject.GetComponent<SlotData>().HOGE = tempStatus;
+        var hitSprite = this.GetComponent<Image>();
+        var hitData = hitObject.GetComponent<SlotData>();
+
+        tempSprite.sprite = thisSprite.sprite;
+        tempData = thisData;
+
+        thisSprite = hitSprite;
+        thisData = hitData;
+
+        hitSprite = tempSprite;
+        hitData = tempData;
+
         Debug.Log("Swap");
     }
 
@@ -218,7 +225,8 @@ public class ReceiveEvent : MonoBehaviour
     {
         this.GetComponent<Image>().sprite = defoSprite;
         this.GetComponent<SlotData>().ID = -1;
-        this.GetComponent<SlotData>().HOGE = SlotData.STATUS.NONE;
+        this.GetComponent<SlotData>().Status = SlotData.STATUS.NONE;
+        this.GetComponent<SlotData>().Name = "";
         Debug.Log("Init");
     }
 
@@ -226,7 +234,8 @@ public class ReceiveEvent : MonoBehaviour
     {
         hitObject.GetComponent<Image>().sprite = this.GetComponent<Image>().sprite;
         hitObject.GetComponent<SlotData>().ID = this.GetComponent<SlotData>().ID;
-        hitObject.GetComponent<SlotData>().HOGE = this.GetComponent<SlotData>().HOGE;
+        hitObject.GetComponent<SlotData>().Status = this.GetComponent<SlotData>().Status;
+        hitObject.GetComponent<SlotData>().Name = this.GetComponent<SlotData>().Name;
         Debug.Log("Overwrite");
     }
 

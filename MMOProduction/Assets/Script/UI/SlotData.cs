@@ -20,7 +20,10 @@ public class SlotData : MonoBehaviour
     private int id = -1;
 
     [SerializeField]
-    private STATUS hoge = STATUS.NONE;
+    private STATUS status = STATUS.NONE;
+
+    [SerializeField]
+    private string name = "";
 
     public int ID
     {
@@ -35,26 +38,42 @@ public class SlotData : MonoBehaviour
         }
     }
 
-    public STATUS HOGE
+    public STATUS Status
     {
         get
         {
-            return hoge;
+            return status;
         }
 
         set
         {
-            hoge = value;
+            status = value;
         }
     }
 
+    public string Name
+    {
+        get
+        {
+            return name;
+        }
+        set
+        {
+            name = value;
+        }
+    }
     // Start is called before the first frame update
     void Start()
     {
-        id = -1;
-        hoge = STATUS.NONE;
+        Init();
     }
 
+    public void Init()
+    {
+        id = -1;
+        status = STATUS.NONE;
+        name = "";
+    }
     public void OnClick()
     {
         useFlag = true;
