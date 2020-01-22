@@ -168,6 +168,8 @@ public class PlaySceneManager : SceneManagerBase
         }
         if (Input.GetKeyDown(KeyCode.F12)) SendMoveMap(MapID.Field);
         if (Input.GetKeyDown(KeyCode.F11)) SendMoveMap(MapID.Base);
+        if (Input.GetKeyDown(KeyCode.F4)) wsp.WsStatus();
+
 
         // debug
         if (Input.GetKeyDown(KeyCode.Backspace)) questResult.SetQuestCrear(Time.time);        
@@ -282,7 +284,7 @@ public class PlaySceneManager : SceneManagerBase
     private void CreateOtherPlayers(Packes.OtherPlayersData _packet)
     {
         GameObject avatar = characterModel.FindModel(CheckModel(_packet.model_id));
-
+        if (avatar == null) return;
 
         var otherPlayer = Instantiate<GameObject>
                           (avatar,
