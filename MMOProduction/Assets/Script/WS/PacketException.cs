@@ -153,19 +153,19 @@ namespace Packes
     /// <summary>
     /// クエストマスターコール command:713
     /// </summary>
-    public class QuestMasterData : IPacketDatas
+    public class LoadingQuestMasterSend : IPacketDatas
     {
         /// <summary>ユーザーID</summary>
         public int user_id;
 
         /// <summary>デフォルトコンストラクタ</summary>
-        public QuestMasterData()
+        public LoadingQuestMasterSend()
         {
             this.command = (int)CommandData.QuestMasterData;
         }
         /// <summary>コンストラクタ</summary>
         /// <param name="_user_id">ユーザーID</summary>
-        public QuestMasterData(
+        public LoadingQuestMasterSend(
             int _user_id
         )
         {
@@ -313,21 +313,13 @@ namespace Packes
     /// <summary>
     /// クエストマスター取得 command:714
     /// </summary>
-    public class QuestMasterDataList : IPacketDatas
+    public class LoadingQuestMaster : IPacketDatas
     {
-        /// <summary>クエストID</summary>
-        public int id;
-        /// <summary>難易度</summary>
-        public int difficulty;
-        /// <summary>アイコンID</summary>
-        public int icon_id;
-        /// <summary>マップID</summary>
-        public int map_id;
-        /// <summary>ドロップ品一覧</summary>
-        public int[] drop_ids;
+        public int version;
+        public List<QuestMasterData> quests;
 
         /// <summary>デフォルトコンストラクタ</summary>
-        public QuestMasterDataList()
+        public LoadingQuestMaster()
         {
             this.command = (int)CommandData.QuestMasterDataList;
         }
@@ -337,20 +329,14 @@ namespace Packes
         /// <param name="_icon_id">アイコンID</summary>
         /// <param name="_map_id">マップID</summary>
         /// <param name="_drop_ids">ドロップ品一覧</summary>
-        public QuestMasterDataList(
-            int _id,
-            int _difficulty,
-            int _icon_id,
-            int _map_id,
-            int[] _drop_ids
+        public LoadingQuestMaster(
+            int _version,
+            List<QuestMasterData> _quests  
         )
         {
             this.command = (int)CommandData.QuestMasterDataList;
-            this.id = _id;
-            this.difficulty = _difficulty;
-            this.icon_id = _icon_id;
-            this.map_id = _map_id;
-            this.drop_ids = _drop_ids;
+            version = _version;
+            quests = _quests;
         }
     }
 
@@ -437,7 +423,7 @@ namespace Packes
 
         public string image;
 
-        AccessoryMasterData(
+        public AccessoryMasterData(
             int _id,
             string _name,
             int _level,
@@ -488,6 +474,40 @@ namespace Packes
             y = _y;
             z = _z;
             dir = _dir;
+        }
+    }
+
+    [System.Serializable]
+    public struct QuestMasterData {
+        public int id;
+	    public string name;
+	    public int difficulty;
+	    public int targetId;
+	    public string comment;
+	    public int mapId;
+	    public float time;
+	    public List<int> items;
+
+        public QuestMasterData
+        (
+            int _id,
+            string _name,
+            int _difficulty,
+            int _targetId,
+            string _comment,
+            int _mapId,
+            float _time,
+            List<int> _items
+        ) 
+        {
+            id = _id;
+            name = _name;
+            difficulty = _difficulty;
+            targetId = _targetId;
+            comment = _comment;
+            mapId = _mapId;
+            time = _time;
+            items = _items;
         }
     }
 }
