@@ -42,4 +42,11 @@ public static class AccessoryDatas
     public static void SaveingData(List<Packes.AccessoryMasterData> _data) {
         datas_ = _data;
     }
+
+    public static void Dump()
+    {
+        foreach (Packes.AccessoryMasterData _data in datas_) {
+            Debug.Log(_data.name);
+        }
+    }
 }

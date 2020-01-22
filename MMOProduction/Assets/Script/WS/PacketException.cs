@@ -485,7 +485,7 @@ namespace Packes
 	    public int targetId;
 	    public string comment;
 	    public int mapId;
-	    public float time;
+	    public int time;
 	    public List<int> items;
 
         public QuestMasterData
@@ -496,7 +496,7 @@ namespace Packes
             int _targetId,
             string _comment,
             int _mapId,
-            float _time,
+            int _time,
             List<int> _items
         ) 
         {
