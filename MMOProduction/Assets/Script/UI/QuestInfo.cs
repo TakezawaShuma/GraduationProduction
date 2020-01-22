@@ -42,16 +42,20 @@ public class QuestInfo : MonoBehaviour
         {
             questNameText.name = "";
             detailText.text = DetailTextGenerate();
-            currentTime += Time.deltaTime;
 
-            if(currentTime >= hiddenTime)
+            if (timeHidden)
             {
-                this.gameObject.SetActive(false);
+                currentTime += Time.deltaTime;
+
+                if (currentTime >= hiddenTime)
+                {
+                    this.gameObject.SetActive(false);
+                }
             }
-        }
-        else
-        {
-            currentTime = 0;
+            else
+            {
+                currentTime = 0;
+            }
         }
     }
 
@@ -63,5 +67,11 @@ public class QuestInfo : MonoBehaviour
     public void Open()
     {
         this.gameObject.SetActive(true);
+        currentTime = 0;
+    }
+
+    public void Pin()
+    {
+        timeHidden = !timeHidden;
     }
 }
