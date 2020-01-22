@@ -8,14 +8,20 @@ public class NoDuplication : MonoBehaviour
     [SerializeField]
     private GameObject[] accessorySlot = null;
 
-    private GameObject[] cAccessorySlot = null;
+    private string[] cAccessorySlot = null;
 
     [SerializeField]
     private Sprite defaultSprite = null;
     // Start is called before the first frame update
     void Start()
     {
-        cAccessorySlot = accessorySlot;
+
+        cAccessorySlot = new string[accessorySlot.Length];
+
+        for (int i = 0; i < accessorySlot.Length; i++)
+        {
+            cAccessorySlot[i] = accessorySlot[i].GetComponent<SlotData>().Name;
+        }
     }
 
     // Update is called once per frame
@@ -25,34 +31,51 @@ public class NoDuplication : MonoBehaviour
         // 更新があるか調べる
         for (int i = 0; i < accessorySlot.Length; i++)
         {
-            if (!IsHoge(accessorySlot[i].GetComponent<SlotData>(), cAccessorySlot[i].GetComponent<SlotData>()))
+            if (!IsHoge(accessorySlot[i].GetComponent<SlotData>().Name, cAccessorySlot[i]))
             {
                 index = i;
                 break;
             }
         }
 
-        // 更新箇所と重複したデータが無いか探索し修正
-        foreach (var slot in accessorySlot)
+        if (index < 0)
         {
-            if (IsHoge(accessorySlot[index].GetComponent<SlotData>(), slot.GetComponent<SlotData>()))
+            Current();
+            return;
+        }
+
+        // 更新箇所と重複したデータが無いか探索し修正
+        for (int i = 0; i < accessorySlot.Length; i++)
+        {
+            if (i != index)
             {
-                slot.GetComponent<Image>().sprite = defaultSprite;
-                slot.GetComponent<SlotData>().Init();
+                if (IsHoge(accessorySlot[index].GetComponent<SlotData>().Name, accessorySlot[i].GetComponent<SlotData>().Name))
+                {
+                    accessorySlot[i].GetComponent<Image>().sprite = defaultSprite;
+                    accessorySlot[i].GetComponent<SlotData>().Init();
+                }
             }
         }
 
         // 更新前の物を持っておく
-        cAccessorySlot = accessorySlot;
+        Current();
     }
 
-    private bool IsHoge(SlotData slot, SlotData cSlot)
+    private bool IsHoge(string name1, string name2)
     {
-        if (slot.Name == cSlot.Name)
+        if (name1 == name2)
         {
             return true;
         }
 
         return false;
+    }
+
+    private void Current()
+    {
+        for (int i = 0; i < accessorySlot.Length; i++)
+        {
+            cAccessorySlot[i] = accessorySlot[i].GetComponent<SlotData>().Name;
+        }
     }
 }

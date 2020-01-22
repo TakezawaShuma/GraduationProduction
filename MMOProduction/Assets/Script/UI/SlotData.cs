@@ -72,7 +72,7 @@ public class SlotData : MonoBehaviour
     {
         id = -1;
         status = STATUS.NONE;
-        name = "";
+        name = this.transform.parent.name;
     }
     public void OnClick()
     {
