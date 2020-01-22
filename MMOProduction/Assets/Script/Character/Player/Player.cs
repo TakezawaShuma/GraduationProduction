@@ -43,7 +43,7 @@ public class Player : CharacterBase
 
     private void Start()
     {
-        hp = mp = maxHp = maxMp = 0;
+        hp = mp = maxHp = maxMp = 1;
 
         position = transform.position;
         rotation = transform.rotation;
