@@ -391,7 +391,9 @@ MonoBehaviour:
   - {fileID: 1533655885}
   - {fileID: 39911716}
   key: 690000006b0000000900000063000000
+  shortcut: []
   chat: {fileID: 3266970890983044155}
+  canvas: {fileID: 809979504}
 --- !u!4 &82423898
 Transform:
   m_ObjectHideFlags: 0
@@ -2042,22 +2044,22 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
-    - target: {fileID: 4691498435420953021, guid: 4caa5454c954d1c46b306447aa1df9e8,
+    - target: {fileID: 2238215083173572094, guid: 4caa5454c954d1c46b306447aa1df9e8,
         type: 3}
       propertyPath: m_TagString
       value: Untagged
       objectReference: {fileID: 0}
-    - target: {fileID: 4691498435420953021, guid: 4caa5454c954d1c46b306447aa1df9e8,
+    - target: {fileID: 2238215083173572094, guid: 4caa5454c954d1c46b306447aa1df9e8,
         type: 3}
       propertyPath: m_Name
       value: InventryImage
       objectReference: {fileID: 0}
-    - target: {fileID: 2238215083173572094, guid: 4caa5454c954d1c46b306447aa1df9e8,
+    - target: {fileID: 4691498435420953021, guid: 4caa5454c954d1c46b306447aa1df9e8,
         type: 3}
       propertyPath: m_TagString
       value: Untagged
       objectReference: {fileID: 0}
-    - target: {fileID: 2238215083173572094, guid: 4caa5454c954d1c46b306447aa1df9e8,
+    - target: {fileID: 4691498435420953021, guid: 4caa5454c954d1c46b306447aa1df9e8,
         type: 3}
       propertyPath: m_Name
       value: InventryImage
