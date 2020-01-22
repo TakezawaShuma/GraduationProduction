@@ -26,7 +26,7 @@ public class UIManager : MonoBehaviour
     void Start()
     {
         //読み込む画像
-        var sprites = Resources.LoadAll<Sprite>("Image/S");
+        var sprites = Resources.LoadAll<Sprite>("Image/UIIcon");
 
         shortcut = new UIShortCut[ui.Length];
 
