@@ -33,14 +33,16 @@ public class ReceiveEvent : MonoBehaviour
         leftClickFlag = false;
         rightClickFlag = false;
 
-        if (InputManager.InputMouseCheck(0) == INPUT_MODE.UI)
+        if (InputManager.InputMouseCheckDown(0) == INPUT_MODE.UI)
         {
             leftClickFlag = true;
         }
-        if (InputManager.InputMouseCheck(1) == INPUT_MODE.UI)
+        if (InputManager.InputMouseCheckDown(1) == INPUT_MODE.UI)
         {
             rightClickFlag = true;
         }
+
+        Debug.Log("left:" + leftClickFlag + " right:" + rightClickFlag);
     }
     /// <summary>
     ///その階層内で描画順を一番上にする
@@ -144,6 +146,7 @@ public class ReceiveEvent : MonoBehaviour
                 initFlag = false;
             }
         }
+
         //データ移動
         if (initFlag)
         {
@@ -190,10 +193,7 @@ public class ReceiveEvent : MonoBehaviour
     /// </summary>
     public void MyDragContents()
     {
-        if (InputManager.InputMouseCheck(0) == INPUT_MODE.UI)
-        {
-            this.transform.position = Input.mousePosition;
-        }
+        this.transform.position = Input.mousePosition;
     }
 
     private void Swap()
