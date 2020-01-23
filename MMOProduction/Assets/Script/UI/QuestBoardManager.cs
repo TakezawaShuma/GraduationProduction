@@ -38,7 +38,7 @@ public class QuestBoardManager : MonoBehaviour
             var colors = toggleGroup.ActiveToggles().FirstOrDefault().colors;
             colors.normalColor = new Color(1, 1, 0, 1);
             toggleGroup.ActiveToggles().FirstOrDefault().colors = colors;
-            UserRecord.MapID = currentID;
+            UserRecord.NextMapId = currentID;
             Debug.Log(currentID + "に決定した");
         }
     }

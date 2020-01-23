@@ -11,11 +11,11 @@ public class MapMovePoint : MonoBehaviour
     [SerializeField, Header("現在のマップID")]
     private MapID currentMapID = MapID.Base;
 
-    [SerializeField, Header("スライダー")]
-    private Slider slider = null;
+    [SerializeField, Header("テキスト")]
+    private Text text = null;
 
-    [SerializeField]
-    private QuestMapMoveImage questMapMoveImage = null;
+    [SerializeField, Header("テキストを使用するか")]
+    private bool textUse = false;
 
     private PlaySceneManager manager = null;
 
@@ -24,13 +24,12 @@ public class MapMovePoint : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        questMapMoveImage.SetState(false);
+        manager = GameObject.Find("PlaySceneManager").GetComponent<PlaySceneManager>();
 
         // ユーザーレコードから現在のマップIDを取得
-        currentMapID = UserRecord.MapID;
+        currentMapID = UserRecord.NextMapId;
 
-        slider.maxValue = moveTime;
-        slider.gameObject.SetActive(false);
+        text.enabled = false;
     }
 
     // Update is called once per frame
@@ -38,35 +37,27 @@ public class MapMovePoint : MonoBehaviour
     {
         if(currentTime > moveTime)
         {
-            manager = GameObject.Find("PlaySceneManager").GetComponent<PlaySceneManager>();
             // ここでマップを移動
-            manager.SendMoveMap(UserRecord.MapID);
+            manager.SendMoveMap(UserRecord.NextMapId);
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (currentMapID != UserRecord.MapID)
+        // プレイヤーが移動ポイントに触れたとき
+        if (other.tag == "Player" && UserRecord.NextMapId != MapID.Non)
         {
-            // プレイヤーが移動ポイントに触れたとき
-            if (other.tag == "Player" && UserRecord.MapID != MapID.Non)
-            {
-                slider.gameObject.SetActive(true);
-                questMapMoveImage.SetState(true);
-            }
+            text.enabled = true;
         }
     }
 
     private void OnTriggerStay(Collider other)
     {
-        if (currentMapID != UserRecord.MapID)
+        // プレイヤーが移動ポイントに触れている間
+        if(other.tag == "Player")
         {
-            // プレイヤーが移動ポイントに触れている間
-            if (other.tag == "Player" && UserRecord.MapID != MapID.Non)
-            {
-                currentTime += Time.deltaTime;
-                slider.value = currentTime;
-            }
+            currentTime += Time.deltaTime;
+            text.text = "クエスト開始まで" + (int)(moveTime - currentTime + 0.5f) +"秒";
         }
     }
 
@@ -76,8 +67,7 @@ public class MapMovePoint : MonoBehaviour
         if (other.tag == "Player")
         {
             currentTime = 0;
-            slider.gameObject.SetActive(false);
-            questMapMoveImage.SetState(false);
+            text.enabled = false;
         }
     }
 }
