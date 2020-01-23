@@ -27,7 +27,7 @@ public class MapMovePoint : MonoBehaviour
         manager = GameObject.Find("PlaySceneManager").GetComponent<PlaySceneManager>();
 
         // ユーザーレコードから現在のマップIDを取得
-        currentMapID = UserRecord.MapID;
+        currentMapID = UserRecord.NextMapId;
 
         text.enabled = false;
     }
@@ -38,14 +38,14 @@ public class MapMovePoint : MonoBehaviour
         if(currentTime > moveTime)
         {
             // ここでマップを移動
-            manager.SendMoveMap(UserRecord.MapID);
+            manager.SendMoveMap(UserRecord.NextMapId);
         }
     }
 
     private void OnTriggerEnter(Collider other)
     {
         // プレイヤーが移動ポイントに触れたとき
-        if (other.tag == "Player" && UserRecord.MapID != MapID.Non)
+        if (other.tag == "Player" && UserRecord.NextMapId != MapID.Non)
         {
             text.enabled = true;
         }
