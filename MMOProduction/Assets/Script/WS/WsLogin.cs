@@ -30,11 +30,7 @@ namespace WS
         {
             get
             {
-                if (instance == null)
-                {
-                    instance = new WsLogin();
-
-                }
+                if (instance == null) instance = new WsLogin();
                 return instance;
             }
         }
@@ -63,6 +59,7 @@ namespace WS
         /// 終了処理
         public void Destroy()
         {
+            if (instance == null) return;
             base.Destroy("ログインWSの終了");
             instance = null;
         }
@@ -124,10 +121,6 @@ namespace WS
             };
         }
 
-        public WebSocketState WSState()
-        {
-            return base.ws.ReadyState;
-        }
 
         /// <summary>
         /// 通信切断された時呼ばれるコールバック
@@ -143,7 +136,6 @@ namespace WS
         private void ChangeScene2Title()
         {
             Destroy();
-            //SceneManager.LoadScene("TitleScene");
         }
 
     }

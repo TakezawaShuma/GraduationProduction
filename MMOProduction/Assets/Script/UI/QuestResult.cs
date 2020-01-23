@@ -118,8 +118,7 @@ public class QuestResult : MonoBehaviour
     {
         if (elapsedTime >= 3.0f)
         {
-            UserRecord.MapID = MapID.Base;
-            scene.SendMoveMap(UserRecord.MapID);
+            scene.SendMoveMap(MapID.Base);
         }
     }
 }

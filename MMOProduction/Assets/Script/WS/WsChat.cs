@@ -25,7 +25,11 @@ namespace WS
 
         public static WsChat Instance
         {
-            get { if (instance == null) { instance = new WsChat(); } return instance; }
+            get
+            {
+                if (instance == null) { instance = new WsChat(); }
+                return instance;
+            }
         }
 
 

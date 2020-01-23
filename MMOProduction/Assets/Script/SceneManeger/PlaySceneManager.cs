@@ -34,10 +34,7 @@ public class PlaySceneManager : SceneManagerBase
 
     [SerializeField, Header("カメラ")]
     private FollowingCamera FollowingCamera = default(FollowingCamera);
-
-    [SerializeField, Header("チャットコントローラー")]
-    private ChatController chatController = default(ChatController);
-
+    
 
     [SerializeField]
     private PlayerUI playerUI = null;
@@ -83,7 +80,7 @@ public class PlaySceneManager : SceneManagerBase
 
     public StageTable stages;
 
-    private bool isLogout = true;
+    //private bool isLogout = true;
 
     private void Awake()
     {
@@ -94,6 +91,7 @@ public class PlaySceneManager : SceneManagerBase
         if (connectFlag)
         {
             wsp = WS.WsPlay.Instance;
+            wsp.MoveMap = false;
         }
         ready = Ready.Instance;
     }
@@ -148,7 +146,9 @@ public class PlaySceneManager : SceneManagerBase
     // Update is called once per frame
     void Update()
     {
+        // 強制終了
         if (InputManager.InputKeyCheck(KeyCode.Escape)) Quit();
+        // 
         if (ready.CheckReady())
         {
             //ready.ReadyGO();
@@ -166,43 +166,25 @@ public class PlaySceneManager : SceneManagerBase
                 }
             }
         }
+        if (Input.GetKeyDown(KeyCode.F2)) questResult.SetQuestFailed(Time.time);
+        if (Input.GetKeyDown(KeyCode.F3)) questResult.SetQuestCrear(Time.time);  
+        if (Input.GetKeyDown(KeyCode.F4)) wsp.WsStatus();
         if (Input.GetKeyDown(KeyCode.F12)) SendMoveMap(MapID.Field);
         if (Input.GetKeyDown(KeyCode.F11)) SendMoveMap(MapID.Base);
-        if (Input.GetKeyDown(KeyCode.F4)) wsp.WsStatus();
-
-
-        // debug
-        if (Input.GetKeyDown(KeyCode.Backspace)) questResult.SetQuestCrear(Time.time);        
-        //if (Input.GetKeyDown(KeyCode.L))
-        //{
-        //    Packes.GetEnemyDataStoC v = new Packes.GetEnemyDataStoC();
-        //    v.enemys.Add(new Packes.EnemyReceiveData(100, 0, -210, 1, -210, 0, 0, 10));
-        //    RegisterEnemies(v); // 100番を生み出す
-        //}
-        //if (Input.GetKeyDown(KeyCode.Comma))
-        //{
-        //    enemies[100].PlayTriggerAnimetion("Attack"); // 敵の攻撃モーションの再生
-        //}
-        //if (Input.GetKeyDown(KeyCode.Alpha0))   // 敵へ攻撃
-        //{
-        //    wsp.Send(Json.ConvertToJson(new Packes.Attack(0, UserRecord.ID, 0, 0)));
-        //    Debug.Log("プレイヤーの攻撃");
-        //}
-        //if (Input.GetKeyDown(KeyCode.F12))
-        //{
-        //    AliveEnemy(new Packes.EnemyAliveStoC(100, 10, 0));
-        //}
     }
 
 
     public void OnDestroy()
     {
-        if (connectFlag) {
-            if (isLogout) {
-                wsp.Destroy(); 
-            }
+        if (!connectFlag) return;
+
+        if (wsp != null)
+        {
+            if (!wsp.MoveMap) wsp.Destroy();
+
         }
     }
+    
 
     /// <summary>
     /// 自分の作成
@@ -227,7 +209,7 @@ public class PlaySceneManager : SceneManagerBase
             player = tmp.AddComponent<Player>();
             PlayerController playerCComponent = tmp.AddComponent<PlayerController>();
 
-            playerCComponent.Init(player, FollowingCamera, playerSetting, chatController, tmp.GetComponent<Animator>());
+            playerCComponent.Init(player, FollowingCamera, playerSetting, uiManager.GetChat(), tmp.GetComponent<Animator>());
             userSeeting.Init(tmp);
             FollowingCamera.Target = tmp;
 
@@ -322,6 +304,7 @@ public class PlaySceneManager : SceneManagerBase
     /// <param name="_str"></param>
     private void RegisterEnemies(Packes.GetEnemyDataStoC _packet)
     {
+        Debug.Log("エネミーの作成＆更新");
         List<Packes.EnemyReceiveData> list = _packet.enemys;
         foreach (var ene in list)
         {
@@ -567,7 +550,7 @@ public class PlaySceneManager : SceneManagerBase
     private void MovingMap(Packes.MoveingMapOk _packet)
     {
         UserRecord.MapID = (MapID)_packet.mapId;
-        isLogout = false;
+        //isLogout = false;
         Debug.Log(_packet.ToJson());
         Debug.Log(_packet.mapId.ToString());
         ChangeScene("LoadingScene");
@@ -585,7 +568,10 @@ public class PlaySceneManager : SceneManagerBase
             Debug.Log("ログアウトしたよ");
 
             UserRecord.DiscardAll();
-            if (connectFlag) { wsp.Destroy(); }
+            if (connectFlag)
+            {
+                 wsp.Destroy(); 
+            }
             ChangeScene("LoadingScene");
         }
         else if (UserRecord.ID != 0)
