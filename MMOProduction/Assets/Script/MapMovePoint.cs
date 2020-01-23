@@ -46,21 +46,27 @@ public class MapMovePoint : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        // プレイヤーが移動ポイントに触れたとき
-        if (other.tag == "Player" && UserRecord.MapID != MapID.Non)
+        if (currentMapID != UserRecord.MapID)
         {
-            slider.gameObject.SetActive(true);
-            questMapMoveImage.SetState(true);
+            // プレイヤーが移動ポイントに触れたとき
+            if (other.tag == "Player" && UserRecord.MapID != MapID.Non)
+            {
+                slider.gameObject.SetActive(true);
+                questMapMoveImage.SetState(true);
+            }
         }
     }
 
     private void OnTriggerStay(Collider other)
     {
-        // プレイヤーが移動ポイントに触れている間
-        if(other.tag == "Player")
+        if (currentMapID != UserRecord.MapID)
         {
-            currentTime += Time.deltaTime;
-            slider.value = currentTime;
+            // プレイヤーが移動ポイントに触れている間
+            if (other.tag == "Player" && UserRecord.MapID != MapID.Non)
+            {
+                currentTime += Time.deltaTime;
+                slider.value = currentTime;
+            }
         }
     }
 

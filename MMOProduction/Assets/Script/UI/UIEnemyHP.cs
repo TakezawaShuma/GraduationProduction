@@ -8,8 +8,11 @@ using UnityEngine.UI;
 /// </summary>
 public class UIEnemyHP : MonoBehaviour
 {
-    [SerializeField, Header("キャンバス")]
-    private GameObject canvas = null;
+    [SerializeField, Header("パネル")]
+    private GameObject panel = null;
+
+    [SerializeField, Header("クエスト対象マーク")]
+    private GameObject targetMark = null;
 
     [SerializeField, Header("スライダー")]
     private Slider slider = null;
@@ -36,11 +39,21 @@ public class UIEnemyHP : MonoBehaviour
 
     public void On()
     {
-        canvas.SetActive(true);
+        panel.SetActive(true);
     }
 
     public void Off()
     {
-        canvas.SetActive(false);
+        panel.SetActive(false);
+    }
+
+    public void TargetMarkON()
+    {
+        targetMark.SetActive(true);
+    }
+
+    public void TargetMarkOFF()
+    {
+        targetMark.SetActive(false);
     }
 }

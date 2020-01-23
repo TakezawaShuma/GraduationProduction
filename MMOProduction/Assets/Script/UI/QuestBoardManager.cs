@@ -15,6 +15,12 @@ public class QuestBoardManager : MonoBehaviour
     [SerializeField, Header("マーカー")]
     private Marker marker = null;
 
+    [SerializeField, Header("クエスト内容テキスト")]
+    private Text detailText = null;
+
+    [SerializeField, Header("制限時間テキスト")]
+    private Text timeLimitText = null;
+
     // 現在選択されているクエストID
     private MapID currentID = MapID.Non;
 
@@ -29,9 +35,21 @@ public class QuestBoardManager : MonoBehaviour
     {
         if (currentID != MapID.Non)
         {
+            var colors = toggleGroup.ActiveToggles().FirstOrDefault().colors;
+            colors.normalColor = new Color(1, 1, 0, 1);
+            toggleGroup.ActiveToggles().FirstOrDefault().colors = colors;
             UserRecord.MapID = currentID;
-            Debug.Log(currentID);
+            Debug.Log(currentID + "に決定した");
         }
+    }
+
+    public void CancelMapID()
+    {
+        var colors = toggleGroup.ActiveToggles().FirstOrDefault().colors;
+        colors.normalColor = new Color(1, 1, 1, 1);
+        toggleGroup.ActiveToggles().FirstOrDefault().colors = colors;
+        UserRecord.MapID = MapID.Base;
+        Debug.Log("取り消した");
     }
 
     public void SetMapID()
