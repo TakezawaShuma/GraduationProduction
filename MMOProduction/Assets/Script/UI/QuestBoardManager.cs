@@ -29,7 +29,7 @@ public class QuestBoardManager : MonoBehaviour
     {
         if (currentID != MapID.Non)
         {
-            UserRecord.MapID = currentID;
+            UserRecord.NextMapId = currentID;
             Debug.Log(currentID);
         }
     }
