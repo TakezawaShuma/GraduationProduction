@@ -18,17 +18,43 @@ public class QuestBoardManager : MonoBehaviour
     [SerializeField, Header("クエスト内容テキスト")]
     private Text detailText = null;
 
-    [SerializeField, Header("制限時間テキスト")]
-    private Text timeLimitText = null;
+    [SerializeField, Header("クエストトグルプレハブ")]
+    private GameObject prefab = null;
+
+    [SerializeField, Header("クエストトグル置くとこ")]
+    private GameObject togglePutObj = null;
 
     // 現在選択されているクエストID
     private MapID currentID = MapID.Non;
+
+    private List<Packes.QuestMasterData> datas;
 
     private void Start()
     {
         panel.SetActive(false);
 
         marker.SetFunction(Open);
+
+        datas = QuestDatas.GetAll();
+
+        int count = 0;
+
+        foreach(Packes.QuestMasterData data in datas)
+        {
+            GameObject gameObject = Instantiate(prefab, togglePutObj.transform);
+
+            gameObject.transform.Translate(new Vector3(0, -40 * count, 0));
+
+            gameObject.GetComponent<QuestToggle>().data = data;
+
+            gameObject.GetComponent<QuestToggle>().GetText().text = data.name;
+
+            gameObject.GetComponent<Toggle>().group = toggleGroup;
+
+            gameObject.GetComponent<Toggle>().onValueChanged.AddListener(SetMapID);
+
+            count++;
+        }
     }
 
     public void DecisionMapID()
@@ -52,11 +78,12 @@ public class QuestBoardManager : MonoBehaviour
         Debug.Log("取り消した");
     }
 
-    public void SetMapID()
+    public void SetMapID(bool b)
     {
         if (toggleGroup.ActiveToggles().FirstOrDefault() != null)
         {
-            currentID = toggleGroup.ActiveToggles().FirstOrDefault().gameObject.GetComponent<QuestToggle>().GetMapID();
+            currentID = (MapID)toggleGroup.ActiveToggles().FirstOrDefault().gameObject.GetComponent<QuestToggle>().data.mapId;
+            detailText.text = toggleGroup.ActiveToggles().FirstOrDefault().gameObject.GetComponent<QuestToggle>().data.comment;
         }
         else
         {
