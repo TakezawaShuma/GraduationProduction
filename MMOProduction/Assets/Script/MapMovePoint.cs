@@ -39,6 +39,7 @@ public class MapMovePoint : MonoBehaviour
         {
             // ここでマップを移動
             manager.SendMoveMap(UserRecord.NextMapId);
+            currentTime = 0;
         }
     }
 
