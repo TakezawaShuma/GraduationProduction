@@ -86,6 +86,7 @@ public class QuestResult : MonoBehaviour
         isResult = -1;
         stertTime = _time;
         resultImage.sprite = questFailed;
+        resultImage.gameObject.SetActive(true);
     }
 
     bool resultDisplayFlag = false;
@@ -119,6 +120,7 @@ public class QuestResult : MonoBehaviour
         if (elapsedTime >= 3.0f)
         {
             scene.SendMoveMap(MapID.Base);
+            isResult = 0;
         }
     }
 }
