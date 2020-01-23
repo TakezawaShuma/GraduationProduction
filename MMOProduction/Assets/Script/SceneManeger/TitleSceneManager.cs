@@ -103,9 +103,11 @@ public class TitleSceneManager : SceneManagerBase
             wsl.loginAction = LoginAction;
             wsl.loadingAccessoryMasterAction = LoadingAccessoryMaster;
             wsl.loadingMapMasterAction = LoadingMapMaster;
-            
+            wsl.loadingQuestMasterAction = LoadingQuestMaster;
+
             wsl.Send(new Packes.LoadingAccessoryMasterSend(UserRecord.ID).ToJson());
             wsl.Send(new Packes.LoadingMapMasterSend(UserRecord.ID).ToJson());
+            wsl.Send(new Packes.LoadingQuestMasterSend(UserRecord.ID).ToJson());
         }
 
         sound_ = GetComponent<SystemSound>();
@@ -118,7 +120,6 @@ public class TitleSceneManager : SceneManagerBase
         if (Input.GetKey(KeyCode.Escape)) Quit();
         if (Input.GetKeyDown(KeyCode.Tab)) InputChange();
         if (Input.GetKeyDown(KeyCode.Return)) EnterCheck();
-
     }
 
 
@@ -468,5 +469,11 @@ public class TitleSceneManager : SceneManagerBase
     {
         InputFile.WriterJson(MasterFileNameList.accessory, JsonUtility.ToJson(_data), FILETYPE.JSON);
         AccessoryDatas.SaveingData(_data.accessorys);
+    }
+
+
+    private void LoadingQuestMaster(Packes.LoadingQuestMaster _data) {
+        InputFile.WriterJson(MasterFileNameList.quest, JsonUtility.ToJson(_data), FILETYPE.JSON);
+        QuestDatas.SaveingData(_data.quests);
     }
 }

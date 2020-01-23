@@ -120,7 +120,6 @@ public class QuestResult : MonoBehaviour
         {
             UserRecord.MapID = MapID.Base;
             scene.SendMoveMap(UserRecord.MapID);
-            Debug.Log("ベースに移動");
         }
     }
 }

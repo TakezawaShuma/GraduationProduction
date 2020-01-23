@@ -24,6 +24,8 @@ namespace WS
         public Action<Packes.LoadingMapMaster> loadingMapMasterAction;
         // アクセサリのマスター
         public Action<Packes.LoadingAccessoryMaster> loadingAccessoryMasterAction;
+        // クエストのマスター
+        public Action<Packes.LoadingQuestMaster> loadingQuestMasterAction;
         public static WsLogin Instance
         {
             get
@@ -108,6 +110,11 @@ namespace WS
                         case CommandData.LoadingAccessoryMaster:
                             Packes.LoadingAccessoryMaster accessory = Json.ConvertToPackets<Packes.LoadingAccessoryMaster>(e.Data);
                             loadingAccessoryMasterAction?.Invoke(accessory);
+                            break;
+
+                        case CommandData.QuestMasterDataList:
+                            Packes.LoadingQuestMaster quest = Json.ConvertToPackets<Packes.LoadingQuestMaster>(e.Data);
+                            loadingQuestMasterAction?.Invoke(quest);
                             break;
                         // 随時追加
 
