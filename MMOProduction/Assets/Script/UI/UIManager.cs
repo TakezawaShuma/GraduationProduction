@@ -95,7 +95,7 @@ public class UIManager : MonoBehaviour
     {
         InputManager.Update();
 
-        if (ui != null && !chat.GetChatActiveFlag())
+        if (ui != null && !chat.IsChatActive())
         {
             for (int i = 0; i < ui.Length; i++)
             {
@@ -129,5 +129,10 @@ public class UIManager : MonoBehaviour
                 }
             }
         }
+    }
+
+    public ChatController GetChat()
+    {
+        return chat;
     }
 }

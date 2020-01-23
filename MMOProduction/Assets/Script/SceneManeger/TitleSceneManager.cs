@@ -125,7 +125,9 @@ public class TitleSceneManager : SceneManagerBase
 
     private void OnDestroy()
     {
-        if (connectFlag) wsl.Destroy();
+        if (!connectFlag) return;
+        if (wsl!=null) wsl.Destroy();
+        
     }
     //public関数--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 
