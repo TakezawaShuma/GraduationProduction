@@ -30,7 +30,7 @@ public class ChatMessageController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (controller.GetChatActiveFlag())
+        if (controller.IsChatActive())
         {
             if (InputManager.InputKeyCheckDown(KeyCode.Return) && messageInput.text != "")
             {

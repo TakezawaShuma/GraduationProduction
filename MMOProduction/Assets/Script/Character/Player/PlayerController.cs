@@ -114,7 +114,7 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (chatController == null || !chatController.GetChatActiveFlag())
+        if (chatController == null || !chatController.IsChatActive())
         {
             if (target != null)
             {

@@ -15,7 +15,16 @@ namespace WS
         // ログインサーバーのポート
         private uint port = 8001;
         private static WsPlay instance = null;
-        private bool logoutFlag = false;
+
+        // ログアウト確認用フラグ　false:logout/true:login
+        private bool isLogin = false;
+
+        private bool moveMap = false;
+        public bool MoveMap
+        {
+            get { return moveMap; }
+            set { moveMap = value; }
+        }
 
 
         // 位置同期 202
@@ -68,7 +77,6 @@ namespace WS
         }
 
 
-
         /// <summary>
         /// コンストラクタ
         /// </summary>
@@ -84,7 +92,7 @@ namespace WS
         /// <param name="_port"></param>
         private void Init(uint _port)
         {
-            logoutFlag = false;
+            isLogin = true;
             base.Connect(_port);
             Receive();
 
@@ -95,7 +103,9 @@ namespace WS
         /// </summary>
         public void Destroy()
         {
-            if (!logoutFlag) { Send(new Packes.LogoutCtoS(UserRecord.ID).ToJson()); }
+            if (instance == null) return;
+            if (isLogin) Logout();
+
             base.Destroy("プレイの終了");
             instance = null;
         }
@@ -199,6 +209,7 @@ namespace WS
 
                         case CommandData.MoveingMapOk:
                             //Debug.Log("マップ移動結果 : " + e.Data);
+                            moveMap = true;
                             mapAction?.Invoke(Json.ConvertToPackets<Packes.MoveingMapOk>(e.Data));
                             break;
 
@@ -207,9 +218,9 @@ namespace WS
                             rewardAction?.Invoke(Json.ConvertToPackets<Packes.SelectRewardOk>(e.Data));
                             break;
 
-                        case CommandData.LogoutStoC:        // 他プレイヤーがログアウトした
+                        case CommandData.LogoutStoC:        // プレイヤーがログアウトした
                             //Debug.Log("プレイヤーのログアウト : " + e.Data);
-                            if (Json.ConvertToPackets<Packes.LogoutStoC>(e.Data).user_id == UserRecord.ID) { logoutFlag = true; }
+                            if (Json.ConvertToPackets<Packes.LogoutStoC>(e.Data).user_id == UserRecord.ID) { isLogin = false; }
                             logoutAction?.Invoke(Json.ConvertToPackets<Packes.LogoutStoC>(e.Data));
                             break;
 
@@ -229,5 +240,7 @@ namespace WS
             };
 
         }
+
+
     }
 }

@@ -20,7 +20,7 @@ public static class QuestDatas
                 return _data;
             }
         }
-        return default;
+        return default(Packes.QuestMasterData);
     }
     public static Packes.QuestMasterData FindOne(MapID _id)
     {
@@ -31,7 +31,7 @@ public static class QuestDatas
                 return _data;
             }
         }
-        return default;
+        return default(Packes.QuestMasterData);
     }
 
     public static List<Packes.QuestMasterData> Find(List<int> _ids)

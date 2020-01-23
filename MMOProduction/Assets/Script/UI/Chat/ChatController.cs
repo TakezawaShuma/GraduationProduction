@@ -59,18 +59,11 @@ public class ChatController : MonoBehaviour
 
     private void OnDestroy()
     {
-        if (connectFlag)
-        {
-            if (wsc != null) wsc.Destroy();
-            else
-            {
-                wsc = WS.WsChat.Instance;
-                wsc.Destroy();
-            }
-        }
+        if (!connectFlag) return;
+        if (wsc != null) wsc.Destroy();
     }
 
-    public bool GetChatActiveFlag()
+    public bool IsChatActive()
     {
         return chatActiveFlag;
     }
