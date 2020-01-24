@@ -171,7 +171,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3278045187222586583}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: Eye_L
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -201,7 +201,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3278045187138354303}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: IKXRoot_M
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -231,7 +231,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3278045186649595375}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: IKSpRootFollowOffset_M
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -261,7 +261,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3278045183800777975}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: IKExtraSpine2_M
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -292,7 +292,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3278045187559139857}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: IKSpine1_M
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -384,7 +384,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3278045183667816755}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: IKSystem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -571,7 +571,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3278045187227377565}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: Main
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -602,7 +602,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3278045183574907963}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: FKXRoot_M
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -743,7 +743,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3278045184315087219}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: Ang3
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1040,7 +1040,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3278045187040074379}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: IKHandle
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1076,7 +1076,8 @@ GameObject:
   - component: {fileID: 3300041205910668509}
   - component: {fileID: 1864718203}
   - component: {fileID: 1864718202}
-  m_Layer: 0
+  - component: {fileID: 301676582615342901}
+  m_Layer: 19
   m_Name: Riko
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1092,7 +1093,7 @@ Transform:
   m_GameObject: {fileID: 3274201342871926291}
   m_LocalRotation: {x: 0, y: -0.9958344, z: 0, w: 0.091180146}
   m_LocalPosition: {x: -208.05, y: 0.18782544, z: -205.4}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_Children:
   - {fileID: 3278045185529140849}
   - {fileID: 3278045185608280545}
@@ -1180,6 +1181,20 @@ MonoBehaviour:
   - list: 010101010100010101
   - list: 010100010100010100
   - list: 000000010100010100
+--- !u!136 &301676582615342901
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3274201342871926291}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  m_Radius: 0.53154075
+  m_Height: 1.7604938
+  m_Direction: 1
+  m_Center: {x: 0.031538013, y: 0.77082396, z: -7.3231066e-10}
 --- !u!1 &3274201342925552071
 GameObject:
   m_ObjectHideFlags: 0
@@ -1345,7 +1360,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3278045185556820529}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: Eye_Down
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1468,7 +1483,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3278045184760082297}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: Sad
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1746,7 +1761,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3278045185136240233}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: Eye_R
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1776,7 +1791,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3278045185727572681}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: FKExtraRoot_M
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1839,7 +1854,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3278045186638240267}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: IKOffsetSpine2_M
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2269,7 +2284,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3278045185153537455}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: FKIKSpine_M
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2423,7 +2438,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3278045186538741791}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: IKOffsetSpine1_M
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2617,7 +2632,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3278045187184941583}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: Eye_sTop
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2647,7 +2662,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3278045186546997565}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: Eye_Top
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2798,7 +2813,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3278045184778661625}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: HipSwingerStabilizer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2860,7 +2875,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3278045184942957405}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: IKScalerRoot_M
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2951,7 +2966,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3278045185356845951}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: IKSpine2_M
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -2981,7 +2996,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3278045184717175783}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: sap
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3426,7 +3441,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3278045185745630151}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: IKParentConstraintRoot_M
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3488,7 +3503,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3278045183634995651}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: IKSpSpineOffset_M
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3672,7 +3687,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3278045183691562653}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: FKIKParentConstraintSpine_M
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3796,7 +3811,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3278045184456437297}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: Eye_c
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3965,7 +3980,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3278045186212573823}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: FKOffsetRoot_M
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -3996,7 +4011,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3278045185608280545}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: Group
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4119,7 +4134,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3278045187590679897}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: IKRootConstraint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4414,7 +4429,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3278045184717571651}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: Smile2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4623,7 +4638,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3278045183903253973}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: IKJoints
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4892,7 +4907,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3278045187415554041}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: FKIKSystem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -4923,7 +4938,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3278045184750452423}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: IKSpRoot_M
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5204,7 +5219,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3278045184756509453}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: IKExtraSpine1_M
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5266,7 +5281,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3278045184259962191}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: Ang2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5441,7 +5456,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3278045184949561281}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: Ang1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5471,7 +5486,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3278045183794654547}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: Eye_sDwon
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5821,7 +5836,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3278045185063934267}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: FKSystem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -5945,7 +5960,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3278045185529140849}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: blen
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6143,7 +6158,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3278045184582465245}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: FKRoot_M
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -6981,7 +6996,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3278045185520774631}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: Eye_sL
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7133,7 +7148,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3278045183555768675}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: MotionSystem
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7166,7 +7181,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3278045187640837925}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: Eye_sR
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7257,7 +7272,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3278045185427618199}
-  m_Layer: 0
+  m_Layer: 19
   m_Name: IKXOffsetRoot_M
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -7474,6 +7489,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: TalkCanvas
       objectReference: {fileID: 0}
+    - target: {fileID: 1036729519347832798, guid: c84e4192ce4b7254386e25573f47a03d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 19
+      objectReference: {fileID: 0}
     - target: {fileID: 1036729519347832785, guid: c84e4192ce4b7254386e25573f47a03d,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -7609,6 +7629,36 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
+    - target: {fileID: 1036729518244052388, guid: c84e4192ce4b7254386e25573f47a03d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 100253001022497535, guid: c84e4192ce4b7254386e25573f47a03d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 1036729519025424553, guid: c84e4192ce4b7254386e25573f47a03d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 1036729519211918826, guid: c84e4192ce4b7254386e25573f47a03d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 1036729520156323751, guid: c84e4192ce4b7254386e25573f47a03d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 19
+      objectReference: {fileID: 0}
+    - target: {fileID: 3868299253222464227, guid: c84e4192ce4b7254386e25573f47a03d,
+        type: 3}
+      propertyPath: m_Layer
+      value: 19
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c84e4192ce4b7254386e25573f47a03d, type: 3}
 --- !u!1 &1301484515635141644 stripped
@@ -7646,6 +7696,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TalkCamera
+      objectReference: {fileID: 0}
+    - target: {fileID: 7531037901397263663, guid: cbce0c4e7b1398443a8bce7eebdf109a,
+        type: 3}
+      propertyPath: m_Layer
+      value: 19
       objectReference: {fileID: 0}
     - target: {fileID: 7531037901397263660, guid: cbce0c4e7b1398443a8bce7eebdf109a,
         type: 3}
@@ -7790,6 +7845,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6733209875478919647, guid: df0519de29861cf4291d4f2c170c6404,
         type: 3}
+      propertyPath: m_Height
+      value: 1.745486
+      objectReference: {fileID: 0}
+    - target: {fileID: 6733209875478919647, guid: df0519de29861cf4291d4f2c170c6404,
+        type: 3}
       propertyPath: m_Center.x
       value: 0.032164205
       objectReference: {fileID: 0}
@@ -7797,11 +7857,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Center.y
       value: -2.5214814e-10
-      objectReference: {fileID: 0}
-    - target: {fileID: 6733209875478919647, guid: df0519de29861cf4291d4f2c170c6404,
-        type: 3}
-      propertyPath: m_Height
-      value: 1.745486
       objectReference: {fileID: 0}
     - target: {fileID: 6733209875478919647, guid: df0519de29861cf4291d4f2c170c6404,
         type: 3}
