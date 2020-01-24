@@ -17,7 +17,7 @@ public class SlotData : MonoBehaviour
     }
 
     [SerializeField]
-    private int id = -1;
+    private int id = 0;
 
     [SerializeField]
     private STATUS status = STATUS.NONE;
@@ -65,12 +65,11 @@ public class SlotData : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        Init();
     }
 
     public void Init()
     {
-        id = -1;
+        id = 0;
         status = STATUS.NONE;
         name = this.transform.parent.name;
     }
