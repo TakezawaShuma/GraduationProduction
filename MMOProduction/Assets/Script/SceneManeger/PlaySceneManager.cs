@@ -347,6 +347,7 @@ public class PlaySceneManager : SceneManagerBase
 
         stutasCanvas.GetComponent<UIEnemyHP>().MAX_HP = enemy.HP = _ene.hp;
         stutasCanvas.GetComponent<UIEnemyHP>().Off();
+        stutasCanvas.GetComponent<UIEnemyHP>().SetEnemyID(0);
 
         newEnemy.name = "Enemy:" + _ene.master_id + "->" + _ene.unique_id;
         enemy.Init(_ene.x, _ene.y, _ene.z, _ene.dir, _ene.unique_id, skillTabe);
