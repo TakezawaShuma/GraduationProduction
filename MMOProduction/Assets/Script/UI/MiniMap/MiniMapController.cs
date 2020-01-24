@@ -11,6 +11,13 @@ public class MiniMapController : MonoBehaviour
     private GameObject target_ = null;
     private float height_ = 20;
 
+    [SerializeField]
+    private RenderTexture _colorTexture = null;
+    [SerializeField]
+    private RenderTexture _minimapTexture = null;
+    [SerializeField]
+    private Material _material = null;
+
 
     public void Init(GameObject _target) {
         target_ = _target;
@@ -20,5 +27,11 @@ public class MiniMapController : MonoBehaviour
         if (target_ == null) return;
         transform.position = new Vector3(target_.transform.position.x, height_, target_.transform.position.z);
         transform.eulerAngles = new Vector3(90, Camera.main.transform.eulerAngles.y, 0);
+    }
+
+    private void OnPostRender()
+    {
+        Graphics.SetRenderTarget(_colorTexture);
+        Graphics.Blit(_colorTexture, _minimapTexture, _material);
     }
 }

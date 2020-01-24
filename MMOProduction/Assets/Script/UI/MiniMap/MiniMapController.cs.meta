@@ -3,7 +3,10 @@ guid: a8b13977e79941a408db65fd86d55d2e
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
+  defaultReferences:
+  - _colorTexture: {fileID: 8400000, guid: ff315f1b960f97f4497e8aa454cfeb2d, type: 2}
+  - _minimapTexture: {fileID: 8400000, guid: df457f6f9d359874e874b05b9be0b787, type: 2}
+  - _material: {fileID: 2100000, guid: acb5b1465276e4845afffa663ec0eb6e, type: 2}
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 
