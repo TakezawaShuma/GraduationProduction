@@ -81,7 +81,6 @@ public class Inventory : MonoBehaviour
                 SlotData slot = obj.GetComponent<SlotData>();
                 if (slot.ID <= 0) {
                     slot.ID = id;
-                    Debug.Log(slot.ID.ToString() + " : " + id.ToString());
                     break;
                 }
             }
