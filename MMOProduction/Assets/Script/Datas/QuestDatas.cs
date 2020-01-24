@@ -6,6 +6,10 @@ public static class QuestDatas
 {
     private static List<Packes.QuestMasterData> datas_ = new List<Packes.QuestMasterData>();
 
+    public static List<Packes.QuestMasterData> GetAll()
+    {
+        return datas_;
+    }
 
     public static Packes.QuestMasterData FindOne(int _id)
     {

@@ -6,11 +6,12 @@ using UnityEngine.UI;
 
 public class QuestToggle : MonoBehaviour
 {
-    [SerializeField, Header("マップID")]
-    private MapID mapID = MapID.Non;
+    public Packes.QuestMasterData data;
+    [SerializeField]
+    private Text questNameText = null;
 
-    public MapID GetMapID()
+    public Text GetText()
     {
-        return mapID;
+        return questNameText;
     }
 }
