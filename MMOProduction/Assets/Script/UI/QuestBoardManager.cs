@@ -69,6 +69,7 @@ public class QuestBoardManager : MonoBehaviour
             UserRecord.NextMapId = (MapID)currentQuest.mapId;
             UserRecord.QuestID = currentQuest.id;
             Debug.Log((MapID)currentQuest.mapId + "に決定した");
+            WS.WsPlay.Instance.Send(new Packes.QuestOrder(UserRecord.ID, currentQuest.id).ToJson());
         }
     }
 
