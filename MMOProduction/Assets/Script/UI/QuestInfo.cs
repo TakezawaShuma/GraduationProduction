@@ -12,10 +12,13 @@ public class QuestInfo : MonoBehaviour
     private float hiddenTime = 5f;
 
     [SerializeField, Header("クエスト名テキスト")]
-    private Text questNameText;
+    private Text questNameText = null;
 
     [SerializeField, Header("詳細テキスト")]
-    private Text detailText;
+    private Text detailText = null;
+
+    [SerializeField, Header("リタイアボタン")]
+    private GameObject retireButton = null;
 
     private float currentTime = 0;
 
@@ -26,6 +29,7 @@ public class QuestInfo : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        retireButton.SetActive(false);
         questNameText.text = questName;
         detailText.text = detail;
         this.gameObject.SetActive(false);
@@ -43,6 +47,14 @@ public class QuestInfo : MonoBehaviour
                 Detail(data);
                 questNameText.text = questName;
                 detailText.text = detail;
+                if (UserRecord.MapID == MapID.Field)
+                {
+                    retireButton.SetActive(true);
+                }
+            }
+            else
+            {
+                retireButton.SetActive(false);
             }
 
             if (timeHidden)
