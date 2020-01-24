@@ -764,6 +764,29 @@ namespace Packes
         }
     }
 
+
+    public class QuestOrder : IPacketDatas {
+        public int user_id;
+        public int quest_id;
+        public QuestOrder() {
+            command = (int)CommandData.QuestOrder;
+            user_id = 0;
+            quest_id = 0;
+        }
+
+        public QuestOrder(int _user_id, int _quest_id) {
+            command = (int)CommandData.QuestOrder;
+            user_id = _user_id;
+            quest_id = _quest_id;
+        }
+    }
+
+    public class QuestClear : IPacketDatas {
+        public QuestClear() {
+            command = (int)CommandData.QuestClear;
+        }
+    }
+
     /// <summary>
     /// マップ移動完了 command:252
     /// (クエスト受注やリタイアに紐づく)
