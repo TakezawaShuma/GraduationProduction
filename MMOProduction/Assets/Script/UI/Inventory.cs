@@ -4,6 +4,10 @@ using UnityEngine;
 using UnityEngine.UI;
 public class Inventory : MonoBehaviour
 {
+
+    [SerializeField]
+    private item_sprites_table images;
+
     private readonly int MAX_ITEM = 90;
     private readonly int WIDTH = 9;
     private readonly int HEIGHT = 10;
@@ -92,13 +96,22 @@ public class Inventory : MonoBehaviour
 
     private void ImageCheck() {
         foreach(var obj in list) {
-            if(obj.GetComponent<SlotData>().ID > 0) {
-                obj.GetComponent<Image>().sprite = sprite;
+            int id = obj.GetComponent<SlotData>().ID;
+            if (id > 0) {
+                obj.GetComponent<Image>().sprite = images.FindOne(id);
             }
         }
     }
 
     private void ImageCheck(int _index) {
-        list[_index].GetComponent<Image>().sprite = sprite;
+        list[_index].GetComponent<Image>().sprite = images.FindOne(list[_index].GetComponent<SlotData>().ID);
+    }
+
+    public GameObject FindAccessory(int _id) {
+        foreach (var obj in list) {
+            int id = obj.GetComponent<SlotData>().ID;
+            if (id == _id) return obj;
+        }
+        return null;
     }
 }

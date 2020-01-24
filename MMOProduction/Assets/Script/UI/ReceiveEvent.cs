@@ -8,7 +8,6 @@ using UnityEngine.UI;
 /// </summary>
 public class ReceiveEvent : MonoBehaviour
 {
-
     private Vector3 clickMousePosition;
     private Vector3 clickThisObjectPosition;
     private Vector3 clickParentObjectPosition;
