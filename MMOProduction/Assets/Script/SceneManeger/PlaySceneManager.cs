@@ -86,6 +86,8 @@ public class PlaySceneManager : SceneManagerBase
     {
         // ステージの作成
         GameObject stage = Instantiate<GameObject>(stages.FindPrefab(UserRecord.MapID), transform);
+        if(UserRecord.Inventory.Count != 0) inventory_.ChangeItems(UserRecord.Inventory);
+
         stage.transform.position = Vector3.zero;
 
         if (connectFlag)
@@ -394,6 +396,7 @@ public class PlaySceneManager : SceneManagerBase
             wsp.Send(new Packes.LoadingOK(UserRecord.ID).ToJson());
             updateFlag = true;
             inventory_.ChangeItems(_packet.accessorys);
+            UserRecord.Inventory = _packet.accessorys;
             ready.ReadyGO();
         }
         else
