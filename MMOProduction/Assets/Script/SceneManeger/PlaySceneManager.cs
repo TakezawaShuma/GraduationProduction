@@ -495,6 +495,10 @@ public class PlaySceneManager : SceneManagerBase
         characters.Remove(_packet.unique_id);
         enemy.PlayTriggerAnimetion("Die");
 
+        if(_packet.drop != 0) {
+            inventory_.AddItem(_packet.drop);
+        }
+
         var damageValue = (int)_packet.damage_value;
         uiManager.GetComponent<Damage>().CreateDamageUI(new Vector3(0, 0, 0), damageValue);
     }

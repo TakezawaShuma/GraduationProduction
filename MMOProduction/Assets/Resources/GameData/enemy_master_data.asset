@@ -13,9 +13,6 @@ MonoBehaviour:
   m_Name: enemy_master_data
   m_EditorClassIdentifier: 
   tables:
-  - id: 0
-    modelId: 103
-    maxHp: 0
   - id: 1
     modelId: 100
     maxHp: 0
@@ -24,5 +21,26 @@ MonoBehaviour:
     maxHp: 0
   - id: 3
     modelId: 102
+    maxHp: 0
+  - id: 4
+    modelId: 103
+    maxHp: 0
+  - id: 5
+    modelId: 104
+    maxHp: 0
+  - id: 6
+    modelId: 105
+    maxHp: 0
+  - id: 7
+    modelId: 106
+    maxHp: 0
+  - id: 8
+    modelId: 107
+    maxHp: 0
+  - id: 9
+    modelId: 108
+    maxHp: 0
+  - id: 10
+    modelId: 109
     maxHp: 0
   models: {fileID: 11400000, guid: ab4899188e127264c844690d2aa09daa, type: 2}

@@ -48,17 +48,19 @@ public class Inventory : MonoBehaviour
     // TODO: 画像のマスター作成後交換
     public bool AddItem(int _id) {
         if (_id <= 0) return false;
-
+        List<int> ids = new List<int>();
         int i = 0;
         foreach(var obj in list) {
             SlotData slot = obj.GetComponent<SlotData>();
             if (slot.ID <= 0) {
                 slot.ID = _id;
+                ids.Add(_id);
                 break;
             }
             i++;
         }
         ImageCheck(i);
+        UserRecord.Inventory = ids;
         return true;
     }
 
