@@ -74,6 +74,7 @@ public class QuestResult : MonoBehaviour
         isResult = 1;
         stertTime = _time;
         // 有効化
+        if (timerSlider == null) Debug.Log("オブジェクトがヌルだぜ！");
         timerSlider.gameObject.SetActive(true);
         crearText.gameObject.SetActive(true);
         // その他設定

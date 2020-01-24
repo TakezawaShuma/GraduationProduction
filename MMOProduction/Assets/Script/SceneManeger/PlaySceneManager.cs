@@ -34,7 +34,7 @@ public class PlaySceneManager : SceneManagerBase
 
     [SerializeField, Header("カメラ")]
     private FollowingCamera FollowingCamera = default(FollowingCamera);
-    
+
 
     [SerializeField]
     private PlayerUI playerUI = null;
@@ -76,7 +76,7 @@ public class PlaySceneManager : SceneManagerBase
 
     private Ready ready;
 
-    
+
 
     public StageTable stages;
 
@@ -106,24 +106,27 @@ public class PlaySceneManager : SceneManagerBase
 
         if (connectFlag)
         {
-            if (!UserRecord.FAST) { 
-                SettingCallback();
+            SettingCallback();
+            if (!UserRecord.FAST)
+            {
 
                 // セーブデータを要請する。
                 wsp.Send(new Packes.SaveLoadCtoS(UserRecord.ID).ToJson());
                 wsp.Send(new Packes.LoadingAccessoryMasterSend(UserRecord.ID).ToJson());
                 UserRecord.FAST = true;
 
-            } else {
+            }
+            else
+            {
                 if (MakePlayer(new Vector3(-210, 0, -210), UserRecord.MODEL))
                 {
                     updateFlag = true;
                     ready.ReadyGO();
                 }
             }
-            
+
         }
-        else { MakePlayer(new Vector3(-210, 5, -210), playerPre); }
+        else { MakePlayer(new Vector3(-210, 5, -210), characterModel.FindModel(CheckModel(0))); }
         questResult.SetScenes(this);
     }
 
@@ -169,7 +172,7 @@ public class PlaySceneManager : SceneManagerBase
             }
         }
         if (Input.GetKeyDown(KeyCode.F2)) questResult.SetQuestFailed(Time.time);
-        if (Input.GetKeyDown(KeyCode.F3)) questResult.SetQuestCrear(Time.time);  
+        if (Input.GetKeyDown(KeyCode.F3)) questResult.SetQuestCrear(Time.time);
         if (Input.GetKeyDown(KeyCode.F4)) wsp.WsStatus();
         if (Input.GetKeyDown(KeyCode.F12)) SendMoveMap(MapID.Field);
         if (Input.GetKeyDown(KeyCode.F11)) SendMoveMap(MapID.Base);
@@ -190,7 +193,7 @@ public class PlaySceneManager : SceneManagerBase
 
         }
     }
-    
+
 
     /// <summary>
     /// 自分の作成
@@ -210,7 +213,7 @@ public class PlaySceneManager : SceneManagerBase
             tmp.tag = "Player";
             tmp.transform.localScale = new Vector3(2, 2, 2);
 
-            if(cheatCommand!=null)cheatCommand.PLAYER = tmp;
+            if (cheatCommand != null) cheatCommand.PLAYER = tmp;
 
             player = tmp.AddComponent<Player>();
             PlayerController playerCComponent = tmp.AddComponent<PlayerController>();
@@ -310,7 +313,6 @@ public class PlaySceneManager : SceneManagerBase
     /// <param name="_str"></param>
     private void RegisterEnemies(Packes.GetEnemyDataStoC _packet)
     {
-        Debug.Log("エネミーの作成＆更新");
         List<Packes.EnemyReceiveData> list = _packet.enemys;
         foreach (var ene in list)
         {
@@ -425,6 +427,7 @@ public class PlaySceneManager : SceneManagerBase
     /// <param name="_packet"></param>
     private void ReceiveOtherListData(Packes.OtherPlayerList _packet)
     {
+        Debug.Log("一覧作成");
         // ほかプレイヤー一覧の生成
         foreach (var tmp in _packet.players)
         {
@@ -559,6 +562,20 @@ public class PlaySceneManager : SceneManagerBase
         Debug.Log("敵の攻撃が" + _packet.user_id + "にヒット");
     }
 
+
+    /// <summary>
+    /// クエストがクリアしたときクリアUIを表示後ベースに移動 → questClearAction
+    /// </summary>
+    /// <param name="_data"></param>
+    public void QuestClearAction(Packes.QuestClear _data)
+    {
+        // TODO: クリア時の実装
+        questResult.SetQuestCrear(Time.time);
+        Debug.Log("quese clear !!!");
+    }
+
+
+
     /// <summary>
     /// マップ移動の許可が出たので移動を開始する → mapAction
     /// </summary>
@@ -586,7 +603,7 @@ public class PlaySceneManager : SceneManagerBase
             UserRecord.DiscardAll();
             if (connectFlag)
             {
-                 wsp.Destroy(); 
+                wsp.Destroy();
             }
             ChangeScene("LoadingScene");
         }
@@ -604,13 +621,13 @@ public class PlaySceneManager : SceneManagerBase
     /// <param name="_packet"></param>
     private void ReceivingFindResults(Packes.FindOfPlayerStoC _packet)
     {
-        //Debug.Log("検索の結果他プレイヤーを作成 -> " + _packet.user_id);
+        Debug.Log("検索の結果他プレイヤーを作成 -> " + _packet.user_id);
         Packes.OtherPlayersData tmp = new Packes.OtherPlayersData(_packet.user_id, _packet.x, _packet.y, _packet.z, _packet.model_id, _packet.name);
         CreateOtherPlayers(tmp);
     }
 
 
- 
+
 
     // --------------------送信関係--------------------
 
@@ -645,7 +662,8 @@ public class PlaySceneManager : SceneManagerBase
     /// マップの移動申請
     /// </summary>
     /// <param name="_mapId"></param>
-    public void SendMoveMap(MapID _mapId) {
+    public void SendMoveMap(MapID _mapId)
+    {
         wsp.Send(new Packes.MoveingMap(UserRecord.ID, (int)_mapId).ToJson());
     }
 
@@ -673,11 +691,6 @@ public class PlaySceneManager : SceneManagerBase
         return characters[_playerId].GetComponent<OtherPlayers>();
     }
 
-    public void QuestClearAction(Packes.QuestClear _data) {
-        // TODO: クリア時の実装
-        Debug.Log("quese clear !!!");
-    }
-
     /// <summary>
     /// コールバックを設定
     /// </summary>
@@ -696,11 +709,13 @@ public class PlaySceneManager : SceneManagerBase
         wsp.enemySkillReqAction = EnemyUseSkillRequest;             // 225
         wsp.enemyUseSkillAction = EnemyUseSkill;                    // 226
         wsp.enemyAttackAction = EnemyAttackResult;                  // 227
-        wsp.questClearAction = QuestClearAction;
+
+        wsp.questClearAction = QuestClearAction;                    // 242
+
         wsp.mapAction = MovingMap;                                  // 252
-        
+
         wsp.logoutAction = Logout;                                  // 707
-        //wsp.loadingAccessoryMasterAction = LoadingAccessoryMaster;  // 709
+
         wsp.findResultsAction = ReceivingFindResults;               // 712
     }
 }
