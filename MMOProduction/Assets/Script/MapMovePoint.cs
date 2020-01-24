@@ -54,7 +54,7 @@ public class MapMovePoint : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
         // プレイヤーが移動ポイントに触れている間
-        if(other.tag == "Player")
+        if(other.tag == "Player" && UserRecord.NextMapId != MapID.Non)
         {
             currentTime += Time.deltaTime;
             slider.value = currentTime;
@@ -64,7 +64,7 @@ public class MapMovePoint : MonoBehaviour
     private void OnTriggerExit(Collider other)
     {
         // プレイヤーが移動ポイントから離れたとき
-        if (other.tag == "Player")
+        if (other.tag == "Player" && UserRecord.NextMapId != MapID.Non)
         {
             currentTime = 0;
             slider.gameObject.SetActive(false);

@@ -24,8 +24,8 @@ public class QuestBoardManager : MonoBehaviour
     [SerializeField, Header("クエストトグル置くとこ")]
     private GameObject togglePutObj = null;
 
-    // 現在選択されているクエストID
-    private MapID currentID = MapID.Non;
+    // 現在選択されているクエスト
+    private Packes.QuestMasterData currentQuest;
 
     private List<Packes.QuestMasterData> datas;
 
@@ -55,18 +55,21 @@ public class QuestBoardManager : MonoBehaviour
 
             count++;
         }
+
+        currentQuest = new Packes.QuestMasterData();
     }
 
     public void DecisionMapID()
     {
-        if (currentID != MapID.Non)
+        if (currentQuest.id != 0)
         {
             var colors = toggleGroup.ActiveToggles().FirstOrDefault().colors;
             colors.normalColor = new Color(1, 1, 0, 1);
             toggleGroup.ActiveToggles().FirstOrDefault().colors = colors;
-            UserRecord.NextMapId = currentID;
-            WS.WsPlay.Instance.Send(new Packes.QuestOrder(UserRecord.ID, 1).ToJson());
-            Debug.Log(currentID + "に決定した");
+            UserRecord.NextMapId = (MapID)currentQuest.mapId;
+            UserRecord.QuestID = currentQuest.id;
+            Debug.Log((MapID)currentQuest.mapId + "に決定した");
+            WS.WsPlay.Instance.Send(new Packes.QuestOrder(UserRecord.ID, currentQuest.id).ToJson());
         }
     }
 
@@ -83,12 +86,12 @@ public class QuestBoardManager : MonoBehaviour
     {
         if (toggleGroup.ActiveToggles().FirstOrDefault() != null)
         {
-            currentID = (MapID)toggleGroup.ActiveToggles().FirstOrDefault().gameObject.GetComponent<QuestToggle>().data.mapId;
+            currentQuest = toggleGroup.ActiveToggles().FirstOrDefault().gameObject.GetComponent<QuestToggle>().data;
             detailText.text = toggleGroup.ActiveToggles().FirstOrDefault().gameObject.GetComponent<QuestToggle>().data.comment;
         }
         else
         {
-            currentID = MapID.Non;
+            currentQuest = new Packes.QuestMasterData();
         }
     }
 

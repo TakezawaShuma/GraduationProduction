@@ -10,11 +10,11 @@ using UnityEngine;
 public class PlayerSetting : ScriptableObject
 {
     [SerializeField, Header("通常スピード(1秒間で進む距離)")]
-    private float NormalSpeed = 2.5f;
+    private float NormalSpeed = 5f;
     public float NS { get { return NormalSpeed; } set { NormalSpeed = value; } }
 
     [SerializeField, Header("ダッシュスピード(1秒間で進む距離)")]
-    private float DashSpeed = 6.25f;
+    private float DashSpeed = 7.5f;
     public float DS { get { return DashSpeed; } set { DashSpeed = value; } }
 
     [SerializeField, Range(0f, 1f), Header("振り向き速度")]
