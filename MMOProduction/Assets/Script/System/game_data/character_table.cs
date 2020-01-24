@@ -16,7 +16,6 @@ public class character_table : ScriptableObject
 
         // モデルのプレファブ
         public GameObject model;
-        // 消してください
     }
 
     public GameObject FindModel(int _id)
