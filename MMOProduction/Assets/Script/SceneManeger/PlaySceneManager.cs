@@ -175,6 +175,10 @@ public class PlaySceneManager : SceneManagerBase
         if (Input.GetKeyDown(KeyCode.F11)) SendMoveMap(MapID.Base);
     }
 
+    public void QuestRetire()
+    {
+        questResult.SetQuestFailed(Time.time);
+    }
 
     public void OnDestroy()
     {
