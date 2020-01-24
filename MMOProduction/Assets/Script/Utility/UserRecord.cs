@@ -25,7 +25,7 @@ public static class UserRecord
     public static string IP { get { return ip; } set { ip = value; } }
     public static MapID MapID { get { return mapId; } set { mapId = value; } }
     public static MapID NextMapId { get { return nextMapId; } set { nextMapId = value; } }
-    public static int QestID { get { return questID; } set { questID = value; } }
+    public static int QuestID { get { return questID; } set { questID = value; } }
 
     public static void DiscardAll()
     {

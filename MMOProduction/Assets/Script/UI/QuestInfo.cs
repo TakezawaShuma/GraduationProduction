@@ -19,19 +19,15 @@ public class QuestInfo : MonoBehaviour
 
     private float currentTime = 0;
 
-    private string questName = "クエスト名";
+    private string questName = "";
 
-    private string monsterName = "モンスター名";
-
-    private int maxKillNum = 10;
-
-    private int currentKillNum = 0;
+    private string detail = "";
 
     // Start is called before the first frame update
     void Start()
     {
-        questNameText.name = "";
-        detailText.text = DetailTextGenerate();
+        questNameText.text = questName;
+        detailText.text = detail;
         this.gameObject.SetActive(false);
     }
 
@@ -40,8 +36,14 @@ public class QuestInfo : MonoBehaviour
     {
         if (this.gameObject.activeSelf)
         {
-            questNameText.name = "";
-            detailText.text = DetailTextGenerate();
+            Packes.QuestMasterData data = QuestDatas.FindOne(UserRecord.QuestID);
+            if (data.id != 0)
+            {
+                QuestName(data);
+                Detail(data);
+                questNameText.text = questName;
+                detailText.text = detail;
+            }
 
             if (timeHidden)
             {
@@ -59,9 +61,14 @@ public class QuestInfo : MonoBehaviour
         }
     }
 
-    private string DetailTextGenerate()
+    private void QuestName(Packes.QuestMasterData data)
     {
-        return monsterName + "を倒す(" + currentKillNum + "/" + maxKillNum + ")";
+        questName = data.name;
+    }
+
+    private void Detail(Packes.QuestMasterData data)
+    {
+        detail = data.comment;
     }
 
     public void Open()

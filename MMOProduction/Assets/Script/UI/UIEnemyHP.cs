@@ -20,7 +20,28 @@ public class UIEnemyHP : MonoBehaviour
     [SerializeField, Header("テスト用テキスト")]
     private Text text = null;
 
+    private int enemyID = 0;
+
     private float maxHP = 100;
+
+    private void Update()
+    {
+        Packes.QuestMasterData data = QuestDatas.FindOne(UserRecord.QuestID);
+
+        if(enemyID == data.targetId)
+        {
+            TargetMarkON();
+        }
+        else
+        {
+            TargetMarkOFF();
+        }
+    }
+
+    public void SetEnemyID(int id)
+    {
+        enemyID = id;
+    }
 
     public float MAX_HP
     {
