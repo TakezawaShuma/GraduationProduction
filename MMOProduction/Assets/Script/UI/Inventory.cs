@@ -48,7 +48,7 @@ public class Inventory : MonoBehaviour
         int i = 0;
         foreach(var obj in list) {
             SlotData slot = obj.GetComponent<SlotData>();
-            if (slot.ID == -1) {
+            if (slot.ID <= 0) {
                 slot.ID = _id;
                 break;
             }
@@ -64,7 +64,7 @@ public class Inventory : MonoBehaviour
             if (id <= 0) continue;
             foreach (var obj in list) {
                 SlotData slot = obj.GetComponent<SlotData>();
-                if (slot.ID == -1) {
+                if (slot.ID <= 0) {
                     slot.ID = id;
                     break;
                 }
@@ -79,7 +79,7 @@ public class Inventory : MonoBehaviour
             if (id <= 0) continue;
             foreach (var obj in list) {
                 SlotData slot = obj.GetComponent<SlotData>();
-                if (slot.ID == -1) {
+                if (slot.ID <= 0) {
                     slot.ID = id;
                     Debug.Log(slot.ID.ToString() + " : " + id.ToString());
                     break;
@@ -91,7 +91,7 @@ public class Inventory : MonoBehaviour
 
     private void ImageCheck() {
         foreach(var obj in list) {
-            if(obj.GetComponent<SlotData>().ID != -1) {
+            if(obj.GetComponent<SlotData>().ID > 0) {
                 obj.GetComponent<Image>().sprite = sprite;
             }
         }

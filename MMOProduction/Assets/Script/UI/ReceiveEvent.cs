@@ -147,10 +147,15 @@ public class ReceiveEvent : MonoBehaviour
         if (initFlag)
         {
             Init();
+            WS.WsPlay.Instance.Send(new Packes.AccessoryChange(UserRecord.ID, 0, this.GetComponent<SlotId>().id).ToJson());
         }
         else
         {
+
+            WS.WsPlay.Instance.Send(new Packes.AccessoryChange(UserRecord.ID, this.GetComponent<SlotData>().ID, hitObject.GetComponent<SlotId>().id).ToJson());
+            WS.WsPlay.Instance.Send(new Packes.AccessoryChange(UserRecord.ID, hitObject.GetComponent<SlotData>().ID, this.GetComponent<SlotId>().id).ToJson());
             Swap();
+           
         }
     }
 
@@ -215,7 +220,7 @@ public class ReceiveEvent : MonoBehaviour
     private void Init()
     {
         this.GetComponent<Image>().sprite = defoSprite;
-        this.GetComponent<SlotData>().ID = -1;
+        this.GetComponent<SlotData>().ID = 0;
         this.GetComponent<SlotData>().Status = SlotData.STATUS.NONE;
         this.GetComponent<SlotData>().Name = this.transform.parent.name;
     }
