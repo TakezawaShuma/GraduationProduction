@@ -8,9 +8,7 @@ public class Inventory : MonoBehaviour
     private readonly int WIDTH = 9;
     private readonly int HEIGHT = 10;
     //管理系
-    private List<Image> list = new List<Image>();
-
-    private List<SlotData> sloatDatas_ = new List<SlotData>();
+    private List<GameObject> list = new List<GameObject>();
 
     //生成に必要な物群
     [SerializeField]
@@ -19,16 +17,11 @@ public class Inventory : MonoBehaviour
     [SerializeField]
     private Sprite sprite = null;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Awake()
     {
         GenerateInventory();
     }
-
-    void Update()
-    {
-    }
-
+    
     private void GenerateInventory()
     {
         Vector3 pos = new Vector3((-240 + 8 + 8), 265 - 8 - 50 - 8 - 24 - 24, 0);
@@ -42,19 +35,26 @@ public class Inventory : MonoBehaviour
             obj.transform.localPosition = pos + new Vector3(x * 48, y * -48, 0);
             obj.transform.localScale = new Vector3(1, 1, 1);
             obj.name = "Inventory" + i;
-            list.Add(obj.transform.GetChild(0).GetComponent<Image>());
+            obj.transform.GetChild(0).gameObject.GetComponent<SlotData>().Init();
+            list.Add(obj.transform.GetChild(0).gameObject);
         }
         ImageCheck();
     }
 
     // TODO: 画像のマスター作成後交換
     public bool AddItem(int _id) {
-        if (sloatDatas_.Count >= MAX_ITEM) return false;
         if (_id <= 0) return false;
 
-        SlotData data = new SlotData();
-        data.ID = _id;
-        sloatDatas_.Add(data);
+        int i = 0;
+        foreach(var obj in list) {
+            SlotData slot = obj.GetComponent<SlotData>();
+            if (slot.ID == -1) {
+                slot.ID = _id;
+                break;
+            }
+            i++;
+        }
+        ImageCheck(i);
         return true;
     }
 
@@ -62,28 +62,42 @@ public class Inventory : MonoBehaviour
         List<Packes.AccessoryMasterData> imageName = AccessoryDatas.Find(_ids);
         foreach(var id in _ids) {
             if (id <= 0) continue;
-
-            SlotData data = new SlotData();
-            data.ID = id;
-            sloatDatas_.Add(data);
+            foreach (var obj in list) {
+                SlotData slot = obj.GetComponent<SlotData>();
+                if (slot.ID == -1) {
+                    slot.ID = id;
+                    break;
+                }
+            }
         }
         ImageCheck();
     }
 
     public void ChangeItems(List<int> _ids) {
         List<Packes.AccessoryMasterData> imageName = AccessoryDatas.Find(_ids);
-        foreach(var id in _ids) {
+        foreach (var id in _ids) {
             if (id <= 0) continue;
-            SlotData data = new SlotData();
-            data.ID = id;
-            sloatDatas_.Add(data);
+            foreach (var obj in list) {
+                SlotData slot = obj.GetComponent<SlotData>();
+                if (slot.ID == -1) {
+                    slot.ID = id;
+                    Debug.Log(slot.ID.ToString() + " : " + id.ToString());
+                    break;
+                }
+            }
         }
         ImageCheck();
     }
 
-    private void ImageCheck() { 
-        for(int i = 0; i < sloatDatas_.Count; i++) {
-            list[i].sprite = sprite;
+    private void ImageCheck() {
+        foreach(var obj in list) {
+            if(obj.GetComponent<SlotData>().ID != -1) {
+                obj.GetComponent<Image>().sprite = sprite;
+            }
         }
+    }
+
+    private void ImageCheck(int _index) {
+        list[_index].GetComponent<Image>().sprite = sprite;
     }
 }
