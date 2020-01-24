@@ -381,6 +381,8 @@ public class PlaySceneManager : SceneManagerBase
 
     [SerializeField]
     private Inventory inventory_ = null;
+    [SerializeField]
+    NoDuplication accessory = null;
 
     /// <summary>
     /// セーブデータを受け取る→　loadSaveAction
@@ -397,6 +399,8 @@ public class PlaySceneManager : SceneManagerBase
             updateFlag = true;
             inventory_.ChangeItems(_packet.accessorys);
             UserRecord.Inventory = _packet.accessorys;
+            UserRecord.Accessorys = _packet.wearing_accessory;
+            accessory.SetAccessorys(inventory_,_packet.wearing_accessory);
             ready.ReadyGO();
         }
         else

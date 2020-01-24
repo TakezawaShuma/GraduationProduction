@@ -323,6 +323,12 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: 37139afbd90cfa24080a0d80e374fe47,
         type: 3}
+    - target: {fileID: 5726655133401845473, guid: f775286550711774bbaaf89532340bb0,
+        type: 3}
+      propertyPath: images
+      value: 
+      objectReference: {fileID: 11400000, guid: f62a6622db9c6e74991495a49f652fd0,
+        type: 2}
     - target: {fileID: 6498072003257930893, guid: f775286550711774bbaaf89532340bb0,
         type: 3}
       propertyPath: m_Enabled
@@ -695,6 +701,7 @@ MonoBehaviour:
   questResult: {fileID: 733438146}
   stages: {fileID: 11400000, guid: d6b9d9e9889f05247b689facd722294a, type: 2}
   inventory_: {fileID: 44066666}
+  accessory: {fileID: 1645851418}
 --- !u!114 &645858245
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1132,7 +1139,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 992294604}
   m_LocalRotation: {x: 0.13063945, y: -0.000000005913365, z: 7.791964e-10, w: 0.99143}
-  m_LocalPosition: {x: 0.00075235305, y: 49563.277, z: -63085.867}
+  m_LocalPosition: {x: 0.00075307913, y: 49611.1, z: -63146.734}
   m_LocalScale: {x: 1.5000008, y: 1.5000002, z: 1.5000006}
   m_Children: []
   m_Father: {fileID: 0}

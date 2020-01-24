@@ -78,4 +78,21 @@ public class NoDuplication : MonoBehaviour
             cAccessorySlot[i] = accessorySlot[i].GetComponent<SlotData>().Name;
         }
     }
+
+    public void SetAccessorys(Inventory _inventory, List<int> _ids) {
+        int i = 0;
+        foreach(var id in _ids) {
+            GameObject accessory = _inventory.FindAccessory(id);
+            SlotData data = accessory.GetComponent<SlotData>();
+
+            if(data.ID != 0) {
+                accessorySlot[i].GetComponent<Image>().sprite = accessory.GetComponent<Image>().sprite;
+                SlotData slot = accessorySlot[i].GetComponent<SlotData>();
+                slot.GetComponent<SlotData>().ID = data.ID;
+                slot.GetComponent<SlotData>().Status = data.Status;
+                slot.GetComponent<SlotData>().Name = data.Name;
+            }
+            i++;
+        }
+    }
 }
