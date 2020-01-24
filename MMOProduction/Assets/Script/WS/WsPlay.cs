@@ -59,7 +59,8 @@ namespace WS
         public Action<Packes.LogoutStoC> logoutAction;
         // 検索したプレイヤー情報を受け取る 712
         public Action<Packes.FindOfPlayerStoC> findResultsAction;
-
+        // クエストクリア
+        public Action<Packes.QuestClear> questClearAction;
         // アクセサリのマスター
         public Action<Packes.LoadingAccessoryMaster> loadingAccessoryMasterAction;
 
@@ -230,6 +231,9 @@ namespace WS
                             break;
                         case CommandData.LoadingAccessoryMaster:
                             loadingAccessoryMasterAction?.Invoke(Json.ConvertToPackets<Packes.LoadingAccessoryMaster>(e.Data));
+                            break;
+                        case CommandData.QuestClear:
+                            questClearAction?.Invoke(Json.ConvertToPackets<Packes.QuestClear>(e.Data));
                             break;
                         // 随時追加
                         default:

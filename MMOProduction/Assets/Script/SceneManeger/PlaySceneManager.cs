@@ -657,6 +657,11 @@ public class PlaySceneManager : SceneManagerBase
         return characters[_playerId].GetComponent<OtherPlayers>();
     }
 
+    public void QuestClearAction(Packes.QuestClear _data) {
+        // TODO: クリア時の実装
+        Debug.Log("quese clear !!!");
+    }
+
     /// <summary>
     /// コールバックを設定
     /// </summary>
@@ -675,9 +680,9 @@ public class PlaySceneManager : SceneManagerBase
         wsp.enemySkillReqAction = EnemyUseSkillRequest;             // 225
         wsp.enemyUseSkillAction = EnemyUseSkill;                    // 226
         wsp.enemyAttackAction = EnemyAttackResult;                  // 227
-
+        wsp.questClearAction = QuestClearAction;
         wsp.mapAction = MovingMap;                                  // 252
-
+        
         wsp.logoutAction = Logout;                                  // 707
         //wsp.loadingAccessoryMasterAction = LoadingAccessoryMaster;  // 709
         wsp.findResultsAction = ReceivingFindResults;               // 712

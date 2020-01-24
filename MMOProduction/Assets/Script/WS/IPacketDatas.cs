@@ -85,9 +85,13 @@ public enum CommandData
 	EnemyAttackResult = 227,
 	/// <summary>敵の攻撃がプレイヤーにヒットした</summary>
 	UserHit = 228,
+    // クエスト受注
+    QuestOrder = 241,
+    // クエストクリア
+    QuestClear = 242,
 
-	/// <summary>マップ移動コール(クエスト受注やリタイアに紐づく)</summary>
-	MoveingMap = 251,
+    /// <summary>マップ移動コール(クエスト受注やリタイアに紐づく)</summary>
+    MoveingMap = 251,
 	/// <summary>マップ移動完了(クエスト受注やリタイアに紐づく)</summary>
 	MoveingMapOk = 252,
 	/// <summary>報酬選択</summary>

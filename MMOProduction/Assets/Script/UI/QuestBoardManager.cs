@@ -65,6 +65,7 @@ public class QuestBoardManager : MonoBehaviour
             colors.normalColor = new Color(1, 1, 0, 1);
             toggleGroup.ActiveToggles().FirstOrDefault().colors = colors;
             UserRecord.NextMapId = currentID;
+            WS.WsPlay.Instance.Send(new Packes.QuestOrder(UserRecord.ID, 1).ToJson());
             Debug.Log(currentID + "に決定した");
         }
     }
