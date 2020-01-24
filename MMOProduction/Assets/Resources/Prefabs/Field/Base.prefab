@@ -190,8 +190,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveTime: 5
   currentMapID: 1
-  text: {fileID: 3427795355666471836}
-  textUse: 1
+  slider: {fileID: 0}
 --- !u!1 &1129968896831214864
 GameObject:
   m_ObjectHideFlags: 0
@@ -461,6 +460,9 @@ MonoBehaviour:
   panel: {fileID: 6911536872635660877}
   toggleGroup: {fileID: 1393114785296162151}
   marker: {fileID: 5185385102724785600}
+  detailText: {fileID: 0}
+  prefab: {fileID: 0}
+  togglePutObj: {fileID: 0}
 --- !u!1 &2385486701965110645
 GameObject:
   m_ObjectHideFlags: 0
@@ -1187,8 +1189,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 0.5}
   m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: -50, y: 400}
-  m_SizeDelta: {x: 100, y: 100}
+  m_AnchoredPosition: {x: -42, y: 406}
+  m_SizeDelta: {x: 80, y: 80}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1417918505851194561
 CanvasRenderer:
@@ -1571,7 +1573,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b594d05cdd8f134ca9723f549b9c078, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapID: 2
+  data:
+    id: 0
+    name: 
+    difficulty: 0
+    targetId: 0
+    comment: 
+    mapId: 0
+    time: 0
+    items: 
+  questNameText: {fileID: 0}
 --- !u!1 &6020335816663378692
 GameObject:
   m_ObjectHideFlags: 0
@@ -1837,7 +1848,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b594d05cdd8f134ca9723f549b9c078, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapID: 1
+  data:
+    id: 0
+    name: 
+    difficulty: 0
+    targetId: 0
+    comment: 
+    mapId: 0
+    time: 0
+    items: 
+  questNameText: {fileID: 0}
 --- !u!1 &7979674526886104570
 GameObject:
   m_ObjectHideFlags: 0
@@ -2020,7 +2040,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b594d05cdd8f134ca9723f549b9c078, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  mapID: 0
+  data:
+    id: 0
+    name: 
+    difficulty: 0
+    targetId: 0
+    comment: 
+    mapId: 0
+    time: 0
+    items: 
+  questNameText: {fileID: 0}
 --- !u!1 &8365187554357470875
 GameObject:
   m_ObjectHideFlags: 0
@@ -2317,7 +2346,7 @@ MonoBehaviour:
       Version=1.0.0.0, Culture=neutral, PublicKeyToken=null
   m_FontData:
     m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 30
+    m_FontSize: 40
     m_FontStyle: 0
     m_BestFit: 0
     m_MinSize: 2
@@ -2485,6 +2514,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 2770488421012531151}
     m_Modifications:
+    - target: {fileID: 4751228875385260585, guid: df0519de29861cf4291d4f2c170c6404,
+        type: 3}
+      propertyPath: executeRange
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 4871035294516008985, guid: df0519de29861cf4291d4f2c170c6404,
         type: 3}
       propertyPath: m_Name
@@ -2559,11 +2593,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.z
       value: 1.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 4751228875385260585, guid: df0519de29861cf4291d4f2c170c6404,
-        type: 3}
-      propertyPath: executeRange
-      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 6733209875478919647, guid: df0519de29861cf4291d4f2c170c6404, type: 3}

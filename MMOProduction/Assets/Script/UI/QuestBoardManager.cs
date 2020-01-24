@@ -78,7 +78,8 @@ public class QuestBoardManager : MonoBehaviour
         var colors = toggleGroup.ActiveToggles().FirstOrDefault().colors;
         colors.normalColor = new Color(1, 1, 1, 1);
         toggleGroup.ActiveToggles().FirstOrDefault().colors = colors;
-        UserRecord.MapID = MapID.Base;
+        UserRecord.NextMapId = MapID.Non;
+        UserRecord.QuestID = 0;
         Debug.Log("取り消した");
     }
 
