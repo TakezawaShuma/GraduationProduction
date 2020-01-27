@@ -15,9 +15,7 @@ public class PlaySceneManager : SceneManagerBase
 
     private const int UPDATE_MAX_COUNT = 3;
 
-
-    public GameObject playerPre = null;
-
+    
     [SerializeField, Header("キャラクターモデルリスト")]
     private character_table characterModel = null;
     [Header("敵のマスターデータ"), SerializeField]
@@ -396,7 +394,6 @@ public class PlaySceneManager : SceneManagerBase
     /// <param name="_save"></param>
     private void ReceiveSaveData(Packes.SaveLoadStoC _packet)
     {
-        //GameObject model = playerPre;
         UserRecord.MODEL = characterModel.FindModel(CheckModel(_packet.model_id));
 
         if (MakePlayer(new Vector3(_packet.x, _packet.y, _packet.z), UserRecord.MODEL))
