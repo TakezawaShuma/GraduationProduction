@@ -1,0 +1,22 @@
+﻿// Each #kernel tells which function to compile; you can have many kernels
+#pragma kernel CSMain
+
+struct Grass
+{
+    float3 startPos;
+    float3 pos;
+    float3 scale;
+    float3 wind;
+    int type;
+};
+
+float _DeltaTime;
+float3 _Center;
+RWStructuredBuffer<Grass> _Grass;
+
+// メイン処理
+[numthreads(8, 1, 1)]
+void CSMain(uint3 id : SV_DispatchThreadID)
+{
+    //_Grass[id.x].pos = _Grass[id.x].startPos + _Center;
+}
