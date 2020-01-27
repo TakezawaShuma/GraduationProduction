@@ -45,6 +45,7 @@ Shader "Custom/Grass"
             StructuredBuffer<Grass> _Grass;
             uniform sampler2D _MainTex;
             uniform sampler2D _HeightMap;
+            uniform sampler2D _RampTex;
             float4 _Color;
             float3 _Scale;
             float3 _Rotate;
@@ -173,6 +174,10 @@ Shader "Custom/Grass"
                 map.a = map.a * com;
                 float displace = float4(map.rgb * map.a, 1).r;
                 if (displace >= 0.9) discard;
+
+
+                fixed4 ramp = tex2D(_RampTex, i.uv) * 0.5 + 1;
+                col *= ramp;
 
                 return col;
             }
