@@ -176,8 +176,8 @@ Shader "Custom/Grass"
                 if (displace >= 0.9) discard;
 
 
-                fixed4 ramp = tex2D(_RampTex, i.uv) * 0.5 + 1;
-                col *= ramp;
+                fixed4 ramp = tex2D(_RampTex, i.uv);
+                col *= lerp(col, ramp, 0.5);
 
                 return col;
             }
