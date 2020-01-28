@@ -14,4 +14,9 @@ public class QuestToggle : MonoBehaviour
     {
         return questNameText;
     }
+
+    public void ToggleChanged()
+    {
+        GetComponent<Toggle>().group.allowSwitchOff = false;
+    }
 }

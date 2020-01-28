@@ -28,6 +28,11 @@ public class QuestResult : MonoBehaviour
     // 失敗：-1 / 何もなし：0 / 成功：1
     int isResult = 0;
 
+    public int IsResult
+    {
+        get { return isResult; }
+    }
+
     PlaySceneManager scene = null;
 
     
