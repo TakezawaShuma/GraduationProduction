@@ -231,6 +231,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 4009852495815101835}
+  - component: {fileID: 2115072452397145902}
   m_Layer: 0
   m_Name: ForestParticle
   m_TagString: Untagged
@@ -252,6 +253,27 @@ Transform:
   m_Father: {fileID: 2806602466976324158}
   m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &2115072452397145902
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4104361584989945200}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3865fcb538d5711488c6e47037997a56, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _renderingShader: {fileID: 4800000, guid: 13c40ce9b0f56184697397481d33cd85, type: 3}
+  _computeShader: {fileID: 7200000, guid: b7fcc5d64dcabd84899ecf9d84480f7e, type: 3}
+  _generateNum: 10000
+  _range: 80
+  _offsetPos: {x: 125, y: 0, z: -125}
+  _property:
+    texure: {fileID: 2800000, guid: d7cadf82ec868e245a9db36b73b8e824, type: 3}
+    rampTex: {fileID: 2800000, guid: 530b0ef736574a346a25b027ee3a9e6c, type: 3}
+    color: {r: 1, g: 1, b: 0, a: 0}
 --- !u!1 &5442936654648155065
 GameObject:
   m_ObjectHideFlags: 0

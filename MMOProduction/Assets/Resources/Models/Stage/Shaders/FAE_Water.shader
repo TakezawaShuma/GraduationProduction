@@ -17,6 +17,7 @@ Shader "FAE/Water" {
         _Tiling ("Tiling", Float ) = 0.05
         _FlowSpeed ("FlowSpeed", Float ) = 1
         [HideInInspector]_Cutoff ("Alpha cutoff", Range(0,1)) = 0.5
+        _RampTex("Ramp Texture", 2D) = "white" {}
     }
     SubShader {
         Tags {
@@ -63,10 +64,12 @@ Shader "FAE/Water" {
             uniform float _Depthdarkness;
             uniform float _Tiling;
             uniform float _FlowSpeed;
+            uniform sampler2D _RampTex;
             struct VertexInput {
                 float4 vertex : POSITION;
                 float3 normal : NORMAL;
                 float4 tangent : TANGENT;
+                float2 uv : TEXCOORD0;
             };
             struct VertexOutput {
                 float4 pos : SV_POSITION;
@@ -76,10 +79,12 @@ Shader "FAE/Water" {
                 float3 bitangentDir : TEXCOORD3;
                 float4 screenPos : TEXCOORD4;
                 float4 projPos : TEXCOORD5;
-                UNITY_FOG_COORDS(6)
+                float2 uv : TEXCOORD6;
+                UNITY_FOG_COORDS(7)
             };
             VertexOutput vert (VertexInput v) {
                 VertexOutput o = (VertexOutput)0;
+                o.uv = v.uv;
                 o.normalDir = UnityObjectToWorldNormal(v.normal);
                 o.tangentDir = normalize( mul( unity_ObjectToWorld, float4( v.tangent.xyz, 0.0 ) ).xyz );
                 o.bitangentDir = normalize(cross(o.normalDir, o.tangentDir) * v.tangent.w);
@@ -217,6 +222,11 @@ Shader "FAE/Water" {
 /// Final Color:
                 float3 finalColor = diffuse + specular;
                 fixed4 finalRGBA = fixed4(lerp(sceneColor.rgb, finalColor,saturate(( lerp(1.0,_Transparency,node_8987) > 0.5 ? (1.0-(1.0-2.0*(lerp(1.0,_Transparency,node_8987)-0.5))*(1.0-node_4175)) : (2.0*lerp(1.0,_Transparency,node_8987)*node_4175) ))),1);
+
+                // トゥーンレンダリング
+                fixed4 ramp = tex2D(_RampTex, fixed2(distance(fixed2(0, 0), i.uv), 0.5));
+                finalRGBA *= ramp + 0.5;
+
                 UNITY_APPLY_FOG(i.fogCoord, finalRGBA);
                 return finalRGBA;
             }
