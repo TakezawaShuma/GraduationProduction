@@ -63,6 +63,8 @@ namespace WS
         public Action<Packes.QuestClear> questClearAction;
         // アクセサリのマスター
         public Action<Packes.LoadingAccessoryMaster> loadingAccessoryMasterAction;
+        // キャラクターの新規作成
+        public Action<Packes.SaveModelType> saveModelAction;
 
         public static WsPlay Instance
         {
@@ -143,7 +145,7 @@ namespace WS
                 {
                     // 受信したデータからコマンドを取り出す
                     var command = (CommandData)int.Parse(e.Data.Substring(11, 3));
-                    //Debug.Log((int)command);
+                    Debug.Log((int)command);
 
                     switch (command)
                     {
@@ -234,6 +236,9 @@ namespace WS
                             break;
                         case CommandData.QuestClear:
                             questClearAction?.Invoke(Json.ConvertToPackets<Packes.QuestClear>(e.Data));
+                            break;
+                        case CommandData.SaveModelType:
+                            saveModelAction?.Invoke(Json.ConvertToPackets<Packes.SaveModelType>(e.Data));
                             break;
                         // 随時追加
                         default:

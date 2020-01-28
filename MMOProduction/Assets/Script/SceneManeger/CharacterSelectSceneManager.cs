@@ -55,7 +55,8 @@ public class CharacterSelectSceneManager : SceneManagerBase
     void Start()
     {
         rotating_ = false;
-        ws = WS.WsPlay.Instance; ;
+        ws = WS.WsPlay.Instance;
+        ws.saveModelAction = SaveModelTypeCallBack;
     }
 
     void Update()
@@ -128,8 +129,7 @@ public class CharacterSelectSceneManager : SceneManagerBase
     {
         if(modelID_ != 0)
         {
-            ws.Send(new Packes.SaveModelType(UserRecord.ID, modelID_).ToJson());
-            ChangeScene("LoadingScene");
+            ws.Send(new Packes.SaveModelTypeSend(UserRecord.ID, modelID_).ToJson());
         }
     }
 
@@ -173,5 +173,10 @@ public class CharacterSelectSceneManager : SceneManagerBase
         parentDefender_.SetActive(false);
         parentWitch_.SetActive(false);
         parentHealer_.SetActive(false);
+    }
+
+    private void SaveModelTypeCallBack(Packes.SaveModelType _data){
+        UserRecord.MapID = MapID.Base;
+        ChangeScene("LoadingScene");
     }
 }
