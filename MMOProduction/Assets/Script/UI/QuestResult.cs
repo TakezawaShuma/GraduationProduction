@@ -127,6 +127,7 @@ public class QuestResult : MonoBehaviour
         {
             scene.SendMoveMap(MapID.Base);
             isResult = 0;
+            UserRecord.QuestID = 0;
         }
     }
 }
