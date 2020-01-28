@@ -682,8 +682,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   connectFlag: 1
-  playerPre: {fileID: 2136695631195096698, guid: f60ab25478542df4281ac7e670433c26,
-    type: 3}
   characterModel: {fileID: 11400000, guid: 324f4e86b8b3bff4b99ae5c867aa456c, type: 2}
   enemyTable: {fileID: 11400000, guid: f386c039a56b44140a9842a5fa893b76, type: 2}
   skillTabe: {fileID: 11400000, guid: d2f11e41ac860894692481b991d94813, type: 2}
@@ -1139,7 +1137,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 992294604}
   m_LocalRotation: {x: 0.13063945, y: -0.000000005913365, z: 7.791964e-10, w: 0.99143}
-  m_LocalPosition: {x: 0.0007673242, y: 50549.367, z: -64340.89}
+  m_LocalPosition: {x: 0.00076763536, y: 50569.863, z: -64366.977}
   m_LocalScale: {x: 1.5000008, y: 1.5000002, z: 1.5000006}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1259,7 +1257,7 @@ Light:
     m_Type: 2
     m_Resolution: -1
     m_CustomResolution: -1
-    m_Strength: 1
+    m_Strength: 0.2
     m_Bias: 0.05
     m_NormalBias: 0.4
     m_NearPlane: 0.2
@@ -2844,7 +2842,7 @@ PrefabInstance:
     - target: {fileID: 2333336984517721263, guid: 0c9678bc6dd9731468dcadc4c698a5f9,
         type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 0
+      value: -0.000030517578
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0c9678bc6dd9731468dcadc4c698a5f9, type: 3}
