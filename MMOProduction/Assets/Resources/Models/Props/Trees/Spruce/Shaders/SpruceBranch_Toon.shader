@@ -27,7 +27,7 @@ Shader "Custom/Stage/Prop/SpruceBranch_Toon"
             "RenderType"="Opaque" 
         }
 
-        Pass
+        /*Pass
         {
             Cull Front
 
@@ -69,7 +69,7 @@ Shader "Custom/Stage/Prop/SpruceBranch_Toon"
                 return 0;
             }
             ENDCG
-        }
+        }*/
 
         Pass
         {
