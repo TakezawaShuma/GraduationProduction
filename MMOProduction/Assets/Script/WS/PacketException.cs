@@ -123,10 +123,36 @@ namespace Packes
     /// <summary>
     /// モデルの保存 command:713
     /// </summary>
-    public class SaveModelType : IPacketDatas
+    public class SaveModelTypeSend : IPacketDatas
     {
         /// <summary>ユーザーID</summary>
         public int user_id;
+        /// <summary>モデルID</summary>
+        public int model_id;
+
+        /// <summary>デフォルトコンストラクタ</summary>
+        public SaveModelTypeSend()
+        {
+            this.command = (int)CommandData.SaveModelTypeSend;
+        }
+        /// <summary>コンストラクタ</summary>
+        /// <param name="_user_id">ユーザーID</summary>
+        /// <param name="_model_id">モデルID</summary>
+        public SaveModelTypeSend(
+            int _user_id,
+            int _model_id
+        )
+        {
+            this.command = (int)CommandData.SaveModelTypeSend;
+            this.user_id = _user_id;
+            this.model_id = _model_id;
+        }
+    }
+    /// <summary>
+    /// モデルの保存完了 command:718
+    /// </summary>
+    public class SaveModelType : IPacketDatas
+    {
         /// <summary>モデルID</summary>
         public int model_id;
 
@@ -144,14 +170,12 @@ namespace Packes
         )
         {
             this.command = (int)CommandData.SaveModelType;
-            this.user_id = _user_id;
             this.model_id = _model_id;
         }
     }
 
-
     /// <summary>
-    /// クエストマスターコール command:713
+    /// クエストマスターコール command:714
     /// </summary>
     public class LoadingQuestMasterSend : IPacketDatas
     {
