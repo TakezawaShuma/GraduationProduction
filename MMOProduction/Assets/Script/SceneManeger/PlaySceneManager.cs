@@ -634,7 +634,7 @@ public class PlaySceneManager : SceneManagerBase
     /// </summary>
     private void SendPosition(Vector4 _pos)
     {
-        wsp.Send(new Packes.TranslationCtoS(UserRecord.ID, _pos.x, _pos.y, _pos.z, _pos.w).ToJson());
+        wsp.Send(new Packes.TranslationCtoS(UserRecord.ID, _pos.x, _pos.y, _pos.z, _pos.w, 0).ToJson());
     }
 
     /// <summary>

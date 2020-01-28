@@ -23,6 +23,7 @@ namespace Packes
         /// <summary>方向</summary>
         public float dir;
 
+        public int animation;
         /// <summary>デフォルトコンストラクタ</summary>
         public TranslationCtoS()
         {
@@ -39,7 +40,8 @@ namespace Packes
             float _x,
             float _y,
             float _z,
-            float _dir
+            float _dir,
+            int _animation
         )
         {
             this.command = (int)CommandData.TranslationCtoS;
@@ -48,6 +50,7 @@ namespace Packes
             this.y = _y;
             this.z = _z;
             this.dir = _dir;
+            this.animation = _animation;
         }
     }
 
@@ -390,7 +393,7 @@ namespace Packes
         public float dir;
         /// <summary>名前</summary>
         public string name;
-
+        public int animation;
         /// <summary>デフォルトコンストラクタ</summary>
         public TranslationStoC()
         {
@@ -407,7 +410,8 @@ namespace Packes
             float _x,
             float _y,
             float _z,
-            float _dir
+            float _dir,
+            int _animation
         )
         {
             this.command = (int)CommandData.TranslationStoC;
@@ -416,6 +420,7 @@ namespace Packes
             this.y = _y;
             this.z = _z;
             this.dir = _dir;
+            this.animation = _animation;
         }
     }
 
