@@ -135,7 +135,7 @@ public enum CommandData
 	/// <summary>キャラクターの詳細</summary>
 	FindOfPlayerStoC = 712,
 	/// <summary>モデルの保存</summary>
-	SaveModelType = 713,
+	SaveModelTypeSend = 713,
 
 	/// <summary>クエストマスターコール</summary>
 	QuestMasterData = 714,
@@ -144,8 +144,8 @@ public enum CommandData
 
     LoadingMapMasterSend = 716,
     LoadingMapMaster = 717,
-
-
+    // モデル保存完了
+    SaveModelType = 718,
 
 
 	// チャット
