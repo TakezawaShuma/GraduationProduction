@@ -55,6 +55,9 @@ public class PlaySceneManager : SceneManagerBase
     [SerializeField]
     private QuestResult questResult = null;
 
+    [SerializeField]
+    private StatusManager statusManager = null;
+
     public QuestResult QuestResult
     {
         get { return questResult; }
@@ -236,6 +239,8 @@ public class PlaySceneManager : SceneManagerBase
             // プレイヤーUIを設定
             playerUI.PLAYER_CMP = player;
             playerUI.PLAYER_NAME = UserRecord.Name;
+
+            statusManager.PLAYER = player;
 
             ret = true;
         }
