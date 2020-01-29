@@ -90,11 +90,11 @@ public class PlayerController : MonoBehaviour
     {
         animatorManager = new AnimatorManager();
         animatorManager.ANIMATOR = animator;
-        IdleState.Instance.Initialized(this, playerSetting, animatorManager);
-        KeyMoveState.Instance.Initialized(this, playerSetting, animatorManager);
-        AutoRunState.Instance.Initialized(this, playerSetting, animatorManager);
-        NormalAttackState.Instance.Initialized(this, playerSetting, animatorManager);
-        SkillUsingState.Instance.Initialized(this, playerSetting, animatorManager);
+        IdleState.Instance.Initialized(this, playerSetting, animatorManager, player);
+        KeyMoveState.Instance.Initialized(this, playerSetting, animatorManager, player);
+        AutoRunState.Instance.Initialized(this, playerSetting, animatorManager, player);
+        NormalAttackState.Instance.Initialized(this, playerSetting, animatorManager, player);
+        SkillUsingState.Instance.Initialized(this, playerSetting, animatorManager, player);
 
         // 初期武器を取得
         weaponList = GetComponent<WeaponList>();

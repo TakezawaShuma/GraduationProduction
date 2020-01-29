@@ -9,6 +9,8 @@ public abstract class CharacterBase : MonoBehaviour
     public int hp { get; set; }
     public int mp { get; set; }
     public int status { get; set; }
+    public PlayerAnim.PARAMETER_ID animationType = PlayerAnim.PARAMETER_ID.IDLE;
+
 
     protected string characterName = "";
     public string Name { get { return characterName; } set { characterName = value; } }
@@ -16,7 +18,6 @@ public abstract class CharacterBase : MonoBehaviour
     public CharacterType Type { get { return characterType; } set { characterType = value; } }
 
     protected int id = 0;   // キャラクターごとのID
-
     protected Animator animator_;
 
 
@@ -27,6 +28,10 @@ public abstract class CharacterBase : MonoBehaviour
     {
         get { return this.id; }
         set { this.id = value; }
+    }
+    public void ChangeAnimationType(PlayerAnim.PARAMETER_ID _type)
+    {
+        animationType = _type;
     }
 }
 

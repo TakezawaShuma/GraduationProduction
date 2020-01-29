@@ -33,6 +33,7 @@ public class IdleState : BaseState
         if (playerSetting.IA)
         {
             animatorManager.AnimChange((int)PlayerAnim.PARAMETER_ID.IDLE);
+            player.animationType = PlayerAnim.PARAMETER_ID.IDLE;
         }
 
         if (InputManager.InputKeyCheckDown(playerSetting.FKey) || 
