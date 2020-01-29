@@ -53,14 +53,6 @@ public class OtherPlayers: NonPlayer
     /// </summary>
     void Animation()
     {
-        am.AnimChange((int)PlayerAnim.PARAMETER_ID.WALK);
-        if (lastPos != nextPos)
-        {
-            am.AnimChange((int)PlayerAnim.PARAMETER_ID.WALK);
-        }
-        else
-        {
-            am.AnimChange((int)PlayerAnim.PARAMETER_ID.IDLE);
-        }
+        am.AnimChange((int)animationType);
     }
 }
