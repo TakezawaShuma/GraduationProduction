@@ -15,6 +15,7 @@ Shader "Custom/Grass"
             Tags
             {
                 "RenderType" = "Opaque"
+                "LightMode" = "ForwardBase"
             }
 
             CGPROGRAM
@@ -24,7 +25,11 @@ Shader "Custom/Grass"
             #pragma geometry geom
             #pragma fragment frag
 
+            #pragma multi_compile_fwdbase nolightmap nodirlightmap nodynlightmap novertexlight
+
             #include "UnityCG.cginc"
+            #include "Lighting.cginc"
+            #include "AutoLight.cginc"
 
             struct Grass
             {
@@ -40,6 +45,7 @@ Shader "Custom/Grass"
                 float4 pos : SV_POSITION;
                 float2 uv : TEXCOORD0;
                 float3 worldPos : TEXCOORD1;
+                SHADOW_COORDS(2)
             };
 
             StructuredBuffer<Grass> _Grass;
@@ -47,6 +53,7 @@ Shader "Custom/Grass"
             uniform sampler2D _HeightMap;
             uniform sampler2D _RampTex;
             float4 _Color;
+            fixed4 _ShadowColor;
             float3 _Scale;
             float3 _Rotate;
             float3 _Translation;
@@ -145,6 +152,8 @@ Shader "Custom/Grass"
                         float right = j;
                         output.uv = float2(left, right);
 
+                        TRANSFER_SHADOW(o);
+
                         stream.Append(output);
                     }
                 }
@@ -179,9 +188,14 @@ Shader "Custom/Grass"
                 fixed4 ramp = tex2D(_RampTex, i.uv);
                 col *= lerp(col, ramp, 0.5);
 
+                //fixed3 shadow = half3(min((SHADOW_ATTENUATION(i) + _ShadowColor.rgb), 1));
+                //col *= fixed4(shadow, 1);
+
                 return col;
             }
             ENDCG
         }
+        
+        UsePass "Custom/Effect/SimpleShadow/ShadowCaster"
     }
 }
