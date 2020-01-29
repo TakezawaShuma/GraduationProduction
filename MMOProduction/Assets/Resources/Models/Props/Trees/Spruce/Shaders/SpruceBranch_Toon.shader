@@ -135,6 +135,6 @@ Shader "Custom/Stage/Prop/SpruceBranch_Toon"
             ENDCG
         }
 
-        UsePass "Legacy Shaders/VertexLit/SHADOWCASTER"
+        UsePass "Custom/Effect/SimpleShadow/ShadowCaster"
     }
 }

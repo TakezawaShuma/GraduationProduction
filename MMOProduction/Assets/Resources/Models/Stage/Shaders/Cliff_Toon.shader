@@ -13,6 +13,7 @@ Shader "Custom/Stage/Cliff_Toon"
 
         _Color("Main Color", Color) = (1, 1, 1, 1)
         _ShadeColor("Shade Color", Color) = (1, 1, 1, 1)
+        _ShadowColor("Shadow Color", Color) = (1, 1, 1, 1)
 
         _Brightness("Brightness", Range(0, 1)) = 0.5
         _ToonStrength("Toon Strength", Range(0, 1)) = 0.5
@@ -43,18 +44,25 @@ Shader "Custom/Stage/Cliff_Toon"
         }
         ENDCG
 
-        Tags 
-        { 
-            "RenderType"="Opaque" 
-        }
+        
 
         Pass
         {
+            Tags
+            {
+                "RenderType" = "Opaque"
+                "LightMode" = "ForwardBase"
+            }
+
             CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag
 
+            #pragma multi_compile_fwdbase nolightmap nodirlightmap nodynlightmap novertexlight
+
             #include "UnityCG.cginc"
+            #include "Lighting.cginc"
+            #include "AutoLight.cginc"
 
             struct appdata
             {
@@ -67,10 +75,11 @@ Shader "Custom/Stage/Cliff_Toon"
             struct v2f
             {
                 float2 uv : TEXCOORD0;
-                float4 vertex : SV_POSITION;
+                float4 pos : SV_POSITION;
                 float3 normal : TEXCOORD1;
                 float3 worldNormal : TEXCOORD2;
                 float3 lightDir : TEXCOORD3;
+                SHADOW_COORDS(4)
             };
 
             sampler2D _MainTex;
@@ -78,6 +87,7 @@ Shader "Custom/Stage/Cliff_Toon"
             sampler2D _CoverageTex;
             fixed4 _Color;
             fixed4 _ShadeColor;
+            fixed4 _ShadowColor;
             fixed _Brightness;
             fixed _ToonStrength;
             fixed _BlendRatio;
@@ -86,7 +96,7 @@ Shader "Custom/Stage/Cliff_Toon"
             v2f vert (appdata v)
             {
                 v2f o;
-                o.vertex = UnityObjectToClipPos(v.vertex);
+                o.pos = UnityObjectToClipPos(v.vertex);
                 o.uv = v.uv;
                 o.worldNormal = UnityObjectToWorldNormal(v.normal);
 
@@ -105,6 +115,7 @@ Shader "Custom/Stage/Cliff_Toon"
                 o.lightDir = WorldSpaceLightDir(v.vertex);
 #endif
 
+                TRANSFER_SHADOW(o);
                 return o;
             }
 
@@ -137,6 +148,9 @@ Shader "Custom/Stage/Cliff_Toon"
                 //ramp = tex2D(_RampTex, fixed2(diff, 0.5));
                 //col *= ramp + _Brightness;
 
+                fixed3 shadow = half3(min((SHADOW_ATTENUATION(i) + _ShadowColor.rgb), 1));
+                col *= fixed4(shadow, 1);
+
                 return col;
 
 /*
@@ -157,10 +171,12 @@ Shader "Custom/Stage/Cliff_Toon"
                 // ディフューズライティング
                 //col *= max(_ShadowThreshold, dotNL);
 */
-
+                
                 return col;
             }
             ENDCG
         }
+
+        UsePass "Custom/Effect/SimpleShadow/ShadowCaster"
     }
 }
