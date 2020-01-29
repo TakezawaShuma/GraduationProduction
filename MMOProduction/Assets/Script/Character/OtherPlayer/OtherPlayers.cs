@@ -25,6 +25,8 @@ public class OtherPlayers: NonPlayer
 {
     private AnimatorManager am;
 
+    private PlayerAnim.PARAMETER_ID lastAnimation;
+
     public int HP { get { return hp; } set { hp = value; } }
     public int MP { get { return mp; } set { mp = value; } }
 
@@ -38,6 +40,7 @@ public class OtherPlayers: NonPlayer
         lastDir = nextDir = transform.rotation;
         am = new AnimatorManager();
         am.ANIMATOR = animator_;
+        lastAnimation = animationType;
     }
 
 
@@ -53,6 +56,9 @@ public class OtherPlayers: NonPlayer
     /// </summary>
     void Animation()
     {
-        am.AnimChange((int)animationType);
+        if (lastAnimation != animationType) {
+            am.AnimChange((int)animationType);
+            lastAnimation = animationType;
+        }
     }
 }
