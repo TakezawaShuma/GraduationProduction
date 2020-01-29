@@ -7,6 +7,12 @@ public class CharacterSelectSceneManager : SceneManagerBase
 {
     WS.WsPlay ws = null;
 
+    //---カメラオブジェクト---//
+    [SerializeField]
+    private SelectLookCamera _selectLookCamera = null;  // 選択時に注視を行うカメラ
+
+
+
     //---モデル・ラベル---//
     [SerializeField]
     private GameObject parentAttacker_=null;
@@ -29,6 +35,10 @@ public class CharacterSelectSceneManager : SceneManagerBase
     string witchText_ = null;
     [SerializeField, MultilineAttribute(10)]
     string healerText_ = null;
+
+    //---UIボタン---//
+    [SerializeField]
+    private GameObject[] _uiButtonArray = new GameObject[1];
 
     //---回転させるモデル---//
     public GameObject target_ = null;
@@ -57,19 +67,25 @@ public class CharacterSelectSceneManager : SceneManagerBase
         rotating_ = false;
         ws = WS.WsPlay.Instance;
         ws.saveModelAction = SaveModelTypeCallBack;
+
+        SetActiveUIButton(false);
     }
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))
-        {
-            Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-            RaycastHit hit;
-            if (Physics.Raycast(ray, out hit, 50.0f))
-            {
-                if(hit.collider.tag == "Player") AnimationPause(hit.collider.gameObject);
-            }
-        }
+        //if (Input.GetMouseButtonDown(0))
+        //{
+        //    Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        //    RaycastHit hit;
+        //    if (Physics.Raycast(ray, out hit, 50.0f))
+        //    {
+        //        if (hit.collider.tag == "Player")
+        //        {
+        //            AnimationPause(hit.collider.gameObject);
+        //            _selectLookCamera.EntryTarget(hit.collider.transform);
+        //        }
+        //    }
+        //}
 
         if (target_ == null)
         {
@@ -115,7 +131,7 @@ public class CharacterSelectSceneManager : SceneManagerBase
         jobText_.text = text;
 
         //---正面を向かせる---//
-        target_.transform.rotation = Quaternion.Euler(0f, 183f, 0f);
+        //target_.transform.rotation = Quaternion.Euler(0f, 183f, 0f);
 
         //---IDを割り振る---//
         modelID_ = _id;
@@ -173,6 +189,22 @@ public class CharacterSelectSceneManager : SceneManagerBase
         parentDefender_.SetActive(false);
         parentWitch_.SetActive(false);
         parentHealer_.SetActive(false);
+    }
+
+    public void ModelActiveAllOn()
+    {
+        parentAttacker_.SetActive(true);
+        parentDefender_.SetActive(true);
+        parentWitch_.SetActive(true);
+        parentHealer_.SetActive(true);
+    }
+
+    public void SetActiveUIButton(bool value)
+    {
+        foreach(var button in _uiButtonArray)
+        {
+            button.SetActive(value);
+        }
     }
 
     private void SaveModelTypeCallBack(Packes.SaveModelType _data){
