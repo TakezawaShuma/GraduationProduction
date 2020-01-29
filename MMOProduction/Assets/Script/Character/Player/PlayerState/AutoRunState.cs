@@ -35,6 +35,7 @@ public class AutoRunState : BaseState
         if(playerSetting.IA)
         {
             animatorManager.AnimChange((int) PlayerAnim.PARAMETER_ID.RUN);
+            player.animationType = PlayerAnim.PARAMETER_ID.RUN;
         }
 
         if (InputManager.InputMouseCheckDown(0) == INPUT_MODE.PLAY)
