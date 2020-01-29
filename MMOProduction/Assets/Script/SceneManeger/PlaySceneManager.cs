@@ -55,6 +55,11 @@ public class PlaySceneManager : SceneManagerBase
     [SerializeField]
     private QuestResult questResult = null;
 
+    public QuestResult QuestResult
+    {
+        get { return questResult; }
+    }
+
     bool updateFlag = false;
 
     // 通信やその他で不具合が生じた場合の再試行用カウンター
@@ -178,7 +183,10 @@ public class PlaySceneManager : SceneManagerBase
 
     public void QuestRetire()
     {
-        questResult.SetQuestFailed(Time.time);
+        if (questResult.IsResult != 1)
+        {
+            questResult.SetQuestFailed(Time.time);
+        }
     }
 
     public void OnDestroy()

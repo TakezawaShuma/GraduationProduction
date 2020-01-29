@@ -1,0 +1,29 @@
+﻿// Each #kernel tells which function to compile; you can have many kernels
+#pragma kernel CSMain
+
+struct Particle
+{
+    float3 startPos;
+    float3 pos;
+    float3 scale;
+    float3 vel;
+    float life;
+};
+
+float _DeltaTime;
+RWStructuredBuffer<Particle> _Particle;
+
+// メイン処理
+[numthreads(8, 1, 1)]
+void CSMain(uint3 id : SV_DispatchThreadID)
+{
+    //_Particle[id.x].scale.x = distance(_CameraPos, _Particle[id.x].pos);
+    
+    _Particle[id.x].pos += sin(_Particle[id.x].vel * _DeltaTime);
+    //_Particle[id.x].scale.x -= _DeltaTime * _Particle[id.x].life * 0.01;
+    if (_Particle[id.x].scale.x <= 0.0)
+    {
+        _Particle[id.x].pos = _Particle[id.x].startPos;
+        _Particle[id.x].scale.x = 0.1;
+    }
+}

@@ -25,7 +25,7 @@ Shader "Custom/Stage/Prop/SpruceTrunk_Toon"
                 "RenderType" = "Opaque"
             }
 
-            Pass
+            /*Pass
             {
                 Cull Front
 
@@ -62,7 +62,7 @@ Shader "Custom/Stage/Prop/SpruceTrunk_Toon"
                     return 0;
                 }
                 ENDCG
-            }
+            }*/
 
             Pass
             {
