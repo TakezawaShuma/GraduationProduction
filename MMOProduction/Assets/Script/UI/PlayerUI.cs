@@ -28,21 +28,9 @@ public class PlayerUI : MonoBehaviour
 
     // UI情報
     [SerializeField]
-    private Image job = null;
-    [SerializeField]
-    private Slider hpRed = null;
-    [SerializeField]
     private Slider hpGreen = null;
     [SerializeField]
-    private Slider mpYellow = null;
-    [SerializeField]
     private Slider mpBlue = null;
-    [SerializeField]
-    private Image number = null;
-    [SerializeField]
-    private Image target = null;
-    [SerializeField]
-    private Text lv = null;
     [SerializeField]
     private Text playerName = null;
 
@@ -55,13 +43,6 @@ public class PlayerUI : MonoBehaviour
     void Start()
     {
         // アイコンやプレイヤ情報の初期設定
-        mpYellow.name = "BGMP";
-        hpRed.name = "BGHP";
-        job.name = "Job";
-        number.name = "Num";
-        lv.name = "LV";
-        playerName.name = "Player";
-        target.name = "Target";
     }
 
     // Update is called once per frame
