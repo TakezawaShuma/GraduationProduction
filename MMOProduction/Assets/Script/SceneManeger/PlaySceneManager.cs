@@ -55,6 +55,9 @@ public class PlaySceneManager : SceneManagerBase
     [SerializeField]
     private QuestResult questResult = null;
 
+    [SerializeField]
+    private StatusManager statusManager = null;
+
     public QuestResult QuestResult
     {
         get { return questResult; }
@@ -167,7 +170,7 @@ public class PlaySceneManager : SceneManagerBase
                 {
                     if (connectFlag)
                     {
-                        SendPosition(playerData);
+                        SendPosition(playerData, (int)player.animationType);
                         SendStatus(UserRecord.ID, Packes.OBJECT_TYPE.PLAYER);
                         SendEnemyPosReq();
                     }
@@ -237,6 +240,8 @@ public class PlaySceneManager : SceneManagerBase
             playerUI.PLAYER_CMP = player;
             playerUI.PLAYER_NAME = UserRecord.Name;
 
+            statusManager.PLAYER = player;
+
             ret = true;
         }
         return ret;
@@ -260,6 +265,7 @@ public class PlaySceneManager : SceneManagerBase
                     if (characters[_packet.user_id] != null)
                     {
                         characters[_packet.user_id].UpdatePostionData(_packet.x, _packet.y, _packet.z, _packet.dir);
+                        characters[_packet.user_id].ChangeAnimationType((PlayerAnim.PARAMETER_ID)_packet.animation);
                     }
                 }
                 // todo 他プレイヤーの更新と作成を関数分けする
@@ -640,9 +646,9 @@ public class PlaySceneManager : SceneManagerBase
     /// <summary>
     /// 位置情報の送信
     /// </summary>
-    private void SendPosition(Vector4 _pos)
+    private void SendPosition(Vector4 _pos, int _anima)
     {
-        wsp.Send(new Packes.TranslationCtoS(UserRecord.ID, _pos.x, _pos.y, _pos.z, _pos.w).ToJson());
+        wsp.Send(new Packes.TranslationCtoS(UserRecord.ID, _pos.x, _pos.y, _pos.z, _pos.w, _anima).ToJson());
     }
 
     /// <summary>

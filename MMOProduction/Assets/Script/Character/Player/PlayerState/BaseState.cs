@@ -14,11 +14,13 @@ public abstract class BaseState
 
     protected AnimatorManager animatorManager;
 
-    public void Initialized(PlayerController playerController, PlayerSetting playerSetting, AnimatorManager animatorManager)
+    protected Player player;
+    public void Initialized(PlayerController playerController, PlayerSetting playerSetting, AnimatorManager animatorManager, Player _player)
     {
         this.playerController = playerController;
         this.playerSetting = playerSetting;
         this.animatorManager = animatorManager;
+        this.player = _player;
     }
 
     public abstract void Start();
