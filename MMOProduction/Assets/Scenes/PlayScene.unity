@@ -655,7 +655,7 @@ MonoBehaviour:
   statusManager: {fileID: 306189712}
   stages: {fileID: 11400000, guid: d6b9d9e9889f05247b689facd722294a, type: 2}
   inventory_: {fileID: 44066666}
-  accessory: {fileID: 0}
+  accessory: {fileID: 927477248}
 --- !u!114 &645858245
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1177,6 +1177,18 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4caa5454c954d1c46b306447aa1df9e8, type: 3}
+--- !u!114 &927477248 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2725137136276758114, guid: 4caa5454c954d1c46b306447aa1df9e8,
+    type: 3}
+  m_PrefabInstance: {fileID: 927477247}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f632506a6b060cb49ac57627f581e0b7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &992294604
 GameObject:
   m_ObjectHideFlags: 0
@@ -1257,7 +1269,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 992294604}
   m_LocalRotation: {x: 0.13063945, y: -0.000000005913365, z: 7.791964e-10, w: 0.99143}
-  m_LocalPosition: {x: 0.0008905507, y: 58665.82, z: -74670.92}
+  m_LocalPosition: {x: 0.0008912768, y: 58713.645, z: -74731.79}
   m_LocalScale: {x: 1.5000008, y: 1.5000002, z: 1.5000006}
   m_Children: []
   m_Father: {fileID: 0}
