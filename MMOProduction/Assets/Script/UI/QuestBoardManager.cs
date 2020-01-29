@@ -65,6 +65,7 @@ public class QuestBoardManager : MonoBehaviour
         {
             var colors = toggleGroup.ActiveToggles().FirstOrDefault().colors;
             colors.normalColor = new Color(1, 1, 0, 1);
+            colors.highlightedColor = new Color(1, 1, 0, 1);
             toggleGroup.ActiveToggles().FirstOrDefault().colors = colors;
             UserRecord.NextMapId = (MapID)currentQuest.mapId;
             UserRecord.QuestID = currentQuest.id;
@@ -77,6 +78,7 @@ public class QuestBoardManager : MonoBehaviour
     {
         var colors = toggleGroup.ActiveToggles().FirstOrDefault().colors;
         colors.normalColor = new Color(1, 1, 1, 1);
+        colors.highlightedColor = new Color(1, 1, 1, 1);
         toggleGroup.ActiveToggles().FirstOrDefault().colors = colors;
         UserRecord.NextMapId = MapID.Non;
         UserRecord.QuestID = 0;
