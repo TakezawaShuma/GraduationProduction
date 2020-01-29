@@ -26,7 +26,7 @@ public class PlayerSetting : ScriptableObject
     public bool IA { get { return IsAnimator; } }
 
     [SerializeField, Range(0f,100f), Header("ロックオンの距離")]
-    private float LockOnDirection = 30f;
+    private float LockOnDirection = 15f;
 
     public float LOD { get { return LockOnDirection; } }
 
