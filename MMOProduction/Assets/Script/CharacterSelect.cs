@@ -41,7 +41,6 @@ public class CharacterSelect : MonoBehaviour
 
         if (anime.GetCurrentAnimatorStateInfo(0).IsName("pause") &&
             anime.GetCurrentAnimatorStateInfo(0).normalizedTime > 1.0f) {
-            Debug.Log("end anime");
             anime.SetBool("pause", false);
         }
     }

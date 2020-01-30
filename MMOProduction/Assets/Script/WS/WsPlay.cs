@@ -145,7 +145,7 @@ namespace WS
                 {
                     // 受信したデータからコマンドを取り出す
                     var command = (CommandData)int.Parse(e.Data.Substring(11, 3));
-                    Debug.Log((int)command);
+                    //Debug.Log((int)command);
 
                     switch (command)
                     {
