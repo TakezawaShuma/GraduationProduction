@@ -13,13 +13,16 @@ public class CharactorUI : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        for(int i = 0; i < slots.Count; i++)
+        if (UserRecord.Accessorys.Count != 0)
         {
-            Debug.Log(i+":"+UserRecord.Accessorys[i]);
-            slots[i].ID = UserRecord.Accessorys[i];
-            if (slots[i].ID != -1)
+            for (int i = 0; i < slots.Count; i++)
             {
-                slots[i].SetSprite(images.FindOne(slots[i].ID));
+                Debug.Log(i + ":" + UserRecord.Accessorys[i]);
+                slots[i].ID = UserRecord.Accessorys[i];
+                if (slots[i].ID != -1)
+                {
+                    slots[i].SetSprite(images.FindOne(slots[i].ID));
+                }
             }
         }
     }
