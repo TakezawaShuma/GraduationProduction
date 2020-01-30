@@ -17,7 +17,7 @@ namespace WS
         private static WsLogin instance = null;
 
 
-        public Action<int> errerAction;
+        public Action<Packes.LoginError> errerAction;
         public Action<Packes.CreateOK> createAction;
         public Action<Packes.LoginOK> loginAction;
         // マップのマスター
@@ -91,7 +91,7 @@ namespace WS
 
                         case CommandData.LoginError: // 104
                             Packes.LoginError logError = Json.ConvertToPackets<Packes.LoginError>(e.Data);
-                            errerAction?.Invoke((int)com);
+                            errerAction?.Invoke(Json.ConvertToPackets<Packes.LoginError>(e.Data));
                             break;
 
                         case CommandData.CreateOK: //105
