@@ -24,6 +24,9 @@ public class QuestBoardManager : MonoBehaviour
     [SerializeField, Header("クエストトグル置くとこ")]
     private GameObject togglePutObj = null;
 
+    [SerializeField, Header("確認ウィンドウ")]
+    private ConfirmPanel confirmPanel = null;
+
     // 現在選択されているクエスト
     private Packes.QuestMasterData currentQuest;
 
@@ -57,21 +60,46 @@ public class QuestBoardManager : MonoBehaviour
         }
 
         currentQuest = new Packes.QuestMasterData();
+
+        CloseConfirm();
+    }
+
+    public void OpenDecisionConfirm()
+    {
+        if (currentQuest.id != 0)
+        {
+            confirmPanel.gameObject.SetActive(true);
+            confirmPanel.Text.text = currentQuest.name + "を受注しますか？";
+            confirmPanel.Yes.onClick.AddListener(DecisionMapID);
+        }
+    }
+
+    public void OpenCancelConfirm()
+    {
+        if (currentQuest.id != 0)
+        {
+            confirmPanel.gameObject.SetActive(true);
+            confirmPanel.Text.text = QuestDatas.FindOne(UserRecord.QuestID).name + "の受注を取り消しますか？";
+            confirmPanel.Yes.onClick.AddListener(CancelMapID);
+        }
+    }
+
+    public void CloseConfirm()
+    {
+        confirmPanel.gameObject.SetActive(false);
+        confirmPanel.Yes.onClick.RemoveAllListeners();
     }
 
     public void DecisionMapID()
     {
-        if (currentQuest.id != 0)
-        {
-            var colors = toggleGroup.ActiveToggles().FirstOrDefault().colors;
-            colors.normalColor = new Color(1, 1, 0, 1);
-            colors.highlightedColor = new Color(1, 1, 0, 1);
-            toggleGroup.ActiveToggles().FirstOrDefault().colors = colors;
-            UserRecord.NextMapId = (MapID)currentQuest.mapId;
-            UserRecord.QuestID = currentQuest.id;
-            Debug.Log((MapID)currentQuest.mapId + "に決定した");
-            WS.WsPlay.Instance.Send(new Packes.QuestOrder(UserRecord.ID, currentQuest.id).ToJson());
-        }
+        var colors = toggleGroup.ActiveToggles().FirstOrDefault().colors;
+        colors.normalColor = new Color(1, 1, 0, 1);
+        colors.highlightedColor = new Color(1, 1, 0, 1);
+        toggleGroup.ActiveToggles().FirstOrDefault().colors = colors;
+        UserRecord.NextMapId = (MapID)currentQuest.mapId;
+        UserRecord.QuestID = currentQuest.id;
+        Debug.Log((MapID)currentQuest.mapId + "に決定した");
+        WS.WsPlay.Instance.Send(new Packes.QuestOrder(UserRecord.ID, currentQuest.id).ToJson());
     }
 
     public void CancelMapID()
