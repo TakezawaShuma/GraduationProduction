@@ -524,27 +524,27 @@ public class TitleSceneManager : SceneManagerBase
     /// <param name="_packet"></param>
     void ErrorAction(Packes.LoginError _packet)
     {
-        if (inputState != CANVAS_STATE.SIGN_IN)
+
+        ButtonState(true);
+        LoadingUIDelete();
+
+        // 再送信
+        /*
+        if (errorCount < 1)
         {
+            StartCoroutine(ReSend(wsl, new Packes.LoginUser(id_.text, pw_.text).ToJson()));
+            errorCount++;
+        }*/
+        if(inputState != CANVAS_STATE.SIGN_UP) {
+            errorCount = 0;
+            SetErrorText(CheckErrorType(4 /*_packet.errorType*/));
             ButtonState(true);
             LoadingUIDelete();
-        }
-        else
-        {
-            // 再送信
-            if (errorCount < 5)
-            {
-                StartCoroutine(ReSend(wsl, new Packes.LoginUser(id_.text, pw_.text).ToJson()));
-                errorCount++;
-            }
-            else
-            {
-                
-                errorCount = 0;
-                SetErrorText(CheckErrorType(_packet.errorType));
-                ButtonState(true);
-                LoadingUIDelete();
-            }
+        } else if(inputState != CANVAS_STATE.SIGN_IN) {
+            errorCount = 0;
+            SetErrorText(CheckErrorType(3 /*_packet.errorType*/));
+            ButtonState(true);
+            LoadingUIDelete();
         }
     }
 
