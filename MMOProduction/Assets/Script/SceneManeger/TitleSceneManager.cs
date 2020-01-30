@@ -221,7 +221,7 @@ public class TitleSceneManager : SceneManagerBase
 
         if (SetErrorText(CheckErrorType(id_.text, pw_.text,confirmPW_.text)))
         {
-            SendPacket(new Packes.LoginUser(id_.text, pw_.text).ToJson());
+            SendPacket(new Packes.CreateUser(id_.text, pw_.text,userName_.text).ToJson());
         }
         else ErrorOn();
     }
@@ -535,12 +535,12 @@ public class TitleSceneManager : SceneManagerBase
             StartCoroutine(ReSend(wsl, new Packes.LoginUser(id_.text, pw_.text).ToJson()));
             errorCount++;
         }*/
-        if(inputState != CANVAS_STATE.SIGN_UP) {
+        if(inputState == CANVAS_STATE.SIGN_IN) {
             errorCount = 0;
             SetErrorText(CheckErrorType(4 /*_packet.errorType*/));
             ButtonState(true);
             LoadingUIDelete();
-        } else if(inputState != CANVAS_STATE.SIGN_IN) {
+        } else if(inputState == CANVAS_STATE.SIGN_UP) {
             errorCount = 0;
             SetErrorText(CheckErrorType(3 /*_packet.errorType*/));
             ButtonState(true);

@@ -265,7 +265,6 @@ public class PlaySceneManager : SceneManagerBase
                 {
                     if (characters[_packet.user_id] != null)
                     {
-                        Debug.Log(_packet.ToJson());
                         characters[_packet.user_id].UpdatePostionData(_packet.x, _packet.y, _packet.z, _packet.dir);
                         characters[_packet.user_id].ChangeAnimationType((PlayerAnim.PARAMETER_ID)_packet.animation);
                     }
