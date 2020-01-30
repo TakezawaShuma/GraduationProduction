@@ -43,10 +43,10 @@ public class IdleState : BaseState
         {
             playerController.ChangeState(KeyMoveState.Instance);
         }
-        else if (InputManager.InputKeyCheckDown(playerSetting.AKey))
-        {
-            playerController.ChangeState(AutoRunState.Instance);
-        }
+        //else if (InputManager.InputKeyCheckDown(playerSetting.AKey))
+        //{
+        //    playerController.ChangeState(AutoRunState.Instance);
+        //}
         else if (InputManager.InputMouseCheckDown(0) == INPUT_MODE.PLAY)
         {
             if (playerController.MODE == PlayerController.Mode.Battle)
