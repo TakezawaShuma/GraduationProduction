@@ -248,8 +248,6 @@ public class TitleSceneManager : SceneManagerBase
         // パスワードと確認用パスワードが違います。
         else if (inputState == CANVAS_STATE.SIGN_UP && _pass != _confirmPass)
         {
-            Debug.Log(inputState);
-            Debug.Log(_pass + " : " + _confirmPass);
             return ERROR_PATTERN.DISAGREEMENT;
         }
         return ERROR_PATTERN.NON;
@@ -483,7 +481,6 @@ public class TitleSceneManager : SceneManagerBase
     /// </summary>
     private void LoadingUIDelete()
     {
-        Debug.Log("くるくるくるくる回るドア");
         Destroy(loadingCircle);
         loadingCircle = null;
     }
@@ -537,12 +534,12 @@ public class TitleSceneManager : SceneManagerBase
             // 再送信
             if (errorCount < 5)
             {
-                Debug.Log(errorCount);
                 StartCoroutine(ReSend(wsl, new Packes.LoginUser(id_.text, pw_.text).ToJson()));
                 errorCount++;
             }
             else
             {
+                
                 errorCount = 0;
                 SetErrorText(CheckErrorType(_packet.errorType));
                 ButtonState(true);
