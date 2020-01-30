@@ -88,6 +88,7 @@ public class QuestBoardManager : MonoBehaviour
     {
         confirmPanel.gameObject.SetActive(false);
         confirmPanel.Yes.onClick.RemoveAllListeners();
+        confirmPanel.Yes.onClick.AddListener(CloseConfirm);
     }
 
     public void DecisionMapID()
@@ -98,7 +99,6 @@ public class QuestBoardManager : MonoBehaviour
         toggleGroup.ActiveToggles().FirstOrDefault().colors = colors;
         UserRecord.NextMapId = (MapID)currentQuest.mapId;
         UserRecord.QuestID = currentQuest.id;
-        Debug.Log((MapID)currentQuest.mapId + "に決定した");
         WS.WsPlay.Instance.Send(new Packes.QuestOrder(UserRecord.ID, currentQuest.id).ToJson());
     }
 
@@ -110,7 +110,6 @@ public class QuestBoardManager : MonoBehaviour
         toggleGroup.ActiveToggles().FirstOrDefault().colors = colors;
         UserRecord.NextMapId = MapID.Non;
         UserRecord.QuestID = 0;
-        Debug.Log("取り消した");
     }
 
     public void SetMapID(bool b)
