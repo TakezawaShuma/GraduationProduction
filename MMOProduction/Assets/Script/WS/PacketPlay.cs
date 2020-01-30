@@ -465,6 +465,49 @@ namespace Packes
         }
     }
 
+    
+    public class GetParameterSend : IPacketDatas
+    {
+        public int user_id;
+        public GetParameterSend() { 
+            command = (int)CommandData.GetParameterSend;
+        }
+
+        public GetParameterSend(int _user_id) {
+            user_id = _user_id;
+        }
+    }
+
+    public class GetParameter : IPacketDatas {
+        public int str;
+		public int vit;
+		public int intelligence;
+		public int mnd;
+		public int dex;
+		public int agi;
+        public GetParameter() {
+            command = (int)CommandData.GetParameter;
+        }
+
+        public GetParameter
+            (
+            int _str,
+            int _vit,
+            int _intelligence,
+            int _mnd,
+            int _dex,
+            int _agi
+            ) 
+        {
+            str = _str;
+            vit = _vit;
+            intelligence = _intelligence;
+            mnd = _mnd;
+            dex = _dex;
+            agi = _agi;
+        }
+    }
+
     /// <summary>
     /// セーブデータの読み込み command:212
     /// </summary>

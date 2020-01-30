@@ -65,7 +65,8 @@ namespace WS
         public Action<Packes.LoadingAccessoryMaster> loadingAccessoryMasterAction;
         // キャラクターの新規作成
         public Action<Packes.SaveModelType> saveModelAction;
-
+        // ステータスの更新
+        public Action<Packes.GetParameter> getParameterAction;
         public static WsPlay Instance
         {
             get
@@ -239,6 +240,9 @@ namespace WS
                             break;
                         case CommandData.SaveModelType:
                             saveModelAction?.Invoke(Json.ConvertToPackets<Packes.SaveModelType>(e.Data));
+                            break;
+                        case CommandData.GetParameter:
+                            getParameterAction?.Invoke(Json.ConvertToPackets<Packes.GetParameter>(e.Data));
                             break;
                         // 随時追加
                         default:

@@ -119,6 +119,7 @@ public class PlaySceneManager : SceneManagerBase
                 // セーブデータを要請する。
                 wsp.Send(new Packes.SaveLoadCtoS(UserRecord.ID).ToJson());
                 wsp.Send(new Packes.LoadingAccessoryMasterSend(UserRecord.ID).ToJson());
+                wsp.Send(new Packes.GetParameterSend(UserRecord.ID).ToJson());
                 UserRecord.FAST = true;
 
             }
@@ -702,6 +703,16 @@ public class PlaySceneManager : SceneManagerBase
         return characters[_playerId].GetComponent<OtherPlayers>();
     }
 
+    // ステータスの更新
+    private void GetParameterAction(Packes.GetParameter _data){
+        player.INT = _data.intelligence;
+        player.STR = _data.str;
+        player.AGI = _data.agi;
+        player.DEX = _data.dex;
+        player.MND = _data.mnd;
+        player.VIT = _data.vit;
+    }
+
     /// <summary>
     /// コールバックを設定
     /// </summary>
@@ -711,6 +722,7 @@ public class PlaySceneManager : SceneManagerBase
         wsp.enemysAction = RegisterEnemies;                         // 204
         wsp.statusAction = UpdateStatus;                            // 206
 
+        wsp.getParameterAction = GetParameterAction;
         wsp.loadSaveAction = ReceiveSaveData;                       // 212
         wsp.loadOtherListAction = ReceiveOtherListData;             // 214
         wsp.loadOtherAction = ReceiveOtherData;                     // 215

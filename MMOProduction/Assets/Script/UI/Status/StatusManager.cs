@@ -25,6 +25,7 @@ public class StatusManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        Debug.Log(PLAYER);
         int count = this.transform.childCount;
 
         string[] st = new string[count];
@@ -37,6 +38,13 @@ public class StatusManager : MonoBehaviour
         st[5] = PLAYER.MND.ToString();
         st[6] = PLAYER.DEX.ToString();
         st[3] = PLAYER.AGI.ToString();
+        Debug.Log(
+            "str : " + PLAYER.STR +
+            "/vit : " + PLAYER.VIT +
+            "/int : " + PLAYER.INT +
+            "/mnd : " + PLAYER.MND +
+            "/dex : " + PLAYER.DEX +
+            "/agu : " + PLAYER.AGI);
 
         for (int i = 0; i < count; i++)
         {
