@@ -90,7 +90,7 @@ public class GrassField : MonoBehaviour
         Buffer[] buff = new Buffer[_computeBuffer.count];
         for (int i = 0; i < _computeBuffer.count; i++)
         {
-            Vector3 startPos = new Vector3(Random.Range(-_range, _range), 10, Random.Range(-_range, _range)) + _offsetPos;
+            Vector3 startPos = new Vector3(Random.Range(-_range, _range), 0, Random.Range(-_range, _range)) + _offsetPos;
             buff[i] = new Buffer(
                 startPos,
                 startPos,
