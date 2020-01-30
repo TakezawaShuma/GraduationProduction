@@ -48,7 +48,7 @@ MonoBehaviour:
   _generateNum: 500000
   _center: {fileID: 358091848}
   _range: 125
-  _offsetPos: {x: 125, y: 0, z: -125}
+  _offsetPos: {x: 125, y: 10, z: -125}
   _property:
     texure: {fileID: 2800000, guid: 4a7e704fd31044444a207602614efce9, type: 3}
     heightMap: {fileID: 2800000, guid: c3c8f5474124db748a5193b16c2a6e53, type: 3}
@@ -254,7 +254,7 @@ MonoBehaviour:
   _generateNum: 500000
   _center: {fileID: 2072410091}
   _range: 125
-  _offsetPos: {x: 125, y: 0, z: 125}
+  _offsetPos: {x: 125, y: 10, z: 125}
   _property:
     texure: {fileID: 2800000, guid: 4a7e704fd31044444a207602614efce9, type: 3}
     heightMap: {fileID: 2800000, guid: c3c8f5474124db748a5193b16c2a6e53, type: 3}
