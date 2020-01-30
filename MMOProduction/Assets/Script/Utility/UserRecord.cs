@@ -34,8 +34,8 @@ public static class UserRecord
     {
         id = 0;
         name = "";
-        mapId = MapID.Non;
-        nextMapId = MapID.Non;
+        mapId = MapID.Title;
+        nextMapId = MapID.Title;
 
         fastCheck = false;
         model = null;
