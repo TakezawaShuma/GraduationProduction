@@ -107,14 +107,17 @@ namespace Packes
     /// </summary>
     public class LoginError : IPacketDatas{
 
+        public int errorType;
+
         /// <summary>デフォルトコンストラクタ</summary>
         public LoginError(){
             this.command = (int)CommandData.LoginError;
         }
         /// <summary>フルコンストラクタ</summary>
-        public LoginError(int _i)
+        public LoginError(int _i,int _type)
         {
             this.command = (int)CommandData.LoginError;
+            errorType = _type;
         }
     }
 
