@@ -99,15 +99,19 @@ public class ForestParticle : MonoBehaviour
 
     private void OnRenderObject()
     {
-        // テクスチャ・バッファをマテリアルに設定
-        _material.SetTexture("_MainTex", _property.texure);
-        _material.SetTexture("_RampTex", _property.rampTex);
-        _material.SetColor("_Color", _property.color);
-        _material.SetBuffer("_Particle", _computeBuffer);
+        // カメラがメインカメラの場合に描画を行う
+        if (Camera.current.tag == "MainCamera")
+        {
+            // テクスチャ・バッファをマテリアルに設定
+            _material.SetTexture("_MainTex", _property.texure);
+            _material.SetTexture("_RampTex", _property.rampTex);
+            _material.SetColor("_Color", _property.color);
+            _material.SetBuffer("_Particle", _computeBuffer);
 
-        _material.SetPass(0);
+            _material.SetPass(0);
 
-        Graphics.DrawProcedural(MeshTopology.Points, _computeBuffer.count);
+            Graphics.DrawProcedural(MeshTopology.Points, _computeBuffer.count);
+        }
     }
 
     private void SafeRelease(ComputeBuffer cb)
