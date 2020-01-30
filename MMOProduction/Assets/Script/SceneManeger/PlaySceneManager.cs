@@ -220,7 +220,7 @@ public class PlaySceneManager : SceneManagerBase
             tmp.transform.position = new Vector3(mapdata.x, mapdata.y, mapdata.z);
             tmp.name = (UserRecord.Name != "") ? UserRecord.Name : _name;
             tmp.tag = "Player";
-            tmp.transform.localScale = new Vector3(2, 2, 2);
+            //tmp.transform.localScale = new Vector3(2, 2, 2);
 
             if (cheatCommand != null) cheatCommand.PLAYER = tmp;
 
