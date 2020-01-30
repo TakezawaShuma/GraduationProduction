@@ -66,7 +66,7 @@ public class QuestBoardManager : MonoBehaviour
 
     public void OpenDecisionConfirm()
     {
-        if (currentQuest.id != 0)
+        if (currentQuest.id != 0 || currentQuest.id != UserRecord.QuestID || UserRecord.QuestID == 0)
         {
             confirmPanel.gameObject.SetActive(true);
             confirmPanel.Text.text = currentQuest.name + "を受注しますか？";
@@ -76,7 +76,7 @@ public class QuestBoardManager : MonoBehaviour
 
     public void OpenCancelConfirm()
     {
-        if (currentQuest.id != 0)
+        if (UserRecord.QuestID != 0)
         {
             confirmPanel.gameObject.SetActive(true);
             confirmPanel.Text.text = QuestDatas.FindOne(UserRecord.QuestID).name + "の受注を取り消しますか？";
