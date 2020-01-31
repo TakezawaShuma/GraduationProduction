@@ -122,11 +122,8 @@ public class FollowingCamera : MonoBehaviour
             {
                 Vector3 v = lockOnTarget.transform.position - target.transform.position;
 
-                if (distFlag)
-                {
-                    dist = v.magnitude + lastDistance;
-                    distFlag = true;
-                }
+                dist = (v.magnitude + lastDistance) * 1.5f;
+                distFlag = true;
                 //float a = Mathf.Atan2(v.x, v.z) * Mathf.Rad2Deg % 360 + 90;
 
                 //azimuthalAngle = -a;
@@ -203,7 +200,7 @@ public class FollowingCamera : MonoBehaviour
         if (lockOnTarget && lockOnTarget.GetComponent<Marker>().LOCK_OBSERVE)
         {
             scroll = dist - scroll * scrollSensitivity;
-            dist = Mathf.Clamp(scroll, minDistance + 10f, maxDistance + 30f);
+            dist = Mathf.Clamp(scroll, minDistance + 10f, maxDistance + 130f);
         }
         else
         {
