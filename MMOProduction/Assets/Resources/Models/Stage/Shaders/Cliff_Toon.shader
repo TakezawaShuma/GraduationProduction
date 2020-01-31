@@ -8,6 +8,7 @@ Shader "Custom/Stage/Cliff_Toon"
     {
         _MainTex("Main Texture", 2D) = "white" {}
         _NormalMap("Normal map Texture", 2D) = "white" {}
+        _HeightMap("Height map Texture", 2D) = "white" {}
         _RampTex("Ramp Texture", 2D) = "white" {}
         _CoverageTex("CoverageTex", 2D) = "white" {}
 
@@ -20,31 +21,12 @@ Shader "Custom/Stage/Cliff_Toon"
 
         _BlendRatio("Blend Ratio", Range(0, 1)) = 1
         _ShadowThreshold("Shade Shewshold", Range(0, 1)) = 0.5
+        _HeightFactor("Height Factor", Range(0.0, 0.1)) = 0.02
 
         [Toggle(_BAMP_MAPPING)] _BampMapping("Bamp Mapping", Float) = 1
     }
     SubShader
     {
-        // バンプマッピング用
-        CGINCLUDE
-        #pragma shader_feature _BAMP_MAPPING
-
-        sampler2D _NormalMap;
-
-        // 接空間変換行列を取得
-        float4x4 invTangentMatrix(float3 tan, float3 bin, float3 nor)
-        {
-            float4x4 mat = float4x4(
-                float4(tan, 0),
-                float4(bin, 0),
-                float4(nor, 0),
-                float4(0, 0, 0, 1)
-                );
-            return transpose(mat);
-        }
-        ENDCG
-
-        
 
         Pass
         {
@@ -60,16 +42,19 @@ Shader "Custom/Stage/Cliff_Toon"
 
             #pragma multi_compile_fwdbase nolightmap nodirlightmap nodynlightmap novertexlight
 
+            #pragma shader_feature _BAMP_MAPPING
+
             #include "UnityCG.cginc"
             #include "Lighting.cginc"
             #include "AutoLight.cginc"
+            #include "Assets/Ex/CGInclude/SimpleMath.cginc"
 
             struct appdata
             {
                 float4 vertex : POSITION;
                 float2 uv : TEXCOORD0;
                 float3 normal : NORMAL;
-                float3 tangent : TANGENT;
+                float4 tangent : TANGENT;
             };
 
             struct v2f
@@ -79,10 +64,13 @@ Shader "Custom/Stage/Cliff_Toon"
                 float3 normal : TEXCOORD1;
                 float3 worldNormal : TEXCOORD2;
                 float3 lightDir : TEXCOORD3;
-                SHADOW_COORDS(4)
+                float3 viewDir : TEXCOORD4;
+                SHADOW_COORDS(5)
             };
 
             sampler2D _MainTex;
+            sampler2D _NormalMap;
+            sampler2D _HeightMap;
             sampler2D _RampTex;
             sampler2D _CoverageTex;
             fixed4 _Color;
@@ -92,6 +80,7 @@ Shader "Custom/Stage/Cliff_Toon"
             fixed _ToonStrength;
             fixed _BlendRatio;
             fixed _ShadowThreshold;
+            fixed _HeightFactor;
 
             v2f vert (appdata v)
             {
@@ -104,15 +93,13 @@ Shader "Custom/Stage/Cliff_Toon"
                 o.normal = v.normal;
 
                 // ローカル空間上での接ベクトルを求める
-                half3 n = normalize(v.normal);
-                half3 t = v.tangent;
-                half3 b = cross(n, t);
-
-                half3 localLight = mul(unity_WorldToObject, _WorldSpaceLightPos0);
-                o.lightDir = mul(localLight, invTangentMatrix(t, b, n));
+                TANGENT_SPACE_ROTATION;
+                o.lightDir = mul(rotation, ObjSpaceLightDir(v.vertex));
+                o.viewDir = mul(rotation, ObjSpaceViewDir(v.vertex));
 #else
                 o.normal = UnityObjectToWorldNormal(v.normal);
                 o.lightDir = WorldSpaceLightDir(v.vertex);
+                o.viewDir = WorldSpaceViewDir(v.vertex);
 #endif
 
                 TRANSFER_SHADOW(o);
@@ -122,6 +109,7 @@ Shader "Custom/Stage/Cliff_Toon"
             fixed4 frag(v2f i) : SV_Target
             {
                 half3 lightDir = normalize(i.lightDir);
+                half3 viewDir = normalize(i.viewDir);
                 half3 worldNormal = normalize(i.worldNormal);
 
                 //fixed4 col = tex2D(_MainTex, i.uv) * _Color * 0.5 + _ToonStrength;
@@ -135,6 +123,9 @@ Shader "Custom/Stage/Cliff_Toon"
                 col = lerp(col, coverage, dotNU);
 
                 // バンプマッピング
+                fixed height = tex2D(_HeightMap, i.uv);
+                height = toGray(height);
+                i.uv += viewDir.xy * height * _HeightFactor;
                 fixed4 normal = fixed4(UnpackNormal(tex2D(_NormalMap, i.uv)), 1);
                 half diff = max(0, dot(normal, lightDir)) * 0.5 + 1;
                 col *= diff;
