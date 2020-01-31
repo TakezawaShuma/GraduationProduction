@@ -76,10 +76,11 @@ public class QuestResult : MonoBehaviour
 
     public void SetQuestCrear(float _time)
     {
+        // 有効化
+        if (timerSlider == null)return;
         isResult = 1;
         stertTime = _time;
-        // 有効化
-        if (timerSlider == null) Debug.Log("オブジェクトがヌルだぜ！");
+
         timerSlider.gameObject.SetActive(true);
         crearText.gameObject.SetActive(true);
         // その他設定
@@ -128,6 +129,7 @@ public class QuestResult : MonoBehaviour
             scene.SendMoveMap(MapID.Base);
             isResult = 0;
             UserRecord.QuestID = 0;
+            UserRecord.NextMapId = MapID.Non;
         }
     }
 }
