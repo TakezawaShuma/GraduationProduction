@@ -1,0 +1,67 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: ToonBaseTown
+  m_Shader: {fileID: 4800000, guid: 5c5a61442a28a1c4e8e26decf95fa7e9, type: 3}
+  m_ShaderKeywords: _BUMP_MAPPING _PARALLAX_MAPPING _TOON_LIGHTING
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _GrassMap:
+        m_Texture: {fileID: 2800000, guid: df8479c4617e4d74e859ac8d9e198f49, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _GroundMask:
+        m_Texture: {fileID: 2800000, guid: 8a4ab2f78764a034ebef6349c25371cf, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _GroundTex:
+        m_Texture: {fileID: 2800000, guid: fee885744af75f74293d1db3fa01fe99, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _RoadHeightMap:
+        m_Texture: {fileID: 2800000, guid: b2b1d64b43b629147a9559b507d43227, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _RoadMap:
+        m_Texture: {fileID: 2800000, guid: 279d127f38aef4e449a505eff93022ef, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _RoadNormalMap:
+        m_Texture: {fileID: 2800000, guid: c6c580ba5286f22428b250c6e1b7233e, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _RoadRampMap:
+        m_Texture: {fileID: 2800000, guid: 9ac6167036a9f5f4fa12f5508adcb11d, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _RoadTex:
+        m_Texture: {fileID: 2800000, guid: a9999219356b8324bb5784bc80b6a750, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _BumpMapping: 1
+    - _ParallaxMapping: 1
+    - _RoadBrightness: 0.2
+    - _RoadHeightFactor: 0.02
+    - _ToonFactor: 0.5
+    - _ToonLighting: 1
+    m_Colors:
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
+    - _RoadColor: {r: 1, g: 1, b: 1, a: 1}
