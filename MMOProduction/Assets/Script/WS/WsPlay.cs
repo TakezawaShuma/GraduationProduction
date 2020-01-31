@@ -67,6 +67,8 @@ namespace WS
         public Action<Packes.SaveModelType> saveModelAction;
         // ステータスの更新
         public Action<Packes.GetParameter> getParameterAction;
+        // プレイヤーの死亡
+        public Action<Packes.PlayerDie> playerDieAction;
         public static WsPlay Instance
         {
             get
@@ -243,6 +245,9 @@ namespace WS
                             break;
                         case CommandData.GetParameter:
                             getParameterAction?.Invoke(Json.ConvertToPackets<Packes.GetParameter>(e.Data));
+                            break;
+                        case CommandData.PlayerDie:
+                            playerDieAction?.Invoke(Json.ConvertToPackets<Packes.PlayerDie>(e.Data));
                             break;
                         // 随時追加
                         default:
