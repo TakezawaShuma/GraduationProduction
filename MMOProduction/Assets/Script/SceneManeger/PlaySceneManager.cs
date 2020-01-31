@@ -713,6 +713,12 @@ public class PlaySceneManager : SceneManagerBase
         player.VIT = _data.vit;
     }
 
+    private void PlayerDie(Packes.PlayerDie _data) {
+        // TODO: プレイヤー死亡処理
+        Debug.Log("はやかわ　たいき 1998年 4月 19日");
+        SendMoveMap(MapID.Base);
+    }
+
     /// <summary>
     /// コールバックを設定
     /// </summary>
@@ -726,6 +732,7 @@ public class PlaySceneManager : SceneManagerBase
         wsp.loadSaveAction = ReceiveSaveData;                       // 212
         wsp.loadOtherListAction = ReceiveOtherListData;             // 214
         wsp.loadOtherAction = ReceiveOtherData;                     // 215
+        wsp.playerDieAction = PlayerDie;
 
         wsp.enemyAliveAction = AliveEnemy;                          // 221
         wsp.enemyDeadAction = DeadEnemy;                            // 222

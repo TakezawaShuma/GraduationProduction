@@ -690,6 +690,19 @@ namespace Packes
         }
     }
 
+    public class PlayerDie : IPacketDatas {
+        public int user_id;
+
+        public PlayerDie() {
+            command = (int)CommandData.PlayerDie;
+        }
+
+        public PlayerDie(int _user_id) {
+            command = (int)CommandData.PlayerDie;
+            user_id = _user_id;
+        }
+    }
+
 
     /// <summary>
     /// 他のプレイヤーがスキルを使用したとき command = 224
