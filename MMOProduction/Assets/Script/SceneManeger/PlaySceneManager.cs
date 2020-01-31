@@ -15,7 +15,7 @@ public class PlaySceneManager : SceneManagerBase
 
     private const int UPDATE_MAX_COUNT = 3;
 
-    
+
     [SerializeField, Header("キャラクターモデルリスト")]
     private character_table characterModel = null;
     [Header("敵のマスターデータ"), SerializeField]
@@ -92,7 +92,7 @@ public class PlaySceneManager : SceneManagerBase
     {
         // ステージの作成
         GameObject stage = Instantiate<GameObject>(stages.FindPrefab(UserRecord.MapID), transform);
-        if(UserRecord.Inventory.Count != 0) inventory_.ChangeItems(UserRecord.Inventory);
+        if (UserRecord.Inventory.Count != 0) inventory_.ChangeItems(UserRecord.Inventory);
 
         stage.transform.position = Vector3.zero;
 
@@ -256,28 +256,28 @@ public class PlaySceneManager : SceneManagerBase
     /// </summary>
     private void UpdatePlayersPostion(Packes.TranslationStoC _packet)
     {
-        if (_packet.user_id != 0)
+        if (_packet.user_id == 0) return;
+        if (_packet.user_id == UserRecord.ID) return;
+
+
+        // 他ユーザーの更新
+        if (characters.ContainsKey(_packet.user_id))
         {
-            if (_packet.user_id != UserRecord.ID)
+            if (characters[_packet.user_id] != null)
             {
-                // 他ユーザーの更新
-                if (characters.ContainsKey(_packet.user_id))
-                {
-                    if (characters[_packet.user_id] != null)
-                    {
-                        characters[_packet.user_id].UpdatePostionData(_packet.x, _packet.y, _packet.z, _packet.dir);
-                        characters[_packet.user_id].ChangeAnimationType((PlayerAnim.PARAMETER_ID)_packet.animation);
-                    }
-                }
-                // todo 他プレイヤーの更新と作成を関数分けする
-                // 他のユーザーの作成
-                else
-                {
-                    // リストに登録されていないIDが来たときの処理
-                    // そのIDは何なのか確認をとる
-                    wsp.Send(new Packes.FindOfPlayerCtoS(UserRecord.ID, _packet.user_id, 0).ToJson());
-                }
+
+                Debug.Log(_packet.ToJson());
+                characters[_packet.user_id].UpdatePostionData(_packet.x, _packet.y, _packet.z, _packet.dir);
+                characters[_packet.user_id].ChangeAnimationType((PlayerAnim.PARAMETER_ID)_packet.animation);
             }
+        }
+        // todo 他プレイヤーの更新と作成を関数分けする
+        // 他のユーザーの作成
+        else
+        {
+            // リストに登録されていないIDが来たときの処理
+            // そのIDは何なのか確認をとる
+            wsp.Send(new Packes.FindOfPlayerCtoS(UserRecord.ID, _packet.user_id, 0).ToJson());
         }
     }
 
@@ -287,6 +287,7 @@ public class PlaySceneManager : SceneManagerBase
     /// <param name="_packet">作成に必要なデータ</param>
     private void CreateOtherPlayers(Packes.OtherPlayersData _packet)
     {
+        if (this == null) return;
         GameObject avatar = characterModel.FindModel(CheckModel(_packet.model_id));
         if (avatar == null) return;
 
@@ -303,7 +304,7 @@ public class PlaySceneManager : SceneManagerBase
                                                       = _packet.name;       // 名前の共通化
 
         otherPlayer.tag = "OtherPlayer";                                    // タグ
-        otherPlayer.transform.localScale = new Vector3(2, 2, 2);
+        //otherPlayer.transform.localScale = new Vector3(2, 2, 2);
         other.Init(0, 0, 0, 0, _packet.user_id, skillTabe);
         other.Type = CharacterType.Other;
         characters[_packet.user_id] = other;                                 // キャラクター管理に登録
@@ -418,7 +419,7 @@ public class PlaySceneManager : SceneManagerBase
             inventory_.ChangeItems(_packet.accessorys);
             UserRecord.Inventory = _packet.accessorys;
             UserRecord.Accessorys = _packet.wearing_accessory;
-            accessory.SetAccessorys(inventory_,_packet.wearing_accessory);
+            accessory.SetAccessorys(inventory_, _packet.wearing_accessory);
             ready.ReadyGO();
         }
         else
@@ -514,7 +515,8 @@ public class PlaySceneManager : SceneManagerBase
         characters.Remove(_packet.unique_id);
         enemy.PlayTriggerAnimetion("Die");
 
-        if(_packet.drop != 0) {
+        if (_packet.drop != 0)
+        {
             inventory_.AddItem(_packet.drop);
         }
 
@@ -595,9 +597,7 @@ public class PlaySceneManager : SceneManagerBase
     private void MovingMap(Packes.MoveingMapOk _packet)
     {
         UserRecord.MapID = (MapID)_packet.mapId;
-        //isLogout = false;
         Debug.Log(_packet.ToJson());
-        Debug.Log(_packet.mapId.ToString());
         ChangeScene("LoadingScene");
     }
 
@@ -704,7 +704,8 @@ public class PlaySceneManager : SceneManagerBase
     }
 
     // ステータスの更新
-    private void GetParameterAction(Packes.GetParameter _data){
+    private void GetParameterAction(Packes.GetParameter _data)
+    {
         player.INT = _data.intelligence;
         player.STR = _data.str;
         player.AGI = _data.agi;
@@ -713,7 +714,8 @@ public class PlaySceneManager : SceneManagerBase
         player.VIT = _data.vit;
     }
 
-    private void PlayerDie(Packes.PlayerDie _data) {
+    private void PlayerDie(Packes.PlayerDie _data)
+    {
         // TODO: プレイヤー死亡処理
         Debug.Log("はやかわ　たいき 1998年 4月 19日");
         SendMoveMap(MapID.Base);
