@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 /// <summary>
 /// インベントリスロットのデータ
@@ -24,6 +25,8 @@ public class SlotData : MonoBehaviour
 
     [SerializeField]
     private string name = "";
+
+    private Image image;
 
     public int ID
     {
@@ -63,8 +66,9 @@ public class SlotData : MonoBehaviour
         }
     }
     // Start is called before the first frame update
-    void Start()
+    void Awake()
     {
+        image = this.GetComponent<Image>();
     }
 
     public void Init()
@@ -86,5 +90,10 @@ public class SlotData : MonoBehaviour
     public void UseFlagOff()
     {
         useFlag = false;
+    }
+
+    public void SetSprite(Sprite sprite)
+    {
+        image.sprite = sprite;
     }
 }

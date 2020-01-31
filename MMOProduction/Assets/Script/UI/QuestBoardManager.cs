@@ -24,10 +24,15 @@ public class QuestBoardManager : MonoBehaviour
     [SerializeField, Header("クエストトグル置くとこ")]
     private GameObject togglePutObj = null;
 
+    [SerializeField, Header("確認ウィンドウ")]
+    private ConfirmPanel confirmPanel = null;
+
     // 現在選択されているクエスト
     private Packes.QuestMasterData currentQuest;
 
     private List<Packes.QuestMasterData> datas;
+
+    private List<GameObject> toggles = new List<GameObject>();
 
     private void Start()
     {
@@ -53,36 +58,71 @@ public class QuestBoardManager : MonoBehaviour
 
             gameObject.GetComponent<Toggle>().onValueChanged.AddListener(SetMapID);
 
+            toggles.Add(gameObject);
+
             count++;
         }
 
         currentQuest = new Packes.QuestMasterData();
+
+        CloseConfirm();
+    }
+
+    private void Update()
+    {
+        foreach(GameObject toggle in toggles)
+        {
+            Packes.QuestMasterData data = toggle.GetComponent<QuestToggle>().data;
+
+            if(UserRecord.QuestID != data.id)
+            {
+                ToggleChangeColor(toggle.GetComponent<Toggle>(), 0);
+            }
+        }
+    }
+
+    public void OpenDecisionConfirm()
+    {
+        if (currentQuest.id != 0 || currentQuest.id != UserRecord.QuestID || UserRecord.QuestID == 0)
+        {
+            confirmPanel.gameObject.SetActive(true);
+            confirmPanel.Text.text = currentQuest.name + "を受注しますか？";
+            confirmPanel.Yes.onClick.AddListener(DecisionMapID);
+        }
+    }
+
+    public void OpenCancelConfirm()
+    {
+        if (UserRecord.QuestID != 0)
+        {
+            confirmPanel.gameObject.SetActive(true);
+            confirmPanel.Text.text = QuestDatas.FindOne(UserRecord.QuestID).name + "の受注を取り消しますか？";
+            confirmPanel.Yes.onClick.AddListener(CancelMapID);
+        }
+    }
+
+    public void CloseConfirm()
+    {
+        confirmPanel.gameObject.SetActive(false);
+        confirmPanel.Yes.onClick.RemoveAllListeners();
+        confirmPanel.Yes.onClick.AddListener(CloseConfirm);
     }
 
     public void DecisionMapID()
     {
-        if (currentQuest.id != 0)
-        {
-            var colors = toggleGroup.ActiveToggles().FirstOrDefault().colors;
-            colors.normalColor = new Color(1, 1, 0, 1);
-            colors.highlightedColor = new Color(1, 1, 0, 1);
-            toggleGroup.ActiveToggles().FirstOrDefault().colors = colors;
-            UserRecord.NextMapId = (MapID)currentQuest.mapId;
-            UserRecord.QuestID = currentQuest.id;
-            Debug.Log((MapID)currentQuest.mapId + "に決定した");
-            WS.WsPlay.Instance.Send(new Packes.QuestOrder(UserRecord.ID, currentQuest.id).ToJson());
-        }
+        ToggleChangeColor(toggleGroup.ActiveToggles().FirstOrDefault(),1);
+        UserRecord.NextMapId = (MapID)currentQuest.mapId;
+        UserRecord.QuestID = currentQuest.id;
+        WS.WsPlay.Instance.Send(new Packes.QuestOrder(UserRecord.ID, currentQuest.id).ToJson());
+        Close();
     }
 
     public void CancelMapID()
     {
-        var colors = toggleGroup.ActiveToggles().FirstOrDefault().colors;
-        colors.normalColor = new Color(1, 1, 1, 1);
-        colors.highlightedColor = new Color(1, 1, 1, 1);
-        toggleGroup.ActiveToggles().FirstOrDefault().colors = colors;
+        ToggleChangeColor(toggleGroup.ActiveToggles().FirstOrDefault(),0);
         UserRecord.NextMapId = MapID.Non;
         UserRecord.QuestID = 0;
-        Debug.Log("取り消した");
+        Close();
     }
 
     public void SetMapID(bool b)
@@ -106,5 +146,24 @@ public class QuestBoardManager : MonoBehaviour
     public void Close()
     {
         panel.gameObject.SetActive(false);
+    }
+
+    private void ToggleChangeColor(Toggle toggle, int mode)
+    {
+        var colors = toggle.colors;
+        switch (mode)
+        {
+            case 0:
+                colors.normalColor = new Color(1, 1, 1, 1);
+                colors.highlightedColor = new Color(1, 1, 1, 1);
+                break;
+            case 1:
+                colors.normalColor = new Color(1, 1, 0, 1);
+                colors.highlightedColor = new Color(1, 1, 0, 1);
+                break;
+            default:
+                break;
+        }
+        toggle.colors = colors;
     }
 }

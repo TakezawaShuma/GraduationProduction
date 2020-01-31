@@ -55,10 +55,11 @@ public enum CommandData
 	StatusStoC = 206,
 	/// <summary>アクセサリー装備変更</summary>
 	AccessoryChange = 207,
+    GetParameterSend = 208,
+    GetParameter = 209,
 
-
-	/// <summary>セーブデータの読み込み要請</summary>
-	SaveLoadCtoS = 211,
+    /// <summary>セーブデータの読み込み要請</summary>
+    SaveLoadCtoS = 211,
 	/// <summary>セーブデータの読み込み</summary>
 	SaveLoadStoC = 212,
 	/// <summary>セーブデータの読み込み完了</summary>

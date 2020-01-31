@@ -26,7 +26,7 @@ public class PlayerSetting : ScriptableObject
     public bool IA { get { return IsAnimator; } }
 
     [SerializeField, Range(0f,100f), Header("ロックオンの距離")]
-    private float LockOnDirection = 30f;
+    private float LockOnDirection = 15f;
 
     public float LOD { get { return LockOnDirection; } }
 
@@ -50,11 +50,11 @@ public class PlayerSetting : ScriptableObject
     private KeyCode DashKey = KeyCode.LeftShift;
     public KeyCode DKey { get { return DashKey; } }
 
-    [SerializeField, Header("ジャンプキー")]
-    private KeyCode JumpKey = KeyCode.Space;
-    public KeyCode JKey { get { return JumpKey; } }
+    //[SerializeField, Header("ジャンプキー")]
+    //private KeyCode JumpKey = KeyCode.Space;
+    //public KeyCode JKey { get { return JumpKey; } }
 
-    [SerializeField, Header("オートランキー")]
-    private KeyCode AutoRunKey = KeyCode.T;
-    public KeyCode AKey { get { return AutoRunKey; } }
+    //[SerializeField, Header("オートランキー")]
+    //private KeyCode AutoRunKey = KeyCode.T;
+    //public KeyCode AKey { get { return AutoRunKey; } }
 }

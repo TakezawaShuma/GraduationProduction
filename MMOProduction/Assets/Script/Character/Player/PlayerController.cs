@@ -120,7 +120,7 @@ public class PlayerController : MonoBehaviour
             {
                 Vector3 v = target.transform.position - player.PositionV3;
 
-                if (v.magnitude > playerSetting.LOD)
+                if (v.magnitude > playerSetting.LOD - 7)
                 {
                     RemoveTarget();
                 }

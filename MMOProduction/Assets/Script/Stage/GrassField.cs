@@ -53,6 +53,7 @@ public class GrassField : MonoBehaviour
         public Texture texure;
         public Texture heightMap;
         public Texture rampTex;
+        public Color shadowColor;
         public Vector3 scale;
         public Vector3 translation;
         public Vector2 heightMapPos;
@@ -109,6 +110,7 @@ public class GrassField : MonoBehaviour
         _material.SetTexture("_MainTex", _property.texure);
         _material.SetTexture("_HeightMap", _property.heightMap);
         _material.SetTexture("_RampTex", _property.rampTex);
+        _material.SetColor("_ShadowColor", _property.shadowColor);
         _material.SetVector("_Scale", _property.scale);
         _material.SetVector("_Translation", _property.translation);
         _material.SetVector("_HeightMapPoint", _property.heightMapPos);

@@ -170,6 +170,7 @@ public class PlaySceneManager : SceneManagerBase
                 {
                     if (connectFlag)
                     {
+                        wsp.Send(new Packes.GetParameterSend(UserRecord.ID).ToJson());
                         SendPosition(playerData, (int)player.animationType);
                         SendStatus(UserRecord.ID, Packes.OBJECT_TYPE.PLAYER);
                         SendEnemyPosReq();
@@ -220,7 +221,7 @@ public class PlaySceneManager : SceneManagerBase
             tmp.transform.position = new Vector3(mapdata.x, mapdata.y, mapdata.z);
             tmp.name = (UserRecord.Name != "") ? UserRecord.Name : _name;
             tmp.tag = "Player";
-            tmp.transform.localScale = new Vector3(2, 2, 2);
+            //tmp.transform.localScale = new Vector3(2, 2, 2);
 
             if (cheatCommand != null) cheatCommand.PLAYER = tmp;
 
@@ -264,7 +265,6 @@ public class PlaySceneManager : SceneManagerBase
                 {
                     if (characters[_packet.user_id] != null)
                     {
-                        Debug.Log(_packet.ToJson());
                         characters[_packet.user_id].UpdatePostionData(_packet.x, _packet.y, _packet.z, _packet.dir);
                         characters[_packet.user_id].ChangeAnimationType((PlayerAnim.PARAMETER_ID)_packet.animation);
                     }
@@ -703,6 +703,16 @@ public class PlaySceneManager : SceneManagerBase
         return characters[_playerId].GetComponent<OtherPlayers>();
     }
 
+    // ステータスの更新
+    private void GetParameterAction(Packes.GetParameter _data){
+        player.INT = _data.intelligence;
+        player.STR = _data.str;
+        player.AGI = _data.agi;
+        player.DEX = _data.dex;
+        player.MND = _data.mnd;
+        player.VIT = _data.vit;
+    }
+
     /// <summary>
     /// コールバックを設定
     /// </summary>
@@ -712,6 +722,7 @@ public class PlaySceneManager : SceneManagerBase
         wsp.enemysAction = RegisterEnemies;                         // 204
         wsp.statusAction = UpdateStatus;                            // 206
 
+        wsp.getParameterAction = GetParameterAction;
         wsp.loadSaveAction = ReceiveSaveData;                       // 212
         wsp.loadOtherListAction = ReceiveOtherListData;             // 214
         wsp.loadOtherAction = ReceiveOtherData;                     // 215
