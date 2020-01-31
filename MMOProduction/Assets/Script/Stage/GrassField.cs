@@ -106,6 +106,8 @@ public class GrassField : MonoBehaviour
 
     private void OnRenderObject()
     {
+        if (Camera.current.tag != "MainCamera") return;
+
         // テクスチャ・バッファをマテリアルに設定
         _material.SetTexture("_MainTex", _property.texure);
         _material.SetTexture("_HeightMap", _property.heightMap);
