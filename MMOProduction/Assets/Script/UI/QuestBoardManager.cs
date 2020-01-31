@@ -32,6 +32,8 @@ public class QuestBoardManager : MonoBehaviour
 
     private List<Packes.QuestMasterData> datas;
 
+    private List<GameObject> toggles = new List<GameObject>();
+
     private void Start()
     {
         panel.SetActive(false);
@@ -56,12 +58,27 @@ public class QuestBoardManager : MonoBehaviour
 
             gameObject.GetComponent<Toggle>().onValueChanged.AddListener(SetMapID);
 
+            toggles.Add(gameObject);
+
             count++;
         }
 
         currentQuest = new Packes.QuestMasterData();
 
         CloseConfirm();
+    }
+
+    private void Update()
+    {
+        foreach(GameObject toggle in toggles)
+        {
+            Packes.QuestMasterData data = toggle.GetComponent<QuestToggle>().data;
+
+            if(UserRecord.QuestID != data.id)
+            {
+                ToggleChangeColor(toggle.GetComponent<Toggle>(), 0);
+            }
+        }
     }
 
     public void OpenDecisionConfirm()
@@ -93,23 +110,19 @@ public class QuestBoardManager : MonoBehaviour
 
     public void DecisionMapID()
     {
-        var colors = toggleGroup.ActiveToggles().FirstOrDefault().colors;
-        colors.normalColor = new Color(1, 1, 0, 1);
-        colors.highlightedColor = new Color(1, 1, 0, 1);
-        toggleGroup.ActiveToggles().FirstOrDefault().colors = colors;
+        ToggleChangeColor(toggleGroup.ActiveToggles().FirstOrDefault(),1);
         UserRecord.NextMapId = (MapID)currentQuest.mapId;
         UserRecord.QuestID = currentQuest.id;
         WS.WsPlay.Instance.Send(new Packes.QuestOrder(UserRecord.ID, currentQuest.id).ToJson());
+        Close();
     }
 
     public void CancelMapID()
     {
-        var colors = toggleGroup.ActiveToggles().FirstOrDefault().colors;
-        colors.normalColor = new Color(1, 1, 1, 1);
-        colors.highlightedColor = new Color(1, 1, 1, 1);
-        toggleGroup.ActiveToggles().FirstOrDefault().colors = colors;
+        ToggleChangeColor(toggleGroup.ActiveToggles().FirstOrDefault(),0);
         UserRecord.NextMapId = MapID.Non;
         UserRecord.QuestID = 0;
+        Close();
     }
 
     public void SetMapID(bool b)
@@ -133,5 +146,24 @@ public class QuestBoardManager : MonoBehaviour
     public void Close()
     {
         panel.gameObject.SetActive(false);
+    }
+
+    private void ToggleChangeColor(Toggle toggle, int mode)
+    {
+        var colors = toggle.colors;
+        switch (mode)
+        {
+            case 0:
+                colors.normalColor = new Color(1, 1, 1, 1);
+                colors.highlightedColor = new Color(1, 1, 1, 1);
+                break;
+            case 1:
+                colors.normalColor = new Color(1, 1, 0, 1);
+                colors.highlightedColor = new Color(1, 1, 0, 1);
+                break;
+            default:
+                break;
+        }
+        toggle.colors = colors;
     }
 }
