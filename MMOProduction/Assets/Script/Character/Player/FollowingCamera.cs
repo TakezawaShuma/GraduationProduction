@@ -16,10 +16,10 @@ public class FollowingCamera : MonoBehaviour
     public GameObject Target { set { target = value; } }
 
     [SerializeField, Header("オフセット")]
-    private Vector3 offset = new Vector3(0f, 1.5f, 0f); // offset form the target object
+    private Vector3 offset = new Vector3(0f, 3.75f, 0f); // offset form the target object
 
     [SerializeField, Header("ターゲットとの距離")]
-    private float distance = 2.0f; // distance from following object
+    private float distance = 9.0f; // distance from following object
     [SerializeField, Header("X軸の回転")]
     private float polarAngle = 75.0f; // angle with y-axis
     [SerializeField, Header("Y軸の回転")]
@@ -33,9 +33,9 @@ public class FollowingCamera : MonoBehaviour
     [Space()]
 
     [SerializeField]
-    private float minDistance = 0.7f;
+    private float minDistance = 3.5f;
     [SerializeField]
-    private float maxDistance = 10.0f;
+    private float maxDistance = 20.0f;
     [SerializeField]
     private float minPolarAngle = 45.0f;
     [SerializeField]

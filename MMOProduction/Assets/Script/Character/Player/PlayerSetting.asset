@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PlayerSetting
   m_EditorClassIdentifier: 
   NormalSpeed: 5
-  DashSpeed: 10
+  DashSpeed: 12.5
   TurnSpeed: 0.3
   IsAnimator: 1
   LockOnDirection: 30
@@ -22,5 +22,3 @@ MonoBehaviour:
   LeftKey: 97
   RightKey: 100
   DashKey: 304
-  JumpKey: 32
-  AutoRunKey: 116
