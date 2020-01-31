@@ -8,14 +8,18 @@ Shader "Custom/UI/Minimap/MinimapRader"
 {
     Properties
     {
-        _MainTex ("Texture", 2D) = "white" {}
-        _Color ("Rader Color", Color) = (1, 1, 1, 1)
-        _Radius ("Rader Radius", Range(0, 1)) = 1
+        [HideInInspector]
+        _MainTex("Texture", 2D) = "white" {}
+        _TargetTex("Target Texture", 2D) = "white" {}
+        _RaderColor("Rader Color", Color) = (1, 1, 1, 1)
+        _RaderSize("Rader Size", Float) = 1
     }
     SubShader
     {
-        Tags { "RenderType"="Opaque" }
-        LOD 100
+        Tags
+        {
+            "RenderType" = "Opaque"
+        }
 
         Pass
         {
@@ -38,8 +42,9 @@ Shader "Custom/UI/Minimap/MinimapRader"
             };
 
             sampler2D _MainTex;
-            fixed4 _Color;
-            float _Radius;
+            sampler2D _TargetTex;
+            fixed4 _RaderColor;
+            fixed _RaderSize;
 
             v2f vert(appdata v)
             {
@@ -51,12 +56,16 @@ Shader "Custom/UI/Minimap/MinimapRader"
 
             fixed4 frag(v2f i) : SV_Target
             {
-                fixed4 col = tex2D(_MainTex, i.uv);
-                float d = distance(i.uv, float2(0.5, 0.5));
-                if (d <= _Radius)
+                // sample the texture
+                fixed4 col = tex2D(_TargetTex, i.uv);
+
+                // 中心にレーダーを表示
+                fixed dist = distance(fixed2(0.5, 0.5), i.uv);
+                if (dist <= _RaderSize)
                 {
-                    col = _Color;
+                    col.rgb *= _RaderColor;
                 }
+
                 return col;
             }
             ENDCG
