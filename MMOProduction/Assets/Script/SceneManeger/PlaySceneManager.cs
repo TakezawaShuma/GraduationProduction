@@ -119,7 +119,6 @@ public class PlaySceneManager : SceneManagerBase
                 // セーブデータを要請する。
                 wsp.Send(new Packes.SaveLoadCtoS(UserRecord.ID).ToJson());
                 wsp.Send(new Packes.LoadingAccessoryMasterSend(UserRecord.ID).ToJson());
-                wsp.Send(new Packes.GetParameterSend(UserRecord.ID).ToJson());
                 UserRecord.FAST = true;
 
             }
@@ -171,6 +170,7 @@ public class PlaySceneManager : SceneManagerBase
                 {
                     if (connectFlag)
                     {
+                        wsp.Send(new Packes.GetParameterSend(UserRecord.ID).ToJson());
                         SendPosition(playerData, (int)player.animationType);
                         SendStatus(UserRecord.ID, Packes.OBJECT_TYPE.PLAYER);
                         SendEnemyPosReq();
