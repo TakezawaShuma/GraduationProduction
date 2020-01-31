@@ -59,6 +59,11 @@ public class MapMovePoint : MonoBehaviour
             currentTime += Time.deltaTime;
             slider.value = currentTime;
         }
+        else
+        {
+            currentTime = 0;
+            slider.gameObject.SetActive(false);
+        }
     }
 
     private void OnTriggerExit(Collider other)

@@ -20,6 +20,9 @@ public class QuestInfo : MonoBehaviour
     [SerializeField, Header("リタイアボタン")]
     private GameObject retireButton = null;
 
+    [SerializeField, Header("キャンセルボタン")]
+    private GameObject cancelButton = null;
+
     private float currentTime = 0;
 
     private string questName = "";
@@ -50,11 +53,20 @@ public class QuestInfo : MonoBehaviour
                 if (UserRecord.MapID == MapID.Field)
                 {
                     retireButton.SetActive(true);
+                    cancelButton.SetActive(false);
+                }
+                else
+                {
+                    retireButton.SetActive(false);
+                    cancelButton.SetActive(true);
                 }
             }
             else
             {
+                questNameText.text = "";
+                detailText.text = "";
                 retireButton.SetActive(false);
+                cancelButton.SetActive(false);
             }
 
             if (timeHidden)
@@ -92,5 +104,11 @@ public class QuestInfo : MonoBehaviour
     public void Pin()
     {
         timeHidden = !timeHidden;
+    }
+
+    public void Cancel()
+    {
+        UserRecord.QuestID = 0;
+        UserRecord.NextMapId = MapID.Non;
     }
 }
