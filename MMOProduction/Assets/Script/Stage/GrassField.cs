@@ -106,22 +106,23 @@ public class GrassField : MonoBehaviour
 
     private void OnRenderObject()
     {
-        if (Camera.current.tag != "MainCamera") return;
+        if (Camera.current.tag == "MainCamera")
+        {
+            // テクスチャ・バッファをマテリアルに設定
+            _material.SetTexture("_MainTex", _property.texure);
+            _material.SetTexture("_HeightMap", _property.heightMap);
+            _material.SetTexture("_RampTex", _property.rampTex);
+            _material.SetColor("_ShadowColor", _property.shadowColor);
+            _material.SetVector("_Scale", _property.scale);
+            _material.SetVector("_Translation", _property.translation);
+            _material.SetVector("_HeightMapPoint", _property.heightMapPos);
+            _material.SetFloat("_HeightMapScale", _property.heightMapScale);
+            _material.SetBuffer("_Grass", _computeBuffer);
 
-        // テクスチャ・バッファをマテリアルに設定
-        _material.SetTexture("_MainTex", _property.texure);
-        _material.SetTexture("_HeightMap", _property.heightMap);
-        _material.SetTexture("_RampTex", _property.rampTex);
-        _material.SetColor("_ShadowColor", _property.shadowColor);
-        _material.SetVector("_Scale", _property.scale);
-        _material.SetVector("_Translation", _property.translation);
-        _material.SetVector("_HeightMapPoint", _property.heightMapPos);
-        _material.SetFloat("_HeightMapScale", _property.heightMapScale);
-        _material.SetBuffer("_Grass", _computeBuffer);
+            _material.SetPass(0);
 
-        _material.SetPass(0);
-
-        Graphics.DrawProcedural(MeshTopology.Points, _computeBuffer.count);
+            Graphics.DrawProcedural(MeshTopology.Points, _computeBuffer.count);
+        }
     }
 
     private void SafeRelease(ComputeBuffer cb)
