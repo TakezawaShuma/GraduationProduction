@@ -191,7 +191,7 @@ Shader "Custom/Grass"
                 //fixed3 shadow = half3(min((SHADOW_ATTENUATION(i) + _ShadowColor.rgb), 1));
                 //col *= fixed4(shadow, 1);
 
-                return col * 0.8;
+                return col * 0.6;
             }
             ENDCG
         }
