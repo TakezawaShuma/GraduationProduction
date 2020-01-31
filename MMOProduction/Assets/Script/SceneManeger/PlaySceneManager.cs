@@ -621,9 +621,12 @@ public class PlaySceneManager : SceneManagerBase
         }
         else if (UserRecord.ID != 0)
         {
-            Destroy(characters[_packet.user_id].gameObject);
-            characters.Remove(_packet.user_id);
-            Debug.Log(_packet.user_id + "さんがログアウトしたよ！");
+            if (characters.ContainsKey(_packet.user_id))
+            {
+                Destroy(characters[_packet.user_id].gameObject);
+                characters.Remove(_packet.user_id);
+                Debug.Log(_packet.user_id + "さんがログアウトしたよ！");
+            }
         }
     }
 
