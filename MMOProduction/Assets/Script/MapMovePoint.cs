@@ -32,7 +32,7 @@ public class MapMovePoint : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(currentTime > moveTime)
+        if(currentTime >= moveTime)
         {
             // ここでマップを移動
             manager = GameObject.Find("PlaySceneManager").GetComponent<PlaySceneManager>();
@@ -54,15 +54,22 @@ public class MapMovePoint : MonoBehaviour
     private void OnTriggerStay(Collider other)
     {
         // プレイヤーが移動ポイントに触れている間
-        if(other.tag == "Player" && UserRecord.NextMapId != MapID.Non)
+        if(other.tag == "Player")
         {
-            currentTime += Time.deltaTime;
-            slider.value = currentTime;
-        }
-        else
-        {
-            currentTime = 0;
-            slider.gameObject.SetActive(false);
+            if (UserRecord.NextMapId != MapID.Non)
+            {
+                currentTime += Time.deltaTime;
+                slider.value = currentTime;
+                if(slider.value >= moveTime)
+                {
+                    slider.value = moveTime;
+                }
+            }
+            else
+            {
+                currentTime = 0;
+                slider.gameObject.SetActive(false);
+            }
         }
     }
 
