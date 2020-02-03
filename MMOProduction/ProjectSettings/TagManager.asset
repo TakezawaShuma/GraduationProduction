@@ -1,44 +1,44 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
 --- !u!78 &1
-TagManager: 
+TagManager:
   serializedVersion: 2
   tags:
-  - Slot 
-  - Marker 
-  - Ground 
-  - Enemy 
-  - OtherPlayer 
-  - SandRoad 
-  - RockyPlace 
-  - SandyBeach 
-  - Grassland 
-  - Weapon 
-  - Undefined 
-  - Inventory 
-  - attacker 
-  - defense 
-  - Healer 
-  - Witch 
-  - Aur 
-  - Accessory 
+  - Slot
+  - Marker
+  - Ground
+  - Enemy
+  - OtherPlayer
+  - SandRoad
+  - RockyPlace
+  - SandyBeach
+  - Grassland
+  - Weapon
+  - Undefined
+  - Inventory
+  - attacker
+  - defense
+  - Healer
+  - Witch
+  - Aur
+  - Accessory
   layers:
   - Default
   - TransparentFX
-  -
-  -
-  -
+  - Ignore Raycast
+  - 
+  - Water
   - UI
   - 
   - 
-  - PostProcessing 
-  - MiniMapRader 
-  - PlayerModel 
+  - PostProcessing
+  - MiniMapRader
+  - PlayerModel
   - 
   - 
-  - Ground 
+  - Ground
   - 
-  - Obstacle 
+  - Obstacle
   - 
   - Marker
   - Player
@@ -48,6 +48,13 @@ TagManager:
   - RockyPlace
   - SandyBeach
   - Other
+  - 
+  - MovePoint
+  - 
+  - 
+  - 
+  - 
+  - 
   m_SortingLayers:
   - name: Default
     uniqueID: 0

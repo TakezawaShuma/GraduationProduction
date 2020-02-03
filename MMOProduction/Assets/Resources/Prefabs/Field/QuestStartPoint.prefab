@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2273517744275352232}
   - component: {fileID: 7201762910226874099}
   - component: {fileID: 2693499110504433310}
-  m_Layer: 0
+  m_Layer: 26
   m_Name: QuestStartPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -61,8 +61,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   moveTime: 5
   currentMapID: 1
-  text: {fileID: 0}
-  textUse: 1
+  slider: {fileID: 0}
 --- !u!1001 &2583540625216761925
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -74,6 +73,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: QuestStartPointEffect
+      objectReference: {fileID: 0}
+    - target: {fileID: 2273289693449278939, guid: 3c94b7ade02c3754182444a12be9252e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 26
       objectReference: {fileID: 0}
     - target: {fileID: 2273289693449278936, guid: 3c94b7ade02c3754182444a12be9252e,
         type: 3}
