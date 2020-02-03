@@ -38,6 +38,8 @@ public class MapMovePoint : MonoBehaviour
             manager = GameObject.Find("PlaySceneManager").GetComponent<PlaySceneManager>();
 
             manager.SendMoveMap(UserRecord.NextMapId);
+
+            currentTime = 0;
         }
     }
 
@@ -59,7 +61,7 @@ public class MapMovePoint : MonoBehaviour
             {
                 currentTime += Time.deltaTime;
                 slider.value = currentTime;
-                if(slider.value >= moveTime)
+                if(currentTime >= moveTime)
                 {
                     slider.value = moveTime;
                 }
