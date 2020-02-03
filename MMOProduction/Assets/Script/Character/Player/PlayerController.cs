@@ -24,8 +24,7 @@ public class PlayerController : MonoBehaviour
 
     [SerializeField, Header("チャットコントローラー")]
     private ChatController chatController = null;
-
-    private GameObject weapon = null;
+    
     private WeaponList weaponList = null;
 
 
@@ -98,9 +97,8 @@ public class PlayerController : MonoBehaviour
 
         // 初期武器を取得
         weaponList = GetComponent<WeaponList>();
-        weapon = weaponList.GetWeapons(0);
         // 武器リストから各種武器の参照を取得
-        Sword = weaponList.GetWeapons(0).GetComponent<Sword>();
+        Sword = weaponList.GetWeapon(0).GetComponent<Sword>();
 
         currentState = IdleState.Instance;
         currentState.Start();
