@@ -30,6 +30,9 @@ public class OtherPlayers: NonPlayer
     public int HP { get { return hp; } set { hp = value; } }
     public int MP { get { return mp; } set { mp = value; } }
 
+    [SerializeField]
+    private GameObject weapon;
+    public GameObject Weapon { get { return weapon; }set { weapon = value; } }
     //public int id = 0;
     //public void Init(int _i) { id = _i; }
 
@@ -41,6 +44,8 @@ public class OtherPlayers: NonPlayer
         am = new AnimatorManager();
         am.ANIMATOR = animator_;
         lastAnimation = animationType;
+
+        weapon = GetComponent<WeaponList>().GetWeapon(0);
     }
 
 
@@ -61,4 +66,12 @@ public class OtherPlayers: NonPlayer
             lastAnimation = animationType;
         }
     }
+
+    public void HideWeapon()
+    {
+        weapon.SetActive(false);
+        animationType = PlayerAnim.PARAMETER_ID.IDLE;
+    }
+
+
 }
