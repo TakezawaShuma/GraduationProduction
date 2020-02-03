@@ -265,10 +265,11 @@ public class PlaySceneManager : SceneManagerBase
         {
             if (characters[_packet.user_id] != null)
             {
-
-                Debug.Log(_packet.ToJson());
-                characters[_packet.user_id].UpdatePostionData(_packet.x, _packet.y, _packet.z, _packet.dir);
-                characters[_packet.user_id].ChangeAnimationType((PlayerAnim.PARAMETER_ID)_packet.animation);
+                NonPlayer nonPlayer = characters[_packet.user_id];
+                //Debug.Log(_packet.ToJson());
+                nonPlayer.UpdatePostionData(_packet.x, _packet.y, _packet.z, _packet.dir);
+                if ((PlayerAnim.PARAMETER_ID)_packet.animation == PlayerAnim.PARAMETER_ID.ATTACK) nonPlayer.GetComponent<OtherPlayers>().Weapon.SetActive(true);
+                nonPlayer.ChangeAnimationType((PlayerAnim.PARAMETER_ID)_packet.animation);
             }
         }
         // todo 他プレイヤーの更新と作成を関数分けする
@@ -289,7 +290,6 @@ public class PlaySceneManager : SceneManagerBase
     {
         if (this == null) return;
         GameObject avatar = characterModel.FindModel(CheckModel(_packet.model_id));
-        if (avatar == null) return;
 
         var otherPlayer = Instantiate<GameObject>
                           (avatar,
@@ -299,6 +299,7 @@ public class PlaySceneManager : SceneManagerBase
 
         GameObject name = Instantiate(nameUI, otherPlayer.transform);       // プレイヤーアイコン生成
         var other = otherPlayer.AddComponent<OtherPlayers>();               // OtherPlayerの追加
+        //other.Weapon = otherPlayer.gameObject.FindDeep("sword", true);
         name.GetComponent<OtherUserNameUI>().UserName = otherPlayer.name
                                                       = other.Name
                                                       = _packet.name;       // 名前の共通化
@@ -528,10 +529,12 @@ public class PlaySceneManager : SceneManagerBase
     /// 他プレイヤーのスキルを再生 → ???
     /// </summary>
     /// <param name="_paket"></param>
-    private void OthersUseSkills(Packes.OtherPlayerUseSkill _paket)
+    private void OthersUseSkills(Packes.OtherPlayerUseSkill _packet)
     {
         // todo
         // 他プレイヤーがスキルを使ったときの処理
+        OtherPlayers other = characters[_packet.user_id].GetComponent<OtherPlayers>();
+        other.animationType = PlayerAnim.PARAMETER_ID.ATTACK;
     }
 
     /// <summary>
@@ -619,14 +622,11 @@ public class PlaySceneManager : SceneManagerBase
             }
             ChangeScene("LoadingScene");
         }
-        else if (UserRecord.ID != 0)
+        else if (UserRecord.ID != 0 && characters.ContainsKey(_packet.user_id))
         {
-            if (characters.ContainsKey(_packet.user_id))
-            {
-                Destroy(characters[_packet.user_id].gameObject);
-                characters.Remove(_packet.user_id);
-                Debug.Log(_packet.user_id + "さんがログアウトしたよ！");
-            }
+            Destroy(characters[_packet.user_id].gameObject);
+            characters.Remove(_packet.user_id);
+            Debug.Log(_packet.user_id + "さんがログアウトしたよ！");
         }
     }
 
@@ -636,9 +636,12 @@ public class PlaySceneManager : SceneManagerBase
     /// <param name="_packet"></param>
     private void ReceivingFindResults(Packes.FindOfPlayerStoC _packet)
     {
+        Debug.Log("検索した。"+ _packet.user_id+ _packet.name);
+        if (characters.ContainsKey(_packet.user_id)) { Debug.Log("もういるよ"); return;}
+
         Debug.Log("検索の結果他プレイヤーを作成 -> " + _packet.user_id);
-        Packes.OtherPlayersData tmp = new Packes.OtherPlayersData(_packet.user_id, _packet.x, _packet.y, _packet.z, _packet.model_id, _packet.name);
-        CreateOtherPlayers(tmp);
+        CreateOtherPlayers(new Packes.OtherPlayersData(_packet.user_id, _packet.x, _packet.y, _packet.z, _packet.model_id, _packet.name));
+
     }
 
 

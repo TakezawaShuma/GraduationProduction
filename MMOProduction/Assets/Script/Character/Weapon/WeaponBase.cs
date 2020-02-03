@@ -4,5 +4,6 @@ using UnityEngine;
 
 public abstract class WeaponBase : MonoBehaviour
 {
+    public int weapon_id; 
 
 }
