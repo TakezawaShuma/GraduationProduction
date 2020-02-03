@@ -15,7 +15,7 @@ public class NonPlayer : CharacterBase
     protected skill_table skillTable;
 
     protected float nowFlame = 0;
-    public const float UPDATE_SPEED = 1.0f / 5.0f;
+    public const float UPDATE_SPEED = 1.0f / 9.0f;
 
     /// <summary>
     /// キャラクターの初期化設定
