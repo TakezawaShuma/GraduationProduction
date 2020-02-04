@@ -484,7 +484,8 @@ public class PlaySceneManager : SceneManagerBase
 
         Debug.Log("敵は生存している");
         Enemy enemy = characters[_packet.unique_id].GetComponent<Enemy>();
-        enemy.PlayTriggerAnimetion("Take Damage");
+        //enemy.PlayTriggerAnimetion("Take Damage");
+        enemy.enemyAnimType = EnemyAnim.PARAMETER_ID.DAMAGE;
         enemy.HP = _packet.hp;
 
         var damageValue = (int)_packet.damage_value;
@@ -514,7 +515,8 @@ public class PlaySceneManager : SceneManagerBase
             pc.RemoveTarget();
         }
         characters.Remove(_packet.unique_id);
-        enemy.PlayTriggerAnimetion("Die");
+        //enemy.PlayTriggerAnimetion("Die");
+        enemy.enemyAnimType = EnemyAnim.PARAMETER_ID.DIE;
 
         if (_packet.drop != 0)
         {
@@ -558,12 +560,11 @@ public class PlaySceneManager : SceneManagerBase
         Enemy enemy = characters[_packet.enemy_id].GetComponent<Enemy>();
         // enemy.PlayTriggerAnimetion("Attack");
         Debug.Log("スキルID : " + _packet.skill_id);
-        enemy.PlayAttackAnimation(_packet.skill_id);
+        enemy.enemyAnimType = EnemyAnim.PARAMETER_ID.ATTACK;
         //if (_packet.target_id == UserRecord.ID)
         //{
         if (enemy.Attacked(player.gameObject, _packet.skill_id))
         {
-            enemy.Attacked(player.gameObject, _packet.skill_id);
             Debug.Log("攻撃がヒットしたよ");
             wsp.Send(new Packes.Attack(UserRecord.ID, _packet.enemy_id, 0, 0).ToJson());
         }
