@@ -5,6 +5,8 @@ using UnityEngine;
 public class Enemy : NonPlayer
 {
 
+    protected EnemyAnim.PARAMETER_ID lastAnimation;
+    public EnemyAnim.PARAMETER_ID enemyAnimType = EnemyAnim.PARAMETER_ID.IDLE;
     public int HP { get { return hp; } set { hp = value; } }
     public int MP { get { return mp; } set { mp = value; } }
     
@@ -19,6 +21,8 @@ public class Enemy : NonPlayer
     // Start is called before the first frame update
     void Start()
     {
+        am = new AnimatorManager();
+        am.ANIMATOR = animator_;
         lastPos = transform.position;
         lastDir = transform.rotation;
     }
@@ -28,23 +32,50 @@ public class Enemy : NonPlayer
     {
         uIHP.UpdateHP(hp);
         LerpMove();
-
+        Animation();
     }
 
+    /// <summary>
+    /// 位置情報を更新する
+    /// </summary>
+    /// <param name="_x"></param>
+    /// <param name="_y"></param>
+    /// <param name="_z"></param>
+    /// <param name="_dir"></param>
+    public override void UpdatePostionData(float _x, float _y, float _z, float _dir)
+    {
+        // 向きを決める
+        lastDir = transform.rotation;
+        nextDir = Quaternion.Euler(0, _dir, 0);
+
+        // 位置を決める
+        lastPos = transform.position;
+        nextPos = new Vector3(_x, CheckSurface(_y), _z);
+        if (lastPos == nextPos)
+        {
+            enemyAnimType = EnemyAnim.PARAMETER_ID.IDLE;
+        }
+        else { enemyAnimType = EnemyAnim.PARAMETER_ID.WALK; }
+
+        // カウントを初期化
+        nowFlame = 0;
+    }
 
     // アニメーション関係
 
-    // アニメーションの種類
-    enum EnemyAnimetionType
+
+
+    /// <summary>
+    /// アニメーションの再生
+    /// </summary>
+    private void Animation()
     {
-        Attack01,
-        Damage,
-        Dei,
-
-        Idol,
-        Non
+        if (lastAnimation != enemyAnimType)
+        {
+            am.AnimChange((int)enemyAnimType);
+            lastAnimation = enemyAnimType;
+        }
     }
-
 
     public void PlayAnimetion()
     {
@@ -88,6 +119,10 @@ public class Enemy : NonPlayer
         return false;
     }
 
+    public void ResetAnimation()
+    {
+        enemyAnimType = EnemyAnim.PARAMETER_ID.IDLE;
+    }
 
     public void DestroyMe()
     {

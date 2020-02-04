@@ -17,7 +17,6 @@ public class CharactorUI : MonoBehaviour
         {
             for (int i = 0; i < slots.Count; i++)
             {
-                Debug.Log(i + ":" + UserRecord.Accessorys[i]);
                 slots[i].ID = UserRecord.Accessorys[i];
                 if (slots[i].ID != -1)
                 {

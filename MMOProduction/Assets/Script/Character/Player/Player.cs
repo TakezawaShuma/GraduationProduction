@@ -9,8 +9,6 @@ using UnityEngine;
 [System.Serializable]
 public class Player : CharacterBase
 {
-    //[SerializeField, Header("プレイヤーの設定")]
-    //private PlayerSetting playerSetting;
 
     // 位置
     private Vector4 position = default(Vector4);
@@ -58,13 +56,17 @@ public class Player : CharacterBase
     }
 
 
-    public void UpdateStatus(int _maxHp, int _hp,int _maxMp,int _mp, int _status)
+    public void UpdateStatus(int _maxHp, int _hp, int _maxMp, int _mp, int _status)
     {
         hp = _hp;
         mp = _mp;
         Status = _status;
         maxHp = _maxHp;
         maxMp = _maxMp;
+    }
+    public void HideWeapon()
+    {
+
     }
 
 }
