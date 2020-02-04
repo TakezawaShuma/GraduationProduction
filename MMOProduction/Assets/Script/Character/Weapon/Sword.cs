@@ -12,10 +12,13 @@ public class Sword : WeaponBase
     [SerializeField]
     private GameObject _swordTrail = null;
 
+    private SwordTrailCreator _effect;
+
 
     private void Start()
     {
-        _swordTrail.SetActive(false);        
+        _swordTrail.SetActive(false);
+        _effect = _swordTrail.GetComponent<SwordTrailCreator>();
     }
 
     /// <summary>
@@ -23,7 +26,7 @@ public class Sword : WeaponBase
     /// </summary>
     public void PlayAttack()
     {
-        _swordTrail.SetActive(true);
+        _effect.On();
     }
 
     /// <summary>
@@ -31,7 +34,7 @@ public class Sword : WeaponBase
     /// </summary>
     public void StopAttack()
     {
-        _swordTrail.SetActive(false);
+        _effect.Off();
     }
 
     /// <summary>

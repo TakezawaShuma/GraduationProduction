@@ -61,15 +61,23 @@ public class SwordTrailCreator : MonoBehaviour
 
         // 各種コンポーネント
         _mesh = GetComponent<MeshFilter>().mesh;
+
+        // 自身のワールド座標におけるスケールに修正
+        // 手動（1.25, 1.25, 1.25）
+        //this.transform.localScale = new Vector3(
+        //    1 / (_parent.lossyScale.x * this.transform.lossyScale.x),
+        //    1 / (_parent.lossyScale.y * this.transform.lossyScale.y),
+        //    1 / (_parent.lossyScale.z * this.transform.lossyScale.z)
+        //    );
     }
 
     private void LateUpdate()
     {
         // 座標のリセット（メッシュの生成位置をずらさないため）
         //this.transform.localScale = new Vector3(
-        //    1 / _parent.localScale.x,
-        //    1 / _parent.localScale.y,
-        //    1 / _parent.localScale.z
+        //    1 * _parent.localScale.x,
+        //    1 * _parent.localScale.y,
+        //    1 * _parent.localScale.z
         //    );
         this.transform.rotation = Quaternion.Euler(0, 0, 0);
         //this.transform.localRotation = Quaternion.Euler(0, 0, 0);
@@ -144,5 +152,41 @@ public class SwordTrailCreator : MonoBehaviour
         // 再計算
         _mesh.RecalculateBounds();
         _mesh.RecalculateNormals();
+    }
+
+    /// <summary>
+    /// 活動開始
+    /// </summary>
+    public void On()
+    {
+        // アクティブ状態に
+        this.gameObject.SetActive(true);
+    }
+
+    /// <summary>
+    /// 活動停止
+    /// </summary>
+    public void Off()
+    {
+        ClearData();
+
+        // 非アクティブ状態に
+        this.gameObject.SetActive(false);
+    }
+
+    /// <summary>
+    /// 頂点座標・メッシュデータをクリアする
+    /// </summary>
+    private void ClearData()
+    {
+        _startPoints.Clear();
+        _endPoints.Clear();
+
+        // メッシュのクリア
+        _mesh.Clear();
+
+        // リストのクリア
+        _vertices.Clear();
+        _indices.Clear();
     }
 }
