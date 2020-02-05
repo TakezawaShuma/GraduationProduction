@@ -95,6 +95,7 @@ public class PlayerController : MonoBehaviour
         NormalAttackState.Instance.Initialized(this, playerSetting, animatorManager, player);
         SkillUsingState.Instance.Initialized(this, playerSetting, animatorManager, player);
         CombatState.Instance.Initialized(this, playerSetting, animatorManager, player);
+        DieState.Instance.Initialized(this, playerSetting, animatorManager, player);
 
         // 初期武器を取得
         weaponList = GetComponent<WeaponList>();
@@ -113,6 +114,9 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        // 死亡
+        if (player.hp <= 0) ChangeState(DieState.Instance);
+
         if (chatController == null || !chatController.IsChatActive())
         {
             if (target != null)
