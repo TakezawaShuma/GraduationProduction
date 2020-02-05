@@ -730,9 +730,7 @@ public class PlaySceneManager : SceneManagerBase
 
     private void PlayerDie(Packes.PlayerDie _data)
     {
-        // TODO: プレイヤー死亡処理
-        Debug.Log("はやかわ　たいき 1998年 4月 19日");
-        SendMoveMap(MapID.Base);
+        QuestRetire();
     }
 
     // 他プレイヤーのマップ移動
