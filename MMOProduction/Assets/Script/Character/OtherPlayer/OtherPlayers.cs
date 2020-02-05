@@ -27,12 +27,12 @@ public class OtherPlayers: NonPlayer
     private PlayerAnim.PARAMETER_ID lastAnimation;
     public int HP { get { return hp; } set { hp = value; } }
     public int MP { get { return mp; } set { mp = value; } }
-
-    [SerializeField]
+    
     private GameObject weapon;
     public GameObject Weapon { get { return weapon; }set { weapon = value; } }
-    //public int id = 0;
-    //public void Init(int _i) { id = _i; }
+
+
+    private bool isCombat;
 
     // Start is called before the first frame update
     void Start()
@@ -86,14 +86,47 @@ public class OtherPlayers: NonPlayer
         }
     }
 
+
+    public void HoldingWeapon()
+    {
+        weapon.SetActive(true);
+    }
+
     /// <summary>
     /// 武器を隠す
     /// </summary>
     public void HideWeapon()
     {
         weapon.SetActive(false);
-        animationType = PlayerAnim.PARAMETER_ID.IDLE;
     }
 
+    public void NextAnim(int _anim)
+    {
+        switch ((PlayerAnim.PARAMETER_ID)_anim)
+        {
+            case PlayerAnim.PARAMETER_ID.IDLE:
+                animationType = PlayerAnim.PARAMETER_ID.IDLE;
+                break;
+            case PlayerAnim.PARAMETER_ID.WALK:
+                animationType = PlayerAnim.PARAMETER_ID.WALK;
+                break;
+            case PlayerAnim.PARAMETER_ID.RUN:
+                animationType = PlayerAnim.PARAMETER_ID.RUN;
+                break;
+            case PlayerAnim.PARAMETER_ID.CONBAT:
+                animationType = PlayerAnim.PARAMETER_ID.CONBAT;
+                break;
+            case PlayerAnim.PARAMETER_ID.ATTACK:
+                animationType = PlayerAnim.PARAMETER_ID.ATTACK;
+                break;
+            case PlayerAnim.PARAMETER_ID.DIE:
+                animationType = PlayerAnim.PARAMETER_ID.CONBAT;
+                break;
+        }
+    }
 
+    void DestroyMe()
+    {
+        Destroy(this.gameObject);
+    }
 }
