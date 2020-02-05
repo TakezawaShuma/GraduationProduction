@@ -3926,6 +3926,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: sword
       objectReference: {fileID: 0}
+    - target: {fileID: 7790451391803476099, guid: a5b61410d7c33fb45b3be611b3482862,
+        type: 3}
+      propertyPath: _owner
+      value: 
+      objectReference: {fileID: 4820261348610004871}
     - target: {fileID: 5817937949196188410, guid: a5b61410d7c33fb45b3be611b3482862,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -3985,18 +3990,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalScale.y
       value: 0.18
-      objectReference: {fileID: 0}
-    - target: {fileID: 985596449, guid: a5b61410d7c33fb45b3be611b3482862, type: 3}
-      propertyPath: m_LocalScale.x
-      value: 1.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 985596449, guid: a5b61410d7c33fb45b3be611b3482862, type: 3}
-      propertyPath: m_LocalScale.y
-      value: 1.25
-      objectReference: {fileID: 0}
-    - target: {fileID: 985596449, guid: a5b61410d7c33fb45b3be611b3482862, type: 3}
-      propertyPath: m_LocalScale.z
-      value: 1.25
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a5b61410d7c33fb45b3be611b3482862, type: 3}

@@ -31,12 +31,10 @@ public class SwordTrailCreator : MonoBehaviour
 
 
     // 軌跡描画用の変換データ
-    [SerializeField]
     private Transform _startPoint = null;   // 剣元
-    [SerializeField]
     private Transform _endPoint = null;     // 剣先
-    [SerializeField]
-    private Transform _parent = null;       // このエフェクトの親オブジェクト
+    private Transform _owner = null;       // このエフェクトの親オブジェクト
+    public Transform Owner { get { return _owner; } set { _owner = value; } }
 
     // 頂点データリスト
     private List<Vertex> _vertices;
@@ -62,13 +60,7 @@ public class SwordTrailCreator : MonoBehaviour
         // 各種コンポーネント
         _mesh = GetComponent<MeshFilter>().mesh;
 
-        // 自身のワールド座標におけるスケールに修正
-        // 手動（1.25, 1.25, 1.25）
-        //this.transform.localScale = new Vector3(
-        //    1 / (_parent.lossyScale.x * this.transform.lossyScale.x),
-        //    1 / (_parent.lossyScale.y * this.transform.lossyScale.y),
-        //    1 / (_parent.lossyScale.z * this.transform.lossyScale.z)
-        //    );
+        Debug.Log("軌跡生成");
     }
 
     private void LateUpdate()
@@ -79,6 +71,7 @@ public class SwordTrailCreator : MonoBehaviour
         //    1 * _parent.localScale.y,
         //    1 * _parent.localScale.z
         //    );
+        this.transform.localScale = new Vector3(1, 1, 1);
         this.transform.rotation = Quaternion.Euler(0, 0, 0);
         //this.transform.localRotation = Quaternion.Euler(0, 0, 0);
         this.transform.position = new Vector3(0, 0, 0);
@@ -188,5 +181,11 @@ public class SwordTrailCreator : MonoBehaviour
         // リストのクリア
         _vertices.Clear();
         _indices.Clear();
+    }
+
+    public void SetPoint(Transform start, Transform end)
+    {
+        _startPoint = start;
+        _endPoint = end;
     }
 }
