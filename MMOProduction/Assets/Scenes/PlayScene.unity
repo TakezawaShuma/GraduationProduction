@@ -575,6 +575,18 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &577655741 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 891344934966012318, guid: 0c9678bc6dd9731468dcadc4c698a5f9,
+    type: 3}
+  m_PrefabInstance: {fileID: 4096359431347328965}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc78725bba25c7143bc738035d88a33d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &645858241
 GameObject:
   m_ObjectHideFlags: 0
@@ -636,7 +648,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4cb1b657d808c7b4583315bc0749e915, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  connectFlag: 1
+  connectFlag: 0
   characterModel: {fileID: 11400000, guid: 324f4e86b8b3bff4b99ae5c867aa456c, type: 2}
   enemyTable: {fileID: 11400000, guid: f386c039a56b44140a9842a5fa893b76, type: 2}
   skillTabe: {fileID: 11400000, guid: d2f11e41ac860894692481b991d94813, type: 2}
@@ -1293,7 +1305,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 992294604}
   m_LocalRotation: {x: 0.13043165, y: -0.000000005910209, z: 7.775206e-10, w: 0.99145734}
-  m_LocalPosition: {x: 0.0009495348, y: 62175.336, z: -79618.07}
+  m_LocalPosition: {x: 0.00095368153, y: 62418.46, z: -79965.88}
   m_LocalScale: {x: 1.5000008, y: 1.5000002, z: 1.5000006}
   m_Children: []
   m_Father: {fileID: 0}
@@ -2667,6 +2679,16 @@ PrefabInstance:
       propertyPath: m_Pivot.y
       value: 0.5
       objectReference: {fileID: 0}
+    - target: {fileID: 3266970890983044155, guid: 0c9678bc6dd9731468dcadc4c698a5f9,
+        type: 3}
+      propertyPath: connectFlag
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3266970890983044155, guid: 0c9678bc6dd9731468dcadc4c698a5f9,
+        type: 3}
+      propertyPath: manager
+      value: 
+      objectReference: {fileID: 577655741}
     - target: {fileID: 2333336982877152603, guid: 0c9678bc6dd9731468dcadc4c698a5f9,
         type: 3}
       propertyPath: m_AnchorMax.x
@@ -2690,7 +2712,7 @@ PrefabInstance:
     - target: {fileID: 2333336984517721263, guid: 0c9678bc6dd9731468dcadc4c698a5f9,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0.000030517578
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2333336984517721263, guid: 0c9678bc6dd9731468dcadc4c698a5f9,
         type: 3}

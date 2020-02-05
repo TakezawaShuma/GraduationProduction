@@ -30,19 +30,6 @@ public class ChatMessageController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (controller.IsChatActive())
-        {
-            if (InputManager.InputKeyCheckDown(KeyCode.Return) && messageInput.text != "")
-            {
-                if (InputManager.InputKeyCheck(KeyCode.LeftControl) || InputManager.InputKeyCheck(KeyCode.RightControl))
-                {
-                    SendInputMassege(messageInput.text);
-                    messageInput.text = "";
-                    EventSystem.current.SetSelectedGameObject(null);
-                    EventSystem.current.SetSelectedGameObject(InputField);
-                }
-            }
-        }
     }
 
     // チャットログの更新
@@ -75,12 +62,23 @@ public class ChatMessageController : MonoBehaviour
         AddChatLog(massege);
     }
 
-    private void SendInputMassege(string _massege)
+    public void SendInputMassege()
     {
+
         string name = UserRecord.Name.ToString();
-        Packes.SendAllChat mag = new Packes.SendAllChat(name, _massege);
-        WS.WsChat.Instance.Send(Json.ConvertToJson(mag)); 
+        Packes.SendAllChat mag = new Packes.SendAllChat(name, messageInput.text);
+        WS.WsChat.Instance.Send(Json.ConvertToJson(mag));
+
+        messageInput.text = "";
+        EventSystem.current.SetSelectedGameObject(null);
+        EventSystem.current.SetSelectedGameObject(InputField);
+
     }
 
-
+    public bool IsTextCheck() {
+        if(messageInput.text == "") {
+            return false;
+        }
+        return true;
+    }
 }
