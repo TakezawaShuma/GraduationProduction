@@ -296,7 +296,8 @@ public class PlaySceneManager : SceneManagerBase
                           Vector3.zero,
                           Quaternion.Euler(0, 0, 0),
                           this.transform);                                  // 本体生成
-
+        var mapData = MapDatas.FindOne(UserRecord.ID);
+        otherPlayer.transform.position = new Vector3(mapData.x, mapData.y, mapData.z);
         GameObject name = Instantiate(nameUI, otherPlayer.transform);       // プレイヤーアイコン生成
         var other = otherPlayer.AddComponent<OtherPlayers>();               // OtherPlayerの追加
         //other.Weapon = otherPlayer.gameObject.FindDeep("sword", true);
