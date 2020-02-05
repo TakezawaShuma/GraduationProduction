@@ -234,6 +234,26 @@ PrefabInstance:
       propertyPath: m_AnchorMax.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5410237545577637779, guid: 703aabb0e070d2b438cbb9d330b25623,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5410237545577637779, guid: 703aabb0e070d2b438cbb9d330b25623,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5410237545577637779, guid: 703aabb0e070d2b438cbb9d330b25623,
+        type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 5410237545577637779, guid: 703aabb0e070d2b438cbb9d330b25623,
+        type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 703aabb0e070d2b438cbb9d330b25623, type: 3}
 --- !u!114 &35458230 stripped
