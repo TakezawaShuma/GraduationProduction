@@ -2560,6 +2560,7 @@ MonoBehaviour:
   _footprintObj: {fileID: 1798921136249380850, guid: cd544bbd20865794389dfde5f6ce030d,
     type: 3}
   _updateDistanceNum: 1
+  _life: 0.5
 --- !u!1 &4689463479604495885
 GameObject:
   m_ObjectHideFlags: 0
@@ -3754,6 +3755,7 @@ MonoBehaviour:
   _footprintObj: {fileID: 1798921136249380850, guid: cd544bbd20865794389dfde5f6ce030d,
     type: 3}
   _updateDistanceNum: 1
+  _life: 0.5
 --- !u!1 &8698201050890601891
 GameObject:
   m_ObjectHideFlags: 0
@@ -3924,11 +3926,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: sword
       objectReference: {fileID: 0}
-    - target: {fileID: 5817937949196412634, guid: a5b61410d7c33fb45b3be611b3482862,
+    - target: {fileID: 7790451391803476099, guid: a5b61410d7c33fb45b3be611b3482862,
         type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
+      propertyPath: _owner
+      value: 
+      objectReference: {fileID: 4820261348610004871}
     - target: {fileID: 5817937949196188410, guid: a5b61410d7c33fb45b3be611b3482862,
         type: 3}
       propertyPath: m_LocalPosition.x
