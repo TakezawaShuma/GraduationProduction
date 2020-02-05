@@ -47,6 +47,7 @@ public class IdleState : BaseState
         {
             playerController.LockOn();
         }
+        playerController.NoMove();
     }
 
     /// <summary>

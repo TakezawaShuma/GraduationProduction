@@ -107,21 +107,26 @@ public class KeyMoveState : BaseState
 
         // 正規化
         velocity = velocity.normalized;
-        if (playerSetting.IA)
+
+        // 押していたらダッシュ
+        if (InputManager.InputKeyCheck(playerSetting.DKey))
         {
-            // 押していたらダッシュ
-            if (InputManager.InputKeyCheck(playerSetting.DKey))
+            if (playerSetting.IA)
             {
                 animatorManager.AnimChange((int)PlayerAnim.PARAMETER_ID.RUN);
                 player.animationType = PlayerAnim.PARAMETER_ID.RUN;
-                velocity *= playerSetting.DS;
             }
-            else
+            velocity *= playerSetting.DS;
+        }
+        else
+        {
+            if (playerSetting.IA)
             {
                 animatorManager.AnimChange((int)PlayerAnim.PARAMETER_ID.WALK);
                 player.animationType = PlayerAnim.PARAMETER_ID.WALK;
-                velocity *= playerSetting.NS;
             }
+            velocity *= playerSetting.NS;
         }
     }
 }
+

@@ -147,7 +147,7 @@ public class PlayerController : MonoBehaviour
 
     public void NoMove()
     {
-        if (target == null) { ChangeState(IdleState.Instance); return; }
+        //if (target == null) { ChangeState(IdleState.Instance); return; }
 
         Quaternion rot = player.Rotation;
 
