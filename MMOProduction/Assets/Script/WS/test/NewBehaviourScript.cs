@@ -27,52 +27,48 @@ public class NewBehaviourScript : MonoBehaviour
         if (Input.GetKeyDown(KeyCode.F1))
         {
             int count = 0;
-            foreach (var tmp in characterModel.tables)
-            {
-                CreateOtherPlayers(new Packes.OtherPlayersData(tmp.modelId, count * 2, 0, 0, tmp.modelId, "私"));
-                count++;
-            }
-            count = 0;
-            foreach (var tmp in enemyTable.tables)
-            {
-                CreateEnemys(new Packes.EnemyReceiveData(tmp.modelId, tmp.id, count * 2, 4, 0, 0, 0, 0));
-                count++;
-            }
+            CreateOtherPlayers(new Packes.OtherPlayersData(902, count * 2, 0, 0, 902, "私"));
+            //foreach (var tmp in characterModel.tables)
+            //{
+            //    CreateOtherPlayers(new Packes.OtherPlayersData(tmp.modelId, count * 2, 0, 0, tmp.modelId, "私"));
+            //    count++;
+            //}
+            //count = 0;
+            //foreach (var tmp in enemyTable.tables)
+            //{
+            //    CreateEnemys(new Packes.EnemyReceiveData(tmp.modelId, tmp.id, count * 2, 4, 0, 0, 0, 0));
+            //    count++;
+            //}
         }
         else if (Input.GetKeyDown(KeyCode.F2))
         {
-            foreach(var ene in enemys)
-            {
-                ene.enemyAnimType = EnemyAnim.PARAMETER_ID.IDLE;
-            }
+            foreach (var ene in others) { ene.animationType = PlayerAnim.PARAMETER_ID.IDLE; }
+            //foreach (var ene in enemys) { ene.enemyAnimType = EnemyAnim.PARAMETER_ID.IDLE; }
         }
         else if (Input.GetKeyDown(KeyCode.F3))
         {
-            foreach (var ene in enemys)
-            {
-                ene.enemyAnimType = EnemyAnim.PARAMETER_ID.WALK;
-            }
+            foreach (var ene in others) { ene.animationType = PlayerAnim.PARAMETER_ID.WALK; }
+            //foreach (var ene in enemys) { ene.enemyAnimType = EnemyAnim.PARAMETER_ID.WALK; }
         }
         else if (Input.GetKeyDown(KeyCode.F4))
         {
-            foreach (var ene in enemys)
-            {
-                ene.enemyAnimType = EnemyAnim.PARAMETER_ID.ATTACK;
-            }
+            foreach (var ene in others) { ene.animationType = PlayerAnim.PARAMETER_ID.RUN; }
+            //foreach (var ene in enemys) { ene.enemyAnimType = EnemyAnim.PARAMETER_ID.ATTACK; }
         }
         else if (Input.GetKeyDown(KeyCode.F5))
         {
-            foreach (var ene in enemys)
-            {
-                ene.enemyAnimType = EnemyAnim.PARAMETER_ID.DAMAGE;
-            }
+            foreach (var ene in others) { ene.animationType = PlayerAnim.PARAMETER_ID.CONBAT; }
+            //foreach (var ene in enemys) { ene.enemyAnimType = EnemyAnim.PARAMETER_ID.DAMAGE; }
         }
         else if (Input.GetKeyDown(KeyCode.F6))
         {
-            foreach (var ene in enemys)
-            {
-                ene.enemyAnimType = EnemyAnim.PARAMETER_ID.DIE;
-            }
+            foreach (var ene in others) { ene.animationType = PlayerAnim.PARAMETER_ID.ATTACK; }
+            //foreach (var ene in enemys) { ene.enemyAnimType = EnemyAnim.PARAMETER_ID.DIE; }
+        }
+        else if (Input.GetKeyDown(KeyCode.F7))
+        {
+            foreach (var ene in others) { ene.animationType = PlayerAnim.PARAMETER_ID.DIE; }
+            //foreach (var ene in enemys) { ene.enemyAnimType = EnemyAnim.PARAMETER_ID.DIE; }
         }
 
         else if (Input.GetKeyDown(KeyCode.F12))

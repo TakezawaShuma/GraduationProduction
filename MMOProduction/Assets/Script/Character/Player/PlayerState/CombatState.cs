@@ -1,12 +1,8 @@
-﻿//////////////////////////////////////
-// 待機状態のステートパターンクラス //
-//////////////////////////////////////
-
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class IdleState : BaseState
+public class CombatState :BaseState
 {
     private static BaseState instance;
 
@@ -16,7 +12,7 @@ public class IdleState : BaseState
         {
             if (instance == null)
             {
-                instance = new IdleState();
+                instance = new CombatState();
             }
 
             return instance;
@@ -32,8 +28,8 @@ public class IdleState : BaseState
     {
         if (playerSetting.IA)
         {
-            animatorManager.AnimChange((int)PlayerAnim.PARAMETER_ID.IDLE);
-            player.animationType = PlayerAnim.PARAMETER_ID.IDLE;
+            animatorManager.AnimChange((int)PlayerAnim.PARAMETER_ID.CONBAT);
+            player.animationType = PlayerAnim.PARAMETER_ID.CONBAT;
         }
 
         if (InputManager.InputKeyCheckDown(playerSetting.FKey) ||
@@ -43,12 +39,14 @@ public class IdleState : BaseState
         {
             playerController.ChangeState(KeyMoveState.Instance);
         }
-        if (InputManager.InputMouseCheckDown(0) == INPUT_MODE.PLAY)
+        else if (InputManager.InputMouseCheckDown(0) == INPUT_MODE.PLAY)
         {
-            playerController.LockOn();
+            playerController.ChangeState(NormalAttackState.Instance);
         }
-    }
 
+        playerController.NoMove();
+
+    }
     /// <summary>
     /// アニメーションの再生
     /// </summary>

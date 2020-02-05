@@ -18,7 +18,7 @@ public class KeyMoveState : BaseState
     {
         get
         {
-            if(instance == null)
+            if (instance == null)
             {
                 instance = new KeyMoveState();
             }
@@ -48,16 +48,27 @@ public class KeyMoveState : BaseState
             playerController.Move(velocity);
         }
 
-        if(!InputManager.InputKeyCheck(playerSetting.FKey) && 
-            !InputManager.InputKeyCheck(playerSetting.BKey) && 
-            !InputManager.InputKeyCheck(playerSetting.LKey) && 
+        if (!InputManager.InputKeyCheck(playerSetting.FKey) &&
+            !InputManager.InputKeyCheck(playerSetting.BKey) &&
+            !InputManager.InputKeyCheck(playerSetting.LKey) &&
             !InputManager.InputKeyCheck(playerSetting.RKey))
         {
-            playerController.ChangeState(IdleState.Instance);
+            if (!player.IsCombat) { playerController.ChangeState(IdleState.Instance); }
+            else { playerController.ChangeState(CombatState.Instance); }
         }
-        
-    }
 
+    }
+    /// <summary>
+    /// アニメーションの再生
+    /// </summary>
+    private void Animation(PlayerAnim.PARAMETER_ID _animationType)
+    {
+        if (player.lastAnimation != _animationType)
+        {
+            animatorManager.AnimChange((int)_animationType);
+            player.lastAnimation = _animationType;
+        }
+    }
     public override void End()
     {
     }
@@ -96,27 +107,21 @@ public class KeyMoveState : BaseState
 
         // 正規化
         velocity = velocity.normalized;
-
-        // 押していたらダッシュ
-        if (InputManager.InputKeyCheck(playerSetting.DKey))
+        if (playerSetting.IA)
         {
-            if (playerSetting.IA)
+            // 押していたらダッシュ
+            if (InputManager.InputKeyCheck(playerSetting.DKey))
             {
                 animatorManager.AnimChange((int)PlayerAnim.PARAMETER_ID.RUN);
                 player.animationType = PlayerAnim.PARAMETER_ID.RUN;
-
+                velocity *= playerSetting.DS;
             }
-            velocity *= playerSetting.DS;
-        }
-        else
-        {
-            if (playerSetting.IA)
+            else
             {
                 animatorManager.AnimChange((int)PlayerAnim.PARAMETER_ID.WALK);
                 player.animationType = PlayerAnim.PARAMETER_ID.WALK;
-
+                velocity *= playerSetting.NS;
             }
-            velocity *= playerSetting.NS;
         }
     }
 }

@@ -5920,7 +5920,7 @@ Animator:
   m_GameObject: {fileID: 1635607460761378293}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: ad62f069c49787140aa2cbd574c05363, type: 3}
-  m_Controller: {fileID: 9100000, guid: 39544d1ac9c7c5a41b609761cc73f464, type: 2}
+  m_Controller: {fileID: 9100000, guid: d00f265baa8408c4985e0d5a83657a6a, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -6296,6 +6296,16 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1635607460761731433}
     m_Modifications:
+    - target: {fileID: 5817937949196412634, guid: a5b61410d7c33fb45b3be611b3482862,
+        type: 3}
+      propertyPath: m_Name
+      value: sword
+      objectReference: {fileID: 0}
+    - target: {fileID: 5817937949196412634, guid: a5b61410d7c33fb45b3be611b3482862,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5817937949196188410, guid: a5b61410d7c33fb45b3be611b3482862,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -6349,16 +6359,6 @@ PrefabInstance:
     - target: {fileID: 5817937949196188410, guid: a5b61410d7c33fb45b3be611b3482862,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5817937949196412634, guid: a5b61410d7c33fb45b3be611b3482862,
-        type: 3}
-      propertyPath: m_Name
-      value: sword
-      objectReference: {fileID: 0}
-    - target: {fileID: 5817937949196412634, guid: a5b61410d7c33fb45b3be611b3482862,
-        type: 3}
-      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

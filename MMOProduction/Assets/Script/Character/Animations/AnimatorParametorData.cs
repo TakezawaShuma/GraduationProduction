@@ -5,6 +5,7 @@
         IDLE,
         WALK,
         RUN,
+        CONBAT,
         ATTACK,
         DIE,
     }

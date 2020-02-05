@@ -26,7 +26,7 @@ public class PlayerController : MonoBehaviour
     private ChatController chatController = null;
     
     private WeaponList weaponList = null;
-
+    
 
     // プレイヤーの武器プロパティ
     public Sword Sword { get; private set; }
@@ -94,6 +94,7 @@ public class PlayerController : MonoBehaviour
         AutoRunState.Instance.Initialized(this, playerSetting, animatorManager, player);
         NormalAttackState.Instance.Initialized(this, playerSetting, animatorManager, player);
         SkillUsingState.Instance.Initialized(this, playerSetting, animatorManager, player);
+        CombatState.Instance.Initialized(this, playerSetting, animatorManager, player);
 
         // 初期武器を取得
         weaponList = GetComponent<WeaponList>();
@@ -146,6 +147,8 @@ public class PlayerController : MonoBehaviour
 
     public void NoMove()
     {
+        if (target == null) { ChangeState(IdleState.Instance); return; }
+
         Quaternion rot = player.Rotation;
 
         if (lockState)
@@ -202,11 +205,9 @@ public class PlayerController : MonoBehaviour
 
     public void LockOn()
     {
-        if (EventSystem.current.IsPointerOverGameObject())
-        {
-            // かぶさってるので処理キャンセル
-            return;
-        }
+        // UIとかぶさってるので処理キャンセル
+        if (EventSystem.current.IsPointerOverGameObject()) return;
+
 
         bool noLock = false;
 
@@ -215,12 +216,14 @@ public class PlayerController : MonoBehaviour
         int layerNo = LayerMask.NameToLayer("Marker");
         int layerMask = 1 << layerNo;
 
+        // オブジェクトにヒットしたら
         if (Physics.Raycast(ray, out hit, playerSetting.LOD, layerMask))
         {
             Vector3 v = hit.transform.position - player.PositionV3;
 
             if (v.magnitude <= playerSetting.LOD)
             {
+                // 他にターゲットしている奴がいたら外す
                 if (target != null)
                 {
                     if (target != hit.collider.gameObject)
@@ -229,16 +232,18 @@ public class PlayerController : MonoBehaviour
                     }
                 }
 
+                // ターゲットを設定
                 target = hit.collider.gameObject;
 
-                if (target.GetComponent<Marker>().LOCK_OBSERVE)
-                {
-                    lockState = true;
-                }
+                // ターゲット時に注目するか？
+                lockState = target.GetComponent<Marker>().LOCK_OBSERVE;
+                //if (target.GetComponent<Marker>().LOCK_OBSERVE) { lockState = true; }
 
                 if (target.GetComponent<Marker>().STATE != Marker.State.Choice)
                 {
                     target.GetComponent<Marker>().STATE = Marker.State.Choice;
+
+                    // ターゲットしているものがEnemyならHP_UIなどを表示
                     if (target.GetComponent<Marker>().TYPE == Marker.Type.Enemy)
                     {
                         target.GetComponentInParent<Enemy>().UI_HP.On();
@@ -249,9 +254,12 @@ public class PlayerController : MonoBehaviour
                     target.GetComponent<Marker>().Execute(player.PositionV3);
                 }
 
+                // ターゲットのタイプがEnemyなら武器を出す
                 if (target.GetComponent<Marker>().TYPE == Marker.Type.Enemy)
                 {
                     mode = Mode.Battle;
+                    player.IsCombat = true;
+                    ChangeState(CombatState.Instance);
                     Sword.gameObject.SetActive(true);
                 }
 
@@ -303,15 +311,43 @@ public class PlayerController : MonoBehaviour
         target = null;
         lockState = false;
         followingCamera.LOCK = null;
-        ReleaseWeapon();
+        Debug.Log("IDLE");
+        player.IsCombat = false;
+        ChangeState(IdleState.Instance);
+        HideWeapon(); 
     }
 
-    public void ReleaseWeapon()
+
+    public void NextAnim(int _anim)
     {
-        if (target == null)
+        switch ((PlayerAnim.PARAMETER_ID)_anim)
         {
-            //weapon.gameObject.SetActive(false);
-            Sword.gameObject.SetActive(false);
+            case PlayerAnim.PARAMETER_ID.IDLE:
+                player.animationType = PlayerAnim.PARAMETER_ID.IDLE;
+                break;
+            case PlayerAnim.PARAMETER_ID.WALK:
+                player.animationType = PlayerAnim.PARAMETER_ID.WALK;
+                break;
+            case PlayerAnim.PARAMETER_ID.RUN:
+                player.animationType = PlayerAnim.PARAMETER_ID.RUN;
+                break;
+            case PlayerAnim.PARAMETER_ID.CONBAT:
+                player.animationType = PlayerAnim.PARAMETER_ID.CONBAT;
+                ChangeState(CombatState.Instance);
+                Sword.StopAttack();
+                break;
+            case PlayerAnim.PARAMETER_ID.ATTACK:
+                player.animationType = PlayerAnim.PARAMETER_ID.ATTACK;
+                break;
+            case PlayerAnim.PARAMETER_ID.DIE:
+                player.animationType = PlayerAnim.PARAMETER_ID.CONBAT;
+                break;
         }
     }
+
+    public void HideWeapon()
+    {
+        Sword.gameObject.SetActive(false);
+    }
+
 }

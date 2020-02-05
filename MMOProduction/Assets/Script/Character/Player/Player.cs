@@ -10,6 +10,8 @@ using UnityEngine;
 public class Player : CharacterBase
 {
 
+    private bool isCombat = false;
+    public bool IsCombat { get { return isCombat; } set { isCombat = value; } }
     // 位置
     private Vector4 position = default(Vector4);
     public Vector3 PositionV3 { get { return new Vector3(position.x, position.y, position.z); } }
@@ -39,6 +41,8 @@ public class Player : CharacterBase
     public Rigidbody Rigid { get { return playerRigid; } set { playerRigid = value; } }
 
 
+    public PlayerAnim.PARAMETER_ID lastAnimation;
+
     private void Start()
     {
         hp = mp = maxHp = maxMp = 1;
@@ -64,9 +68,10 @@ public class Player : CharacterBase
         maxHp = _maxHp;
         maxMp = _maxMp;
     }
-    public void HideWeapon()
+
+
+    void DestroyMe()
     {
-
+        Destroy(this.gameObject);
     }
-
 }

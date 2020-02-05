@@ -666,6 +666,7 @@ namespace Packes
         public int unique_id;
         /// <summary>与えたダメージ </summary>
         public float damage_value;
+        /// <summary>ラストアタックした人のID </summary>
         public int last_attack_id;
 
         /// <summary>デフォルトコンストラクタ</summary>

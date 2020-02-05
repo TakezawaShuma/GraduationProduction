@@ -532,11 +532,15 @@ public class PlaySceneManager : SceneManagerBase
             }
         }
         characters.Remove(_packet.unique_id);
-        //enemy.PlayTriggerAnimetion("Die");
+        // エネミーの死亡アニメーション
         enemy.enemyAnimType = EnemyAnim.PARAMETER_ID.DIE;
 
+        // ラストアタックが自分だったら
+        if (_packet.last_attack_id == UserRecord.ID)
+        {
         if (_packet.drop != 0) {
             inventory_.AddItem(_packet.drop);
+            }
         }
     }
 
