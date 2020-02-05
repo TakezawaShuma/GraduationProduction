@@ -508,11 +508,12 @@ public class PlaySceneManager : SceneManagerBase
         enemy.HP = 0;
 
         PlayerController pc = player.GetComponent<PlayerController>();
-        int target = pc.Target.GetComponentInParent<Enemy>().ID;
-
-        if (target == _packet.unique_id)
-        {
-            pc.RemoveTarget();
+        if(pc.Target != null) { 
+            int target = pc.Target.GetComponentInParent<Enemy>().ID;
+            if (target == _packet.unique_id)
+            {
+                pc.RemoveTarget();
+            }
         }
         characters.Remove(_packet.unique_id);
         //enemy.PlayTriggerAnimetion("Die");
