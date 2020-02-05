@@ -498,6 +498,7 @@ public class PlaySceneManager : SceneManagerBase
     /// <param name="_packet"></param>
     private void DeadEnemy(Packes.EnemyDieStoC _packet)
     {
+        Debug.Log(_packet.ToJson());
         // todo
         // 戦闘で計算後エネミーが死亡していたら
         // HPを0にして死亡エフェクトやドロップアイテムの取得
@@ -601,7 +602,8 @@ public class PlaySceneManager : SceneManagerBase
     private void MovingMap(Packes.MoveingMapOk _packet)
     {
         UserRecord.MapID = (MapID)_packet.mapId;
-        Debug.Log(_packet.ToJson());
+        UserRecord.Inventory = inventory_.AllItem();
+        UserRecord.Accessorys = accessory.AllAccessory();
         ChangeScene("LoadingScene");
     }
 
