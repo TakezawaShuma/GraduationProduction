@@ -487,9 +487,15 @@ public class PlaySceneManager : SceneManagerBase
         //enemy.PlayTriggerAnimetion("Take Damage");
         enemy.enemyAnimType = EnemyAnim.PARAMETER_ID.DAMAGE;
         enemy.HP = _packet.hp;
-
-        var damageValue = (int)_packet.damage_value;
-        uiManager.GetComponent<Damage>().CreateDamageUI(new Vector3(0, 0, 0), damageValue);
+        
+        PlayerController pc = player.GetComponent<PlayerController>();
+        if (pc.Target != null) {
+            int target = pc.Target.GetComponentInParent<Enemy>().ID;
+            if (target == _packet.unique_id) {
+                var damageValue = (int)_packet.damage_value;
+                uiManager.GetComponent<Damage>().CreateDamageUI(new Vector3(0, 0, 0), damageValue);
+            }
+        }
     }
 
     /// <summary>
@@ -509,23 +515,21 @@ public class PlaySceneManager : SceneManagerBase
         enemy.HP = 0;
 
         PlayerController pc = player.GetComponent<PlayerController>();
-        int target = pc.Target.GetComponentInParent<Enemy>().ID;
-
-        if (target == _packet.unique_id)
-        {
-            pc.RemoveTarget();
+        if(pc.Target != null) { 
+            int target = pc.Target.GetComponentInParent<Enemy>().ID;
+            if (target == _packet.unique_id) {
+                var damageValue = (int)_packet.damage_value;
+                uiManager.GetComponent<Damage>().CreateDamageUI(new Vector3(0, 0, 0), damageValue);
+                pc.RemoveTarget();
+            }
         }
         characters.Remove(_packet.unique_id);
         //enemy.PlayTriggerAnimetion("Die");
         enemy.enemyAnimType = EnemyAnim.PARAMETER_ID.DIE;
 
-        if (_packet.drop != 0)
-        {
+        if (_packet.drop != 0) {
             inventory_.AddItem(_packet.drop);
         }
-
-        var damageValue = (int)_packet.damage_value;
-        uiManager.GetComponent<Damage>().CreateDamageUI(new Vector3(0, 0, 0), damageValue);
     }
 
     /// <summary>
