@@ -735,6 +735,13 @@ public class PlaySceneManager : SceneManagerBase
         SendMoveMap(MapID.Base);
     }
 
+    // 他プレイヤーのマップ移動
+    private void MoveingMapExitOtherAction(Packes.MoveingMapExitOther _data) {
+        Destroy(characters[_data.user_id].gameObject);
+        characters.Remove(_data.user_id);
+        Debug.Log(_data.user_id + "さんが移動したよ！");
+    }
+
     /// <summary>
     /// コールバックを設定
     /// </summary>
@@ -759,6 +766,7 @@ public class PlaySceneManager : SceneManagerBase
         wsp.questClearAction = QuestClearAction;                    // 242
 
         wsp.mapAction = MovingMap;                                  // 252
+        wsp.moveingMapExitOtherAction = MoveingMapExitOtherAction;
 
         wsp.logoutAction = Logout;                                  // 707
 
