@@ -654,6 +654,7 @@ MonoBehaviour:
   questResult: {fileID: 733438146}
   statusManager: {fileID: 306189712}
   stages: {fileID: 11400000, guid: d6b9d9e9889f05247b689facd722294a, type: 2}
+  CancelButton: {fileID: 1490612622}
   inventory_: {fileID: 44066666}
   accessory: {fileID: 927477248}
 --- !u!114 &645858245
@@ -1292,7 +1293,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 992294604}
   m_LocalRotation: {x: 0.13043165, y: -0.000000005910209, z: 7.775206e-10, w: 0.99145734}
-  m_LocalPosition: {x: 0.00090070727, y: 59312.54, z: -75522.58}
+  m_LocalPosition: {x: 0.0009495348, y: 62175.336, z: -79618.07}
   m_LocalScale: {x: 1.5000008, y: 1.5000002, z: 1.5000006}
   m_Children: []
   m_Father: {fileID: 0}
@@ -1819,6 +1820,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   defoSprite: {fileID: 0}
+--- !u!1 &1490612622 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7365177635260845796, guid: 1dba9fb859ac0d0459da284b1f787ace,
+    type: 3}
+  m_PrefabInstance: {fileID: 3349917795832867408}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1533655884
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2381,6 +2388,36 @@ PrefabInstance:
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 6332213515015448530, guid: 1dba9fb859ac0d0459da284b1f787ace,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6332213515015448530, guid: 1dba9fb859ac0d0459da284b1f787ace,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6332213515015448530, guid: 1dba9fb859ac0d0459da284b1f787ace,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6332213515015448530, guid: 1dba9fb859ac0d0459da284b1f787ace,
+        type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 97
+      objectReference: {fileID: 0}
+    - target: {fileID: 6332213515015448530, guid: 1dba9fb859ac0d0459da284b1f787ace,
+        type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 3411872805482751969, guid: 1dba9fb859ac0d0459da284b1f787ace,
+        type: 3}
+      propertyPath: m_Text
+      value: "\u30AD\u30E3\u30F3\u30BB\u30EB"
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1dba9fb859ac0d0459da284b1f787ace, type: 3}

@@ -88,6 +88,9 @@ public class PlaySceneManager : SceneManagerBase
 
     //private bool isLogout = true;
 
+    //キャンセルボタン
+    public GameObject CancelButton;
+
     private void Awake()
     {
         // ステージの作成
@@ -109,6 +112,9 @@ public class PlaySceneManager : SceneManagerBase
     {
         // ユーザーID
         var user_id = UserRecord.ID;
+
+        //キャンセルボタンを非表示
+        CancelButton.SetActive(false);
 
         if (connectFlag)
         {
@@ -162,6 +168,7 @@ public class PlaySceneManager : SceneManagerBase
         // 
         if (ready.CheckReady())
         {
+            
             //ready.ReadyGO();
             if (player != null)
             {
