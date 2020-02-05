@@ -17,7 +17,7 @@ Shader "Custom/Grass"
                 "RenderType" = "Opaque"
                 "LightMode" = "ForwardBase"
             }
-
+            
             CGPROGRAM
             #pragma target 5.0
 
@@ -30,7 +30,7 @@ Shader "Custom/Grass"
             #include "UnityCG.cginc"
             #include "Lighting.cginc"
             #include "AutoLight.cginc"
-
+            
             struct Grass
             {
                 float3 startPos;
