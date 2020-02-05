@@ -303,7 +303,8 @@ public class PlaySceneManager : SceneManagerBase
                           Vector3.zero,
                           Quaternion.Euler(0, 0, 0),
                           this.transform);                                  // 本体生成
-
+        var mapData = MapDatas.FindOne(UserRecord.ID);
+        otherPlayer.transform.position = new Vector3(mapData.x, mapData.y, mapData.z);
         GameObject name = Instantiate(nameUI, otherPlayer.transform);       // プレイヤーアイコン生成
         var other = otherPlayer.AddComponent<OtherPlayers>();               // OtherPlayerの追加
         //other.Weapon = otherPlayer.gameObject.FindDeep("sword", true);
@@ -741,6 +742,13 @@ public class PlaySceneManager : SceneManagerBase
         SendMoveMap(MapID.Base);
     }
 
+    // 他プレイヤーのマップ移動
+    private void MoveingMapExitOtherAction(Packes.MoveingMapExitOther _data) {
+        Destroy(characters[_data.user_id].gameObject);
+        characters.Remove(_data.user_id);
+        Debug.Log(_data.user_id + "さんが移動したよ！");
+    }
+
     /// <summary>
     /// コールバックを設定
     /// </summary>
@@ -765,6 +773,7 @@ public class PlaySceneManager : SceneManagerBase
         wsp.questClearAction = QuestClearAction;                    // 242
 
         wsp.mapAction = MovingMap;                                  // 252
+        wsp.moveingMapExitOtherAction = MoveingMapExitOtherAction;
 
         wsp.logoutAction = Logout;                                  // 707
 

@@ -31,12 +31,10 @@ public class SwordTrailCreator : MonoBehaviour
 
 
     // 軌跡描画用の変換データ
-    [SerializeField]
     private Transform _startPoint = null;   // 剣元
-    [SerializeField]
     private Transform _endPoint = null;     // 剣先
-    [SerializeField]
-    private Transform _parent = null;       // このエフェクトの親オブジェクト
+    private Transform _owner = null;       // このエフェクトの親オブジェクト
+    public Transform Owner { get { return _owner; } set { _owner = value; } }
 
     // 頂点データリスト
     private List<Vertex> _vertices;
@@ -61,16 +59,19 @@ public class SwordTrailCreator : MonoBehaviour
 
         // 各種コンポーネント
         _mesh = GetComponent<MeshFilter>().mesh;
+
+        Debug.Log("軌跡生成");
     }
 
     private void LateUpdate()
     {
         // 座標のリセット（メッシュの生成位置をずらさないため）
         //this.transform.localScale = new Vector3(
-        //    1 / _parent.localScale.x,
-        //    1 / _parent.localScale.y,
-        //    1 / _parent.localScale.z
+        //    1 * _parent.localScale.x,
+        //    1 * _parent.localScale.y,
+        //    1 * _parent.localScale.z
         //    );
+        this.transform.localScale = new Vector3(1, 1, 1);
         this.transform.rotation = Quaternion.Euler(0, 0, 0);
         //this.transform.localRotation = Quaternion.Euler(0, 0, 0);
         this.transform.position = new Vector3(0, 0, 0);
@@ -144,5 +145,47 @@ public class SwordTrailCreator : MonoBehaviour
         // 再計算
         _mesh.RecalculateBounds();
         _mesh.RecalculateNormals();
+    }
+
+    /// <summary>
+    /// 活動開始
+    /// </summary>
+    public void On()
+    {
+        // アクティブ状態に
+        this.gameObject.SetActive(true);
+    }
+
+    /// <summary>
+    /// 活動停止
+    /// </summary>
+    public void Off()
+    {
+        ClearData();
+
+        // 非アクティブ状態に
+        this.gameObject.SetActive(false);
+    }
+
+    /// <summary>
+    /// 頂点座標・メッシュデータをクリアする
+    /// </summary>
+    private void ClearData()
+    {
+        _startPoints.Clear();
+        _endPoints.Clear();
+
+        // メッシュのクリア
+        _mesh.Clear();
+
+        // リストのクリア
+        _vertices.Clear();
+        _indices.Clear();
+    }
+
+    public void SetPoint(Transform start, Transform end)
+    {
+        _startPoint = start;
+        _endPoint = end;
     }
 }

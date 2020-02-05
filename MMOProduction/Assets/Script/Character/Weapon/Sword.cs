@@ -12,10 +12,33 @@ public class Sword : WeaponBase
     [SerializeField]
     private GameObject _swordTrail = null;
 
+    [SerializeField]
+    private Transform _startPoint = null;
+    [SerializeField]
+    private Transform _endPoint = null;
+
+    [SerializeField]
+    private Transform _owner = null;
+
+    private SwordTrailCreator _effect;
+
 
     private void Start()
     {
-        _swordTrail.SetActive(false);        
+        // 剣の軌跡を作成
+        SwordTrailCreator newTrail = Instantiate(_swordTrail).GetComponent<SwordTrailCreator>();
+        newTrail.SetPoint(_startPoint, _endPoint);
+        newTrail.Owner = this.transform;
+        _effect = newTrail;
+        newTrail.gameObject.SetActive(false);
+    }
+
+    private void Update()
+    {
+        if (_effect == null)
+        {
+            Start();
+        }
     }
 
     /// <summary>
@@ -23,7 +46,7 @@ public class Sword : WeaponBase
     /// </summary>
     public void PlayAttack()
     {
-        _swordTrail.SetActive(true);
+        _effect.On();
     }
 
     /// <summary>
@@ -31,7 +54,7 @@ public class Sword : WeaponBase
     /// </summary>
     public void StopAttack()
     {
-        _swordTrail.SetActive(false);
+        _effect.Off();
     }
 
     /// <summary>
