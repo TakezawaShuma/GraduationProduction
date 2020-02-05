@@ -139,11 +139,13 @@ public class QuestBoardManager : MonoBehaviour
 
     public void Open()
     {
+        InputManager.QuestBoardMode();
         panel.gameObject.SetActive(true);
     }
 
     public void Close()
     {
+        InputManager.Release();
         panel.gameObject.SetActive(false);
     }
 

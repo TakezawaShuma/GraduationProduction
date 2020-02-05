@@ -15,6 +15,7 @@ public enum INPUT_MODE {
     TUTORIAL,
     CHAT,
     UI,
+    QUEST_BOARD,
 
     NOT,
 
@@ -56,7 +57,7 @@ public static class InputManager
     /// 押されたとき
     /// </summary>
     public static bool InputKeyCheckDown(KeyCode _code) {
-        if (type_ == INPUT_MODE.KEY_STOP || type_ == INPUT_MODE.ALL_STOP || 
+        if (type_ == INPUT_MODE.KEY_STOP || type_ == INPUT_MODE.ALL_STOP || type_ == INPUT_MODE.QUEST_BOARD ||
             (type_ == INPUT_MODE.CHAT && _code != KeyCode.Return)) 
             return false;
         
@@ -67,7 +68,7 @@ public static class InputManager
     /// 押されたとき
     /// </summary>
     public static bool InputKeyCheckDown(string _code) {
-        if (type_ == INPUT_MODE.KEY_STOP || type_ == INPUT_MODE.ALL_STOP || 
+        if (type_ == INPUT_MODE.KEY_STOP || type_ == INPUT_MODE.ALL_STOP || type_ == INPUT_MODE.QUEST_BOARD ||
             type_ == INPUT_MODE.CHAT) 
             return false;
         
@@ -78,7 +79,7 @@ public static class InputManager
     /// キー
     /// </summary>
     public static bool InputKeyCheck(KeyCode _code) {
-        if (type_ == INPUT_MODE.KEY_STOP || type_ == INPUT_MODE.ALL_STOP || 
+        if (type_ == INPUT_MODE.KEY_STOP || type_ == INPUT_MODE.ALL_STOP || type_ == INPUT_MODE.QUEST_BOARD ||
             (type_ == INPUT_MODE.CHAT &&  (_code != KeyCode.LeftControl || _code != KeyCode.RightControl))) 
             return false;
 
@@ -128,4 +129,5 @@ public static class InputManager
     public static void FriezeAll() => type_ = INPUT_MODE.ALL_STOP;
     public static void ChatMode() => type_ = INPUT_MODE.CHAT;
     public static void Release() => type_ = INPUT_MODE.NONE;
+    public static void QuestBoardMode() => type_ = INPUT_MODE.QUEST_BOARD;
 }
