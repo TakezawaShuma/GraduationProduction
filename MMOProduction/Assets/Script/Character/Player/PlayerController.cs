@@ -262,7 +262,7 @@ public class PlayerController : MonoBehaviour
                     mode = Mode.Battle;
                     player.IsCombat = true;
                     ChangeState(CombatState.Instance);
-                    Sword.gameObject.SetActive(true);
+                    //Sword.gameObject.SetActive(true);
                 }
 
                 followingCamera.LOCK = target;
@@ -302,6 +302,7 @@ public class PlayerController : MonoBehaviour
     public void RemoveTarget()
     {
         mode = Mode.Normal;
+        ChangeState(IdleState.Instance);
         if (target)
         {
             target.GetComponent<Marker>().STATE = Marker.State.None;
@@ -315,8 +316,6 @@ public class PlayerController : MonoBehaviour
         followingCamera.LOCK = null;
         Debug.Log("IDLE");
         player.IsCombat = false;
-        //ChangeState(IdleState.Instance);
-        HideWeapon();
     }
 
 
