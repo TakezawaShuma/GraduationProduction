@@ -586,7 +586,10 @@ public class PlaySceneManager : SceneManagerBase
         if (enemy.Attacked(player.gameObject, _packet.skill_id))
         {
             Debug.Log("攻撃がヒットしたよ");
-            wsp.Send(new Packes.Attack(UserRecord.ID, _packet.enemy_id, 0, 0).ToJson());
+            if (player.hp > 0)
+            {
+                wsp.Send(new Packes.Attack(UserRecord.ID, _packet.enemy_id, 0, 0).ToJson());
+            }
         }
         //}
     }
@@ -742,9 +745,15 @@ public class PlaySceneManager : SceneManagerBase
         player.VIT = _data.vit;
     }
 
+    /// <summary>
+    /// プレイヤーの死亡 → 
+    /// </summary>
+    /// <param name="_data"></param>
     private void PlayerDie(Packes.PlayerDie _data)
     {
         QuestRetire();
+        player.GetComponent<PlayerController>().RemoveTarget();
+        player.GetComponent<PlayerController>().ChangeState(DieState.Instance);
     }
 
     // 他プレイヤーのマップ移動
