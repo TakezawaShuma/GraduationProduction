@@ -132,11 +132,13 @@ public class PlaySceneManager : SceneManagerBase
             {
                 if (MakePlayer(new Vector3(-210, 0, -210), UserRecord.MODEL))
                 {
+                    inventory_.ChangeItems(UserRecord.Inventory);
+                    accessory.SetAccessorys(inventory_, UserRecord.Accessorys);
                     updateFlag = true;
                     ready.ReadyGO();
                 }
             }
-
+            wsp.Send(new Packes.GetInventory(UserRecord.ID).ToJson());
         }
         else { MakePlayer(new Vector3(-210, 5, -210), characterModel.FindModel(CheckModel(0))); }
         questResult.SetScenes(this);
@@ -765,6 +767,10 @@ public class PlaySceneManager : SceneManagerBase
         Debug.Log(_data.user_id + "さんが移動したよ！");
     }
 
+    private void InventoryListAction(Packes.InventoryList _data) { 
+        
+    }
+
     /// <summary>
     /// コールバックを設定
     /// </summary>
@@ -785,7 +791,7 @@ public class PlaySceneManager : SceneManagerBase
         wsp.enemySkillReqAction = EnemyUseSkillRequest;             // 225
         wsp.enemyUseSkillAction = EnemyUseSkill;                    // 226
         wsp.enemyAttackAction = EnemyAttackResult;                  // 227
-
+        wsp.inventoryListAction = InventoryListAction;
         wsp.questClearAction = QuestClearAction;                    // 242
 
         wsp.mapAction = MovingMap;                                  // 252
