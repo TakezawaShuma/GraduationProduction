@@ -187,11 +187,6 @@ public class PlaySceneManager : SceneManagerBase
                 }
             }
         }
-        if (Input.GetKeyDown(KeyCode.F2)) questResult.SetQuestFailed(Time.time);
-        if (Input.GetKeyDown(KeyCode.F3)) questResult.SetQuestCrear(Time.time);
-        if (Input.GetKeyDown(KeyCode.F4)) wsp.WsStatus();
-        if (Input.GetKeyDown(KeyCode.F12)) SendMoveMap(MapID.Field);
-        if (Input.GetKeyDown(KeyCode.F11)) SendMoveMap(MapID.Base);
     }
 
     public void QuestRetire()
