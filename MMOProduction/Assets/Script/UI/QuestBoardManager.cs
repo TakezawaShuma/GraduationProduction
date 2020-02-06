@@ -59,6 +59,12 @@ public class QuestBoardManager : MonoBehaviour
             gameObject.GetComponent<Toggle>().onValueChanged.AddListener(SetMapID);
 
             toggles.Add(gameObject);
+
+            if (count == 0)
+            {
+                gameObject.GetComponent<Toggle>().isOn = true;
+            }
+
             count++;
         }
 
@@ -75,7 +81,7 @@ public class QuestBoardManager : MonoBehaviour
             SetMapID(true);
         }
 
-        foreach(GameObject toggle in toggles)
+        foreach (GameObject toggle in toggles)
         {
             Packes.QuestMasterData data = toggle.GetComponent<QuestToggle>().data;
 
