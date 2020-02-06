@@ -114,9 +114,6 @@ public class PlayerController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // 死亡
-        if (player.hp <= 0) ChangeState(DieState.Instance);
-
         if (chatController == null || !chatController.IsChatActive())
         {
             if (target != null)
@@ -125,28 +122,19 @@ public class PlayerController : MonoBehaviour
 
                 if (v.magnitude > playerSetting.LOD - 7)
                 {
-                    RemoveTarget();
+                    if (typeof(DieState) != currentState.GetType()) RemoveTarget();
                 }
             }
 
             if (InputManager.InputMouseCheckDown(1) == INPUT_MODE.PLAY && target != null)
             {
-                RemoveTarget();
+                if (typeof(DieState) != currentState.GetType()) RemoveTarget();
             }
-
+            // 死亡
+            if (player.hp <= 0) ChangeState(DieState.Instance);
             currentState.Execute();
         }
 
-        // デバッグ スキル使用
-        // ファイア・ボール
-        if (InputManager.InputKeyCheckDown(KeyCode.Alpha1))
-        {
-            Vector3 pos = player.PositionV3;
-            pos.y += 2;
-            pos += player.transform.forward * 1;
-            Quaternion rot = player.Rotation;
-            SkillHandler.Instance.RequestToUseSkill(SkillID.MiniIce, gameObject, pos, rot);
-        }
     }
 
     public void NoMove()
@@ -232,7 +220,7 @@ public class PlayerController : MonoBehaviour
                 {
                     if (target != hit.collider.gameObject)
                     {
-                        RemoveTarget();
+                        if (typeof(DieState) != currentState.GetType()) RemoveTarget();
                     }
                 }
 
@@ -281,7 +269,7 @@ public class PlayerController : MonoBehaviour
 
         if (noLock && mode == Mode.Normal)
         {
-            RemoveTarget();
+            if (typeof(DieState) != currentState.GetType()) RemoveTarget();
         }
     }
 
@@ -344,7 +332,7 @@ public class PlayerController : MonoBehaviour
                 player.animationType = PlayerAnim.PARAMETER_ID.ATTACK;
                 break;
             case PlayerAnim.PARAMETER_ID.DIE:
-                player.animationType = PlayerAnim.PARAMETER_ID.CONBAT;
+                player.animationType = PlayerAnim.PARAMETER_ID.DIE;
                 break;
         }
     }
