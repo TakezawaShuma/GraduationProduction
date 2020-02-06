@@ -315,7 +315,7 @@ public class PlayerController : MonoBehaviour
         followingCamera.LOCK = null;
         Debug.Log("IDLE");
         player.IsCombat = false;
-        ChangeState(IdleState.Instance);
+        //ChangeState(IdleState.Instance);
         HideWeapon();
     }
 
