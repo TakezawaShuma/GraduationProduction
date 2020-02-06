@@ -16,6 +16,7 @@ public static class MasterFileNameList {
     public static string accessory = "accessoryMaster";
     public static string map = "mapMaster";
     public static string quest = "questMaster";
+    public static string config = "config";
 }
 
 public class InputFile : MonoBehaviour
