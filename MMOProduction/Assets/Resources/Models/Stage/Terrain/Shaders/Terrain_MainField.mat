@@ -1,0 +1,61 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: Terrain_MainField
+  m_Shader: {fileID: 4800000, guid: 8d0cc8e66ac206a48b86b5536b988783, type: 3}
+  m_ShaderKeywords: _BAMP_MAPPING
+  m_LightmapFlags: 4
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _CaveAreaMap:
+        m_Texture: {fileID: 2800000, guid: 967bc8d4368eedd4ba6ee6d10dd6b3b2, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _CaveAreaTex:
+        m_Texture: {fileID: 2800000, guid: 70443e95631920748a542861b3c767cd, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _CoverageTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _HeightMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _MainTex:
+        m_Texture: {fileID: 2800000, guid: baa3187a03142a043a24cb6cf50b4170, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _NormalMap:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _RampTex:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _BampMapping: 1
+    - _BlendRatio: 1
+    - _Brightness: 0.5
+    - _HeightFactor: 0.02
+    - _ShadowThreshold: 0.5
+    - _ToonStrength: 0.5
+    m_Colors:
+    - _CaveColor: {r: 0.5, g: 0.5, b: 0.5, a: 1}
+    - _Color: {r: 0.6132076, g: 0.51197046, b: 0.51197046, a: 1}
+    - _ShadeColor: {r: 1, g: 1, b: 1, a: 1}
+    - _ShadowColor: {r: 0.6981132, g: 0.6981132, b: 0.6981132, a: 1}
