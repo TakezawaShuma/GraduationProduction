@@ -16,6 +16,7 @@ public static class MasterFileNameList {
     public static string accessory = "accessoryMaster";
     public static string map = "mapMaster";
     public static string quest = "questMaster";
+    public static string config = "config";
 }
 
 public class InputFile : MonoBehaviour
@@ -37,7 +38,7 @@ public class InputFile : MonoBehaviour
 
 
     static public string ReadFile(string _fileName, FILETYPE _type = FILETYPE.JSON) {
-        StreamReader sr = new StreamReader(Application.dataPath + _fileName + _type, false);
+        StreamReader sr = new StreamReader(Application.dataPath + _fileName + fileType[(int)_type], false);
         string data = sr.ReadToEnd();
         sr.Close();
 

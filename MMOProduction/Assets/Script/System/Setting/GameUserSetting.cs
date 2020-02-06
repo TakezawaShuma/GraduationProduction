@@ -8,6 +8,12 @@ using UnityEngine.UI;
 /// </summary>
 public class GameUserSetting : MonoBehaviour
 {
+    public struct config_data {
+        public bool mute;
+        public float bgmVolume;
+        public float seVolume;
+    }
+
     [Header("ミュート設定項目"), SerializeField]
     private Toggle mute = null;
     [Header("BGM設定項目"), SerializeField]
@@ -22,6 +28,12 @@ public class GameUserSetting : MonoBehaviour
 
     [Header("BGM音"), SerializeField]
     private AudioSource backMusic = null;
+
+    private void Start()
+    {
+        //SaveConfig();
+        LoadConfig();
+    }
 
     public void Init(GameObject _player)
     {
@@ -45,10 +57,30 @@ public class GameUserSetting : MonoBehaviour
         systemSound_.SettingVolume(seVolume_.value);
 
         backMusic.volume = bgmVolume_.value;
+        SaveConfig();
     }
 
     public void LogoutClick()
     {
         WS.WsPlay.Instance.Logout();
+    }
+
+    private void LoadConfig() {
+        var dataJson = InputFile.ReadFile(MasterFileNameList.config, FILETYPE.JSON);
+        Debug.Log(dataJson);
+
+        if (string.IsNullOrEmpty(dataJson)) return;
+        config_data data    = JsonUtility.FromJson<config_data>(dataJson);
+        bgmVolume_.value    = data.bgmVolume;
+        seVolume_.value     = data.seVolume;
+        mute.isOn           = data.mute;
+    }
+
+    private void SaveConfig() {
+        config_data data;
+        data.bgmVolume  = bgmVolume_.value;
+        data.seVolume   = seVolume_.value;
+        data.mute       = mute.isOn;
+        InputFile.WriterJson(MasterFileNameList.config, JsonUtility.ToJson(data));
     }
 }
