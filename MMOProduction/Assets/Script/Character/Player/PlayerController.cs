@@ -345,6 +345,14 @@ public class PlayerController : MonoBehaviour
         }
     }
 
+
+    public void HoldingWeapon()
+    {
+        Sword.gameObject.SetActive(true);
+    }
+
+
+
     public void HideWeapon()
     {
         Sword.gameObject.SetActive(false);
