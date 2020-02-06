@@ -38,7 +38,7 @@ public class InputFile : MonoBehaviour
 
 
     static public string ReadFile(string _fileName, FILETYPE _type = FILETYPE.JSON) {
-        StreamReader sr = new StreamReader(Application.dataPath + _fileName + _type, false);
+        StreamReader sr = new StreamReader(Application.dataPath + _fileName + fileType[(int)_type], false);
         string data = sr.ReadToEnd();
         sr.Close();
 

@@ -32,7 +32,7 @@ public class GameUserSetting : MonoBehaviour
     private void Start()
     {
         //SaveConfig();
-        //LoadConfig();
+        LoadConfig();
     }
 
     public void Init(GameObject _player)
