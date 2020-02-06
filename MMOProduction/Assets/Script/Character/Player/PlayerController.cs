@@ -314,6 +314,7 @@ public class PlayerController : MonoBehaviour
         Debug.Log("IDLE");
         player.IsCombat = false;
         ChangeState(IdleState.Instance);
+        HideWeapon();
     }
 
 
@@ -333,7 +334,7 @@ public class PlayerController : MonoBehaviour
             case PlayerAnim.PARAMETER_ID.CONBAT:
                 player.animationType = PlayerAnim.PARAMETER_ID.CONBAT;
                 ChangeState(CombatState.Instance);
-                Sword.StopAttack();
+                //Sword.StopAttack();
                 break;
             case PlayerAnim.PARAMETER_ID.ATTACK:
                 player.animationType = PlayerAnim.PARAMETER_ID.ATTACK;
