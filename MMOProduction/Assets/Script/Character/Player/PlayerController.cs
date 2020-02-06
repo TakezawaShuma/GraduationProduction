@@ -151,7 +151,7 @@ public class PlayerController : MonoBehaviour
 
         Quaternion rot = player.Rotation;
 
-        if (lockState)
+        if (lockState && target != null)
         {
             Vector3 dir = target.transform.position - player.PositionV3;
             rot = Quaternion.Slerp(player.Rotation, Quaternion.LookRotation(dir), playerSetting.TS);
@@ -172,7 +172,7 @@ public class PlayerController : MonoBehaviour
         Quaternion rot = new Quaternion();
 
         Vector3 v = followingCamera.Angle * velocity;
-        if (lockState)
+        if (lockState && target != null)
         {
             Vector3 dir = target.transform.position - player.PositionV3;
             rot = Quaternion.Slerp(player.Rotation, Quaternion.LookRotation(dir), playerSetting.TS);
@@ -314,7 +314,6 @@ public class PlayerController : MonoBehaviour
         Debug.Log("IDLE");
         player.IsCombat = false;
         ChangeState(IdleState.Instance);
-        HideWeapon(); 
     }
 
 
