@@ -522,6 +522,7 @@ public class PlaySceneManager : SceneManagerBase
         Enemy enemy = characters[_packet.unique_id].GetComponent<Enemy>();
         enemy.HP = 0;
 
+        Debug.Log("敵が死んだよ");
         PlayerController pc = player.GetComponent<PlayerController>();
         if(pc.Target != null) { 
             int target = pc.Target.GetComponentInParent<Enemy>().ID;
@@ -529,6 +530,7 @@ public class PlaySceneManager : SceneManagerBase
                 var damageValue = (int)_packet.damage_value;
                 uiManager.GetComponent<Damage>().CreateDamageUI(new Vector3(0, 0, 0), damageValue);
                 pc.RemoveTarget();
+                Debug.Log("ターゲットを消したよ");
             }
         }
         characters.Remove(_packet.unique_id);
@@ -765,10 +767,10 @@ public class PlaySceneManager : SceneManagerBase
         wsp.loadSaveAction = ReceiveSaveData;                       // 212
         wsp.loadOtherListAction = ReceiveOtherListData;             // 214
         wsp.loadOtherAction = ReceiveOtherData;                     // 215
-        wsp.playerDieAction = PlayerDie;
 
         wsp.enemyAliveAction = AliveEnemy;                          // 221
         wsp.enemyDeadAction = DeadEnemy;                            // 222
+        wsp.playerDieAction = PlayerDie;                            // 223
         wsp.enemySkillReqAction = EnemyUseSkillRequest;             // 225
         wsp.enemyUseSkillAction = EnemyUseSkill;                    // 226
         wsp.enemyAttackAction = EnemyAttackResult;                  // 227
