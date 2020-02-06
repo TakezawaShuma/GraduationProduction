@@ -71,6 +71,8 @@ namespace WS
         public Action<Packes.GetParameter> getParameterAction;
         // プレイヤーの死亡
         public Action<Packes.PlayerDie> playerDieAction;
+        // インベの取得
+        public Action<Packes.InventoryList> inventoryListAction;
         public static WsPlay Instance
         {
             get
@@ -253,6 +255,9 @@ namespace WS
                             break;
                         case CommandData.MoveingMapExitOther:
                             moveingMapExitOtherAction?.Invoke(Json.ConvertToPackets<Packes.MoveingMapExitOther>(e.Data));
+                            break;
+                        case CommandData.InventoryList:
+                            inventoryListAction?.Invoke(Json.ConvertToPackets<Packes.InventoryList>(e.Data));
                             break;
                         // 随時追加
                         default:

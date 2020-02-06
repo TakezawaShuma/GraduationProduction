@@ -18,7 +18,6 @@ public static class UserRecord
     private static GameObject model = null;
     private static int questID = -1;
     private static List<int> inventory = new List<int>();
-    private static List<int> accessorys = new List<int>();
 
     public static int ID { get { return id; } set { if (id == 0) id = value; } }
     public static string Name { get { return name; } set { if (name == "") name = value; } }
@@ -28,7 +27,7 @@ public static class UserRecord
     public static GameObject MODEL { get { return model; } set { model = value; } }
     public static int QuestID { get { return questID; } set { questID = value; } }
     public static List<int> Inventory { get { return inventory; } set { inventory = value; } }
-    public static List<int> Accessorys { get { return accessorys; } set { accessorys = value; } }
+    public static List<int> Accessorys { get; set; } = new List<int>();
 
     public static void DiscardAll()
     {
@@ -41,6 +40,6 @@ public static class UserRecord
         model = null;
         questID = -1;
         inventory = new List<int>();
-        accessorys = new List<int>();
+        Accessorys = new List<int>();
     }
 }
