@@ -529,7 +529,9 @@ public class PlaySceneManager : SceneManagerBase
             if (target == _packet.unique_id) {
                 var damageValue = (int)_packet.damage_value;
                 uiManager.GetComponent<Damage>().CreateDamageUI(new Vector3(0, 0, 0), damageValue);
+                Debug.Log("IsCombat : "+player.IsCombat);
                 pc.RemoveTarget();
+                Debug.Log("IsCombat : " + player.IsCombat);
                 Debug.Log("ターゲットを消したよ");
             }
         }
