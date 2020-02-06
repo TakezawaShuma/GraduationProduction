@@ -10,6 +10,7 @@ struct Particle
     float life;
 };
 
+float _Time;
 float _DeltaTime;
 RWStructuredBuffer<Particle> _Particle;
 
@@ -19,11 +20,11 @@ void CSMain(uint3 id : SV_DispatchThreadID)
 {
     //_Particle[id.x].scale.x = distance(_CameraPos, _Particle[id.x].pos);
     
-    _Particle[id.x].pos += sin(_Particle[id.x].vel * _DeltaTime);
+    _Particle[id.x].pos += _Particle[id.x].vel * _DeltaTime * sin(_Time);
     //_Particle[id.x].scale.x -= _DeltaTime * _Particle[id.x].life * 0.01;
-    if (_Particle[id.x].scale.x <= 0.0)
-    {
-        _Particle[id.x].pos = _Particle[id.x].startPos;
-        _Particle[id.x].scale.x = 0.1;
-    }
+    //if (_Particle[id.x].scale.x <= 0.0)
+    //{
+    //    _Particle[id.x].pos = _Particle[id.x].startPos;
+    //    _Particle[id.x].scale.x = 0.1;
+    //}
 }

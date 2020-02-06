@@ -71,6 +71,7 @@ public class ForestParticle : MonoBehaviour
     private void Update()
     {
         _computeShader.SetBuffer(0, "_Particle", _computeBuffer);
+        _computeShader.SetFloat("_Time", Time.time);
         _computeShader.SetFloat("_DeltaTime", Time.deltaTime);
         _computeShader.Dispatch(0, _computeBuffer.count / 8 + 1, 1, 1);
     }
