@@ -2246,6 +2246,7 @@ GameObject:
   - component: {fileID: 4312106020259883379}
   - component: {fileID: 4312106020269235002}
   - component: {fileID: 4312106020269235000}
+  - component: {fileID: 578920893600514640}
   m_Layer: 0
   m_Name: Forest Wolf - Purple
   m_TagString: Untagged
@@ -2318,6 +2319,19 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 2
   m_Center: {x: 0, y: 0.47, z: 0}
+--- !u!114 &578920893600514640
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4312106020269235003}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55156e5040e8f3d4fb632192fca2a669, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  marker: {fileID: 3694927832477406535}
 --- !u!1 &4312106020269235007
 GameObject:
   m_ObjectHideFlags: 0
@@ -2447,6 +2461,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de596fb218a51844ca2c68f312682837, type: 3}
+--- !u!1 &3694927832477406535 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 694367849638356950, guid: de596fb218a51844ca2c68f312682837,
+    type: 3}
+  m_PrefabInstance: {fileID: 4244051833642840721}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3694927832477406532 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 694367849638356949, guid: de596fb218a51844ca2c68f312682837,

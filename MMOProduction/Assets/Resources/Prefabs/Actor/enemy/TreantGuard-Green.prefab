@@ -1623,6 +1623,7 @@ GameObject:
   - component: {fileID: 6837555480324350336}
   - component: {fileID: 6837555480317088743}
   - component: {fileID: 6837555480317088742}
+  - component: {fileID: 5927691293046278957}
   m_Layer: 0
   m_Name: TreantGuard-Green
   m_TagString: Untagged
@@ -1695,6 +1696,19 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 2
   m_Center: {x: 0, y: 1.47, z: 0}
+--- !u!114 &5927691293046278957
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6837555480317088736}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55156e5040e8f3d4fb632192fca2a669, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  marker: {fileID: 7135228684855470510}
 --- !u!1 &6837555480317088738
 GameObject:
   m_ObjectHideFlags: 0
@@ -6719,6 +6733,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de596fb218a51844ca2c68f312682837, type: 3}
+--- !u!1 &7135228684855470510 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 694367849638356950, guid: de596fb218a51844ca2c68f312682837,
+    type: 3}
+  m_PrefabInstance: {fileID: 7685268854617509496}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7135228684855470509 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 694367849638356949, guid: de596fb218a51844ca2c68f312682837,

@@ -6820,6 +6820,7 @@ GameObject:
   - component: {fileID: 5601390550380257831}
   - component: {fileID: 5601390550372864194}
   - component: {fileID: 5601390550372864204}
+  - component: {fileID: 1024326804009022695}
   m_Layer: 0
   m_Name: Nymph Fairy-Pink
   m_TagString: Untagged
@@ -6892,6 +6893,19 @@ CapsuleCollider:
   m_Height: 1.84
   m_Direction: 1
   m_Center: {x: 0, y: 1.2, z: 0}
+--- !u!114 &1024326804009022695
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5601390550372864205}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55156e5040e8f3d4fb632192fca2a669, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  marker: {fileID: 6012655598391087827}
 --- !u!1 &5601390550372864207
 GameObject:
   m_ObjectHideFlags: 0
@@ -8676,6 +8690,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de596fb218a51844ca2c68f312682837, type: 3}
+--- !u!1 &6012655598391087827 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 694367849638356950, guid: de596fb218a51844ca2c68f312682837,
+    type: 3}
+  m_PrefabInstance: {fileID: 6544818261160637701}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &6012655598391087824 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 694367849638356949, guid: de596fb218a51844ca2c68f312682837,

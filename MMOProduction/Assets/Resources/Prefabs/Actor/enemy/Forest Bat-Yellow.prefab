@@ -236,6 +236,7 @@ GameObject:
   - component: {fileID: 3909748969047724516}
   - component: {fileID: 6864057731483318968}
   - component: {fileID: 6557952929534288798}
+  - component: {fileID: 1299110403458712472}
   m_Layer: 0
   m_Name: Forest Bat-Yellow
   m_TagString: Untagged
@@ -307,6 +308,19 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 1.25, z: 0}
+--- !u!114 &1299110403458712472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3909748969057247790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55156e5040e8f3d4fb632192fca2a669, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  marker: {fileID: 2609184791556130157}
 --- !u!1 &3909748969057247792
 GameObject:
   m_ObjectHideFlags: 0
@@ -5718,6 +5732,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de596fb218a51844ca2c68f312682837, type: 3}
+--- !u!1 &2609184791556130157 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 694367849638356950, guid: de596fb218a51844ca2c68f312682837,
+    type: 3}
+  m_PrefabInstance: {fileID: 3285178424954151611}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2609184791556130158 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 694367849638356949, guid: de596fb218a51844ca2c68f312682837,

@@ -532,6 +532,7 @@ public class PlaySceneManager : SceneManagerBase
             }
         }
         characters.Remove(_packet.unique_id);
+        enemy.GetComponent<EnemyMarker>().MARKER.SetActive(false);
         // エネミーの死亡アニメーション
         enemy.enemyAnimType = EnemyAnim.PARAMETER_ID.DIE;
 
