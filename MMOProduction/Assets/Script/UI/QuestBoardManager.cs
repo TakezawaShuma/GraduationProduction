@@ -69,6 +69,12 @@ public class QuestBoardManager : MonoBehaviour
 
     private void Update()
     {
+        if (panel.activeSelf)
+        {
+            currentQuest = toggleGroup.ActiveToggles().FirstOrDefault().GetComponent<QuestToggle>().data;
+            SetMapID(true);
+        }
+
         foreach(GameObject toggle in toggles)
         {
             Packes.QuestMasterData data = toggle.GetComponent<QuestToggle>().data;
