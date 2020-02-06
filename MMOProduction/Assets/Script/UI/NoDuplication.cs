@@ -83,6 +83,7 @@ public class NoDuplication : MonoBehaviour
         int i = 0;
         foreach(var id in _ids) {
             GameObject accessory = _inventory.FindAccessory(id);
+            if (accessory == null) continue;
             SlotData data = accessory.GetComponent<SlotData>();
 
             if(data.ID != 0) {
