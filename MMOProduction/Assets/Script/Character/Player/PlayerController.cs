@@ -302,7 +302,7 @@ public class PlayerController : MonoBehaviour
     public void RemoveTarget()
     {
         mode = Mode.Normal;
-        ChangeState(IdleState.Instance);
+        //ChangeState(IdleState.Instance);
         if (target)
         {
             target.GetComponent<Marker>().STATE = Marker.State.None;

@@ -758,6 +758,7 @@ public class PlaySceneManager : SceneManagerBase
         QuestRetire();
         player.GetComponent<PlayerController>().RemoveTarget();
         player.GetComponent<PlayerController>().ChangeState(DieState.Instance);
+        questResult.SetScenes(this);
     }
 
     // 他プレイヤーのマップ移動
