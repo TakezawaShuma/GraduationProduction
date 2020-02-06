@@ -95,6 +95,8 @@ public class PlayerController : MonoBehaviour
         NormalAttackState.Instance.Initialized(this, playerSetting, animatorManager, player);
         SkillUsingState.Instance.Initialized(this, playerSetting, animatorManager, player);
         CombatState.Instance.Initialized(this, playerSetting, animatorManager, player);
+        DieState.Instance.Initialized(this, playerSetting, animatorManager, player);
+
 
         // 初期武器を取得
         weaponList = GetComponent<WeaponList>();
