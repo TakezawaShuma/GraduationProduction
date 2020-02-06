@@ -65,6 +65,12 @@ public class SwordTrailCreator : MonoBehaviour
 
     private void LateUpdate()
     {
+        if(_owner.gameObject.activeSelf != true)
+        {
+            ClearData();
+            return;
+        }
+
         // 座標のリセット（メッシュの生成位置をずらさないため）
         //this.transform.localScale = new Vector3(
         //    1 * _parent.localScale.x,
