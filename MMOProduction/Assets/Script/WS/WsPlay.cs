@@ -55,6 +55,8 @@ namespace WS
         public Action<Packes.MoveingMapOk> mapAction;
         // 報酬選択 254
         public Action<Packes.SelectRewardOk> rewardAction;
+        // 他プレイヤーのマップ移動
+        public Action<Packes.MoveingMapExitOther> moveingMapExitOtherAction;
         // 他プレイヤーがログアウトした 707
         public Action<Packes.LogoutStoC> logoutAction;
         // 検索したプレイヤー情報を受け取る 712
@@ -248,6 +250,9 @@ namespace WS
                             break;
                         case CommandData.PlayerDie:
                             playerDieAction?.Invoke(Json.ConvertToPackets<Packes.PlayerDie>(e.Data));
+                            break;
+                        case CommandData.MoveingMapExitOther:
+                            moveingMapExitOtherAction?.Invoke(Json.ConvertToPackets<Packes.MoveingMapExitOther>(e.Data));
                             break;
                         // 随時追加
                         default:

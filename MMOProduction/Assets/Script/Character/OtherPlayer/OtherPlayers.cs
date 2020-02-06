@@ -23,18 +23,16 @@ Sutas　常(変)
 
 public class OtherPlayers: NonPlayer
 {
-    private AnimatorManager am;
 
     private PlayerAnim.PARAMETER_ID lastAnimation;
-
     public int HP { get { return hp; } set { hp = value; } }
     public int MP { get { return mp; } set { mp = value; } }
-
-    [SerializeField]
+    
     private GameObject weapon;
     public GameObject Weapon { get { return weapon; }set { weapon = value; } }
-    //public int id = 0;
-    //public void Init(int _i) { id = _i; }
+
+
+    private bool isCombat;
 
     // Start is called before the first frame update
     void Start()
@@ -57,21 +55,78 @@ public class OtherPlayers: NonPlayer
     }
 
     /// <summary>
-    /// アニメーション
+    /// 位置情報を更新する
     /// </summary>
-    void Animation()
+    /// <param name="_x"></param>
+    /// <param name="_y"></param>
+    /// <param name="_z"></param>
+    /// <param name="_dir"></param>
+    public override void UpdatePostionData(float _x, float _y, float _z, float _dir)
     {
-        if (lastAnimation != animationType) {
+        // 向きを決める
+        lastDir = transform.rotation;
+        nextDir = Quaternion.Euler(0, _dir, 0);
+
+        // 位置を決める
+        lastPos = transform.position;
+        nextPos = new Vector3(_x, CheckSurface(_y), _z);
+
+        // カウントを初期化
+        nowFlame = 0;
+    }
+    /// <summary>
+    /// アニメーションの再生
+    /// </summary>
+    private void Animation()
+    {
+        if (lastAnimation != animationType)
+        {
             am.AnimChange((int)animationType);
             lastAnimation = animationType;
         }
     }
 
+
+    public void HoldingWeapon()
+    {
+        weapon.SetActive(true);
+    }
+
+    /// <summary>
+    /// 武器を隠す
+    /// </summary>
     public void HideWeapon()
     {
         weapon.SetActive(false);
-        animationType = PlayerAnim.PARAMETER_ID.IDLE;
     }
 
+    public void NextAnim(int _anim)
+    {
+        switch ((PlayerAnim.PARAMETER_ID)_anim)
+        {
+            case PlayerAnim.PARAMETER_ID.IDLE:
+                animationType = PlayerAnim.PARAMETER_ID.IDLE;
+                break;
+            case PlayerAnim.PARAMETER_ID.WALK:
+                animationType = PlayerAnim.PARAMETER_ID.WALK;
+                break;
+            case PlayerAnim.PARAMETER_ID.RUN:
+                animationType = PlayerAnim.PARAMETER_ID.RUN;
+                break;
+            case PlayerAnim.PARAMETER_ID.CONBAT:
+                animationType = PlayerAnim.PARAMETER_ID.CONBAT;
+                break;
+            case PlayerAnim.PARAMETER_ID.ATTACK:
+                animationType = PlayerAnim.PARAMETER_ID.ATTACK;
+                break;
+            case PlayerAnim.PARAMETER_ID.DIE:
+                animationType = PlayerAnim.PARAMETER_ID.CONBAT;
+                break;
+        }
+    }
 
+    void DestroyMe()
+    {
+        Destroy(this.gameObject);
+    }
 }

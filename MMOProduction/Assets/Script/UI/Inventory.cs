@@ -114,4 +114,12 @@ public class Inventory : MonoBehaviour
         }
         return null;
     }
+
+    public List<int> AllItem() {
+        List<int> items = new List<int>();
+        foreach(var item in list) {
+            items.Add(item.GetComponent<SlotData>().ID);
+        }
+        return items;
+    }
 }

@@ -9,9 +9,9 @@ using UnityEngine;
 [System.Serializable]
 public class Player : CharacterBase
 {
-    //[SerializeField, Header("プレイヤーの設定")]
-    //private PlayerSetting playerSetting;
 
+    private bool isCombat = false;
+    public bool IsCombat { get { return isCombat; } set { isCombat = value; } }
     // 位置
     private Vector4 position = default(Vector4);
     public Vector3 PositionV3 { get { return new Vector3(position.x, position.y, position.z); } }
@@ -41,6 +41,8 @@ public class Player : CharacterBase
     public Rigidbody Rigid { get { return playerRigid; } set { playerRigid = value; } }
 
 
+    public PlayerAnim.PARAMETER_ID lastAnimation;
+
     private void Start()
     {
         hp = mp = maxHp = maxMp = 1;
@@ -58,7 +60,7 @@ public class Player : CharacterBase
     }
 
 
-    public void UpdateStatus(int _maxHp, int _hp,int _maxMp,int _mp, int _status)
+    public void UpdateStatus(int _maxHp, int _hp, int _maxMp, int _mp, int _status)
     {
         hp = _hp;
         mp = _mp;
@@ -67,4 +69,9 @@ public class Player : CharacterBase
         maxMp = _maxMp;
     }
 
+
+    void DestroyMe()
+    {
+        Destroy(this.gameObject);
+    }
 }

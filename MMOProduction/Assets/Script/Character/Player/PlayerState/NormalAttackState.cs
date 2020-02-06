@@ -27,7 +27,7 @@ public class NormalAttackState : BaseState
         animatorManager.AnimChange((int)PlayerAnim.PARAMETER_ID.ATTACK);
         player.animationType = PlayerAnim.PARAMETER_ID.ATTACK;
         changeAnimeState = animatorManager.ANIMATOR.GetCurrentAnimatorStateInfo(0).shortNameHash.Equals(Animator.StringToHash("Attack"));
-        HitRange(4);
+        HitRange(10);
         playerController.SKIL = 0;
 
         this.playerController.Sword.PlayAttack();
@@ -35,20 +35,32 @@ public class NormalAttackState : BaseState
 
     public override void Execute()
     {
-        changeAnimeState = animatorManager.ANIMATOR.GetCurrentAnimatorStateInfo(0).shortNameHash.Equals(Animator.StringToHash("Attack"));
+        //changeAnimeState = animatorManager.ANIMATOR.GetCurrentAnimatorStateInfo(0).shortNameHash.Equals(Animator.StringToHash("Attack"));
 
-        // Attackアニメに切り替わったら
-        if (changeAnimeState)
+        //// Attackアニメに切り替わったら
+        //if (changeAnimeState)
+        //{
+        //    // Attackアニメが終了したら
+        //    if (animatorManager.ANIMATOR.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.99f)
+        //    {
+        //        // 剣の軌跡の表示を停止する
+        //        this.playerController.Sword.StopAttack();
+        //    }
+        //}
+    }
+
+    /// <summary>
+    /// アニメーションの再生
+    /// </summary>
+    private void Animation(PlayerAnim.PARAMETER_ID _animationType)
+    {
+        if (player.lastAnimation != _animationType)
         {
-            // Attackアニメが終了したら
-            if (animatorManager.ANIMATOR.GetCurrentAnimatorStateInfo(0).normalizedTime >= 0.99f)
-            {
-                // 剣の軌跡の表示を停止する
-                this.playerController.Sword.StopAttack();
-                playerController.ChangeState(IdleState.Instance);
-            }
+            animatorManager.AnimChange((int)_animationType);
+            player.lastAnimation = _animationType;
         }
     }
+
 
     public override void End()
     {
@@ -64,7 +76,6 @@ public class NormalAttackState : BaseState
             int myID = UserRecord.ID;
 
             WS.WsPlay.Instance.Send(new Packes.Attack(enemyID, UserRecord.ID, 0, 0).ToJson());
-            Debug.Log("attack state");
             return true;
         }
         return false;

@@ -59,7 +59,6 @@ public class QuestBoardManager : MonoBehaviour
             gameObject.GetComponent<Toggle>().onValueChanged.AddListener(SetMapID);
 
             toggles.Add(gameObject);
-
             count++;
         }
 
@@ -140,16 +139,20 @@ public class QuestBoardManager : MonoBehaviour
 
     public void Open()
     {
+        InputManager.QuestBoardMode();
         panel.gameObject.SetActive(true);
     }
 
     public void Close()
     {
+        InputManager.Release();
         panel.gameObject.SetActive(false);
     }
 
     private void ToggleChangeColor(Toggle toggle, int mode)
     {
+        if (toggle == null) return;
+
         var colors = toggle.colors;
         switch (mode)
         {

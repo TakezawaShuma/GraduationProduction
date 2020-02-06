@@ -24,7 +24,6 @@ public class ChatController : MonoBehaviour
     // チャット画面表示フラグ
     private bool chatActiveFlag = false;
 
-
     // Start is called before the first frame update
     void Start()
     {
@@ -48,8 +47,9 @@ public class ChatController : MonoBehaviour
         }
         else if (InputManager.InputKeyCheckUp(KeyCode.Return) && chatActiveFlag == true)
         {
-            if (!InputManager.InputKeyCheck(KeyCode.LeftControl) && !InputManager.InputKeyCheck(KeyCode.RightControl))
-            {
+            if (chatFlame.IsTextCheck()) {
+                chatFlame.SendInputMassege();
+            } else {
                 chatActiveFlag = false;
                 chatFlame.gameObject.SetActive(chatActiveFlag);
                 EventSystem.current.SetSelectedGameObject(null);

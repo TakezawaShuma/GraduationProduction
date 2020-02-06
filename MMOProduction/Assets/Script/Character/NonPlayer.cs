@@ -10,6 +10,8 @@ public class NonPlayer : CharacterBase
     protected Quaternion lastDir = new Quaternion();
     protected Quaternion nextDir = new Quaternion();
 
+    protected AnimatorManager am;
+
 
     // スキル一覧
     protected skill_table skillTable;
@@ -42,19 +44,8 @@ public class NonPlayer : CharacterBase
     /// <param name="_y"></param>
     /// <param name="_z"></param>
     /// <param name="_dir"></param>
-    public void UpdatePostionData(float _x, float _y, float _z, float _dir)
-    {
-        // 向きを決める
-        lastDir = transform.rotation;
-        nextDir = Quaternion.Euler(0, _dir, 0);
-        
-        // 位置を決める
-        lastPos = transform.position;
-        nextPos = new Vector3(_x, CheckSurface(_y), _z);
+    public virtual void UpdatePostionData(float _x, float _y, float _z, float _dir) { }
 
-        // カウントを初期化
-        nowFlame = 0;
-    }
 
     /// <summary>
     /// ステータス情報を更新する
@@ -84,7 +75,7 @@ public class NonPlayer : CharacterBase
     /// </summary>
     /// <param name="_y"></param>
     /// <returns></returns>
-    private float CheckSurface(float _y)
+    protected float CheckSurface(float _y)
     {
         // 下に調べる
         Ray ray = new Ray(transform.position, -transform.up);
@@ -134,5 +125,4 @@ public class NonPlayer : CharacterBase
         }
         return Vector3.zero;
     }
-    
 }

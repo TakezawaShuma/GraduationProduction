@@ -95,4 +95,12 @@ public class NoDuplication : MonoBehaviour
             i++;
         }
     }
+
+    public List<int> AllAccessory() {
+        List<int> items = new List<int>();
+        foreach (var item in accessorySlot) {
+            items.Add(item.GetComponent<SlotData>().ID);
+        }
+        return items;
+    }
 }

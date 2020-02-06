@@ -666,6 +666,7 @@ namespace Packes
         public int unique_id;
         /// <summary>与えたダメージ </summary>
         public float damage_value;
+        /// <summary>ラストアタックした人のID </summary>
         public int last_attack_id;
 
         /// <summary>デフォルトコンストラクタ</summary>
@@ -906,7 +907,32 @@ namespace Packes
         }
     }
 
+    // 他ユーザーのマップ移動(退出)
+    public class MoveingMapExitOther : IPacketDatas
+    {
+        public int user_id;
+        public MoveingMapExitOther() { 
+        }
 
+        public MoveingMapExitOther(int _user_id) {
+            command = (int)CommandData.MoveingMapExitOther;
+            user_id = _user_id;
+        }
+    }
+
+    // 他ユーザーのマップ移動(入室)
+    public class MoveingMapInOther : IPacketDatas
+    {
+        public int user_id;
+        public MoveingMapInOther() {
+            command = (int)CommandData.MoveingMapInOther;
+        }
+
+        public MoveingMapInOther(int _user_id) {
+            command = (int)CommandData.MoveingMapInOther;
+            user_id = _user_id;
+        }
+    }
 
     /// <summary>
     /// ドロップインベの取得 command:292

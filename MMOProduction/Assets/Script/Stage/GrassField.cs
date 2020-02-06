@@ -71,6 +71,7 @@ public class GrassField : MonoBehaviour
     private void Start()
     {
         _material = new Material(_renderingShader);
+        _material.renderQueue = 0;
         InitializeComputeBuffer();
     }
 

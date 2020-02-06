@@ -105,10 +105,13 @@ public enum CommandData
 	GetInventory = 255,
 	/// <summary>永久インべの取得</summary>
 	InventoryList = 256,
+    // 他ユーザーのマップ移動(退出)
+    MoveingMapExitOther = 257,
+    // 他ユーザーのマップ移動(入室)
+    MoveingMapInOther = 258,
 
-
-	/// <summary>ドロップインベの取得コール</summary>
-	GetDropInventory = 291,
+    /// <summary>ドロップインベの取得コール</summary>
+    GetDropInventory = 291,
 	/// <summary>ドロップインベの取得</summary>
 	DropInventoryList = 292,
 

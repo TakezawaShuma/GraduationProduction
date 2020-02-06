@@ -214,11 +214,11 @@ ModelImporter:
       curves: []
       events:
       - time: 1
-        functionName: HideWeapon
+        functionName: NextAnim
         data: 
         objectReferenceParameter: {instanceID: 0}
         floatParameter: 0
-        intParameter: 0
+        intParameter: 3
         messageOptions: 0
       transformMask:
       - path: 

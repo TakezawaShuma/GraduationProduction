@@ -88,6 +88,9 @@ public class PlaySceneManager : SceneManagerBase
 
     //private bool isLogout = true;
 
+    //キャンセルボタン
+    public GameObject CancelButton;
+
     private void Awake()
     {
         // ステージの作成
@@ -109,6 +112,9 @@ public class PlaySceneManager : SceneManagerBase
     {
         // ユーザーID
         var user_id = UserRecord.ID;
+
+        //キャンセルボタンを非表示
+        CancelButton.SetActive(false);
 
         if (connectFlag)
         {
@@ -162,6 +168,7 @@ public class PlaySceneManager : SceneManagerBase
         // 
         if (ready.CheckReady())
         {
+            
             //ready.ReadyGO();
             if (player != null)
             {
@@ -296,7 +303,8 @@ public class PlaySceneManager : SceneManagerBase
                           Vector3.zero,
                           Quaternion.Euler(0, 0, 0),
                           this.transform);                                  // 本体生成
-
+        var mapData = MapDatas.FindOne(UserRecord.ID);
+        otherPlayer.transform.position = new Vector3(mapData.x, mapData.y, mapData.z);
         GameObject name = Instantiate(nameUI, otherPlayer.transform);       // プレイヤーアイコン生成
         var other = otherPlayer.AddComponent<OtherPlayers>();               // OtherPlayerの追加
         //other.Weapon = otherPlayer.gameObject.FindDeep("sword", true);
@@ -484,11 +492,18 @@ public class PlaySceneManager : SceneManagerBase
 
         Debug.Log("敵は生存している");
         Enemy enemy = characters[_packet.unique_id].GetComponent<Enemy>();
-        enemy.PlayTriggerAnimetion("Take Damage");
+        //enemy.PlayTriggerAnimetion("Take Damage");
+        enemy.enemyAnimType = EnemyAnim.PARAMETER_ID.DAMAGE;
         enemy.HP = _packet.hp;
-
-        var damageValue = (int)_packet.damage_value;
-        uiManager.GetComponent<Damage>().CreateDamageUI(new Vector3(0, 0, 0), damageValue);
+        
+        PlayerController pc = player.GetComponent<PlayerController>();
+        if (pc.Target != null) {
+            int target = pc.Target.GetComponentInParent<Enemy>().ID;
+            if (target == _packet.unique_id) {
+                var damageValue = (int)_packet.damage_value;
+                uiManager.GetComponent<Damage>().CreateDamageUI(new Vector3(0, 0, 0), damageValue);
+            }
+        }
     }
 
     /// <summary>
@@ -497,6 +512,7 @@ public class PlaySceneManager : SceneManagerBase
     /// <param name="_packet"></param>
     private void DeadEnemy(Packes.EnemyDieStoC _packet)
     {
+        Debug.Log(_packet.ToJson());
         // todo
         // 戦闘で計算後エネミーが死亡していたら
         // HPを0にして死亡エフェクトやドロップアイテムの取得
@@ -507,22 +523,25 @@ public class PlaySceneManager : SceneManagerBase
         enemy.HP = 0;
 
         PlayerController pc = player.GetComponent<PlayerController>();
-        int target = pc.Target.GetComponentInParent<Enemy>().ID;
-
-        if (target == _packet.unique_id)
-        {
-            pc.RemoveTarget();
+        if(pc.Target != null) { 
+            int target = pc.Target.GetComponentInParent<Enemy>().ID;
+            if (target == _packet.unique_id) {
+                var damageValue = (int)_packet.damage_value;
+                uiManager.GetComponent<Damage>().CreateDamageUI(new Vector3(0, 0, 0), damageValue);
+                pc.RemoveTarget();
+            }
         }
         characters.Remove(_packet.unique_id);
-        enemy.PlayTriggerAnimetion("Die");
+        // エネミーの死亡アニメーション
+        enemy.enemyAnimType = EnemyAnim.PARAMETER_ID.DIE;
 
-        if (_packet.drop != 0)
+        // ラストアタックが自分だったら
+        if (_packet.last_attack_id == UserRecord.ID)
         {
+        if (_packet.drop != 0) {
             inventory_.AddItem(_packet.drop);
+            }
         }
-
-        var damageValue = (int)_packet.damage_value;
-        uiManager.GetComponent<Damage>().CreateDamageUI(new Vector3(0, 0, 0), damageValue);
     }
 
     /// <summary>
@@ -558,12 +577,11 @@ public class PlaySceneManager : SceneManagerBase
         Enemy enemy = characters[_packet.enemy_id].GetComponent<Enemy>();
         // enemy.PlayTriggerAnimetion("Attack");
         Debug.Log("スキルID : " + _packet.skill_id);
-        enemy.PlayAttackAnimation(_packet.skill_id);
+        enemy.enemyAnimType = EnemyAnim.PARAMETER_ID.ATTACK;
         //if (_packet.target_id == UserRecord.ID)
         //{
         if (enemy.Attacked(player.gameObject, _packet.skill_id))
         {
-            enemy.Attacked(player.gameObject, _packet.skill_id);
             Debug.Log("攻撃がヒットしたよ");
             wsp.Send(new Packes.Attack(UserRecord.ID, _packet.enemy_id, 0, 0).ToJson());
         }
@@ -600,7 +618,8 @@ public class PlaySceneManager : SceneManagerBase
     private void MovingMap(Packes.MoveingMapOk _packet)
     {
         UserRecord.MapID = (MapID)_packet.mapId;
-        Debug.Log(_packet.ToJson());
+        UserRecord.Inventory = inventory_.AllItem();
+        UserRecord.Accessorys = accessory.AllAccessory();
         ChangeScene("LoadingScene");
     }
 
@@ -722,9 +741,14 @@ public class PlaySceneManager : SceneManagerBase
 
     private void PlayerDie(Packes.PlayerDie _data)
     {
-        // TODO: プレイヤー死亡処理
-        Debug.Log("はやかわ　たいき 1998年 4月 19日");
-        SendMoveMap(MapID.Base);
+        QuestRetire();
+    }
+
+    // 他プレイヤーのマップ移動
+    private void MoveingMapExitOtherAction(Packes.MoveingMapExitOther _data) {
+        Destroy(characters[_data.user_id].gameObject);
+        characters.Remove(_data.user_id);
+        Debug.Log(_data.user_id + "さんが移動したよ！");
     }
 
     /// <summary>
@@ -751,6 +775,7 @@ public class PlaySceneManager : SceneManagerBase
         wsp.questClearAction = QuestClearAction;                    // 242
 
         wsp.mapAction = MovingMap;                                  // 252
+        wsp.moveingMapExitOtherAction = MoveingMapExitOtherAction;
 
         wsp.logoutAction = Logout;                                  // 707
 

@@ -36,34 +36,31 @@ public class IdleState : BaseState
             player.animationType = PlayerAnim.PARAMETER_ID.IDLE;
         }
 
-        if (InputManager.InputKeyCheckDown(playerSetting.FKey) || 
-            InputManager.InputKeyCheckDown(playerSetting.BKey) || 
-            InputManager.InputKeyCheckDown(playerSetting.LKey) || 
+        if (InputManager.InputKeyCheckDown(playerSetting.FKey) ||
+            InputManager.InputKeyCheckDown(playerSetting.BKey) ||
+            InputManager.InputKeyCheckDown(playerSetting.LKey) ||
             InputManager.InputKeyCheckDown(playerSetting.RKey))
         {
             playerController.ChangeState(KeyMoveState.Instance);
-        }
-        //else if (InputManager.InputKeyCheckDown(playerSetting.AKey))
-        //{
-        //    playerController.ChangeState(AutoRunState.Instance);
-        //}
-        else if (InputManager.InputMouseCheckDown(0) == INPUT_MODE.PLAY)
-        {
-            if (playerController.MODE == PlayerController.Mode.Battle)
-            {
-                playerController.ChangeState(NormalAttackState.Instance);
-
-            }
         }
         if (InputManager.InputMouseCheckDown(0) == INPUT_MODE.PLAY)
         {
             playerController.LockOn();
         }
-
         playerController.NoMove();
-
     }
 
+    /// <summary>
+    /// アニメーションの再生
+    /// </summary>
+    private void Animation(PlayerAnim.PARAMETER_ID _animationType)
+    {
+        if (player.lastAnimation != _animationType)
+        {
+            animatorManager.AnimChange((int)_animationType);
+            player.lastAnimation = _animationType;
+        }
+    }
     public override void End()
     {
     }

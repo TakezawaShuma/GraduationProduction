@@ -14,6 +14,7 @@ public abstract class BaseState
 
     protected AnimatorManager animatorManager;
 
+
     protected Player player;
     public void Initialized(PlayerController playerController, PlayerSetting playerSetting, AnimatorManager animatorManager, Player _player)
     {
