@@ -35,6 +35,7 @@ public class NormalAttackState : BaseState
 
     public override void Execute()
     {
+        player.GetComponent<PlayerController>().HoldingWeapon();
         //changeAnimeState = animatorManager.ANIMATOR.GetCurrentAnimatorStateInfo(0).shortNameHash.Equals(Animator.StringToHash("Attack"));
 
         //// Attackアニメに切り替わったら

@@ -46,7 +46,10 @@ public class Sword : WeaponBase
     /// </summary>
     public void PlayAttack()
     {
-        _effect.On();
+        if (_effect != null)
+        {
+            _effect.On();
+        }
     }
 
     /// <summary>
