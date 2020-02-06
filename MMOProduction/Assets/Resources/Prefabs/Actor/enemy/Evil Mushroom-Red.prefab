@@ -977,6 +977,7 @@ GameObject:
   - component: {fileID: 4308311643149844266}
   - component: {fileID: 5142752689393036348}
   - component: {fileID: 4240836143542333254}
+  - component: {fileID: 3553284829247895028}
   m_Layer: 0
   m_Name: Evil Mushroom-Red
   m_TagString: Untagged
@@ -1049,6 +1050,19 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0.7, z: 0}
+--- !u!114 &3553284829247895028
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4308311643142573290}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55156e5040e8f3d4fb632192fca2a669, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  marker: {fileID: 1536873968772855427}
 --- !u!1 &4308311643142573292
 GameObject:
   m_ObjectHideFlags: 0
@@ -1450,6 +1464,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de596fb218a51844ca2c68f312682837, type: 3}
+--- !u!1 &1536873968772855427 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 694367849638356950, guid: de596fb218a51844ca2c68f312682837,
+    type: 3}
+  m_PrefabInstance: {fileID: 2087120846188794197}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &1536873968772855424 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 694367849638356949, guid: de596fb218a51844ca2c68f312682837,

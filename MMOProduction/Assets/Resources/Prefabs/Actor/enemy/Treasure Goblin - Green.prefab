@@ -6626,6 +6626,7 @@ GameObject:
   - component: {fileID: 8783346421756562882}
   - component: {fileID: 5229318765004168429}
   - component: {fileID: 1362688791892196970}
+  - component: {fileID: 4684819274211768533}
   m_Layer: 0
   m_Name: Treasure Goblin - Green
   m_TagString: Untagged
@@ -6698,6 +6699,19 @@ CapsuleCollider:
   m_Height: 1
   m_Direction: 1
   m_Center: {x: 0, y: 0.6, z: 0}
+--- !u!114 &4684819274211768533
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8783346421747089304}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55156e5040e8f3d4fb632192fca2a669, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  marker: {fileID: 4286108984115286339}
 --- !u!1 &8783346421747089306
 GameObject:
   m_ObjectHideFlags: 0
@@ -7359,6 +7373,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de596fb218a51844ca2c68f312682837, type: 3}
+--- !u!1 &4286108984115286339 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 694367849638356950, guid: de596fb218a51844ca2c68f312682837,
+    type: 3}
+  m_PrefabInstance: {fileID: 3664156072650225301}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &4286108984115286336 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 694367849638356949, guid: de596fb218a51844ca2c68f312682837,

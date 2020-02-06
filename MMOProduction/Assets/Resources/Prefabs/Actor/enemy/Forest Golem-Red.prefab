@@ -1843,6 +1843,7 @@ GameObject:
   - component: {fileID: 435485068309262536}
   - component: {fileID: 7620916215984476777}
   - component: {fileID: 2569526697311862910}
+  - component: {fileID: 6684057577181828537}
   m_Layer: 0
   m_Name: Forest Golem-Red
   m_TagString: Untagged
@@ -1915,6 +1916,19 @@ CapsuleCollider:
   m_Height: 3
   m_Direction: 1
   m_Center: {x: 0, y: 1.4, z: 0}
+--- !u!114 &6684057577181828537
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 435485068301828964}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55156e5040e8f3d4fb632192fca2a669, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  marker: {fileID: 8060575133268342026}
 --- !u!1 &435485068301828966
 GameObject:
   m_ObjectHideFlags: 0
@@ -2430,6 +2444,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de596fb218a51844ca2c68f312682837, type: 3}
+--- !u!1 &8060575133268342026 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 694367849638356950, guid: de596fb218a51844ca2c68f312682837,
+    type: 3}
+  m_PrefabInstance: {fileID: 7385350889175454428}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8060575133268342025 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 694367849638356949, guid: de596fb218a51844ca2c68f312682837,

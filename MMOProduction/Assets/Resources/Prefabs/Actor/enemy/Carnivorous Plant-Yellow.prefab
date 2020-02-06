@@ -4480,6 +4480,7 @@ GameObject:
   - component: {fileID: 2480060747993764060}
   - component: {fileID: 2480060747986477849}
   - component: {fileID: 2480060747986477855}
+  - component: {fileID: 6715211022837968303}
   m_Layer: 0
   m_Name: Carnivorous Plant-Yellow
   m_TagString: Untagged
@@ -4552,6 +4553,19 @@ CapsuleCollider:
   m_Height: 2
   m_Direction: 1
   m_Center: {x: 0, y: 0.98, z: 0}
+--- !u!114 &6715211022837968303
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2480060747986477852}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 55156e5040e8f3d4fb632192fca2a669, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  marker: {fileID: 2635960829720134433}
 --- !u!1 &2480060747986477854
 GameObject:
   m_ObjectHideFlags: 0
@@ -6204,6 +6218,12 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: de596fb218a51844ca2c68f312682837, type: 3}
+--- !u!1 &2635960829720134433 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 694367849638356950, guid: de596fb218a51844ca2c68f312682837,
+    type: 3}
+  m_PrefabInstance: {fileID: 3257848048188220663}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &2635960829720134434 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 694367849638356949, guid: de596fb218a51844ca2c68f312682837,
