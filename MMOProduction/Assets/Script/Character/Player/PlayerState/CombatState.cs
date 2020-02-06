@@ -26,6 +26,11 @@ public class CombatState :BaseState
     // 実行関数
     public override void Execute()
     {
+        if (!player.IsCombat)
+        {
+            playerController.ChangeState(IdleState.Instance);
+        }
+
         if (playerSetting.IA)
         {
             animatorManager.AnimChange((int)PlayerAnim.PARAMETER_ID.CONBAT);
