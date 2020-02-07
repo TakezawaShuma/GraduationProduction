@@ -8501,6 +8501,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: "\u30AD\u30B9\u30B7\u30E7\u30C3\u30C8\u30A2\u30BB\u30ED\u30E9\u30AA\u30EA\u30AA\u30F3\u30CF\u30FC\u30C8\u30A2\u30F3\u30C0\u30FC\u30D6\u30EC\u30FC\u30C9"
       objectReference: {fileID: 0}
+    - target: {fileID: 6328179489904852573, guid: 14ba9fd08d87ae34f970c45c9257cde7,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6328179489905271421, guid: 14ba9fd08d87ae34f970c45c9257cde7,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -10343,7 +10348,7 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Avatar
       value: 
-      objectReference: {fileID: 90796127910405158, guid: 2956f20c7c3de234a8541b4839667490,
+      objectReference: {fileID: 90190494558882754, guid: 2956f20c7c3de234a8541b4839667490,
         type: 3}
     - target: {fileID: 8483896550878658452, guid: 717034f4840fb7f46954362a17a60b72,
         type: 3}
