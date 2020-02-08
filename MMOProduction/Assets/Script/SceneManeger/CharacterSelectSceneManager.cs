@@ -116,19 +116,19 @@ public class CharacterSelectSceneManager : SceneManagerBase
     public void TypeButtonClick(int _id) {
         GameObject parent = FindModel(_id);
         
-        if (!parent) {
-            Debug.LogError("not model type");
-            return;
-        }
-        ModelActiveAllOff();
+        //if (!parent) {
+        //    Debug.LogError("not model type");
+        //    return;
+        //}
+        //ModelActiveAllOff();
 
-        //---ラベル・モデル表示---//
-        parent.SetActive(true);
-        target_ = parent.transform.GetChild(0).gameObject;
+        ////---ラベル・モデル表示---//
+        //parent.SetActive(true);
+        //target_ = parent.transform.GetChild(0).gameObject;
 
-        //---テキスト表示---//
-        string text = FindComment(_id);
-        jobText_.text = text;
+        ////---テキスト表示---//
+        //string text = FindComment(_id);
+        //jobText_.text = text;
 
         //---正面を向かせる---//
         //target_.transform.rotation = Quaternion.Euler(0f, 183f, 0f);
