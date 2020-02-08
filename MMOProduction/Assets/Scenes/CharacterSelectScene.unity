@@ -1321,10 +1321,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 74481690}
     m_Modifications:
-    - target: {fileID: 100000, guid: b367c84a53a65724f9e5029ac8a9a541, type: 3}
-      propertyPath: m_Name
-      value: Cliff_A_2 (2)
-      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: b367c84a53a65724f9e5029ac8a9a541, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4
@@ -1344,6 +1340,10 @@ PrefabInstance:
     - target: {fileID: 400000, guid: b367c84a53a65724f9e5029ac8a9a541, type: 3}
       propertyPath: m_LocalRotation.x
       value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: b367c84a53a65724f9e5029ac8a9a541, type: 3}
+      propertyPath: m_Name
+      value: Cliff_A_2 (2)
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: b367c84a53a65724f9e5029ac8a9a541, type: 3}
       propertyPath: m_LocalRotation.y
@@ -8210,11 +8210,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: adeb471ac7e931b48bea869e3d9f1713, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  connectFlag: 0
+  connectFlag: 1
   _selectLookCamera: {fileID: 1031853958}
   parentAttacker_: {fileID: 1977838256}
   parentDefender_: {fileID: 2003021699}
-  parentWitch_: {fileID: 737510833}
+  parentWitch_: {fileID: 0}
   parentHealer_: {fileID: 1697654128}
   jobText_: {fileID: 320835054}
   attackerText_: 1
@@ -10588,10 +10588,6 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 74481690}
     m_Modifications:
-    - target: {fileID: 100000, guid: b367c84a53a65724f9e5029ac8a9a541, type: 3}
-      propertyPath: m_Name
-      value: Cliff_A_2 (3)
-      objectReference: {fileID: 0}
     - target: {fileID: 400000, guid: b367c84a53a65724f9e5029ac8a9a541, type: 3}
       propertyPath: m_LocalPosition.x
       value: 4
@@ -10611,6 +10607,10 @@ PrefabInstance:
     - target: {fileID: 400000, guid: b367c84a53a65724f9e5029ac8a9a541, type: 3}
       propertyPath: m_LocalRotation.x
       value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 100000, guid: b367c84a53a65724f9e5029ac8a9a541, type: 3}
+      propertyPath: m_Name
+      value: Cliff_A_2 (3)
       objectReference: {fileID: 0}
     - target: {fileID: 400006, guid: b367c84a53a65724f9e5029ac8a9a541, type: 3}
       propertyPath: m_LocalRotation.y
