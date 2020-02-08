@@ -728,10 +728,10 @@ MonoBehaviour:
   playerSetting: {fileID: 11400000, guid: 3e527ec6b81f01c47a7915e7e523702e, type: 2}
   upSpeedValue: 5
   upDownSpeed: 5
-  upSpeedCommand: {fileID: 645858247}
-  resetSpeedCommand: {fileID: 645858246}
-  resetPosCommand: {fileID: 645858245}
-  airWalkCommand: {fileID: 645858243}
+  upSpeedCommand: {fileID: 0}
+  resetSpeedCommand: {fileID: 0}
+  resetPosCommand: {fileID: 0}
+  airWalkCommand: {fileID: 0}
   player: {fileID: 0}
   startPos: {x: -210, y: 2, z: -210}
 --- !u!224 &646274429 stripped
@@ -1565,7 +1565,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 992294604}
   m_LocalRotation: {x: 0.13043165, y: -0.000000005910209, z: 7.775206e-10, w: 0.99145734}
-  m_LocalPosition: {x: 0.00094559544, y: 61944.367, z: -79287.65}
+  m_LocalPosition: {x: 0.00094746146, y: 62053.773, z: -79444.164}
   m_LocalScale: {x: 1.5000008, y: 1.5000002, z: 1.5000006}
   m_Children: []
   m_Father: {fileID: 0}

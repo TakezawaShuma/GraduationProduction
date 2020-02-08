@@ -48,7 +48,7 @@ public class ChatController : MonoBehaviour
         else if (InputManager.InputKeyCheckUp(KeyCode.Return) && chatActiveFlag == true)
         {
             if (chatFlame.IsTextCheck()) {
-                chatFlame.SendInputMassege();
+                if (connectFlag) { chatFlame.SendInputMassege(); }
             } else {
                 chatActiveFlag = false;
                 chatFlame.gameObject.SetActive(chatActiveFlag);
